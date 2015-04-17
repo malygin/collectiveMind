@@ -282,8 +282,8 @@
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
             %a.open_welcome_popup{:href => "#popup-explanation-1st"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда можете вызвать помощь по стадии, нажав сюда."}
-            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
+              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
+            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
                   .col-xs-6.col-md-6.col_padding_right_3
@@ -316,7 +316,7 @@
                 %span.stage-heading Аспекты (9)
               .col-md-5
                 .sort-block.pull-right
-                  %a.btn.add-button{:href => "1st-stage - cabinet.html"}
+                  %button.btn.add-button.disabled
                     %span +
                     Аспект
           / Aspects block (UI four) starts
@@ -390,73 +390,251 @@
                 / Tab panes
                 .tab-content
                   #tab-one.tab-pane.main-pane.active.fade.in
-                    .row
-                      .col-md-12.col-sm-12
-                        %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                          %li.active{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
-                          %li{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
-                          %li{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
-                          .tab-content
-                            #article1.tab-pane.active.fade.in{:role => "tabpanel"}
-                              %h6.aspect-main-block-heading Ситуация с пчелами
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              %img{:src => "img/aspect-pic1.jpg"}/
-                            #article2.tab-pane.fade{:role => "tabpanel"}
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              %img{:src => "img/aspect-pic1.jpg"}/
-                            #article3.tab-pane.fade{:role => "tabpanel"}
-                              %h6.aspect-main-block-heading
-                                Ситуация с пчелами
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              .divider50
-                              %button.btn.info-button.flag Закрыть базу знаний
-                              .divider50
-                              .divider50
-                              .divider25
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
+                            %li{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
+                            %li{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                            .tab-content
+                              #article1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                %h6.aspect-main-block-heading Ситуация с пчелами
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article2.tab-pane.fade{:role => "tabpanel"}
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article3.tab-pane.fade{:role => "tabpanel"}
+                                %h6.aspect-main-block-heading Ситуация с пчелами
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                        .col-md-4.col-sm-4.min-col-left-padd
+                          #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                              %h4.block-with-left-icon.pull-left
+                                %i.left-icon.fa.fa-2x.fa-comments
+                                Вопросы по теме
+                              %span.pull-right.question_count 1 из 2
+                              .carousel-inner
+                                .item.active
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 1.
+                                    Из-за чего начались конфликты?
+                                  .hint.close-notice
+                                    Читайте вторую страничку презентации
+                                    %span.close-button
+                                      %i.fa.fa-times-circle-o
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери много шумят
+                                          в лесу
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотели
+                                          поселиться в Высоком дубу
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          В лесу был
+                                          пожар
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотят
+                                          отнять мед у пчел
+                                        %i.fa.fa-check
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                .item
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 2.
+                                    К кому обратились жители опушки для разрешения спора?
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К Президенту РФ
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white К Сове
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К Винни-Пуху
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К слону Аркадию
+                                        %i.fa.fa-check
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"} Ответить
                   #tab-two.tab-pane.main-pane.fade
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                          %p.aspect-main-block-text
-                            В популярной сказке Винни-Пух и его
-                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
-                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
-                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
-                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
-                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
-                            был отвергнут.
-                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
-                            друзья Пятачок и Кролик.
-                          %img{:src => "img/aspect-pic2.jpg"}/
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                            %p.aspect-main-block-text
+                              В популярной сказке Винни-Пух и его
+                              друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                              труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                              пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                              момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                              втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                              был отвергнут.
+                              Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                              друзья Пятачок и Кролик.
+                            %img{:src => "img/aspect-pic2.jpg"}/
+                        .col-md-4.col-sm-4.min-col-left-padd
+                          #questionsCarousel2.carousel.slide.questionsCarousel{"data-ride" => "carousel questionsCarousel"}
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                              %h4.block-with-left-icon.pull-left
+                                %i.left-icon.fa.fa-2x.fa-comments
+                                Вопросы по теме
+                              %span.pull-right.question_count 1 из 2
+                              .carousel-inner
+                                .item.active
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 1.
+                                    Пытались ли четвероногие договориться с пчелами о взаимовыгодном
+                                    сотрудничестве, связанном с распределением меда?
+                                  .hint.close-notice
+                                    Читайте вторую страничку презентации
+                                    %span.close-button
+                                      %i.fa.fa-times-circle-o
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Да
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Нет
+                                        %i.fa.fa-check
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "1", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel2"} Ответить
+                                .item
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 2.
+                                    Как Винни пробовал добыть мед?
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Собирал нектар
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Поднимался на
+                                          воздушном шаре
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Пытался выменять
+                                          мед на грибы и ягоды
+                                        %i.fa.fa-check
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "1", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect", "data-slide-to" => "2", "data-target" => "#questionsCarousel2"} Ответить
                   #tab-three.tab-pane.main-pane.fade
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
-                          %h6.aspect-main-block-heading
-                            Трудности, связанные с
-                            расположением конфликтующих сторон
-                          %p.aspect-main-block-text
-                            Как видно на карте, Винни-Пух с
-                            друзьями живут достаточно близко к Высокому дубу.
-                            Это часто обостряет конфликт, потому что пчелы не могут нормально
-                            собирать мед,
-                            постоянно беспокоясь, что их ограбят.
-                          %img{:src => "img/aspect-pic3.jpg"}/
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                            %h6.aspect-main-block-heading
+                              Трудности, связанные с
+                              расположением конфликтующих сторон
+                            %p.aspect-main-block-text
+                              Как видно на карте, Винни-Пух с
+                              друзьями живут достаточно близко к Высокому дубу.
+                              Это часто обостряет конфликт, потому что пчелы не могут нормально
+                              собирать мед,
+                              постоянно беспокоясь, что их ограбят.
+                            %img{:src => "img/aspect-pic3.jpg"}/
+                        .col-md-4.col-sm-4.min-col-left-padd
+                          #questionsCarousel3.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                              %h4.block-with-left-icon.pull-left
+                                %i.left-icon.fa.fa-2x.fa-comments
+                                Вопросы по теме
+                              %span.pull-right.question_count 1 из 2
+                              .carousel-inner
+                                .item.active
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 1.
+                                    Где живут пчелы?
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          У Винни-Пуха
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          На Высоком дубе
+                                        %i.fa.fa-check
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          В особняке
+                                        %i.fa.fa-check
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "2", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target2.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel3"} Ответить
+                                .item
+                                  .divider10
+                                  %h6.text-center.bold.font_red 2 из 2
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 2.
+                                    Какой фактор обостряет конфликт между пчелами и четвероногими?
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Конфликтующие
+                                          стороны разговаривают на разных языках
+                                        %i.fa.fa-check
+                                      %button.btn.btn-xs.btn-white.pull-left
+                                      %button.btn.btn-xs.btn-white.pull-left
+                                        Конфликтующие
+                                        стороны живут близко друг к другу
+                                      %button.btn.btn-xs.btn-white.pull-left
+                                        Пчелы — очень
+                                        вредные насекомые
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "2", "data-me-type" => "aspect"} Подсказка
+                                      %a.btn.answer-button.color_me{"data-me-action" => "background", "data-me-color" => "2", "data-me-type" => "aspect"} Ответить
           / Aspects block (UI four) ends
           %a.open-popup-vote-link{:href => "#vote-1"} Голосовалка
           %br/
@@ -472,39 +650,38 @@
           .modal_title
             .row
               .col-md-12
-                %h4.bold.font_dark_grey
+                %h4.bold.font_dark_grey.tall_modal_title
                   Голосование по аспектам
           .vote_progress_cont.progress
             .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
           .modal_body
-            .container.vote_folders_cont.folders_4.no_padding_col
+            .container.vote_folders_cont.folders_3.no_padding_col
               %ul.nav.vote_nav.row{:role => "tablist"}
-                %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
+                %li.no_padding_col.active.folder_all{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+                    %i.fa.fa-angle-left.fa_xlg
+                    %small.bold Вернуться в общий список
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
                     .vote_folder_inn.poll-2-1
                       %span.vote_counter
-                      %h5.font_color_stage1 Общий список
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
+                      %h5 Важно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
                     .vote_folder_inn.poll-2-2
                       %span.vote_counter
-                      %h5 Необходимо
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
+                      %h5 Неважно
+                %li.col-md-4.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
                     .vote_folder_inn.poll-2-3
                       %span.vote_counter
-                      %h5 Важно
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
-                    .vote_folder_inn.poll-2-4
-                      %span.vote_counter
-                      %h5 Неважно
+                      %h5 Лишнее
             .divider25
             .container
               .row
                 .divider25
                 .tab-content
-                  #vote_tab1.tab-pane.all_vote.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
+                  #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
                     .container.padding30
                       .row
                         .col-sm-4.vote_item_cont
@@ -513,12 +690,12 @@
                               %h6 Мед и пчелы
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "aspect"}
@@ -526,12 +703,12 @@
                               %h6 Мед и четвероногие
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "aspect"}
@@ -539,12 +716,12 @@
                               %h6 Взаимоотношения четвероногих и пчел
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "aspect"}
@@ -552,12 +729,12 @@
                               %h6 Пчелы и цветочные поляны
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "aspect"}
@@ -565,12 +742,12 @@
                               %h6 Четвероногие и сахар
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "5", "data-me-type" => "aspect"}
@@ -578,12 +755,12 @@
                               %h6 Пчелы, четвероногие и зимняя спячка
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "6", "data-me-type" => "aspect"}
@@ -591,12 +768,12 @@
                               %h6 Винни-Пух и все-все-все
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "7", "data-me-type" => "aspect"}
@@ -604,12 +781,12 @@
                               %h6 Эффективность пчел в сборе меда
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                         .col-sm-4.vote_item_cont
                           .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "8", "data-me-type" => "aspect"}
@@ -617,12 +794,12 @@
                               %h6 Пчелы и лес
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
                                 %i.fa.fa-minus
+                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
+                                %i.fa.fa-times
                             .divider15
                   #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
                     .container.padding30
@@ -639,20 +816,27 @@
           .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
           %h2
             %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
-            Цель стадии
+            Цель 1-й стадии
           %p.expl-sub-heading
-            Подробное изучение всеми участниками информации, необходимой для дальнейшей работы в процедуре MASSDECISION™
+            Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры
+            выработки проекта
           %p.expl-notice.rounded-2
-            Вторая стадия процедуры не начнется, пока средний уровень готовности участников не достигнет 80%!
+            Второй этап выработки проекта будет доступен только после того,
+            %br>/
+            как
+            средний уровень готовности участников будет не менее 80%!
           %h2
             %img.expl-header-img-2{:src => "img/flag1.png"}>/
-            Что делать?
+            С чего начать?
           %ol
-            %li Ознакомьтесь со всеми аспектами базы знаний.
-            %li Примите участие в их обсуждении.
-            %li Если база знаний кажется вам неполной, предложите собственные аспекты.
-            %li Пройдите короткое тестирование на понимание базы знаний.
-            %li При помощи голосования распределите аспекты по степени важности.
+            %li Выберите аспект в списке ниже
+            %li Ознакомьтесь с базой знаний внутри этого аспекта
+            %li Пройдите короткое тестирование по полученным знаниям
+            %li Переходите к следующему аспекту
+            %li
+              Проголосуйте за самые важные на ваш вгляд аспекты
+              %br>/
+              (будет доступно в конце этапа)
           %button.btn.red.close_magnific Начать работу
       #popup-greetings-text.popup-window.popup-w710.mfp-hide.stage1_theme
         .popup.popup_rounded.popup_medal
@@ -670,7 +854,7 @@
                   %span
                     %i.fa.fa-comment-o
                   Просмотреть аспекты
-                %a.btn.add-button{:href => "1st-stage - cabinet.html"}
+                %a.btn.add-button{:href => "#"}
                   %span +
                   Добавить аспект
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide

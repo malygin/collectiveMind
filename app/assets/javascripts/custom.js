@@ -2,6 +2,21 @@
 $(document).ready(function () {
 
     /* number colors for aspects and imperfects (class '.color_me') */
+    var colors_aspect_codes = [
+        'cfa7cc',
+        'a4b1db',
+        '88a2c3',
+        '8a99ae',
+        '8abdea',
+        '8fc8d3',
+        'a3bead',
+        'a5cba2',
+        'b9dd9d',
+        'd7d69e',
+        'e9dd93',
+        'e7b288',
+        'd59d9e'
+    ];
     var colors_imperf_codes = [
         'd3a5c9',
         'a7b3dd',
@@ -59,7 +74,7 @@ $(document).ready(function () {
         var me = $(this);
         var type = me.attr('data-me-type');
         if (type === 'aspect') {
-            var color = me.attr('data-me-color');
+            var color = colors_aspect_codes[me.attr('data-me-color')];
         } else if (type === 'imperf'){
             var color = colors_imperf_codes[me.attr('data-me-color')];
         }
@@ -100,9 +115,7 @@ $(document).ready(function () {
     $('.tag-stripes').mouseover(function(){
         $(this).closest('.post-theme').width(count_themes_width($(this).closest('.post-theme').attr('id')));
     });
-    $('.tag-stripes').mouseleave(function(){
-        $(this).closest('.post-theme').width(count_themes_width($(this).closest('.post-theme').attr('id')));
-    });
+
 
     function count_themes_width (cont) {
         var width = 0;
@@ -198,24 +211,14 @@ $(document).ready(function () {
 
     /* tooltips */
     $("#tooltip_button_1").click(function() {
+		if ($(this).text()==' Открыть подсказки')
+			$(this).html($(this).find('i')).append(' Закрыть подсказки')
+		else $(this).html($(this).find('i')).append(' Открыть подсказки');
+
+			
+		
         $(".tooltip1").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_2").click(function() {
-        $(".tooltip2").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_3").click(function() {
-        $(".tooltip3").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_4").click(function() {
-        $(".tooltip4").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
-    });
-    $("#tooltip_button_5").click(function() {
-        $(".tooltip5").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
+		$(this).toggleClass('btn-tooltip btn-tooltip-close')
     });
 
     $("[data-toggle=popover]").popover();
@@ -231,7 +234,7 @@ $(document).ready(function () {
 
 
 
-    /* MagnificPopup init */
+     /* MagnificPopup init */
     $('.open-popup-link').magnificPopup({
         type: 'inline',
         midClick: true,
@@ -241,7 +244,6 @@ $(document).ready(function () {
         type: 'inline',
         midClick: true
     });
-
     /* magnific popup close button */
     $('.close_magnific').click(function(){
         var magnificPopup = $.magnificPopup.instance;
@@ -448,41 +450,42 @@ $(document).ready(function () {
 
 /* popup links and fix height */
 
-$('.open-popup').each(function () {
-    me = $(this);
-    var stageNum = me.attr('data-placement');
-    var popupNum = me.attr('data-target');
-    var src = '#popup-' + stageNum + '-' + popupNum;
-    me.magnificPopup({
-        type: 'inline',
+    $('.open-popup').each(function () {
+        me = $(this);
+        var stageNum = me.attr('data-placement');
+        var popupNum = me.attr('data-target');
+        var src = '#popup-' + stageNum + '-' + popupNum;
+        me.magnificPopup({
+            type: 'inline',
 
-        items: [
-            {
-                src: src, // CSS selector of an element on page that should be used as a popup
-                type: 'inline'
+            items: [
+                {
+                    src: src, // CSS selector of an element on page that should be used as a popup
+                    type: 'inline'
+                }
+            ],
+            callbacks: {
+                open: function() {
+                    /*$('.modal_content', this).height()*/
+                    var me_id = $.magnificPopup.instance['items'][0]['src'];
+                    var pop_h = $('.modal_content', me_id).height();
+                    $('.modal_content', me_id).css({
+                        'height': pop_h + 'px',
+                        'overflow': 'hidden'
+                    });
+                },
+                close: function() {
+                    // Will fire when popup is closed
+                }
             }
-        ],
-        callbacks: {
-            open: function() {
-                /*$('.modal_content', this).height()*/
-                var me_id = $.magnificPopup.instance['items'][0]['src'];
-                var pop_h = $('.modal_content', me_id).height();
-                $('.modal_content', me_id).css({
-                    'height': pop_h + 'px',
-                    'overflow': 'hidden'
-                });
-            },
-            close: function() {
-                // Will fire when popup is closed
-            }
-        }
+        });
     });
-});
 
 
 /* vote scripts */
 $(document).ready(function () {
     var folder_len = {};
+    var vote_icon_all = 'fa-home';
 
     $('[data-vote-poll-role]').each(function() {
         var role = $(this).attr('data-vote-poll-role');
@@ -508,24 +511,31 @@ $(document).ready(function () {
         if (!$(this).hasClass('voted')) {
             if ($(this).siblings().hasClass('voted')){
                 var prev_role = $(this).siblings('.voted').attr('data-vote-role');
-                $(this).siblings().removeClass('voted');
+                $(this).siblings('.voted').each(function() {
+                    $(this).removeClass('voted');
+                    $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
+                });
             }
             $(this).addClass('voted');
+            $('.fa', this).removeClass($(this).attr("data-icon-class")).addClass(vote_icon_all);
             var vote_item = $(this).parents('.vote_item_cont').detach();
             $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
             if (prev_role) {
                 $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
             } else {
                 all_len--;
+                $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
                 pb_stretch(pb, all_len, folder_len['overall']);
             }
             $('[data-vote-poll-role = "' + role + '"] .container>.row').append(vote_item);
         } else {
             $(this).removeClass('voted');
+            $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
             var vote_item = $(this).parents('.vote_item_cont').detach();
             $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
             $('.all_vote>.container>.row').append(vote_item);
             all_len++;
+            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
             pb_stretch(pb, all_len, folder_len['overall']);
         }
         var item_e = $(this).parents('.item_expandable');
@@ -564,4 +574,51 @@ $('#opener').on('click', function() {
         panel.addClass('visible').animate({'margin-left':'0px'});
     }
     return false;
+});
+
+
+/* cabinet 3rd stage check-and-push */
+var ch_its = $('.item', '.checked_items').length;
+var unch_its = $('.item', '.unchecked_items').length;
+$('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+
+$('.check_push_box').click(function(){
+    if ($(this).is(':checked')){
+        var item = $(this).closest('.item').detach();
+        $('.checked_items').append(item);
+        ch_its++; unch_its--;
+        $('.hideable_checks').show();
+        $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
+        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+    } else {
+        var item = $(this).closest('.item').detach();
+        $('.unchecked_items').append(item);
+        ch_its--; unch_its++;
+        if (ch_its == 0) {
+            $('.hideable_checks').hide();
+        }
+        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+    }
+});
+
+/* toggle arrows on accordion */
+$('.with_arrow').click(function(){
+    $(this).find('i.collapse_arrow').toggleClass('fa-rotate-90');
+});
+
+/* cabinet sticker */
+function close_sticker (id) {
+    $(id).hide();
+}
+function open_sticker (id) {
+    $(id).show();
+}
+
+$('.open_sticker').click(function(){
+    var stick_id = $(this).attr('data-for');
+    open_sticker(stick_id);
+});
+$('.sticker_close').click(function(){
+    var stick_id = $(this).attr('data-for');
+    close_sticker(stick_id);
 });

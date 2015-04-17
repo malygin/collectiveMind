@@ -373,8 +373,8 @@
             </div>
 
             <div class="col-md-4 col_padding_left_3">
-                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1" data-toggle="tooltip" id="tooltip1_2" data-trigger="manual" data-placement="bottom" title="Вы всегда можете вызвать помощь по стадии, нажав сюда."></div></a>
-                <div class="border_grey rounded_3 progress_block tooltip1" data-toggle="tooltip" id="tooltip1_3" data-trigger="manual" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
+                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1" data-toggle="tooltip" id="tooltip1_2" data-trigger="manual" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div></a>
+                <div class="border_grey rounded_3 progress_block tooltip" data-toggle="tooltip" id="tooltip1_3" data-trigger="manual" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-6 col-md-6 col_padding_right_3">
@@ -440,7 +440,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="sort-block pull-right">
-                        <a href="1st-stage - cabinet.html" class="btn add-button"><span>+</span> Аспект</a>
+                        <button class="btn add-button disabled"><span>+</span> Аспект</button>
                     </div>
                 </div>
             </div>
@@ -565,8 +565,9 @@
                     <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane main-pane active fade in" id="tab-one">
+                                <div class="container">
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <ul class="nav nav-tabs aspects_tabs" role="tablist">
                                                 <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 1</a></li>
                                                 <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 2</a></li>
@@ -576,7 +577,7 @@
                                     </div>
                                     <div class="row">
 
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active fade in" id="article1">
@@ -593,27 +594,128 @@
                                                         <img src="img/aspect-pic1.jpg">
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane fade" id="article3">
-                                                        <h6 class="aspect-main-block-heading">
-                                                            Ситуация с пчелами
-                                                        </h6>
+                                                        <h6 class="aspect-main-block-heading">Ситуация с пчелами</h6>
                                                         <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
                                                             постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                                            конфликт мирным способом, они обратились к мудрой Сове.
-                                                        </p>
-                                                        <div class="divider50"></div>
-                                                        <button class="btn info-button flag">Закрыть базу знаний</button>
-                                                        <div class="divider50"></div><div class="divider50"></div><div class="divider25"></div>
+                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                        <p class="aspect-main-block-text">Пчелы недовольны тем, что на их мед
+                                                            постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                                            конфликт мирным способом, они обратились к мудрой Сове.</p>
+                                                        <img src="img/aspect-pic1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
+                                            <div id="questionsCarousel1" class="carousel slide questionsCarousel" data-ride="carousel">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
+                                                    <h4 class="block-with-left-icon pull-left">
+                                                        <i class="left-icon fa fa-2x fa-comments"></i>
+                                                        Вопросы по теме
+                                                    </h4>
+                                                    <span class="pull-right question_count">1 из 2</span>
+                                                    <div class="carousel-inner">
+
+                                                        <div class="item active">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">1.</span>
+                                                                Из-за чего начались конфликты?
+                                                            </p>
+
+                                                            <div class="hint close-notice">
+                                                                Читайте вторую страничку презентации
+                                                                <span class="close-button">
+                                                                    <i class="fa fa-times-circle-o"></i>
+                                                                </span>
+                                                            </div>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери много шумят
+                                                                            в лесу
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотели
+                                                                            поселиться в Высоком дубу
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">В лесу был
+                                                                            пожар
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотят
+                                                                            отнять мед у пчел
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0' data-target="#questionsCarousel1" data-slide-to="1">Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="item">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">2.</span>
+                                                                К кому обратились жители опушки для разрешения спора?
+                                                            </p>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Президенту РФ
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Сове</button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Винни-Пуху
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К слону Аркадию
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0'>Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
+                                </div>
                             </div>
                             <div class="tab-pane main-pane fade" id="tab-two">
+                                <div class="container">
                                     <div class="row">
 
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
                                                 <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
                                                     друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
@@ -627,12 +729,101 @@
                                                 <img src="img/aspect-pic2.jpg">
                                             </div>
                                         </div>
+
+                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
+                                            <div id="questionsCarousel2" class="carousel slide questionsCarousel" data-ride="carousel questionsCarousel">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '1'>
+                                                    <h4 class="block-with-left-icon pull-left">
+                                                        <i class="left-icon fa fa-2x fa-comments"></i>
+                                                        Вопросы по теме
+                                                    </h4>
+                                                    <span class="pull-right question_count">1 из 2</span>
+
+                                                    <div class="carousel-inner">
+
+                                                        <div class="item active">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">1.</span>
+                                                                Пытались ли четвероногие договориться с пчелами о взаимовыгодном
+                                                                сотрудничестве, связанном с распределением меда?
+                                                            </p>
+
+                                                            <div class="hint close-notice">
+                                                                Читайте вторую страничку презентации
+                                                                <span class="close-button">
+                                                                    <i class="fa fa-times-circle-o"></i>
+                                                                </span>
+                                                            </div>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Да
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Нет
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '1'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '1' data-target="#questionsCarousel2" data-slide-to="1">Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="item">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">2.</span>
+                                                                Как Винни пробовал добыть мед?
+                                                            </p>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Собирал нектар
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Поднимался на
+                                                                            воздушном шаре
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Пытался выменять
+                                                                            мед на грибы и ягоды
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '1'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '1' data-target="#questionsCarousel2" data-slide-to="2">Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane main-pane fade" id="tab-three">
+                                <div class="container">
                                     <div class="row">
 
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
                                                 <h6 class="aspect-main-block-heading">Трудности, связанные с
                                                     расположением конфликтующих сторон</h6>
@@ -646,7 +837,90 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
+                                            <div id="questionsCarousel3" class="carousel slide questionsCarousel" data-ride="carousel">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '2'>
+                                                    <h4 class="block-with-left-icon pull-left">
+                                                        <i class="left-icon fa fa-2x fa-comments"></i>
+                                                        Вопросы по теме
+                                                    </h4>
+                                                    <span class="pull-right question_count">1 из 2</span>
+
+                                                    <div class="carousel-inner">
+
+                                                        <div class="item active">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">1.</span>
+                                                                Где живут пчелы?
+                                                            </p>
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">У Винни-Пуха
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">На Высоком дубе
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">В особняке
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '2'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target2 color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '2' data-target="#questionsCarousel3" data-slide-to="1">Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="item">
+
+                                                            <div class="divider10"></div>
+                                                            <h6 class="text-center bold font_red">2 из 2</h6>
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">2.</span>
+                                                                Какой фактор обостряет конфликт между пчелами и четвероногими?
+                                                            </p>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Конфликтующие
+                                                                            стороны разговаривают на разных языках
+                                                                        </button>
+                                                                        <i class="fa fa-check"></i>
+                                                                    </div>
+                                                                    <button class="btn btn-xs btn-white pull-left">
+                                                                    </button>
+                                                                    <button class="btn btn-xs btn-white pull-left">Конфликтующие
+                                                                        стороны живут близко друг к другу
+                                                                    </button>
+                                                                    <button class="btn btn-xs btn-white pull-left">Пчелы — очень
+                                                                        вредные насекомые
+                                                                    </button>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '2'>Подсказка</a>
+                                                                    <a class="btn answer-button color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '2'>Ответить</a>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -668,7 +942,7 @@
             <div class="modal_title">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 class=" bold font_dark_grey">
+                        <h4 class=" bold font_dark_grey tall_modal_title">
                             Голосование по аспектам
                         </h4>
                     </div>
@@ -678,37 +952,34 @@
                 <div class="vote_progress light-green progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="modal_body">
-                <div class="container vote_folders_cont folders_4 no_padding_col">
+                <div class="container vote_folders_cont folders_3 no_padding_col">
                     <ul class="nav vote_nav row" role="tablist">
-                        <li role="presentation" class="col-md-3 no_padding_col folder_all active">
-                            <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab" data-vote-folder-role="all">
-                                <div class="vote_folder_inn poll-2-1">
-                                    <span class="vote_counter"></span>
-                                    <h5 class="font_color_stage1">Общий список</h5>
-                                </div>
+                        <li role="presentation" class="no_padding_col active folder_all">
+                            <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab">
+                                <i class="fa fa-angle-left fa_xlg"></i><small class="bold">Вернуться в общий список</small>
                             </a>
                         </li>
-                        <li role="presentation" class="col-md-3 no_padding_col">
+                        <li role="presentation" class="col-md-4 no_padding_col">
                             <a class="vote_folder" href="#vote_tab2" role="tab" data-toggle="tab" data-vote-folder-role="important">
-                                <div class="vote_folder_inn poll-2-2">
-                                    <span class="vote_counter"></span>
-                                    <h5>Необходимо</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation" class="col-md-3 no_padding_col">
-                            <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab" data-vote-folder-role="not_important">
-                                <div class="vote_folder_inn poll-2-3">
+                                <div class="vote_folder_inn poll-2-1">
                                     <span class="vote_counter"></span>
                                     <h5>Важно</h5>
                                 </div>
                             </a>
                         </li>
-                        <li role="presentation" class="col-md-3 no_padding_col">
-                            <a class="vote_folder" href="#vote_tab4" role="tab" data-toggle="tab" data-vote-folder-role="unnecessary">
-                                <div class="vote_folder_inn poll-2-4">
+                        <li role="presentation" class="col-md-4 no_padding_col">
+                            <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab" data-vote-folder-role="not_important">
+                                <div class="vote_folder_inn poll-2-2">
                                     <span class="vote_counter"></span>
                                     <h5>Неважно</h5>
+                                </div>
+                            </a>
+                        </li>
+                        <li role="presentation" class="col-md-4 no_padding_col">
+                            <a class="vote_folder" href="#vote_tab4" role="tab" data-toggle="tab" data-vote-folder-role="unnecessary">
+                                <div class="vote_folder_inn poll-2-3">
+                                    <span class="vote_counter"></span>
+                                    <h5>Лишнее</h5>
                                 </div>
                             </a>
                         </li>
@@ -719,7 +990,7 @@
                     <div class="row">
                         <div class="divider25"></div>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane all_vote active" id="vote_tab1" data-vote-poll-role="all">
+                            <div role="tabpanel" class="tab-pane all_vote active" id="vote_tab1">
                                 <div class="container padding30">
                                     <div class="row">
                                         <div class="col-sm-4 vote_item_cont">
@@ -729,9 +1000,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -743,9 +1014,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -757,9 +1028,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -771,9 +1042,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -785,9 +1056,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -799,9 +1070,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -813,9 +1084,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -827,9 +1098,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -841,9 +1112,9 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -880,23 +1151,21 @@
     <div id="popup-explanation-1st" class="popup-window popup-explanation popup-w710 mfp-hide welcome_popup">
         <div class="popup popup_rounded">
             <div class="modal_badge back_color_stage1 rounded_2 font_white">1 СТАДИЯ</div>
-            <h2><img src="img/good-shot1.png" class="expl-header-img-1">Цель стадии</h2>
+            <h2><img src="img/good-shot1.png" class="expl-header-img-1">Цель 1-й стадии</h2>
 
-            <p class="expl-sub-heading">
-                Подробное изучение всеми участниками информации, необходимой для дальнейшей работы в процедуре MASSDECISION™
-            </p>
+            <p class="expl-sub-heading">Подробное изучение базы знаний по каждому аспекту всеми участниками процедуры
+                выработки проекта</p>
 
-            <p class="expl-notice rounded-2">
-                Вторая стадия процедуры не начнется, пока средний уровень готовности участников не достигнет 80%!
-            </p>
+            <p class="expl-notice rounded-2">Второй этап выработки проекта будет доступен только после того,<br>как
+                средний уровень готовности участников будет не менее 80%!</p>
 
-            <h2><img src="img/flag1.png" class="expl-header-img-2">Что делать?</h2>
+            <h2><img src="img/flag1.png" class="expl-header-img-2">С чего начать?</h2>
             <ol>
-                <li>Ознакомьтесь со всеми аспектами базы знаний.</li>
-                <li>Примите участие в их обсуждении.</li>
-                <li>Если база знаний кажется вам неполной, предложите собственные аспекты.</li>
-                <li>Пройдите короткое тестирование на понимание базы знаний.</li>
-                <li>При помощи голосования распределите аспекты по степени важности.</li>
+                <li>Выберите аспект в списке ниже</li>
+                <li>Ознакомьтесь с базой знаний внутри этого аспекта</li>
+                <li>Пройдите короткое тестирование по полученным знаниям</li>
+                <li>Переходите к следующему аспекту</li>
+                <li>Проголосуйте за самые важные на ваш вгляд аспекты<br>(будет доступно в конце этапа)</li>
             </ol>
             <button class="btn red close_magnific">Начать работу</button>
         </div>
@@ -918,7 +1187,7 @@
                     <div class="divider50"></div>
                     <p>
                         <a href="1st-stage_discuss.html" class="btn add-button"><span><i class="fa fa-comment-o"></i></span> Просмотреть аспекты</a>
-                        <a href="1st-stage - cabinet.html" class="btn add-button"><span>+</span> Добавить аспект</a>
+                        <a href="#" class="btn add-button"><span>+</span> Добавить аспект</a>
                     </p>
                 </div>
             </div>

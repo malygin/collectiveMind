@@ -261,7 +261,7 @@
       .subhead
         .container
           %h4.font_white Решение конфликта, возникшего из-за меда
-        %button#tooltip_button_2.btn.btn-tooltip{:type => "button", :value => "Show"}
+        %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
           Подсказки
       .container
@@ -311,9 +311,9 @@
       .main-block
         .container
           .stage-info-sort-block
-            #tooltip2_1.btn-group.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект."}
-              %span Аспекты (8) :
-              %a.dropdown-toggle{"data-toggle" => "dropdown"} ---
+            #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект."}
+              %span Фильтр аспектов:
+              %a.dropdown-toggle{"data-toggle" => "dropdown"} все
               %ul.dropdown-menu
                 %li
                   %input#ex2_2_1{:name => "ex2_2", :type => "radio", :value => "1"}/
@@ -425,16 +425,16 @@
                   %span.sort-label Сортировать по новым:
                   .sort-1.sort_btn.sprite_com.sprite-item2_2_1
                     %span 25
-                  #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+                  #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
                     %span 2
-                  %a{:href => "cabinet-stage2.html"}
+                  %a{:href => "2nd-stage - cabinet.html"}
                     %button.btn.add-button
                       %span> +
                       Несовершенство
           .stage-post-block
             .row
               .col-md-6
-                #tooltip2_3.post.post_type_2.tooltip2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное название аспекта."}
+                #tooltip2_3.post.post_type_2.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень аспектов, связанных с данным несовершенством. Нажмите на любой из них, чтобы увидеть полное название аспекта."}
                   .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "imperf"}
                   .post-body.no_post_head.ch_action{"data-for" => "post_ch1"}
                     .media

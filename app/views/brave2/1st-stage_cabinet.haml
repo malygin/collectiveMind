@@ -270,6 +270,10 @@
                   %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
                     1 СТАДИЯ: ВВЕДЕНИЕ В
                     ПРОЦЕДУРУ
+                %i.fa.fa-circle.fa-lg.font_lighter_grey.open_sticker{"data-for" => "#sticker1"}
+                #sticker1.sticker.rounded_3.font_white
+                  Тут будет текст, объясняющий, что надо делать на этом экране
+                  %i.sticker_close.fa.fa-times.fa-lg{"data-for" => "#sticker1"}
       / Main Block starts
       .main-block
         .container
@@ -303,7 +307,7 @@
                               .divider15
                               .form-group
                                 %textarea.form-control{:rows => "6", :type => "text"}
-                  %button.btn.add-button.pull-right Добавить
+                  %button.btn.add-button.type2.pull-right Добавить
                 #cabinet_1_2.tab-pane.fade{:role => "tabpanel"}
                   .post.post_add_type1
                     .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}

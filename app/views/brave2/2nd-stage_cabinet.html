@@ -20,10 +20,11 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/custom-post.css" rel="stylesheet">
     <link href="css/colors.css" rel="stylesheet">
+    <link href="css/dropdowns-enhancement.css" rel="stylesheet">
 
 </head>
 
-<body class="stage1_theme">
+<body class="stage2_theme">
 <div class="outer">
 
     <!-- Top bar starts -->
@@ -349,13 +350,19 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <div class="border_grey rounded_3 stages_block">
                     <div class="btn-toolbar" role="toolbar">
 
                         <div class="btn-group" role="group">
-                            <a href="1st-stage.html" role="button" class="btn back_color_stage1">1 СТАДИЯ: ВВЕДЕНИЕ В
-                                ПРОЦЕДУРУ</a>
+                            <a href="2nd-stage.html" role="button" class="btn back_color_stage2">2 СТАДИЯ: АНАЛИЗ СИТУАЦИИ</a>
+                        </div>
+
+                        <i class="fa fa-circle fa-lg font_lighter_grey open_sticker" data-for="#sticker1"></i>
+
+                        <div class="sticker rounded_3 font_white" id="sticker1">
+                            Тут будет текст, объясняющий, что надо делать на этом экране
+                            <i class="sticker_close fa fa-times fa-lg" data-for="#sticker1"></i>
                         </div>
 
                     </div>
@@ -369,98 +376,256 @@
     <div class="main-block">
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3 col_padding_right_75">
                     <ul class="list-unstyled tabs_type_1" role="tablist">
                         <li role="presentation" class="active">
-                            <a href="#cabinet_1_1" class="a_font_reset text-right" role="tab" data-toggle="tab">+ Аспект</a>
+                            <a href="#cabinet_3_1" class="a_font_reset text-right" role="tab" data-toggle="tab">+ Несовершенство</a>
                         </li>
                         <li role="presentation">
-                            <a href="#cabinet_1_2" class="a_font_reset text-right" role="tab" data-toggle="tab">Мои аспекты</a>
+                            <a href="#cabinet_3_2" class="a_font_reset text-right" role="tab" data-toggle="tab">Воспользоваться вспомогательной техникой</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#cabinet_3_3" class="a_font_reset text-right" role="tab" data-toggle="tab">Мои несовершенства (2)</a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-8 col-md-offset-1">
+                <div class="col-md-9">
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active fade in" id="cabinet_1_1">
-                            <div class="post post_add_type1">
-                                <div class="post-header grey"></div>
-                                <div class="post-body">
-                                    <div class="media">
-                                        <div class="media-left text-center gradient2 post-poster">
-                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
-                                            <p class="poster-name">Оргкомитет</p>
-                                            <p class="poster-name"></p>
-                                        </div>
-                                        <div class="media-body white">
-                                            <div class="post-text">
-                                                <div class="divider10"></div>
-                                                <form class="cabinet-aspect-form">
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="text" placeholder="Название аспекта">
-                                                    </div>
-                                                    <div class="divider15"></div>
-                                                    <p>
-                                                        <span class="badge badge_type1 grey">Обоснование</span>
-                                                    </p>
-                                                    <div class="divider15"></div>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" type="text" rows="6"></textarea>
-                                                    </div>
-                                                </form>
+                        <div role="tabpanel" class="tab-pane active fade in" id="cabinet_3_1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="divider10"></div>
+                                    <div class="content_window white">
+                                        <div class="divider25"></div>
+                                        <form>
+                                            <div class="btn-group cab_drop">
+                                                <a data-toggle="dropdown" class="dropdown-toggle"><span>Выберите аспект</span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <input type="radio" id="ex2_2_1" name="ex2_2" value="1">
+                                                        <label for="ex2_2_1">
+                                                            <span><span class="color_counter color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '0'></span></span>
+                                                            <span class="text_label">Персонал как инструмент продаж</span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" id="ex2_2_2" name="ex2_2" value="2">
+                                                        <label for="ex2_2_2">
+                                                            <span><span class="color_counter color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '1'></span></span>
+                                                            <span class="text_label">Персонал как инструмент продаж</span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" id="ex2_2_3" name="ex2_2" value="3">
+                                                        <label for="ex2_2_3">
+                                                            <span><span class="color_counter color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '1'></span></span>
+                                                            <span class="text_label">Персонал как инструмент продаж</span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" id="ex2_2_4" name="ex2_2" value="4">
+                                                        <label for="ex2_2_4">
+                                                            <span><span class="color_counter color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '1'></span></span>
+                                                            <span class="text_label">Персонал как инструмент продаж</span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
                                             </div>
+                                            <div class="divider25"></div>
+                                            <p>
+                                                Название (краткое описание несовершенства)
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="1"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                На каком этапе это происходит?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="2"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                От чего это зависит?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="2"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                Чья работа от этого зависит?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="2"></textarea>
+                                        </form>
+                                        <div class="divider25"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a class="theme_font_color with_arrow collapsed not_full_width bold collapser_type1" data-toggle="collapse" href="#imperfs1" aria-expanded="false">
+                                                Пример несовершенства
+                                                <i class="fa fa-chevron-circle-right fa-lg collapse_arrow"></i>
+                                            </a>
                                         </div>
+                                        <div class="col-md-6">
+                                            <p><button class="btn add-button type2 pull-right">Добавить</button></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="divider25"></div>
+
+                                    <div class="content_window white collapse font_lighter_grey" id="imperfs1">
+                                        <div class="divider15"></div>
+                                        <a class="with_arrow collapsed a_font_reset not_full_width collapser_type1" data-toggle="collapse" href="#imperf_example" aria-expanded="false">
+                                            Невозможно дышать при большом количестве людей в комнате
+                                            <i class="fa fa-angle-right fa-lg collapse_arrow font_grey"></i>
+                                        </a>
+                                        <div class="collapse" id="imperf_example">
+                                            <div class="divider25"></div>
+                                            <p class="font_dark_grey">
+                                                Название (краткое описание несовершенства)
+                                            </p>
+                                            <p>
+                                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                            </p>
+                                            <div class="divider15"></div>
+                                            <p class="font_dark_grey">
+                                                На каком этапе это происходит?
+                                            </p>
+                                            <p>
+                                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                            </p>
+                                            <div class="divider15"></div>
+                                            <p class="font_dark_grey">
+                                                От чего это зависит?
+                                            </p>
+                                            <p>
+                                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                            </p>
+                                            <div class="divider15"></div>
+                                            <p class="font_dark_grey">
+                                                Чья работа от этого зависит?
+                                            </p>
+                                            <p>
+                                                Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                                            </p>
+                                            <div class="divider20"></div>
+                                        </div>
+                                        <div class="divider15"></div>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn add-button pull-right">Добавить</button>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade " id="cabinet_1_2">
+                        <div role="tabpanel" class="tab-pane fade" id="cabinet_3_2">
+                            <div class="container">
+                                <div class="row cabinet_popup_links">
+                                    <div class="col-md-6 no_padding_col">
+                                        <div class="cab_pop_l l_col1 open-popup" data-placement="cab2" data-target="1">
+                                            <span>
+                                                То, что не достаточно хорошо<br>
+                                                <small>(Объяснительная строка)</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 no_padding_col">
+                                        <div class="cab_pop_l l_col2 open-popup" data-placement="cab2" data-target="1">
+                                            <span>
+                                                То, что хорошо, но можно существенно улучшить<br>
+                                                <small>(Объяснительная строка)</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 no_padding_col">
+                                        <div class="cab_pop_l l_col3 open-popup" data-placement="cab2" data-target="1">
+                                            <span>
+                                                То, что мешает работе<br>
+                                                <small>(Объяснительная строка)</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 no_padding_col">
+                                        <div class="cab_pop_l l_col4 open-popup" data-placement="cab2" data-target="1">
+                                            <span>
+                                                То, чего не хватает<br>
+                                                <small>(Объяснительная строка)</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="cabinet_3_3">
                             <div class="post post_add_type1">
-                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '1'></div>
+                                <div class="post-header"></div>
                                 <div class="post-body">
                                     <div class="media">
                                         <div class="media-left text-center gradient2 post-poster">
                                             <img class="img-circle img40" src="img/ava-pyat.jpg">
-                                            <p class="poster-name">Оргкомитет</p>
-                                            <p class="poster-name"></p>
+                                            <p class="poster-name">Имя</p>
+                                            <p class="poster-name">Фамилия</p>
+                                            <div class="divider10"></div>
+                                            <p class="time">21.12.2014</p>
                                         </div>
-                                        <div class="media-body white">
-                                            <div class="post-text">
-                                                <h5 class="bold">Lorem Ipsum</h5>
-                                                <div class="divider15"></div>
-                                                <p>
-                                                    <span class="badge badge_type1 color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '1'>Обоснование</span>
-                                                </p>
-                                                <div class="divider10"></div>
-                                                <p>
-                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                                                </p>
-                                            </div>
+                                        <div class="media-body">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr class="what">
+                                                    <td class=" bold">
+                                                        Винни-Пух постоянно
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="col-md-12 ">
+                                                        При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-bottom white">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="tag-stripes active color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '2' data-me-type = 'aspect'>
+                                                <span class="tags">Взаимоотношения четвероногих</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="post post_add_type1">
-                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '4'></div>
+                                <div class="post-header"></div>
                                 <div class="post-body">
                                     <div class="media">
                                         <div class="media-left text-center gradient2 post-poster">
                                             <img class="img-circle img40" src="img/ava-pyat.jpg">
-                                            <p class="poster-name">Оргкомитет</p>
-                                            <p class="poster-name"></p>
+                                            <p class="poster-name">Имя</p>
+                                            <p class="poster-name">Фамилия</p>
+                                            <div class="divider10"></div>
+                                            <p class="time">21.12.2014</p>
                                         </div>
-                                        <div class="media-body white">
-                                            <div class="post-text">
-                                                <h5 class="bold">Lorem Ipsum</h5>
-                                                <div class="divider15"></div>
-                                                <p>
-                                                    <span class="badge badge_type1 color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '4'>Обоснование</span>
-                                                </p>
-                                                <div class="divider10"></div>
-                                                <p>
-                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                                                </p>
-                                            </div>
+                                        <div class="media-body">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr class="what">
+                                                    <td class=" bold">
+                                                        Винни-Пух постоянно
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="col-md-12 ">
+                                                        При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-bottom white">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="tag-stripes active color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '8' data-me-type = 'aspect'>
+                                                <span class="tags">Взаимоотношения четвероногих</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -472,6 +637,88 @@
         </div>
     </div>
     <!-- Main Block ends -->
+
+    <div id="popup-cab2-1" class="popup-window detailed_popup popup-w800 mfp-hide">
+        <div class="content_window white">
+            <div class="divider25"></div>
+            <form>
+                <p>
+                    Название (краткое описание несовершенства)
+                </p>
+                <textarea class="form-control" type="text" rows="1"></textarea>
+                <div class="divider15"></div>
+                <p>
+                    На каком этапе это происходит?
+                </p>
+                <textarea class="form-control" type="text" rows="2"></textarea>
+                <div class="divider15"></div>
+                <p>
+                    От чего это зависит?
+                </p>
+                <textarea class="form-control" type="text" rows="2"></textarea>
+                <div class="divider15"></div>
+                <p>
+                    Чья работа от этого зависит?
+                </p>
+                <textarea class="form-control" type="text" rows="2"></textarea>
+            </form>
+            <div class="divider25"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a class="theme_font_color with_arrow collapsed not_full_width bold collapser_type1" data-toggle="collapse" href="#p-imperfs1" aria-expanded="false">
+                    Пример несовершенства
+                    <i class="fa fa-chevron-circle-right fa-lg collapse_arrow"></i>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <p><button class="btn add-button type2 pull-right">Добавить</button></p>
+            </div>
+        </div>
+
+        <div class="divider25"></div>
+
+        <div class="content_window white collapse font_lighter_grey" id="p-imperfs1">
+            <div class="divider15"></div>
+            <a class="with_arrow collapsed a_font_reset not_full_width collapser_type1" data-toggle="collapse" href="#p-imperf_example" aria-expanded="false">
+                Невозможно дышать при большом количестве людей в комнате
+                <i class="fa fa-angle-right fa-lg collapse_arrow font_grey"></i>
+            </a>
+            <div class="collapse" id="p-imperf_example">
+                <div class="divider25"></div>
+                <p class="font_dark_grey">
+                    Название (краткое описание несовершенства)
+                </p>
+                <p>
+                    Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                </p>
+                <div class="divider15"></div>
+                <p class="font_dark_grey">
+                    На каком этапе это происходит?
+                </p>
+                <p>
+                    Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                </p>
+                <div class="divider15"></div>
+                <p class="font_dark_grey">
+                    От чего это зависит?
+                </p>
+                <p>
+                    Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                </p>
+                <div class="divider15"></div>
+                <p class="font_dark_grey">
+                    Чья работа от этого зависит?
+                </p>
+                <p>
+                    Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+                </p>
+                <div class="divider20"></div>
+            </div>
+            <div class="divider15"></div>
+        </div>
+    </div>
 
     <div id="popup-database" class="popup-window popup_database popup-w770 mfp-hide">
         <div class="popup popup_rounded">
@@ -660,6 +907,8 @@
 <script src="js/jquery.js"></script>
 <!-- Bootstrap JS -->
 <script src="js/bootstrap.min.js"></script>
+
+<script src="js/dropdowns-enhancement.js"></script>
 <!-- Magnific Popup -->
 <script src="js/jquery.magnific-popup.min.js"></script>
 <!-- Owl carousel -->
