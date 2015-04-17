@@ -810,9 +810,9 @@ module ApplicationHelper
   # последняя дата захода на страницу
   def last_time_visit_page(stage, type_event = 'visit_save', post = nil)
     if post
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where("body = ?", "/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
     else
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where(" body like ? ", "%/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where("body = ?", "/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
     end
     notice ? notice.created_at : "2000-01-01 00:00:00"
   end

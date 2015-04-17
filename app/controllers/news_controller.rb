@@ -76,7 +76,7 @@ class NewsController < ApplicationController
   def set_logger
     if current_user and @project and request.method == 'GET'
       current_user.loggers.create type_event: 'expert_news_read', project_id: @project.id,
-                                  body: request.original_url.split('?')[0], first_id: @news.id
+                                  body: request.original_fullpath.split('?')[0], first_id: @news.id
     end
   end
 end

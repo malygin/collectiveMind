@@ -376,7 +376,8 @@ class User < ActiveRecord::Base
 
   # аспекты за которые пользователь еще не проголосовал
   def unvote_aspects_for_vote(project)
-    project.main_aspects.includes(:final_votings).where('collect_info_votings.user_id <> ? OR collect_info_votings.user_id IS NULL', self.id)
+    vote_aspects = project.main_aspects.joins(:final_votings).where(collect_info_votings: {user_id: self.id}).pluck('core_aspect_posts.id')
+    project.main_aspects.where.not(id: vote_aspects)
   end
 
   def content_for_project(project)

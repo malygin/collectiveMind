@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     # возможсно стоит разбивать url на составляющие и отдельно записывать
     if current_user and @project and request.method == 'GET'
       current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
-                                  body: request.original_url.split('?')[0]
+                                  body: request.original_fullpath.split('?')[0]
     end
   end
 
