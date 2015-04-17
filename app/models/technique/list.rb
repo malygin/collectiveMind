@@ -1,6 +1,9 @@
 class Technique::List < ActiveRecord::Base
-  scope :by_stage, -> (stage) { stage = :aspect_posts if stage == :collect_info_posts; where stage: stage }
+  has_many :technique_list_projects, class_name: 'Technique::ListProject', dependent: :destroy
+
   validates :code, :stage, presence: true
+
+  scope :by_stage, -> (stage) { stage = :aspect_posts if stage == :collect_info_posts; where stage: stage }
 
   def name
     "#{stage}_#{code}"
