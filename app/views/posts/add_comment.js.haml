@@ -1,3 +1,30 @@
+- unless @comment.nil?
+  -if @comment_answer
+    $('#reply_comment_#{@comment_answer.id}').closest('.media.comment').next('form').collapse('hide').remove();
+    $('#reply_comment_#{@comment_answer.id}').toggleClass('reply-comment cancel-reply');
+    if($('#answers_#{@comment_parent.id}').length){
+    $('#answers_#{@comment_parent.id} .answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    } else {
+    var answers = $('<a class="answers_collapse theme_font_color opened" data-toggle="collapse" href="#answers_#{@comment_parent.id}" aria-expanded="false"><span>1 ответ</span></a>');
+    var answers2 = $('<div class="com_answers collapse in" id="answers_#{@comment_parent.id}"><div class="answers_subblock level1"></div></div>');
+    $('#comment#{@comment_parent.id}').after(answers);
+    answers.after(answers2);
+    answers2.find('.answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    }
+  -else
+    $("#comment_text_area").val('');
+    $('.chat-messages .item.active').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+
+
+
+
+
+
+
+
+
+
+
 -#-if @comment_answer.nil?
 -#  $("#comment_text_area").val('');
 -#  $('#comments.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
@@ -13,8 +40,4 @@
 -#
 -#-#$("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
 -#-#$('#change_comment_stat .btn').button('reset');
-
-- unless @comment.nil?
-  $("#comment_text_area").val('');
-  $('.chat-messages .item.active').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-  -#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");
+-#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");

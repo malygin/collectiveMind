@@ -1,6 +1,6 @@
 class Core::Aspect::PostsController < PostsController
   before_action :prepare_data, except: [:update, :destroy]
-  before_action :set_aspect, except: [:new, :create]
+  before_action :set_aspect, only: [:edit, :update, :destroy]
 
   def voting_model
     Core::Aspect::Post

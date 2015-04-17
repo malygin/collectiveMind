@@ -8,21 +8,22 @@
       %span.date_time.theme_font_color
         =Russian::strftime(comment.created_at,'%k:%M')
       - if current_user?(comment.user) or boss?
-        %span.dropdown.edit_comment
+        %span.dropdown.edit_comment{id: "redactor_comment_#{comment.id}"}
           %button.btn_reset{id: "edit_comment#{comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
             %i.fa.fa-cog.fa-lg.theme_font_color
           %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{comment.id}", :role => "menu"}
             %li
-              %a{:href => "#", :tabindex => "-1"}
+              %a.edit-comment{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}", href: "#", tabindex: "-1"}
                 %i.fa.fa-pencil>
                 Редактировать
             %li
-              %a{:href => "#", :tabindex => "-1"}
+              = link_to({action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
                 %i.fa.fa-close>
                 Удалить
       -if comment.approve_status
         %span.badge.badge_important.theme_back_color важно
-  %p.font_grey.bold
+      %span{id: "cancel_comment_#{comment.id}"}
+  %p.font_grey.bold{id: "comment_text_#{comment.id}"}
     =comment.content
   .post-interfaces-buttons.text-left
     =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
@@ -37,7 +38,7 @@
           %span(id="dlk_comment_#{comment.id}")
             =comment.users_against.count
           %i.fa.fa-thumbs-down.theme_font_color
-    %button.reply_btn.collapsed{"data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
+    %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}", "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
       %span.bold
         %i.fa.fa-reply.fa-rotate-180.theme_font_color
 -if comment.comments.present?
@@ -49,7 +50,6 @@
     .answers_subblock.level1
       - comment.comments.each do |c|
         = render partial: 'shared/comment', object: c
-
 
 
 

@@ -496,8 +496,8 @@ class PostsController < ProjectsController
   end
 
   def create_comment(post)
-    if params[:main_comment]
-      @comment_answer = comment_model.find(params[:main_comment]) unless params[:main_comment].nil?
+    if params[:comment]
+      @comment_answer = comment_model.find(params[:comment])
       @comment_parent = @comment_answer.comment ? @comment_answer.comment : @comment_answer
     end
     content = params[name_of_comment_for_param][:content]

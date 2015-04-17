@@ -12,13 +12,17 @@
                 %span.bold
                   =@post.comments.count
                   %i.fa.fa-comment-o.theme_font_color
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false, :remote => true}, :method => :put, id: "plus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="plus_counter_#{@post.id}" style="color:#333;")
+                      =@post.users_pro.count
+                    %i.fa.fa-thumbs-o-up.theme_font_color
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="minus_counter_#{@post.id}" style="color:#333;")
+                      =@post.users_against.count
+                    %i.fa.fa-thumbs-o-down.theme_font_color
                 %span.bold
-                  =@post.users_pro.count
-                  %i.fa.fa-thumbs-o-up.theme_font_color
-                %span.bold
-                  =@post.users_against.count
-                  %i.fa.fa-thumbs-o-down.theme_font_color
-                %small
                   =Russian::strftime(@post.created_at,'%d.%m.%Y')
     .modal_body
       .media

@@ -11,7 +11,7 @@
           .post-text.open-popup{"data-placement" => "1", "data-target" => "1"}
             =post_short.content
             %i.fa.fa-angle-right
-        - if post_short.comments.count >0
+        - if post_short.comments.count > 0
           .post_comments_cont
             .post_cont_hover.white{id: "post_ch#{post_short.id}"}
               .wrapper.ps_cont.half_wheel_speed
