@@ -16,6 +16,11 @@ describe 'Cabinet Discontents' do
     visit project_user_path(project, user)
   end
 
+  it 'correct link to cabinet' do
+    click_link 'open_cabinet'
+    expect(current_path) == new_discontent_post_path(project, type_mechanic: 'simple')
+  end
+
   it 'list forms for techniques' do
     project.techniques.each do |technique|
       expect(page).to have_content t("techniques.#{technique.name}")

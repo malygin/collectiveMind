@@ -115,6 +115,15 @@ class Core::Project < ActiveRecord::Base
     current_stage_values[:type_stage]
   end
 
+  #@todo нужно универсализовать эту логику
+  def current_stage_type_for_cabinet
+    if current_stage_values[:type_stage] == :collect_info_posts
+      'aspect_posts'
+    else
+      current_stage_values[:type_stage]
+    end
+  end
+
   def current_stage_num
     current_stage.first[0]
   end
