@@ -15,13 +15,8 @@
           #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
             - new_posts = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
             %span
-<<<<<<< HEAD
-              = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts' do
-=======
               = new_posts if new_posts > 0
-        = link_to project_user_path(@project, current_user) do
->>>>>>> fix add, edit, replay and destroy comments
+        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts' do
           %button.btn.add-button
             %span
               = t('techniques.aspect_posts_simple')
