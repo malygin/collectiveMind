@@ -12,7 +12,7 @@ class Concept::Post < ActiveRecord::Base
 
   has_many :advices, class_name: 'Advice', as: :adviseable
 
-  validates :title, presence: true
+  validates :title, :user_id, :project_id, presence: true
 
   scope :by_status, ->(p) { where(status: p) }
   scope :by_project, ->(p) { where(project_id: p) }

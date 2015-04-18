@@ -6,10 +6,6 @@ describe 'Concept::Post', type: :model do
   end
 
   context 'invalid without' do
-    it 'status' do
-      expect(build(:concept, status: nil)).to be_invalid
-    end
-
     it 'user' do
       expect(build(:concept, user: nil)).to be_invalid
     end
