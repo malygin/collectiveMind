@@ -33,7 +33,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "1st-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -52,23 +52,26 @@
                               %span.dd_n_cell.left.font_color_stage4
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage4
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice.moder{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-exclamation-triangle
                               %span.dd_n_cell.right
-                                22:00 11.03.2015
-                                = succeed ":" do
-                                  %span.bold Модератор
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
                                 %p
                                   На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                             .dd_nav_divider.font_color_stage4
@@ -78,16 +81,18 @@
                               %span.dd_n_cell.left.font_color_stage2
                                 %i.fa.fa-lg.fa-thumbs-up
                               %span.dd_n_cell.right.font_color_stage2
-                                19:45 12.03.2015
-                                %span.bold Liza
-                                в теме
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage2
                               %span 2
                             .divider10
@@ -95,29 +100,32 @@
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage1
                               %span 1
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %a#tooltip_db.book_icon.open-popup-link.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :href => "#popup-database", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -265,13 +273,10 @@
         %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
           Открыть подсказки
-        %button#close_tooltip_button_1.btn.btn-tooltip-close{:type => "button", :value => "Destroy"}
-          %i.fa.fa-lightbulb-o
-          Закрыть подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
-            #tooltip1_1.border_grey.rounded_3.stages_block.tooltip1_1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы."}
+            .border_grey.rounded_3.stages_block
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
                   %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
@@ -286,8 +291,8 @@
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
             %a.open_welcome_popup{:href => "#popup-explanation-1st"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда сможете вызвать помощь по стадии, нажав сюда"}
-            #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1_3{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
+              .border_grey.rounded_3.help_icon
+            .border_grey.rounded_3.progress_block
               .container
                 .row
                   .col-xs-6.col-md-6.col_padding_right_3
@@ -323,9 +328,9 @@
                   %span.sort-label Сортировать по новым:
                   .sort-1.sort_btn.sprite_com.sprite-item1_2_1
                     %span 25
-                  #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+                  .sort-2.sort_btn.sprite_doc.sprite-item1_1
                     %span 2
-                  %a.btn.add-button{:href => "1st-stage - cabinet.html"}
+                  %a.btn.add-button{:href => "1st-stage-cabinet.html"}
                     %span +
                     Аспект
           .divider10
@@ -356,30 +361,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -409,30 +423,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -462,30 +485,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -515,30 +547,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -568,30 +609,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -621,30 +671,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -675,30 +734,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -711,6 +779,8 @@
                     %span.popup2
                       %small 1
                       %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                    %span.popup2
+                      %i.fa.fa-exclamation-triangle.font_lighter_grey
                 .post.post_type_1.ch_action{"data-for" => "post_ch8"}
                   .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "aspect"}
                   .post-body
@@ -728,30 +798,39 @@
                             .wrapper.ps_cont.half_wheel_speed
                               .post_cont_inner
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   По поводу кнопки "всё". Она не очень интуитивна и красива.
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold Liza:
                                   Начальная - это та, что грузится со страницей. Но она по дате сортировки
                                 .comment_preview
+                                  %span.bold.com_date 12.04.2014
                                   %span.bold irivertime:
                                   И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.text-right.small_icons
@@ -764,6 +843,8 @@
                     %span.popup2
                       %small 1
                       %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                    %span.popup2
+                      %i.fa.fa-exclamation-triangle.font_lighter_grey
       / Main Block ends
       #popup-1-1.popup-window.detailed_popup.popup-w835.mfp-hide
         .popup.popup_rounded.popup_color_theme_stage2
@@ -797,7 +878,7 @@
                     %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "0", "data-me-type" => "aspect"} Обоснование
                   %p
                     Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже, компания Инвар будет на слуху, так как это будет исключительное нововведение для первопрестольников.
-            .container.modal_content
+            .container.modal_content.ps_cont
               .row
                 .col-md-12
                   .divider20
@@ -966,6 +1047,8 @@
                           %button.btn{:type => "button"}
                             %span.bold
                               %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                        %a.answers_collapse.font_grey
+                          %span 0 ответов
                       .item
                       .item
                   .divider15

@@ -32,7 +32,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "1st-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -51,23 +51,26 @@
                               %span.dd_n_cell.left.font_color_stage4
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage4
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice.moder{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-exclamation-triangle
                               %span.dd_n_cell.right
-                                22:00 11.03.2015
-                                = succeed ":" do
-                                  %span.bold Модератор
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
                                 %p
                                   На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                             .dd_nav_divider.font_color_stage4
@@ -77,16 +80,18 @@
                               %span.dd_n_cell.left.font_color_stage2
                                 %i.fa.fa-lg.fa-thumbs-up
                               %span.dd_n_cell.right.font_color_stage2
-                                19:45 12.03.2015
-                                %span.bold Liza
-                                в теме
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage2
                               %span 2
                             .divider10
@@ -94,29 +99,32 @@
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage1
                               %span 1
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %a#tooltip_db.book_icon.open-popup-link.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :href => "#popup-database", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -263,7 +271,7 @@
           %h4.font_white Решение конфликта, возникшего из-за меда
         %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
-          Подсказки
+          Открыть подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
@@ -316,7 +324,7 @@
                 %span.stage-heading Аспекты (9)
               .col-md-5
                 .sort-block.pull-right
-                  %a.btn.add-button{:href => "1st-stage - cabinet.html"}
+                  %a.btn.add-button{:href => "1st-stage-cabinet.html"}
                     %span +
                     Аспект
           / Aspects block (UI four) starts
@@ -390,44 +398,112 @@
                 / Tab panes
                 .tab-content
                   #tab-one.tab-pane.main-pane.active.fade.in
-                    .row
-                      .col-md-12.col-sm-12
-                        %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                          %li.active{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
-                          %li{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
-                          %li{:role => "presentation"}
-                            %a.aspect_color0_background{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
-                          .tab-content
-                            #article1.tab-pane.active.fade.in{:role => "tabpanel"}
-                              %h6.aspect-main-block-heading Ситуация с пчелами
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              %img{:src => "img/aspect-pic1.jpg"}/
-                            #article2.tab-pane.fade{:role => "tabpanel"}
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              %img{:src => "img/aspect-pic1.jpg"}/
-                            #article3.tab-pane.fade{:role => "tabpanel"}
-                              %h6.aspect-main-block-heading
-                                Ситуация с пчелами
-                              %p.aspect-main-block-text
-                                Пчелы недовольны тем, что на их мед
-                                постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                конфликт мирным способом, они обратились к мудрой Сове.
-                              .divider50
-                              %button.btn.info-button.flag Закрыть базу знаний
-                              .divider50
-                              .divider50
-                              .divider25
+                    .container
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                            %li.active{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1", :role => "tab"} Статья 1
+                            %li{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article2", :role => "tab"} Статья 2
+                            %li{:role => "presentation"}
+                              %a.aspect_color0_background{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article3", :role => "tab"} Статья 3
+                      .row
+                        .col-md-8.col-sm-8.min-col-right-padd
+                          .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                            .tab-content
+                              #article1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                %h6.aspect-main-block-heading Ситуация с пчелами
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article2.tab-pane.fade{:role => "tabpanel"}
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %img{:src => "img/aspect-pic1.jpg"}/
+                              #article3.tab-pane.fade{:role => "tabpanel"}
+                                %h6.aspect-main-block-heading
+                                  Ситуация с пчелами
+                                %p.aspect-main-block-text
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                .divider50
+                                %button.btn.info-button.flag Закрыть базу знаний
+                                .divider50
+                                .divider50
+                                .divider25
+                        .col-md-4.col-sm-4.min-col-left-padd
+                          #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
+                            .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                              %h4.block-with-left-icon.pull-left
+                                %i.left-icon.fa.fa-2x.fa-comments
+                                Вопросы по теме
+                              %span.pull-right.question_count 1 из 2
+                              .carousel-inner
+                                .item.active
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 1.
+                                    Из-за чего начались конфликты?
+                                  .hint.close-notice
+                                    Читайте вторую страничку презентации
+                                    %span.close-button
+                                      %i.fa.fa-times-circle-o
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери много шумят
+                                          в лесу
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотели
+                                          поселиться в Высоком дубу
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          В лесу был
+                                          пожар
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          Звери хотят
+                                          отнять мед у пчел
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.questionCarousel-target.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect", "data-slide-to" => "1", "data-target" => "#questionsCarousel1"} Ответить
+                                .item
+                                  %p.text.block-with-left-icon
+                                    %span.left-icon.pull-right 2.
+                                    К кому обратились жители опушки для разрешения спора?
+                                  %form.form.instruments-block
+                                    .btn-group{"data-toggle" => "buttons"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К Президенту РФ
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white К Сове
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К Винни-Пуху
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      .form-group
+                                        %button.btn.btn-xs.btn-white
+                                          К слону Аркадию
+                                        %i.fa.fa-check.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                    .clearfix
+                                    .form-group.bottom-buttons
+                                      %a.btn.btn-outline.notice-button.color_me{"data-me-action" => "border-color", "data-me-color" => "0", "data-me-type" => "aspect"} Подсказка
+                                      %button.btn.answer-button.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"} Ответить
                   #tab-two.tab-pane.main-pane.fade
                     .row
                       .col-md-12.col-sm-12
@@ -670,7 +746,7 @@
                   %span
                     %i.fa.fa-comment-o
                   Просмотреть аспекты
-                %a.btn.add-button{:href => "1st-stage - cabinet.html"}
+                %a.btn.add-button{:href => "1st-stage-cabinet.html"}
                   %span +
                   Добавить аспект
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide

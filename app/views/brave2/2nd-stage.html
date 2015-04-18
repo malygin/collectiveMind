@@ -35,7 +35,7 @@
 
                 <ul class="nav navbar-nav main_menu">
                     <li class="active"><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-                    <li><a href="cabinet-stage1.html" class="menu_a">Кабинет</a></li>
+                    <li><a href="2nd-stage-cabinet.html" class="menu_a">Кабинет</a></li>
                     <li class="has_dropwindow">
                         <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
                         </a>
@@ -55,7 +55,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage4">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <a href="#" class="dd_notice">
@@ -63,7 +63,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <a href="#" class="dd_notice moder">
@@ -71,7 +71,7 @@
                                                             <i class="fa fa-lg fa-exclamation-triangle"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            22:00 11.03.2015 <span class="bold">Модератор</span>:
+                                                            <span>22:00 11.03.2015 <span class="bold">Модератор</span>:</span>
                                                             <p>
                                                                 На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                                                             </p>
@@ -86,7 +86,7 @@
                                                             <i class="fa fa-lg fa-thumbs-up"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage2">
-                                                            19:45 12.03.2015 <span class="bold">Liza</span> в теме
+                                                            <span>19:45 12.03.2015 <span class="bold">Liza</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <a href="#" class="dd_notice">
@@ -94,7 +94,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <div class="dd_nav_divider font_color_stage2">
@@ -106,7 +106,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <a href="#" class="dd_notice">
@@ -114,7 +114,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <a href="#" class="dd_notice">
@@ -122,7 +122,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                                     </a>
                                                     <div class="dd_nav_divider font_color_stage1">
@@ -141,7 +141,7 @@
                 </ul>
 
                 <div class="navbar-right text-right user_block font_grey">
-                    <a href="#popup-database" class="book_icon open-popup-link">
+                    <a href="#popup-database" class="book_icon open-popup-link tooltip1" data-toggle="tooltip" id="tooltip_db" data-trigger="manual" data-placement="bottom" title="Жмите сюда, чтобы освежить в памяти базу знаний.">
                     </a>
                     <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -342,7 +342,7 @@
             <div class="container">
                 <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
             </div>
-            <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Подсказки</button>
+            <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
         </div>
 
 
@@ -433,7 +433,7 @@
 
                 <div class="stage-info-sort-block">
                     <div class="btn-group tooltip1" data-toggle="tooltip" id="tooltip2_1" data-trigger="manual" data-placement="bottom"
-                         title="Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект.">
+                         title="Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом.">
                         <span>Фильтр аспектов:</span>
                         <a data-toggle="dropdown" class="dropdown-toggle"> все </a>
                         <ul class="dropdown-menu">
@@ -550,7 +550,7 @@
                             <div class="sort-block pull-right">
                                 <span class="sort-label">Сортировать по новым:</span>
                                 <div class="sort-1 sort_btn sprite_com sprite-item2_2_1"><span>25</span></div><div class="sort-2 sort_btn sprite_doc sprite-item2_1 tooltip1" data-toggle="tooltip" id="tooltip2_2" data-trigger="manual" data-placement="bottom" title="При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."><span>2</span></div>
-                                <a href="2nd-stage - cabinet.html"><button class="btn add-button"><span>+</span>Несовершенство</button></a>
+                                <a href="2nd-stage-cabinet.html"><button class="btn add-button"><span>+</span>Несовершенство</button></a>
                             </div>
                         </div>
                     </div>
@@ -574,43 +574,31 @@
                                             <table class="table">
                                                 <tbody>
                                                 <tr class="what">
-                                                    <td class="col-md-2 text-center right-column">
-                                                        Что
-                                                    </td>
-                                                    <td class="col-md-10 left-column bold open-popup" data-placement="2" data-target="1">Винни-Пух постоянно
+                                                    <td class="col-md-12 left-column bold open-popup" data-placement="2" data-target="1">Винни-Пух постоянно
                                                         раздражает пчел своим излишним вниманием к Высокому дубу
                                                         <i class="fa fa-angle-right"></i>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
+                                                    <td class="col-md-12 left-column">Около Высокого дуба при выслеживании удачного момента
                                                         для кражи меда
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-2 text-center right-column"></td>
-                                                    <td class="col-md-10 left-column"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                             <div class="post_cont_hover white" id="post_ch1">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -626,7 +614,7 @@
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <span class="popup2 comments_icon" data-for="post_ch1"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                <span class="popup2 comments_icon" data-for="post_ch1" <small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -652,42 +640,31 @@
                                             <table class="table">
                                                 <tbody>
                                                 <tr class="what">
-                                                    <td class="col-md-2 text-center right-column">
-                                                        Что
-                                                    </td>
-                                                    <td class="col-md-10 left-column bold open-popup" data-placement="2" data-target="1">Винни-Пух постоянно
+                                                    <td class="col-md-12 left-column bold open-popup" data-placement="2" data-target="1">Винни-Пух постоянно
+                                                        раздражает пчел своим излишним вниманием к Высокому дубу
                                                         <i class="fa fa-angle-right"></i>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
+                                                    <td class="col-md-12 left-column">Около Высокого дуба при выслеживании удачного момента
                                                         для кражи меда
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-2 text-center right-column"></td>
-                                                    <td class="col-md-10 left-column"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                             <div class="post_cont_hover white" id="post_ch2">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -703,7 +680,7 @@
                                         </div>
                                         <div class="col-md-3 col_padding_left_3">
                                             <div class="text-right small_icons">
-                                                <span class="popup2 comments_icon" data-for="post_ch2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                <span class="popup2 comments_icon" data-for="post_ch2"<small>5</small> <i class="fa fa-comment-o"></i></span>
                                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                                                 <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
@@ -754,8 +731,8 @@
                         <div class="col-md-5 com_dashed_border right popup_collapsable_col collapse in">
                             <button class="expand_button remove_col btn_reset" type="button" data-toggle="collapse" data-target=".popup_collapsable_col" data-col="7"></button>
                             <div class="divider20"></div>
-                            <div class="border_light_grey rounded_5 imperf_left">
-                                <div class="media comment main_line pink">
+                            <div class="border_light_grey rounded_3 imperf_left">
+                                <div class="media comment main_line">
                                     <div class="container">
                                         <div class="media-left">
                                             <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
@@ -765,23 +742,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table pink">
+                                <table class="table">
                                     <tr>
-                                        <td class="col-md-2 text-center right-column">
-                                            Что
-                                        </td>
-                                        <td class="col-md-10 left-column">Винни-Пух постоянно
-                                            раздражает пчел своим излишним вниманием к Высокому дубу
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-2 text-center right-column">Где</td>
-                                        <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-2 text-center right-column">Когда</td>
-                                        <td class="col-md-10 left-column">При выслеживании удачного момента
+                                        <td class="col-md-12 left-column">При выслеживании удачного момента
                                             для кражи меда
                                         </td>
                                     </tr>
@@ -789,52 +752,23 @@
                                 <div class="divider10"></div>
                                 <div class="index_block">
                                     <div class="text-center col-md-1">
-                                        <i class="fa fa-exclamation-triangle font_lighter_grey"></i>
+                                        <i class="fa fa-exclamation-triangle font_red"></i>
                                     </div>
                                     <div class="col-md-11">
                                         <h5>Замечание модератора</h5>
+                                        <div class="divider10"></div>
                                         мотивированы продавать продукцию Инвар, фиксируя на ней
                                         свой процент от продажи
                                     </div>
                                 </div>
+                                <div class="divider10"></div>
+                                <div class="divider_1_grey"></div>
                                 <div class="index_block">
                                     <div class="text-center col-md-1">
-                                        <i class="fa fa-square font_dark_blue"></i>
+                                        <i class="fa fa-square color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
                                     </div>
                                     <div class="col-md-11">
                                         Взаимоотношения четвероногих и пчел
-                                    </div>
-                                </div>
-                                <div class="index_block">
-                                    <div class="text-center col-md-1">
-                                        <i class="fa fa-square font_blue_green"></i>
-                                    </div>
-                                    <div class="col-md-11">
-                                        Эффективность пчел в сборе меда
-                                    </div>
-                                </div>
-                                <div class="index_block">
-                                    <div class="text-center col-md-1">
-                                        <i class="fa fa-square font_blue_green2"></i>
-                                    </div>
-                                    <div class="col-md-11">
-                                        Винни-Пух и все-все-все
-                                    </div>
-                                </div>
-                                <div class="index_block">
-                                    <div class="text-center col-md-1">
-                                        <i class="fa fa-square font_blue_green3"></i>
-                                    </div>
-                                    <div class="col-md-11">
-                                        Пчелы и цветочные поляны
-                                    </div>
-                                </div>
-                                <div class="index_block">
-                                    <div class="text-center col-md-1">
-                                        <i class="fa fa-square font_light_green"></i>
-                                    </div>
-                                    <div class="col-md-11">
-                                        Эффективность пчел в сборе меда
                                     </div>
                                 </div>
                                 <div class="divider10"></div>
@@ -853,17 +787,17 @@
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">15:28</span>
-                            <span class="dropdown edit_comment">
-                                <button class="btn_reset" id="edit_comment1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
-                                </ul>
-                            </span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
+                                                <span class="comment_interf">
+                                                    <span class="date_time theme_font_color">15:28</span>
+                                                    <span class="dropdown edit_comment">
+                                                        <button class="btn_reset" id="edit_comment1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-lg theme_font_color"></i></button>
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
+                                                            <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
+                                                            <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
+                                                        </ul>
+                                                    </span>
+                                                    <span class="badge badge_important theme_back_color">важно</span>
+                                                </span>
                                             </div>
                                             <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
 
@@ -888,10 +822,10 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">17:28</span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
+                                                        <span class="comment_interf">
+                                                            <span class="date_time theme_font_color">17:28</span>
+                                                            <span class="badge badge_important theme_back_color">важно</span>
+                                                        </span>
                                                     </div>
                                                     <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.</p>
 
@@ -1028,7 +962,7 @@
                 <div class="modal_title">
                     <div class="row">
                         <div class="col-md-12">
-                            <h4 class=" bold font_dark_grey tall_modal_title">
+                            <h4 class=" bold font_dark_grey">
                                 Голосование по несовершенствам
                             </h4>
                         </div>
@@ -1038,34 +972,37 @@
                     <div class="vote_progress light-green progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="modal_body">
-                    <div class="container vote_folders_cont folders_3 no_padding_col">
+                    <div class="container vote_folders_cont folders_4 no_padding_col">
                         <ul class="nav vote_nav row" role="tablist">
-                            <li role="presentation" class="no_padding_col active folder_all">
-                                <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab">
-                                    <i class="fa fa-angle-left fa_xlg"></i><small class="bold">Вернуться в общий список</small>
+                            <li role="presentation" class="col-md-3 no_padding_col folder_all active">
+                                <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab" data-vote-folder-role="all">
+                                    <div class="vote_folder_inn poll-2-1">
+                                        <span class="vote_counter"></span>
+                                        <h5 class="font_color_stage2">Общий список</h5>
+                                    </div>
                                 </a>
                             </li>
-                            <li role="presentation" class="col-md-4 no_padding_col">
+                            <li role="presentation" class="col-md-3 no_padding_col">
                                 <a class="vote_folder" href="#vote_tab2" role="tab" data-toggle="tab" data-vote-folder-role="important">
-                                    <div class="vote_folder_inn poll-2-1">
+                                    <div class="vote_folder_inn poll-2-2">
+                                        <span class="vote_counter"></span>
+                                        <h5>Необходимо</h5>
+                                    </div>
+                                </a>
+                            </li>
+                            <li role="presentation" class="col-md-3 no_padding_col">
+                                <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab" data-vote-folder-role="not_important">
+                                    <div class="vote_folder_inn poll-2-3">
                                         <span class="vote_counter"></span>
                                         <h5>Важно</h5>
                                     </div>
                                 </a>
                             </li>
-                            <li role="presentation" class="col-md-4 no_padding_col">
-                                <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab" data-vote-folder-role="not_important">
-                                    <div class="vote_folder_inn poll-2-2">
+                            <li role="presentation" class="col-md-3 no_padding_col">
+                                <a class="vote_folder" href="#vote_tab4" role="tab" data-toggle="tab" data-vote-folder-role="unnecessary">
+                                    <div class="vote_folder_inn poll-2-4">
                                         <span class="vote_counter"></span>
                                         <h5>Неважно</h5>
-                                    </div>
-                                </a>
-                            </li>
-                            <li role="presentation" class="col-md-4 no_padding_col">
-                                <a class="vote_folder" href="#vote_tab4" role="tab" data-toggle="tab" data-vote-folder-role="unnecessary">
-                                    <div class="vote_folder_inn poll-2-3">
-                                        <span class="vote_counter"></span>
-                                        <h5>Лишнее</h5>
                                     </div>
                                 </a>
                             </li>
@@ -1079,249 +1016,79 @@
                                 <div role="tabpanel" class="tab-pane all_vote active" id="vote_tab1">
                                     <div class="container padding30">
                                         <div class="row">
-                                            <div class="col-sm-4 vote_item_cont item_expandable h_1">
-                                                <div class="vote_item">
-                                                    <div class="media">
-                                                        <div class="media-body pink">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                <tr class="what">
-                                                                    <td class="col-md-2  text-center right-column">
-                                                                        Что
-                                                                    </td>
-                                                                    <td class="col-md-10 left-column bold">Нечем дышать
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
-                                                                        для кражи меда
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                            <div class="col-sm-4 vote_item_cont">
+                                                <div class="vote_item color_me" data-me-type = "imperf" data-me-action = 'border-top-color' data-me-color = '0'>
+                                                    <div class="heading_cont">
+                                                        <h6>Нечем дышать</h6>
                                                     </div>
-                                                    <div class="dark-blue vote_tag">Аспект: Слишком низкие потолки в офисах</div>
+                                                    <div class="vote_tag color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '5'>Аспект: Слишком низкие потолки в офисах</div>
                                                     <div class="divider10"></div>
                                                     <div class="vote_controls text-center">
-                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
-                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
-                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
-                                                        <span class="vote_open_detail grey">
-                                                            <i class="fa fa-angle-right font_white"></i>
-                                                        </span>
-                                                        <div class="divider15"></div>
+                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
+                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
                                                     </div>
+                                                    <div class="divider15"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 vote_item_cont item_expandable h_1">
-                                                <div class="vote_item">
-                                                    <div class="media">
-                                                        <div class="media-body blue">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                <tr class="what">
-                                                                    <td class="col-md-2  text-center right-column">
-                                                                        Что
-                                                                    </td>
-                                                                    <td class="col-md-10 left-column bold">Нечем дышать
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
-                                                                        для кражи меда
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                            <div class="col-sm-4 vote_item_cont">
+                                                <div class="vote_item color_me" data-me-type = "imperf" data-me-action = 'border-top-color' data-me-color = '1'>
+                                                    <div class="heading_cont">
+                                                        <h6>Нечем дышать</h6>
                                                     </div>
-                                                    <div class="dark-blue vote_tag">Аспект: Слишком низкие потолки в офисах</div>
+                                                    <div class="vote_tag color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '3'>Аспект: Слишком низкие потолки в офисах</div>
                                                     <div class="divider10"></div>
                                                     <div class="vote_controls text-center">
-                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
-                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
-                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
-                                                        <span class="vote_open_detail grey">
-                                                            <i class="fa fa-angle-right font_white"></i>
-                                                        </span>
-                                                        <div class="divider15"></div>
+                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
+                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
                                                     </div>
+                                                    <div class="divider15"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 vote_item_cont item_expandable h_1">
-                                                <div class="vote_item">
-                                                    <div class="media">
-                                                        <div class="media-body pink">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                <tr class="what">
-                                                                    <td class="col-md-2  text-center right-column">
-                                                                        Что
-                                                                    </td>
-                                                                    <td class="col-md-10 left-column bold">Нечем дышать
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
-                                                                        для кражи меда
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                            <div class="col-sm-4 vote_item_cont">
+                                                <div class="vote_item color_me" data-me-type = "imperf" data-me-action = 'border-top-color' data-me-color = '2'>
+                                                    <div class="heading_cont">
+                                                        <h6>Нечем дышать</h6>
                                                     </div>
-                                                    <div class="dark-blue vote_tag">Аспект: Слишком низкие потолки в офисах</div>
+                                                    <div class="vote_tag color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '6'>Аспект: Слишком низкие потолки в офисах</div>
                                                     <div class="divider10"></div>
                                                     <div class="vote_controls text-center">
-                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
-                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
-                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
-                                                        <span class="vote_open_detail grey">
-                                                            <i class="fa fa-angle-right font_white"></i>
-                                                        </span>
-                                                        <div class="divider15"></div>
+                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
+                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
                                                     </div>
+                                                    <div class="divider15"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 vote_item_cont item_expandable h_1">
-                                                <div class="vote_item">
-                                                    <div class="media">
-                                                        <div class="media-body pink">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                <tr class="what">
-                                                                    <td class="col-md-2  text-center right-column">
-                                                                        Что
-                                                                    </td>
-                                                                    <td class="col-md-10 left-column bold">Нечем дышать
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
-                                                                        для кражи меда
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                            <div class="col-sm-4 vote_item_cont">
+                                                <div class="vote_item color_me" data-me-type = "imperf" data-me-action = 'border-top-color' data-me-color = '3'>
+                                                    <div class="heading_cont">
+                                                        <h6>Нечем дышать</h6>
                                                     </div>
-                                                    <div class="dark-blue vote_tag">Аспект: Слишком низкие потолки в офисах</div>
+                                                    <div class="vote_tag color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '8'>Аспект: Слишком низкие потолки в офисах</div>
                                                     <div class="divider10"></div>
                                                     <div class="vote_controls text-center">
-                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
-                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
-                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
-                                                        <span class="vote_open_detail grey">
-                                                            <i class="fa fa-angle-right font_white"></i>
-                                                        </span>
-                                                        <div class="divider15"></div>
+                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
+                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
                                                     </div>
+                                                    <div class="divider15"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 vote_item_cont item_expandable h_1">
-                                                <div class="vote_item">
-                                                    <div class="media">
-                                                        <div class="media-body blue">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                <tr class="what">
-                                                                    <td class="col-md-2  text-center right-column">
-                                                                        Что
-                                                                    </td>
-                                                                    <td class="col-md-10 left-column bold">Нечем дышать
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Где</td>
-                                                                    <td class="col-md-10 left-column">Около Высокого дуба</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-2 text-center right-column">Когда</td>
-                                                                    <td class="col-md-10 left-column">При выслеживании удачного момента
-                                                                        для кражи меда
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="vote_filler_cell">
-                                                                    <td class="col-md-2 right-column"></td>
-                                                                    <td class="col-md-10 left-column"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                            <div class="col-sm-4 vote_item_cont">
+                                                <div class="vote_item color_me" data-me-type = "imperf" data-me-action = 'border-top-color' data-me-color = '4'>
+                                                    <div class="heading_cont">
+                                                        <h6>Нечем дышать</h6>
                                                     </div>
-                                                    <div class="dark-blue vote_tag">Аспект: Слишком низкие потолки в офисах</div>
+                                                    <div class="vote_tag color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '10'>Аспект: Слишком низкие потолки в офисах</div>
                                                     <div class="divider10"></div>
                                                     <div class="vote_controls text-center">
-                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important"><i class="fa fa-exclamation"></i></button>
-                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important"><i class="fa fa-minus"></i></button>
-                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary"><i class="fa fa-times"></i></button>
-                                                        <span class="vote_open_detail grey">
-                                                            <i class="fa fa-angle-right font_white"></i>
-                                                        </span>
-                                                        <div class="divider15"></div>
+                                                        <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation"><i class="fa fa-exclamation"></i></button>
+                                                        <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check"><i class="fa fa-check"></i></button>
+                                                        <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus"><i class="fa fa-minus"></i></button>
                                                     </div>
+                                                    <div class="divider15"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1362,12 +1129,14 @@
                 <div class="modal_badge back_color_stage2 rounded_2 font_white">2 СТАДИЯ</div>
                 <h2><img src="img/good-shot1.png" class="expl-header-img-1">Цель 2-й стадии</h2>
 
-                <p class="expl-sub-heading">На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний,
-                и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для исправления
-                текущей ситуации.</p>
+                <p class="expl-sub-heading">Выявление несовершенств текущей ситуации, описанной в базе знаний.</p>
 
-                <h2><img src="img/flag1.png" class="expl-header-img-2">С чего начать?</h2>
+                <h2><img src="img/flag1.png" class="expl-header-img-2">Что делать?</h2>
+                <ol>
+                    <li>Читайте и обсуждайте несовершенства, сформулированные участниками процедуры.</li>
+                    <li>Формулируйте собственные несовершенства и выставляйте их на всеобщее обсуждение.</li>
+                    <li>В конце стадии примите участие в голосовании и распределите несовершенства по степени важности.</li>
+                </ol>
                 <button class="btn red close_magnific">Начать работу</button>
             </div>
         </div>

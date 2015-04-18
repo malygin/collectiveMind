@@ -37,7 +37,7 @@
 
     <ul class="nav navbar-nav main_menu">
         <li class="active"><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-        <li><a href="cabinet-stage1.html" class="menu_a">Кабинет</a></li>
+        <li><a href="1st-stage-cabinet.html" class="menu_a">Кабинет</a></li>
         <li class="has_dropwindow">
             <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
             </a>
@@ -57,7 +57,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage4">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -65,7 +65,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice moder">
@@ -73,7 +73,7 @@
                                                             <i class="fa fa-lg fa-exclamation-triangle"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            22:00 11.03.2015 <span class="bold">Модератор</span>:
+                                                            <span>22:00 11.03.2015 <span class="bold">Модератор</span>:</span>
                                                             <p>
                                                                 На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                                                             </p>
@@ -88,7 +88,7 @@
                                                             <i class="fa fa-lg fa-thumbs-up"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage2">
-                                                            19:45 12.03.2015 <span class="bold">Liza</span> в теме
+                                                            <span>19:45 12.03.2015 <span class="bold">Liza</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -96,7 +96,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage2">
@@ -108,7 +108,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -116,7 +116,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -124,7 +124,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage1">
@@ -143,7 +143,7 @@
     </ul>
 
     <div class="navbar-right text-right user_block font_grey">
-        <a href="#popup-database" class="book_icon open-popup-link">
+        <a href="#popup-database" class="book_icon open-popup-link tooltip1" data-toggle="tooltip" id="tooltip_db" data-trigger="manual" data-placement="bottom" title="Жмите сюда, чтобы освежить в памяти базу знаний.">
         </a>
         <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -345,7 +345,6 @@
             <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
         </div>
         <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
-        <button type="button" class="btn btn-tooltip-close" id="close_tooltip_button_1" value="Destroy"><i class="fa fa-lightbulb-o"></i> Закрыть подсказки</button>
     </div>
 
 
@@ -353,7 +352,7 @@
         <div class="row">
 
             <div class="col-md-8 col_padding_right_3">
-                <div class="border_grey rounded_3 stages_block tooltip1_1" data-toggle="tooltip" id="tooltip1_1" data-trigger="manual" data-placement="bottom" title="В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.">
+                <div class="border_grey rounded_3 stages_block">
                     <div class="btn-toolbar" role="toolbar">
 
                         <div class="btn-group" role="group">
@@ -375,8 +374,8 @@
             </div>
 
             <div class="col-md-4 col_padding_left_3">
-                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon tooltip1_2" data-toggle="tooltip" id="tooltip1_2" data-trigger="manual" data-placement="bottom" title="Вы всегда сможете вызвать помощь по стадии, нажав сюда"></div></a>
-                <div class="border_grey rounded_3 progress_block tooltip1_3" data-toggle="tooltip" id="tooltip1_3" data-trigger="manual" data-placement="bottom" title="Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!">
+                <a href="#popup-explanation-1st" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon"></div></a>
+                <div class="border_grey rounded_3 progress_block">
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-6 col-md-6 col_padding_right_3">
@@ -443,8 +442,8 @@
                     <div class="col-md-5">
                         <div class="sort-block pull-right">
                             <span class="sort-label">Сортировать по новым:</span>
-                            <div class="sort-1 sort_btn sprite_com sprite-item1_2_1"><span>25</span></div><div class="sort-2 sort_btn sprite_doc sprite-item1_1 tooltip2_2" data-toggle="tooltip" id="tooltip2_2" data-trigger="manual" data-placement="bottom" title="При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."><span>2</span></div>
-                            <a href="1st-stage - cabinet.html" class="btn add-button"><span>+</span> Аспект</a>
+                            <div class="sort-1 sort_btn sprite_com sprite-item1_2_1"><span>25</span></div><div class="sort-2 sort_btn sprite_doc sprite-item1_1"><span>2</span></div>
+                            <a href="1st-stage-cabinet.html" class="btn add-button"><span>+</span> Аспект</a>
                         </div>
                     </div>
                 </div>
@@ -483,15 +482,15 @@
                                             <div class="post_cont_hover white" id="post_ch1">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -523,15 +522,15 @@
                                             <div class="post_cont_hover white" id="post_ch2">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -563,15 +562,15 @@
                                             <div class="post_cont_hover white" id="post_ch3">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -603,15 +602,15 @@
                                             <div class="post_cont_hover white" id="post_ch4">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -643,15 +642,15 @@
                                             <div class="post_cont_hover white" id="post_ch5">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -683,15 +682,15 @@
                                             <div class="post_cont_hover white" id="post_ch6">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -705,7 +704,6 @@
                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-6 combined_border left">
                         <div class="post post_type_1 ch_action" data-for="post_ch7">
@@ -726,15 +724,15 @@
                                             <div class="post_cont_hover white" id="post_ch7">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -746,6 +744,7 @@
                                 <span class="popup2 comments_icon" data-for="post_ch7"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
                             </div>
                         </div>
                         <div class="post post_type_1 ch_action" data-for="post_ch8">
@@ -766,15 +765,15 @@
                                             <div class="post_cont_hover white" id="post_ch8">
                                                 <div class="wrapper ps_cont half_wheel_speed">
                                                     <div class="post_cont_inner">
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
-                                                        <div class="comment_preview"><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
-                                                        <div class="comment_preview"><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> По поводу кнопки "всё". Она не очень интуитивна и красива.</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">Liza:</span> Начальная - это та, что грузится со страницей. Но она по дате сортировки</div>
+                                                        <div class="comment_preview"><span class="bold com_date">12.04.2014</span><span class="bold">irivertime:</span> И обратная сортировка должна тоже как-то выделяться</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -786,6 +785,7 @@
                                 <span class="popup2 comments_icon" data-for="post_ch8"><small>5</small> <i class="fa fa-comment-o"></i></span>
                                 <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
                                 <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                <span class="popup2"><i class="fa fa-exclamation-triangle font_lighter_grey"></i></span>
                             </div>
                         </div>
                     </div>
@@ -837,7 +837,7 @@
                 </div>
             </div>
         </div>
-    <div class="container modal_content">
+    <div class="container modal_content ps_cont">
     <div class="row">
     <div class="col-md-12">
         <div class="divider20"></div>
@@ -990,6 +990,7 @@
                         </div>
                         <button class="btn" type="button"><span class="bold"><i class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
                     </form>
+                    <a class="answers_collapse font_grey"><span>0 ответов</span></a>
                 </div>
                 <div class="item">
                 </div>

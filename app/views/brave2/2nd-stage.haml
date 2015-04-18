@@ -32,7 +32,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "2nd-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -51,23 +51,26 @@
                               %span.dd_n_cell.left.font_color_stage4
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage4
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice.moder{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-exclamation-triangle
                               %span.dd_n_cell.right
-                                22:00 11.03.2015
-                                = succeed ":" do
-                                  %span.bold Модератор
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
                                 %p
                                   На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                             .dd_nav_divider.font_color_stage4
@@ -77,16 +80,18 @@
                               %span.dd_n_cell.left.font_color_stage2
                                 %i.fa.fa-lg.fa-thumbs-up
                               %span.dd_n_cell.right.font_color_stage2
-                                19:45 12.03.2015
-                                %span.bold Liza
-                                в теме
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage2
                               %span 2
                             .divider10
@@ -94,29 +99,32 @@
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage1
                               %span 1
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %a#tooltip_db.book_icon.open-popup-link.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :href => "#popup-database", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -263,7 +271,7 @@
           %h4.font_white Решение конфликта, возникшего из-за меда
         %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
           %i.fa.fa-lightbulb-o
-          Подсказки
+          Открыть подсказки
       .container
         .row
           .col-md-8.col_padding_right_3
@@ -311,7 +319,7 @@
       .main-block
         .container
           .stage-info-sort-block
-            #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Сейчас вы просматриваете несовершенства, связанные только с этим аспектом, но в выпадающем меню вы можете выбрать любой другой аспект."}
+            #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
               %span Фильтр аспектов:
               %a.dropdown-toggle{"data-toggle" => "dropdown"} все
               %ul.dropdown-menu
@@ -427,7 +435,7 @@
                     %span 25
                   #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
                     %span 2
-                  %a{:href => "2nd-stage - cabinet.html"}
+                  %a{:href => "2nd-stage-cabinet.html"}
                     %button.btn.add-button
                       %span> +
                       Несовершенство
@@ -447,51 +455,51 @@
                         %table.table
                           %tbody
                             %tr.what
-                              %td.col-md-2.text-center.right-column
-                                Что
-                              %td.col-md-10.left-column.bold.open-popup{"data-placement" => "2", "data-target" => "1"}
+                              %td.col-md-12.left-column.bold.open-popup{"data-placement" => "2", "data-target" => "1"}
                                 Винни-Пух постоянно
                                 раздражает пчел своим излишним вниманием к Высокому дубу
                                 %i.fa.fa-angle-right
                             %tr
-                              %td.col-md-2.text-center.right-column Где
-                              %td.col-md-10.left-column Около Высокого дуба
-                            %tr
-                              %td.col-md-2.text-center.right-column Когда
-                              %td.col-md-10.left-column
-                                При выслеживании удачного момента
+                              %td.col-md-12.left-column
+                                Около Высокого дуба при выслеживании удачного момента
                                 для кражи меда
-                            %tr
-                              %td.col-md-2.text-center.right-column
-                              %td.col-md-10.left-column
                         #post_ch1.post_cont_hover.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.white
@@ -502,7 +510,7 @@
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
                           %span.popup2.comments_icon{"data-for" => "post_ch1"}
-                            %small 5
+                            5
                             %i.fa.fa-comment-o
                           %span.popup2
                             %small 9
@@ -526,50 +534,51 @@
                         %table.table
                           %tbody
                             %tr.what
-                              %td.col-md-2.text-center.right-column
-                                Что
-                              %td.col-md-10.left-column.bold.open-popup{"data-placement" => "2", "data-target" => "1"}
+                              %td.col-md-12.left-column.bold.open-popup{"data-placement" => "2", "data-target" => "1"}
                                 Винни-Пух постоянно
+                                раздражает пчел своим излишним вниманием к Высокому дубу
                                 %i.fa.fa-angle-right
                             %tr
-                              %td.col-md-2.text-center.right-column Где
-                              %td.col-md-10.left-column Около Высокого дуба
-                            %tr
-                              %td.col-md-2.text-center.right-column Когда
-                              %td.col-md-10.left-column
-                                При выслеживании удачного момента
+                              %td.col-md-12.left-column
+                                Около Высокого дуба при выслеживании удачного момента
                                 для кражи меда
-                            %tr
-                              %td.col-md-2.text-center.right-column
-                              %td.col-md-10.left-column
                         #post_ch2.post_cont_hover.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 По поводу кнопки "всё". Она не очень интуитивна и красива.
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold Liza:
                                 Начальная - это та, что грузится со страницей. Но она по дате сортировки
                               .comment_preview
+                                %span.bold.com_date 12.04.2014
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.white
@@ -580,7 +589,7 @@
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
                           %span.popup2.comments_icon{"data-for" => "post_ch2"}
-                            %small 5
+                            5
                             %i.fa.fa-comment-o
                           %span.popup2
                             %small 9
@@ -621,61 +630,34 @@
                 .col-md-5.com_dashed_border.right.popup_collapsable_col.collapse.in
                   %button.expand_button.remove_col.btn_reset{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
                   .divider20
-                  .border_light_grey.rounded_5.imperf_left
-                    .media.comment.main_line.pink
+                  .border_light_grey.rounded_3.imperf_left
+                    .media.comment.main_line
                       .container
                         .media-left
                           %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
                         .media-body
                           %h5.media-heading.bold Винни-Пух
-                    %table.table.pink
+                    %table.table
                       %tr
-                        %td.col-md-2.text-center.right-column
-                          Что
-                        %td.col-md-10.left-column
-                          Винни-Пух постоянно
-                          раздражает пчел своим излишним вниманием к Высокому дубу
-                      %tr
-                        %td.col-md-2.text-center.right-column Где
-                        %td.col-md-10.left-column Около Высокого дуба
-                      %tr
-                        %td.col-md-2.text-center.right-column Когда
-                        %td.col-md-10.left-column
+                        %td.col-md-12.left-column
                           При выслеживании удачного момента
                           для кражи меда
                     .divider10
                     .index_block
                       .text-center.col-md-1
-                        %i.fa.fa-exclamation-triangle.font_lighter_grey
+                        %i.fa.fa-exclamation-triangle.font_red
                       .col-md-11
                         %h5 Замечание модератора
+                        .divider10
                         мотивированы продавать продукцию Инвар, фиксируя на ней
                         свой процент от продажи
+                    .divider10
+                    .divider_1_grey
                     .index_block
                       .text-center.col-md-1
-                        %i.fa.fa-square.font_dark_blue
+                        %i.fa.fa-square.color_me{"data-me-action" => "color", "data-me-color" => "0", "data-me-type" => "aspect"}
                       .col-md-11
                         Взаимоотношения четвероногих и пчел
-                    .index_block
-                      .text-center.col-md-1
-                        %i.fa.fa-square.font_blue_green
-                      .col-md-11
-                        Эффективность пчел в сборе меда
-                    .index_block
-                      .text-center.col-md-1
-                        %i.fa.fa-square.font_blue_green2
-                      .col-md-11
-                        Винни-Пух и все-все-все
-                    .index_block
-                      .text-center.col-md-1
-                        %i.fa.fa-square.font_blue_green3
-                      .col-md-11
-                        Пчелы и цветочные поляны
-                    .index_block
-                      .text-center.col-md-1
-                        %i.fa.fa-square.font_light_green
-                      .col-md-11
-                        Эффективность пчел в сборе меда
                     .divider10
                 .col-md-7.comment_col.popup_expandable_col.ps_cont
                   %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
@@ -868,32 +850,33 @@
           .modal_title
             .row
               .col-md-12
-                %h4.bold.font_dark_grey.tall_modal_title
+                %h4.bold.font_dark_grey
                   Голосование по несовершенствам
           .vote_progress_cont.progress
             .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
           .modal_body
-            .container.vote_folders_cont.folders_3.no_padding_col
+            .container.vote_folders_cont.folders_4.no_padding_col
               %ul.nav.vote_nav.row{:role => "tablist"}
-                %li.no_padding_col.active.folder_all{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
-                    %i.fa.fa-angle-left.fa_xlg
-                    %small.bold Вернуться в общий список
-                %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
+                %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
                     .vote_folder_inn.poll-2-1
                       %span.vote_counter
-                      %h5 Важно
-                %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
+                      %h5.font_color_stage2 Общий список
+                %li.col-md-3.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
                     .vote_folder_inn.poll-2-2
                       %span.vote_counter
-                      %h5 Неважно
-                %li.col-md-4.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
+                      %h5 Необходимо
+                %li.col-md-3.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
                     .vote_folder_inn.poll-2-3
                       %span.vote_counter
-                      %h5 Лишнее
+                      %h5 Важно
+                %li.col-md-3.no_padding_col{:role => "presentation"}
+                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
+                    .vote_folder_inn.poll-2-4
+                      %span.vote_counter
+                      %h5 Неважно
             .divider25
             .container
               .row
@@ -902,191 +885,76 @@
                   #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
                     .container.padding30
                       .row
-                        .col-sm-4.vote_item_cont.item_expandable.h_1
-                          .vote_item
-                            .media
-                              .media-body.pink
-                                %table.table
-                                  %tbody
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                                    %tr.what
-                                      %td.col-md-2.text-center.right-column
-                                        Что
-                                      %td.col-md-10.left-column.bold
-                                        Нечем дышать
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Где
-                                      %td.col-md-10.left-column Около Высокого дуба
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Когда
-                                      %td.col-md-10.left-column
-                                        При выслеживании удачного момента
-                                        для кражи меда
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                        .col-sm-4.vote_item_cont
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "imperf"}
+                            .heading_cont
+                              %h6 Нечем дышать
+                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "5", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-check
+                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-times
-                              %span.vote_open_detail.grey
-                                %i.fa.fa-angle-right.font_white
-                              .divider15
-                        .col-sm-4.vote_item_cont.item_expandable.h_1
-                          .vote_item
-                            .media
-                              .media-body.blue
-                                %table.table
-                                  %tbody
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                                    %tr.what
-                                      %td.col-md-2.text-center.right-column
-                                        Что
-                                      %td.col-md-10.left-column.bold
-                                        Нечем дышать
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Где
-                                      %td.col-md-10.left-column Около Высокого дуба
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Когда
-                                      %td.col-md-10.left-column
-                                        При выслеживании удачного момента
-                                        для кражи меда
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                            .heading_cont
+                              %h6 Нечем дышать
+                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-check
+                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-times
-                              %span.vote_open_detail.grey
-                                %i.fa.fa-angle-right.font_white
-                              .divider15
-                        .col-sm-4.vote_item_cont.item_expandable.h_1
-                          .vote_item
-                            .media
-                              .media-body.pink
-                                %table.table
-                                  %tbody
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                                    %tr.what
-                                      %td.col-md-2.text-center.right-column
-                                        Что
-                                      %td.col-md-10.left-column.bold
-                                        Нечем дышать
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Где
-                                      %td.col-md-10.left-column Около Высокого дуба
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Когда
-                                      %td.col-md-10.left-column
-                                        При выслеживании удачного момента
-                                        для кражи меда
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                            .heading_cont
+                              %h6 Нечем дышать
+                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "6", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-check
+                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-times
-                              %span.vote_open_detail.grey
-                                %i.fa.fa-angle-right.font_white
-                              .divider15
-                        .col-sm-4.vote_item_cont.item_expandable.h_1
-                          .vote_item
-                            .media
-                              .media-body.pink
-                                %table.table
-                                  %tbody
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                                    %tr.what
-                                      %td.col-md-2.text-center.right-column
-                                        Что
-                                      %td.col-md-10.left-column.bold
-                                        Нечем дышать
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Где
-                                      %td.col-md-10.left-column Около Высокого дуба
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Когда
-                                      %td.col-md-10.left-column
-                                        При выслеживании удачного момента
-                                        для кражи меда
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                            .heading_cont
+                              %h6 Нечем дышать
+                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "8", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-check
+                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-times
-                              %span.vote_open_detail.grey
-                                %i.fa.fa-angle-right.font_white
-                              .divider15
-                        .col-sm-4.vote_item_cont.item_expandable.h_1
-                          .vote_item
-                            .media
-                              .media-body.blue
-                                %table.table
-                                  %tbody
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                                    %tr.what
-                                      %td.col-md-2.text-center.right-column
-                                        Что
-                                      %td.col-md-10.left-column.bold
-                                        Нечем дышать
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Где
-                                      %td.col-md-10.left-column Около Высокого дуба
-                                    %tr
-                                      %td.col-md-2.text-center.right-column Когда
-                                      %td.col-md-10.left-column
-                                        При выслеживании удачного момента
-                                        для кражи меда
-                                    %tr.vote_filler_cell
-                                      %td.col-md-2.right-column
-                                      %td.col-md-10.left-column
-                            .dark-blue.vote_tag Аспект: Слишком низкие потолки в офисах
+                            .divider15
+                        .col-sm-4.vote_item_cont
+                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                            .heading_cont
+                              %h6 Нечем дышать
+                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "10", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
                             .divider10
                             .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
                                 %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
+                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                                %i.fa.fa-check
+                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
                                 %i.fa.fa-minus
-                              %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-times
-                              %span.vote_open_detail.grey
-                                %i.fa.fa-angle-right.font_white
-                              .divider15
+                            .divider15
                     .divider50
                   #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
                     .container.padding30
@@ -1107,14 +975,14 @@
           %h2
             %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
             Цель 2-й стадии
-          %p.expl-sub-heading
-            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний,
-            и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для исправления
-            текущей ситуации.
+          %p.expl-sub-heading Выявление несовершенств текущей ситуации, описанной в базе знаний.
           %h2
             %img.expl-header-img-2{:src => "img/flag1.png"}>/
-            С чего начать?
+            Что делать?
+          %ol
+            %li Читайте и обсуждайте несовершенства, сформулированные участниками процедуры.
+            %li Формулируйте собственные несовершенства и выставляйте их на всеобщее обсуждение.
+            %li В конце стадии примите участие в голосовании и распределите несовершенства по степени важности.
           %button.btn.red.close_magnific Начать работу
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded

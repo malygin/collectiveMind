@@ -36,7 +36,7 @@
 
     <ul class="nav navbar-nav main_menu">
         <li class="active"><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-        <li><a href="cabinet-stage1.html" class="menu_a">Кабинет</a></li>
+        <li><a href="1st-stage-cabinet.html" class="menu_a">Кабинет</a></li>
         <li class="has_dropwindow">
             <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
             </a>
@@ -56,7 +56,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage4">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -64,7 +64,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice moder">
@@ -72,7 +72,7 @@
                                                             <i class="fa fa-lg fa-exclamation-triangle"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            22:00 11.03.2015 <span class="bold">Модератор</span>:
+                                                            <span>22:00 11.03.2015 <span class="bold">Модератор</span>:</span>
                                                             <p>
                                                                 На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                                                             </p>
@@ -87,7 +87,7 @@
                                                             <i class="fa fa-lg fa-thumbs-up"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage2">
-                                                            19:45 12.03.2015 <span class="bold">Liza</span> в теме
+                                                            <span>19:45 12.03.2015 <span class="bold">Liza</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -95,7 +95,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage2">
@@ -107,7 +107,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -115,7 +115,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -123,7 +123,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage1">
@@ -142,7 +142,7 @@
     </ul>
 
     <div class="navbar-right text-right user_block font_grey">
-        <a href="#popup-database" class="book_icon open-popup-link">
+        <a href="#popup-database" class="book_icon open-popup-link tooltip1" data-toggle="tooltip" id="tooltip_db" data-trigger="manual" data-placement="bottom" title="Жмите сюда, чтобы освежить в памяти базу знаний.">
         </a>
         <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -343,7 +343,7 @@
         <div class="container">
             <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
         </div>
-        <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Подсказки</button>
+        <button type="button" class="btn btn-tooltip" id="tooltip_button_1" value="Show"><i class="fa fa-lightbulb-o"></i> Открыть подсказки</button>
     </div>
 
 
@@ -440,7 +440,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="sort-block pull-right">
-                        <a href="1st-stage - cabinet.html" class="btn add-button"><span>+</span> Аспект</a>
+                        <a href="1st-stage-cabinet.html" class="btn add-button"><span>+</span> Аспект</a>
                     </div>
                 </div>
             </div>
@@ -565,8 +565,9 @@
                     <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane main-pane active fade in" id="tab-one">
+                                <div class="container">
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <ul class="nav nav-tabs aspects_tabs" role="tablist">
                                                 <li role="presentation" class="active"><a href="#article1" aria-controls="Статья 1" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 1</a></li>
                                                 <li role="presentation"><a href="#article2" aria-controls="Статья 2" role="tab" data-toggle="tab" class="aspect_color0_background">Статья 2</a></li>
@@ -576,7 +577,7 @@
                                     </div>
                                     <div class="row">
 
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-8 col-sm-8 min-col-right-padd">
                                             <div class="aspect-main-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active fade in" id="article1">
@@ -608,7 +609,109 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-4 col-sm-4 min-col-left-padd">
+                                            <div id="questionsCarousel1" class="carousel slide questionsCarousel" data-ride="carousel">
+                                                <div class="aspect-questions-block color_me" data-me-type = "aspect" data-me-action = 'border-top-color' data-me-color = '0'>
+                                                    <h4 class="block-with-left-icon pull-left">
+                                                        <i class="left-icon fa fa-2x fa-comments"></i>
+                                                        Вопросы по теме
+                                                    </h4>
+                                                    <span class="pull-right question_count">1 из 2</span>
+                                                    <div class="carousel-inner">
+
+                                                        <div class="item active">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">1.</span>
+                                                                Из-за чего начались конфликты?
+                                                            </p>
+
+                                                            <div class="hint close-notice">
+                                                                Читайте вторую страничку презентации
+                                                                <span class="close-button">
+                                                                    <i class="fa fa-times-circle-o"></i>
+                                                                </span>
+                                                            </div>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери много шумят
+                                                                            в лесу
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотели
+                                                                            поселиться в Высоком дубу
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">В лесу был
+                                                                            пожар
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">Звери хотят
+                                                                            отнять мед у пчел
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button questionCarousel-target color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0' data-target="#questionsCarousel1" data-slide-to="1">Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="item">
+
+                                                            <p class="text block-with-left-icon">
+                                                                <span class="left-icon pull-right">2.</span>
+                                                                К кому обратились жители опушки для разрешения спора?
+                                                            </p>
+
+                                                            <form class="form instruments-block">
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Президенту РФ
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Сове</button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К Винни-Пуху
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-xs btn-white">К слону Аркадию
+                                                                        </button>
+                                                                        <i class="fa fa-check color_me" data-me-type = 'aspect' data-me-action = 'color' data-me-color = '0'></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="form-group bottom-buttons">
+                                                                    <a class="btn btn-outline notice-button color_me" data-me-type = "aspect" data-me-action = 'border-color' data-me-color = '0'>Подсказка</a>
+                                                                    <button class="btn answer-button color_me" data-me-type = "aspect" data-me-action = 'background-color' data-me-color = '0'>Ответить</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
                             </div>
                             <div class="tab-pane main-pane fade" id="tab-two">
                                     <div class="row">
@@ -918,7 +1021,7 @@
                     <div class="divider50"></div>
                     <p>
                         <a href="1st-stage_discuss.html" class="btn add-button"><span><i class="fa fa-comment-o"></i></span> Просмотреть аспекты</a>
-                        <a href="1st-stage - cabinet.html" class="btn add-button"><span>+</span> Добавить аспект</a>
+                        <a href="1st-stage-cabinet.html" class="btn add-button"><span>+</span> Добавить аспект</a>
                     </p>
                 </div>
             </div>
