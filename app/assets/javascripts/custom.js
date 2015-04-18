@@ -70,6 +70,13 @@ $(document).ready(function () {
         '978ac2'
     ];
 
+
+    /*
+    * data-me-type - aspect or imperfect
+    * data-me-action - css property
+    * data-me-color - item number in list
+    * */
+
     $('.color_me').each(function(){ /* paints '.color_me' */
         var me = $(this);
         var type = me.attr('data-me-type');
@@ -182,6 +189,13 @@ $(document).ready(function () {
         $(this).toggleClass('opened');
     });
 
+    $('.com_answers').on('shown.bs.collapse', function () {
+        $('.modal_content.ps_cont').perfectScrollbar('update');
+    });
+    $('.com_answers').on('hidden.bs.collapse', function () {
+        $('.modal_content.ps_cont').perfectScrollbar('update');
+    });
+
 
     /* comments like/dislike active */
     $('.rate_button').click(function(){
@@ -225,6 +239,7 @@ $(document).ready(function () {
 
     $("[data-toggle=tooltip]").tooltip();
 
+    $(".tt_def_shown").tooltip('show');
 
 
     /* submit на внешней кнопке в попапе с опросом */
