@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415144833) do
+ActiveRecord::Schema.define(version: 20150418191842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,54 +214,21 @@ ActiveRecord::Schema.define(version: 20150415144833) do
   add_index "concept_post_votings", ["user_id"], name: "index_concept_post_voitings_on_user_id", using: :btree
 
   create_table "concept_posts", force: :cascade do |t|
-    t.text     "goal"
-    t.text     "reality"
     t.integer  "user_id"
-    t.integer  "number_views",      default: 0
-    t.integer  "life_tape_post_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "status",            default: 0
+    t.integer  "number_views",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "status",         default: 0
     t.integer  "project_id"
     t.text     "content"
-    t.boolean  "censored",          default: false
-    t.boolean  "status_name"
-    t.boolean  "status_content"
-    t.boolean  "status_positive"
-    t.boolean  "status_positive_r"
-    t.boolean  "status_negative"
-    t.boolean  "status_negative_r"
-    t.boolean  "status_problems"
-    t.boolean  "status_reality"
-    t.integer  "improve_comment"
-    t.integer  "improve_stage"
-    t.boolean  "discuss_status"
     t.boolean  "useful"
-    t.boolean  "status_positive_s"
-    t.boolean  "status_negative_s"
-    t.boolean  "status_control"
-    t.boolean  "status_control_r"
-    t.boolean  "status_control_s"
-    t.boolean  "status_obstacles"
-    t.boolean  "approve_status"
-    t.integer  "fullness"
-    t.boolean  "status_all"
-    t.integer  "core_aspect_id"
-    t.text     "positive"
-    t.text     "negative"
-    t.text     "control"
-    t.text     "name"
-    t.text     "problems"
-    t.text     "positive_r"
-    t.text     "negative_r"
     t.text     "title"
-    t.text     "obstacles"
-    t.text     "actions_desc"
-    t.text     "actions_ground"
     t.text     "actors"
-    t.text     "tools"
-    t.text     "impact_group"
     t.text     "impact_env"
+    t.boolean  "approve_status"
+    t.text     "goal"
+    t.text     "censored"
+    t.text     "discuss_status"
   end
 
   add_index "concept_posts", ["created_at"], name: "index_concept_posts_on_created_at", using: :btree
