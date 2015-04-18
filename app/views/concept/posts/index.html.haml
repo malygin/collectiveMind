@@ -14,10 +14,10 @@
           %span.sort-2.sort-rate
             %span 2
         -#%span.sort-all ВСЕ
-        = link_to project_user_path(@project, current_user) do
+        = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_post' do
           %button.btn.add-button
-            %span> +
-            Идея
+            %span
+              = t('techniques.concept_posts_simple')
 
 .stage-post-block
   .row

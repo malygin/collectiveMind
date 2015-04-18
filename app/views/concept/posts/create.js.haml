@@ -1,6 +1,6 @@
-- if @concept_post.errors.any?
-  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object: @concept_post})}');
-  window.scrollTo(0,0)
-  $('#send_post_concept').button('reset');
+- if @concept_post.valid?
+  $('#create_concept_success').fadeIn(3000).fadeOut('slow');
+  $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
-  $("#tab-for_content").html('Спасибо за добавленное нововведение!');
+  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");

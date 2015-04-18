@@ -27,7 +27,7 @@ class Concept::PostsController < PostsController
     @asp = Core::Aspect::Post.find(params[:asp]) unless params[:asp].nil?
     @concept_post = current_model.new
     # нововведение без несовершенства?
-    @discontent_post = Discontent::Post.find(params[:dis_id]) unless params[:dis_id].nil?
+    @discontent_posts = Discontent::Post.by_project(@project)
     # @resources = Concept::Resource.where(project_id: @project.id)
     # if params[:improve_comment] and params[:improve_stage]
     #   @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
