@@ -40,15 +40,14 @@ DiscontentCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
   loadByAspect: (evt)->
     evt.preventDefault();
-    console.log this
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
 
-
-
-dc = new DiscontentCollection
-dc.fetch
-  success: (col,res)->
-    dv = new DiscontentCollectionView({collection: dc})
-    dv.render()
+# only for discontents url
+if window.location.href.indexOf("discontent/posts") > -1
+  dc = new DiscontentCollection
+  dc.fetch
+    success: (col,res)->
+      dv = new DiscontentCollectionView({collection: dc})
+      dv.render()
 
