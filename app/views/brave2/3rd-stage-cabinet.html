@@ -3,13 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <!-- Description, Keywords and Author -->
-    <meta name="description" content="Your description">
-    <meta name="keywords" content="Your,Keywords">
-    <meta name="author" content="Ian">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Styles -->
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +14,16 @@
     <link href="css/magnific-popup.css" rel="stylesheet">
     <!-- Owl carousel -->
     <link href="css/owl.carousel.css" rel="stylesheet">
+    <!-- Perfect scrollbar -->
+    <link href='css/perfect-scrollbar.min.css' rel="stylesheet">
     <!-- Custom CSS. Type your CSS code in custom.css file -->
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/custom-post.css" rel="stylesheet">
     <link href="css/colors.css" rel="stylesheet">
 
 </head>
 
-<body class="white_theme">
+<body class="stage3_theme">
 <div class="outer">
 
     <!-- Top bar starts -->
@@ -38,7 +36,7 @@
 
     <ul class="nav navbar-nav main_menu">
         <li><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-        <li class="active"><a href="cabinet-stage1.html" class="menu_a">Кабинет</a></li>
+        <li class="active"><a href="3rd-stage-cabinet.html" class="menu_a">Кабинет</a></li>
         <li class="has_dropwindow">
             <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
             </a>
@@ -58,7 +56,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage4">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -66,7 +64,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice moder">
@@ -74,7 +72,7 @@
                                                             <i class="fa fa-lg fa-exclamation-triangle"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            22:00 11.03.2015 <span class="bold">Модератор</span>:
+                                                            <span>22:00 11.03.2015 <span class="bold">Модератор</span>:</span>
                                                             <p>
                                                                 На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                                                             </p>
@@ -89,7 +87,7 @@
                                                             <i class="fa fa-lg fa-thumbs-up"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage2">
-                                                            19:45 12.03.2015 <span class="bold">Liza</span> в теме
+                                                            <span>19:45 12.03.2015 <span class="bold">Liza</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -97,7 +95,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage2">
@@ -109,7 +107,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -117,7 +115,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <a href="#" class="dd_notice">
@@ -125,7 +123,7 @@
                                                             <i class="fa fa-lg fa-thumbs-down"></i>
                                                         </span>
                                                         <span class="dd_n_cell right font_color_stage1">
-                                                            20:15 12.03.2015 <span class="bold">Рахель</span> в теме
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
                                                         </span>
                                         </a>
                                         <div class="dd_nav_divider font_color_stage1">
@@ -341,96 +339,325 @@
     </header>
     <!-- Top Bar ends -->
 
+    <div class="subhead">
+        <div class="container">
+            <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="border_grey rounded_3 stages_block">
+                    <div class="btn-toolbar" role="toolbar">
+
+                        <div class="btn-group" role="group">
+                            <a href="3rd-stage.html" role="button" class="btn back_color_stage3">3 СТАДИЯ: СБОР ИДЕЙ</a>
+                        </div>
+
+                        <i class="fa fa-circle fa-lg font_lighter_grey open_sticker" data-for="#sticker1"></i>
+
+                        <div class="sticker rounded_3 font_white" id="sticker1">
+                            Тут будет текст, объясняющий, что надо делать на этом экране
+                            <i class="sticker_close fa fa-times fa-lg" data-for="#sticker1"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Main Block starts -->
-    <div class="main-block cabinet">
+    <div class="main-block">
         <div class="container">
             <div class="row">
-                <div class="col-xs-3 cabinet-left-col">
-                    <span class="stage-label">Стадия 2</span>
+                <div class="col-md-2">
+                    <ul class="list-unstyled tabs_type_1" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#cabinet_3_1" class="a_font_reset text-right" role="tab" data-toggle="tab">+ Идея</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#cabinet_3_2" class="a_font_reset text-right" role="tab" data-toggle="tab">Мои идеи (3)</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-xs-9 cabinet-right-col">
+                <div class="col-md-9 col-md-offset-1">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab-1">
-                            <div class="cabinet-tab-heading">
-                                <h5>Форма добавления несовершенства</h5>
-                            </div>
-
-                            <div class="divider35"></div>
-                            <form class="cabinet-aspect-form">
-
-                                <div class="form-group">
-                                    <h4><label class="label label-default color-white">Что</label></h4>
-                                    <label for="aspectField1">Что вас не устраивает</label>
-                                    <textarea class="form-control" id="aspectField1"
-                                              placeholder="Отрицательное действие, явление,установление, черта"
-                                              type="text"></textarea>
-
-                                    <h6>Пример: пчелы тратят много времени на перелеты до лучших источников нектара</h6>
-                                </div>
-                                <div class="divider250"></div>
-                                <div class="form-group">
-                                    <h4><label class="label label-default">Когда</label></h4>
-                                    <label for="aspectField2">Когда это происходит</label>
-                                    <input class="form-control" id="aspectField2"
-                                           placeholder="Во время какого события, мероприятия, процесса, ситуации "
-                                           type="text">
-
-                                    <h6>Пример: при сборе нектара</h6>
-                                </div>
-                                <div class="divider10"></div>
-                                <div class="form-group">
-                                    <h4><label class="label label-default">Где</label></h4>
-                                    <label for="aspectField3">Где это происходит</label>
-                                    <input class="form-control" id="aspectField3"
-                                           placeholder="Место, организация, общеность в которой это происходит"
-                                           type="text">
-
-                                    <h6>Пример: На лужайках, отдаленных от выского дуба</h6>
-                                </div>
-                                <div class="divider10"></div>
-                                <div class="form-group">
-                                    <h4><label class="label label-default">Аспект</label></h4>
-                                    <label for="aspectField4">К какому аспекту относится несовершенство?</label>
-
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <select id="aspectField4" class="form-control">
-                                                <option>Выберите аспект</option>
-                                            </select>
+                        <div role="tabpanel" class="tab-pane active fade in" id="cabinet_3_1">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="divider10"></div>
+                                    <div class="content_window white">
+                                        <div class="divider25"></div>
+                                        <form>
+                                            <p>
+                                                Название идеи
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="1"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                Суть идеи
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="2"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                Что будет иначе?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="2"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                Кто будет делать иначе?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="1"></textarea>
+                                            <div class="divider15"></div>
+                                            <p>
+                                                Чьи интересы будут затронуты?
+                                            </p>
+                                            <textarea class="form-control" type="text" rows="1"></textarea>
+                                        </form>
+                                        <div class="divider15"></div>
+                                        <div class="check_push_cont checked_items">
+                                            <p class="hideable_checks enter_lenght">
+                                                Устраняемые несовершенства <span class="ch_lenght"></span>
+                                            </p>
+                                        </div>
+                                        <div class="divider10"></div>
+                                    </div>
+                                    <div class="content_window white">
+                                        <a class="theme_font_color with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs1" aria-expanded="false">
+                                            <span class="enter_lenght">Привязать идею к несовершенству <span class="unch_lenght"></span></span>
+                                            <i class="fa fa-chevron-circle-right fa-lg collapse_arrow"></i>
+                                        </a>
+                                        <div class="collapse check_push_cont rotate_arrow unchecked_items" id="imperfs1">
+                                            <div class="item">
+                                                <span><span class="cb_input"><input class="check_push_box" type="checkbox" id="check1"><label for="check1"><i class="fa fa-check"></i></label></span></span>
+                                                <span class="cell_full_w">
+                                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-1" aria-expanded="false">
+                                                        <span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '0' data-me-type = 'imperf'></span>Низкие потолки в офисах
+                                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
+                                                    </a>
+                                                    <div class="description collapse rotate_arrow" id="imperfs3-1-1">
+                                                        <div class="media comment">
+                                                            <div class="media-left">
+                                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <h6 class="media-heading bold">Винни-Пух</h6>
+                                                                        <span class="date">21.12.2014</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-md-offset-4">
+                                                                        <div class="small_icons text-right">
+                                                                            <span class="popup2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                                            <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
+                                                                            <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font_grey bold">Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже</p>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="item">
+                                                <span><span class="cb_input"><input class="check_push_box" type="checkbox" id="check2"><label for="check2"><i class="fa fa-check"></i></label></span></span>
+                                                <span class="cell_full_w">
+                                                    <a class="a_font_reset collapsed with_arrow collapser_type1" data-toggle="collapse" href="#imperfs3-1-2" aria-expanded="false">
+                                                        <span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '1' data-me-type = 'imperf'></span>Низкие потолки в офисах
+                                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
+                                                    </a>
+                                                    <div class="description collapse rotate_arrow" id="imperfs3-1-2">
+                                                        <div class="media comment">
+                                                            <div class="media-left">
+                                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <h6 class="media-heading bold">Винни-Пух</h6>
+                                                                        <span class="date">21.12.2014</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-md-offset-4">
+                                                                        <div class="small_icons text-right">
+                                                                            <span class="popup2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                                            <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
+                                                                            <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font_grey bold">Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже</p>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="item">
+                                                <span><span class="cb_input"><input class="check_push_box" type="checkbox" id="check3"><label for="check3"><i class="fa fa-check"></i></label></span></span>
+                                                <span class="cell_full_w">
+                                                    <a class="a_font_reset collapsed with_arrow collapser_type1" data-toggle="collapse" href="#imperfs3-1-3" aria-expanded="false">
+                                                        <span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '2' data-me-type = 'imperf'></span>Низкие потолки в офисах
+                                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
+                                                    </a>
+                                                    <div class="description collapse rotate_arrow" id="imperfs3-1-3">
+                                                        <div class="media comment">
+                                                            <div class="media-left">
+                                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <h6 class="media-heading bold">Винни-Пух</h6>
+                                                                        <span class="date">21.12.2014</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-md-offset-4">
+                                                                        <div class="small_icons text-right">
+                                                                            <span class="popup2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                                            <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
+                                                                            <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font_grey bold">Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже</p>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="item">
+                                                <span><span class="cb_input"><input class="check_push_box" type="checkbox" id="check4"><label for="check4"><i class="fa fa-check"></i></label></span></span>
+                                                <span class="cell_full_w">
+                                                    <a class="a_font_reset collapsed with_arrow collapser_type1" data-toggle="collapse" href="#imperfs3-1-4" aria-expanded="false">
+                                                        <span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '3' data-me-type = 'imperf'></span>Низкие потолки в офисах
+                                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
+                                                    </a>
+                                                    <div class="description collapse rotate_arrow" id="imperfs3-1-4">
+                                                        <div class="media comment">
+                                                            <div class="media-left">
+                                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <h6 class="media-heading bold">Винни-Пух</h6>
+                                                                        <span class="date">21.12.2014</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-md-offset-4">
+                                                                        <div class="small_icons text-right">
+                                                                            <span class="popup2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                                            <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
+                                                                            <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font_grey bold">Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже</p>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="item">
+                                                <span><span class="cb_input"><input class="check_push_box" type="checkbox" id="check5"><label for="check5"><i class="fa fa-check"></i></label></span></span>
+                                                <span class="cell_full_w">
+                                                    <a class="a_font_reset collapsed with_arrow collapser_type1" data-toggle="collapse" href="#imperfs3-1-5" aria-expanded="false">
+                                                        <span class="color_counter color_me" data-me-action = 'background-color' data-me-color = '4' data-me-type = 'imperf'></span>Низкие потолки в офисах
+                                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
+                                                    </a>
+                                                    <div class="description rotate_arrow collapse" id="imperfs3-1-5">
+                                                        <div class="media comment">
+                                                            <div class="media-left">
+                                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <h6 class="media-heading bold">Винни-Пух</h6>
+                                                                        <span class="date">21.12.2014</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-md-offset-4">
+                                                                        <div class="small_icons text-right">
+                                                                            <span class="popup2"><small>5</small> <i class="fa fa-comment-o"></i></span>
+                                                                            <span class="popup2"><small>9</small> <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i></span>
+                                                                            <span class="popup2"><small>1</small> <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p class="font_grey bold">Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже</p>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <h5><i class="fa fa-stop colorT2"></i>Взаимоотношения
-                                        четвероногих и пчел</h5>
                                 </div>
-                                <div class="divider10"></div>
-                                <div class="form-group">
-                                    <h4><label class="label label-default">Тип</label></h4>
-                                    <label>Выберите тип несовершенства</label>
-                                    <br>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        Имеющиеся недостатки
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        Отстутствующие достоинства
-                                    </label>
-
-                                </div>
-                                </br>
-                                <button type="submit" class="btn btn-white pull-right nearby_buttons">Отменить</button>
-                                <button class="btn btn-danger pull-right nearby_buttons">Сохранить</button>
-
-
-                            </form>
+                            </div>
                         </div>
-                        <div class="tab-pane fade in" id="tab-2"></div>
-                        <div class="tab-pane fade in" id="tab-3"></div>
-                        <div class="tab-pane fade in" id="tab-4"></div>
-                        <div class="tab-pane fade in" id="tab-5"></div>
-                        <div class="tab-pane fade in" id="tab-6"></div>
-                        <div class="tab-pane fade in" id="tab-7"></div>
+                        <div role="tabpanel" class="tab-pane fade" id="cabinet_3_2">
+                            <div class="post post_add_type1">
+                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '1'></div>
+                                <div class="post-body">
+                                    <div class="media">
+                                        <div class="media-left text-center gradient2 post-poster">
+                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
+                                            <p class="poster-name">Оргкомитет</p>
+                                            <p class="poster-name"></p>
+                                        </div>
+                                        <div class="media-body white">
+                                            <div class="post-text">
+                                                <h5 class="bold">Lorem Ipsum</h5>
+                                                <p>
+                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-bottom white">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="tag-stripes active color_me" data-me-type = 'aspect' data-me-action = 'background-color' data-me-color = '2' data-me-type = 'aspect'>
+                                                <span class="tags">Взаимоотношения четвероногих</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post post_add_type1">
+                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '4'></div>
+                                <div class="post-body">
+                                    <div class="media">
+                                        <div class="media-left text-center gradient2 post-poster">
+                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
+                                            <p class="poster-name">Оргкомитет</p>
+                                            <p class="poster-name"></p>
+                                        </div>
+                                        <div class="media-body white">
+                                            <div class="post-text">
+                                                <h5 class="bold">Lorem Ipsum</h5>
+                                                <p>
+                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-bottom white">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="tag-stripes active color_me" data-me-type = 'imperf' data-me-action = 'background-color' data-me-color = '2' data-me-type = 'aspect'>
+                                                <span class="tags">Взаимоотношения четвероногих</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -522,18 +749,18 @@
                             <div class="item color-theme-2">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
-                                        <div class="aspect-main-block">
-                                            <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
-                                                друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
-                                                труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
-                                                пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
-                                                момент, когда все пчелы вылетят из улья, — не дождался; пытался
-                                                втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
-                                                был отвергнут.
-                                                Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
-                                                друзья Пятачок и Кролик.</p>
-                                            <img src="img/aspect-pic2.jpg">
-                                        </div>
+                                            <div class="aspect-main-block">
+                                                <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
+                                                    друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                                                    труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                                                    пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                                                    момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                                                    втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                                                    был отвергнут.
+                                                    Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                                                    друзья Пятачок и Кролик.</p>
+                                                <img src="img/aspect-pic2.jpg">
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -633,31 +860,33 @@
 <script src="js/respond.min.js"></script>
 <!-- HTML5 Support for IE -->
 <script src="js/html5shiv.js"></script>
+<!-- Content hover JS -->
+<script src="js/jquery.contenthover.min.js"></script>
 
 <!-- Javascript for this page -->
-<script type="text/javascript">
-    $('.cabinet-aspect-form-checkb input').click(function () {
-        var me = $(this);
-        var attrname = me.attr('name');
-        $("input[name='" + attrname + "']").removeClass('active-radio');
-        me.addClass('active-radio');
-    });
-    $('.cabinet-tabs-subblock-2ndlev-li a').click(function () {
-        if (!$(this).hasClass('active-2ndlev-li')) {
-            $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-                $(this).removeClass('active-2ndlev-li');
-            });
-            $(this).addClass('active-2ndlev-li');
-        }
-        ;
-    });
-    $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function () {
-        $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-            $(this).removeClass('active-2ndlev-li');
-        });
-    });
-</script>
+<!-- Excanvas JS for Knob Support in IE 8-->
+<script src="js/excanvas.js"></script>
+<!-- jQuery Knob -->
+<script src="js/jquery.knob.js"></script>
+<!-- Perfect scrollbar -->
+<script src='js/perfect-scrollbar.jquery.min.js'></script>
+<script src="js/waypoints.min.js"></script>
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
+<script>
+    /* first stage slider */
+
+    $(document).ready(function () {
+
+        /* perfect scrollbar */
+        $('.ps_cont.half_wheel_speed').perfectScrollbar({
+            wheelSpeed: 0.3
+        });
+        $('.ps_cont').perfectScrollbar();
+
+    });
+
+</script>
+
 </body>
 </html>

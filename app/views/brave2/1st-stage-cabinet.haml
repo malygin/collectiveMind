@@ -20,7 +20,7 @@
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
     %link{:href => "css/colors.css", :rel => "stylesheet"}/
-  %body.stage3_theme
+  %body.stage1_theme
     .outer
       / Top bar starts
       %header.navbar.top_bar
@@ -29,10 +29,10 @@
             %a.navbar-brand{:href => "main.html"}
               %img{:src => "img/logo1.png"}/
           %ul.nav.navbar-nav.main_menu
-            %li.active
-              %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "1st-stage.html"} Процедура
+            %li.active
+              %a.menu_a{:href => "1st-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -267,7 +267,9 @@
             .border_grey.rounded_3.stages_block
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3 СТАДИЯ: СБОР ИДЕЙ
+                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
+                    1 СТАДИЯ: ВВЕДЕНИЕ В
+                    ПРОЦЕДУРУ
                 %i.fa.fa-circle.fa-lg.font_lighter_grey.open_sticker{"data-for" => "#sticker1"}
                 #sticker1.sticker.rounded_3.font_white
                   Тут будет текст, объясняющий, что надо делать на этом экране
@@ -279,211 +281,34 @@
             .col-md-2
               %ul.list-unstyled.tabs_type_1{:role => "tablist"}
                 %li.active{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_3_1", :role => "tab"} + Идея
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_1", :role => "tab"} + Аспект
                 %li{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_3_2", :role => "tab"} Мои идеи (3)
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_2", :role => "tab"} Мои аспекты
             .col-md-9.col-md-offset-1
               .tab-content
-                #cabinet_3_1.tab-pane.active.fade.in{:role => "tabpanel"}
-                  .row
-                    .col-md-12
-                      .divider10
-                      .content_window.white
-                        .divider25
-                        %form
-                          %p
-                            Название идеи
-                          %textarea.form-control{:rows => "1", :type => "text"}
-                          .divider15
-                          %p
-                            Суть идеи
-                          %textarea.form-control{:rows => "2", :type => "text"}
-                          .divider15
-                          %p
-                            Что будет иначе?
-                          %textarea.form-control{:rows => "2", :type => "text"}
-                          .divider15
-                          %p
-                            Кто будет делать иначе?
-                          %textarea.form-control{:rows => "1", :type => "text"}
-                          .divider15
-                          %p
-                            Чьи интересы будут затронуты?
-                          %textarea.form-control{:rows => "1", :type => "text"}
-                        .divider15
-                        .check_push_cont.checked_items
-                          %p.hideable_checks.enter_lenght
-                            Устраняемые несовершенства
-                            %span.ch_lenght
-                        .divider10
-                      .content_window.white
-                        %a.theme_font_color.with_arrow.collapsed.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs1"}
-                          %span.enter_lenght
-                            Привязать идею к несовершенству
-                            %span.unch_lenght
-                          %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-                        #imperfs1.collapse.check_push_cont.rotate_arrow.unchecked_items
-                          .item
-                            %span
-                              %span.cb_input
-                                %input#check1.check_push_box{:type => "checkbox"}/
-                                %label{:for => "check1"}
-                                  %i.fa.fa-check
-                            %span.cell_full_w
-                              %a.a_font_reset.with_arrow.collapsed.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-1-1"}
-                                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "imperf"}>
-                                Низкие потолки в офисах
-                                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                              #imperfs3-1-1.description.collapse.rotate_arrow
-                                .media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    .row
-                                      .col-md-4
-                                        %h6.media-heading.bold Винни-Пух
-                                        %span.date 21.12.2014
-                                      .col-md-4.col-md-offset-4
-                                        .small_icons.text-right
-                                          %span.popup2
-                                            %small 5
-                                            %i.fa.fa-comment-o
-                                          %span.popup2
-                                            %small 9
-                                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                                          %span.popup2
-                                            %small 1
-                                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                                  %p.font_grey.bold Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                          .item
-                            %span
-                              %span.cb_input
-                                %input#check2.check_push_box{:type => "checkbox"}/
-                                %label{:for => "check2"}
-                                  %i.fa.fa-check
-                            %span.cell_full_w
-                              %a.a_font_reset.collapsed.with_arrow.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-1-2"}
-                                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}>
-                                Низкие потолки в офисах
-                                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                              #imperfs3-1-2.description.collapse.rotate_arrow
-                                .media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    .row
-                                      .col-md-4
-                                        %h6.media-heading.bold Винни-Пух
-                                        %span.date 21.12.2014
-                                      .col-md-4.col-md-offset-4
-                                        .small_icons.text-right
-                                          %span.popup2
-                                            %small 5
-                                            %i.fa.fa-comment-o
-                                          %span.popup2
-                                            %small 9
-                                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                                          %span.popup2
-                                            %small 1
-                                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                                  %p.font_grey.bold Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                          .item
-                            %span
-                              %span.cb_input
-                                %input#check3.check_push_box{:type => "checkbox"}/
-                                %label{:for => "check3"}
-                                  %i.fa.fa-check
-                            %span.cell_full_w
-                              %a.a_font_reset.collapsed.with_arrow.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-1-3"}
-                                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}>
-                                Низкие потолки в офисах
-                                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                              #imperfs3-1-3.description.collapse.rotate_arrow
-                                .media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    .row
-                                      .col-md-4
-                                        %h6.media-heading.bold Винни-Пух
-                                        %span.date 21.12.2014
-                                      .col-md-4.col-md-offset-4
-                                        .small_icons.text-right
-                                          %span.popup2
-                                            %small 5
-                                            %i.fa.fa-comment-o
-                                          %span.popup2
-                                            %small 9
-                                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                                          %span.popup2
-                                            %small 1
-                                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                                  %p.font_grey.bold Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                          .item
-                            %span
-                              %span.cb_input
-                                %input#check4.check_push_box{:type => "checkbox"}/
-                                %label{:for => "check4"}
-                                  %i.fa.fa-check
-                            %span.cell_full_w
-                              %a.a_font_reset.collapsed.with_arrow.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-1-4"}
-                                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}>
-                                Низкие потолки в офисах
-                                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                              #imperfs3-1-4.description.collapse.rotate_arrow
-                                .media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    .row
-                                      .col-md-4
-                                        %h6.media-heading.bold Винни-Пух
-                                        %span.date 21.12.2014
-                                      .col-md-4.col-md-offset-4
-                                        .small_icons.text-right
-                                          %span.popup2
-                                            %small 5
-                                            %i.fa.fa-comment-o
-                                          %span.popup2
-                                            %small 9
-                                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                                          %span.popup2
-                                            %small 1
-                                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                                  %p.font_grey.bold Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                          .item
-                            %span
-                              %span.cb_input
-                                %input#check5.check_push_box{:type => "checkbox"}/
-                                %label{:for => "check5"}
-                                  %i.fa.fa-check
-                            %span.cell_full_w
-                              %a.a_font_reset.collapsed.with_arrow.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-1-5"}
-                                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}>
-                                Низкие потолки в офисах
-                                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                              #imperfs3-1-5.description.rotate_arrow.collapse
-                                .media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    .row
-                                      .col-md-4
-                                        %h6.media-heading.bold Винни-Пух
-                                        %span.date 21.12.2014
-                                      .col-md-4.col-md-offset-4
-                                        .small_icons.text-right
-                                          %span.popup2
-                                            %small 5
-                                            %i.fa.fa-comment-o
-                                          %span.popup2
-                                            %small 9
-                                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                                          %span.popup2
-                                            %small 1
-                                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                                  %p.font_grey.bold Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                #cabinet_3_2.tab-pane.fade{:role => "tabpanel"}
+                #cabinet_1_1.tab-pane.active.fade.in{:role => "tabpanel"}
+                  .post.post_add_type1
+                    .post-header.grey
+                    .post-body
+                      .media
+                        .media-left.text-center.gradient2.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Оргкомитет
+                          %p.poster-name
+                        .media-body.white
+                          .post-text
+                            .divider10
+                            %form.cabinet-aspect-form
+                              .form-group
+                                %input.form-control{:placeholder => "Название аспекта", :type => "text"}/
+                              .divider15
+                              %p
+                                %span.badge.badge_type1.grey Обоснование
+                              .divider15
+                              .form-group
+                                %textarea.form-control{:rows => "6", :type => "text"}
+                  %button.btn.add-button.type2.pull-right Добавить
+                #cabinet_1_2.tab-pane.fade{:role => "tabpanel"}
                   .post.post_add_type1
                     .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
                     .post-body
@@ -495,13 +320,12 @@
                         .media-body.white
                           .post-text
                             %h5.bold Lorem Ipsum
+                            .divider15
+                            %p
+                              %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"} Обоснование
+                            .divider10
                             %p
                               Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                    .post-bottom.white
-                      .row
-                        .col-md-12
-                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
-                            %span.tags Взаимоотношения четвероногих
                   .post.post_add_type1
                     .post-header.color_me{"data-me-action" => "background", "data-me-color" => "4", "data-me-type" => "aspect"}
                     .post-body
@@ -513,13 +337,12 @@
                         .media-body.white
                           .post-text
                             %h5.bold Lorem Ipsum
+                            .divider15
+                            %p
+                              %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "4", "data-me-type" => "aspect"} Обоснование
+                            .divider10
                             %p
                               Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
-                    .post-bottom.white
-                      .row
-                        .col-md-12
-                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
-                            %span.tags Взаимоотношения четвероногих
       / Main Block ends
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded

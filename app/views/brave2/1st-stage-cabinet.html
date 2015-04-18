@@ -3,13 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <!-- Description, Keywords and Author -->
-    <meta name="description" content="Your description">
-    <meta name="keywords" content="Your,Keywords">
-    <meta name="author" content="Ian">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Styles -->
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,13 +14,16 @@
     <link href="css/magnific-popup.css" rel="stylesheet">
     <!-- Owl carousel -->
     <link href="css/owl.carousel.css" rel="stylesheet">
+    <!-- Perfect scrollbar -->
+    <link href='css/perfect-scrollbar.min.css' rel="stylesheet">
     <!-- Custom CSS. Type your CSS code in custom.css file -->
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/custom-post.css" rel="stylesheet">
     <link href="css/colors.css" rel="stylesheet">
 
 </head>
 
-<body class="white_theme">
+<body class="stage1_theme">
 <div class="outer">
 
     <!-- Top bar starts -->
@@ -38,7 +36,7 @@
 
     <ul class="nav navbar-nav main_menu">
         <li><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-        <li class="active"><a href="cabinet-stage1.html" class="menu_a">Кабинет</a></li>
+        <li class="active"><a href="1st-stage-cabinet.html" class="menu_a">Кабинет</a></li>
         <li class="has_dropwindow">
             <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
             </a>
@@ -341,57 +339,140 @@
     </header>
     <!-- Top Bar ends -->
 
+    <div class="subhead">
+        <div class="container">
+            <h4 class="font_white">Решение конфликта, возникшего из-за меда</h4>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="border_grey rounded_3 stages_block">
+                    <div class="btn-toolbar" role="toolbar">
+
+                        <div class="btn-group" role="group">
+                            <a href="1st-stage.html" role="button" class="btn back_color_stage1">1 СТАДИЯ: ВВЕДЕНИЕ В
+                                ПРОЦЕДУРУ</a>
+                        </div>
+
+                        <i class="fa fa-circle fa-lg font_lighter_grey open_sticker" data-for="#sticker1"></i>
+
+                        <div class="sticker rounded_3 font_white" id="sticker1">
+                            Тут будет текст, объясняющий, что надо делать на этом экране
+                            <i class="sticker_close fa fa-times fa-lg" data-for="#sticker1"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Main Block starts -->
-    <div class="main-block cabinet">
+    <div class="main-block">
         <div class="container">
             <div class="row">
-                <div class="col-xs-3 cabinet-left-col">
-                    <span class="stage-label">Стадия 4</span>
+                <div class="col-md-2">
+                    <ul class="list-unstyled tabs_type_1" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#cabinet_1_1" class="a_font_reset text-right" role="tab" data-toggle="tab">+ Аспект</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#cabinet_1_2" class="a_font_reset text-right" role="tab" data-toggle="tab">Мои аспекты</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-xs-9 cabinet-right-col">
+                <div class="col-md-9 col-md-offset-1">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab-1">
-                            <div class="cabinet-tab-heading">
-                                <h5>Описание проекта</h5>
+                        <div role="tabpanel" class="tab-pane active fade in" id="cabinet_1_1">
+                            <div class="post post_add_type1">
+                                <div class="post-header grey"></div>
+                                <div class="post-body">
+                                    <div class="media">
+                                        <div class="media-left text-center gradient2 post-poster">
+                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
+                                            <p class="poster-name">Оргкомитет</p>
+                                            <p class="poster-name"></p>
+                                        </div>
+                                        <div class="media-body white">
+                                            <div class="post-text">
+                                                <div class="divider10"></div>
+                                                <form class="cabinet-aspect-form">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" placeholder="Название аспекта">
+                                                    </div>
+                                                    <div class="divider15"></div>
+                                                    <p>
+                                                        <span class="badge badge_type1 grey">Обоснование</span>
+                                                    </p>
+                                                    <div class="divider15"></div>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" type="text" rows="6"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="divider35"></div>
-                            <form class="cabinet-aspect-form">
-                                <div class="form-group">
-                                    <label for="aspectField1">Название проекта</label>
-                                    <input class="form-control" id="aspectField1" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <label for="aspectField2">Коротко о проекте</label>
-                                    <textarea class="form-control" id="aspectField2" rows="3"
-                                              placeholder="Попытайтесь кратко изложив суть проекта в тоже время привлечь этим внимание других учатсников"
-                                              type="text"
-                                              maxlength="200"></textarea>
-
-                                </div>
-
-                                <h5>1) Цель: какую выгоду даст ваш проект ? Зачем это нужно его реализаторам?</h5>
-                                <h5>2) Методы, средства и другие ресурсы: как, при помощи чего эта выгода будет получаться?</h5>
-                                <div class="divider10"></div>
-                                <div class="form-group">
-                                    <label for="aspectField3">Пояснения и обоснования</label>
-                                    <textarea class="form-control" id="aspectField3" rows="3"
-                                              type="text"></textarea>
-
-                                </div>
-                                </br>
-                                <button type="submit" class="btn btn-white pull-right nearby_buttons">Отменить</button>
-                                <button class="btn btn-danger pull-right nearby_buttons">Сохранить</button>
-
-
-                            </form>
+                            <button class="btn add-button type2 pull-right">Добавить</button>
                         </div>
-                        <div class="tab-pane fade in" id="tab-2"></div>
-                        <div class="tab-pane fade in" id="tab-3"></div>
-                        <div class="tab-pane fade in" id="tab-4"></div>
-                        <div class="tab-pane fade in" id="tab-5"></div>
-                        <div class="tab-pane fade in" id="tab-6"></div>
-                        <div class="tab-pane fade in" id="tab-7"></div>
+                        <div role="tabpanel" class="tab-pane fade " id="cabinet_1_2">
+                            <div class="post post_add_type1">
+                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '1'></div>
+                                <div class="post-body">
+                                    <div class="media">
+                                        <div class="media-left text-center gradient2 post-poster">
+                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
+                                            <p class="poster-name">Оргкомитет</p>
+                                            <p class="poster-name"></p>
+                                        </div>
+                                        <div class="media-body white">
+                                            <div class="post-text">
+                                                <h5 class="bold">Lorem Ipsum</h5>
+                                                <div class="divider15"></div>
+                                                <p>
+                                                    <span class="badge badge_type1 color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '1'>Обоснование</span>
+                                                </p>
+                                                <div class="divider10"></div>
+                                                <p>
+                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post post_add_type1">
+                                <div class="post-header color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '4'></div>
+                                <div class="post-body">
+                                    <div class="media">
+                                        <div class="media-left text-center gradient2 post-poster">
+                                            <img class="img-circle img40" src="img/ava-pyat.jpg">
+                                            <p class="poster-name">Оргкомитет</p>
+                                            <p class="poster-name"></p>
+                                        </div>
+                                        <div class="media-body white">
+                                            <div class="post-text">
+                                                <h5 class="bold">Lorem Ipsum</h5>
+                                                <div class="divider15"></div>
+                                                <p>
+                                                    <span class="badge badge_type1 color_me" data-me-type = "aspect" data-me-action = 'background' data-me-color = '4'>Обоснование</span>
+                                                </p>
+                                                <div class="divider10"></div>
+                                                <p>
+                                                    Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -483,18 +564,18 @@
                             <div class="item color-theme-2">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
-                                        <div class="aspect-main-block">
-                                            <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
-                                                друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
-                                                труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
-                                                пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
-                                                момент, когда все пчелы вылетят из улья, — не дождался; пытался
-                                                втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
-                                                был отвергнут.
-                                                Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
-                                                друзья Пятачок и Кролик.</p>
-                                            <img src="img/aspect-pic2.jpg">
-                                        </div>
+                                            <div class="aspect-main-block">
+                                                <p class="aspect-main-block-text">В популярной сказке Винни-Пух и его
+                                                    друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                                                    труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                                                    пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                                                    момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                                                    втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                                                    был отвергнут.
+                                                    Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                                                    друзья Пятачок и Кролик.</p>
+                                                <img src="img/aspect-pic2.jpg">
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -594,31 +675,33 @@
 <script src="js/respond.min.js"></script>
 <!-- HTML5 Support for IE -->
 <script src="js/html5shiv.js"></script>
+<!-- Content hover JS -->
+<script src="js/jquery.contenthover.min.js"></script>
 
 <!-- Javascript for this page -->
-<script type="text/javascript">
-    $('.cabinet-aspect-form-checkb input').click(function () {
-        var me = $(this);
-        var attrname = me.attr('name');
-        $("input[name='" + attrname + "']").removeClass('active-radio');
-        me.addClass('active-radio');
-    });
-    $('.cabinet-tabs-subblock-2ndlev-li a').click(function () {
-        if (!$(this).hasClass('active-2ndlev-li')) {
-            $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-                $(this).removeClass('active-2ndlev-li');
-            });
-            $(this).addClass('active-2ndlev-li');
-        }
-        ;
-    });
-    $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function () {
-        $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-            $(this).removeClass('active-2ndlev-li');
-        });
-    });
-</script>
+<!-- Excanvas JS for Knob Support in IE 8-->
+<script src="js/excanvas.js"></script>
+<!-- jQuery Knob -->
+<script src="js/jquery.knob.js"></script>
+<!-- Perfect scrollbar -->
+<script src='js/perfect-scrollbar.jquery.min.js'></script>
+<script src="js/waypoints.min.js"></script>
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
+<script>
+    /* first stage slider */
+
+    $(document).ready(function () {
+
+        /* perfect scrollbar */
+        $('.ps_cont.half_wheel_speed').perfectScrollbar({
+            wheelSpeed: 0.3
+        });
+        $('.ps_cont').perfectScrollbar();
+
+    });
+
+</script>
+
 </body>
 </html>
