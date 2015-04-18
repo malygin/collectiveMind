@@ -4025,7 +4025,6 @@ ul.vote_nav>li>a {
 }
 .notifications_drop .ps_cont {
     max-height: 410px;
-    min-height: 410px;
     padding: 10px 17px 5px 12px;
 }
 .notifications_drop .dd_bottom {
