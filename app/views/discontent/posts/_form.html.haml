@@ -1,56 +1,94 @@
-.text-success#create_discontent_success(style='display:none;')
-  = t('form.discontent.create_success')
-
-= form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
-  - content_for :discontent_content do
-    .form-group
-      %p
-      %span.badge.badge_type1.grey#text_field_content
-        = t('form.discontent.field_content')
-      = f.text_field :content, class: 'form-control'
-    .divider15
-  - content_for :what_whend_where do
-    %p
-      %span.badge.badge_type1.grey
-        = t('form.discontent.field_what')
-    .divider15
-    .form-group
-      = f.text_area :what, class: 'form-control post-textarea', rows: 5
-    %p
-      %span.badge.badge_type1.grey
-        = t('form.discontent.field_where')
-    .divider15
-    .form-group
-      = f.text_field :whered, style: 'height: 44px', class: 'form-control autocomplete', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
-    %p
-      %span.badge.badge_type1.grey
-        = t('form.discontent.field_when')
-    .divider15
-    .form-group
-      = f.text_field :whend, style: 'height: 44px', 'data-url' => discontent_autocomplete_path(@project, field: 'whend'), class: 'form-control autocomplete'
-  - content_for :select_aspect do
-    %p
-      %span.badge.badge_type1.grey
-        = t('form.discontent.select_aspect')
-    .divider15
-    .form-group
-      = select_tag 'select_for_aspects', options_from_collection_for_select(@aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)), 'id', 'content'),
-                      prompt: t('form.discontent.select_aspect_prompt') , style:'margin-left:15px; margin-top:10px; height: 30px;'
-      %br
-      #add_post_aspects(style="margin-left: 2%;margin-top: 10px;")
-        - unless @aspects_for_post.nil?
-          - @aspects_for_post.each do |ap|
-            %div{id: "aspect_#{ap.id}"}
-              %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
-              %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
-              %span.span_aspect.label.label-xs.label-info{id: "#{ap.id}"}
-                = ap.content
-        - unless @asp.nil?
-          %div{id: "aspect_#{@asp.id}"}
-            %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{@asp.id}"}/
-            %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
-            %span.span_aspect.label.label-xs.label-info{id: "#{@asp.id}"}
-              = @asp.content
-
-  #notice_messages
-  = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
+.row
+  = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
+    .col-md-12
+      .divider10
+      .text-success#create_discontent_success(style='display:none;')
+        = t('form.discontent.create_success')
+      .content_window.white
+        .divider25
+        #notice_messages
+        - content_for :select_aspect do
+          -#    - unless @aspects_for_post.nil?
+          -#      - @aspects_for_post.each do |ap|
+          -#        %div{id: "aspect_#{ap.id}"}
+          -#          %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{ap.id}"}/
+          -#          %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{ap.id}','#{ap.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+          -#          %span.span_aspect.label.label-xs.label-info{id: "#{ap.id}"}
+          -#            = ap.content
+          -#    - unless @asp.nil?
+          -#      %div{id: "aspect_#{@asp.id}"}
+          -#        %input{name: 'discontent_post_aspects[]', type: 'hidden', value: "#{@asp.id}"}/
+          -#        %span.fa.fa-remove.text-danger{onclick: "remove_core_aspect('#{@asp.id}','#{@asp.content}');", style: 'cursor:pointer;text-decoration:none;font-size:15px;'}
+          -#        %span.span_aspect.label.label-xs.label-info{id: "#{@asp.id}"}
+          -#          = @asp.content
+          .btn-group.cab_drop
+            %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+              %span
+                = t('form.discontent.select_aspect')
+            %ul.dropdown-menu
+              - @aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)).each do |aspect|
+                %li
+                  /@TODO
+                  %input#ex2_2_1{name: "ex2_2", type: "radio", value: "1"}/
+                  %label{for: "aspect_#{aspect.id}"}
+                    %span
+                      %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => "#{aspect.color}"}
+                    %span.text_label
+                      = aspect.content
+        - content_for :discontent_content do
+          .divider25
+          %p
+            = t('form.discontent.field_content')
+          = f.text_area :content, rows: 1, class: 'form-control'
+        - content_for :what_whend_where do
+          .divider15
+          %p
+            = t('form.discontent.field_what')
+          = f.text_area :what, rows: 2, class: 'form-control'
+          .divider15
+          %p
+            = t('form.discontent.field_where')
+          = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
+          .divider15
+          %p
+            = t('form.discontent.field_when')
+          = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
+        = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
+        .divider25
+    .row
+      .col-md-6
+        %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", href: "#imperfs1"}
+          Пример несовершенства
+          %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
+      .col-md-6
+        %p
+          = f.submit t('form.save'), class: 'btn add-button type2 pull-right', id: 'send_post'
+    .divider25
+    #imperfs1.content_window.white.collapse.font_lighter_grey
+      .divider15
+      %a.with_arrow.collapsed.a_font_reset.not_full_width.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", href: "#imperf_example"}
+        Невозможно дышать при большом количестве людей в комнате
+        %i.fa.fa-angle-right.fa-lg.collapse_arrow.font_grey
+      #imperf_example.collapse
+        .divider25
+        %p.font_dark_grey
+          Название (краткое описание несовершенства)
+        %p
+          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        .divider15
+        %p.font_dark_grey
+          На каком этапе это происходит?
+        %p
+          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        .divider15
+        %p.font_dark_grey
+          От чего это зависит?
+        %p
+          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        .divider15
+        %p.font_dark_grey
+          Чья работа от этого зависит?
+        %p
+          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+        .divider20
+      .divider15

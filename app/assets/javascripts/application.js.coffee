@@ -83,3 +83,26 @@ $ ->
   $('.color_me').each ->
     $(this).css $(this).attr('data-me-action'), $(this).attr('data-me-color')
     return
+
+  # Используется в кабинете на стадии несовершенств, во вспомогательной технике
+  $('.open-popup').each ->
+    stageNum = $(this).attr('data-placement')
+    popupNum = $(this).attr('data-target')
+    src = '#popup-' + stageNum + '-' + popupNum
+    $(this).magnificPopup
+      type: 'inline'
+      items: [{
+        src: src
+        type: 'inline'
+      }]
+      callbacks:
+        open: ->
+          me_id = $.magnificPopup.instance['items'][0]['src']
+          pop_h = $('.modal_content', me_id).height()
+          $('.modal_content', me_id).css
+            'height': pop_h + 'px'
+            'overflow': 'hidden'
+          return
+        close: ->
+          return
+    return
