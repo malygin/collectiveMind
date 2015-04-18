@@ -29,4 +29,4 @@
             = render partial: "#{params[:type_mechanic]}_form", locals: {f: f, aspect: aspect}
             - if @project.try(:project_type).try(:custom_fields?)
               = render partial: "#{@project.project_type.code}_fields", locals: {f: f}
-  = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn add-button pull-right'
+  = f.submit t('form.save'), id: 'send_post_aspect', class: 'btn add-button type2 pull-right'

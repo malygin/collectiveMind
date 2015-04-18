@@ -4,9 +4,8 @@
       %li{role: 'presentation', class: ('active' if current_page?(action: 'new', type_mechanic: technique.code))}
         = link_to t("techniques.#{technique.name}"), self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
         role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}"
-        .divider25
     %li{role: 'presentation', class: ('active' if action_name == 'user_content')}
       = link_to "#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})", self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'a_font_reset text-right', id: "open_my_#{@project.current_stage_type}"
-.col-md-8.col-md-offset-1
+.col-md-9.col-md-offset-1
   .tab-content
     = yield :cabinet_form
