@@ -61,7 +61,6 @@ class Concept::PostsController < PostsController
 
     # create_concept_resources_on_type(@project, @concept_post)
 
-    @concept_post.fullness_apply(@concept_post, params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -105,8 +104,6 @@ class Concept::PostsController < PostsController
     end
 
     # create_concept_resources_on_type(@project, @concept_post)
-
-    @concept_post.fullness_apply(@concept_post, params[:resor])
 
     respond_to do |format|
       if @concept_post.save
@@ -192,12 +189,7 @@ class Concept::PostsController < PostsController
 
   private
   def concept_post_params
-    params.require(:concept_post).permit(:goal, :reality, :user_id, :number_views, :life_tape_post_id, :status,
-                                         :content, :censored, :status_name, :status_content, :status_positive, :status_positive_r,
-                                         :status_negative, :status_negative_r, :status_problems, :status_reality, :improve_comment,
-                                         :improve_stage, :discuss_status, :useful, :status_positive_s, :status_negative_s,
-                                         :status_control, :status_control_r, :status_control_s, :status_obstacles, :approve_status,
-                                         :fullness, :status_all, :core_aspect_id, :positive, :negative, :control, :name, :problems,
-                                         :positive_r, :negative_r, :title, :obstacles, :actions_desc, :actions_ground, :actors, :tools, :impact_group, :impact_env)
+    params.require(:concept_post).permit(:goal, :user_id, :number_views, :status, :content, :censored, :discuss_status,
+                                         :useful, :approve_status, :title, :actors, :impact_env)
   end
 end
