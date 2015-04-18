@@ -3,7 +3,7 @@
   $(el).each ->
     cur =$(this);
     newValue = cur.data('end');
-    $({animatedVal: 0}).animate {animatedVal: newValue},
+    $({animatedVal: cur.val()}).animate {animatedVal: newValue},
       duration: 3000,
       easing: "swing",
       step: ->
