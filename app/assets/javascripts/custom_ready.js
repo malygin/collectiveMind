@@ -100,4 +100,27 @@ $(document).ready(function () {
         $('#' + ch_id).toggleClass('active');
     });
 
+   // одинаковая высота для аспектов в слайдере на первом этапе - переделать в цсс
+    var max_item_h = 0;
+    $('.c1-item').each(function () {
+        var cur_height = $(this).innerHeight();
+        if (cur_height > max_item_h) {
+            max_item_h = cur_height;
+        }
+    });
+    $('.c1-item-inner').each(function () {
+        $(this).css('height', max_item_h + 'px');
+    });
+    $('.client-one .owl-nav').css('height', max_item_h + 'px');
+
+    var wrapper_w = 0;
+    $('.owl-item').each(function () {
+        wrapper_w += $(this).innerWidth();
+    });
+    var content_w = $('.owl-carousel').innerWidth()
+    if (wrapper_w < content_w) {
+        $('.nav-tabs').css('padding', '0');
+        $('.owl-nav').css('display', 'none');
+    }
+
 });
