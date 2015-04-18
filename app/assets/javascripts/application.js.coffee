@@ -79,5 +79,7 @@ $ ->
     $(this).datepicker "hide"
     return
 
-
-
+  # Раскрашиваем аспекты согласно цвету, который в них зашит
+  $('.color_me').each ->
+    $(this).css $(this).attr('data-me-action'), $(this).attr('data-me-color')
+    return
