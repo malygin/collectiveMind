@@ -45,7 +45,7 @@
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone_datalink
-#= require discontent/discontents
+# require discontent/discontents
 
 #= require custom_ready
 
@@ -106,3 +106,13 @@ $ ->
         close: ->
           return
     return
+
+  ### slide panel 3rd stage ###
+
+  $('#opener').on 'click', ->
+    panel = $('#slide-panel')
+    if panel.hasClass('visible')
+      panel.removeClass('visible').animate 'margin-left': '-400px'
+    else
+      panel.addClass('visible').animate 'margin-left': '0px'
+

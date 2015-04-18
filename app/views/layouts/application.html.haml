@@ -15,6 +15,7 @@
 
   %body{class: "stage#{current_stage_controller}_theme"}
     .outer
+      = render partial: 'application/left_rollover'
       / Top bar starts
       %header.navbar.top_bar
         .container
@@ -38,7 +39,7 @@
                 = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
 
           .navbar-right.text-right.user_block.font_grey
-            = link_to '', knowbase_posts_path(@project), remote: true, class: 'book_icon'
+            = link_to '', knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'book_icon tooltip1', "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."
             %span.auth-divider
               |
             %span.has_dropwindow

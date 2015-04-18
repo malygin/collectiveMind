@@ -155,7 +155,7 @@ class PostsController < ProjectsController
       # @my_journals_count = @my_journals_count - 1
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
-    @comments = @post.main_comments.paginate(page: params[:page] ? params[:page] : last_page, per_page: 10)
+    @comments = @post.main_comments
 
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)

@@ -20,7 +20,7 @@
     %link{:href => "css/colors.css", :rel => "stylesheet"}/
   %body.stage3_theme
     .outer
-      #slide-panel.slide-outer{"data-position" => "left"}
+      #slide-panel.slide-outer.visible{"data-position" => "left"}
         %span#opener.slide-opener.icon_new.i_new_stage.rounded_2
           %img{:src => "img/text-slider-opener.png"}/
         .slide-inner.slide_stage3.white
@@ -587,7 +587,8 @@
                   %a.btn.back_color_stage6.icon_new.i_new_stage{:href => "6th-stage.html", :role => "button"} 6
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
-            .border_grey.rounded_3.help_icon
+            %a.open_welcome_popup{:href => "#popup-explanation-3rd"}
+              .border_grey.rounded_3.help_icon
             .border_grey.rounded_3.progress_block
               .container
                 .row
@@ -677,7 +678,7 @@
                               .comment_preview
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
-                  #tooltip3_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
+                  #tooltip3_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данной идеей. Нажмите на любой из них, чтобы увидеть полное название несовершенства."}
                     .row
                       .col-md-2.col_padding_right_3
                         %small.pull-left{:style => "margin-right: 3px;"} Несовершенства
@@ -810,6 +811,20 @@
                             %i.fa.fa-exclamation-triangle.font_lighter_grey
           %a.open-popup-vote-link{:href => "#vote-3"} Голосовалка
       / Main Block ends
+      #popup-explanation-3rd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
+        .popup.popup_rounded
+          .modal_badge.back_color_stage3.rounded_2.font_white 3 СТАДИЯ
+          %h2
+            %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
+            Цель стадии
+          %p.expl-sub-heading Сбор идей по устранению проблем, выявленных на предыдущей стадии.
+          %h2
+            %img.expl-header-img-2{:src => "img/flag1.png"}>/
+            Что делать?
+          %ol
+            %li Читайте и обсуждайте идеи участников процедуры.
+            %li Если у вас возникнут собственные идеи, формулируйте их при помощи наших вспомогательных техник и форм и выставляйте на всеобщее обсуждение.
+          %button.btn.red.close_magnific Начать работу
       #popup-3-1.popup-window.detailed_popup.popup-w1030.mfp-hide
         .popup.popup_rounded.popup_color_theme_stage3
           .modal_title
@@ -1336,6 +1351,12 @@
     / Custom JS. Type your JS code in custom.js file
     %script{:src => "js/custom.js"}
     :javascript
+      $('.open_welcome_popup').magnificPopup({
+          type: 'inline',
+          midClick: true
+      });
+      $('.open_welcome_popup').magnificPopup('open');
+
       /* perfect scrollbar */
       $('.ps_cont.half_wheel_speed').perfectScrollbar({
           wheelSpeed: 0.3

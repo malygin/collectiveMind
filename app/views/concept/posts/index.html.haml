@@ -8,71 +8,34 @@
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span
-          %span.sort-1.sort-date
-            %span 25
-          %span.sort-2.sort-rate
-            %span 2
-        -#%span.sort-all ВСЕ
+        %span#sorter
+          %span.sort-1.sort_btn.sprite_com.sprite-item3_2_1.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.concepts.after_last_visit_comments(last_time_visit_page('concept')).size
+            - if new_comments > 0
+              %span
+                = new_comments
+          %span#tooltip3_2.sort-2.sort_btn.sprite_doc.sprite-item3_1.tooltip1.sort-date{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
+            - new_posts = @project.concepts.after_last_visit_posts(last_time_visit_page('concept')).size
+            - if new_posts > 0
+              %span
+                = new_posts
+
         = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_post' do
           %button.btn.add-button
             %span
               = t('techniques.concept_posts_simple')
 
 .stage-post-block
-  .row
+  .row#tab_dispost_concepts
     = render partial: 'post_short', collection: @posts
 
 #render_concept_post
 
+
+= render partial: 'popup_welcome'
 - if current_user.can_vote_for(:concept, @project)
-  #vote-3.popup-window.popup-vote.popup-w1030.mfp-hide
-    .popup.popup_rounded
-      .modal_title
-        .row
-          .col-md-12
-            %h4.bold.font_dark_grey.tall_modal_title
-              Голосование по идеям
-      .vote_progress_cont.progress
-        .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
-      .modal_body
-        .container.vote_folders_cont.folders_2.no_padding_col
-          %ul.nav.vote_nav.row{:role => "tablist"}
-            %li.no_padding_col.active.folder_all{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
-                %i.fa.fa-angle-left.fa_xlg
-                %small.bold Вернуться в общий список
-            %li.col-md-6.no_padding_col{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
-                .vote_folder_inn.poll-2-1
-                  %span.vote_counter
-                  %h5 Да
-            %li.col-md-6.no_padding_col{:role => "presentation"}
-              %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
-                .vote_folder_inn.poll-2-3
-                  %span.vote_counter
-                  %h5 Нет
-        %h4.bold.text-center 1. Нравится ли вам идея?
-        .divider25
-        .container
-          .row
-            .divider25
-            .tab-content
-              #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
-                .container.padding30
-                  .row#cont_vote_tab1
-                    - @posts.each_with_index do |post, index|
-                      = render partial: 'post_vote', object: post
-                .divider50
-              #vote_tab2.tab-pane{"data-vote-poll-role" => "vote_yes", :role => "tabpanel"}
-                .container.padding30
-                  .row
-                  .divider50
-              #vote_tab3.tab-pane{"data-vote-poll-role" => "vote_no", :role => "tabpanel"}
-                .container.padding30
-                  .row
-                  .divider50
-            .divider35
+  = render partial: 'popup_vote'
+
 
 
 

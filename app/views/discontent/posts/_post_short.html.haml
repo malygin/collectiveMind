@@ -1,74 +1,64 @@
 .col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{(post_short.created_at.to_datetime.to_f)}",
                             rate: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
-  .post
-    .post-header.white
-    .post-body
+  .post.post_type_2
+    .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+    .post-body.no_post_head.ch_action{"data-for" => "post_ch#{post_short.id}"}
       .media
         .media-left.text-center.gradient.post-poster
           = image_tag 'no-ava.png', class: "img-circle img50"
           %p.poster-name
             =post_short.user
           %p.time
-            = Russian::strftime(post_short.created_at,'%d.%m.%Y %k:%M:%S')
-        .media-body{class: "#{post_short.style == 1 ? 'pink' : 'blue'}"}
+            = Russian::strftime(post_short.created_at,'%d.%m.%Y')
+        .media-body
           %table.table
             %tbody
               %tr.what
-                %td.col-md-2.text-center.right-column
-                  Что
-                %td.col-md-10.left-column.bold
-                  = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: "show_record_#{post_short.id}") do
-                    %div
-                      = trim_string(post_short.content, size = 50)
+                %td.col-md-12.left-column.bold
+                  = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+                    = trim_string(post_short.content, size = 50)
                     %i.fa.fa-angle-right
               %tr
-                %td.col-md-2.text-center.right-column
-                  Где
-                %td.col-md-10.left-column
-                  = trim_string(post_short.whered, size = 50)
-              %tr
-                %td.col-md-2.text-center.right-column
-                  Когда
-                %td.col-md-10.left-column
-                  = trim_string(post_short.whend, size = 50)
-              %tr
-                %td.col-md-2.text-center.right-column
-                %td.col-md-10.left-column
+                %td.col-md-12.left-column
+                  = trim_string(post_short.what, size = 50)
+
           .post_cont_hover.white{id: "post_ch#{post_short.id}"}
             .wrapper.ps_cont.half_wheel_speed
               .post_cont_inner
-                - post_short.main_comments.each do |comment|
+                -post_short.comments.preview.each do |comment|
                   .comment_preview
+                    %span.bold.com_date
+                      = Russian::strftime(comment.created_at,'%d.%m.%Y')
                     %span.bold
                       ="#{comment.user}:"
-                    = trim_string(comment.content, size = 50)
+                    =comment.content
+
     .post-bottom.white
       .row
-        .col-md-9.col_padding_right_3
-          -#%small.pull-left{:style => "margin-right: 3px;"} Аспекты
+        .col-md-9.col_padding_right_3.themes_cont
           .post-theme{id: "stripe#{post_short.id}"}
-            - post_short.post_aspects.each_with_index do |asp, index|
-              %a.tag-stripes{id: "stripe#{index+1}", class: "#{index == 0 ? 'active' : ''}", style: "background: #{asp.color};", href: "#"}
+            - post_short.post_aspects.each_with_index do |aspect, index|
+              %span.tag-stripes.color_me{class: "#{index == 0 ? 'active' : ''}", style: "background-color: #{aspect.color};"}
                 %span.tags
-                  = asp.content
+                  = aspect.content
         .col-md-3.col_padding_left_3
           .text-right.small_icons
-            %a.popup2.btn_reset.ch_action.a_font_reset{"data-for" => "post_ch#{post_short.id}", :type => "button"}
-              %small
-                = post_short.comments.count
+            %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}"}
+              = post_short.comments.count
               %i.fa.fa-comment-o
-            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false, remote: true}, method: :put, id: "plus_post_#{post_short.id}") do
+            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}") do
               %span.popup2
-                %small(id="plus_counter_#{post_short.id}" style="color:#333;")
+                %small(id="lk_post_#{post_short.id}")
                   = post_short.users_pro.count
                 %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true, remote: true}, method: :put, id: "minus_post_#{post_short.id}") do
+            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}") do
               %span.popup2
-                %small(id="minus_counter_#{post_short.id}" style="color:#333;")
+                %small(id="dlk_post_#{post_short.id}")
                   = post_short.users_against.count
                 %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-            %span.popup2
-              %i.fa.fa-exclamation-triangle.font_lighter_grey
+            -if post_short.notes.present?
+              %span.popup2
+                %i.fa.fa-exclamation-triangle.font_lighter_grey
 
 
 

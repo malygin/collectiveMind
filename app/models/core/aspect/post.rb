@@ -7,7 +7,7 @@ class Core::Aspect::Post < ActiveRecord::Base
 
   has_many :discontent_posts, class_name: 'Discontent::Post'
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post', foreign_key: 'aspect_id'
-  has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
+  has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect', foreign_key: 'aspect_id'
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'aspect_id', class_name: 'CollectInfo::Voting'

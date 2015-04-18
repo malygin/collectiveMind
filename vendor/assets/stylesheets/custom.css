@@ -431,7 +431,7 @@ textarea:focus {
 }
 .slide-outer[data-position="left"] {
     left: 0;
-    margin-left:-400px;
+    margin-left:0px;
 }
 .slide-outer[data-position="right"] {
     right: 0;

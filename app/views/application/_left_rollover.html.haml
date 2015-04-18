@@ -1,0 +1,40 @@
+-if name_controller == :concept_posts
+  #slide-panel.slide-outer{style: "margin-left:-400px", "data-position" => "left"}
+    %span#opener.slide-opener.icon_new.i_new_stage.rounded_2
+      =image_tag 'text-slider-opener.png'
+    .slide-inner.slide_stage3.white
+      .ps_cont
+        .divider15
+        .checkox_item
+          %span
+            %span.cb_input
+              %input#check0{:type => "checkbox"}/
+              %label{:for => "check0"}
+                %i.fa.fa-check
+          %span.text_label
+            %label{:for => "check0"} Выбрать все
+        .slide_table_wrap
+          - @project.discontent_grouped_post.each_with_index do |post, index|
+            .checkox_item
+              %span
+                %span.cb_input
+                  %input{id: "check#{index+1}", :type => "checkbox"}/
+                  %label{:for => "check#{index+1}"}
+                    %i.fa.fa-check
+              %span
+                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "#{index}", "data-me-type" => "imperf"}
+                  = post.dispost_concepts.count
+              %span.text_label
+                %label{:for => "check#{index+1}"}
+                  = post.content
+              - new_posts = post.dispost_concepts.after_last_visit_posts(last_time_visit_page('concept')).size
+              - if new_posts > 0
+                %span.cb_doc
+                  = new_posts
+              - new_comments = post.dispost_concepts.after_last_visit_comments(last_time_visit_page('concept')).size
+              - if new_comments > 0
+                %span.cb_com
+                  = new_comments
+
+        .divider15
+

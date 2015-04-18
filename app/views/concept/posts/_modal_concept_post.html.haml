@@ -13,18 +13,19 @@
                 %span.bold
                   = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}") do
                   %span.bold
-                    %span(id="plus_counter_#{@post.id}")
+                    %span(id="lk_post_#{@post.id}")
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}") do
                   %span.bold
-                    %span(id="minus_counter_#{@post.id}")
+                    %span(id="dlk_post_#{@post.id}")
                       = @post.users_against.count
                     %i.fa.fa-thumbs-down.theme_font_color
-                %span
-                  %i.fa.fa-exclamation-triangle.font_lighter_grey
+                - if @post.notes.present?
+                  %span
+                    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
                   = Russian::strftime(@post.created_at, '%d.%m.%Y')
     .modal_body
@@ -39,30 +40,34 @@
           .col-md-6.col_padding_right_0
             .innov-tags
               - @post.concept_disposts.each_with_index do |post, index|
-                .innov-tags-tag{class: "color-N#{index + 1}"}
+                .innov-tags-tag.popup_tooltip{class: "color-N#{index + 1} tooltip3_tag_#{index + 1}"}
                   = trim_content(post.content, 50)
 
-      .container
+      .container.modal_content
         .row
           .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
-            %button.expand_button.remove_col.btn_reset{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+            %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
             .divider25
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
-                  = t('show.concept.actions')
+                  Суть идеи
               %p
                 %strong
                   = t('show.desc')
-                = @post.actions_desc
-              %p
-                %strong
-                  = t('show.ground')
-                = @post.actions_ground
+                = @post.goal
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
-                  = t('show.concept.actors')
+                  Что будет иначе?
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.content
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  Кто будет делать иначе?
               %p
                 %strong
                   = t('show.desc')
@@ -70,30 +75,14 @@
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
-                  = t('show.concept.tools')
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.tools
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.concept.impact_group')
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.impact_group
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.concept.impact_env')
+                  Чьи интересы будут затронуты?
               %p
                 %strong
                   = t('show.desc')
                 = @post.impact_env
 
-          .col-md-6.comment_col.popup_expandable_col
-            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
+          .col-md-6.comment_col.popup_expandable_col.ps_cont
+            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
             .divider15
             #myCarousel.carousel.slide{"data-ride" => "carousel"}
               .carousel-inner.chat-messages{:role => "listbox"}

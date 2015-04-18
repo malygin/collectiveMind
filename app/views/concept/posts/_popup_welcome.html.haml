@@ -1,0 +1,16 @@
+#popup-explanation-3.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('concept_intro')}"}
+  .popup.popup_rounded
+    .modal_badge.back_color_stage3.rounded_2.font_white 3 СТАДИЯ
+    %h2
+      = image_tag 'good-shot1.png', class: "expl-header-img-1"
+      Цель стадии
+    %p.expl-sub-heading
+      Сбор идей по устранению проблем, выявленных на предыдущей стадии.
+    %h2
+      = image_tag 'flag1.png', class: "expl-header-img-2"
+      Что делать?
+    %ol
+      %li Читайте и обсуждайте идеи участников процедуры.
+      %li Если у вас возникнут собственные идеи, формулируйте их при помощи наших вспомогательных техник и форм и выставляйте на всеобщее обсуждение.
+    = link_to concept_posts_check_field_path(@project, check_field: "concept_intro", status: true), method: :put, remote: true do
+      %button.btn.red.close_magnific Начать работу

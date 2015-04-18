@@ -14,9 +14,9 @@ class Discontent::Post < ActiveRecord::Base
   has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
 
-  # has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
-  #          class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-  # has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
+  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
+           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
+  has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
 
 
   # has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'

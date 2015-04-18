@@ -144,4 +144,12 @@ module Discontent::PostsHelper
     end
     classes
   end
+
+  def post_discontent_classes(post)
+    classes = ''
+    post.concept_disposts.each do |p|
+      classes += "discontent_#{p.id} "
+    end
+    classes
+  end
 end

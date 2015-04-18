@@ -24,7 +24,7 @@
 <body class="stage3_theme">
 <div class="outer">
 
-    <div id="slide-panel" class="slide-outer" data-position="left">
+    <div id="slide-panel" class="slide-outer visible" data-position="left">
         <span class="slide-opener icon_new i_new_stage rounded_2" id="opener">
             <img src="img/text-slider-opener.png">
         </span>
@@ -553,7 +553,7 @@
         </div>
 
         <div class="col-md-4 col_padding_left_3">
-            <div class="border_grey rounded_3 help_icon"></div>
+            <a href="#popup-explanation-3rd" class="open_welcome_popup"><div class="border_grey rounded_3 help_icon"></div></a>
             <div class="border_grey rounded_3 progress_block">
                 <div class="container">
                     <div class="row">
@@ -672,7 +672,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="post-bottom white tooltip1" data-toggle="tooltip" id="tooltip3_2" data-trigger="manual" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения.">
+                                <div class="post-bottom white tooltip1" data-toggle="tooltip" id="tooltip3_2" data-trigger="manual" data-placement="bottom" title="В цветных квадратиках скрывается перечень несовершенств, связанных с данной идеей. Нажмите на любой из них, чтобы увидеть полное название несовершенства.">
                                     <div class="row">
                                         <div class="col-md-2 col_padding_right_3"><small class="pull-left" style="margin-right: 3px;">Несовершенства</small></div>
                                         <div class="col-md-7 col_padding_right_3 themes_cont">
@@ -808,6 +808,23 @@
 </div>
 </div>
 <!-- Main Block ends -->
+
+
+    <div id="popup-explanation-3rd" class="popup-window popup-explanation popup-w710 mfp-hide welcome_popup">
+        <div class="popup popup_rounded">
+            <div class="modal_badge back_color_stage3 rounded_2 font_white">3 СТАДИЯ</div>
+            <h2><img src="img/good-shot1.png" class="expl-header-img-1">Цель стадии</h2>
+
+            <p class="expl-sub-heading">Сбор идей по устранению проблем, выявленных на предыдущей стадии.</p>
+
+            <h2><img src="img/flag1.png" class="expl-header-img-2">Что делать?</h2>
+            <ol>
+                <li>Читайте и обсуждайте идеи участников процедуры.</li>
+                <li>Если у вас возникнут собственные идеи, формулируйте их при помощи наших вспомогательных техник и форм и выставляйте на всеобщее обсуждение.</li>
+            </ol>
+            <button class="btn red close_magnific">Начать работу</button>
+        </div>
+    </div>
 
 
 <div id="popup-3-1" class="popup-window detailed_popup popup-w1030 mfp-hide">
@@ -1459,6 +1476,12 @@
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
 <script>
+    $('.open_welcome_popup').magnificPopup({
+        type: 'inline',
+        midClick: true
+    });
+    $('.open_welcome_popup').magnificPopup('open');
+
     /* perfect scrollbar */
     $('.ps_cont.half_wheel_speed').perfectScrollbar({
         wheelSpeed: 0.3

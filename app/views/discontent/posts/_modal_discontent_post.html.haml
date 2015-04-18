@@ -13,68 +13,76 @@
                 %span.bold
                   =@post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize,:action => :like, :project => @project, :id => @post.id, :against => false,  :remote => true},:method => :put, id: "plus_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false}, :remote => true, :method => :put, id: "like_post_#{@post.id}") do
                   %span.bold
-                    %span(id="plus_counter_#{@post.id}" style="color:#333;")
+                    %span(id="lk_post_#{@post.id}")
                       =@post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize,:action => :like, :project => @project,  :id => @post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project,  :id => @post.id, :against => true}, :remote => true, :method => :put, id: "dislike_post_#{@post.id}") do
                   %span.bold
-                    %span(id="minus_counter_#{@post.id}" style="color:#333;")
+                    %span(id="dlk_post_#{@post.id}")
                       =@post.users_against.count
                     %i.fa.fa-thumbs-down.theme_font_color
-                %span
-                  %i.fa.fa-exclamation-triangle.font_lighter_grey
+                -if @post.notes.present?
+                  %span
+                    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
-                  =Russian::strftime(@post.created_at,'%d.%m.%Y %k:%M:%S')
+                  =Russian::strftime(@post.created_at,'%d.%m.%Y')
     .modal_body
-      .container
+      .container.modal_content
         .row
           .col-md-5.com_dashed_border.right.popup_collapsable_col.collapse.in
             %button.expand_button.remove_col.btn_reset{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
             .divider20
-            .border_light_grey.rounded_5.imperf_left
-              .media.comment.main_line{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
+            .border_light_grey.rounded_3.imperf_left
+              .media.comment.main_line
                 .container
                   .media-left
                     = image_tag 'no-ava.png', class: "media-object img50 img-circle"
                   .media-body
                     %h5.media-heading.bold
-                      =@post.user
-              %table.table{class: "#{@post.style == 1 ? 'pink' : 'blue'}"}
+                      = @post.user
+              %table.table
                 %tr
-                  %td.col-md-2.text-center.right-column
-                    Что
-                  %td.col-md-10.left-column
-                    =@post.content
+                  %td.col-md-12.left-column.bold
+                    = t('form.discontent.field_what')
                 %tr
-                  %td.col-md-2.text-center.right-column
-                    Где
-                  %td.col-md-10.left-column
-                    =@post.whered
+                  %td.col-md-12.left-column
+                    = @post.what
                 %tr
-                  %td.col-md-2.text-center.right-column
-                    Когда
-                  %td.col-md-10.left-column
-                    =@post.whend
-              .divider10
+                  %td.col-md-12.left-column.bold
+                    = t('form.discontent.field_where')
+                %tr
+                  %td.col-md-12.left-column
+                    = @post.whered
+                %tr
+                  %td.col-md-12.left-column.bold
+                    = t('form.discontent.field_when')
+                %tr
+                  %td.col-md-12.left-column
+                    = @post.whend
               -if @post.notes.present?
+                .divider10
                 .index_block
                   .text-center.col-md-1
-                    %i.fa.fa-exclamation-triangle.font_lighter_grey
+                    %i.fa.fa-exclamation-triangle.font_red
                   .col-md-11
                     %h5 Замечание модератора
+                    .divider10
                     -@post.notes.each do |note|
-                      %li=note.content
+                      %li
+                        =note.content
                       %br
-              - @post.post_aspects.each do |asp|
+                .divider10
+              - @post.post_aspects.each do |aspect|
+                .divider_1_grey
                 .index_block
                   .text-center.col-md-1
-                    %i.fa.fa-square{style: "color:#{asp.color};"}
+                    %i.fa.fa-square.color_me{style: "color:#{aspect.color};"}
                   .col-md-11
-                    = asp.content
-              .divider10
-          .col-md-7.comment_col.popup_expandable_col
+                    = aspect.content
+                .divider10
+          .col-md-7.comment_col.popup_expandable_col.ps_cont
             %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание несовершенства
             .divider15
             #myCarousel.carousel.slide{"data-ride" => "carousel"}

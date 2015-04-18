@@ -1,0 +1,47 @@
+#vote-3.popup-window.popup-vote.popup-w1030.mfp-hide
+  .popup.popup_rounded
+    .modal_title
+      .row
+        .col-md-12
+          %h4.bold.font_dark_grey.tall_modal_title
+            Голосование по идеям
+    .vote_progress_cont.progress
+      .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
+    .modal_body
+      .container.vote_folders_cont.folders_2.no_padding_col
+        %ul.nav.vote_nav.row{:role => "tablist"}
+          %li.no_padding_col.active.folder_all{:role => "presentation"}
+            %a.vote_folder{"data-toggle" => "tab", :href => "#vote_tab1", :role => "tab"}
+              %i.fa.fa-angle-left.fa_xlg
+              %small.bold Вернуться в общий список
+          %li.col-md-6.no_padding_col{:role => "presentation"}
+            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
+              .vote_folder_inn.poll-2-1
+                %span.vote_counter
+                %h5 Да
+          %li.col-md-6.no_padding_col{:role => "presentation"}
+            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
+              .vote_folder_inn.poll-2-3
+                %span.vote_counter
+                %h5 Нет
+      %h4.bold.text-center 1. Нравится ли вам идея?
+      .divider25
+      .container
+        .row
+          .divider25
+          .tab-content
+            #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
+              .container.padding30
+                .row#cont_vote_tab1
+                  - @posts.each_with_index do |post, index|
+                    = render partial: 'post_vote', object: post
+              .divider50
+            #vote_tab2.tab-pane{"data-vote-poll-role" => "vote_yes", :role => "tabpanel"}
+              .container.padding30
+                .row
+                .divider50
+            #vote_tab3.tab-pane{"data-vote-poll-role" => "vote_no", :role => "tabpanel"}
+              .container.padding30
+                .row
+                .divider50
+          .divider35
