@@ -242,6 +242,10 @@ en:
       problems: Please prove that the effect brought by your suggested change will be worth of associated material and labor costs.
       reality: Please justify that implementation of your suggested change will not involve major obstacles.
 
+      goal: "Суть идеи"
+      content: "Что будет иначе?"
+      actors: "Кто будет делать иначе?"
+      impact_env: "Чьи интересы будут затронуты?"
     project:
       name: Title
       short_desc: Short description
@@ -801,3 +805,5 @@ en:
     success_update: "Success update technique"
   aspect:
     content: "Content"
+  techniques:
+    concept_posts_simple: "+ Idea"
