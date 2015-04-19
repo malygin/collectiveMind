@@ -106,6 +106,7 @@ CollectiveMind::Application.routes.draw do
           put :like
           put :like_comment
           put :vote
+          put :discuss_status
         end
       end
     end

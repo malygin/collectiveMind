@@ -8,7 +8,7 @@
           =post_short.user
       .media-body.white
         = link_to({controller: 'core/aspect/posts', action: :show, project: @project.id, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
-          .post-text.open-popup{"data-placement" => "1", "data-target" => "1"}
+          .post-text
             =post_short.content
             %i.fa.fa-angle-right
         - if post_short.comments.count > 0

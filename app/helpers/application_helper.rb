@@ -382,7 +382,7 @@ module ApplicationHelper
 
   def get_stage_for_improve(c)
     case c
-      when 'CoreAspect'
+      when 'Core::Aspect'
         1
       when 'Discontent'
         2

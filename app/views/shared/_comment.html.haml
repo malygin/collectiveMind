@@ -20,15 +20,14 @@
               = link_to({action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
                 %i.fa.fa-close>
                 Удалить
-      -if comment.approve_status
-        %span.badge.badge_important.theme_back_color важно
-        -#- if boss? or role_expert? or stat_expert?
-        -#  = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-        -#    %span.label_approve.label(class="#{label_approve_stat(comment)}")
-        -#      = t('show.important')
-        -#- else
-        -#  %span.label_approve.label(class="#{label_approve_stat(comment)}")
-        -#    = t('show.important')
+
+      -#%span.badge.badge_important.theme_back_color важно
+      - if boss? or role_expert? or stat_expert?
+        = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+          %span.label_approve.label(class="#{label_approve_stat(comment)}")
+            = t('show.important')
+      - elsif comment.approve_status
+        %span.label_approve.label.label-success= t('show.important')
       %span{id: "cancel_comment_#{comment.id}"}
   %p.font_grey.bold{id: "comment_text_#{comment.id}"}
     =comment.content

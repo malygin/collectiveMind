@@ -14,7 +14,7 @@
 #    form.append('<br/><br/><a class="edit-cancel btn btn-xs btn-danger" data-id="' + id + '">Отменить</a>')
 #    form.append('<input class="btn btn-xs btn-info send-comment"  name="commit"  type="submit" value="Отправить">')
     $('#comment_text_' + id).html(form)
-    $('#cancel_comment_' + id).append('<button class="edit-cancel badge_important btn btn-xs theme_back_color" style="display:none;" data-id="' + id + '">Отменить</button>')
+    $('#cancel_comment_' + id).append('<a href="#" class="edit-cancel" style="display:none;" data-id="' + id + '"><span class="label label-danger">Отменить</span></a>')
     $('#redactor_comment_' + id).fadeOut()
     $('#cancel_comment_' + id + ' .edit-cancel').fadeIn()
     $('#form_edit_comment_' + id).collapse('show')
@@ -117,7 +117,7 @@
 #      $(this).html('Выдать баллы')
 
   $('.chat-messages').on('click', 'a.edit-comment', this.edit_comment)
-  $('.chat-messages').on('click', 'button.edit-cancel', this.edit_cancel)
+  $('.chat-messages').on('click', 'a.edit-cancel', this.edit_cancel)
   $('.chat-messages').on('click', 'button.reply-comment', this.reply_comment)
   $('.chat-messages').on('click', 'button.cancel-reply', this.cancel_reply)
 
