@@ -50,7 +50,7 @@
               %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
                 %i.fa.fa-globe.font_lighter_grey
                 %small
-                  Russian
+                  Русский
                   %i.fa.fa-angle-down
               %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
                 %li
@@ -70,6 +70,10 @@
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
                 %li{role: 'presentation'}
                   = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
+                %li{role: 'presentation'}
+                  %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
+                    =t('menu.sign_out')
+
       / Top Bar ends
       .subhead
         .container
