@@ -1,7 +1,7 @@
 .container
   .row.cabinet_popup_links
     .col-md-6.no_padding_col
-      .cab_pop_l.l_col1.open-popup{'data-placement' => 'cab2', 'data-target' => '1'}
+      .cab_pop_l.l_col1.open-popup#first{'data-placement' => 'cab2', 'data-target' => '1'}
         %span
           То, что не достаточно хорошо
           %br/
@@ -26,5 +26,4 @@
           %small (Объяснительная строка)
 
 #popup-cab2-1.popup-window.detailed_popup.popup-w800.mfp-hide
-  = yield :discontent_content
-  = yield :what_whend_where
+  = yield :discontent_form

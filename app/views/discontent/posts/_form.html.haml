@@ -1,13 +1,14 @@
-.row
+.text-success#create_discontent_success(style='display:none;')
+  = t('form.discontent.create_success')
+
+- content_for :discontent_form do
   = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
     .col-md-12
       .divider10
-      .text-success#create_discontent_success(style='display:none;')
-        = t('form.discontent.create_success')
       .content_window.white
         .divider25
         #notice_messages
-        - content_for :select_aspect do
+        - if params[:type_mechanic] == 'simple'
           -#    - unless @aspects_for_post.nil?
           -#      - @aspects_for_post.each do |ap|
           -#        %div{id: "aspect_#{ap.id}"}
@@ -28,32 +29,29 @@
             %ul.dropdown-menu
               - @aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)).each do |aspect|
                 %li
-                  /@TODO
-                  %input#ex2_2_1{name: "ex2_2", type: "radio", value: "1"}/
+                  %input{name: "aspect_#{aspect.id}", type: 'radio', value: '0', id: "aspect_#{aspect.id}"}/
                   %label{for: "aspect_#{aspect.id}"}
                     %span
                       %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => "#{aspect.color}"}
                     %span.text_label
                       = aspect.content
-        - content_for :discontent_content do
-          .divider25
-          %p
-            = t('form.discontent.field_content')
-          = f.text_area :content, rows: 1, class: 'form-control'
-        - content_for :what_whend_where do
-          .divider15
-          %p
-            = t('form.discontent.field_what')
-          = f.text_area :what, rows: 2, class: 'form-control'
-          .divider15
-          %p
-            = t('form.discontent.field_where')
-          = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
-          .divider15
-          %p
-            = t('form.discontent.field_when')
-          = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
-        = render partial: "#{params[:type_mechanic]}_form", locals: {f: f}
+
+        .divider25
+        %p
+          = t('form.discontent.field_content')
+        = f.text_area :content, rows: 1, class: 'form-control'
+        .divider15
+        %p
+          = t('form.discontent.field_what')
+        = f.text_area :what, rows: 2, class: 'form-control'
+        .divider15
+        %p
+          = t('form.discontent.field_where')
+        = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
+        .divider15
+        %p
+          = t('form.discontent.field_when')
+        = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
         .divider25
     .row
       .col-md-6
@@ -92,3 +90,5 @@
           Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
         .divider20
       .divider15
+
+= render partial: "#{params[:type_mechanic]}_form"

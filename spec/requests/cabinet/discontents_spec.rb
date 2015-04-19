@@ -56,7 +56,7 @@ describe 'Cabinet Discontents' do
   context 'create with detailed form', js: true do
     before do
       click_link 'new_discontent_posts_detailed'
-      click_button 'first'
+      find('#first').click
     end
 
     it 'correct' do
