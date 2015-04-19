@@ -1,0 +1,24 @@
+- content_for :cabinet_form do
+  - @content.each do |concept|
+    .post.post_add_type1
+      .post-header.color_me{'data-me-action' => 'background', 'data-me-color' => '1', 'data-me-type' => 'aspect'}
+      .post-body
+        .media
+          .media-left.text-center.gradient2.post-poster
+            = cl_image_tag concept.user.avatar, class: 'img-circle img40'
+            %p.poster-name
+              = concept.user
+            %p.poster-name
+          .media-body.white
+            .post-text
+              %h5.bold
+                = concept.title
+              %p
+                = concept.goal
+      .post-bottom.white
+        .row
+          .col-md-12
+            - concept.concept_disposts.each do |discontent|
+              %span.tag-stripes.active.color_me{'data-me-action' => 'background-color', 'data-me-color' => '2', 'data-me-type' => 'aspect'}
+                %span.tags
+                  = discontent.content
