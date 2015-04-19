@@ -3,9 +3,9 @@
     .divider10
     .text-success#create_concept_success(style='display:none;')
       = t('form.concept.create_success')
-    .content_window.white
-      .divider25
-      = form_for @concept_post, url: {project: @project.id, action: @concept_post.persisted? ? 'update' : 'create'}, remote: true do |f|
+    = form_for @concept_post, url: {project: @project.id, action: @concept_post.persisted? ? 'update' : 'create'}, remote: true do |f|
+      .content_window.white
+        .divider25
         #notice_messages
         %p
           = t('form.concept.title')
@@ -29,16 +29,16 @@
         .divider15
         %p
           = f.submit t('form.save'), class: 'btn add-button type2 pull-right', id: 'send_post_concept'
-      .divider15
-      .check_push_cont.checked_items
-        %p.hideable_checks.enter_lenght
-          Устраняемые несовершенства
-          %span.ch_lenght
+        .divider15
+        .check_push_cont.checked_items
+          %p.hideable_checks.enter_lenght
+            Устраняемые несовершенства
+            %span.ch_lenght
       .divider10
     .content_window.white
-      %a.theme_font_color.with_arrow.collapsed.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+      %a.theme_font_color.with_arrow.collapsed.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
         %span.enter_lenght
-          = "Привязать идею к несовершенству (#{@discontent_posts.count})"
+          = 'Привязать идею к несовершенству'
           %span.unch_lenght
         %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       #imperfs1.collapse.check_push_cont.rotate_arrow.unchecked_items
@@ -46,8 +46,8 @@
           .item
             %span
               %span.cb_input
-                %input.check_push_box{type: 'checkbox', id: "check#{discontent.id}"}/
-                %label{for: "check#{discontent.id}"}
+                %input.check_push_box{type: 'checkbox', id: "concept_post_discontents[#{discontent.id}]", name: "concept_post_discontents[#{discontent.id}]"}/
+                %label{for: "concept_post_discontents[#{discontent.id}]"}
                   %i.fa.fa-check
             %span.cell_full_w
               %a.a_font_reset.with_arrow.collapsed.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs3-1-1'}
@@ -77,4 +77,4 @@
                             %small 1
                             %i.fa.fa-thumbs-o-down.fa-flip-horizontal
                   %p.font_grey.bold
-                    = discontent.short_desc
+                    = discontent.whend

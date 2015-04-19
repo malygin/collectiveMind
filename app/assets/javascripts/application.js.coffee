@@ -340,3 +340,26 @@ $colors_imperf_codes = [
   'fea1cd'
   '978ac2'
 ]
+
+# Выбор несовершенства для идеи
+ch_its = $('.item', '.checked_items').length
+unch_its = $('.item', '.unchecked_items').length
+$('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+
+$('.check_push_box').click ->
+  item = $(this).closest('.item').detach()
+  if $(this).is(':checked')
+    $('.checked_items').append item
+    ch_its++
+    unch_its--
+    $('.hideable_checks').show()
+    $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+    $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  else
+    $('.unchecked_items').append item
+    ch_its--
+    unch_its++
+    if ch_its == 0
+      $('.hideable_checks').hide()
+    $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  return

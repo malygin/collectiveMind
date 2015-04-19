@@ -6,6 +6,7 @@ describe 'Cabinet Concepts' do
   let (:project) { create :core_project, status: Core::Project::STATUS_CODES[:concept] }
   let (:core_project_user) { create :core_project_user, core_project: project }
   let (:user) { core_project_user.user }
+  let! (:discontent) { create :discontent, user: user, project: project }
 
   before do
     # тут еще нужно прицеплять техники к проекту
@@ -28,21 +29,28 @@ describe 'Cabinet Concepts' do
     end
   end
 
-  context 'create with simple form', js: true do
+  describe 'create with simple form', js: true do
     before do
       click_link 'new_concept_posts_simple'
     end
 
-    it 'correct' do
-      expect {
+    context 'correct' do
+      before do
         fill_in 'concept_post_title', with: 'title for concept'
         fill_in 'concept_post_goal', with: 'goal in concept'
         fill_in 'concept_post_content', with: 'content concept'
         fill_in 'concept_post_actors', with: 'actors'
         fill_in 'concept_post_impact_env', with: 'impact environment'
+        find('#open_discontents').click
+        find("input#concept_post_discontents[#{discontent.id}]").click
         click_button 'send_post_concept'
-        expect(page).to have_content t('form.concept.create_success')
-      }.to change(Concept::Post, :count).by(1)
+      end
+
+      it { expect(page).to have_content t('form.concept.create_success') }
+
+      it { expect {}.to change(Concept::Post, :count).by(1) }
+
+      it { expect {}.to change(Concept::PostDiscontent, :count).by(1) }
     end
 
     it 'empty fields - error' do

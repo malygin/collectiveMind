@@ -37,7 +37,7 @@ class Concept::PostsController < PostsController
                                                       count_likes: item.users_pro.count,
                                                       count_dislikes: item.users_against.count,
                                                       discontents: item.concept_disposts.map { |dispost| {id: dispost.id, content: dispost.content} },
-                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} } } } }
+                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} }} } }
 
     end
   end
@@ -61,38 +61,28 @@ class Concept::PostsController < PostsController
   end
 
   def create
-    @concept_post = current_model.new concept_post_params
-    unless params[:cd].nil?
-      params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
-      end
-    end
-    #выбор отдельных несовершенств
-    unless params[:check_discontent].nil?
-      params[:check_discontent].each do |com|
-        @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
+    @concept_post = current_model.new concept_post_params.merge(user_id: current_user.id, project_id: @project.id)
+    unless params[:concept_post_discontents].nil?
+      params[:concept_post_discontents].each do |id, value|
+        @concept_post.concept_post_discontents.build(discontent_post_id: id, status: 0)
       end
     end
 
-    @concept_post.user = current_user
-    @concept_post.project = @project
+    #выбор отдельных несовершенств
+    # unless params[:check_discontent].nil?
+    #   params[:check_discontent].each do |com|
+    #     @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
+    #   end
+    # end
     # @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
     # @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
-
     # create_concept_resources_on_type(@project, @concept_post)
-
 
     respond_to do |format|
       if @concept_post.save
         current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
-        @aspect_id = params[:asp_id]
-        #@todo
-        #@discontent_post = @concept_post.discontent
-        @remove_able = true
-        format.html { redirect_to @aspect_id.nil? ? "/project/#{@project.id}/concept/posts" : "/project/#{@project.id}/concept/posts?asp=#{@aspect_id}" }
         format.js
       else
-        format.html { render action: 'new' }
         format.js
       end
     end
