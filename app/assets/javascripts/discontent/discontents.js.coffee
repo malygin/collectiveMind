@@ -23,11 +23,18 @@ DiscontentCollectionView = Backbone.View.extend
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
     $('#filter').unbind('click').on('click', 'li', this.loadByAspect)
+    $('#sorter').unbind('click').on('click', 'span', this.sortByAspect)
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
       itemSelector: '.discontent-block',
-      layoutMode: 'fitRows'
+      layoutMode: 'fitRows',
+      getSortData:
+        comment: '[data-comment] parseFloat',
+        date: '[data-date] parseFloat'
+    show_comments_hover()
+    activate_perfect_scrollbar()
+    post_colored_stripes()
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
@@ -35,13 +42,18 @@ DiscontentCollectionView = Backbone.View.extend
   renderNew: (newModel)->
     this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
   removeOld: (model)->
-    console.log this.$container
+    # console.log this.$container
     el = $('div[data-id="id-'+model.id+'"]')
     this.$container.isotope('remove', el);
   loadByAspect: (evt)->
     evt.preventDefault();
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
+  sortByAspect: (evt)->
+    evt.preventDefault();
+    sortByValue = $(this).data('type')
+    $('#tab_aspect_posts').isotope
+      sortBy: sortByValue
 
 # only for discontents url
 if window.location.href.indexOf("discontent/posts") > -1

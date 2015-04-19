@@ -94,11 +94,11 @@ $(document).ready(function () {
         win.find('[data-toggle="collapse"]').addClass('collapsed');
     }
 
-    $('.ch_action').hover(function(){
-        var ch_id = $(this).attr('data-for');
-        $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass('active');
-        $('#' + ch_id).toggleClass('active');
-    });
+    //$('.ch_action').hover(function(){
+    //    var ch_id = $(this).attr('data-for');
+    //    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass('active');
+    //    $('#' + ch_id).toggleClass('active');
+    //});
 
    // одинаковая высота для аспектов в слайдере на первом этапе - переделать в цсс
     var max_item_h = 0;
@@ -121,50 +121,6 @@ $(document).ready(function () {
     if (wrapper_w < content_w) {
         $('.nav-tabs').css('padding', '0');
         $('.owl-nav').css('display', 'none');
-    }
-
-    /* perfect scrollbar */
-    $('.ps_cont.half_wheel_speed').perfectScrollbar({
-        wheelSpeed: 0.3
-    });
-    $('.ps_cont').perfectScrollbar();
-
-    /* post colored stripes */
-    // показ цветных полосок -> упростить
-
-    $('.post-theme').each(function(){
-        curId = $(this).attr('id');
-        $(this).width(count_themes_width (curId));
-    });
-
-    $('.post-theme').hover(function () {
-        curId = $(this).attr('id');
-        $('#' + curId + " .tag-stripes").hover(function () {
-            $('#' + curId + " .tag-stripes").removeClass('active');
-            $(this).addClass('active');
-        });
-    });
-
-    $('.post-theme').mouseover(function(){
-        $(this).addClass('shown');
-        $(this).closest('.themes_cont').addClass('themesShown');
-    });
-
-    $('.post-theme').mouseleave(function(){
-        $(this).removeClass('shown');
-        $(this).closest('.themes_cont').removeClass('themesShown');
-    });
-
-    $('.tag-stripes').mouseover(function(){
-        $(this).closest('.post-theme').width(count_themes_width($(this).closest('.post-theme').attr('id')));
-    });
-
-    function count_themes_width (cont) {
-        var width = 0;
-        $('#' + cont + ' .tag-stripes').each(function(){
-            width = width + $(this).outerWidth();
-        });
-        return width + 100;
     }
 
 });

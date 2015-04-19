@@ -3,7 +3,7 @@
     %span Фильтр аспектов:
     %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"} все
     %ul.dropdown-menu.index-of-aspects#filter
-      %li
+      %li{data: {aspect: "*"}}
         %input#ex2_2_0{:name => "ex2_2", :type => "radio", :value => "0"}/
         %label.checkox_item{:for => "ex2_2_0"}
           %span
@@ -66,7 +66,7 @@
 
 .stage-post-block
   .row#tab_aspect_posts
-    = render partial: 'post_short', collection: @posts
+    -#= render partial: 'post_short', collection: @posts
 
 #render_discontent_post
 

@@ -1,5 +1,5 @@
-.col-md-6.concept-block{id: "concept_post_#{post_short.id}", class: "#{post_discontent_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{(post_short.created_at.to_datetime.to_f)}",
-                            rate: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
+.col-md-6.concept-block{id: "concept_post_#{post_short.id}", class: "#{post_discontent_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
+                            rate: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"}}
   .post.post_type_3.themes_cont
     = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
       .post-header.white

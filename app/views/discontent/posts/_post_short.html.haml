@@ -1,5 +1,5 @@
-.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{(post_short.created_at.to_datetime.to_f)}",
-                            rate: "#{post_short.users_pro.count + (post_short.number_views * 0.3)}"}}
+.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
+                            comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"}}
   .post.post_type_2
     .post-header.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
     .post-body.no_post_head.ch_action{"data-for" => "post_ch#{post_short.id}"}

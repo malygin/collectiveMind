@@ -1,4 +1,5 @@
 class Concept::PostsController < PostsController
+  include Concept::PostsHelper
   before_action :set_concept_post, only: [:edit, :update]
 
   def voting_model
@@ -19,7 +20,26 @@ class Concept::PostsController < PostsController
   end
 
   def index
-    @posts = @project.concept_ongoing_post
+    @posts= nil
+    if params[:discontent] and params[:discontent] != '*'
+      @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join('')).dispost_concepts
+    else
+      @posts = @project.concept_ongoing_post
+    end
+    respond_to do |format|
+
+      format.html # show.html.erb
+      format.json { render json: @posts.map { |item| {id: item.id, content: item.content, title: item.title,
+                                                      user: item.user.to_s, post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                      project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
+                                                      discontent_class: post_discontent_classes(item),
+                                                      count_comments: item.comments.count,
+                                                      count_likes: item.users_pro.count,
+                                                      count_dislikes: item.users_against.count,
+                                                      discontents: item.concept_disposts.map { |dispost| {id: dispost.id, content: dispost.content} },
+                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} } } } }
+
+    end
   end
 
   def new

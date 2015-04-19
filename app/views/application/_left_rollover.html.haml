@@ -3,9 +3,9 @@
     %span#opener.slide-opener.icon_new.i_new_stage.rounded_2
       =image_tag 'text-slider-opener.png'
     .slide-inner.slide_stage3.white
-      .ps_cont
+      .ps_cont#filter
         .divider15
-        .checkox_item
+        .checkox_item{data: {discontent: "*"}}
           %span
             %span.cb_input
               %input#check0{:type => "checkbox"}/
@@ -15,7 +15,7 @@
             %label{:for => "check0"} Выбрать все
         .slide_table_wrap
           - @project.discontent_grouped_post.each_with_index do |post, index|
-            .checkox_item
+            .checkox_item{data: {discontent: ".discontent_#{post.id}"}}
               %span
                 %span.cb_input
                   %input{id: "check#{index+1}", :type => "checkbox"}/

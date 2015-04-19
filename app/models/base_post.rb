@@ -39,6 +39,7 @@ module BasePost
     scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present?}
     scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts','_comments')}.created_at >= ?", last_time) if last_time.present?}
 
+
     validates :user_id, :project_id, presence: true
 
     # вывод постов по дате последних комментов
@@ -47,6 +48,10 @@ module BasePost
         joins("LEFT OUTER JOIN #{table_name.gsub('_posts','_comments')} ON #{table_name.gsub('_posts','_comments')}.post_id = #{table_name}.id").
         group("#{table_name}.id").
         reorder("max(#{table_name.gsub('_posts','_comments')}.created_at) DESC NULLS LAST")
+    end
+
+    def last_comment
+      self.comments.reorder(created_at: :desc).first
     end
 
     def show_content

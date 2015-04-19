@@ -37,6 +37,7 @@
 #= require waypoints.min
 #= require jquery.contenthover.min
 #= require perfect-scrollbar.jquery.min
+#= require dropdowns-enhancement
 
 #= require isotope.pkgd.min
 
@@ -45,7 +46,8 @@
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone_datalink
-# require discontent/discontents
+#= require discontent/discontents
+#= require concept/concepts
 
 #= require custom_ready
 
@@ -115,4 +117,55 @@ $ ->
       panel.removeClass('visible').animate 'margin-left': '-400px'
     else
       panel.addClass('visible').animate 'margin-left': '0px'
+
+  show_comments_hover()
+  activate_perfect_scrollbar()
+  post_colored_stripes()
+
+
+#show comments panel on post hover
+@show_comments_hover = ->
+  $('.ch_action').hover ->
+    ch_id = $(this).attr('data-for')
+    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
+    $('#' + ch_id).toggleClass 'active'
+    return
+
+# perfect scrollbar
+@activate_perfect_scrollbar = ->
+  $('.ps_cont.half_wheel_speed').perfectScrollbar wheelSpeed: 0.3
+  $('.ps_cont').perfectScrollbar()
+
+#  post colored stripes
+#  показ цветных полосок -> упростить
+@post_colored_stripes = ->
+  count_themes_width = (cont) ->
+    width = 0
+    $('#' + cont + ' .tag-stripes').each ->
+      width = width + $(this).outerWidth()
+      return
+    width + 100
+
+  $('.post-theme').each ->
+    curId = $(this).attr('id')
+    $(this).width count_themes_width(curId)
+    return
+  $('.post-theme').hover ->
+    curId = $(this).attr('id')
+    $('#' + curId + ' .tag-stripes').hover ->
+      $('#' + curId + ' .tag-stripes').removeClass 'active'
+      $(this).addClass 'active'
+      return
+    return
+  $('.post-theme').mouseover ->
+    $(this).addClass 'shown'
+    $(this).closest('.themes_cont').addClass 'themesShown'
+    return
+  $('.post-theme').mouseleave ->
+    $(this).removeClass 'shown'
+    $(this).closest('.themes_cont').removeClass 'themesShown'
+    return
+  $('.tag-stripes').mouseover ->
+    $(this).closest('.post-theme').width count_themes_width($(this).closest('.post-theme').attr('id'))
+    return
 

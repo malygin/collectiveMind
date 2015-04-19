@@ -20,7 +20,7 @@ class Discontent::PostsController < PostsController
 
   def index
     @posts= nil
-    if params[:aspect]
+    if params[:aspect] and params[:aspect] != '*'
       @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts
     else
       @posts = @project.discontents.by_status_for_discontent(@project)
@@ -28,11 +28,15 @@ class Discontent::PostsController < PostsController
     respond_to do |format|
 
       format.html # show.html.erb
-      format.json { render json: @posts.map { |item| {id: item.id, content: item.content, whend: item.whend, whered: item.whered,
-                                                      user: item.user.to_s, post_date: Russian::strftime(item.created_at, '%d.%m.%Y %k:%M:%S'),
-                                                      project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_rate: (item.users_pro.count + (item.number_views * 0.3)),
+      format.json { render json: @posts.map { |item| {id: item.id, content: item.content, what: item.what, whend: item.whend, whered: item.whered,
+                                                      user: item.user.to_s, post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                      project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
                                                       aspect_class: post_aspect_classes(item),
-                                                      aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} }} } }
+                                                      count_comments: item.comments.count,
+                                                      count_likes: item.users_pro.count,
+                                                      count_dislikes: item.users_against.count,
+                                                      aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} },
+                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} } } } }
 
     end
   end
