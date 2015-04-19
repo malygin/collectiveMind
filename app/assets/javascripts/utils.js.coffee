@@ -32,9 +32,9 @@
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
       $('#li_aspect_'+aspect).removeClass('active')
-      $('#li_aspect_'+aspect+' .slider-item').removeClass('active');
-      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete)').find('.slider-item').addClass('active');
-      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete)').find('a').tab('show');
+#      $('#li_aspect_'+aspect+' .slider-item').removeClass('active');
+#      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('.slider-item').addClass('active');
+      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
     else
       # else we have not more aspects, we just show greetings
       magnificPopupOpen('#popup-greetings-text')
