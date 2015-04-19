@@ -1,5 +1,7 @@
 - if @aspect.valid?
   $('#create_aspect_success').fadeIn(3000).fadeOut('slow');
+  $('#core_aspect_post_content').val('');
+  $('#core_aspect_post_short_desc').val('')
   $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
   $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
