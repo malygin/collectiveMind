@@ -1315,7 +1315,7 @@ p .add-button + .add-button {
     text-align: left;
     padding: 0 85px;
     font-size: 12px;
-    margin-bottom: 35px;
+    padding-bottom: 10px;
 }
 
 .aspect-main-block-heading {
