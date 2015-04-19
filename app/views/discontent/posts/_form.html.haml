@@ -29,8 +29,8 @@
             %ul.dropdown-menu
               - @aspects.minus_view(@aspects_for_post.nil? ? (@asp.nil? ? [] : [@asp.id]) : @aspects_for_post.pluck(:id)).each do |aspect|
                 %li
-                  %input{name: "aspect_#{aspect.id}", type: 'radio', value: '0', id: "aspect_#{aspect.id}"}/
-                  %label{for: "aspect_#{aspect.id}"}
+                  = f.radio_button :aspect_id, aspect.id
+                  %label{for: "discontent_post_aspect_id_#{aspect.id}"}
                     %span
                       %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => "#{aspect.color}"}
                     %span.text_label

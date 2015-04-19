@@ -36,7 +36,7 @@ class Discontent::PostsController < PostsController
                                                       count_likes: item.users_pro.count,
                                                       count_dislikes: item.users_against.count,
                                                       aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} },
-                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} } } } }
+                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} }} } }
 
     end
   end
@@ -62,12 +62,12 @@ class Discontent::PostsController < PostsController
   def create
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
-    if params[:discontent_post_aspects]
-      @aspect_id = params[:discontent_post_aspects].first
-      params[:discontent_post_aspects].each do |asp|
-        @post.discontent_post_aspects.build(aspect_id: asp.to_i)
-      end
-    end
+    # if params[:discontent_post_aspects]
+    #   @aspect_id = params[:discontent_post_aspects].first
+    #   params[:discontent_post_aspects].each do |asp|
+    #     @post.discontent_post_aspects.build(aspect_id: asp.to_i)
+    #   end
+    # end
     if @post.save
       current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project)
     end
@@ -100,6 +100,6 @@ class Discontent::PostsController < PostsController
   end
 
   def discontent_post_params
-    params.require(:discontent_post).permit(:content, :whend, :whered, :style)
+    params.require(:discontent_post).permit(:content, :whend, :whered, :style, :aspect_id, :what)
   end
 end
