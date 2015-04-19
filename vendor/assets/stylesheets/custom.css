@@ -1313,9 +1313,8 @@ p .add-button + .add-button {
 .aspect-main-block {
     position: relative;
     text-align: left;
-    padding: 0 85px;
+    padding: 0 85px 10px;
     font-size: 12px;
-    padding-bottom: 10px;
 }
 
 .aspect-main-block-heading {
