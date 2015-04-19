@@ -35,6 +35,7 @@ DiscontentCollectionView = Backbone.View.extend
     show_comments_hover()
     activate_perfect_scrollbar()
     post_colored_stripes()
+    colors_discontents()
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
