@@ -2,7 +2,7 @@ class Core::Knowbase::PostsController < PostsController
 
 
   def index
-    @aspects = @project.main_aspects
+    @aspects = @project.proc_main_aspects
 
 
 

@@ -1,6 +1,6 @@
 #popup-aspect.popup-window.detailed_popup.popup-w835.mfp-hide
   .popup.popup_rounded.popup_color_theme_stage2
-    .modal_title.color_me{style: "border-top-color:#{@post.color}", "data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+    .modal_title{style: "border-top-color:#{@post.color};"}
       .row
         .col-md-9
           %h4.bold.font_dark_grey
@@ -12,17 +12,17 @@
                 %span.bold
                   =@post.comments.count
                   %i.fa.fa-comment-o.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false, :remote => true}, :method => :put, id: "plus_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false}, :remote => true, :method => :put, id: "like_post_#{@post.id}") do
                   %span.bold
-                    %span(id="plus_counter_#{@post.id}" style="color:#333;")
+                    %span(id="lk_post_#{@post.id}")
                       =@post.users_pro.count
                     %i.fa.fa-thumbs-o-up.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => true, :remote => true}, :method => :put, id: "minus_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => true}, :remote => true, :method => :put, id: "dislike_post_#{@post.id}") do
                   %span.bold
-                    %span(id="minus_counter_#{@post.id}" style="color:#333;")
+                    %span(id="dlk_post_#{@post.id}")
                       =@post.users_against.count
                     %i.fa.fa-thumbs-o-down.theme_font_color
-                %span.bold
+                %small
                   =Russian::strftime(@post.created_at,'%d.%m.%Y')
 
                 - if boss? or role_expert? or stat_expert?
@@ -41,10 +41,10 @@
         .media-body.white
           .post-text
             %p
-              %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "0", "data-me-type" => "aspect"} Обоснование
+              %span.badge.badge_type1{style: "background:#{@post.color};"} Обоснование
             %p
               =@post.short_desc
-      .container.modal_content
+      .container.modal_content.ps_cont
         .row
           .col-md-12
             .divider20

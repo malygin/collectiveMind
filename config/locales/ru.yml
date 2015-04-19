@@ -200,6 +200,11 @@ ru:
       one: '1 отзыв'
       few: '%{count} отзыва'
       other: '%{count} отзывов'
+    comments:
+      one: '1 ответ'
+      few: '%{count} ответа'
+      other: '%{count} ответов'
+
   form:
     concept:
       rules: 'Правила заполнения нововведения:'

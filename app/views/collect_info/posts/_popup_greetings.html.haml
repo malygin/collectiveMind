@@ -14,6 +14,6 @@
             %span
               %i.fa.fa-comment-o
             Просмотреть аспекты
-          = link_to project_user_path(@project, current_user), class: "btn add-button" do
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), class: "btn add-button" do
             %span +
             Добавить аспект

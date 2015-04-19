@@ -47,15 +47,14 @@
     %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}", "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
       %span.bold
         %i.fa.fa-reply.fa-rotate-180.theme_font_color
--if comment.comments.present?
-  %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
-    %span
-      = comment.comments.size
-      ответа
-  .com_answers.collapse{id: "answers_#{comment.id}"}
-    .answers_subblock.level1
-      - comment.comments.each do |c|
-        = render partial: 'shared/comment', object: c
+
+%a.answers_collapse{class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
+  %span
+    = t('stages.comments', count: comment.comments.size)
+.com_answers.collapse{id: "answers_#{comment.id}"}
+  .answers_subblock.level1
+    - comment.comments.each do |c|
+      = render partial: 'shared/comment', object: c
 
 
 

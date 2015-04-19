@@ -1134,8 +1134,7 @@ p .add-button + .add-button {
     border-radius: 2px;
     box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);
     border-top: 4px solid transparent;
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 /* 1st stage tab color themes */
@@ -1323,7 +1322,6 @@ p .add-button + .add-button {
     font-size: 16px;
     font-weight: bold;
 }
-
 
 .aspect-questions-block {
 }
@@ -5209,4 +5207,23 @@ i.fa.sticker_close {
 .cab_drop .color_counter {
     width: 8px;
     min-height: 8px;
+}
+
+
+
+
+
+
+/* 4th stage cabinet media */
+.media.type_cab {
+    overflow: hidden;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.media.type_cab, .media.type_cab .media-left, .media.type_cab .media-body {
+    height: 90px;
+}
+.type_cab .media-left {
+    width: 26%;
 }

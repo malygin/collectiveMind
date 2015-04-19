@@ -365,9 +365,7 @@ $(function () {
 });
 
 /* equals active aspect and question blocks */
-var border = 4;
-var padding_top = 20;
-var padding_bottom = 30;
+
 
 equal_heights();
 

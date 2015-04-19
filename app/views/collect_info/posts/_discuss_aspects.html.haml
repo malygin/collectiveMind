@@ -13,15 +13,15 @@
               %span
                 = new_comments
         = link_to collect_info_posts_path(@project, sort_date: true) do
-          #tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip2_2{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+          #tooltip1_2.sort-2.sort_btn.sprite_doc.sprite-item1_1.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться аспекты."}
             - new_posts = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
             - if new_posts > 0
               %span
                 = new_posts
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts' do
-          %button.btn.add-button
-            %span
-              = t('techniques.aspect_posts_simple')
+        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
+          %span
+            = t('techniques.aspect_posts_simple')
+.divider10
 .divider_1_grey
 .divider10
 .stage-post-block

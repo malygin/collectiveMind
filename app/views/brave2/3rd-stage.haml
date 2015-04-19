@@ -21,9 +21,9 @@
   %body.stage3_theme
     .outer
       #slide-panel.slide-outer.visible{"data-position" => "left"}
-        %span#opener.slide-opener.icon_new.i_new_stage.rounded_2
+        %span#opener.slide-opener.icon_new.i_new_stage.rounded_2.tooltip1{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Если здесь горит красная надпись NEW, значит, где-то за пределами экрана появились новые идеи или комментарии."}
           %img{:src => "img/text-slider-opener.png"}/
-        .slide-inner.slide_stage3.white
+        #tooltip_slide_panel.slide-inner.slide_stage3.white.tooltip1{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны."}
           .ps_cont
             .divider15
             .checkox_item
@@ -334,7 +334,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "3rd-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -627,7 +627,7 @@
                     %span 25
                   .sort-2.sort_btn.sprite_doc.sprite-item3_1
                     %span 2
-                  %a{:href => "3rd-stage - cabinet.html"}
+                  %a{:href => "3rd-stage-cabinet.html"}
                     %button.btn.add-button
                       %span> +
                       Идея

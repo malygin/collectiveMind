@@ -1,4 +1,4 @@
-# @todo используемые
+# используемые
 
 #= require jquery
 #= require jquery_ujs
