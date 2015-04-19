@@ -59,9 +59,21 @@ $(document).ready(function () {
         });
     };
 
+    /* show welcome popup if stage is beginning  */
+    if ($($('.open_welcome_popup').attr('href')).length){
+        if (!$($('.open_welcome_popup').attr('href')).hasClass('shown_intro')){
+            $('.open_welcome_popup').magnificPopup('open');
+        }
+    };
+
+
     /* show hint for question on 1st stage  */
     $('.notice-button').click(function(){
         $('#hint_question_'+$(this).data('question')).removeClass('close-notice');
+    });
+    /* close hint for question on 1st stage  */
+    $('.close-button,.answer-button,.li_aspect').click(function(){
+        $('.hint').addClass("close-notice");
     });
 
     /* dropdown window */

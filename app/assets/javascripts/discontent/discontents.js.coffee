@@ -48,13 +48,17 @@ DiscontentCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
   loadByAspect: (evt)->
     evt.preventDefault();
+    #    filterValue = $(this).data('aspect')
+    #    $('#tab_aspect_posts').isotope
+    #      filter: filterValue
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
   sortByAspect: (evt)->
     evt.preventDefault();
     sortByValue = $(this).data('type')
     $('#tab_aspect_posts').isotope
-      sortBy: sortByValue
+      sortBy: sortByValue,
+      sortAscending: false
 
 # only for discontents url
 if window.location.href.indexOf("discontent/posts") > -1

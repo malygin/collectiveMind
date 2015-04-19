@@ -131,7 +131,7 @@
 
   $('body').on('click', '#comment_text_area', this.autosize)
 
-  $('body').on('click', '.expand_button', this.comments_collapse)
+#  $('body').on('click', '.expand_button', this.comments_collapse)
 
   #  check if url contain anchor
   myLink = document.location.toString();

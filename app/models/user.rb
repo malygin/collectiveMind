@@ -277,20 +277,21 @@ class User < ActiveRecord::Base
   def can_vote_for(stage, project)
     if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'collect_info') > 0
       return true
-    elsif stage == :discontent and project.status == 6 and !project.get_united_posts_for_vote(self).empty?
+    elsif stage == :discontent and project.status == 6 and project.get_free_votes_for(self, 'discontent') > 0
       return true
-    elsif stage == :concept and project.status == 8
-      disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
-      last_vote = self.concept_post_votings.by_project_votings(project).last
-      return true if last_vote.nil?
-      dispost = self.able_concept_posts_for_vote(project, disposts, last_vote)
-      if dispost
-        concept_posts = dispost.dispost_concepts.by_status(0).order('concept_posts.id')
-        count_now = self.concept_post_votings.by_project_votings(project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
-        unless concept_posts[dispost.id != last_vote.discontent_post_id ? 0 : count_now].nil?
-          return true
-        end
-      end
+    elsif stage == :concept and project.status == 8 and project.get_free_votes_for(self, 'concept') > 0
+      return true
+      # disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
+      # last_vote = self.concept_post_votings.by_project_votings(project).last
+      # return true if last_vote.nil?
+      # dispost = self.able_concept_posts_for_vote(project, disposts, last_vote)
+      # if dispost
+      #   concept_posts = dispost.dispost_concepts.by_status(0).order('concept_posts.id')
+      #   count_now = self.concept_post_votings.by_project_votings(project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
+      #   unless concept_posts[dispost.id != last_vote.discontent_post_id ? 0 : count_now].nil?
+      #     return true
+      #   end
+      # end
     elsif stage == :estimate and project.status == 11 and self.voted_plan_posts.by_project(project.id).size == 0
       return true
     end
@@ -369,7 +370,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # аспекты для голосования (важные, неважные, лишние)
+  # аспекты для голосования (необходимые, важные, неважные)
   def aspects_for_vote(project, status)
     self.voted_aspects.by_project(project.id).where(collect_info_votings: {status: status})
   end
@@ -378,6 +379,28 @@ class User < ActiveRecord::Base
   def unvote_aspects_for_vote(project)
     vote_aspects = project.main_aspects.joins(:final_votings).where(collect_info_votings: {user_id: self.id}).pluck('core_aspect_posts.id')
     project.main_aspects.where.not(id: vote_aspects)
+  end
+
+  # несовершенства для голосования (необходимые, важные, неважные)
+  def discontents_for_vote(project, status)
+    self.voted_discontent_posts.by_project(project.id).where(discontent_votings: {status: status})
+  end
+
+  # несовершенства за которые пользователь еще не проголосовал
+  def unvote_discontents_for_vote(project)
+    vote_discontents = project.discontent_for_vote.joins(:final_votings).where(discontent_votings: {user_id: self.id}).pluck('discontent_posts.id')
+    project.discontent_for_vote.where.not(id: vote_discontents)
+  end
+
+  # идеи для голосования (необходимые, важные, неважные)
+  def concepts_for_vote(project, status)
+    self.voted_concept_post.by_project(project.id).where(concept_votings: {status: status})
+  end
+
+  # идеи за которые пользователь еще не проголосовал
+  def unvote_concepts_for_vote(project)
+    vote_concepts = project.concept_ongoing_post.joins(:final_votings).where(concept_votings: {user_id: self.id}).pluck('concept_posts.id')
+    project.concept_ongoing_post.where.not(id: vote_concepts)
   end
 
   def content_for_project(project)

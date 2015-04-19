@@ -19,8 +19,8 @@ class Discontent::Post < ActiveRecord::Base
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
 
 
-  # has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
-  # has_many :voted_users, through: :final_votings, source: :user
+  has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
+  has_many :voted_users, through: :final_votings, source: :user
 
   # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
 

@@ -13,6 +13,7 @@ class Core::Project < ActiveRecord::Base
   has_many :discontent_accepted_post, -> { where status: 2 }, class_name: 'Discontent::Post'
   has_many :discontent_for_admin_post, -> { where status: 1 }, class_name: 'Discontent::Post'
   has_many :discontent_grouped_post, -> { where status: 4 }, class_name: 'Discontent::Post'
+  has_many :discontent_for_vote, -> { where status: [2, 4] }, class_name: 'Discontent::Post'
 
   has_many :discontent_groups, -> { where status: 2 }, class_name: 'Discontent::PostGroup'
 
@@ -54,8 +55,8 @@ class Core::Project < ActiveRecord::Base
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Сбор идей', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Дизайн будущего', type_stage: :novation_posts, status: [9, 10]},
-                 5 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [11]},
-                 6 => {name: 'Оценивание проектов', type_stage: :estimate_posts, status: [12, 13, 14, 15]}}.freeze
+                 5 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [11, 12]},
+                 6 => {name: 'Оценивание проектов', type_stage: :estimate_posts, status: [13, 14, 15]}}.freeze
 
   TYPE_ACCESS = {
       0 => I18n.t('form.project.opened'),
@@ -74,14 +75,18 @@ class Core::Project < ActiveRecord::Base
       collect_info: 1,
       vote_aspects: 2,
       discontent: 3,
-      vote_discontent: 4,
+      group_discontent: 4,
+      discuss_discontent: 5,
+      vote_discontent: 6,
       concept: 7,
       vote_concept: 8,
-      plan: 7,
-      vote_plan: 8,
-      estimate: 9,
-      vote_final: 10,
-      wait_decision: 11,
+      navation: 9,
+      vote_novation: 10,
+      plan: 11,
+      vote_plan: 12,
+      estimate: 13,
+      vote_final: 14,
+      wait_decision: 15,
       complete: 20
   }.freeze
 
@@ -160,6 +165,10 @@ class Core::Project < ActiveRecord::Base
     case stage
       when 'collect_info'
         self.main_aspects.size - user.voted_aspects.by_project(self.id).size
+      when 'discontent'
+        self.discontent_for_vote.size - user.voted_discontent_posts.by_project(self.id).size
+      when 'concept'
+        self.concept_ongoing_post.size - user.voted_concept_post.by_project(self.id).size
       when 'plan'
         self.stage5.to_i - user.voted_plan_posts.by_project(self.id).size
     end

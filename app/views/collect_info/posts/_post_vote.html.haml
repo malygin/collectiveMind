@@ -6,12 +6,12 @@
     .divider10
     .vote_controls.text-center
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_1{"data-vote-role" => "important", :role => "button"}
+        %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
           %i.fa.fa-exclamation
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_2{"data-vote-role" => "not_important", :role => "button"}
-          %i.fa.fa-minus
+        %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+          %i.fa.fa-check
       = link_to vote_collect_info_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_3{"data-vote-role" => "unnecessary", :role => "button"}
-          %i.fa.fa-times
+        %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+          %i.fa.fa-minus
     .divider15

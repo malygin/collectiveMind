@@ -48,13 +48,18 @@ ConceptCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
   loadByDiscontent: (evt)->
     evt.preventDefault();
+    #    filterValue = $(this).data('discontent')
+    #    $('#tab_dispost_concepts').isotope
+    #      filter: filterValue
+
     dc.fetch
       data: $.param({discontent: $(this).data('discontent')})
   sortByDiscontent: (evt)->
     evt.preventDefault();
     sortByValue = $(this).data('type')
     $('#tab_dispost_concepts').isotope
-      sortBy: sortByValue
+      sortBy: sortByValue,
+      sortAscending: false
 
 
 # only for concept url
