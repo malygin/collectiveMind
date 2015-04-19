@@ -1312,22 +1312,19 @@ p .add-button + .add-button {
 
 .aspect-main-block {
     position: relative;
-    text-align: center;
+    text-align: left;
+    padding: 0 85px;
+    font-size: 12px;
+    margin-bottom: 35px;
 }
 
 .aspect-main-block-heading {
     text-align: center;
-    margin: 0 0 30px;
+    margin-top: 20px;
     font-size: 16px;
     font-weight: bold;
 }
 
-.aspect-main-block-text {
-    text-align: left;
-    padding: 0 85px;
-    font-size: 16px;
-    margin-bottom: 35px;
-}
 
 .aspect-questions-block {
 }

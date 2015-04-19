@@ -134,6 +134,43 @@ ActiveRecord::Schema.define(version: 20150419110242) do
   add_index "concept_comments", ["post_id"], name: "index_concept_comments_on_post_id", using: :btree
   add_index "concept_comments", ["user_id"], name: "index_concept_comments_on_user_id", using: :btree
 
+  create_table "concept_essays", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "concept_final_voitings", force: :cascade do |t|
+    t.integer  "score"
+    t.integer  "forecast_task_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "concept_final_voitings", ["forecast_task_id"], name: "index_concept_final_voitings_on_forecast_task_id", using: :btree
+  add_index "concept_final_voitings", ["user_id"], name: "index_concept_final_voitings_on_user_id", using: :btree
+
+  create_table "concept_forecast_tasks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "concept_forecasts", force: :cascade do |t|
+    t.integer  "forecast_task_id"
+    t.integer  "position"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "concept_forecasts", ["forecast_task_id"], name: "index_concept_forecasts_on_forecast_task_id", using: :btree
+  add_index "concept_forecasts", ["user_id"], name: "index_concept_forecasts_on_user_id", using: :btree
+
   create_table "concept_notes", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -254,14 +291,14 @@ ActiveRecord::Schema.define(version: 20150419110242) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",                           default: 0
+    t.integer  "status",               default: 0
     t.integer  "core_aspect_id"
-    t.string   "color",                limit: 255
-    t.string   "short_name",           limit: 255
+    t.string   "color"
+    t.string   "short_name"
     t.text     "detailed_description"
   end
 
@@ -377,10 +414,10 @@ ActiveRecord::Schema.define(version: 20150419110242) do
     t.integer  "user_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.boolean  "owner",            default: false
-    t.integer  "type_user"
     t.boolean  "ready_to_concept", default: false
     t.boolean  "ready_to_plan",    default: false
+    t.boolean  "owner",            default: false
+    t.integer  "type_user"
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -530,7 +567,7 @@ ActiveRecord::Schema.define(version: 20150419110242) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym",             default: false
+    t.boolean  "anonym"
     t.text     "what"
   end
 
@@ -775,7 +812,7 @@ ActiveRecord::Schema.define(version: 20150419110242) do
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type_event",    limit: 255
-    t.string   "body",          limit: 255
+    t.text     "body"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "project_id"
@@ -807,7 +844,7 @@ ActiveRecord::Schema.define(version: 20150419110242) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
@@ -1034,15 +1071,26 @@ ActiveRecord::Schema.define(version: 20150419110242) do
     t.integer  "status"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.string   "description",  limit: 255
+    t.datetime "begin1st"
+    t.datetime "end1st"
+    t.datetime "begin1stvote"
+    t.datetime "end1stvote"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version",     limit: 255
+    t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
@@ -1092,6 +1140,63 @@ ActiveRecord::Schema.define(version: 20150419110242) do
 
   add_index "technique_stores", ["technique_list_project_id"], name: "index_technique_stores_on_technique_list_project_id", using: :btree
   add_index "technique_stores", ["user_id"], name: "index_technique_stores_on_user_id", using: :btree
+
+  create_table "test_answers", force: :cascade do |t|
+    t.text     "name"
+    t.integer  "type_answer"
+    t.integer  "test_question_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "test_answers", ["test_question_id"], name: "index_test_answers_on_test_question_id", using: :btree
+
+  create_table "test_attempts", force: :cascade do |t|
+    t.integer  "test_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "test_attempts", ["test_id"], name: "index_test_attempts_on_test_id", using: :btree
+  add_index "test_attempts", ["user_id"], name: "index_test_attempts_on_user_id", using: :btree
+
+  create_table "test_question_attempts", force: :cascade do |t|
+    t.integer  "test_attempt_id"
+    t.integer  "test_question_id"
+    t.string   "answer",           limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "test_question_attempts", ["test_attempt_id"], name: "index_test_question_attempts_on_test_attempt_id", using: :btree
+  add_index "test_question_attempts", ["test_question_id"], name: "index_test_question_attempts_on_test_question_id", using: :btree
+
+  create_table "test_questions", force: :cascade do |t|
+    t.text     "name"
+    t.integer  "type_question"
+    t.integer  "test_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "order_question"
+  end
+
+  add_index "test_questions", ["order_question"], name: "index_test_questions_on_order_question", using: :btree
+  add_index "test_questions", ["test_id"], name: "index_test_questions_on_test_id", using: :btree
+
+  create_table "tests", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.integer  "project_id"
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.text     "preview"
+  end
+
+  add_index "tests", ["begin_date"], name: "index_tests_on_begin_date", using: :btree
+  add_index "tests", ["end_date"], name: "index_tests_on_end_date", using: :btree
 
   create_table "user_checks", force: :cascade do |t|
     t.integer  "user_id"
@@ -1153,9 +1258,9 @@ ActiveRecord::Schema.define(version: 20150419110242) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",                          default: false
     t.datetime "last_seen_chat_at"
+    t.string   "skype",                  limit: 255
+    t.string   "phone",                  limit: 255
     t.string   "locale",                 limit: 255
-    t.string   "skype"
-    t.string   "phone"
     t.string   "avatar"
   end
 
