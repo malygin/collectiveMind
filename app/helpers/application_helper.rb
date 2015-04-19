@@ -363,35 +363,39 @@ module ApplicationHelper
 
   def get_comment_for_stage(stage, id)
     case stage
-      when '1'
-        CollectInfo::Comment.find(id)
-      when '2'
+      when '1', 1
+        Core::Aspect::Comment.find(id)
+      when '2', 2
         Discontent::Comment.find(id)
       when '3', 3
         Concept::Comment.find(id)
       when '4', 4
-        Plan::Comment.find(id)
+        Novation::Comment.find(id)
       when '5', 5
-        Estimate::Comment.find(id)
+        Plan::Comment.find(id)
       when '6', 6
-        Essay::Comment.find(id)
+        Estimate::Comment.find(id)
+      when '7', 7
+        Core::Essay::Comment.find(id)
     end
   end
 
   def get_stage_for_improve(c)
     case c
-      when 'CollectInfo'
+      when 'CoreAspect'
         1
       when 'Discontent'
         2
       when 'Concept'
         3
-      when 'Plan'
+      when 'Novation'
         4
-      when 'Estimate'
+      when 'Plan'
         5
-      when 'Essay'
+      when 'Estimate'
         6
+      when 'Essay'
+        7
     end
   end
 

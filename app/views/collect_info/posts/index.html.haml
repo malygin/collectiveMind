@@ -146,7 +146,7 @@
                                           = answer.content
                                         %i.fa.fa-check{style: "color:#{asp.color};"}
                                   .clearfix
-                                    = text_area_tag 'content', nil, rows: 1, placeholder: 'Ваше пояснение'
+                                    = text_area_tag 'content', nil, rows: 2, placeholder: 'Ваше пояснение'
                                   .form-group.bottom-buttons
                                     -#%a.btn.btn-outline.notice-button.color_me{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
                                     %button#send_answers.btn.answer-button.questionsCarousel-target.color_me{type: "submit", style: "background-color: #{asp.color};"} Ответить

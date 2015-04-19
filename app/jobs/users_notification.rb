@@ -14,7 +14,7 @@ class CommentNotification
       if user != current_user and user != comment.user
         current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, user_informed: user, project: project,
                                     body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                    first_id: (post.instance_of? LifeTape::Post) ? post.core_aspects.first.id : post.id, second_id: comment.id,
+                                    first_id: post.id, second_id: comment.id,
                                     personal: true, viewed: false, visible: false).save!
       end
     end
