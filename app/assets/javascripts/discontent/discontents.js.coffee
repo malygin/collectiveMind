@@ -22,8 +22,8 @@ DiscontentCollectionView = Backbone.View.extend
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
-    $('#filter').unbind('click').on('click', 'li', this.loadByAspect)
-    $('#sorter').unbind('click').on('click', 'span', this.sortByAspect)
+    $('#filter').on('click', 'li', this.loadByAspect)
+    $('#sorter').on('click', 'span', this.sortByAspect)
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
@@ -43,18 +43,16 @@ DiscontentCollectionView = Backbone.View.extend
   renderNew: (newModel)->
     this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
   removeOld: (model)->
-    # console.log this.$container
     el = $('div[data-id="id-'+model.id+'"]')
     this.$container.isotope('remove', el);
   loadByAspect: (evt)->
-    evt.preventDefault();
+#    evt.preventDefault();
     #    filterValue = $(this).data('aspect')
     #    $('#tab_aspect_posts').isotope
     #      filter: filterValue
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
-  sortByAspect: (evt)->
-    evt.preventDefault();
+  sortByAspect: ()->
     sortByValue = $(this).data('type')
     $('#tab_aspect_posts').isotope
       sortBy: sortByValue,
