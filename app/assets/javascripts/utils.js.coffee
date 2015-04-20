@@ -29,6 +29,7 @@
       $("#question_count_"+aspect).html(parseInt($("#question_count_"+aspect).html())+1)
   else
     # else we try to active next aspect
+    $('#aspect_block_'+aspect).html('<div class="divider20"></div><h4 class="block-with-left-icon pull-left"><i class="left-icon fa fa-2x fa-comments"></i>Вы ответили на все вопросы по данному аспекту.</h4><span class="pull-right question_count"></span><div class="carousel-inner"></div>')
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
       $('#li_aspect_'+aspect).removeClass('active')

@@ -113,7 +113,7 @@
 
                   .col-md-4.col-sm-4.min-col-left-padd
                     .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
-                      .aspect-questions-block.color_me{:style => "border-top-color: #{asp.color};"}
+                      .aspect-questions-block{id: "aspect_block_#{asp.id}", style: "border-top-color: #{asp.color};"}
                         .divider20
                         %h4.block-with-left-icon.pull-left
                           %i.left-icon.fa.fa-2x.fa-comments

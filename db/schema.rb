@@ -380,7 +380,6 @@ ActiveRecord::Schema.define(version: 20150420062300) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "ready_to_concept", default: false
-    t.boolean  "ready_to_plan",    default: false
     t.boolean  "owner",            default: false
     t.integer  "type_user"
   end
@@ -532,7 +531,7 @@ ActiveRecord::Schema.define(version: 20150420062300) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
     t.text     "what"
   end
 
@@ -809,7 +808,7 @@ ActiveRecord::Schema.define(version: 20150420062300) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.text     "title"
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
@@ -1157,7 +1156,6 @@ ActiveRecord::Schema.define(version: 20150420062300) do
     t.datetime "last_seen_chat_at"
     t.string   "skype",                  limit: 255
     t.string   "phone",                  limit: 255
-    t.string   "locale",                 limit: 255
     t.string   "avatar"
   end
 

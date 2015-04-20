@@ -20,7 +20,7 @@
     $('.chat-messages .item.active').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 
 
-  $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html()) + parseInt("#{@comment.post.comments.count}"))
+  $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html())+1)
 
 
 
