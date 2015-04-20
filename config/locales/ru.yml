@@ -426,6 +426,7 @@ ru:
 
       skype: "Skype"
       phone: "Телефон"
+      update: "Сохранить"
     estimate:
       negative: Оценка негативных явлений
       planwhole: Общая оценка проекта

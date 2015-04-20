@@ -1,138 +1,167 @@
-= link_to "/project/#{@project.id}" do
-  %span.fa.fa-angle-double-left
-  = t('link.back_proc')
+.col-md-4.col-md-offset-4.text-center
+  .profile
+    .profile_icon.img-circle
+      .divider10
+      - if @user.avatar.present?
+        = cl_image_tag @user.avatar
+      - else
+        = image_tag 'user.png'
+      .divider10
+      %a#profile-tab{'aria-controls' => 'profile', 'aria-expanded' => 'true', 'data-toggle' => 'tab', href: '#profile', role: 'tab'}
+        %button.btn.btn-xs.btn-danger Изменить
+    .divider10
+    %h4
+      = @user
+    #profile.tab-pane.fade{'aria-labelledby' => 'profile-tab', role: 'tabpanel'}
+      %h5 Не состоит ни в одной группе
+      = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
+        = render 'shared/notice_messages', object: f.object
+        .form-group
+          = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+        .form-group
+          = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+        .form-group
+          = f.text_field :email, class: 'form-control', placeholder: 'Email'
+        .form-group
+          = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+        .form-group
+          = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
+        .form-group
+          = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+        .form-group
+          .checkbox
+            %label
+              %input{type: 'checkbox'}/
+              Получать автоматические уведомления
+        = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
 
-%section.widget
-  .body
-    .row
-      .col-md-4
-        - if @user.avatar.present?
-          = cl_image_tag @user.avatar
-        - else
-          = image_tag 'no-ava.png', style: 'margin: auto;width:295px;height:250px;'
-        %br
-        - if not @user.boss? or @project.uniq_proc?
-          %h3
-            = t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
-          %br
-          - @awards.each do |a|
-            = image_tag("awards/#{a.url}_70_70.png", title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
-      .col-md-8
-        .row
-          .col-md-9
-            %b
-              = link_to @user, '#'
-            %br
-            %span.text-muted
-              = t('show.user.not_group')
-            %br
-            -#- if admin?
-            -#  %h4(style='font-weight: bold;')
-            -#    %span.color-green.pull-left
-            -#      - unless @user.boss?
-            -#        = link_to club_toggle_user_path(@project, @user), remote: true, method: :put, style: 'text-decoration:none;', id: "club_status_#{@user.id}" do
-            -#          = club_status_show_user(@user)
-            -#      %a(href='#' id="userscore_#{@user.id}" class='userscore' data-pk='1' data-remote='true' data-resource='post' data-type='text' data-name='score' data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
-            -#        = @user.score
-            -#- else
-            -#  %h4(style='font-weight: bold;')
-            -#    %span.color-green.pull-left
-            -#      = club_status_show_user(@user)
-            -#      - unless @user.user_project_scores(@project.id).nil?
-            -#        = @user.user_project_scores(@project.id).score
-          .col-md-3
-
-        - unless @user.user_project_scores(@project.id).nil?
-          .row
-            .col-md-7
-              = t('show.user.generator')
-            .col-md-5
-              %span.pull-right
-                %span.text-muted
-                  = @user.user_project_scores(@project.id).score_g
-
-          .row
-            .col-md-7
-              = t('show.user.analyst')
-            .col-md-5
-              %span.pull-right
-                %span.text-muted
-                  = @user.user_project_scores(@project.id).score_a
-
-          .row
-            .col-md-7
-              =t('show.user.voter')
-            .col-md-5
-              %span.pull-right
-                %span.text-muted
-                  = @user.user_project_scores(@project.id).score_o
-
-          %hr
-          .row
-            .col-md-7
-            .col-md-5
-              %span.pull-right
-                = t('show.user.all_score')
-                %span.text-muted
-                  = @user.user_project_scores(@project.id).score
-
-        %br
-        %br
-        %section.widget.widget-tabs
-          %header
-            %ul.nav.nav-tabs
-              %li.active
-                %a(href='#active_line' data-toggle='tab')=t('show.user.activity')
-              %li
-                %a(href='#ideas' data-toggle='tab')="#{t('show.user.aspects')} (#{@user.core_aspects.by_project(@project.id).count})"
-              %li
-                %a(href='#imperfections' id='tab-imperfections' data-toggle='tab')="#{t('show.user.discontents')} (#{@user.discontent_posts.by_project(@project.id).count})"
-              %li
-                %a(href='#images' data-toggle='tab')="#{t('show.user.concepts')} (#{@user.concept_posts.by_project(@project.id).count})"
-
-          .body.tab-content
-            #active_line.tab-pane.fade.in.active
-              %br
-              - unless @journals.nil?
-                - @journals.each do |journal|
-                  - if journal_parser(journal, @project.id)
-                    = link_to journal.user, user_path(@project,journal.user)
-                    = journal_parser(journal, @project.id).html_safe
-                    %small
-                      = Russian::strftime(journal.created_at,'%d %B %k:%M:%S ')
-                    %br
-
-            #ideas.tab-pane.fade.in
-              %br
-              = render @user.core_aspects.by_project(@project.id)
-
-            #imperfections.tab-pane.fade.in
-              %br
-              %ul.discontent-list
-                -#= render partial: 'discontent/posts/post_short', collection: @user.discontent_posts.by_project_and_not_anonym(@project.id)
-                - @user.discontent_posts.by_project_and_not_anonym(@project.id).each do |dp|
-                  .panel.panel-success
-                    .panel-body.nov-list
-                      %span.label.label-success что?
-                      = dp.content
-                      %br
-                      %span.label.label-success где?
-                      = dp.whered
-                      %br
-                      %span.label.label-success когда?
-                      = dp.whend
-                      %br
-                      = link_to t('link.more'), discontent_post_path(@project, dp)
-                      = render 'shared/post_social_bar2', post: dp
-
-            #images.tab-pane.fade.in
-              %br
-              - @user.concept_posts.by_project(@project.id).each do |cp|
-                .panel.panel-success
-                  .panel-body.nov-list
-                    -if cp.title.present?
-                      = cp.title
-                    -else
-                      Без названия
-                    = link_to t('link.more'), concept_post_path(@project, cp)
-                    = render 'shared/post_social_bar2', post:cp
+%div
+  -#%section.widget
+  -#  .body
+  -#    .row
+  -#      .col-md-4
+  -#        - if not @user.boss? or @project.uniq_proc?
+  -#          %h3
+  -#            = t('show.user.award', num: @user.awards.for_project(@project).count, all: 22)
+  -#          %br
+  -#          - @awards.each do |a|
+  -#            = image_tag("awards/#{a.url}_70_70.png", title: a.name, class: "#{'disabled_award' if not @user.awards.for_project(@project).include? a}")
+  -#      .col-md-8
+  -#        .row
+  -#          .col-md-9
+  -#            %b
+  -#              = link_to @user, '#'
+  -#            %br
+  -#            %span.text-muted
+  -#              = t('show.user.not_group')
+  -#            %br
+  -#            -#- if admin?
+  -#            -#  %h4(style='font-weight: bold;')
+  -#            -#    %span.color-green.pull-left
+  -#            -#      - unless @user.boss?
+  -#            -#        = link_to club_toggle_user_path(@project, @user), remote: true, method: :put, style: 'text-decoration:none;', id: "club_status_#{@user.id}" do
+  -#            -#          = club_status_show_user(@user)
+  -#            -#      %a(href='#' id="userscore_#{@user.id}" class='userscore' data-pk='1' data-remote='true' data-resource='post' data-type='text' data-name='score' data-url="/project/#{@project.id}/users/#{@user.id}/update_score")
+  -#            -#        = @user.score
+  -#            -#- else
+  -#            -#  %h4(style='font-weight: bold;')
+  -#            -#    %span.color-green.pull-left
+  -#            -#      = club_status_show_user(@user)
+  -#            -#      - unless @user.user_project_scores(@project.id).nil?
+  -#            -#        = @user.user_project_scores(@project.id).score
+  -#          .col-md-3
+  -#
+  -#        - unless @user.user_project_scores(@project.id).nil?
+  -#          .row
+  -#            .col-md-7
+  -#              = t('show.user.generator')
+  -#            .col-md-5
+  -#              %span.pull-right
+  -#                %span.text-muted
+  -#                  = @user.user_project_scores(@project.id).score_g
+  -#
+  -#          .row
+  -#            .col-md-7
+  -#              = t('show.user.analyst')
+  -#            .col-md-5
+  -#              %span.pull-right
+  -#                %span.text-muted
+  -#                  = @user.user_project_scores(@project.id).score_a
+  -#
+  -#          .row
+  -#            .col-md-7
+  -#              =t('show.user.voter')
+  -#            .col-md-5
+  -#              %span.pull-right
+  -#                %span.text-muted
+  -#                  = @user.user_project_scores(@project.id).score_o
+  -#
+  -#          %hr
+  -#          .row
+  -#            .col-md-7
+  -#            .col-md-5
+  -#              %span.pull-right
+  -#                = t('show.user.all_score')
+  -#                %span.text-muted
+  -#                  = @user.user_project_scores(@project.id).score
+  -#
+  -#        %br
+  -#        %br
+  -#        %section.widget.widget-tabs
+  -#          %header
+  -#            %ul.nav.nav-tabs
+  -#              %li.active
+  -#                %a(href='#active_line' data-toggle='tab')=t('show.user.activity')
+  -#              %li
+  -#                %a(href='#ideas' data-toggle='tab')="#{t('show.user.aspects')} (#{@user.core_aspects.by_project(@project.id).count})"
+  -#              %li
+  -#                %a(href='#imperfections' id='tab-imperfections' data-toggle='tab')="#{t('show.user.discontents')} (#{@user.discontent_posts.by_project(@project.id).count})"
+  -#              %li
+  -#                %a(href='#images' data-toggle='tab')="#{t('show.user.concepts')} (#{@user.concept_posts.by_project(@project.id).count})"
+  -#
+  -#          .body.tab-content
+  -#            #active_line.tab-pane.fade.in.active
+  -#              %br
+  -#              - unless @journals.nil?
+  -#                - @journals.each do |journal|
+  -#                  - if journal_parser(journal, @project.id)
+  -#                    = link_to journal.user, user_path(@project,journal.user)
+  -#                    = journal_parser(journal, @project.id).html_safe
+  -#                    %small
+  -#                      = Russian::strftime(journal.created_at,'%d %B %k:%M:%S ')
+  -#                    %br
+  -#
+  -#            #ideas.tab-pane.fade.in
+  -#              %br
+  -#              = render @user.core_aspects.by_project(@project.id)
+  -#
+  -#            #imperfections.tab-pane.fade.in
+  -#              %br
+  -#              %ul.discontent-list
+  -#                -#= render partial: 'discontent/posts/post_short', collection: @user.discontent_posts.by_project_and_not_anonym(@project.id)
+  -#                - @user.discontent_posts.by_project_and_not_anonym(@project.id).each do |dp|
+  -#                  .panel.panel-success
+  -#                    .panel-body.nov-list
+  -#                      %span.label.label-success что?
+  -#                      = dp.content
+  -#                      %br
+  -#                      %span.label.label-success где?
+  -#                      = dp.whered
+  -#                      %br
+  -#                      %span.label.label-success когда?
+  -#                      = dp.whend
+  -#                      %br
+  -#                      = link_to t('link.more'), discontent_post_path(@project, dp)
+  -#                      = render 'shared/post_social_bar2', post: dp
+  -#
+  -#            #images.tab-pane.fade.in
+  -#              %br
+  -#              - @user.concept_posts.by_project(@project.id).each do |cp|
+  -#                .panel.panel-success
+  -#                  .panel-body.nov-list
+  -#                    -if cp.title.present?
+  -#                      = cp.title
+  -#                    -else
+  -#                      Без названия
+  -#                    = link_to t('link.more'), concept_post_path(@project, cp)
+  -#                    = render 'shared/post_social_bar2', post:cp

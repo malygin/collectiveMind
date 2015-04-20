@@ -393,6 +393,7 @@ en:
 
       skype: "Skype"
       phone: "Phone"
+      update: "Save"
     estimate:
       negative: Оценка негативных явлений
       planwhole: Общая оценка проекта
