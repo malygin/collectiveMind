@@ -6,9 +6,9 @@
           = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.current_stage_num}" do
             = "#{@project.current_stage_num} СТАДИЯ: #{@project.current_stage_values[:name]}"
         %i.fa.fa-circle.fa-lg.font_lighter_grey.open_sticker{'data-for' => '#sticker1'}
-        #sticker1.sticker.rounded_3.font_white
-          Тут будет текст, объясняющий, что надо делать на этом экране
-          %i.sticker_close.fa.fa-times.fa-lg{'data-for' => '#sticker1'}
+        -##sticker1.sticker.rounded_3.font_white
+        -#  Тут будет текст, объясняющий, что надо делать на этом экране
+        -#  %i.sticker_close.fa.fa-times.fa-lg{'data-for' => '#sticker1'}
 - else
   .col-md-8.col_padding_right_3
     #tooltip1_1.tooltip1.border_grey.rounded_3.stages_block.tooltip1{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.'}
