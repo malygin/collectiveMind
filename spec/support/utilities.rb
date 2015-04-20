@@ -5,7 +5,7 @@ def sign_in user
   visit new_user_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: 'pascal2003'
-  click_button 'Signin'
+  click_button 'sign_in'
 end
 
 def sign_out

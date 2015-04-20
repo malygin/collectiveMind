@@ -1,7 +1,12 @@
 !!! 5
 %html(lang="en")
   %head
-    =render 'meta'
+    = render 'meta'
+-# До тех времен, пока не сделаем нормальные лейауты (а лучше один)
+- if controller_name == 'sessions'
+  %body
+    = yield
+- else
   %body.background.landing
     .container
       %header.page-header
@@ -23,5 +28,3 @@
     \==================================================
   / Placed at the end of the document so the pages load faster
   = javascript_include_tag 'application'
-
-
