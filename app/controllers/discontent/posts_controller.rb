@@ -29,7 +29,7 @@ class Discontent::PostsController < PostsController
 
       format.html # show.html.erb
       format.json { render json: @posts.map { |item| {id: item.id, content: item.content, what: item.what, whend: item.whend, whered: item.whered,
-                                                      user: item.user.to_s, post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                      user: item.user.to_s, user_avatar: ActionController::Base.helpers.asset_path('no-ava.png') ,post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
                                                       project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
                                                       aspect_class: post_aspect_classes(item),
                                                       count_comments: item.comments.count,

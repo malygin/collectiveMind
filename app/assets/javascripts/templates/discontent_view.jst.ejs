@@ -4,7 +4,7 @@
         <div class="post-body no_post_head ch_action" data-for="post_ch<%= id %>">
             <div class="media">
                 <div class="media-left text-center gradient post-poster">
-                    <img class="img-circle img50" src="/assets/no-ava-d90d3c57ab2b2aa06d4aeeb739c1c75b.png" alt="No ava">
+                    <img class="img-circle img50" src="<%= user_avatar %>" alt="No ava">
                     <p class="poster-name">
                         <%= user %>
                     </p>
@@ -30,6 +30,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <% if(comments.length > 0) { %>>
                     <div id="post_ch<%= id %>" class="post_cont_hover white">
                         <div class="wrapper ps_cont half_wheel_speed">
                             <div class="post_cont_inner">
@@ -47,6 +48,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
