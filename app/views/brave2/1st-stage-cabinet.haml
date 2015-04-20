@@ -270,7 +270,7 @@
                   %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
                     1 СТАДИЯ: ВВЕДЕНИЕ В
                     ПРОЦЕДУРУ
-                %i.fa.fa-circle.fa-lg.font_lighter_grey.open_sticker{"data-for" => "#sticker1"}
+                %i.fa.fa-info-circle.fa-lg.font_color_stage1.open_sticker{"data-for" => "#sticker1"}
                 #sticker1.sticker.rounded_3.font_white
                   Тут будет текст, объясняющий, что надо делать на этом экране
                   %i.sticker_close.fa.fa-times.fa-lg{"data-for" => "#sticker1"}
@@ -343,6 +343,15 @@
                             .divider10
                             %p
                               Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+          / Уведомления о действии
+          .cab_notice.white
+            %span.success
+              Вы успешно создали аспект
+          .divider15
+          .cab_notice.white
+            %span.fail
+              Сохранение не удалось
+          / 
       / Main Block ends
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded
