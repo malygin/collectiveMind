@@ -1,7 +1,7 @@
 class UsersController < ProjectsController
   before_action :set_user
-  before_filter :correct_user, only: [:edit, :update]
-  before_filter :journal_data, only: [:index, :new, :edit, :show, :users_rc, :journal_clear, :edit_notice]
+  before_filter :correct_user, only: [:update]
+  before_filter :journal_data, only: [:index, :new, :show, :users_rc, :journal_clear, :edit_notice]
   before_filter :boss_authenticate, only: [:users_rc]
   before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :club_toggle, :update_score]
   before_filter :have_project_access
@@ -27,10 +27,6 @@ class UsersController < ProjectsController
     else
       @journals = Journal.events_for_user_show @project.id, @user.id, 30
     end
-  end
-
-  def edit
-    add_breadcrumb "Редактирование профиля: #{@user}", edit_user_path(@project, @user)
   end
 
   def update

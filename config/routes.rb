@@ -135,7 +135,7 @@ CollectiveMind::Application.routes.draw do
       resources :posts, controller: 'core/knowbase/posts'
     end
 
-    resources :users do
+    resources :users, except: [:edit] do
       collection do
         get :show_top
         get :users_rc
