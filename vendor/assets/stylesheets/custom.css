@@ -376,6 +376,9 @@ textarea:focus {
 .popup_rounded {
     border-radius: 5px;
 }
+.popup.transparent {
+    box-shadow: none;
+}
 
 
 /* first stage slider */
@@ -1312,18 +1315,39 @@ p .add-button + .add-button {
 .aspect-main-block {
     position: relative;
     text-align: left;
-    padding: 0 85px 10px;
+    padding: 20px 35px 10px;
     font-size: 12px;
+    color: #797979;
 }
 
-.aspect-main-block-heading {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 16px;
+.aspect-main-block p {
+    line-height: 20px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.aspect-main-block ul {
+    line-height: 20px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.aspect-main-block p + h5, .aspect-main-block p + h6 {
+    margin-top: 25px;
+}
+
+.aspect-main-block h5 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.aspect-main-block h6 {
+    font-size: 15px;
     font-weight: bold;
 }
 
 .aspect-questions-block {
+    padding: 20px 0 10px;
 }
 .aspect-questions-block h4 {
     margin: 0 50px 0 60px;
@@ -1448,14 +1472,15 @@ p .add-button + .add-button {
 .c1-item-inner {
     position: relative;
     display: block;
-    line-height: 14px;
-    padding: 10px 20px;
+    line-height: 16px;
+    padding: 8px 20px 10px;
     max-width: 270px;
     border-radius: 3px;
     border-top: 3px solid transparent;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
     background: #fff;
     color: #777;
+    font-size: 13px;
 }
 
 .c1-item-inner.color-theme-1 {
@@ -1561,7 +1586,6 @@ p .add-button + .add-button {
 }
 .instruments-block button {
     white-space: normal;
-    text-align: left;
 }
 
 
@@ -5012,6 +5036,9 @@ ul.vote_nav>li>a {
 .stage3_theme .tabs_type_1 > li.active > a:before {
     border-left-color: #c292bd;
 }
+.stage4_theme .tabs_type_1 > li.active > a:before {
+    border-left-color: #8e8bc7;
+}
 .tabs_type_1 > li > a:hover, .tabs_type_1 > li > a:focus {
     color: #fff;
 }
@@ -5047,6 +5074,14 @@ ul.vote_nav>li>a {
 .collapser_type1.not_full_width i {
     margin-left: 5px;
     position: inherit;
+}
+.collapser_type2 {
+    display: block;
+    position: relative;
+    padding: 7px 9px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    border-radius: 2px;
 }
 .check_push_cont {
     padding-bottom: 15px;
@@ -5214,6 +5249,46 @@ i.fa.sticker_close {
 
 
 
+/* 4 */
+.cont_heading {
+    margin: 0;
+}
+.stage4_theme .cont_heading, .stage4_theme .collapser_type2, .stage4_theme .mod_col_top {
+    background: #d5d6ea;
+}
+.stage4_theme .cont_heading {
+    margin-left: -20px;
+    margin-right: -20px;
+    font-size: 17px;
+    padding: 15px 20px;
+}
+.cab_modal_opnr {
+    display: inline-block;
+    padding-left: 25px;
+    line-height: 27px;
+    font-size: 13px;
+    vertical-align: middle;
+    background: image-url('icon-cab-bulb.png') no-repeat left top;
+}
+.popup .left_col, .popup .right_col {
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);
+}
+.mod_col_top {
+    min-height: 50px;
+    border-bottom: 1px solid #cccad5;
+}
+.items {
+    height: 560px;
+    margin: 15px 10px 15px 15px;
+    padding-right: 20px;
+}
+.items .ps-scrollbar-y-rail {
+    margin: 0;
+}
+
+
+
 
 /* 4th stage cabinet media */
 .media.type_cab {
@@ -5221,10 +5296,98 @@ i.fa.sticker_close {
     border: 1px solid #e1e1e1;
     border-radius: 4px;
     margin-top: 10px;
+    box-shadow: 0 1px 1px 0px rgba(0,0,0,0.4);
 }
 .media.type_cab, .media.type_cab .media-left, .media.type_cab .media-body {
     height: 90px;
 }
 .type_cab .media-left {
-    width: 26%;
+    width: 33%;
+    padding-top: 15px;
+}
+.type_cab .cab_folder {
+    position: relative;
+    height: 50px;
+}
+.type_cab .cab_folder.back1 {
+    background: image-url('icon-cab-folder.png') no-repeat center top;
+}
+.type_cab .cab_folder.back2 {
+    background: image-url('icon-cab-folder_.png') no-repeat center top;
+}
+.type_cab .cab_folder .percentage {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: block;
+    padding-left: 5px;
+}
+.type_cab .media-body {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+.type_cab .media-body h6 {
+    display: table-cell;
+    height: 56px;
+    vertical-align: middle;
+}
+.type_cab .media-bottom {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    line-height: 36px;
+    font-size: 12px;
+}
+.type_cab .media-bottom.ideas {
+    padding-left: 30px;
+    background: image-url('icon-cab-bulb.png') no-repeat left top;
+}
+.type_cab .media-bottom .fa {
+    position: absolute;
+    right: 0px;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+/* cabinet notices */
+.cab_notice {
+    width: 370px;
+    position: relative;
+    line-height: 93px;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 0 3px 3px 1px rgba(0,0,0,0.3);
+}
+.cabnot_close {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    cursor: pointer;
+    color: #828282;
+}
+.cabnot_close:hover {
+    color: #b5b5b5;
+}
+.cab_notice span {
+    display: inline-block;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 20px;
+    font-size: 13px;
+    color: #666;
+}
+.cab_notice span.success {
+    background: image-url('smile-yes.png') no-repeat left center ;
+}
+.cab_notice span.fail {
+    background: image-url('smile-no.png') no-repeat left center ;
 }

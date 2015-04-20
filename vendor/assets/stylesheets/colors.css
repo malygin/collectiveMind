@@ -93,6 +93,10 @@
     background: #bfc122 !important
 }
 
+.transparent {
+    background: transparent !important;
+}
+
 
 /* fonts */
 /* font colors for stages */
