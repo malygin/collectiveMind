@@ -635,3 +635,13 @@ $('.sticker_close').click(function(){
     var stick_id = $(this).attr('data-for');
     close_sticker(stick_id);
 });
+
+
+
+/* append close button */
+$(document).ready(function () {
+    $('.cab_notice').append('<i class="fa fa-times cabnot_close"></i>');
+    $('.cabnot_close').click(function(){
+        $(this).closest('.cab_notice').hide();
+    });
+});
