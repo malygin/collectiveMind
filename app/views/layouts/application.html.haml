@@ -69,25 +69,27 @@
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
                 %li{role: 'presentation'}
-                  = link_to t('menu.profile_edit'), edit_user_path(@project, current_user), id: 'go_to_edit_profile'
+                  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
                 %li{role: 'presentation'}
                   %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
                     =t('menu.sign_out')
 
       / Top Bar ends
-      .subhead
-        .container
-          %h4.font_white
-            Тема процедуры:
-            = @project.name
-        - unless cabinet?
-          %button#tooltip_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
-            %i.fa.fa-lightbulb-o
-            Открыть подсказки
+      -# В верстке профиля нет ничего про процедуру
+      - unless controller_name == 'users'
+        .subhead
+          .container
+            %h4.font_white
+              Тема процедуры:
+              = @project.name
+          - unless cabinet?
+            %button#tooltip_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
+              %i.fa.fa-lightbulb-o
+              Открыть подсказки
 
-      .container
-        .row
-          = render partial: 'stages'
+        .container
+          .row
+            = render partial: 'stages'
       / Main Block starts
       .main-block
         .container
