@@ -3,7 +3,7 @@
     .profile_icon.img-circle
       .divider10
       - if @user.avatar.present?
-        = cl_image_tag @user.avatar
+        = cl_image_tag @user.avatar, width: 79, height: 79, crop: :limit
       - else
         = image_tag 'user.png'
       .divider10

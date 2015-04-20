@@ -31,7 +31,7 @@ class UsersController < ProjectsController
 
   def update
     # params[:user].delete(:password) if params[:user][:password].blank?
-    img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars')
+    img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
     if @user.update_attributes(user_params.merge(avatar: img['public_id']))
       flash[:success] = 'Профиль обновлен'
       redirect_to user_path(@project, @user)
