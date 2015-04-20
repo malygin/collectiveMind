@@ -8,20 +8,19 @@
       .content_window.white
         .divider25
         #notice_messages
-        - if params[:type_mechanic] == 'simple'
-          .btn-group.cab_drop
-            %a.dropdown-toggle{'data-toggle' => 'dropdown'}
-              %span
-                = t('form.discontent.select_aspect')
-            %ul.dropdown-menu
-              - @aspects.each do |aspect|
-                %li
-                  = f.radio_button :aspect_id, aspect.id
-                  %label{for: "discontent_post_aspect_id_#{aspect.id}"}
-                    %span
-                      %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => "#{aspect.color}"}
-                    %span.text_label
-                      = aspect.content
+        .btn-group.cab_drop
+          %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+            %span
+              = t('form.discontent.select_aspect')
+          %ul.dropdown-menu
+            - @aspects.each do |aspect|
+              %li
+                = f.radio_button :aspect_id, aspect.id
+                %label{for: "discontent_post_aspect_id_#{aspect.id}"}
+                  %span
+                    %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                  %span.text_label
+                    = aspect.content
 
         .divider25
         %p
