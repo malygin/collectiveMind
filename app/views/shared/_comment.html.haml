@@ -48,7 +48,7 @@
       %span.bold
         %i.fa.fa-reply.fa-rotate-180.theme_font_color
 
-%a.answers_collapse{class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
+%a.answers_collapse{id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
   %span
     = t('stages.comments', count: comment.comments.size)
 .com_answers.collapse{id: "answers_#{comment.id}"}

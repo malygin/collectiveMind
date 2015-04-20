@@ -11,6 +11,8 @@ class CollectInfo::Question < ActiveRecord::Base
   scope :by_status, ->(status) { where(collect_info_questions: {status: status}) }
   scope :by_complete, ->(ids) { where.not(collect_info_questions: {id: ids}) }
 
+  scope :by_type, ->(type) { where(collect_info_questions: {type_stage: type}) }
+
   validates :content, :project_id, presence: true
   default_scope { order :id }
 end

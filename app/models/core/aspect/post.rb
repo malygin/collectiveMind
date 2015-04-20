@@ -48,9 +48,9 @@ class Core::Aspect::Post < ActiveRecord::Base
   }
 
   # выборка всех вопросов к аспекту на которые пользователь еще не ответил
-  def missed_questions(user)
-    questions_answered = self.questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).pluck('collect_info_questions.id')
-    self.questions.where.not(id: questions_answered)
+  def missed_questions(user, type_questions)
+    questions_answered = self.questions.by_type(type_questions).joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).pluck('collect_info_questions.id')
+    self.questions.by_type(type_questions).where.not(id: questions_answered)
   end
 
   def voted(user)

@@ -71,9 +71,9 @@ class Core::Project < ActiveRecord::Base
   }.freeze
 
   STATUS_CODES = {
-      prepare: 0,
-      collect_info: 1,
-      vote_aspects: 2,
+      prepare: 0, # 1 round questions
+      collect_info: 1, # 2 round questions
+      vote_aspects: 2, # vote
       discontent: 3,
       group_discontent: 4,
       discuss_discontent: 5,
@@ -102,6 +102,11 @@ class Core::Project < ActiveRecord::Base
     define_method :"stage_#{method_name}?" do
       status == STATUS_CODES[method_name]
     end
+  end
+
+  # тип вопроса в зависимости от этапа
+  def type_for_questions
+    [STATUS_CODES[:prepare],STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
   end
 
   def current_stage

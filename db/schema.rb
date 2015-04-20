@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419133756) do
+ActiveRecord::Schema.define(version: 20150420062300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150419133756) do
     t.integer  "status"
     t.text     "hint"
     t.integer  "aspect_id"
+    t.integer  "type_stage"
   end
 
   add_index "collect_info_questions", ["created_at"], name: "index_collect_info_questions_on_created_at", using: :btree
@@ -254,14 +255,14 @@ ActiveRecord::Schema.define(version: 20150419133756) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",               default: 0
+    t.integer  "status",                           default: 0
     t.integer  "core_aspect_id"
-    t.string   "color"
-    t.string   "short_name"
+    t.string   "color",                limit: 255
+    t.string   "short_name",           limit: 255
     t.text     "detailed_description"
     t.boolean  "approve_status"
   end
@@ -378,10 +379,10 @@ ActiveRecord::Schema.define(version: 20150419133756) do
     t.integer  "user_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.boolean  "ready_to_concept", default: false
-    t.boolean  "ready_to_plan",    default: false
     t.boolean  "owner",            default: false
     t.integer  "type_user"
+    t.boolean  "ready_to_concept", default: false
+    t.boolean  "ready_to_plan",    default: false
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
@@ -531,7 +532,7 @@ ActiveRecord::Schema.define(version: 20150419133756) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
     t.text     "what"
   end
 
@@ -776,7 +777,7 @@ ActiveRecord::Schema.define(version: 20150419133756) do
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type_event",    limit: 255
-    t.text     "body"
+    t.string   "body",          limit: 255
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "project_id"
@@ -808,7 +809,7 @@ ActiveRecord::Schema.define(version: 20150419133756) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
@@ -1036,14 +1037,14 @@ ActiveRecord::Schema.define(version: 20150419133756) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version"
+    t.string   "version",     limit: 255
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
@@ -1154,9 +1155,9 @@ ActiveRecord::Schema.define(version: 20150419133756) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",                          default: false
     t.datetime "last_seen_chat_at"
-    t.string   "skype",                  limit: 255
-    t.string   "phone",                  limit: 255
     t.string   "locale",                 limit: 255
+    t.string   "skype"
+    t.string   "phone"
     t.string   "avatar"
   end
 

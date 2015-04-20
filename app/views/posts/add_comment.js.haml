@@ -4,8 +4,12 @@
     $('#reply_comment_#{@comment_answer.id}').toggleClass('reply-comment cancel-reply');
     if($('#answers_#{@comment_parent.id}').length){
     $('#answers_#{@comment_parent.id} .answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    if(!$('#answers_collapse_#{@comment_parent.id}').hasClass('opened')){
+    $('#answers_#{@comment_parent.id}').collapse('show');
+    }
+    $('#answers_collapse_#{@comment_parent.id} span').html("#{t('stages.comments', count: @comment_parent.comments.size)}");
     } else {
-    var answers = $('<a class="answers_collapse theme_font_color opened" data-toggle="collapse" href="#answers_#{@comment_parent.id}" aria-expanded="false"><span>1 ответ</span></a>');
+    var answers = $('<a id="answers_collapse_#{@comment_parent.id}" class="answers_collapse theme_font_color opened" data-toggle="collapse" href="#answers_#{@comment_parent.id}" aria-expanded="false"><span>1 ответ</span></a>');
     var answers2 = $('<div class="com_answers collapse in" id="answers_#{@comment_parent.id}"><div class="answers_subblock level1"></div></div>');
     $('#comment#{@comment_parent.id}').after(answers);
     answers.after(answers2);
