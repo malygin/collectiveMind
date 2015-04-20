@@ -47,14 +47,18 @@ class CollectInfo::PostsController < PostsController
     @correct_answers = @question.answers.by_correct.pluck("collect_info_answers.id")
     if params[:answers]
       #проверка правильности набора ответов
-      # answers = params[:answers].collect { |a| a.to_i }
-      # @wrong = true if (answers - @correct_answers).present? or (@correct_answers - answers).present?
+      if @project.type_for_questions == 1
+        answers = params[:answers].collect { |a| a.to_i }
+        @wrong = true if (answers - @correct_answers).present? or (@correct_answers - answers).present?
+      end
       unless @wrong
-        current_user.user_answers.create(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id, content: params[:content]).save!
+        unless current_user.user_answers.where(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id).present?
+          current_user.user_answers.create(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id, content: params[:content]).save!
+        end
         # подсчет данных для прогресс-бара по вопросам
-        count_all = CollectInfo::Question.joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count
-        count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:aspect).where('core_aspect_posts.project_id' => @project).where(user: current_user).count
-        @questions_progress = (count_answered.to_f/count_all.to_f) * 100
+        count_all = CollectInfo::Question.by_type(@project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count
+        count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: {project_id: @project, type_stage: @project.type_for_questions} ).where(collect_info_user_answers: {user_id: current_user}).count
+        @questions_progress = count_all == 0 ? 0 : (count_answered.to_f/count_all.to_f) * 100
       end
     end
   end

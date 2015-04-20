@@ -130,14 +130,15 @@
                                 %span.left-icon.pull-right
                                   ="#{ind + 1}."
                                 = question.content
-                              -#.hint.close-notice{id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
-                              -#  = question.hint
-                              -#  %span.close-button
-                              -#    %i.fa.fa-times-circle-o
-                              -#.hint.close-notice{id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
-                              -#  Ответ неправильный, воспользуейтесь подсказкой
-                              -#  %span.close-button
-                              -#    %i.fa.fa-times-circle-o
+                              -if @project.type_for_questions == 1
+                                .hint.close-notice{id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
+                                  = question.hint
+                                  %span.close-button
+                                    %i.fa.fa-times-circle-o
+                                .hint.close-notice{id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
+                                  Ответ неправильный, воспользуейтесь подсказкой
+                                  %span.close-button
+                                    %i.fa.fa-times-circle-o
                               = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
                                 .btn-group#answers_buttons(data-toggle="buttons")
                                   - question.answers.each do |answer|
@@ -146,11 +147,11 @@
                                         = check_box_tag 'answers[]', answer.id
                                         = answer.content
                                       %i.fa.fa-check{style: "color:#{asp.color};"}
-                                -#.clearfix
                                 = text_area_tag 'content', nil, rows: 2, placeholder: 'Ваше пояснение', class: "form-control"
                                 .clearfix
                                 .form-group.bottom-buttons
-                                  -#%a.btn.btn-outline.notice-button.color_me{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                                  -if @project.type_for_questions == 1
+                                    %a.btn.btn-outline.notice-button.color_me{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
             - else
               - if asp.knowbase_posts.size > 1
