@@ -52,6 +52,29 @@
   url = window.location.href.match(/\d+/g)
   return url[url.length-1]
 
+
+@parse_my_journal_links = ()->
+  #  if window.location.href.indexOf("discontent/posts") > -1
+  #  $('#comment_content_' + link.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
+  link = document.location.toString();
+  if link.match(/project\/(\d+)/)
+    project_id = link.match(/project\/(\d+)/)[1]
+  if link.match(/jr_post=(\d+)/)
+    post_id = link.match(/jr_post=(\d+)/)[1]
+  if link.match(/jr_comment=(\d+)/)
+    comment_id = link.match(/jr_comment=(\d+)/)[1]
+  if link.match(/project\/(\d+)\/(\w+)\/posts/)
+    stage = link.match(/project\/(\d+)\/(\w+)\/posts/)[2]
+    if stage == 'collect_info'
+      stage = 'aspect'
+
+  if project_id and post_id and stage
+    $.ajax
+      url: "/project/#{project_id}/#{stage}/posts/#{post_id}"
+      type: "get"
+      dataType: "script"
+
+
 # чтение отдельной новости эксперта в попапе
 @expert_news = ->
   this.expert_news_read = ->

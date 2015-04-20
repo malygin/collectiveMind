@@ -69,66 +69,125 @@ module JournalHelper
 
   def journal_parser(j, project)
     case j.type_event
-      #LIFETAPE
-      when 'life_tape_comment_save'
-        "добавил комментарий: '#{j.body} ...' к теме:  "+ link_to("#{j.body2}", "/project/#{project}/collect_info/posts/?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'life_tape_post_save'
-        'добавил тему '+ link_to("#{j.body}..", "/project/#{project}/collect_info/posts/#{j.first_id}")
-      when 'my_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+ link_to(' к вашей теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'reply_life_tape_comment'
-        "добавил комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'life_tape_comment_discuss_stat'
-        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_life_tape_comment_discuss_stat'
-        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'life_tape_comment_approve_status'
-        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
-      when 'my_life_tape_comment_approve_status'
-        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к теме ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      #COLLECT INFO
+      # when 'core_aspect_comment_save'
+      #   "добавил(а) комментарий: '#{j.body} ...' к аспекту:  "+ link_to("#{j.body2}", "/project/#{project}/collect_info/posts/?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'core_aspect_post_save'
+      #   'добавил(а) аспект '+ link_to("#{j.body}..", "/project/#{project}/collect_info/posts/#{j.first_id}")
+      # when 'my_core_aspect_comment'
+      #   "добавил(а) комментарий: '#{j.body}'"+ link_to(' к вашему аспекту ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'reply_core_aspect_comment'
+      #   "добавил(а) комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'core_aspect_comment_discuss_stat'
+      #   "выделил(а) комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'my_core_aspect_comment_discuss_stat'
+      #   "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      #
+      # when 'core_aspect_post_approve_status'
+      #   'выделил(а) аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts/#{j.first_id}?asp=#{j.first_id}") + ' как важный'
+      # when 'my_core_aspect_post_approve_status'
+      #   'выделил(а) ваш аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts/#{j.first_id}?asp=#{j.first_id}&viewed=true") + ' как важный'
+      # when 'core_aspect_comment_approve_status'
+      #   "выделил(а) комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      # when 'my_core_aspect_comment_approve_status'
+      #   "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?asp=#{j.first_id}&viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+      when 'core_aspect_post_save'
+        'добавил(а) аспект '+ link_to("#{j.body}..", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}")
+
+      when 'core_aspect_comment_save'
+        "добавил(а) комментарий: '#{j.body} ...' к аспекту:  "+ link_to("#{j.body2}", "/project/#{project}/collect_info/posts/?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_core_aspect_comment'
+        "добавил(а) комментарий: '#{j.body}'"+ link_to(' к вашему аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'reply_core_aspect_comment'
+        "добавил(а) комментарий: '#{j.body}'"+ link_to(" в ответ на ваш '#{j.body2}'", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'core_aspect_post_approve_status'
+        'выделил(а) аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}") + ' как важный'
+      when 'my_core_aspect_post_approve_status'
+        'выделил(а) ваш аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true") + ' как важный'
+
+      when 'core_aspect_comment_approve_status'
+        "выделил(а) комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      when 'my_core_aspect_comment_approve_status'
+        "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+
+
       # DISCONTENTS
       when 'discontent_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'discontent_post_save'
         if j.anonym
-          " #{t('journal.add_anonym_discontent')} #{link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")}"
+          " #{t('journal.add_anonym_discontent')} #{link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}")}"
         else
-          'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
-        end
-
-      when 'discontent_post_update'
-        if j.anonym
-          ' анонимное несовершенство отредактировано ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
-        else
-          'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+          'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}")
         end
       when 'my_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_discontent_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'my_add_score_discontent'
-        "вы получили  #{j.body} баллов за несовершенство "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
-      when 'my_add_score_discontent_improve'
-        "вы получили  #{j.body} баллов за то, что вашу проблему доработали в несовершенство "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
-      when 'my_discontent_note'
-        s = j.body.split(':')
-        "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
-      when 'discontent_post_discuss_status'
-        'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как требующее обсуждения'
-      when 'my_discontent_post_discuss_status'
-        'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
-      when 'discontent_comment_discuss_status'
-        "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_discontent_comment_discuss_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
       when 'discontent_post_approve_status'
-        'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как важное'
+        'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}") + ' как важное'
       when 'my_discontent_post_approve_status'
-        'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как важное'
+        'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true") + ' как важное'
       when 'discontent_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_discontent_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+
+
+
+
+      # DISCONTENTS
+      # when 'discontent_comment_save'
+      #   "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'discontent_post_save'
+      #   if j.anonym
+      #     " #{t('journal.add_anonym_discontent')} #{link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")}"
+      #   else
+      #     'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+      #   end
+      #
+      # when 'discontent_post_update'
+      #   if j.anonym
+      #     ' анонимное несовершенство отредактировано ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}")
+      #   else
+      #     'отредактировал(а) несовершенство '+ link_to("#{j.body}...", "/project/#{project}/discontent/posts/#{j.first_id}")
+      #   end
+      # when 'my_discontent_comment'
+      #   "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'reply_discontent_comment'
+      #   "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'my_add_score_discontent'
+      #   "вы получили  #{j.body} баллов за несовершенство "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
+      # when 'my_add_score_discontent_improve'
+      #   "вы получили  #{j.body} баллов за то, что вашу проблему доработали в несовершенство "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
+      # when 'my_discontent_note'
+      #   s = j.body.split(':')
+      #   "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему несовершенству', "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true")
+      # when 'discontent_post_discuss_status'
+      #   'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как требующее обсуждения'
+      # when 'my_discontent_post_discuss_status'
+      #   'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
+      # when 'discontent_comment_discuss_status'
+      #   "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'my_discontent_comment_discuss_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'discontent_post_approve_status'
+      #   'выделил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}") + ' как важное'
+      # when 'my_discontent_post_approve_status'
+      #   'выделил(а) ваше несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true") + ' как важное'
+      # when 'discontent_comment_approve_status'
+      #   "выделил(а) комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      # when 'my_discontent_comment_approve_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
       # CONCEPTS
       when 'concept_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+ link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")

@@ -144,7 +144,7 @@
   #  check if url contain anchor
   myLink = document.location.toString();
   if (myLink.match(/comment_(\d+)/))
-    $('#comment_content_' + myLink.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
+    $('#comment' + myLink.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
     return false;
 
 @comments_sumbit = ->

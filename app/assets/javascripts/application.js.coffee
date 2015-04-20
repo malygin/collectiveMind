@@ -71,6 +71,8 @@ $ ->
 
   vote_buttons()
 
+  parse_my_journal_links()
+
 
   $('.carousel').carousel
     interval: 4000,
