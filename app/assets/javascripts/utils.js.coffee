@@ -40,6 +40,11 @@
       # else we have not more aspects, we just show greetings
       if($("#popup-greetings-text").length)
         magnificPopupOpen('#popup-greetings-text')
+      else
+        setTimeout (->
+          window.location.reload(true)
+          return
+        ), 1000
 
 
 # get project id from url like /project/11/discontent/posts
