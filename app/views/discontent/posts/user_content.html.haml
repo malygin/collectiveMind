@@ -23,6 +23,6 @@
       .post-bottom.white
         .row
           .col-md-12
-            %span.tag-stripes.active.color_me{'data-me-action' => 'background-color', 'data-me-color' => "#{discontent.aspect.color}", 'data-me-type' => 'aspect'}
+            %span.tag-stripes.active.color_me{class: 'active', style: "background-color: #{discontent.aspect.color};"}
               %span.tags
                 = discontent.aspect.content

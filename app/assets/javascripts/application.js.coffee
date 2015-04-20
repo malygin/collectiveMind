@@ -283,9 +283,7 @@ $ ->
   $('.color_me').each ->
     me = $(this)
     type = me.attr('data-me-type')
-    if type == 'aspect'
-      color = $colors_imperf_codes[me.attr('data-me-color')]
-    else if type == 'imperf'
+    if type == 'imperf'
       color = $colors_imperf_codes[me.attr('data-me-color')]
     action = me.attr('data-me-action')
     if action and color
