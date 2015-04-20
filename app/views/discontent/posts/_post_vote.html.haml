@@ -3,18 +3,27 @@
     .heading_cont
       %h6
         = trim_string(post_vote.content, size = 50)
-    .vote_tag.color_me{style: "background: #{post_vote.post_aspects.first.color if post_vote.post_aspects.first}"}
+    .vote_tag{style: "background: #{post_vote.aspect.color if post_vote.aspect}"}
       Аспект:
-      = post_vote.post_aspects.first.content if post_vote.post_aspects.first
+      = post_vote.aspect.content if post_vote.aspect
     .divider10
     .vote_controls.text-center
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+      -#= link_to vote_discontent_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
+      %button.btn.vote_button.v_btn_1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_discontent_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+        - if status == 1
+          %i.fa.fa-home
+        - else
           %i.fa.fa-exclamation
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+      -#= link_to vote_discontent_post_path(@project, post_vote.id, status: 2), remote: true, method: :put do
+      %button.btn.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+        - if status == 2
+          %i.fa.fa-home
+        - else
           %i.fa.fa-check
-      = link_to vote_discontent_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
-        %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+      -#= link_to vote_discontent_post_path(@project, post_vote.id, status: 3), remote: true, method: :put do
+      %button.btn.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+        - if status == 3
+          %i.fa.fa-home
+        - else
           %i.fa.fa-minus
     .divider15

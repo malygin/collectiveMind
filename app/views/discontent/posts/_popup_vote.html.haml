@@ -43,24 +43,24 @@
               .container.padding30
                 .row
                   - current_user.unvote_discontents_for_vote(@project).each do |post|
-                    = render partial: 'post_vote', object: post
+                    = render partial: 'post_vote', object: post, locals: {status: 0}
               .divider50
             #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.discontents_for_vote(@project, 1).each do |post|
-                    = render partial: 'post_vote', object: post
+                    = render partial: 'post_vote', object: post, locals: {status: 1}
                 .divider50
             #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.discontents_for_vote(@project, 2).each do |post|
-                    = render partial: 'post_vote', object: post
+                    = render partial: 'post_vote', object: post, locals: {status: 2}
                 .divider50
             #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.discontents_for_vote(@project, 3).each do |post|
-                    = render partial: 'post_vote', object: post
+                    = render partial: 'post_vote', object: post, locals: {status: 3}
                 .divider50
           .divider35
