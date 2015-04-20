@@ -85,12 +85,6 @@ $ ->
     $(this).datepicker "hide"
     return
 
-  # Раскрашиваем аспекты согласно цвету, который в них зашит
-
-  #  $('.color_me').each ->
-  #    $(this).css $(this).attr('data-me-action'), $(this).attr('data-me-color')
-  #    return
-
   # Используется в кабинете на стадии несовершенств, во вспомогательной технике
   $('.open-popup').each ->
     stageNum = $(this).attr('data-placement')
