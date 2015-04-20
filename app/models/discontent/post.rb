@@ -36,6 +36,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
+  scope :by_aspect, ->(asp) { where(aspect_id: asp) }
 
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4

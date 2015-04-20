@@ -21,7 +21,8 @@ class Discontent::PostsController < PostsController
   def index
     @posts= nil
     if params[:aspect] and params[:aspect] != '*'
-      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+      # @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+      @posts = @project.discontents.by_aspect(params[:aspect].scan(/\d/).join('').to_i)
     else
       @posts = @project.discontents.by_status_for_discontent(@project)
     end
