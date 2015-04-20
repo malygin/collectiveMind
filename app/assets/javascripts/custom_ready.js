@@ -234,5 +234,76 @@ $(document).ready(function () {
     }
 
 
+    // скрипт для голосования
+    var folder_len = {};
+    var vote_icon_all = 'fa-home';
+
+    $('[data-vote-poll-role]').each(function() {
+        var role = $(this).attr('data-vote-poll-role');
+        var len = count_vote_items($(this));
+        folder_len[role] = len;
+        $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(len);
+    });
+    var pb = $('.vote_progress');
+    var all_len = folder_len['overall'] = count_vote_items('.all_vote');
+    pb_stretch(pb, all_len, folder_len['overall']);
+
+    function count_vote_items (me){
+        return $('.vote_item_cont', me).length;
+    }
+
+    function pb_stretch(me, current, over){
+        var vote_perc = (1 - current/over)*100;
+        me.css('width', vote_perc+'%');
+    }
+
+    $('.vote_button').click(function () {
+        var role = $(this).attr('data-vote-role');
+        if (!$(this).hasClass('voted')) {
+            if ($(this).siblings().hasClass('voted')){
+                var prev_role = $(this).siblings('.voted').attr('data-vote-role');
+                $(this).siblings('.voted').each(function() {
+                    $(this).removeClass('voted');
+                    $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
+                });
+            }
+            $(this).addClass('voted');
+            $('.fa', this).removeClass($(this).attr("data-icon-class")).addClass(vote_icon_all);
+            var vote_item = $(this).parents('.vote_item_cont').detach();
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
+            if (prev_role) {
+                $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
+            } else {
+                all_len--;
+                $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
+                pb_stretch(pb, all_len, folder_len['overall']);
+            }
+            $('[data-vote-poll-role = "' + role + '"] .container>.row').append(vote_item);
+        } else {
+            $(this).removeClass('voted');
+            $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
+            var vote_item = $(this).parents('.vote_item_cont').detach();
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
+            $('.all_vote>.container>.row').append(vote_item);
+            all_len++;
+            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
+            pb_stretch(pb, all_len, folder_len['overall']);
+        }
+        var item_e = $(this).parents('.item_expandable');
+        if (item_e.hasClass('opened')){
+
+            item_e.removeClass('opened');
+            $(this).siblings('.vote_open_detail').children('i').toggleClass('fa-angle-right').toggleClass('fa-angle-left');
+        }
+    });
+
+    $('.vote_open_detail').click( function (){
+        $('i', this).toggleClass('fa-angle-right');
+        $('i', this).toggleClass('fa-angle-left');
+        $('.item_expandable').not($(this).parents()).removeClass('opened');
+        $(this).parents('.item_expandable').toggleClass('opened');
+    });
+
+
 
 });

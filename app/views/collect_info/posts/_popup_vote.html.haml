@@ -43,21 +43,21 @@
               .container.padding30
                 .row
                   - current_user.unvote_aspects_for_vote(@project).each do |asp|
-                    = render partial: 'post_vote', object: asp
+                    = render partial: 'post_vote', object: asp, locals: {status: 0}
 
             #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.aspects_for_vote(@project, 1).each do |asp|
-                    = render partial: 'post_vote', object: asp
+                    = render partial: 'post_vote', object: asp, locals: {status: 1}
             #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.aspects_for_vote(@project, 2).each do |asp|
-                    = render partial: 'post_vote', object: asp
+                    = render partial: 'post_vote', object: asp, locals: {status: 2}
             #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
               .container.padding30
                 .row
                   - current_user.aspects_for_vote(@project, 3).each do |asp|
-                    = render partial: 'post_vote', object: asp
+                    = render partial: 'post_vote', object: asp, locals: {status: 3}
           .divider35

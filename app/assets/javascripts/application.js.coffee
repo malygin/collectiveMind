@@ -69,6 +69,8 @@ $ ->
 
   expert_news()
 
+  vote_buttons()
+
 
   $('.carousel').carousel
     interval: 4000,
@@ -124,7 +126,7 @@ $ ->
   post_colored_stripes()
   colors_discontents()
   comments_expandable_column()
-  vote_scripts()
+#  vote_scripts()
 
   ### sort button active ###
   # выделение кнопок сортировки

@@ -37,7 +37,9 @@
       $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
     else
       # else we have not more aspects, we just show greetings
-      magnificPopupOpen('#popup-greetings-text')
+      if($("#popup-greetings-text").length)
+        magnificPopupOpen('#popup-greetings-text')
+
 
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->
@@ -60,6 +62,22 @@
         type: "get"
 
   $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
+
+# голосование за пост
+@vote_buttons = ->
+  this.vote_post = ->
+    project_id = $(this).data('project')
+    post_id = $(this).data('id')
+    stage = $(this).data('stage')
+    status = $(this).data('status')
+    if project_id and post_id and stage and status
+      $.ajax
+        url: "/project/#{project_id}/#{stage}/posts/#{post_id}/vote"
+        type: "put"
+        data:
+          status: status
+
+  $('.vote_controls').on('click', '.vote_button', this.vote_post)
 
 
 #----------
