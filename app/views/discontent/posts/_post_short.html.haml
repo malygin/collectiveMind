@@ -37,10 +37,13 @@
       .row
         .col-md-9.col_padding_right_3.themes_cont
           .post-theme{id: "stripe#{post_short.id}"}
-            - post_short.post_aspects.each_with_index do |aspect, index|
-              %span.tag-stripes.color_me{class: "#{index == 0 ? 'active' : ''}", style: "background-color: #{aspect.color};"}
-                %span.tags
-                  = aspect.content
+            %span.tag-stripes.color_me{class: 'active', style: "background-color: #{post_short.aspect.color};"}
+              %span.tags
+                = post_short.aspect.content
+            -#- post_short.post_aspects.each_with_index do |aspect, index|
+            -#  %span.tag-stripes.color_me{class: "#{index == 0 ? 'active' : ''}", style: "background-color: #{aspect.color};"}
+            -#    %span.tags
+            -#      = aspect.content
         .col-md-3.col_padding_left_3
           .text-right.small_icons
             %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}"}
