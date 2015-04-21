@@ -2,9 +2,9 @@ class CreateNewProjectForFocusGroup < SeedMigration::Migration
   def up
     @user = User.find_by(email: 'test@test.com')
     @project = Core::Project.create!(name: 'Организация системы продаж МД', type_access: 0)
-    @project.technique_list_projects.create technique_list: Technique::List.find_by(stage: 'aspect_posts', code: 'simple')
-    @project.technique_list_projects.create technique_list: Technique::List.find_by(stage: 'discontent_posts', code: 'simple')
-    @project.technique_list_projects.create technique_list: Technique::List.find_by(stage: 'discontent_posts', code: 'detailed')
+    @project.technique_list_projects.create! technique_list: Technique::List.find_by(stage: 'aspect_posts', code: 'simple')
+    @project.technique_list_projects.create! technique_list: Technique::List.find_by(stage: 'discontent_posts', code: 'simple')
+    @project.technique_list_projects.create! technique_list: Technique::List.find_by(stage: 'discontent_posts', code: 'detailed')
 
     aspect = @project.aspects.create! content: 'Рынок (потребители)', user: @user, color: '#cfa7cc'
     create_question_with_answers(aspect, 'Сколько будет 5+5', [['10', true], ['11', false], ['12', false], ['13', false]])
