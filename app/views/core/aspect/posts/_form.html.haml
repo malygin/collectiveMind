@@ -1,18 +1,14 @@
-.cab_notice.white#create_aspect_success(style='display:none;')
-  %span.success
-    = t('form.aspect.create_success')
-
-#notice_messages
+= render partial: 'shared/create_success', locals: {model_name: 'aspect'}
 
 = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
   - content_for :aspect_content do
     .form-group
-      = f.text_field :content, class: 'form-control', placeholder: t('activerecord.attributes.core_aspect_post.content')
+      = f.text_field :content, class: 'form-control', placeholder: t('activerecord.attributes.core/aspect/post.content')
     .divider15
   - content_for :aspect_description do
     %p
       %span.badge.badge_type1.grey
-        = t('activerecord.attributes.core_aspect_post.short_desc')
+        = t('activerecord.attributes.core/aspect/post.short_desc')
     .divider15
     .form-group
       = f.text_area :short_desc, class: 'form-control', rows: '6'
