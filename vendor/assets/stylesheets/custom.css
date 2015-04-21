@@ -2322,10 +2322,10 @@ button.mfp-close {
 /* medal block */
 .popup .medal-block {
     position: absolute;
-    width: 179px;
-    height: 330px;
-    left: -18px;
-    top: 40px;
+    width: 158px;
+    height: 253px;
+    left: -15px;
+    top: 36px;
 }
 
 .medal-block.gold-medal {
