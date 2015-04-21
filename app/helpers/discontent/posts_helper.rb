@@ -1,4 +1,11 @@
 module Discontent::PostsHelper
+  def trim_post_content(content, size = 100)
+    if !content.nil? and content.length > size
+      return content[0..size] + ' ...'
+    end
+    content
+  end
+
   def first_post_for_vote?(post)
     if @project.get_united_posts_for_vote(current_user).size == 1
       false

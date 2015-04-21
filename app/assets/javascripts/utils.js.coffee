@@ -55,7 +55,7 @@
 #  return url[url.length-1]
 #  универсализация
   url = window.location.href.match(/project\/(\d+)/)
-  return url.match(/project\/(\d+)/)[1]
+  return url[1]
 
 @parse_my_journal_links = ()->
   #  if window.location.href.indexOf("discontent/posts") > -1
@@ -90,9 +90,12 @@
       $(this).addClass('read')
       # убираем статус
       $(this).find('.status_news').html('')
+      unless($(".expert_news_drop .dd_xprt_notice a:not(.read)").length)
+        $('.drop_opener i').css 'color', '#9e9e9e'
       $.ajax
         url: "/project/#{project_id}/news/#{news_id}/read"
         type: "get"
+        dataType: "script"
 
   $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
 
