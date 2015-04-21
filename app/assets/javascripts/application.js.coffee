@@ -359,3 +359,13 @@ $('.check_push_box').click ->
       $('.hideable_checks').hide()
     $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
   return
+
+# Открывает и закрывает стикеры в кабинете
+$('.open_sticker').click ->
+  stick_id = $(this).attr('data-for')
+  $(stick_id).show()
+  return
+$('.sticker_close').click ->
+  stick_id = $(this).attr('data-for')
+  $(stick_id).hide()
+  return
