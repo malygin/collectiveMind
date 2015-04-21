@@ -49,15 +49,20 @@
           -else
             -# @todo прицепить perfectScrollbar, без сокращения пояснения
             .post-text.ps_cont
+              =@post.questions.by_type(0).first.content
+              %br
               -@post.collect_info_user_answers.each do |answer|
                 %span.bold
-                  ="#{answer.user}:"
-                %span.bold
-                  ответ:
-                =answer.answer.content if answer.answer
-                %span.bold
-                  пояснение:
-                =answer.content
+                  ="#{answer.user}"
+                %br
+                -if answer.answer
+                  %span.bold
+                    ответ:
+                  =answer.answer.content
+                - unless answer.content==''
+                  %span
+                    пояснение:
+                  =answer.content
                 %br
 
       .container.modal_content.ps_cont

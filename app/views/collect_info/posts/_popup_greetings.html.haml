@@ -4,16 +4,13 @@
     .row
       .col-md-8.col-md-offset-3
         %p.font_mid_grey.bold
-          Итак, начало положено!
+          Спасибо за ответы на вопросы!
         .divider50
         %p.font_mid_grey.bold
-          Вы изучили базу знаний и готовы принять участие в процедуре. Теперь вы можете обсудить аспекты, добавленные участниками, или предложить собственный аспект для общего обсуждения.
+          Теперь выможете ознакомится с ответами других участников и добавить аспект если посчитаете нужным
         .divider50
         %p
           = link_to collect_info_posts_path(@project), class: "btn add-button" do
             %span
               %i.fa.fa-comment-o
             Просмотреть аспекты
-          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), class: "btn add-button" do
-            %span +
-            Добавить аспект
