@@ -51,9 +51,11 @@
 
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->
-  url = window.location.href.match(/\d+/g)
-  return url[url.length-1]
-
+#  url = window.location.href.match(/\d+/g)
+#  return url[url.length-1]
+#  универсализация
+  url = window.location.href.match(/project\/(\d+)/)
+  return url.match(/project\/(\d+)/)[1]
 
 @parse_my_journal_links = ()->
   #  if window.location.href.indexOf("discontent/posts") > -1
