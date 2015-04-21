@@ -1,30 +1,29 @@
 .row
   .col-md-12
     .divider10
-    .text-success#create_concept_success(style='display:none;')
-      = t('form.concept.create_success')
+    = render partial: 'shared/create_success', locals: {model_name: 'concept'}
+
     = form_for @concept_post, url: {project: @project.id, action: @concept_post.persisted? ? 'update' : 'create'}, remote: true do |f|
       .content_window.white
         .divider25
-        #notice_messages
         %p
-          = t('form.concept.title')
+          = t('activerecord.attributes.concept/post.title')
         = f.text_area :title, class: 'form-control', rows: 1
         .divider15
         %p
-          = t('form.concept.goal')
+          = t('activerecord.attributes.concept/post.goal')
         = f.text_area :goal, class: 'form-control', rows: 2
         .divider15
         %p
-          = t('form.concept.content')
+          = t('activerecord.attributes.concept/post.content')
         = f.text_area :content, class: 'form-control', rows: 2
         .divider15
         %p
-          = t('form.concept.actors')
+          = t('activerecord.attributes.concept/post.actors')
         = f.text_area :actors, class: 'form-control', rows: 1
         .divider15
         %p
-          = t('form.concept.impact_env')
+          = t('activerecord.attributes.concept/post.impact_env')
         = f.text_area :impact_env, class: 'form-control', rows: 1
         .divider15
         %p
