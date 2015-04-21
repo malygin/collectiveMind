@@ -40,11 +40,26 @@
           %p.poster-name
             =@post.user
         .media-body.white
-          .post-text
-            %p
-              %span.badge.badge_type1{style: "background:#{@post.color};"} Обоснование
-            %p
-              =@post.short_desc
+          -if @post.status == 1
+            .post-text
+              %p
+                %span.badge.badge_type1{style: "background:#{@post.color};"} Обоснование
+              %p
+                =@post.short_desc
+          -else
+            -# @todo прицепить perfectScrollbar, без сокращения пояснения
+            .post-text.ps_cont
+              -@post.collect_info_user_answers.each do |answer|
+                %span.bold
+                  ="#{answer.user}:"
+                %span.bold
+                  ответ:
+                =answer.answer.content
+                %span.bold
+                  пояснение:
+                =answer.content
+                %br
+
       .container.modal_content.ps_cont
         .row
           .col-md-12

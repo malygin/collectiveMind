@@ -46,6 +46,8 @@
           return
         ), 1000
 
+@reload_isotope = ->
+  $('#tab_aspect_posts').isotope('reloadItems').isotope()
 
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->

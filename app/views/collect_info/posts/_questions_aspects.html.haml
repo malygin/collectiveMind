@@ -152,7 +152,7 @@
                                 .clearfix
                                 .form-group.bottom-buttons
                                   -if @project.type_for_questions == 1
-                                    %a.btn.btn-outline.notice-button.color_me{style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                                    %a.btn.btn-outline.notice-button.hint.close-notice{id:"notice_question_#{question.id}", style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
             - else
               - if asp.knowbase_posts.size > 1

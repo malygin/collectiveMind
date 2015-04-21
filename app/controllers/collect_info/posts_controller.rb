@@ -53,7 +53,7 @@ class CollectInfo::PostsController < PostsController
       end
       unless @wrong
         unless current_user.user_answers.where(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id).present?
-          current_user.user_answers.create(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id, content: params[:content]).save!
+          current_user.user_answers.create(project_id: @project.id, question_id: @question.id, aspect_id: @aspect.id, answer_id: params[:answers].first.to_i, content: params[:content]).save!
         end
         # подсчет данных для прогресс-бара по вопросам
         count_all = CollectInfo::Question.by_type(@project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count

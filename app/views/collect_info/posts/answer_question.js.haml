@@ -1,6 +1,7 @@
 -#$('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white');
 -if @wrong
   $('#wrong_question_#{@question.id}').removeClass('close-notice');
+  $('#notice_question_#{@question.id}').removeClass('close-notice');
 -else
   $('#knob-1').data('end',#{@questions_progress});
   animateKnobChange('#knob-1');

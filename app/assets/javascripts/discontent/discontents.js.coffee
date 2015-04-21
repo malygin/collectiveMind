@@ -32,9 +32,21 @@ DiscontentCollectionView = Backbone.View.extend
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
+    # todo нужно настроить перегруппировку элементов после загрузки новых
+    # todo (бывает что элементы остаются на местах и не схлопываются навверх оставляя промежутки в плитке)
+    #    reload_isotope()
+    #    this.reloadIsotope
+    #    $('#tab_aspect_posts').isotope('reloadItems').isotope()
+    #    this.$container.isotope('updateSortData').isotope();
+    #    this.$container.isotope().isotope('layout');
+    #    this.$container.isotope('reloadItems')
+    #    this.$container.isotope( 'updateSortData', this.collection )
+    #    $('#tab_aspect_posts').isotope().isotope('reloadItems')
+
+
     show_comments_hover()
     activate_perfect_scrollbar()
-    post_colored_stripes()
+    # post_colored_stripes()
     colors_discontents()
     return this
   addOne: (discontent)->
