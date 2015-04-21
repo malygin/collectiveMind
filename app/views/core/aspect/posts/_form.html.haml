@@ -1,19 +1,21 @@
-.text-success#create_aspect_success(style='display:none;')
-  = t('form.aspect.create_success')
+.cab_notice.white#create_aspect_success(style='display:none;')
+  %span.success
+    = t('form.aspect.create_success')
+
+#notice_messages
 
 = form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
   - content_for :aspect_content do
     .form-group
-      = f.text_field :content, class: 'form-control', placeholder: 'Название аспекта'
+      = f.text_field :content, class: 'form-control', placeholder: t('activerecord.attributes.core_aspect_post.content')
     .divider15
   - content_for :aspect_description do
     %p
-      %span.badge.badge_type1.grey Обоснование
+      %span.badge.badge_type1.grey
+        = t('activerecord.attributes.core_aspect_post.short_desc')
     .divider15
     .form-group
       = f.text_area :short_desc, class: 'form-control', rows: '6'
-  #notice_messages
-    = render 'shared/notice_messages', object: f.object
   .post.post_add_type1
     .post-header.grey
     .post-body

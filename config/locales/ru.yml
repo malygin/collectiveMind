@@ -9,8 +9,13 @@ ru:
     collect_info_posts: 'Мои аспекты'
     discontent_posts: 'Мои несовершенства'
     concept_posts: "Мои идеи"
+  cabinet:
+    collect_info_posts_sticker: Предложите название нового аспекта. В поле «Обоснование» объясните, почему этот аспект необходим.
   activerecord:
     attributes:
+      core/aspect/post:
+        content: 'Название аспекта'
+        short_desc: 'Обоснование аспекта'
       group_task:
         name: 'Название задачи'
         description: 'Описание задачи'
@@ -307,7 +312,7 @@ ru:
       status_main: Основная
       status_other: Дополнительная
 
-      create_success: "Аспект создан!"
+      create_success: "Вы успешно создали аспект"
     discontent:
       title: Форма добавления несовершенства
       field_content: "Название (краткое описание несовершенства)"
