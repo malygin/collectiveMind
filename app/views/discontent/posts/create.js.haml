@@ -1,6 +1,7 @@
 - if @post.valid?
-  $.magnificPopup.instance.close();
+  $('#notice_messages').hide();
   $('#create_discontent_success').fadeIn(3000).fadeOut('slow');
+  $.magnificPopup.instance.close();
   $('#discontent_post_content').val('');
   $('#discontent_post_what').val('')
   $('#discontent_post_whered').val('')

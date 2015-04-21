@@ -1,13 +1,10 @@
-.text-success#create_discontent_success(style='display:none;')
-  = t('form.discontent.create_success')
-
 - content_for :discontent_form do
   = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
     .col-md-12
+      = render partial: 'shared/create_success', locals: {model_name: 'discontent'}
       .divider10
       .content_window.white
         .divider25
-        #notice_messages
         .btn-group.cab_drop
           %a.dropdown-toggle{'data-toggle' => 'dropdown'}
             %span
@@ -24,19 +21,19 @@
 
         .divider25
         %p
-          = t('form.discontent.field_content')
+          = t('activerecord.attributes.discontent/post.content')
         = f.text_area :content, rows: 1, class: 'form-control'
         .divider15
         %p
-          = t('form.discontent.field_what')
+          = t('activerecord.attributes.discontent/post.what')
         = f.text_area :what, rows: 2, class: 'form-control'
         .divider15
         %p
-          = t('form.discontent.field_where')
+          = t('activerecord.attributes.discontent/post.whered')
         = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
         .divider15
         %p
-          = t('form.discontent.field_when')
+          = t('activerecord.attributes.discontent/post.whend')
         = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
         .divider25
     .row

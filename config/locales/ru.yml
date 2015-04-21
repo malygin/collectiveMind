@@ -11,6 +11,7 @@ ru:
     concept_posts: "Мои идеи"
   cabinet:
     collect_info_posts_sticker: Предложите название нового аспекта. В поле «Обоснование» объясните, почему этот аспект необходим.
+    discontent_posts_sticker: Предложите несовершенство
   activerecord:
     attributes:
       core/aspect/post:
@@ -23,9 +24,10 @@ ru:
         name: 'Название группы'
         description: 'Описание группы'
       discontent/post:
-        content: 'Поле "Что вас не устраивает"'
-        whend:  'Поле "Когда это происходит"'
-        whered:  'Поле "Где это происходит"'
+        content: 'Название (краткое описание несовершенства)'
+        what: 'На каком этапе это происходит?'
+        whered: 'От чего это зависит?'
+        whend: Чья работа от этого зависит?
         discontent_post_aspects:  'Поле "Аспекты"'
       concept/post_aspect:
         title:  'Поле "Краткое название"'
@@ -315,10 +317,6 @@ ru:
       create_success: "Вы успешно создали аспект"
     discontent:
       title: Форма добавления несовершенства
-      field_content: "Название (краткое описание несовершенства)"
-      field_what: На каком этапе это происходит?
-      field_where: От чего это зависит?
-      field_when: Чья работа от этого зависит?
       style_negative: Имеющиеся недостатки
       style_positive: Отсутствующие достоинства
       style_nun: не определена
