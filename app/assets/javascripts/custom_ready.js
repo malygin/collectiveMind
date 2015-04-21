@@ -307,9 +307,7 @@ $(document).ready(function () {
         $(this).parents('.item_expandable').toggleClass('opened');
     });
 
-    var data = 'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на простые вопросы в правой колонке.<br>' +
-         'Вы можете комментировать свои ответы в поле “Пояснение”. Вы не сможете перейти к этапу обсуждения и добавления аспектов, пока не ознакомитесь со всеми аспектами.<br>' +
-        'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!';
+
 
 
     var popoverTemplate = ['<div class="popover help_popover_content cl_btn_container">',
@@ -327,6 +325,7 @@ $(document).ready(function () {
         template:popoverTemplate,
         html:true
     });
+    $(".help_popover").popover('show');
     $(".help_popover").on("show.bs.popover", function () {
         $(this).addClass('shown');
     });
