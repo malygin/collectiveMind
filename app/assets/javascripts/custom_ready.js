@@ -75,7 +75,10 @@ $(document).ready(function () {
     $('.close-button,.answer-button,.li_aspect').click(function(){
         $('.hint').addClass("close-notice");
     });
-
+    /* close notice for question on 1st stage  */
+    $('.answer-button,.li_aspect').click(function(){
+        $('.notice').addClass("close-notice");
+    });
     /* dropdown window */
     // открытие/закрытие новостей эксперта -> перевести в simple popover
     $('.drop_opener').click(function(){
