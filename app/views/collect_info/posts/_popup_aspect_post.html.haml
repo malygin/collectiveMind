@@ -53,16 +53,9 @@
               %br
               -@post.collect_info_user_answers.each do |answer|
                 %span.bold
-                  ="#{answer.user}"
-                %br
-                -if answer.answer
-                  %span.bold
-                    ответ:
-                  =answer.answer.content
-                - unless answer.content==''
-                  %span
-                    пояснение:
-                  =answer.content
+                  ="#{answer.user}:"
+                =answer.answer.content
+                =answer.content
                 %br
 
       .container.modal_content.ps_cont
