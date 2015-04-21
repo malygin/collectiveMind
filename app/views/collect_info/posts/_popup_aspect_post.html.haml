@@ -54,7 +54,7 @@
                   ="#{answer.user}:"
                 %span.bold
                   ответ:
-                =answer.answer.content
+                =answer.answer.content if answer.answer
                 %span.bold
                   пояснение:
                 =answer.content
