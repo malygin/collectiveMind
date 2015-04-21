@@ -48,7 +48,8 @@
           %span.auth-divider
             = '|'
           %span.dropdown
-            %span.badge.grey 500
+            %span.badge.grey
+              = current_user.score
             %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
               %small
                 = current_user
