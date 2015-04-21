@@ -273,12 +273,6 @@ en:
       create_success: "Аспект создан!"
     discontent:
       title:  Shortfall addition form
-      what: What
-      where: Where
-      when: When
-      field_what: What is that you do not like?
-      field_where: Where does it happen?
-      field_when: When does it happen?
       style_negative: Present faults
       style_positive: Absent benefits
       style_nun: Not determined
