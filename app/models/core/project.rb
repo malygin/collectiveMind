@@ -238,7 +238,7 @@ class Core::Project < ActiveRecord::Base
   def prev_status
     # @todo здесь круто войдет https://github.com/pluginaweek/state_machine
     # займусь позже)
-    if status > 1
+    if status > 0
       status - 1
     else
       nil
