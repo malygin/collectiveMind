@@ -1582,6 +1582,7 @@ p .add-button + .add-button {
 }
 .instruments-block button {
     white-space: normal;
+    text-align: left;
 }
 
 

@@ -11,7 +11,7 @@
           %i.sticker_close.fa.fa-times.fa-lg{'data-for' => '#sticker1'}
 - else
   .col-md-8.col_padding_right_3
-    #tooltip1_1.tooltip1.border_grey.rounded_3.stages_block.tooltip1{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.'}
+    #tooltip1_1.border_grey.rounded_3.stages_block{class: "#{'tooltip1' if name_controller == :collect_info_posts}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.'}
       .btn-toolbar{role: 'toolbar'}
         - Core::Project::LIST_STAGES.each do |num_stage, stage|
           .btn-group{role: 'group'}
@@ -27,9 +27,12 @@
                 = num_stage
 
   .col-md-4.col_padding_left_3
-    %a.open_welcome_popup{href: "#popup-explanation-#{current_stage_controller}"}
-      #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
-    #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!'}
+    -#%a.open_welcome_popup{href: "#popup-explanation-#{current_stage_controller}"}
+    -#  #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
+    %a(style="cursor:pointer;" )
+      #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{class: "#{shown_intro(current_stage_popover_status)}", 'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}", 'data-text' => "#{current_stage_popover_text}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
+
+    #tooltip1_3.border_grey.rounded_3.progress_block{class: "#{'tooltip1' if name_controller == :collect_info_posts}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!'}
       .container
         .row
           = render partial: 'application/progress_bar'

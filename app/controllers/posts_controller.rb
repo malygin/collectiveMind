@@ -470,7 +470,7 @@ class PostsController < ProjectsController
   end
 
   def check_field
-    if params[:check_field] and params[:status]
+    if params[:check_field] and params[:check_field]!='' and params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end

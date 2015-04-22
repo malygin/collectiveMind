@@ -29,10 +29,10 @@ $(document).ready(function () {
         midClick: true
     });
     /* welcome popup */
-    $('.open_welcome_popup').magnificPopup({
-        type: 'inline',
-        midClick: true
-    });
+    //$('.open_welcome_popup').magnificPopup({
+    //    type: 'inline',
+    //    midClick: true
+    //});
     /* magnific popup close button */
     $('.close_magnific').click(function(){
         var magnificPopup = $.magnificPopup.instance;
@@ -60,9 +60,14 @@ $(document).ready(function () {
     };
 
     /* show welcome popup if stage is beginning  */
-    if ($($('.open_welcome_popup').attr('href')).length){
-        if (!$($('.open_welcome_popup').attr('href')).hasClass('shown_intro')){
-            $('.open_welcome_popup').magnificPopup('open');
+    //if ($($('.open_welcome_popup').attr('href')).length){
+    //    if (!$($('.open_welcome_popup').attr('href')).hasClass('shown_intro')){
+    //        $('.open_welcome_popup').magnificPopup('open');
+    //    }
+    //};
+    if ($('.popup-explanation').length){
+        if (!$('.popup-explanation').hasClass('shown_intro')){
+            magnificPopupOpen('.popup-explanation');
         }
     };
 
@@ -312,27 +317,35 @@ $(document).ready(function () {
 
     var popoverTemplate = ['<div class="popover help_popover_content cl_btn_container">',
         '<div class="arrow"></div>',
-        '<i class="fa fa-times cl_btn font_white" onclick="$(&quot;.help_popover&quot;).popover(&quot;hide&quot;);"></i>',
+        '<a data-remote="true" rel="nofollow" data-method="put" href="/project/' + $('.help_popover').data('project') + '/' + $('.help_popover').data('stage') + '/posts/check_field?check_field=' + $('.help_popover').data('status') + '&status=true">',
+        '<i class="fa fa-times cl_btn font_white" onclick="$(\'.help_popover\').popover(\'hide\');"></i></a>',
         '<div class="popover-content font_white">',
         '</div>',
         '</div>'].join('');
+
+
+
     $(".help_popover").popover({
         selector: '[rel=popover]',
         trigger: 'manual',
         placement:'bottom',
         container: 'body',
-        content:data,
+        content: $('.help_popover').data('text'),
         template:popoverTemplate,
         html:true
     });
-    $(".help_popover").popover('show');
+
+    if (!$($('.help_popover')).hasClass('shown_intro')){
+        $('.help_popover').popover('show');
+    }
+
     $(".help_popover").on("show.bs.popover", function () {
         $(this).addClass('shown');
     });
     $(".help_popover").on("hide.bs.popover", function () {
         $(this).removeClass('shown');
     });
-    $(".help_popover").hover(function(){
+    $(".help_popover").click(function(){
         if (!$(this).hasClass('shown')) {
             $(".help_popover").popover('show');
         }

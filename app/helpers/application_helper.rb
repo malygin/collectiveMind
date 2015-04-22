@@ -806,7 +806,7 @@ module ApplicationHelper
     page == 0 ? 1 : page
   end
 
-  # необходимость показа приветсвенной модалки
+  # необходимость показа приветсвенной модалки или поповера
   def shown_intro(check_field)
     current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
   end
@@ -830,5 +830,27 @@ module ApplicationHelper
   def unread_expert_news?
     count_news_log = current_user.loggers.select(' DISTINCT "journal_loggers"."first_id" ').where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id).count
     @project.news.count - count_news_log > 0
+  end
+
+  def current_stage_popover_status
+    if name_controller == :collect_info_posts and @questions_progress != 100
+      'collect_info_questions'
+    elsif name_controller == :collect_info_posts and @questions_progress == 100
+      'collect_info_discuss'
+    end
+  end
+
+  def current_stage_popover_text
+    if name_controller == :collect_info_posts and @questions_progress != 100
+      'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' +
+      'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' +
+      'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
+    elsif name_controller == :collect_info_posts and @questions_progress == 100
+      'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' +
+      'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' +
+      'Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'
+    else
+      'Здесь могла быть подсказка, но пока ее нет!'
+    end
   end
 end
