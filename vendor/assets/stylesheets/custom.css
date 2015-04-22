@@ -1917,7 +1917,7 @@ p .add-button + .add-button {
 }
 .input_cont {
     margin-right: 58px;
-    height: 40px;
+    min-height: 40px;
 }
 .input_cont textarea {
     width: 100%;
