@@ -2,6 +2,7 @@ class PostsController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about, :user_content]
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
+  before_filter :check_type_mechanics, only: [:new, :edit]
 
   def autocomplete
     results = current_model.autocomplete params[:term]
@@ -98,7 +99,7 @@ class PostsController < ProjectsController
       if @comment.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_'+type, user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
-                                    first_id:@post.id, second_id: @comment.id,
+                                    first_id: @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
       end
       if @project.closed?
@@ -521,5 +522,18 @@ class PostsController < ProjectsController
     end
     @new_comment = comment_model.new
     render template: 'posts/add_comment'
+  end
+
+  def check_type_mechanics
+    # чекаем что подходит для стадии, иначе ставим простую механику
+    if params[:type_mechanic].present? and correct_mechanic?
+      @mechanic_type = params[:type_mechanic]
+    else
+      @mechanic_type = 'simple'
+    end
+  end
+
+  def correct_mechanic?
+    Technique::List.by_stage(current_model.to_s.sub('Core::', '').sub('::', '_').underscore.pluralize).where(code: params[:type_mechanic]).any?
   end
 end
