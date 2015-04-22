@@ -38,6 +38,6 @@
         %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
           =post_short.users_against.count
         %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-    -if post_short.status == 1 and post_short.comments.count > 0
-      %span.popup2
-        %i.fa.fa-exclamation-triangle.font_lighter_grey
+    -#-if post_short.status == 1 and post_short.comments.count > 0
+    -#  %span.popup2
+    -#    %i.fa.fa-exclamation-triangle.font_lighter_grey

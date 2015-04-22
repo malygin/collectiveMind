@@ -2,11 +2,14 @@ $(document).ready(function () {
 
     /* tooltips for all stages */
     $("#tooltip_button_1").click(function() {
-        if ($(this).text().trim()=='Открыть подсказки')
-            $(this).html($(this).find('i')).append('Закрыть подсказки')
-        else $(this).html($(this).find('i')).append('Открыть подсказки');
+        if ($(this).text().trim()=='Открыть подсказки') {
+            $(this).html($(this).find('i')).append('Закрыть подсказки');
+        }
+        else {
+            $(this).html($(this).find('i')).append('Открыть подсказки');
+        }
         $(".tooltip1").tooltip('toggle');
-        $(this).toggleClass('btn-tooltip btn-tooltip-close')
+        $(this).toggleClass('btn-tooltip btn-tooltip-close');
     });
 
     $("[data-toggle=popover]").popover();
