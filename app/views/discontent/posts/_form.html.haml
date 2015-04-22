@@ -12,7 +12,7 @@
           %ul.dropdown-menu
             - @aspects.each do |aspect|
               %li
-                = f.radio_button :aspect_id, aspect.id
+                /= f.radio_button :aspect_id, aspect.id
                 %label{for: "discontent_post_aspect_id_#{aspect.id}"}
                   %span
                     %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
@@ -38,40 +38,39 @@
         .divider25
     .row
       .col-md-6
-        %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", href: "#imperfs1"}
-          Пример несовершенства
-          %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
+        - if @mechanic_type == 'simple'
+          %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+            Пример несовершенства
+            %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       .col-md-6
         %p
-          = f.submit t('form.save'), class: 'btn add-button type2 pull-right', id: 'send_post'
+          = f.submit t("form.#{action_name}"), class: 'btn add-button type2 pull-right', id: 'send_post'
     .divider25
     #imperfs1.content_window.white.collapse.font_lighter_grey
       .divider15
-      %a.with_arrow.collapsed.a_font_reset.not_full_width.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", href: "#imperf_example"}
+      %a.with_arrow.collapsed.a_font_reset.not_full_width
         Невозможно дышать при большом количестве людей в комнате
-        %i.fa.fa-angle-right.fa-lg.collapse_arrow.font_grey
-      #imperf_example.collapse
-        .divider25
-        %p.font_dark_grey
-          Название (краткое описание несовершенства)
-        %p
-          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-        .divider15
-        %p.font_dark_grey
-          На каком этапе это происходит?
-        %p
-          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-        .divider15
-        %p.font_dark_grey
-          От чего это зависит?
-        %p
-          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-        .divider15
-        %p.font_dark_grey
-          Чья работа от этого зависит?
-        %p
-          Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-        .divider20
+      .divider25
+      %p.font_dark_grey
+        Название (краткое описание несовершенства)
+      %p
+        Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+      .divider15
+      %p.font_dark_grey
+        На каком этапе это происходит?
+      %p
+        Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+      .divider15
+      %p.font_dark_grey
+        От чего это зависит?
+      %p
+        Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+      .divider15
+      %p.font_dark_grey
+        Чья работа от этого зависит?
+      %p
+        Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+      .divider20
       .divider15
 
-= render partial: "#{params[:type_mechanic]}_form"
+= render partial: "#{@mechanic_type}_form"
