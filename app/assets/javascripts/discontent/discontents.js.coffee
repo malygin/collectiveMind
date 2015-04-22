@@ -32,8 +32,14 @@ DiscontentCollectionView = Backbone.View.extend
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
+
     # todo нужно настроить перегруппировку элементов после загрузки новых
     # todo (бывает что элементы остаются на местах и не схлопываются навверх оставляя промежутки в плитке)
+    # todo сейчас после добавления и удаления каждого элемента (renderNew, removeOld) вызывается updateSortData
+    # todo нужно настроить чтобы запускалосль обновление (updateSortData) плитки после рендера всех постов, т.е. после loadByAspect
+    # todo также нужно на всех новых постах после подгрузки инициализировать hover, perfect_scrollbar, colors_discontents
+    # todo сейчас это происходит после добаления каждого в renderNew
+    # todo для этого нужно повесить callback на loadByAspect
     #    reload_isotope()
     #    this.reloadIsotope
     #    $('#tab_aspect_posts').isotope('reloadItems').isotope()
@@ -46,19 +52,27 @@ DiscontentCollectionView = Backbone.View.extend
 
     show_comments_hover()
     activate_perfect_scrollbar()
-    # post_colored_stripes()
     colors_discontents()
+    # post_colored_stripes()
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
     this.$el.append(discontentView.render().el);
+
   renderNew: (newModel)->
     this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
+    $('#tab_aspect_posts').isotope('updateSortData').isotope()
+    show_comments_hover()
+    activate_perfect_scrollbar()
+    colors_discontents()
+
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')
     this.$container.isotope('remove', el);
+    $('#tab_aspect_posts').isotope('updateSortData').isotope()
+
   loadByAspect: (evt)->
-#    evt.preventDefault();
+    #    evt.preventDefault();
     #    filterValue = $(this).data('aspect')
     #    $('#tab_aspect_posts').isotope
     #      filter: filterValue
