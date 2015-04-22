@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     /* tooltips for all stages */
     $("#tooltip_button_1").click(function() {
-        if ($(this).text().trim()=='Открыть подсказки') {
+        if ($(this).hasClass('btn-tooltip')) {
             $(this).html($(this).find('i')).append('Закрыть подсказки');
         }
         else {

@@ -17,6 +17,9 @@
           -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
           = f.email_field :email, placeholder: 'Email'
           = f.password_field :password, placeholder: 'Пароль'
+          .form-group
+            = f.label :remember_me, 'Запомнить меня'
+            = f.check_box :remember_me
           %button.btn.btn-lg.btn-block.btn-danger.auth-main{id: "sign_in", type: "submit"} Войти
           -#= f.submit 'Войти', class: 'btn btn-lg btn-block btn-danger auth-main', id: 'sign_in'
         .divider10

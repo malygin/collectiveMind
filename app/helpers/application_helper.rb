@@ -833,10 +833,14 @@ module ApplicationHelper
   end
 
   def current_stage_popover_status
-    if name_controller == :collect_info_posts and @questions_progress != 100
-      'collect_info_questions'
-    elsif name_controller == :collect_info_posts and @questions_progress == 100
-      'collect_info_discuss'
+    if name_controller == :collect_info_posts and @project.status == 0 and @questions_progress != 100
+      'collect_info_questions_0'
+    elsif name_controller == :collect_info_posts and @project.status == 0 and @questions_progress == 100
+      'collect_info_discuss_0'
+    elsif name_controller == :collect_info_posts and @project.status == 1 and @questions_progress != 100
+      'collect_info_questions_1'
+    elsif name_controller == :collect_info_posts and @project.status == 1 and @questions_progress == 100
+      'collect_info_discuss_1'
     end
   end
 
