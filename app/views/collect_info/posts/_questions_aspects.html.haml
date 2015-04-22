@@ -144,7 +144,8 @@
                                   - question.answers.each do |answer|
                                     .form-group
                                       %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
-                                        = check_box_tag 'answers[]', answer.id
+                                        -#= check_box_tag 'answers[]', answer.id
+                                        = radio_button_tag 'answers[]', answer.id
                                         = answer.content
                                       %i.fa.fa-check{style: "color:#{asp.color};"}
                                 -if @project.type_for_questions == 0
