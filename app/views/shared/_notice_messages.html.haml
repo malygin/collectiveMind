@@ -2,6 +2,6 @@
   .cab_notice.white
     %span.fail
       = t('errors.messages.not_saved', count: object.errors.count)
-    %p
-    - object.errors.full_messages.each do |msg|
-      = msg
+      - object.errors.full_messages.each do |msg|
+        %br/
+        = msg
