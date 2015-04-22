@@ -55,7 +55,8 @@
 #  return url[url.length-1]
 #  универсализация
   url = window.location.href.match(/project\/(\d+)/)
-  return url[1]
+  if url
+    return url[1]
 
 @parse_my_journal_links = ()->
   #  if window.location.href.indexOf("discontent/posts") > -1

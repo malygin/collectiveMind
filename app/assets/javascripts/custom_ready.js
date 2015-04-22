@@ -70,7 +70,16 @@ $(document).ready(function () {
     //};
     if ($('.popup-explanation').length){
         if (!$('.popup-explanation').hasClass('shown_intro')){
-            magnificPopupOpen('.popup-explanation');
+            $.magnificPopup.open({
+                items: {src: '.popup-explanation'},
+                type: 'inline',
+                //absolute prohibition on closing
+                closeOnContentClick: false,
+                closeOnBgClick: false,
+                closeBtnInside: false,
+                showCloseBtn: false,
+                enableEscapeKey: false
+            });
         }
     };
 
