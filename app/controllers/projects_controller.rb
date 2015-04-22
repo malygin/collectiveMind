@@ -10,7 +10,6 @@ class ProjectsController < ApplicationController
   # базовое логирование, отрабатывает после, чтобы дата была предпоследней
   after_action :start_visit
 
-
   protected
   def set_project
     @project = Core::Project.find(params[:project])

@@ -83,7 +83,7 @@ class UsersController < ProjectsController
     @added_users = User.joins(:core_project_users).where('core_project_users.project_id = ?', @project.id)
     @users = User.without_added(@added_users.pluck(:id)).paginate(page: params[:page])
     respond_to do |format|
-      format.html { render layout: 'core/list_projects' }
+      format.html { render layout: 'core/projects' }
       format.js
     end
   end

@@ -18,7 +18,7 @@ class Core::ProjectsController < ApplicationController
     @core_project = @view_projects.first
 
     respond_to do |format|
-      format.html { render layout: 'core/list_projects' }
+      format.html { render layout: 'core/projects' }
     end
   end
 
