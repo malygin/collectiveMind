@@ -6,21 +6,17 @@ class Discontent::Post < ActiveRecord::Base
   # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
 
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
-
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
 
   #галочки для выбранных несовершенств группы в нововведении
   has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-
   has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
 
-
   has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
   has_many :voted_users, through: :final_votings, source: :user
-
   # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
 
   has_many :advices, class_name: 'Advice', as: :adviseable
@@ -28,6 +24,7 @@ class Discontent::Post < ActiveRecord::Base
   validates :content, :whend, :whered, :project_id, presence: true
 
   default_scope { order :id }
+  #@deprecated нужно использовать for_project из BasePost
   scope :by_project, ->(p) { where(project_id: p) }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
   scope :by_status, ->(p) { where(status: p) }
@@ -35,7 +32,6 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
-  scope :by_aspect, ->(asp) { where(aspect_id: asp) }
 
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4
