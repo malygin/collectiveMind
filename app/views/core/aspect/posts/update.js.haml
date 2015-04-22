@@ -1,3 +1,5 @@
-$('#modal_aspect_view').modal('hide');
-$('#edit_aspect_content_#{@aspect.id}').html("#{escape_javascript("#{@aspect.content}")}");
-$('#edit_aspect_desc_#{@aspect.id}').html("#{escape_javascript("#{@aspect.short_desc}")}");
+- if @aspect.valid?
+  $('#notice_messages').hide();
+  $('#create_aspect_success').fadeIn(3000).fadeOut('slow');
+- else
+  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @aspect)}");

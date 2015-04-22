@@ -6,6 +6,10 @@ class Core::Aspect::PostsController < PostsController
     Core::Aspect::Post
   end
 
+  def current_model
+    Core::Aspect::Post
+  end
+
   def new
     @aspect = Core::Aspect::Post.new
   end
@@ -18,6 +22,7 @@ class Core::Aspect::PostsController < PostsController
   end
 
   def edit
+    render action: :new
   end
 
   def update
@@ -25,8 +30,8 @@ class Core::Aspect::PostsController < PostsController
   end
 
   def destroy
-    @aspect.destroy if boss?
-    redirect_back_or life_tape_posts_path
+    @aspect.destroy if current_user?(@aspect.user)
+    redirect_back_or user_content_collect_info_posts_path(@project)
   end
 
   private
