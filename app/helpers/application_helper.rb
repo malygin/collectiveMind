@@ -859,4 +859,12 @@ module ApplicationHelper
       'Здесь могла быть подсказка, но пока ее нет!'
     end
   end
+
+  def current_stage_url(project)
+    sub_url = project.current_stage_type.to_s.gsub('_', '/')
+    if project.current_stage_type == :collect_info_posts
+      sub_url.sub!('/', '_')
+    end
+    "/project/#{project.id}/#{sub_url}"
+  end
 end

@@ -12,7 +12,7 @@
             %b
               ="(#{status_project(project)})"
           .col-md-3
-            = link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
+            = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
         %br
       %hr
@@ -29,7 +29,7 @@
             %b
               = "(#{status_project(project)})"
           .col-md-3
-            = link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
+            = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
         %br
       %hr
@@ -45,7 +45,7 @@
           %b
             = "(#{status_project(project)})"
         .col-md-3
-          = link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_club_project_#{project.id}" do
+          = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_club_project_#{project.id}" do
             = t('link.go_to_project')
       %br
   %br

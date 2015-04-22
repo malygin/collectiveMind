@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en")
   %head
-    = render 'meta'
+    = render 'application/meta'
 -# До тех времен, пока не сделаем нормальные лейауты (а лучше один)
 - if controller_name == 'sessions'
   %body
@@ -11,7 +11,7 @@
     .container
       %header.page-header
         %a(name='top')
-        =render 'header_no_current_project'
+        = render 'application/header_no_current_project'
     #about.widget.widget-white.widget-about
       .container
         .col-sm-offset-1.col-sm-10
