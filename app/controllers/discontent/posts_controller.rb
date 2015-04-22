@@ -29,14 +29,14 @@ class Discontent::PostsController < PostsController
 
       format.html # show.html.erb
       format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, content: trim_post_content(item.content, 50), what: trim_post_content(item.what, 100), whend: item.whend, whered: item.whered,
-                                                      user: item.user.to_s, user_avatar: ActionController::Base.helpers.asset_path('no-ava.png') ,post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
-                                                      project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
-                                                      aspect_class: post_aspect_classes(item),
-                                                      count_comments: item.comments.count,
-                                                      count_likes: item.users_pro.count,
-                                                      count_dislikes: item.users_against.count,
-                                                      aspects:  item.aspect ? [{id: item.aspect.id, color: item.aspect.color, content: item.aspect.content}] : [],
-                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} }} } }
+                                                                             user: item.user.to_s, user_avatar: ActionController::Base.helpers.asset_path('no-ava.png'), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                                             project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
+                                                                             aspect_class: post_aspect_classes(item),
+                                                                             count_comments: item.comments.count,
+                                                                             count_likes: item.users_pro.count,
+                                                                             count_dislikes: item.users_against.count,
+                                                                             aspects: item.aspect ? [{id: item.aspect.id, color: item.aspect.color, content: item.aspect.content}] : [],
+                                                                             comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} }} } }
 
     end
   end
@@ -100,6 +100,6 @@ class Discontent::PostsController < PostsController
   end
 
   def discontent_post_params
-    params.require(:discontent_post).permit(:content, :whend, :whered, :style, :aspect_id, :what)
+    params.require(:discontent_post).permit(:content, :whend, :whered, :style, :what)
   end
 end

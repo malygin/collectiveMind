@@ -2,7 +2,6 @@ class Discontent::Post < ActiveRecord::Base
   include PgSearch
   include BasePost
 
-  belongs_to :aspect, class_name: 'Core::Aspect::Post', foreign_key: :aspect_id
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
   # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
 
