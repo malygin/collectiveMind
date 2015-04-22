@@ -637,11 +637,74 @@ $('.sticker_close').click(function(){
 });
 
 
-
 /* append close button */
 $(document).ready(function () {
     $('.cab_notice').append('<i class="fa fa-times cabnot_close"></i>');
     $('.cabnot_close').click(function(){
         $(this).closest('.cab_notice').hide();
     });
+});
+
+
+/* button toggle */
+$(document).ready(function () {
+    $('.btn_toggle').click(function(){
+        var usg = $(this).attr('data-usage');
+        $('.btn_toggle[data-usage=' + usg + ']').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+
+
+/* textarea toggle */
+$(document).ready(function () {
+    $('.edit_tgl_ta').click(function(){
+        var textarea_id = $(this).attr('data-for');
+        alert(textarea_id);
+        $(textarea_id).addClass('shown');
+    });
+});
+
+
+
+/* help popover */
+$(document).ready(function(){
+    var data = 'Прочитайте все статьи по каждому из аспектов базы знаний и согласитесь (или не согласитесь) с их целесообразностью.<br>' +
+        'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!';
+    var popoverTemplate = ['<div class="popover help_popover_content cl_btn_container">',
+        '<div class="arrow"></div>',
+        '<i class="fa fa-times cl_btn font_white" onclick="$(&quot;.help_popover&quot;).popover(&quot;hide&quot;);"></i>',
+        '<div class="popover-content font_white">',
+        '</div>',
+        '</div>'].join('');
+    $(".help_popover").popover({
+        selector: '[rel=popover]',
+        trigger: 'manual',
+        placement:'bottom',
+        container: 'body',
+        content:data,
+        template:popoverTemplate,
+        html:true
+    });
+    $(".help_popover").on("show.bs.popover", function () {
+        $(this).addClass('shown');
+    });
+    $(".help_popover").on("hide.bs.popover", function () {
+        $(this).removeClass('shown');
+    });
+    $(".help_popover").hover(function(){
+        if (!$(this).hasClass('shown')) {
+            $(".help_popover").popover('show');
+        }
+    });
+
+
+    /*
+    $('.add_pop_close_btn_here').append('<i class="fa fa-times cl_btn"></i>').removeClass('.add_pop_close_btn_here').addClass('cl_btn_container');
+    $('.cl_btn').click(function(){
+        $(this).closest('.cl_btn_cont').hide();
+    });
+
+    */
+
 });
