@@ -29,7 +29,7 @@
       - elsif comment.approve_status
         %span.label_approve.label.label-success= t('show.important')
       %span{id: "cancel_comment_#{comment.id}"}
-  %p.font_grey.bold{id: "comment_text_#{comment.id}"}
+  %p.font_grey.bold.comment_text{id: "comment_text_#{comment.id}"}
     =comment.content
   .post-interfaces-buttons.text-left
     =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do

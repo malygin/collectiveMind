@@ -19,6 +19,7 @@
     $('#cancel_comment_' + id + ' .edit-cancel').fadeIn()
     $('#form_edit_comment_' + id).collapse('show')
     comments_sumbit()
+    textarea_autosize()
 
 
   this.edit_cancel = (e) ->
@@ -59,6 +60,7 @@
     $('#reply_form_' + comment).collapse('show')
     $('#reply_comment_' + comment).toggleClass('reply-comment cancel-reply')
     comments_sumbit()
+    textarea_autosize()
 
   #    form = $('#form_reply_comment_' + id)
   #    form.append('<br/><textarea class="form-control input-transparent comment-textarea"  name="' + stage + '_comment[content]" placeholder="Ваш комментарий или вопрос" ></textarea>')
@@ -136,6 +138,7 @@
   $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
 
   #  $('body').on('click', '#comment_text_area', this.autosize)
+  $('body').on('click', 'form.comment_add textarea', this.autosize)
 
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
 
@@ -153,3 +156,9 @@
       $(this).closest('form').trigger 'submit'
 
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
+
+@textarea_autosize = ->
+  this.autosize = ->
+    $(this).autosize()
+
+  $('body').on('click', 'form.comment_add textarea', this.autosize)

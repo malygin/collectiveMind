@@ -36,6 +36,10 @@
 #tooltip1_3 + .tooltip{
   left: 310px !important;
 }
+.media.comment .comment_text {
+//  word-break: break-all;
+  word-wrap: break-word;
+}
 
 //.select_aspect {
 //  background-color: gray;
