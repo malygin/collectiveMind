@@ -1,10 +1,5 @@
-- if @concept_post.errors.any?
-  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@concept_post})}');
-  window.scrollTo(0,0)
+- if @concept_post.valid?
+  $('#notice_messages').hide();
+  $('#create_concept_success').fadeIn(3000).fadeOut('slow');
 - else
-  $("#notice_messages").html('')
-  -#$('#render_success_concept').empty();
-  -#$("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_update')}');
-  -#$('#modal_update_concept').modal('show');
-
-$('#send_post_concept').button('reset');
+  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");

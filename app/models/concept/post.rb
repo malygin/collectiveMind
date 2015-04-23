@@ -4,7 +4,7 @@ class Concept::Post < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'concept_post_id', class_name: 'Concept::Voting'
 
-  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} }, class_name: 'Concept::PostDiscontent'
+  has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
 
   # has_many :concept_post_resources, class_name: 'Concept::PostResource'
@@ -34,9 +34,6 @@ class Concept::Post < ActiveRecord::Base
 
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
-  end
-
-  def update_status_fields(pa)
   end
 
   def fullness_title
