@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence(:content) { |n| "what #{n}" }
     sequence(:whend) { |n| "whend #{n}" }
     sequence(:whered) { |n| "whered #{n}" }
+    sequence(:what) { |n| "what #{n}" }
 
     status 0
 
