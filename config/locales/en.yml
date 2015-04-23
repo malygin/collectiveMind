@@ -532,6 +532,7 @@ en:
     delete_group: "Delete group?"
     delete_group_task: "Delete?"
     delete_news: "Delete news?"
+    delete_discontent: "Delete discontent?"
   show:
     without_name: 'Без названия'
     note: замечание
