@@ -358,6 +358,7 @@ $('.check_push_box').click ->
     if ch_its == 0
       $('.hideable_checks').hide()
     $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+    $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
   return
 
 # Открывает и закрывает стикеры в кабинете
