@@ -6,14 +6,21 @@
       .content_window.white
         .divider25
         .btn-group.cab_drop
-          %a.dropdown-toggle{'data-toggle' => 'dropdown'}
-            %span
-              = t('form.discontent.select_aspect')
-          %ul.dropdown-menu
+          %a.dropdown-toggle#select_aspect{'data-toggle' => 'dropdown'}
+            - if @post.post_aspects.empty?
+              %span
+                = t('form.discontent.select_aspect')
+            - @post.post_aspects.each do |aspect|
+              %span
+                %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+              %span.text_label
+                = aspect.content
+
+          %ul.dropdown-menu#list_aspects
             - @aspects.each do |aspect|
               %li
-                /= f.radio_button :aspect_id, aspect.id
-                %label{for: "discontent_post_aspect_id_#{aspect.id}"}
+                = check_box_tag 'discontent_post_aspects[]', aspect.id, @post.post_aspects.include?(aspect), id: "discontent_post_aspects_#{aspect.id}"
+                %label{for: "discontent_post_aspects_#{aspect.id}"}
                   %span
                     %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
                   %span.text_label

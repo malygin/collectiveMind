@@ -63,21 +63,9 @@ class Discontent::Post < ActiveRecord::Base
 
   #привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
-    self.discontent_post_aspects.destroy_all
+    discontent_post_aspects.destroy_all
     aspects_new.each do |asp|
-      self.discontent_post_aspects.create(aspect_id: asp.to_i)
-    end
-  end
-
-  def update_status_fields(pa)
-    if self.read_attribute('content') != pa['content']
-      self.status_content = nil
-    end
-    if self.read_attribute('whend') != pa['whend']
-      self.status_whend = nil
-    end
-    if self.read_attribute('whered') != pa['whered']
-      self.status_whered = nil
+      discontent_post_aspects.create(aspect_id: asp.to_i)
     end
   end
 

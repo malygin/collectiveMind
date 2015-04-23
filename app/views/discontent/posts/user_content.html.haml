@@ -17,12 +17,17 @@
                 %tr.what
                   %td.bold
                     = discontent.content
+                  - if current_user?(discontent.user)
+                    %td
+                      = link_to 'Редактировать', edit_discontent_post_path(@project, discontent), id: "edit_discontent_#{discontent.id}"
+                      = link_to 'Удалить', discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}"
                 %tr
                   %td.col-md-12
                     = discontent.what
       .post-bottom.white
         .row
           .col-md-12
-            %span.tag-stripes.active.color_me{class: 'active', style: "background-color: #{discontent.aspect.color};"}
-              %span.tags
-                = discontent.aspect.content
+            - discontent.post_aspects.each do |aspect|
+              %span.tag-stripes.active.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                %span.tags
+                  = aspect.content
