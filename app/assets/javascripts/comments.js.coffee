@@ -18,8 +18,8 @@
     $('#redactor_comment_' + id).fadeOut()
     $('#cancel_comment_' + id + ' .edit-cancel').fadeIn()
     $('#form_edit_comment_' + id).collapse('show')
-    comments_sumbit()
     textarea_autosize()
+    comments_sumbit()
 
 
   this.edit_cancel = (e) ->
@@ -59,8 +59,8 @@
     $('#comment' + comment).after(form)
     $('#reply_form_' + comment).collapse('show')
     $('#reply_comment_' + comment).toggleClass('reply-comment cancel-reply')
-    comments_sumbit()
     textarea_autosize()
+    comments_sumbit()
 
   #    form = $('#form_reply_comment_' + id)
   #    form.append('<br/><textarea class="form-control input-transparent comment-textarea"  name="' + stage + '_comment[content]" placeholder="Ваш комментарий или вопрос" ></textarea>')

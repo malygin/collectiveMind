@@ -3,7 +3,7 @@
     $('#reply_comment_#{@comment_answer.id}').closest('.media.comment').next('form').collapse('hide').remove();
     $('#reply_comment_#{@comment_answer.id}').toggleClass('reply-comment cancel-reply');
     if($('#answers_#{@comment_parent.id}').length){
-    $('#answers_#{@comment_parent.id} .answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    $('#answers_#{@comment_parent.id} > .answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
     if(!$('#answers_collapse_#{@comment_parent.id}').hasClass('opened')){
     $('#answers_#{@comment_parent.id}').collapse('show');
     }
