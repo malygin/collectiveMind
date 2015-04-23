@@ -59,6 +59,7 @@
     $('#comment' + comment).after(form)
     $('#reply_form_' + comment).collapse('show')
     $('#reply_comment_' + comment).toggleClass('reply-comment cancel-reply')
+    $('#reply_form_' + comment + ' textarea').html($('#user_name_' + comment).text().trim() + ', ')
     textarea_autosize()
     comments_sumbit()
 
@@ -154,6 +155,7 @@
   this.submit_enter = (e) ->
     if e.keyCode == 13
       $(this).closest('form').trigger 'submit'
+      return false;
 
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
 

@@ -507,6 +507,9 @@ class PostsController < ProjectsController
       @comment_answer = comment_model.find(params[:comment])
       @comment_parent = @comment_answer.comment ? @comment_answer.comment : @comment_answer
     end
+    # comment_user = @comment_answer.user unless @comment_answer.nil?
+    # content = comment_user ? "#{comment_user.to_s}, " + params[name_of_comment_for_param][:content] : params[name_of_comment_for_param][:content]
+
     content = params[name_of_comment_for_param][:content]
 
     if params[name_of_comment_for_param][:image]

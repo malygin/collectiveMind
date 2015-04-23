@@ -2,7 +2,7 @@
   .media-left
     = image_tag 'no-ava.png', class: "media-object img35 img-circle"
   .media-body
-    %h5.media-heading.bold
+    %h5.media-heading.bold{id: "user_name_#{comment.id}"}
       =comment.user
     %span.comment_interf
       %span.date_time.theme_font_color
