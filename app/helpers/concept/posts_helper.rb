@@ -1,4 +1,11 @@
 module Concept::PostsHelper
+  def trim_post_content(content, size = 100)
+    if !content.nil? and content.length > size
+      return content[0..size] + ' ...'
+    end
+    content
+  end
+
   def can_vote_for_task?(task)
     task.voitings.each do |fr|
       if fr.user == current_user

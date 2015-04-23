@@ -3,7 +3,8 @@
   = render 'application/meta'
   %body{class: "stage#{current_stage_controller}_theme"}
     .outer
-      = render partial: 'application/left_rollover'
+      - unless cabinet?
+        = render partial: 'application/left_rollover'
       / Top bar starts
       %header.navbar.top_bar
         .container

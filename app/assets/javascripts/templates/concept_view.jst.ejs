@@ -15,7 +15,7 @@
         <div class="post-body ch_action" data-for="post_ch<%= id %>">
             <div class="media">
                 <div class="media-left text-center gradient post-poster">
-                    <img class="img-circle img50" src="/assets/no-ava-d90d3c57ab2b2aa06d4aeeb739c1c75b.png" alt="No ava">
+                    <img class="img-circle img50" src="<%= user_avatar %>" alt="No ava">
                     <p class="poster-name">
                         <%= user %>
                     </p>
@@ -26,6 +26,7 @@
                             <%= content %>
                         </p>
                     </div>
+                    <% if(comments.length > 0) { %>
                     <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
                         <div class="wrapper ps_cont half_wheel_speed">
                             <div class="post_cont_inner">
@@ -43,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -56,7 +58,7 @@
                 <div class="col-md-7 col_padding_right_3 themes_cont">
                     <div id="stripe<%= id %>" class="post-theme">
                         <% for(var i=0; i<discontents.length; i++) {%>
-                        <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="1" data-me-type="imperf">
+                        <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
                                 <span class="tags">
                                   <%= discontents[i].content %>
                                 </span>
@@ -67,7 +69,7 @@
                 <div class="col-md-3 col_padding_left_3">
                     <div class="text-right small_icons">
                         <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
-                          <small>
+                          <small class="cc_post_<%= id %>">
                             <%= count_comments %>
                           </small>
                           <i class="fa fa-comment-o"></i>
@@ -75,7 +77,7 @@
 
                         <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
                               <span class="popup2">
-                                <small id="lk_post_<%= id %>">
+                                <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
                                     <%= count_likes %>
                                 </small>
                                 <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
@@ -83,7 +85,7 @@
                         </a>
                         <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
                               <span class="popup2">
-                                <small id="dlk_post_<%= id %>">
+                                <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
                                     <%= count_dislikes %>
                                 </small>
                                 <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
