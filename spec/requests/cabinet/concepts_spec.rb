@@ -7,6 +7,7 @@ describe 'Cabinet Concepts' do
   let (:core_project_user) { create :core_project_user, core_project: project }
   let (:user) { core_project_user.user }
   let! (:discontent) { create :discontent, user: user, project: project }
+  let! (:concept) { create :concept, user: user, project: project }
 
   before do
     # тут еще нужно прицеплять техники к проекту
@@ -46,7 +47,7 @@ describe 'Cabinet Concepts' do
         click_button 'send_post_concept'
       end
 
-      it { expect(page).to have_content t('form.concept.create_success') }
+      it { expect(page).to have_content t('form.concept.new_success') }
 
       it { expect {}.to change(Concept::Post, :count).by(1) }
 
@@ -63,8 +64,40 @@ describe 'Cabinet Concepts' do
     end
   end
 
+  it 'edit', js: true do
+    new_content = 'new cool content'
+    visit user_content_concept_posts_path(project)
+    click_link "edit_concept_#{concept.id}"
+    within :css, '.checked_items' do
+      concept.concept_disposts.each do |discontent|
+        expect(page).to have_content discontent.content
+      end
+    end
+    within :css, '.unchecked_items' do
+      expect(page).to have_content discontent.content
+    end
+    expect {
+      fill_in 'concept_post_content', with: new_content
+      click_button 'send_post'
+      expect(page).to have_content t('form.concept.edit_success')
+    }.not_to change(Concept::Post, :count)
+    visit user_content_concept_posts_path(project)
+    expect(page).to have_content new_content
+  end
+
+  context 'destroy' do
+    it 'author - ok', js: true do
+      visit user_content_concept_posts_path(project)
+      expect {
+        click_link "destroy_concept_#{concept.id}"
+        page.driver.browser.accept_js_confirms
+        expect(current_path) == user_content_concept_posts_path(project)
+      }.to change(Concept::Post, :count).by(-1)
+    end
+  end
+
+
   it 'created by current user' do
-    concept = create :concept, user: user, project: project
     click_link 'open_my_concept_posts'
     expect(page).to have_content concept.content
   end
