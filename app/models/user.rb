@@ -407,7 +407,7 @@ class User < ActiveRecord::Base
     if project.current_stage_values[:type_stage] == Core::Project::LIST_STAGES.first.second[:type_stage]
       core_aspects.by_project(project)
     else
-      send(project.current_stage_values[:type_stage]).by_project(project)
+      send(project.current_stage_values[:type_stage]).for_project(project.id)
     end
   end
 end

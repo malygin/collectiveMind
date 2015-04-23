@@ -1,0 +1,35 @@
+.item
+  %span
+    %span.cb_input
+      %input.check_push_box{type: 'checkbox', id: "concept_post_discontents[#{discontent.id}]", name: "concept_post_discontents[#{discontent.id}]"}/
+      %label{for: "concept_post_discontents[#{discontent.id}]"}
+        %i.fa.fa-check
+  %span.cell_full_w
+    %a.a_font_reset.with_arrow.collapsed.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs3-1-1'}
+      %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => '0', 'data-me-type' => 'imperf'}>
+      = discontent.content
+      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+    #imperfs3-1-1.description.collapse.rotate_arrow
+      .media.comment
+        .media-left
+        -#= cl_image_tag discontent.user.avatar, class: 'media-object img35 img-circle'
+        .media-body
+          .row
+            .col-md-4
+              %h6.media-heading.bold
+                = discontent.user
+              %span.date
+                = Russian::strftime(discontent.created_at,'%d.%m.%Y %k:%M:%S')
+            .col-md-4.col-md-offset-4
+              .small_icons.text-right
+                %span.popup2
+                  %small 5
+                  %i.fa.fa-comment-o
+                %span.popup2
+                  %small 9
+                  %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+                %span.popup2
+                  %small 1
+                  %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+        %p.font_grey.bold
+          = discontent.whend

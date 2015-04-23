@@ -9,12 +9,10 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara-screenshot/rspec'
   require 'capybara/webkit/matchers'
-  require 'database_cleaner'
   require 'websocket_rails/spec_helpers'
 
   require 'simplecov'
   SimpleCov.start
-  DatabaseCleaner.clean
   Capybara.javascript_driver = :webkit
 
   Capybara.save_and_open_page_path = 'tmp/capybara-screenshot'
@@ -48,24 +46,12 @@ Spork.prefork do
       Capybara.default_wait_time = 5
     end
 
-    config.before(:suite) do
-      DatabaseCleaner.clean_with(:truncation)
+    config.before :suite do
+      DatabaseRewinder.clean_all
     end
 
-    config.before(:each) do
-      DatabaseCleaner.strategy = :transaction
-    end
-
-    config.before(:each, js: true) do
-      DatabaseCleaner.strategy = :truncation
-    end
-
-    config.before(:each) do
-      DatabaseCleaner.start
-    end
-
-    config.after(:each) do
-      DatabaseCleaner.clean
+    config.after :each do
+      DatabaseRewinder.clean
     end
   end
 end

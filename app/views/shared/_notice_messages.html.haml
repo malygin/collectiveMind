@@ -1,5 +1,5 @@
 - if object.errors.any?
-  .cab_notice.white
+  .cab_notice.white#error_explanation
     %span.fail
       = t('errors.messages.not_saved', count: object.errors.count)
       - object.errors.full_messages.each do |msg|

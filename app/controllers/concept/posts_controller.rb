@@ -1,6 +1,7 @@
 class Concept::PostsController < PostsController
   include Concept::PostsHelper
   before_action :set_concept_post, only: [:edit, :update]
+  before_action :set_discontent_posts, only: [:new, :edit]
 
   def voting_model
     Concept::Post
@@ -46,8 +47,6 @@ class Concept::PostsController < PostsController
     # нововведение без аспекта?
     @asp = Core::Aspect::Post.find(params[:asp]) unless params[:asp].nil?
     @concept_post = current_model.new
-    # нововведение без несовершенства?
-    @discontent_posts = Discontent::Post.by_project(@project)
     # @resources = Concept::Resource.where(project_id: @project.id)
     # if params[:improve_comment] and params[:improve_stage]
     #   @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
@@ -89,45 +88,31 @@ class Concept::PostsController < PostsController
   end
 
   def edit
-    # @discontent_post = @concept_post.discontent
-    @remove_able = true
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    @discontent_posts = @discontent_posts - @concept_post.concept_disposts
+    render action: :new
   end
 
   def update
-    @concept_post.update_status_fields(params[:concept_post])
-
-    unless params[:cd].nil?
-      @concept_post.concept_post_discontents.destroy_all if @concept_post.valid?
-      params[:cd].each do |cd|
-        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0], complite: cd[1][:complite], status: 0)
+    @concept_post.update_attributes(concept_post_params)
+    if @concept_post.valid? and params[:concept_post_discontents].present?
+      @concept_post.concept_post_discontents.destroy_all
+      params[:concept_post_discontents].each do |cd|
+        @concept_post.concept_post_discontents.build(discontent_post_id: cd[0])
       end
     end
-    unless params[:check_discontent].nil?
-      @concept_post.concept_post_discontent_checks.destroy_all if @concept_post.valid?
-      params[:check_discontent].each do |com|
-        @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
-      end
-    end
-
+    # unless params[:check_discontent].nil?
+    #   @concept_post.concept_post_discontent_checks.destroy_all if @concept_post.valid?
+    #   params[:check_discontent].each do |com|
+    #     @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
+    #   end
+    # end
     # create_concept_resources_on_type(@project, @concept_post)
 
     respond_to do |format|
       if @concept_post.save
-        unless params[:fast_update]
-          current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
-        else
-          @discontent_post = @concept_post.discontent
-          @remove_able = true
-        end
-        @aspect_id = @project.proc_aspects.order(:id).first.id
-        format.html { redirect_to action: 'show', project: @project, id: @concept_post.id }
+        current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
         format.js
       else
-        format.html { render action: 'edit' }
         format.js
       end
     end
@@ -167,6 +152,10 @@ class Concept::PostsController < PostsController
   end
 
   private
+  def set_discontent_posts
+    @discontent_posts = Discontent::Post.by_project(@project)
+  end
+
   def set_concept_post
     @concept_post = Concept::Post.find(params[:id])
   end
@@ -197,7 +186,6 @@ class Concept::PostsController < PostsController
   #   end
   # end
 
-  private
   def concept_post_params
     params.require(:concept_post).permit(:goal, :user_id, :number_views, :status, :content, :censored, :discuss_status,
                                          :useful, :approve_status, :title, :actors, :impact_env)

@@ -6,6 +6,7 @@ describe 'Cabinet Aspects' do
   let (:project) { create :core_project, status: Core::Project::STATUS_CODES[:collect_info] }
   let (:core_project_user) { create :core_project_user, core_project: project }
   let (:user) { core_project_user.user }
+  let! (:aspect) { create :aspect, user: user, project: project }
 
   before do
     # тут еще нужно прицеплять техники к проекту
@@ -38,7 +39,7 @@ describe 'Cabinet Aspects' do
         fill_in 'core_aspect_post_content', with: 'new aspect'
         fill_in 'core_aspect_post_short_desc', with: 'because'
         click_button 'send_post_aspect'
-        expect(page).to have_content t('form.aspect.create_success')
+        expect(page).to have_content t('form.aspect.new_success')
       }.to change(Core::Aspect::Post, :count).by(1)
     end
 
@@ -48,14 +49,37 @@ describe 'Cabinet Aspects' do
         fill_in 'core_aspect_post_short_desc', with: ''
         click_button 'send_post_aspect'
         within :css, 'div#notice_messages' do
-          expect(page).to have_css 'div.error_explanation'
+          expect(page).to have_css 'div#error_explanation'
         end
       }.not_to change(Core::Aspect::Post, :count)
     end
   end
 
+  it 'edit', js: true do
+    new_content = 'new cool content'
+    visit user_content_collect_info_posts_path(project)
+    click_link "edit_aspect_#{aspect.id}"
+    expect {
+      fill_in 'core_aspect_post_content', with: new_content
+      click_button 'send_post_aspect'
+      expect(page).to have_content t('form.aspect.edit_success')
+    }.not_to change(Core::Aspect::Post, :count)
+    visit user_content_collect_info_posts_path(project)
+    expect(page).to have_content new_content
+  end
+
+  context 'destroy' do
+    it 'author - ok', js: true do
+      visit user_content_collect_info_posts_path(project)
+      expect {
+        click_link "destroy_aspect_#{aspect.id}"
+        page.driver.browser.accept_js_confirms
+        expect(current_path) == user_content_collect_info_posts_path(project)
+      }.to change(Core::Aspect::Post, :count).by(-1)
+    end
+  end
+
   it 'created by current user' do
-    aspect = create :aspect, user: user, project: project
     click_link 'open_my_collect_info_posts'
     expect(page).to have_content aspect.content
   end

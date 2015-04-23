@@ -13,12 +13,15 @@
             .post-text
               %h5.bold
                 = concept.title
+              - if current_user?(concept.user)
+                = link_to 'Редактировать', edit_concept_post_path(@project, concept), id: "edit_concept_#{concept.id}"
+                = link_to 'Удалить', concept_post_path(@project, concept), method: :delete, data: {confirm: t('confirm.delete_concept')}, id: "destroy_concept_#{concept.id}"
               %p
                 = concept.goal
       .post-bottom.white
         .row
           .col-md-12
             - concept.concept_disposts.each do |discontent|
-              %span.tag-stripes.active.color_me{'data-me-action' => 'background-color', 'data-me-color' => '2', 'data-me-type' => 'aspect'}
+              %span.tag-stripes.active.color_me{'data-me-action' => 'background-color', 'data-me-color' => '1', 'data-me-type' => 'imperf'}
                 %span.tags
                   = discontent.content
