@@ -13,7 +13,7 @@
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
             %li{class: "#{'active' unless cabinet?}"}
-              = link_to 'Процедура', "/project/#{@project.id}", class: 'menu_a'
+              = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
             %li{class: "#{'active' if cabinet?}"}
               = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet.to_s.downcase.singularize}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
             %li.has_dropwindow
