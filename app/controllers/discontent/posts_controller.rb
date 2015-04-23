@@ -36,7 +36,7 @@ class Discontent::PostsController < PostsController
                                                                              count_comments: item.comments.count,
                                                                              count_likes: item.users_pro.count,
                                                                              count_dislikes: item.users_against.count,
-                                                                             aspects: item.aspect ? [{id: item.aspect.id, color: item.aspect.color, content: item.aspect.content}] : [],
+                                                                             aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} },
                                                                              comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%d.%m.%Y'), user: comment.user.to_s, content: comment.content} }} } }
 
     end
