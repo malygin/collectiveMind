@@ -43,7 +43,8 @@ describe 'Cabinet Concepts' do
         fill_in 'concept_post_actors', with: 'actors'
         fill_in 'concept_post_impact_env', with: 'impact environment'
         find('#open_discontents').click
-        find("input#concept_post_discontents[#{discontent.id}]").click
+
+        find("input#concept_post_discontents_#{discontent.id}").click
         click_button 'send_post_concept'
       end
 
