@@ -81,14 +81,16 @@
                         =note.content
                       %br
                 .divider10
-              - if @post.aspect.present?
+              -if @post.post_aspects.present?
                 .divider_1_grey
-                .index_block
-                  .text-center.col-md-1
-                    %i.fa.fa-square{style: "color:#{@post.aspect.color};"}
-                  .col-md-11
-                    = @post.aspect.content
+                - @post.post_aspects.each do |asp|
+                  .index_block
+                    .text-center.col-md-1
+                      %i.fa.fa-square{style: "color:#{asp.color};"}
+                    .col-md-11
+                      = asp.content
                 .divider10
+
           .col-md-7.comment_col.popup_expandable_col.ps_cont
             %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание несовершенства
             .divider15
