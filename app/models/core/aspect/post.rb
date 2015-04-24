@@ -53,6 +53,11 @@ class Core::Aspect::Post < ActiveRecord::Base
     self.questions.by_type(type_questions).where.not(id: questions_answered)
   end
 
+  # только вопросы первой порции
+  def user_answers_for_aspect
+    self.collect_info_user_answers.joins(:question).where(collect_info_questions: {type_stage: 0})
+  end
+
   def voted(user)
     self.voted_users.where(id: user)
   end

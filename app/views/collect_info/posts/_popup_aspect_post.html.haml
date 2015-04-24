@@ -49,12 +49,12 @@
           -else
             -# @todo прицепить perfectScrollbar, без сокращения пояснения
             .post-text.ps_cont
-              =@post.questions.by_type(0).first.content
+              = @post.questions.by_type(0).first.try(:content)
               %br
-              -@post.collect_info_user_answers.each do |answer|
+              -@post.user_answers_for_aspect.each do |answer|
                 %span.bold
                   ="#{answer.user}:"
-                =" #{answer.answer.content}  #{answer.content}"
+                =" #{answer.answer.try(:content)}  #{answer.content}"
                 %br
 
 
