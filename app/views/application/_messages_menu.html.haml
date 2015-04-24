@@ -16,13 +16,13 @@
             .ps_cont
               - unless my_journals.empty?
                 - my_journals.each do |journal, k|
-                  %a.dd_notice.moder{:href => "#"}
+                  %span.dd_notice.moder{:href => "#"}
                     %span.dd_n_cell.left
-                      %i.fa.fa-lg.fa-exclamation-triangle
+                      %i.fa.fa-lg(class="#{journal_icon(journal)}")
                     %span.dd_n_cell.right
                       = Russian::strftime(journal.created_at,'%k:%M %d.%m.%Y')
                       %span.bold
-                        = journal.user
+                        = link_to journal.user, user_path(@project, journal.user)
                       %p
                         - if k > 1
                           = t('menu.journal_count', count: k-1)

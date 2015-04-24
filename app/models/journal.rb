@@ -167,18 +167,35 @@ class Journal < ActiveRecord::Base
                                 body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
                                 first_id: post.id, second_id: comment.id).save!
 
-    if post.user!=current_user
+    # if post.user!=current_user
       current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
                                   first_id: post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
-    end
+    # end
 
-    if comment_answer and comment_answer.user!=current_user
+    if comment_answer #and comment_answer.user!=current_user
       current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
                                   first_id: post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
+  end
+
+
+  def self.like_event(current_user, project, name_of_model_for_param, post, against)
+    # if post.user!=current_user
+      current_user.journals.build(type_event: 'my_'+name_of_model_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: post.user, project: project,
+                                  body: "#{trim_content(post.content)}", first_id: post.id, personal: true, viewed: false).save!
+    # end
+  end
+
+  def self.like_comment_event(current_user, project, name_of_comment_for_param, comment, against)
+    # if comment.user!=current_user
+      current_user.journals.build(type_event: 'my_'+name_of_comment_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: comment.user, project: project,
+                                  body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(comment.post)),
+                                  first_id: comment.post.id, second_id: comment.id,
+                                  personal: true, viewed: false).save!
+    # end
   end
 end

@@ -845,6 +845,10 @@ module ApplicationHelper
       'collect_info_questions_1'
     elsif name_controller == :collect_info_posts and @project.status > 1 and @questions_progress == 100
       'collect_info_discuss_1'
+    elsif name_controller == :discontent_posts
+      'discontent_discuss'
+    elsif name_controller == :concept_posts
+      'concept_discuss'
     end
   end
 

@@ -332,7 +332,7 @@ class User < ActiveRecord::Base
 
   def my_journals(project)
     events = Journal.events_for_my_feed project.id, id
-    g = events.group_by { |e| e.first_id }
+    g = events.group_by { |e| [e.first_id, e.type_event] }
     g.collect { |k, v| [v.first, v.size] }
   end
 

@@ -53,7 +53,7 @@ DiscontentCollectionView = Backbone.View.extend
     show_comments_hover()
     activate_perfect_scrollbar()
     colors_discontents()
-    # post_colored_stripes()
+    post_colored_stripes()
     return this
   addOne: (discontent)->
     discontentView = new DiscontentView({model: discontent});
@@ -65,6 +65,7 @@ DiscontentCollectionView = Backbone.View.extend
     show_comments_hover()
     activate_perfect_scrollbar()
     colors_discontents()
+    post_colored_stripes()
 
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')

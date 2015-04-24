@@ -19,7 +19,7 @@
                   -post_short.comments.preview.each do |comment|
                     .comment_preview
                       %span.bold.com_date
-                        =Russian::strftime(comment.created_at,'%d.%m.%y %k:%M')
+                        =Russian::strftime(comment.created_at,'%k:%M %d.%m.%y')
                       %span.bold
                         ="#{comment.user}:"
                       =comment.content

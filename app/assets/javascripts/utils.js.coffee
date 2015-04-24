@@ -32,9 +32,11 @@
     $('#aspect_block_'+aspect).html('<div class="divider20"></div><h4 class="block-with-left-icon pull-left"><i class="left-icon fa fa-2x fa-comments"></i>Вы ответили на все вопросы по данному аспекту.</h4><span class="pull-right question_count"></span><div class="carousel-inner"></div>')
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
-      $('#li_aspect_'+aspect).removeClass('active')
+#      $('#li_aspect_'+aspect).removeClass('active')
 #      $('#li_aspect_'+aspect+' .slider-item').removeClass('active');
 #      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('.slider-item').addClass('active');
+      $('.li_aspect').removeClass('active')
+      $('.slider-item').removeClass('active')
       $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
     else
       # else we have not more aspects, we just show greetings

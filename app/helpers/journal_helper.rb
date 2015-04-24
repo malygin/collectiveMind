@@ -1,69 +1,113 @@
 module JournalHelper
   def journal_icon(j)
     case j.type_event
-      when 'plan_post_save'
-        'fa fa-plus color-green'
-      when 'plan_post_update'
-        'fa fa-edit color-green'
-      when 'plan_comment_save'
-        'fa fa-comment color-green'
-
-      when 'concept_post_save'
-        'fa fa-plus color-orange'
-      when 'concept_post_update'
-        'fa fa-edit color-orange'
-      when 'concept_comment_save'
-        'fa fa-comment color-orange'
-
-      when 'discontent_post_save'
-        'fa fa-plus color-red'
-      when 'discontent_post_update'
-        'fa fa-edit color-red'
+      # статус Важно
+      when 'core_aspect_post_approve_status', 'my_core_aspect_post_approve_status', 'core_aspect_comment_approve_status', 'my_core_aspect_comment_approve_status'
+        'fa-exclamation font_color_stage1'
+      when 'discontent_post_approve_status', 'my_discontent_post_approve_status', 'discontent_comment_approve_status', 'my_discontent_comment_approve_status'
+        'fa-exclamation font_color_stage2'
+      when 'concept_post_approve_status', 'my_concept_post_approve_status', 'concept_comment_approve_status', 'my_concept_comment_approve_status'
+        'fa-exclamation font_color_stage3'
+      # лайки
+      when 'my_core_aspect_post_like', 'my_core_aspect_comment_like'
+        'fa-thumbs-up font_color_stage1'
+      when 'my_discontent_post_like', 'my_discontent_comment_like'
+        'fa-thumbs-up font_color_stage2'
+      when 'my_concept_post_like', 'my_concept_comment_like'
+        'fa-thumbs-up font_color_stage3'
+      #  дислайки
+      when 'my_core_aspect_post_dislike', 'my_core_aspect_comment_dislike'
+        'fa-thumbs-down font_color_stage1'
+      when 'my_discontent_post_dislike', 'my_discontent_comment_dislike'
+        'fa-thumbs-down font_color_stage2'
+      when 'my_concept_post_dislike', 'my_concept_comment_dislike'
+        'fa-thumbs-down font_color_stage3'
+      # комменты
+      when 'core_aspect_comment_save', 'my_core_aspect_comment'
+        'fa-comment font_color_stage1'
       when 'discontent_comment_save', 'my_discontent_comment'
-        'fa fa-comment color-red'
-      when 'life_tape_post_save'
-        'fa fa-plus color-teal'
-      when 'life_tape_comment_save'
-        'fa fa-comment color-teal'
-      when 'award_1like', 'award_3likes', 'award_5likes', 'award_15likes', 'award_50likes',
-          'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
-          'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
-          'award_100points', 'award_500points', 'award_1000points', 'award_3000points', 'my_add_score_discontent', 'my_add_score_comment',
-          'my_award_1like', 'my_award_3likes', 'my_award_5likes', 'my_award_15likes', 'my_award_50likes',
-          'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection',
-          'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
-          'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points', 'my_add_score_discontent_improve'
-        'fa fa-trophy '
-      when 'life_tape_comment_discuss_status', 'life_tape_comment_approve_status', 'my_life_tape_comment_approve_status'
-        'fa color-teal  fa-exclamation'
-      when 'my_discontent_comment_discuss_status', 'discontent_comment_discuss_status', 'discontent_post_comment_stat', 'discontent_post_discuss_status',
-          'discontent_comment_approve_status', 'discontent_post_approve_status'
-        'fa color-red  fa-exclamation'
-      when 'concept_comment_discuss_status', 'concept_post_discuss_status', 'concept_comment_approve_status', 'concept_post_approve_status'
-        'fa color-orange  fa-exclamation'
-      when 'plan_comment_discuss_status', 'plan_comment_approve_status'
-        'fa fa-exclamation color-green'
-      when 'essay_comment_discuss_status', 'essay_comment_approve_stat'
-        'fa fa-exclamation'
-      when 'essay_post_save'
-        'fa fa-plus'
-      when 'essay_post_update'
-        'fa fa-edit'
-      when 'essay_comment_save'
-        'fa fa-comment'
-      when 'discontent_post_discuss_status'
-        'fa fa-exclamation color-red'
-      when 'my_concept_note'
-        'fa color-orange fa-hand-o-up'
-      when 'my_discontent_note'
-        'fa color-red fa-hand-o-up'
-      when 'my_life_tape_comment'
-        'fa color-teal fa-reply'
+        'fa-comment font_color_stage2'
+      when 'concept_comment_save', 'my_concept_comment'
+        'fa-comment font_color_stage3'
+      # ответы на комменты
+      when 'reply_core_aspect_comment'
+        'fa-reply font_color_stage1'
       when 'reply_discontent_comment'
-        'fa color-red fa-reply'
+        'fa-reply font_color_stage2'
+      when 'reply_concept_comment'
+        'fa-reply font_color_stage3'
+      # добавление постов
+      when 'core_aspect_post_save'
+        'fa-plus font_color_stage1'
+      when 'discontent_post_save'
+        'fa-plus font_color_stage2'
+      when 'concept_post_save'
+        'fa-plus font_color_stage3'
 
-      when 'knowbase_edit'
-        'fa fa-plus'
+
+      # when 'plan_post_save'
+      #   'fa fa-plus color-green'
+      # when 'plan_post_update'
+      #   'fa fa-edit color-green'
+      # when 'plan_comment_save'
+      #   'fa fa-comment color-green'
+      #
+      # when 'concept_post_save'
+      #   'fa fa-plus color-orange'
+      # when 'concept_post_update'
+      #   'fa fa-edit color-orange'
+      # when 'concept_comment_save'
+      #   'fa fa-comment color-orange'
+      #
+      # when 'discontent_post_save'
+      #   'fa fa-plus color-red'
+      # when 'discontent_post_update'
+      #   'fa fa-edit color-red'
+      # when 'discontent_comment_save', 'my_discontent_comment'
+      #   'fa fa-comment color-red'
+      # when 'life_tape_post_save'
+      #   'fa fa-plus color-teal'
+      # when 'life_tape_comment_save'
+      #   'fa fa-comment color-teal'
+      # when 'award_1like', 'award_3likes', 'award_5likes', 'award_15likes', 'award_50likes',
+      #     'award_1imperfection', 'award_3imperfection', 'award_5imperfection', 'award_15imperfection',
+      #     'award_1innovation', 'award_3innovation', 'award_5innovation', 'award_15innovation',
+      #     'award_100points', 'award_500points', 'award_1000points', 'award_3000points', 'my_add_score_discontent', 'my_add_score_comment',
+      #     'my_award_1like', 'my_award_3likes', 'my_award_5likes', 'my_award_15likes', 'my_award_50likes',
+      #     'my_award_1imperfection', 'my_award_3imperfection', 'my_award_5imperfection', 'my_award_15imperfection',
+      #     'my_award_1innovation', 'my_award_3innovation', 'my_award_5innovation', 'my_award_15innovation',
+      #     'my_award_100points', 'my_award_500points', 'my_award_1000points', 'my_award_3000points', 'my_add_score_discontent_improve'
+      #   'fa fa-trophy '
+      # when 'life_tape_comment_discuss_status', 'life_tape_comment_approve_status', 'my_life_tape_comment_approve_status'
+      #   'fa color-teal  fa-exclamation'
+      # when 'my_discontent_comment_discuss_status', 'discontent_comment_discuss_status', 'discontent_post_comment_stat', 'discontent_post_discuss_status',
+      #     'discontent_comment_approve_status', 'discontent_post_approve_status'
+      #   'fa color-red  fa-exclamation'
+      # when 'concept_comment_discuss_status', 'concept_post_discuss_status', 'concept_comment_approve_status', 'concept_post_approve_status'
+      #   'fa color-orange  fa-exclamation'
+      # when 'plan_comment_discuss_status', 'plan_comment_approve_status'
+      #   'fa fa-exclamation color-green'
+      # when 'essay_comment_discuss_status', 'essay_comment_approve_stat'
+      #   'fa fa-exclamation'
+      # when 'essay_post_save'
+      #   'fa fa-plus'
+      # when 'essay_post_update'
+      #   'fa fa-edit'
+      # when 'essay_comment_save'
+      #   'fa fa-comment'
+      # when 'discontent_post_discuss_status'
+      #   'fa fa-exclamation color-red'
+      # when 'my_concept_note'
+      #   'fa color-orange fa-hand-o-up'
+      # when 'my_discontent_note'
+      #   'fa color-red fa-hand-o-up'
+      # when 'my_life_tape_comment'
+      #   'fa color-teal fa-reply'
+      # when 'reply_discontent_comment'
+      #   'fa color-red fa-reply'
+      #
+      # when 'knowbase_edit'
+      #   'fa fa-plus'
     end
   end
 
@@ -94,7 +138,6 @@ module JournalHelper
 
       when 'core_aspect_post_save'
         'добавил(а) аспект '+ link_to("#{j.body}..", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}")
-
       when 'core_aspect_comment_save'
         "добавил(а) комментарий: '#{j.body} ...' к аспекту:  "+ link_to("#{j.body2}", "/project/#{project}/collect_info/posts/?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'my_core_aspect_comment'
@@ -106,24 +149,31 @@ module JournalHelper
         'выделил(а) аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}") + ' как важный'
       when 'my_core_aspect_post_approve_status'
         'выделил(а) ваш аспект  ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true") + ' как важный'
-
       when 'core_aspect_comment_approve_status'
         "выделил(а) комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_core_aspect_comment_approve_status'
         "выделил(а) ваш комментарий: '#{j.body}'"+ link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
+      when 'my_core_aspect_post_like'
+        'понравился ваш аспект ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_core_aspect_comment_like'
+        "понравился ваш комментарий: '#{j.body}'" + link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_core_aspect_post_dislike'
+        'не понравился ваш аспект ' + link_to("#{j.body}", "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_core_aspect_comment_dislike'
+        "не понравился ваш комментарий: '#{j.body}'" + link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
 
 
       # DISCONTENTS
-      when 'discontent_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'discontent_post_save'
         if j.anonym
           " #{t('journal.add_anonym_discontent')} #{link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}")}"
         else
           'добавил(а) несовершенство  ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}")
         end
+      when 'discontent_comment_save'
+        "добавил(а) комментарий: '#{j.body}'"+ ' к несовершенству '+ link_to("#{j.body2} ... ", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'my_discontent_comment'
         "добавил(а) комментарий '#{j.body}...' к вашему несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_discontent_comment'
@@ -139,7 +189,14 @@ module JournalHelper
         "выделил(а) ваш комментарий '#{j.body}...' к несовершенству "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
 
 
-
+      when 'my_discontent_post_like'
+        'понравилось ваше несовершенство ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_discontent_comment_like'
+        "понравился ваш комментарий: '#{j.body}'" + link_to(' к несовершенству ', "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_discontent_post_dislike'
+        'не понравилось ваше несовершенство ' + link_to("#{j.body}", "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_discontent_comment_dislike'
+        "не понравился ваш комментарий: '#{j.body}'" + link_to(' к несовершенству ', "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
 
 
@@ -189,41 +246,83 @@ module JournalHelper
 
 
       # CONCEPTS
-      when 'concept_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+ link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+
       when 'concept_post_save'
-        'добавил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}")
-      when 'concept_post_update'
-        'отредактировал(а) нововведение '+ link_to("#{j.body}...", "/project/#{project}/concept/posts/#{j.first_id}")
+        'добавил(а) идею  ' + link_to("#{j.body}", "/project/#{project}/concept/posts?jr_post=#{j.first_id}")
+      when 'concept_comment_save'
+        "добавил(а) комментарий: '#{j.body}'"+ ' к идее '+ link_to("#{j.body2} ... ", "/project/#{project}/concept/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'my_concept_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашей идее "+ link_to(j.body2, "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_concept_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
-      when 'my_add_score_concept'
-        "вы получили  #{j.body} баллов за нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
-      when 'my_add_score_concept_improve'
-        "вы получили  #{j.body} баллов за то, что вашу идею доработали в нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
-
-      when 'my_concept_note'
-        s = j.body.split(':')
-        "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
-      when 'concept_post_discuss_status'
-        'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как требующее обсуждения'
-      when 'my_concept_post_discuss_status'
-        'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
-      when 'concept_comment_discuss_status'
-        "выделил(а) комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_concept_comment_discuss_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
       when 'concept_post_approve_status'
-        'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как важное'
+        'выделил(а) идею  ' + link_to("#{j.body}", "/project/#{project}/concept/posts?jr_post=#{j.first_id}") + ' как важную'
       when 'my_concept_post_approve_status'
-        'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как важное'
+        'выделил(а) вашу идею  ' + link_to("#{j.body}", "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true") + ' как важную'
       when 'concept_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к идее "+ link_to(j.body2, "/project/#{project}/concept/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_concept_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к идее "+ link_to(j.body2, "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+      when 'my_concept_post_like'
+        'понравилась ваша идея ' + link_to("#{j.body}", "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_concept_comment_like'
+        "понравился ваш комментарий: '#{j.body}'" + link_to(' к идее ', "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_concept_post_dislike'
+        'не понравилась ваша идея ' + link_to("#{j.body}", "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_concept_comment_dislike'
+        "не понравился ваш комментарий: '#{j.body}'" + link_to(' к идее ', "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+
+
+
+
+
+
+
+
+
+
+      # when 'concept_comment_save'
+      #   "добавил(а) комментарий: '#{j.body}'"+ ' к нововведению '+ link_to("#{j.body2} ... ", "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'concept_post_save'
+      #   'добавил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}")
+      # when 'concept_post_update'
+      #   'отредактировал(а) нововведение '+ link_to("#{j.body}...", "/project/#{project}/concept/posts/#{j.first_id}")
+      # when 'my_concept_comment'
+      #   "добавил(а) комментарий '#{j.body}...' к вашему нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'reply_concept_comment'
+      #   "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      #
+      # when 'my_add_score_concept'
+      #   "вы получили  #{j.body} баллов за нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+      # when 'my_add_score_concept_improve'
+      #   "вы получили  #{j.body} баллов за то, что вашу идею доработали в нововведение "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+      #
+      # when 'my_concept_note'
+      #   s = j.body.split(':')
+      #   "добавил(а) замечание  '#{j.body}...' к "+ link_to('вашему нововведению', "/project/#{project}/concept/posts/#{j.first_id}?viewed=true")
+      # when 'concept_post_discuss_status'
+      #   'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как требующее обсуждения'
+      # when 'my_concept_post_discuss_status'
+      #   'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как требующее обсуждения'
+      # when 'concept_comment_discuss_status'
+      #   "выделил(а) комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'my_concept_comment_discuss_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'concept_post_approve_status'
+      #   'выделил(а) нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}") + ' как важное'
+      # when 'my_concept_post_approve_status'
+      #   'выделил(а) ваше нововведение  ' + link_to("#{j.body}", "/project/#{project}/concept/posts/#{j.first_id}?viewed=true") + ' как важное'
+      # when 'concept_comment_approve_status'
+      #   "выделил(а) комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      # when 'my_concept_comment_approve_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к нововведению "+ link_to(j.body2, "/project/#{project}/concept/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+
       # PLANS
       when 'plan_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+ link_to("#{j.body2} ... ", "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
