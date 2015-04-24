@@ -377,8 +377,8 @@ class User < ActiveRecord::Base
 
   # аспекты за которые пользователь еще не проголосовал
   def unvote_aspects_for_vote(project)
-    vote_aspects = project.main_aspects.joins(:final_votings).where(collect_info_votings: {user_id: self.id}).pluck('core_aspect_posts.id')
-    project.main_aspects.where.not(id: vote_aspects)
+    vote_aspects = project.proc_main_aspects.joins(:final_votings).where(collect_info_votings: {user_id: self.id}).pluck('core_aspect_posts.id')
+    project.proc_main_aspects.where.not(id: vote_aspects)
   end
 
   # несовершенства для голосования (необходимые, важные, неважные)
