@@ -7,33 +7,35 @@
       - else
         = image_tag 'user.png'
       .divider10
-      %a#profile-tab{'aria-controls' => 'profile', 'aria-expanded' => 'true', 'data-toggle' => 'tab', href: '#profile', role: 'tab'}
-        %button.btn.btn-xs.btn-danger Изменить
+      - if current_user?(@user)
+        %a#profile-tab{'aria-controls' => 'profile', 'aria-expanded' => 'true', 'data-toggle' => 'tab', href: '#profile', role: 'tab'}
+          %button.btn.btn-xs.btn-danger Изменить
     .divider10
     %h4
       = @user
-    #profile.tab-pane.fade{'aria-labelledby' => 'profile-tab', role: 'tabpanel'}
-      %h5 Не состоит ни в одной группе
-      = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
-        = render 'shared/notice_messages', object: f.object
-        .form-group
-          = f.text_field :name, class: 'form-control', placeholder: 'Имя'
-        .form-group
-          = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
-        .form-group
-          = f.text_field :email, class: 'form-control', placeholder: 'Email'
-        .form-group
-          = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
-        .form-group
-          = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
-        .form-group
-          = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-        .form-group
-          .checkbox
-            %label
-              %input{type: 'checkbox'}/
-              Получать автоматические уведомления
-        = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+    - if current_user?(@user)
+      #profile.tab-pane.fade{'aria-labelledby' => 'profile-tab', role: 'tabpanel'}
+        %h5 Не состоит ни в одной группе
+        = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
+          = render 'shared/notice_messages', object: f.object
+          .form-group
+            = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+          .form-group
+            = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+          .form-group
+            = f.text_field :email, class: 'form-control', placeholder: 'Email'
+          .form-group
+            = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+          .form-group
+            = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
+          .form-group
+            = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+          .form-group
+            .checkbox
+              %label
+                %input{type: 'checkbox'}/
+                Получать автоматические уведомления
+          = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
 
 %div
   -#%section.widget
