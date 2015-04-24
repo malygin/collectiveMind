@@ -20,7 +20,7 @@
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
     %link{:href => "css/colors.css", :rel => "stylesheet"}/
-  %body.stage1_theme
+  %body.grey_theme
     .outer
       / Top bar starts
       %header.navbar.top_bar
@@ -31,8 +31,10 @@
           %ul.nav.navbar-nav.main_menu
             %li
               %a.menu_a{:href => "1st-stage.html"} Процедура
-            %li.active
+            %li
               %a.menu_a{:href => "1st-stage-cabinet.html"} Кабинет
+            %li.active
+              %a.menu_a{:href => "rating.html"} Рейтинг
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -51,23 +53,26 @@
                               %span.dd_n_cell.left.font_color_stage4
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage4
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice.moder{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-exclamation-triangle
                               %span.dd_n_cell.right
-                                22:00 11.03.2015
-                                = succeed ":" do
-                                  %span.bold Модератор
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
                                 %p
                                   На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
                             .dd_nav_divider.font_color_stage4
@@ -77,16 +82,18 @@
                               %span.dd_n_cell.left.font_color_stage2
                                 %i.fa.fa-lg.fa-thumbs-up
                               %span.dd_n_cell.right.font_color_stage2
-                                19:45 12.03.2015
-                                %span.bold Liza
-                                в теме
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage2
                               %span 2
                             .divider10
@@ -94,29 +101,32 @@
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             %a.dd_notice{:href => "#"}
                               %span.dd_n_cell.left.font_color_stage1
                                 %i.fa.fa-lg.fa-thumbs-down
                               %span.dd_n_cell.right.font_color_stage1
-                                20:15 12.03.2015
-                                %span.bold Рахель
-                                в теме
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
                             .dd_nav_divider.font_color_stage1
                               %span 1
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %a#tooltip_db.book_icon.open-popup-link.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :href => "#popup-database", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -261,118 +271,130 @@
       .subhead
         .container
           %h4.font_white Решение конфликта, возникшего из-за меда
-      .container
-        .row
-          .col-md-12
-            .border_grey.rounded_3.stages_block
-              .btn-toolbar{:role => "toolbar"}
-                .btn-group{:role => "group"}
-                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"}
-                    1 СТАДИЯ: ВВЕДЕНИЕ В
-                    ПРОЦЕДУРУ
-                %i.fa.fa-info-circle.fa-lg.font_color_stage1.open_sticker{"data-for" => "#sticker1"}
-                #sticker1.sticker.rounded_3.font_white
-                  Тут будет текст, объясняющий, что надо делать на этом экране
-                  %i.sticker_close.fa.fa-times.fa-lg{"data-for" => "#sticker1"}
       / Main Block starts
       .main-block
         .container
           .row
-            .col-md-2
-              %ul.list-unstyled.tabs_type_1{:role => "tablist"}
-                %li.active{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_1", :role => "tab"} + Аспект
-                %li{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_2", :role => "tab"} Мои аспекты
-            .col-md-9.col-md-offset-1
-              .tab-content
-                #cabinet_1_1.tab-pane.active.fade.in{:role => "tabpanel"}
-                  .post.post_add_type1
-                    .post-header.grey
-                    .post-body
-                      .media
-                        .media-left.text-center.gradient2.post-poster
-                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                          %p.poster-name Оргкомитет
-                          %p.poster-name
-                        .media-body.white
-                          .post-text
-                            .divider10
-                            %form.cabinet-aspect-form
-                              .form-group
-                                %textarea.form-control{:placeholder => "Название аспекта", :rows => "1", :type => "text"}
-                              .divider15
-                              %p
-                                %span.badge.badge_type1.grey Обоснование
-                              .divider15
-                              .form-group
-                                %textarea.form-control{:rows => "6", :type => "text"}
-                    .post-bottom.text-right.white
-                      %button.btn.add-button.type2.del Удалить
-                      %button.btn.add-button.type2 Сохранить
-                      %button.btn.add-button.type2 Опубликовать
-                #cabinet_1_2.tab-pane.fade{:role => "tabpanel"}
-                  .post.post_add_type1
-                    .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
-                    .post-body
-                      .media
-                        .media-left.text-center.gradient2.post-poster
-                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                          %p.poster-name Оргкомитет
-                          %p.poster-name
-                        .media-body.white
-                          .post-text
-                            .divider10
-                            %form.cabinet-aspect-form
-                              .form-group
-                                %textarea.form-control.p_name.ta_icon{:placeholder => "Нечем дышать при большом количестве людей в комнате", :rows => "1", :type => "text"}
-                              .divider15
-                              %p
-                                %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"} Обоснование
-                              .divider15
-                              .form-group
-                                %textarea.form-control.p_descr.ta_icon{:placeholder => "Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже", :rows => "4", :type => "text"}
-                    .post-bottom.text-right.white
-                      %button.btn.add-button.type2.del Удалить
-                      %button.btn.add-button.type2.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"} Сохранить
-                  .post.post_add_type1
-                    .post-header.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"}
-                    .post-body
-                      .media
-                        .media-left.text-center.gradient2.post-poster
-                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                          %p.poster-name Оргкомитет
-                          %p.poster-name
-                        .media-body.white
-                          .post-text
-                            .divider10
-                            %form.cabinet-aspect-form
-                              .form-group
-                                %textarea.form-control.p_name.ta_icon{:placeholder => "Нечем дышать при большом количестве людей в комнате", :rows => "1", :type => "text"}
-                              .divider15
-                              %p
-                                %span.badge.badge_type1.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Обоснование
-                              .divider15
-                              .form-group
-                                %textarea.form-control.p_descr.ta_icon{:placeholder => "Имея такую карту, сотрудники будут мотивированы продавать продукцию Инвар, фиксируя на ней свой процент от продажи, отразится на имидже", :rows => "4", :type => "text"}
-                    .post-bottom.text-right.white
-                      %button.btn.add-button.type2.del Удалить
-                      %button.btn.add-button.type2.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Сохранить
-          / Уведомления о действии
-          .cab_notice.white
-            %span.success
-              Вы успешно создали аспект
-          .divider15
-          .cab_notice.white
-            %span.fail
-              Сохранение не удалось из-за 3 ошибок:
-              %br/
-              Название (краткое описание несовершенства) не может быть пустым
-              %br/
-              Чья работа от этого зависит? не может быть пустым
-              %br/
-              От чего это зависит? не может быть пустым
-          / 
+            .col-sm-3
+              %span.badge.badge_type2.wide.white.font_dark_grey Участник
+            .col-sm-9
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage1 Стадия 1
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage2 Стадия 2
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage3 Стадия 3
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage4 Стадия 4
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage5 Стадия 5
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage6 Стадия 6
+              .col_custom.col_type1.text-center
+                %span.badge.badge_type2.back_color_stage7 Стадия 7
+              .col_custom.col_type2.text-center
+                %span.badge.badge_type2.wide Итог
+          .divider20
+          .rating_line
+            .row
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Виннинниннинниннинни Пуууууууууух
+              .col-sm-9
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage1 8
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage2 400
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage3 200
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage4 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage5 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage6 -
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage7 -
+                .col_custom.col_type2.divided
+                  %span.rating_cell.font_dark_grey -
+          .rating_line
+            .row
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+              .col-sm-9
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage1 8
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage2 400
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage3 200
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage4 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage5 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage6 -
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage7 -
+                .col_custom.col_type2.divided
+                  %span.rating_cell.font_dark_grey -
+          .rating_line
+            .row
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+              .col-sm-9
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage1 8
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage2 400
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage3 200
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage4 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage5 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage6 -
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage7 -
+                .col_custom.col_type2.divided
+                  %span.rating_cell.font_dark_grey -
+          .rating_line
+            .row
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+              .col-sm-9
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage1 8
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage2 400
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage3 200
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage4 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage5 1000
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage6 -
+                .col_custom.col_type1.divided
+                  %span.rating_cell.font_color_stage7 -
+                .col_custom.col_type2.divided
+                  %span.rating_cell.font_dark_grey -
       / Main Block ends
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded
@@ -519,12 +541,115 @@
     :javascript
       /* first stage slider */
 
-      $(document).ready(function () {
+      $(document).ready(function (){
+
+          $('.open_welcome_popup').magnificPopup({
+              type: 'inline',
+              midClick: true
+          });
+          $('.open_welcome_popup').magnificPopup('open');
 
           /* perfect scrollbar */
           $('.ps_cont.half_wheel_speed').perfectScrollbar({
               wheelSpeed: 0.3
           });
           $('.ps_cont').perfectScrollbar();
+
+          var offset = 0;
+
+          /* set inner width */
+          var inner = $('.slider-inner');
+          var inner_w = count_inner()+100;
+          inner.css('width', inner_w+'px');
+
+          /* count outer width */
+          var outer = $('.slider-outer');
+          var outer_w = outer.innerWidth();
+
+          /* events */
+          $('.slider-item').click(function(){
+              click_item($(this));
+          });
+          $('.slider-right').click(function(){
+              slide_inner(outer_w, offset, 'right');
+          });
+          $('.slider-left').click(function(){
+              slide_inner(outer_w, offset, 'left');
+          });
+
+
+          function count_inner(){
+              var sliders_sum = 0;
+              $('.slider-item').each(function (){
+                  sliders_sum += $(this).innerWidth();
+              });
+              return sliders_sum;
+          };
+
+          /*  */
+          function slide_inner(out, off, dir){
+              var sum_i = 0;
+              var m = 0;
+              var right_point = off + out;
+
+              $('.slider-item').each(function (){
+                  var me = $(this);
+                  sum_i += me.innerWidth();
+                  if (dir == 'left' && off) {
+                      if (sum_i >= off) {
+                          m = me.innerWidth() - (sum_i - off);
+                          return false;
+                      }
+                  } else if (dir == 'right'){
+                      if (sum_i > right_point){
+                          m = sum_i - right_point;
+                          return false;
+                      }
+                  }
+              });
+
+              if(m){
+                  if (dir == 'left') {
+                      off -= m;
+                  } else if (dir == 'right') {
+                      off += m;
+                  }
+                  var anim = [];
+                  anim['margin-left'] = -off+'px';
+                  inner.animate(anim, 500);
+
+                  offset = off;
+              }
+          };
+
+          function click_item(item) {
+              if(!(item.hasClass('active'))){
+                  $('.slider-item').removeClass('active');
+                  item.addClass('active');
+                  var left_pos = count_pos()+1;
+                  var right_pos = left_pos + item.innerWidth();
+                  if (left_pos < offset){
+                      slide_inner(outer_w, offset, "left");
+                  } else if(right_pos < (offset+outer_w)){
+
+                  } else {
+                      slide_inner(outer_w, offset, "right");
+                  };
+              };
+          };
+
+          function count_pos(){
+              var sum_i = 0;
+              var m = 0;
+              $('.slider-item').each(function () {
+                  var me = $(this);
+                  if (me.hasClass('active')){
+                      return false;
+                  } else {
+                      sum_i += me.innerWidth();
+                  }
+              });
+              return sum_i;
+          }
 
       });

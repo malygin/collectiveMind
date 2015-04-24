@@ -290,7 +290,7 @@
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
             %a.open_welcome_popup{:href => "#popup-explanation-1st"}
-              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда можете вызвать помощь по стадии, нажав сюда."}
+              #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Вы всегда можете вызвать помощь по стадии, нажав сюда."}
             #tooltip1_3.border_grey.rounded_3.progress_block.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Здесь будут отображаться ваши успехи по работе с аспектами. Другие участники тоже не сидят сложа руки!"}
               .container
                 .row
@@ -413,12 +413,21 @@
                           .aspect-main-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
                             .tab-content
                               #article1.tab-pane.active.fade.in{:role => "tabpanel"}
-                                %h6.aspect-main-block-heading Ситуация с пчелами
-                                %p.aspect-main-block-text
+                                %h5 Ситуация с пчелами
+                                %h6 Ситуация с пчелами
+                                %p
                                   Пчелы недовольны тем, что на их мед
                                   постоянно покушаются Винни-Пух и его друзья. Желая разрешить
                                   конфликт мирным способом, они обратились к мудрой Сове.
-                                %img{:src => "img/aspect-pic1.jpg"}/
+                                %h6 Ситуация с пчелами
+                                %p
+                                  Пчелы недовольны тем, что на их мед
+                                  постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                  конфликт мирным способом, они обратились к мудрой Сове.
+                                %ul.list-unstyled
+                                  %li Группа разработчиков MD – подготовка продукта, участие в тестовой процедуре
+                                  %li В.Видро -  подготовка  и проведение варианта процедуры для  российского рынка
+                                  %li Ю. Хоффман – подготовка  варианта процедуры для  израильского  рынка
                               #article2.tab-pane.fade{:role => "tabpanel"}
                                 %p.aspect-main-block-text
                                   Пчелы недовольны тем, что на их мед
@@ -440,7 +449,6 @@
                         .col-md-4.col-sm-4.min-col-left-padd
                           #questionsCarousel1.carousel.slide.questionsCarousel{"data-ride" => "carousel"}
                             .aspect-questions-block.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "aspect"}
-                              .divider20
                               %h4.block-with-left-icon.pull-left
                                 %i.left-icon.fa.fa-2x.fa-comments
                                 Вопросы по теме
@@ -737,10 +745,10 @@
           .row
             .col-md-8.col-md-offset-3
               %p.font_mid_grey.bold
-                Итак, начало положено!
+                Спасибо за ваши ответы!
               .divider50
               %p.font_mid_grey.bold
-                Вы изучили базу знаний и готовы принять участие в процедуре. Теперь вы можете обсудить аспекты, добавленные участниками, или предложить собственный аспект для общего обсуждения.
+                Теперь вы можете ознакомиться с ответами других участников и предложить аспект, если посчитаете нужным.
               .divider50
               %p
                 %a.btn.add-button{:href => "1st-stage_discuss.html"}

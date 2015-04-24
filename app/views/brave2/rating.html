@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="stage4_theme">
+<body class="grey_theme">
 <div class="outer">
 
     <!-- Top bar starts -->
@@ -36,7 +36,8 @@
 
     <ul class="nav navbar-nav main_menu">
         <li><a href="1st-stage.html" class="menu_a">Процедура</a></li>
-        <li class="active"><a href="4th-stage-cabinet.html" class="menu_a">Кабинет</a></li>
+        <li><a href="1st-stage-cabinet.html" class="menu_a">Кабинет</a></li>
+        <li class="active"><a href="rating.html" class="menu_a">Рейтинг</a></li>
         <li class="has_dropwindow">
             <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span class="top-circle">1</span>
             </a>
@@ -142,7 +143,7 @@
     </ul>
 
     <div class="navbar-right text-right user_block font_grey">
-        <a href="#popup-database" class="book_icon open-popup-link">
+        <a href="#popup-database" class="book_icon open-popup-link tooltip1" data-toggle="tooltip" id="tooltip_db" data-trigger="manual" data-placement="bottom" title="Жмите сюда, чтобы освежить в памяти базу знаний.">
         </a>
         <span class="auth-divider"> |</span>
                     <span class="has_dropwindow">
@@ -345,441 +346,206 @@
         </div>
     </div>
 
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="border_grey rounded_3 stages_block">
-                    <div class="btn-toolbar" role="toolbar">
-
-                        <div class="btn-group" role="group">
-                            <a href="4th-stage.html" role="button" class="btn back_color_stage4">4 СТАДИЯ: ОБЪЕДИНЕНИЕ ИДЕЙ В ПАКЕТЫ</a>
-                        </div>
-
-                        <i class="fa fa-info-circle fa-lg font_color_stage4 open_sticker" data-for="#sticker1"></i>
-
-                        <div class="sticker rounded_3 font_white" id="sticker1">
-                            Тут будет текст, объясняющий, что надо делать на этом экране
-                            <i class="sticker_close fa fa-times fa-lg" data-for="#sticker1"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <!-- Main Block starts -->
     <div class="main-block">
         <div class="container">
+
             <div class="row">
-                <div class="col-md-2">
-                    <ul class="list-unstyled tabs_type_1" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#cabinet_4_1" class="a_font_reset text-right" role="tab" data-toggle="tab">+ Пакет</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#cabinet_4_2" class="a_font_reset text-right" role="tab" data-toggle="tab">Мои пакеты (3)</a>
-                        </li>
-                    </ul>
+                <div class="col-sm-3">
+                    <span class="badge badge_type2 wide white font_dark_grey">Участник</span>
                 </div>
-                <div class="col-md-9 col-md-offset-1">
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active fade in" id="cabinet_4_1">
-                            <div class="divider10"></div>
-                            <div class="content_window white">
-                                <div class="cont_heading bold">
-                                    <textarea class="form-control transp_ta" type="text" rows="1" placeholder="Название пакета" id="t_textarea1"></textarea>
-                                </div>
-                                <!--
-                                <div class="cont_heading bold toggled_textarea_cont">
-                                    <span id="tgl_ta_target1">Название пакета</span><i class="fa fa-pencil edit_tgl_ta" data-for="#t_textarea1"></i>
-                                    <textarea class="form-control toggled_textarea" type="text" rows="1" placeholder="" id="t_textarea1"></textarea>
-                                </div>
-                                -->
-                                <div class="divider25"></div>
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <a class="a_font_reset collapser_type2 collapsed" data-toggle="collapse" href="#cab4-1" aria-expanded="false">Деятельность (5)</a>
-                                            <div class="collapse" id="cab4-1">
-                                                <div class="divider5"></div>
-                                                <h6 class="bold">Опишите деятельность</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="3" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                                <h6 class="bold">Опишите деятельность</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="2" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                            </div>
-                                            <a class="a_font_reset collapser_type2 collapsed" data-toggle="collapse" href="#cab4-2" aria-expanded="false">Участники (2)</a>
-                                            <div class="collapse" id="cab4-2">
-                                                <div class="divider5"></div>
-                                                <h6 class="bold">Опишите ожидаемые качества участников</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="3" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                                <h6 class="bold">Опишите ожидаемые качества участников</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="2" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                            </div>
-                                            <a class="a_font_reset collapser_type2 collapsed" data-toggle="collapse" href="#cab4-3" aria-expanded="false">Инструменты (10)</a>
-                                            <div class="collapse" id="cab4-3">
-                                                <div class="divider5"></div>
-                                                <h6 class="bold">Опишите инструменты</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="3" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                                <h6 class="bold">Опишите инструменты</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="2" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                            </div>
-                                            <a class="a_font_reset collapser_type2 collapsed" data-toggle="collapse" href="#cab4-4" aria-expanded="false">ЦУ (8)</a>
-                                            <div class="collapse" id="cab4-4">
-                                                <div class="divider5"></div>
-                                                <h6 class="bold">Опишите ЦУ</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="3" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                                <h6 class="bold">Опишите ЦУ</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="2" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                            </div>
-                                            <a class="a_font_reset collapser_type2 collapsed" data-toggle="collapse" href="#cab4-5" aria-expanded="false">Внешняя среда (2)</a>
-                                            <div class="collapse" id="cab4-5">
-                                                <div class="divider5"></div>
-                                                <h6 class="bold">Опишите ожидаемые качества участников</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="3" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                                <h6 class="bold">Опишите ожидаемые качества участников</h6>
-                                                <textarea class="form-control ta_icon" type="text" rows="2" placeholder="Опишите ожидаемые качества участников"></textarea>
-                                                <div class="divider15"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <h6 class="bold open-popup cab_modal_opnr" data-placement="cabinet4" data-target="1">Выберите идеи</h6>
-                                            <div class="divider_1_grey"></div>
-                                            <div class="divider20"></div>
-                                            <p class="bold">Низкие потолки в офисах</p>
-                                            <p class="bold">Большое количество народа</p>
-                                            <p class="bold">Недостаточное технологическое оснащение</p>
-                                        </div>
-                                    </div>
-                                    <div class="divider50"></div>
-                                    <div class="divider_1_grey"></div>
-                                    <div class="divider20"></div>
-                                    <button class="btn add-button type2 pull-right" type="submit">Опубликовать</button>
-                                    <button class="btn add-button type2 del pull-right" type="submit">Удалить</button>
-                                </form>
-                            </div>
+                <div class="col-sm-9">
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage1">Стадия 1</span>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="cabinet_4_2">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="media type_cab">
-
-                                        <div class="media-left gradient2">
-
-                                            <div class="cab_folder back1">
-                                                <span class="percentage font_white bold text-center">32%</span>
-                                            </div>
-                                            <p class="time text-center">21.12.2014</p>
-
-                                        </div>
-                                        <div class="media-body white">
-                                            <h6>
-                                                Название пакета с идеями идеями пакета
-                                            </h6>
-                                            <div class="media-bottom ideas">
-                                                4 идеи
-                                                <i class="fa fa-angle-right font_grey"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="media type_cab">
-
-                                        <div class="media-left gradient2">
-
-                                            <div class="cab_folder back1">
-                                                <span class="percentage font_white bold text-center">32%</span>
-                                            </div>
-                                            <p class="time text-center">21.12.2014</p>
-
-                                        </div>
-                                        <div class="media-body white">
-                                            <h6>
-                                                Название пакета с идеями идеями пакета
-                                            </h6>
-                                            <div class="media-bottom ideas">
-                                                4 идеи
-                                                <i class="fa fa-angle-right font_grey"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="media type_cab">
-
-                                        <div class="media-left gradient2">
-
-                                            <div class="cab_folder back2">
-                                                <span class="percentage font_white bold text-center">32%</span>
-                                            </div>
-                                            <p class="time text-center">21.12.2014</p>
-
-                                        </div>
-                                        <div class="media-body white">
-                                            <h6>
-                                                Название пакета с идеями идеями пакета
-                                            </h6>
-                                            <div class="media-bottom ideas">
-                                                4 идеи
-                                                <i class="fa fa-angle-right font_grey"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage2">Стадия 2</span>
+                        </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage3">Стадия 3</span>
+                        </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage4">Стадия 4</span>
+                        </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage5">Стадия 5</span>
+                        </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage6">Стадия 6</span>
+                        </div>
+                        <div class="col_custom col_type1 text-center">
+                            <span class="badge badge_type2 back_color_stage7">Стадия 7</span>
+                        </div>
+                        <div class="col_custom col_type2 text-center">
+                            <span class="badge badge_type2 wide">Итог</span>
+                        </div>
+                </div>
+            </div>
+            <div class="divider20"></div>
+            <div class="rating_line">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="rating_user">
+                            <div class="media-left">
+                                <img class="media-object img-circle img40 img_bordered" src="img/ava-vinnie.jpg">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading bold">Виннинниннинниннинни Пуууууууууух</h5>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-9">
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage1">8</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage2">400</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage3">200</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage4">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage5">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage6">-</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage7">-</span>
+                            </div>
+                            <div class="col_custom col_type2 divided">
+                                <span class="rating_cell font_dark_grey">-</span>
+                            </div>
+                    </div>
                 </div>
             </div>
+            <div class="rating_line">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="rating_user">
+                            <div class="media-left">
+                                <img class="media-object img-circle img40 img_bordered" src="img/ava-vinnie.jpg">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading bold">Винни-Пух</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage1">8</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage2">400</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage3">200</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage4">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage5">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage6">-</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage7">-</span>
+                            </div>
+                            <div class="col_custom col_type2 divided">
+                                <span class="rating_cell font_dark_grey">-</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating_line">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="rating_user">
+                            <div class="media-left">
+                                <img class="media-object img-circle img40 img_bordered" src="img/ava-vinnie.jpg">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading bold">Винни-Пух</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage1">8</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage2">400</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage3">200</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage4">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage5">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage6">-</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage7">-</span>
+                            </div>
+                            <div class="col_custom col_type2 divided">
+                                <span class="rating_cell font_dark_grey">-</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating_line">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="rating_user">
+                            <div class="media-left">
+                                <img class="media-object img-circle img40 img_bordered" src="img/ava-vinnie.jpg">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading bold">Винни-Пух</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage1">8</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage2">400</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage3">200</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage4">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage5">1000</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage6">-</span>
+                            </div>
+                            <div class="col_custom col_type1 divided">
+                                <span class="rating_cell font_color_stage7">-</span>
+                            </div>
+                            <div class="col_custom col_type2 divided">
+                                <span class="rating_cell font_dark_grey">-</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- Main Block ends -->
-
-    <div id="popup-cabinet4-1" class="popup-window popup-w1030 mfp-hide">
-        <div class="popup transparent">
-            <div class="row">
-                <div class="col-md-6 col_padding_7">
-                    <div class="left_col rounded_5 white">
-                        <div class="mod_col_top">
-                            <button class="btn btn_cab_mod btn_toggle btn_reset active" data-show="collapse" data-usage="modal_4_top">Список несовершенств с их идеями</button>
-                            <button class="btn btn_cab_mod btn_toggle btn_reset" data-show="all" data-usage="modal_4_top">Список идей</button>
-                        </div>
-                        <div class="items ps_cont check_push_cont unchecked_items">
-                            <a class="a_font_reset collapser_type2 with_arrow collapsed" data-toggle="collapse" href="#cab4-mod-1" aria-expanded="false">
-                                Низкие потолки в офисах (10)
-                                <i class="fa fa-angle-right fa-lg collapse_arrow bold font_grey"></i>
-                            </a>
-                            <div class="collapse" id="cab4-mod-1">
-                                <div class="item">
-                                    <span>
-                                        <span class="cb_input"><input class="check_push_box" type="checkbox" id="check1"><label for="check1"><i class="fa fa-check"></i></label></span>
-                                    </span>
-                                    <span class="cell_full_w">
-                                        <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#ideas3-1-1" aria-expanded="false">
-                                            Низкие потолки в офисах
-                                            <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                        </a>
-                                    </span>
-                                    <div class="description collapse rotate_arrow" id="ideas3-1-1">
-                                        <h6 class="bold">Суть идеи</h6>
-                                        <p>
-                                            Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                        </p>
-                                        <h6 class="bold">Что будет иначе</h6>
-                                        <p>
-                                            Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <span>
-                                        <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2"><label for="check2"><i class="fa fa-check"></i></label></span>
-                                    </span>
-                                    <span class="cell_full_w">
-                                        <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#ideas3-1-2" aria-expanded="false">
-                                            Низкие потолки в офисах
-                                            <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                        </a>
-                                    </span>
-                                    <div class="description collapse rotate_arrow" id="ideas3-1-2">
-                                        <h6 class="bold">Суть идеи</h6>
-                                        <p>
-                                            Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                        </p>
-                                        <h6 class="bold">Что будет иначе</h6>
-                                        <p>
-                                            Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="divider_1_grey"></div>
-                                <div class="divider5"></div>
-                            </div>
-
-
-                            <a class="a_font_reset collapser_type2 with_arrow collapsed" data-toggle="collapse" href="#cab4-mod-2" aria-expanded="false">
-                                Низкие потолки в офисах (10)
-                                <i class="fa fa-angle-right fa-lg collapse_arrow bold font_grey"></i>
-                            </a>
-                            <div class="collapse" id="cab4-mod-2">
-                                <div class="divider5"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col_padding_7">
-                    <div class="right_col rounded_5 white">
-                        <div class="mod_col_top">
-                            <button class="btn btn_cab_mod btn_toggle btn_reset active" data-show="collapse" data-usage="modal_4_top_right">Выбранные идеи</button>
-                            <i class="fa fa-info-circle fa-lg font_color_stage4 open_sticker"></i>
-                        </div>
-                        <div class="items ps_cont check_push_cont checked_items">
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_1" checked><label for="check2_1"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-1" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-1">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_2" checked><label for="check2_2"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-2" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-2">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_3" checked><label for="check2_3"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-3" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-3">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_4" checked><label for="check2_4"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-4" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-4">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_5" checked><label for="check2_5"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-5" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-5">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_6" checked><label for="check2_6"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-6" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-6">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <span>
-                                    <span class="cb_input"><input class="check_push_box" type="checkbox" id="check2_7" checked><label for="check2_7"><i class="fa fa-check"></i></label></span>
-                                </span>
-                                <span class="cell_full_w">
-                                    <a class="a_font_reset with_arrow collapsed collapser_type1" data-toggle="collapse" href="#imperfs3-1-7" aria-expanded="false">
-                                        Низкие потолки в офисах
-                                        <i class="fa fa-angle-right fa-lg collapse_arrow"></i>
-                                    </a>
-                                </span>
-                                <div class="description collapse rotate_arrow" id="imperfs3-1-7">
-                                    <h6 class="bold">Суть идеи</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                    <h6 class="bold">Что будет иначе</h6>
-                                    <p>
-                                        Имея такую карту, сотрудники будут мотивированы продавать продукцию, имея такую карту, сотрудники будут мотивированы продавать
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="popup-database" class="popup-window popup_database popup-w770 mfp-hide">
         <div class="popup popup_rounded">
@@ -833,7 +599,6 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="aspect-main-block">
                                                         <div class="tab-content">
@@ -992,13 +757,116 @@
 <script>
     /* first stage slider */
 
-    $(document).ready(function () {
+    $(document).ready(function (){
+
+        $('.open_welcome_popup').magnificPopup({
+            type: 'inline',
+            midClick: true
+        });
+        $('.open_welcome_popup').magnificPopup('open');
 
         /* perfect scrollbar */
         $('.ps_cont.half_wheel_speed').perfectScrollbar({
             wheelSpeed: 0.3
         });
         $('.ps_cont').perfectScrollbar();
+
+        var offset = 0;
+
+        /* set inner width */
+        var inner = $('.slider-inner');
+        var inner_w = count_inner()+100;
+        inner.css('width', inner_w+'px');
+
+        /* count outer width */
+        var outer = $('.slider-outer');
+        var outer_w = outer.innerWidth();
+
+        /* events */
+        $('.slider-item').click(function(){
+            click_item($(this));
+        });
+        $('.slider-right').click(function(){
+            slide_inner(outer_w, offset, 'right');
+        });
+        $('.slider-left').click(function(){
+            slide_inner(outer_w, offset, 'left');
+        });
+
+
+        function count_inner(){
+            var sliders_sum = 0;
+            $('.slider-item').each(function (){
+                sliders_sum += $(this).innerWidth();
+            });
+            return sliders_sum;
+        };
+
+        /*  */
+        function slide_inner(out, off, dir){
+            var sum_i = 0;
+            var m = 0;
+            var right_point = off + out;
+
+            $('.slider-item').each(function (){
+                var me = $(this);
+                sum_i += me.innerWidth();
+                if (dir == 'left' && off) {
+                    if (sum_i >= off) {
+                        m = me.innerWidth() - (sum_i - off);
+                        return false;
+                    }
+                } else if (dir == 'right'){
+                    if (sum_i > right_point){
+                        m = sum_i - right_point;
+                        return false;
+                    }
+                }
+            });
+
+            if(m){
+                if (dir == 'left') {
+                    off -= m;
+                } else if (dir == 'right') {
+                    off += m;
+                }
+                var anim = [];
+                anim['margin-left'] = -off+'px';
+                inner.animate(anim, 500);
+
+                offset = off;
+            }
+        };
+
+        function click_item(item) {
+            if(!(item.hasClass('active'))){
+                $('.slider-item').removeClass('active');
+                item.addClass('active');
+                var left_pos = count_pos()+1;
+                var right_pos = left_pos + item.innerWidth();
+                if (left_pos < offset){
+                    slide_inner(outer_w, offset, "left");
+                } else if(right_pos < (offset+outer_w)){
+
+                } else {
+                    slide_inner(outer_w, offset, "right");
+                };
+            };
+        };
+
+        function count_pos(){
+            var sum_i = 0;
+            var m = 0;
+            $('.slider-item').each(function () {
+                var me = $(this);
+                if (me.hasClass('active')){
+                    return false;
+                } else {
+                    sum_i += me.innerWidth();
+                }
+            });
+            return sum_i;
+        }
 
     });
 

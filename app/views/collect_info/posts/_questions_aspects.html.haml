@@ -136,7 +136,7 @@
                                   %span.close-button
                                     %i.fa.fa-times-circle-o
                                 .hint.close-notice{id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
-                                  Ответ неправильный, воспользуейтесь подсказкой
+                                  Ответ неправильный, воспользуйтесь подсказкой
                                   %span.close-button
                                     %i.fa.fa-times-circle-o
                               = form_tag(answer_question_collect_info_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do

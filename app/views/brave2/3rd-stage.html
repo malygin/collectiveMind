@@ -1098,7 +1098,7 @@
 <div class="modal_title">
     <div class="row">
         <div class="col-md-12">
-            <h4 class=" bold font_dark_grey tall_modal_title">
+            <h4 class=" bold font_dark_grey">
                 Голосование по идеям
             </h4>
         </div>
@@ -1108,24 +1108,27 @@
     <div class="vote_progress light-green progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div class="modal_body">
-<div class="container vote_folders_cont folders_2 no_padding_col">
+<div class="container vote_folders_cont folders_3 no_padding_col">
     <ul class="nav vote_nav row" role="tablist">
-        <li role="presentation" class="no_padding_col active folder_all">
-            <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab">
-                <i class="fa fa-angle-left fa_xlg"></i><small class="bold">Вернуться в общий список</small>
+        <li role="presentation" class="col-md-4 no_padding_col folder_all active">
+            <a class="vote_folder" href="#vote_tab1" role="tab" data-toggle="tab" data-vote-folder-role="all">
+                <div class="vote_folder_inn poll-2-1">
+                    <span class="vote_counter"></span>
+                    <h5 class="font_color_stage3">Общий список</h5>
+                </div>
             </a>
         </li>
-        <li role="presentation" class="col-md-6 no_padding_col">
+        <li role="presentation" class="col-md-4 no_padding_col">
             <a class="vote_folder" href="#vote_tab2" role="tab" data-toggle="tab" data-vote-folder-role="vote_yes">
-                <div class="vote_folder_inn poll-2-1">
+                <div class="vote_folder_inn poll-2-3">
                     <span class="vote_counter"></span>
                     <h5>Да</h5>
                 </div>
             </a>
         </li>
-        <li role="presentation" class="col-md-6 no_padding_col">
+        <li role="presentation" class="col-md-4 no_padding_col">
             <a class="vote_folder" href="#vote_tab3" role="tab" data-toggle="tab" data-vote-folder-role="vote_no">
-                <div class="vote_folder_inn poll-2-3">
+                <div class="vote_folder_inn poll-2-4">
                     <span class="vote_counter"></span>
                     <h5>Нет</h5>
                 </div>
@@ -1133,7 +1136,7 @@
         </li>
     </ul>
 </div>
-<h4 class="bold text-center">1. Нравится ли вам идея?</h4>
+<h4 class="bold text-center">Нравится ли вам идея?</h4>
 <div class="divider25"></div>
 <div class="container">
 <div class="row">
@@ -1158,83 +1161,8 @@
                 </div>
                 <div class="divider15"></div>
                 <div class="vote_controls text-center">
-                    <button class="btn vote_button v_b_text v_btn_1" role="button" data-vote-role="vote_yes">Да</button>
-                    <button class="btn vote_button v_b_text v_btn_3" role="button" data-vote-role="vote_no">Нет</button>
-                                                                <span class="vote_open_detail grey">
-                                                                    <i class="fa fa-angle-right font_white"></i>
-                                                                </span>
-                    <div class="divider15"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item themes_cont">
-                <div class="heading_cont blackonwhite">
-                    <h6>Lorem ipsum</h6>
-                </div>
-                <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-2">
-                    <span class="tag-stripes dark-blue active"><span
-                            class="tags">Слишком низкие потолки</span></span>
-                    <span class="tag-stripes blue-green"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
-                    <span class="tag-stripes blue-green2"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></span>
-                </div>
-                <div class="divider15"></div>
-                <div class="vote_controls text-center">
-                    <button class="btn vote_button v_b_text v_btn_1" role="button" data-vote-role="vote_yes">Да</button>
-                    <button class="btn vote_button v_b_text v_btn_3" role="button" data-vote-role="vote_no">Нет</button>
-                                                                <span class="vote_open_detail grey">
-                                                                    <i class="fa fa-angle-right font_white"></i>
-                                                                </span>
-                    <div class="divider15"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item themes_cont">
-                <div class="heading_cont blackonwhite">
-                    <h6>Lorem ipsum</h6>
-                </div>
-                <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-3">
-                    <span class="tag-stripes dark-blue active"><span
-                            class="tags">Слишком низкие потолки</span></span>
-                    <span class="tag-stripes blue-green"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
-                    <span class="tag-stripes blue-green2"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></span>
-                </div>
-                <div class="divider15"></div>
-                <div class="vote_controls text-center">
-                    <button class="btn vote_button v_b_text v_btn_1" role="button" data-vote-role="vote_yes">Да</button>
-                    <button class="btn vote_button v_b_text v_btn_3" role="button" data-vote-role="vote_no">Нет</button>
-                                                                <span class="vote_open_detail grey">
-                                                                    <i class="fa fa-angle-right font_white"></i>
-                                                                </span>
-                    <div class="divider15"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 vote_item_cont item_expandable h_2">
-            <div class="vote_item themes_cont">
-                <div class="heading_cont blackonwhite">
-                    <h6>Lorem ipsum</h6>
-                </div>
-                <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-                <div class="post-theme" id="stripe-p-4">
-                    <span class="tag-stripes dark-blue active"><span
-                            class="tags">Слишком низкие потолки</span></span>
-                    <span class="tag-stripes blue-green"><span
-                            class="tags">Четвероногим нечем заинтересовать пчел</span></span>
-                    <span class="tag-stripes blue-green2"><span
-                            class="tags">Активное противостояние четвероногих и пчел</span></span>
-                </div>
-                <div class="divider15"></div>
-                <div class="vote_controls text-center">
-                    <button class="btn vote_button v_b_text v_btn_1" role="button" data-vote-role="vote_yes">Да</button>
-                    <button class="btn vote_button v_b_text v_btn_3" role="button" data-vote-role="vote_no">Нет</button>
+                    <button class="btn vote_button v_b_text v_btn_2" role="button" data-vote-role="vote_yes" data-icon-class="fa-check">Да</button>
+                    <button class="btn vote_button v_b_text v_btn_3" role="button" data-vote-role="vote_no" data-icon-class="fa-minus">Нет</button>
                                                                 <span class="vote_open_detail grey">
                                                                     <i class="fa fa-angle-right font_white"></i>
                                                                 </span>
