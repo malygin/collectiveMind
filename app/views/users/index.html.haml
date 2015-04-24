@@ -1,70 +1,109 @@
-=link_to '/project/'+@project.id.to_s do
-  %span.fa.fa-angle-double-left
-  =t('link.back_proc')
-%section.widget
-  .body
-    %h6 * В процедуре MASSDECISION™ баллы не начисляются автоматически.
-    %h6 * На каждой стадии начисление баллов производится вручную модераторами и экспертами.
-    %table.table.table-striped
-      %thead
-        %tr.success
-          %th
-            %b Введение в процедуру
-          %th
-            %b Анализ ситуации
-          %th
-            %b
-              Дизайн будущего
-          %th
-            %b
-              Разработка проектов
-          %th
-            %b
-              Отзывы
-      %tbody
-        %tr.warning
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-          %td Комментарий 5 баллов
-        %tr.info
-          %td
-          %td
-            Несовершенство 25 баллов,
-            %br
-            Комментарий, ставший основой
-            %br
-            для несовершенства
-            10 баллов
-
-          %td
-            Максимальное количество баллов
-            %br
-            за одно нововведение — 110 баллов
-            %br (в зависимости от заполненности)
-          %td Проект 300 баллов
-          %td Отзыв 25 баллов
+.row
+  .col-sm-3
+    %span.badge.badge_type2.wide.white.font_dark_grey Участник
+  .col-sm-9
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage1 Стадия 1
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage2 Стадия 2
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage3 Стадия 3
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage4 Стадия 4
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage5 Стадия 5
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage6 Стадия 6
+    .col_custom.col_type1.text-center
+      %span.badge.badge_type2.back_color_stage7 Стадия 7
+    .col_custom.col_type2.text-center
+      %span.badge.badge_type2.wide Итог
+.divider20
+- @users.each_with_index do |user, i|
+  = render partial: 'user', locals: {user: user, number: i+1} unless user.role_expert?
 
 
-    %h1=t('show.rating.title')
-    #tabs
-      .pull-right
-        =t('show.rating.sort')
-        =link_to t('show.rating.sort_default'), {action: :show_top, score_name: 'score'},remote: true, class: 'score_class top_all', id: 'score_all'
-        |
-        =link_to t('show.rating.sort_generators'), {action: :show_top, score_name: 'score_g'},remote: true, class: 'score_class'
-        |
-        =link_to t('show.rating.sort_analysts'), {action: :show_top, score_name: 'score_a'},remote: true, class: 'score_class'
-        |
-        =link_to t('show.rating.sort_voters'), {action: :show_top, score_name: 'score_o'},remote: true, class: 'score_class'
-      %br
-      %br
-    #tabs-1
-      %table.table
-        %tbody
-          - @users.each_with_index do |user, i|
-            = render partial: 'user', locals: {user: user, number: i+1} unless user.role_expert?
 
-    %br
-    =link_to t('link.back_proc'), core_projects_path(@project.id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+-#=link_to '/project/'+@project.id.to_s do
+-#  %span.fa.fa-angle-double-left
+-#  =t('link.back_proc')
+-#%section.widget
+-#  .body
+-#    %h6 * В процедуре MASSDECISION™ баллы не начисляются автоматически.
+-#    %h6 * На каждой стадии начисление баллов производится вручную модераторами и экспертами.
+-#    %table.table.table-striped
+-#      %thead
+-#        %tr.success
+-#          %th
+-#            %b Введение в процедуру
+-#          %th
+-#            %b Анализ ситуации
+-#          %th
+-#            %b
+-#              Дизайн будущего
+-#          %th
+-#            %b
+-#              Разработка проектов
+-#          %th
+-#            %b
+-#              Отзывы
+-#      %tbody
+-#        %tr.warning
+-#          %td Комментарий 5 баллов
+-#          %td Комментарий 5 баллов
+-#          %td Комментарий 5 баллов
+-#          %td Комментарий 5 баллов
+-#          %td Комментарий 5 баллов
+-#        %tr.info
+-#          %td
+-#          %td
+-#            Несовершенство 25 баллов,
+-#            %br
+-#            Комментарий, ставший основой
+-#            %br
+-#            для несовершенства
+-#            10 баллов
+-#
+-#          %td
+-#            Максимальное количество баллов
+-#            %br
+-#            за одно нововведение — 110 баллов
+-#            %br (в зависимости от заполненности)
+-#          %td Проект 300 баллов
+-#          %td Отзыв 25 баллов
+-#
+-#
+-#    %h1=t('show.rating.title')
+-#    #tabs
+-#      .pull-right
+-#        =t('show.rating.sort')
+-#        =link_to t('show.rating.sort_default'), {action: :show_top, score_name: 'score'},remote: true, class: 'score_class top_all', id: 'score_all'
+-#        |
+-#        =link_to t('show.rating.sort_generators'), {action: :show_top, score_name: 'score_g'},remote: true, class: 'score_class'
+-#        |
+-#        =link_to t('show.rating.sort_analysts'), {action: :show_top, score_name: 'score_a'},remote: true, class: 'score_class'
+-#        |
+-#        =link_to t('show.rating.sort_voters'), {action: :show_top, score_name: 'score_o'},remote: true, class: 'score_class'
+-#      %br
+-#      %br
+-#    #tabs-1
+-#      %table.table
+-#        %tbody
+-#          - @users.each_with_index do |user, i|
+-#            = render partial: 'user', locals: {user: user, number: i+1} unless user.role_expert?
+-#
+-#    %br
+-#    =link_to t('link.back_proc'), core_projects_path(@project.id)

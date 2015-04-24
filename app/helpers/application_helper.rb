@@ -517,6 +517,14 @@ module ApplicationHelper
     name_controller == :core_project_users or action_name == 'new' or action_name == 'user_content' or action_name == 'edit'
   end
 
+  def profile?
+    controller_name == 'users' and action_name == 'show'
+  end
+
+  def rating?
+    controller_name == 'users' and action_name == 'index'
+  end
+
   def current_stage_controller
     # Если это контроллер для кабинета, возвращаем номер текущей стадии
     if cabinet?
@@ -874,5 +882,16 @@ module ApplicationHelper
       sub_url.sub!('/', '_')
     end
     "/project/#{project.id}/#{sub_url}"
+  end
+
+
+  def stage_theme
+    if rating?
+      'grey_theme'
+    elsif profile?
+      'white_theme'
+    else
+      "stage#{current_stage_controller}_theme"
+    end
   end
 end

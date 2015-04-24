@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423192334) do
+ActiveRecord::Schema.define(version: 20150424213241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -383,13 +383,13 @@ ActiveRecord::Schema.define(version: 20150423192334) do
     t.integer  "type_user"
     t.boolean  "ready_to_concept",         default: false
     t.boolean  "ready_to_plan",            default: false
-    t.integer  "collect_info_posts_score"
-    t.integer  "discontent_posts_score"
-    t.integer  "concept_posts_score"
-    t.integer  "novation_posts_score"
-    t.integer  "plan_posts_score"
-    t.integer  "estimate_posts_score"
-    t.integer  "score"
+    t.integer  "collect_info_posts_score", default: 0
+    t.integer  "discontent_posts_score",   default: 0
+    t.integer  "concept_posts_score",      default: 0
+    t.integer  "novation_posts_score",     default: 0
+    t.integer  "plan_posts_score",         default: 0
+    t.integer  "estimate_posts_score",     default: 0
+    t.integer  "score",                    default: 0
   end
 
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree

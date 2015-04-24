@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en")
   = render 'application/meta'
-  %body{class: "stage#{current_stage_controller}_theme"}
+  %body{class: stage_theme}
     .outer
       - unless cabinet?
         = render partial: 'application/left_rollover'
@@ -12,7 +12,7 @@
             %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
               = image_tag 'logo1.png'
           %ul.nav.navbar-nav.main_menu
-            %li{class: "#{'active' unless cabinet?}"}
+            %li{class: "#{'active' unless (cabinet? or rating? or profile?)}"}
               = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
             %li{class: "#{'active' if cabinet?}"}
               = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet.to_s.downcase.singularize}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
@@ -20,6 +20,9 @@
               = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
             -#%li{class: "#{'active' if name_controller == :journal}"}
             -#  = link_to 'Новости', journals_path(@project), class: "menu_a"
+            - if @project.closed?
+              %li{class: "#{'active' if rating?}"}
+                = link_to 'Рейтинг', users_path(@project), class: 'menu_a'
             - if current_user.admin?
               - if @project.prev_status
                 %li
@@ -59,15 +62,15 @@
               %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
                 %li{role: 'presentation'}
                   = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-                %li{role: 'presentation'}
-                  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
+                -#%li{role: 'presentation'}
+                -#  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
                 %li{role: 'presentation'}
                   %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
                     =t('menu.sign_out')
 
       / Top Bar ends
       -# В верстке профиля нет ничего про процедуру
-      - unless controller_name == 'users'
+      - unless profile?
         .subhead
           .container
             %h4.font_white
@@ -77,10 +80,10 @@
             %button#tooltip_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
               %i.fa.fa-lightbulb-o
               Открыть подсказки
-
-        .container
-          .row
-            = render partial: 'stages'
+        - unless controller_name == 'users'
+          .container
+            .row
+              = render partial: 'stages'
       / Main Block starts
       .main-block
         .container

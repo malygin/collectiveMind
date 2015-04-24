@@ -12,7 +12,7 @@
     #imperfs3-1-1.description.collapse.rotate_arrow
       .media.comment
         .media-left
-        -#= cl_image_tag discontent.user.avatar, class: 'media-object img35 img-circle'
+        = cl_image_tag discontent.user.avatar, class: 'media-object img35 img-circle' if discontent.user
         .media-body
           .row
             .col-md-4

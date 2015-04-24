@@ -53,9 +53,9 @@ module SessionsHelper
   def uniq_proc_users
     @project = Core::Project.find(params[:project]) if params[:project]
     if @project and @project.moderator_id.present?
-      [1, 2, 3, 4, 5, 6, 7, 8, nil]
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, nil]
     else
-      [4, 5, 8, nil]
+      [0, 4, 5, 8, nil]
     end
   end
 

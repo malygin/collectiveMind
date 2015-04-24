@@ -44,6 +44,13 @@
 .comment_add.main_add{
   border-top: none;
 }
+.grey_theme .dd_badge,.white_theme .dd_badge {
+  background: #BEB8B8;
+}
+
+.rating_user .media-heading a:hover{
+  color: #337ab7;
+}
 
 //.select_aspect {
 //  background-color: gray;
