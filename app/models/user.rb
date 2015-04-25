@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
   has_many :concept_post_votings, class_name: 'Concept::Voting'
   has_many :voted_concept_post, through: :concept_post_votings, source: :concept_post, class_name: 'Concept::Post'
+
+  has_many :novation_post_votings, class_name: 'Novation::Voting'
+  has_many :voted_novation_post, through: :novation_post_votings, source: :novation_post, class_name: 'Novation::Post'
+
   has_many :plan_post_votings, class_name: 'Plan::Voting'
   has_many :voted_plan_posts, through: :plan_post_votings, source: :plan_post, class_name: 'Plan::Post'
   has_many :core_project_users, class_name: 'Core::ProjectUser'
@@ -280,6 +284,8 @@ class User < ActiveRecord::Base
     elsif stage == :discontent and project.status == 6 and project.get_free_votes_for(self, 'discontent') > 0
       return true
     elsif stage == :concept and project.status == 8 and project.get_free_votes_for(self, 'concept') > 0
+      return true
+    elsif stage == :novation and project.status == 10 and project.get_free_votes_for(self, 'novation') > 0
       return true
       # disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
       # last_vote = self.concept_post_votings.by_project_votings(project).last

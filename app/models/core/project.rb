@@ -174,6 +174,8 @@ class Core::Project < ActiveRecord::Base
         self.discontent_for_vote.size - user.voted_discontent_posts.for_project(self.id).size
       when 'concept'
         self.concept_ongoing_post.size - user.voted_concept_post.by_project(self.id).size
+      when 'novation'
+        self.novations.size - user.voted_novation_post.by_project(self.id).size
       when 'plan'
         self.stage5.to_i - user.voted_plan_posts.by_project(self.id).size
     end
