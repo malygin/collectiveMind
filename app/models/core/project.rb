@@ -186,7 +186,7 @@ class Core::Project < ActiveRecord::Base
       when 1
         (user.cluber? && users.include?(user)) || user.boss?
       when 2
-        user.boss?
+        users.include?(user) || user.boss?
     end
   end
 

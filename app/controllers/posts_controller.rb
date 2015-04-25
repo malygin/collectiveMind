@@ -96,12 +96,12 @@ class PostsController < ProjectsController
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                   first_id: @post.id, second_id: @comment.id).save!
 
-      # if @comment.user!=current_user
+      if @comment.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_'+type, user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                     first_id: @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!
-      # end
+      end
       if @project.closed?
         Resque.enqueue(CommentNotification, current_model.to_s, @project.id, current_user.id, name_of_comment_for_param, type, @post.id, @comment.id, params[:comment_stage])
       end
@@ -128,10 +128,10 @@ class PostsController < ProjectsController
     if type
       current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
                                   body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-      # if @post.user!=current_user
+      if @post.user!=current_user
         current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_'+type, user_informed: @post.user, project: @project,
                                     body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-      # end
+      end
       if @project.closed?
         Resque.enqueue(PostNotification, current_model.to_s, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
       end
