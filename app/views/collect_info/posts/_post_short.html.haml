@@ -3,7 +3,8 @@
   .post-body
     .media
       .media-left.text-center.gradient.post-poster
-        = image_tag 'no-ava.png', class: 'img-circle img40'
+        -#= image_tag 'no-ava.png', class: 'img-circle img40'
+        = cl_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
         %p.poster-name
           =post_short.user
       .media-body.white

@@ -1,6 +1,7 @@
 class Discontent::PostsController < PostsController
   include Discontent::PostsHelper
   include DiscontentGroup
+  include CloudinaryHelper
 
   before_action :set_aspects, only: [:index, :new, :edit]
   before_action :set_discontent_post, only: [:edit, :update, :destroy]
@@ -30,7 +31,7 @@ class Discontent::PostsController < PostsController
 
       format.html # show.html.erb
       format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, content: trim_post_content(item.content, 50), what: trim_post_content(item.what, 100),
-                                                                             user: item.user.to_s, user_avatar: ActionController::Base.helpers.asset_path('no-ava.png'), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                                             user: item.user.to_s, user_avatar: cl_image_path(item.user.try(:avatar)), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
                                                                              project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
                                                                              aspect_class: post_aspect_classes(item),
                                                                              count_comments: item.comments.count,

@@ -36,7 +36,8 @@
     .modal_body
       .media
         .media-left.text-center.gradient.post-poster
-          = image_tag 'no-ava.png', class: 'img-circle img50'
+          -#= image_tag 'no-ava.png', class: 'img-circle img50'
+          = cl_image_tag @post.user.try(:avatar), class: 'img-circle img50'
           %p.poster-name
             =@post.user
         .media-body.white

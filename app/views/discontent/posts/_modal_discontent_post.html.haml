@@ -45,7 +45,8 @@
               .media.comment.main_line
                 .container
                   .media-left
-                    = image_tag 'no-ava.png', class: "media-object img50 img-circle"
+                    -#= image_tag 'no-ava.png', class: "media-object img50 img-circle"
+                    = cl_image_tag @post.user.try(:avatar), class: 'media-object img50 img-circle'
                   .media-body
                     %h5.media-heading.bold
                       = @post.user
