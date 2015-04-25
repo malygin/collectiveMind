@@ -1,6 +1,7 @@
 .media.comment{id: "comment#{comment.id}"}
   .media-left
-    = image_tag 'no-ava.png', class: "media-object img35 img-circle"
+    -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
+    = cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
   .media-body
     %h5.media-heading.bold{id: "user_name_#{comment.id}"}
       =comment.user
