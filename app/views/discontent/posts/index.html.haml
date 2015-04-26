@@ -19,10 +19,26 @@
           - if new_comments > 0
             %span.cb_com
               = new_comments
+      %li{data: {aspect: "#"}}
+        %input#ex2_2_1{:name => "ex2_2", :type => "radio", :value => "1"}/
+        %label.checkox_item{:for => "ex2_2_1"}
+          %span
+            %span.vert_stripe.back0
+            %span.vert_stripe.back0
+            %span.vert_stripe.back0
+          %span.text_label Без аспекта
+          - new_posts = @project.discontents.after_last_visit_posts(last_time_visit_page('discontent')).size
+          - if new_posts > 0
+            %span.cb_doc
+              = new_posts
+          - new_comments = @project.discontents.after_last_visit_comments(last_time_visit_page('discontent')).size
+          - if new_comments > 0
+            %span.cb_com
+              = new_comments
       - @aspects.each_with_index do |aspect, index|
         %li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}}
-          %input{:id => "ex2_2_#{index+1}",:name => "ex2_2", :type => "radio", :value => "#{index+1}"}/
-          %label.checkox_item{:for => "ex2_2_#{index+1}"}
+          %input{:id => "ex2_2_#{index+2}",:name => "ex2_2", :type => "radio", :value => "#{index+2}"}/
+          %label.checkox_item{:for => "ex2_2_#{index+2}"}
             %span
               %span.color_counter.color_me{style: "background-color: #{aspect.color}"}
                 %span
@@ -53,7 +69,7 @@
             - if new_comments > 0
               %span
                 = new_comments
-          %span#tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip1.sort-date{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+          %span#tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
             - if new_posts > 0
               %span
                 = new_posts

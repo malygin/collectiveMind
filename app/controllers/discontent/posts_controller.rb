@@ -22,10 +22,12 @@ class Discontent::PostsController < PostsController
 
   def index
     @posts= nil
-    if params[:aspect] and params[:aspect] != '*'
-      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts
+    if params[:aspect] and params[:aspect] != '*' and params[:aspect] != '#'
+      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.created_order
+    elsif params[:aspect] == '#'
+      @posts = @project.discontents_without_aspect.created_order
     else
-      @posts = @project.discontents.by_status_for_discontent(@project)
+      @posts = @project.discontents.by_status_for_discontent(@project).created_order
     end
     respond_to do |format|
 
@@ -37,7 +39,7 @@ class Discontent::PostsController < PostsController
                                                                              count_comments: item.comments.count,
                                                                              count_likes: item.users_pro.count,
                                                                              count_dislikes: item.users_against.count,
-                                                                             aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: trim_post_content(aspect.content, 30)} },
+                                                                             aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} },
                                                                              comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_post_content(comment.content, 50)} }} } }
 
     end
