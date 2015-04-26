@@ -22,7 +22,8 @@ ConceptCollectionView = Backbone.View.extend
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
-    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
+    #    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
+    $('#filter').on('change', this.loadByDiscontent)
     $('#sorter').on('click', 'span', this.sortByDiscontent)
   render: ()->
     this.collection.forEach(this.addOne, this)
@@ -32,26 +33,24 @@ ConceptCollectionView = Backbone.View.extend
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
+
     show_comments_hover()
     activate_perfect_scrollbar()
     post_colored_stripes()
     colors_discontents()
     return this
+
   addOne: (concept)->
     conceptView = new ConceptView({model: concept});
     this.$el.append(conceptView.render().el);
+
   renderNew: (newModel)->
     this.$container.isotope('insert', new ConceptView({ model:newModel }).render().el);
-    $('#tab_dispost_concepts').isotope('updateSortData').isotope()
-    show_comments_hover()
-    activate_perfect_scrollbar()
-    colors_discontents()
-    colors_discontents()
+
   removeOld: (model)->
-    # console.log this.$container
     el = $('div[data-id="id-'+model.id+'"]')
     this.$container.isotope('remove', el);
-    $('#tab_dispost_concepts').isotope('updateSortData').isotope()
+
   loadByDiscontent: (evt)->
     #    evt.preventDefault();
     #    filterValue = $(this).data('discontent')
@@ -59,7 +58,18 @@ ConceptCollectionView = Backbone.View.extend
     #      filter: filterValue
 
     dc.fetch
-      data: $.param({discontent: $(this).data('discontent')})
+      # data: $.param({discontent: $(this).data('discontent')})
+      # data: $.param({discontent: $(this).find('input:checked').closest('.checkox_item').data('discontent')})
+      data: $.param({discontent: check_discontents(this)})
+
+      success: (col,res)->
+        $('#count_concepts').html('(' + dc.length + ')')
+        $('#tab_dispost_concepts').isotope('updateSortData').isotope()
+        show_comments_hover()
+        activate_perfect_scrollbar()
+        colors_discontents()
+        post_colored_stripes()
+
   sortByDiscontent: ()->
     #    evt.preventDefault();
     sortByValue = $(this).data('type')

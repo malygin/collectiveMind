@@ -4,7 +4,8 @@
     .col-md-7
       %span.stage-heading
         Идеи
-        ="(#{@posts.count})"
+        %span#count_concepts
+          ="(#{@posts.count})"
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
@@ -14,7 +15,7 @@
             - if new_comments > 0
               %span
                 = new_comments
-          %span#tooltip3_2.sort-2.sort_btn.sprite_doc.sprite-item3_1.tooltip1.sort-date{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
+          %span#tooltip3_2.sort-2.sort_btn.sprite_doc.sprite-item3_1.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
             - new_posts = @project.concepts.after_last_visit_posts(last_time_visit_page('concept')).size
             - if new_posts > 0
               %span

@@ -16,6 +16,7 @@ class Concept::Post < ActiveRecord::Base
 
   scope :by_status, ->(p) { where(status: p) }
   scope :by_project, ->(p) { where(project_id: p) }
+  scope :for_discontents, ->(discontents) { where(concept_post_discontents: {discontent_post_id: discontents}) }
 
   # def self.scope_vote_top(post)
   #   joins(:concept_post_discontents).

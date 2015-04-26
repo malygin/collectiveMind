@@ -24,15 +24,21 @@ class Concept::PostsController < PostsController
   def index
     @posts= nil
     if params[:discontent] and params[:discontent] != '*'
-      @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join('')).dispost_concepts
+      # @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join('')).dispost_concepts.created_order
+      # @posts = @project.concept_ongoing_post.joins(:concept_post_discontents).for_discontents(params[:discontent]).created_order
+      if params[:discontent].include?('#')
+        params[:discontent].delete('#')
+        params[:discontent] += [nil]
+      end
+      @posts = @project.concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: {discontent_post_id: params[:discontent]}).created_order
     else
-      @posts = @project.concept_ongoing_post
+      @posts = @project.concept_ongoing_post.created_order
     end
     respond_to do |format|
 
       format.html # show.html.erb
-      format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, content: trim_post_content(item.content, 100), title: trim_post_content(item.title, 50),
-                                                      user: item.user.to_s, user_avatar: cl_image_path(item.user.try(:avatar)), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+      format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, title: item.title, content: trim_post_content(item.content, 100),
+                                                      user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar))  : ActionController::Base.helpers.asset_path('no-ava.png') , post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
                                                       project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
                                                       discontent_class: post_discontent_classes(item),
                                                       count_comments: item.comments.count,

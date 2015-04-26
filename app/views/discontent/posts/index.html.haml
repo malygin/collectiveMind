@@ -11,11 +11,11 @@
             %span.vert_stripe.back2
             %span.vert_stripe.back3
           %span.text_label Все аспекты
-          - new_posts = @project.discontents.after_last_visit_posts(last_time_visit_page('discontent')).size
+          - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
           - if new_posts > 0
             %span.cb_doc
               = new_posts
-          - new_comments = @project.discontents.after_last_visit_comments(last_time_visit_page('discontent')).size
+          - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
           - if new_comments > 0
             %span.cb_com
               = new_comments
@@ -27,11 +27,11 @@
             %span.vert_stripe.back0
             %span.vert_stripe.back0
           %span.text_label Без аспекта
-          - new_posts = @project.discontents.after_last_visit_posts(last_time_visit_page('discontent')).size
+          - new_posts = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
           - if new_posts > 0
             %span.cb_doc
               = new_posts
-          - new_comments = @project.discontents.after_last_visit_comments(last_time_visit_page('discontent')).size
+          - new_comments = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
           - if new_comments > 0
             %span.cb_com
               = new_comments
@@ -45,11 +45,11 @@
                   = aspect.aspect_posts.by_status_for_discontent(@project).count
             %span.text_label
               = aspect.content
-            - new_posts = aspect.aspect_posts.after_last_visit_posts(last_time_visit_page('discontent')).size
+            - new_posts = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
             - if new_posts > 0
               %span.cb_doc
                 = new_posts
-            - new_comments = aspect.aspect_posts.after_last_visit_comments(last_time_visit_page('discontent')).size
+            - new_comments = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
             - if new_comments > 0
               %span.cb_com
                 = new_comments

@@ -51,6 +51,16 @@
 @reload_isotope = ->
   $('#tab_aspect_posts').isotope('reloadItems').isotope()
 
+@check_discontents= (el)->
+  arr = []
+  $(el).find('input:checked').closest('.checkox_item').each (index, element) ->
+    if $(element).data('discontent') == '*'
+      arr = $(element).data('discontent')
+      return false
+    else
+      arr.push(if $(element).data('discontent').match(/(\d+)/) then $(element).data('discontent').match(/(\d+)/)[1] else $(element).data('discontent'))
+  return arr
+
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->
 #  url = window.location.href.match(/\d+/g)
