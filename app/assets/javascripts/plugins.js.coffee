@@ -91,14 +91,14 @@
 #    $('#tab_aspect_posts div.discontent-block').fadeOut();
     $("#tab_aspect_posts div[class^='aspect_']").fadeIn();
 
-  $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
-  $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
-  $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
+#  $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
+#  $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
+#  $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
 
-  $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
-  $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
+#  $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
+#  $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
 #  $('.index-of-aspects').on('click', "li[id^='button_aspect_']", this.filter_aspects)
-  $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
+#  $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
 
 #  $('.sort-block').on('click', ".sort-all", this.show_all_aspects)
 

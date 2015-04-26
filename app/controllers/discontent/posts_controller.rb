@@ -23,9 +23,9 @@ class Discontent::PostsController < PostsController
   def index
     @posts= nil
     if params[:aspect] and params[:aspect] != '*' and params[:aspect] != '#'
-      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.created_order
+      @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.by_status_for_discontent(@project).created_order
     elsif params[:aspect] == '#'
-      @posts = @project.discontents_without_aspect.created_order
+      @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).created_order
     else
       @posts = @project.discontents.by_status_for_discontent(@project).created_order
     end

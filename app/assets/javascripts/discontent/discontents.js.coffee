@@ -22,6 +22,7 @@ DiscontentCollectionView = Backbone.View.extend
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
+    # @todo loadByAspect и dropdowns-enhancement events
     $('#filter').on('click', 'li', this.loadByAspect)
     $('#sorter').on('click', 'span', this.sortByAspect)
   render: ()->
@@ -61,24 +62,34 @@ DiscontentCollectionView = Backbone.View.extend
 
   renderNew: (newModel)->
     this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
-    $('#tab_aspect_posts').isotope('updateSortData').isotope()
-    show_comments_hover()
-    activate_perfect_scrollbar()
-    colors_discontents()
-    post_colored_stripes()
+#    $('#tab_aspect_posts').isotope('updateSortData').isotope()
+#    show_comments_hover()
+#    activate_perfect_scrollbar()
+#    colors_discontents()
+#    post_colored_stripes()
 
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')
     this.$container.isotope('remove', el);
-    $('#tab_aspect_posts').isotope('updateSortData').isotope()
+#    $('#tab_aspect_posts').isotope('updateSortData').isotope()
 
   loadByAspect: (evt)->
-    #    evt.preventDefault();
+#    return false
+#    evt.preventDefault();
+#    evt.stopPropagation()
     #    filterValue = $(this).data('aspect')
     #    $('#tab_aspect_posts').isotope
     #      filter: filterValue
     dc.fetch
       data: $.param({aspect: $(this).data('aspect')})
+      success: (col,res)->
+        console.log dc.length
+        $('#tab_aspect_posts').isotope('updateSortData').isotope()
+        show_comments_hover()
+        activate_perfect_scrollbar()
+        colors_discontents()
+        post_colored_stripes()
+#    return false
   sortByAspect: ()->
     sortByValue = $(this).data('type')
     $('#tab_aspect_posts').isotope
@@ -87,9 +98,11 @@ DiscontentCollectionView = Backbone.View.extend
 
 # only for discontents url
 if window.location.href.indexOf("discontent/posts") > -1
+  console.log 'gc'
   dc = new DiscontentCollection
   dc.fetch
     success: (col,res)->
+      console.log 'gc+'
       dv = new DiscontentCollectionView({collection: dc})
       dv.render()
 

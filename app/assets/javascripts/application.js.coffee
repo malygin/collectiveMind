@@ -134,7 +134,7 @@ $ ->
 
 #show comments panel on post hover
 @show_comments_hover = ->
-  $('.ch_action').hover ->
+  $('.ch_action').unbind().hover ->
     ch_id = $(this).attr('data-for')
     $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
     $('#' + ch_id).toggleClass 'active'
