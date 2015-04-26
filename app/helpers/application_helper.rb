@@ -815,8 +815,14 @@ module ApplicationHelper
   end
 
   # необходимость показа приветсвенной модалки или поповера
+  #@todo почему бы не возвращать boolean?
   def shown_intro(check_field)
     current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
+  end
+
+  # Показывать ли стикер в кабинете?
+  def show_sticker?(check_field)
+    current_user.user_checks.check_field(@project, check_field).present?
   end
 
   # последняя дата захода на страницу

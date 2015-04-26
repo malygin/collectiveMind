@@ -28,6 +28,15 @@ describe 'Cabinet Discontents' do
     end
   end
 
+  it 'close sticker' do
+    expect(page).to have_content t('cabinet.discontent_posts_sticker')
+    expect {
+      click_link 'close_sticker'
+    }.to change(UserCheck, :count).by(1)
+    refresh_page
+    expect(page).not_to have_content t('cabinet.discontent_posts_sticker')
+  end
+
   describe 'create with simple form', js: true do
     let! (:aspect_1) { create :aspect, user: user, project: project }
     let! (:aspect_2) { create :aspect, user: user, project: project }
