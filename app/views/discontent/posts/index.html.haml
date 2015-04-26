@@ -60,7 +60,8 @@
     .col-md-7
       %span.stage-heading
         Несовершенства
-        ="(#{@posts.count})"
+        %span#count_discontents
+          ="(#{@posts.count})"
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
