@@ -10,7 +10,7 @@ class Novation::PostsController < PostsController
 
       format.html # show.html.erb
       format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, title: item.title, content: trim_post_content(item.content, 100),
-                                                                             user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar))  : ActionController::Base.helpers.asset_path('no-ava.png') , post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                                             user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar)) : ActionController::Base.helpers.asset_path('no-ava.png'), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
                                                                              project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
                                                                              concept_class: post_concept_classes(item),
                                                                              count_comments: item.comments.count,
@@ -49,11 +49,16 @@ class Novation::PostsController < PostsController
 
 
   private
-    def set_novation_post
-      @novation = current_model.find(params[:id])
-    end
+  def set_novation_post
+    @novation = current_model.find(params[:id])
+  end
 
-    def novation_params
-      params.require(:novation_post).permit(:title, :user_id, :number_views, :status, :project_id, :actions_desc, :actions_ground, :actors, :tools, :impact_group, :impact_env)
-    end
+  def novation_params
+    params.require(:novation_post).permit(:title, :status, :content, :approve_status, :project_change, :project_goal,
+                                          :project_members, :project_results, :project_time, :members_new, :members_who,
+                                          :members_education, :members_motivation, :members_execute, :resource_commands,
+                                          :resource_support, :resource_internal, :resource_external, :resource_financial,
+                                          :resource_competition, :confidence_commands, :confidence_remove_discontent,
+                                          :confidence_negative_results)
+  end
 end
