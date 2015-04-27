@@ -69,7 +69,7 @@ describe 'Cabinet Discontents' do
     it 'empty fields - error' do
       expect {
         click_button 'send_post'
-        within :css, 'div#notice_messages' do
+        within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
       }.not_to change(Discontent::Post, :count)

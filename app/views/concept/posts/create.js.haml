@@ -1,5 +1,5 @@
 - if @concept_post.valid?
-  $('#notice_messages').hide();
+  $('.notice_messages').hide();
   $('#create_concept_success').fadeIn(3000).fadeOut('slow');
   $('#concept_post_title').val('');
   $('#concept_post_goal').val('')
@@ -13,4 +13,4 @@
   $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
   $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
-  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");

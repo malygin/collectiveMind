@@ -1,5 +1,5 @@
 - if @concept_post.valid?
-  $('#notice_messages').hide();
+  $('.notice_messages').hide();
   $('#create_concept_success').fadeIn(3000).fadeOut('slow');
 - else
-  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");

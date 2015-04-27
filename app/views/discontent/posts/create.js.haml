@@ -1,5 +1,5 @@
 - if @post.valid?
-  $('#notice_messages').hide();
+  $('.notice_messages').hide();
   $('#create_discontent_success').fadeIn(5000).fadeOut('slow');
   $.magnificPopup.instance.close();
   $('#discontent_post_content').val('');
@@ -10,4 +10,4 @@
   $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
   $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
-  $('#notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");
