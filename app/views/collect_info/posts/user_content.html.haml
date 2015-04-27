@@ -1,1 +1,2 @@
-= render partial: 'core/aspect/posts/post', collection: @content
+- @content.each do |aspect|
+  = render partial: 'core/aspect/posts/form', locals: {aspect: aspect}
