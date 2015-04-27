@@ -54,10 +54,6 @@ class PostsController < ProjectsController
     note_model.table_name.singularize
   end
 
-  def root_model_path(project)
-    life_tape_posts_path(project)
-  end
-
   def voting_model
     Discontent::Post
   end
@@ -238,7 +234,7 @@ class PostsController < ProjectsController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_model_path(@project) }
+      format.html { redirect_to current_stage_url(@project) }
       format.json { head :no_content }
     end
   end
