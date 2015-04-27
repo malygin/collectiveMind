@@ -4,10 +4,10 @@ module BasePost
 
   # Статусы поста: черновик, опубликовано, одобрено, в архиве
   STATUSES = {
-      new: 0,
+      draft: 0,
       published: 1,
       approved: 2,
-      archive: 3
+      archived: 3
   }
 
   included do
@@ -109,6 +109,12 @@ module BasePost
 
     def note_size?(type_field)
       self.post_notes(type_field).size > 0
+    end
+
+    STATUSES.keys.each do |method_name|
+      define_method :"#{method_name}?" do
+        status == STATUSES[method_name]
+      end
     end
   end
 end
