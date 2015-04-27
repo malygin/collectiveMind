@@ -132,6 +132,13 @@ $ ->
     $(this).addClass 'active'
     return
 
+  # просмотр несовершенства в голосовании
+  $('.vote_open_detail_imperf').click ->
+    $('i', this).toggleClass 'fa-angle-right'
+    $('i', this).toggleClass 'fa-angle-left'
+    $('.item_expandable_imperf').not($(this).parents('.vote_item').find('.item_expandable_imperf')).removeClass 'opened'
+    $(this).parents('.vote_item').find('.item_expandable_imperf').toggleClass 'opened'
+
 
 #show comments panel on post hover
 @show_comments_hover = ->
