@@ -1,4 +1,3 @@
-require 'rake'
 require 'spec_helper'
 
 describe 'Cabinet Aspects' do
@@ -9,8 +8,6 @@ describe 'Cabinet Aspects' do
   let! (:aspect) { create :aspect, user: user, project: project }
 
   before do
-    # тут еще нужно прицеплять техники к проекту
-    #Rake::Task['seed:migrate'].invoke
     technique_1 = Technique::List.create stage: 'aspect_posts', code: 'simple'
     project.techniques << technique_1
 
@@ -57,7 +54,7 @@ describe 'Cabinet Aspects' do
         fill_in 'core_aspect_post_content', with: ''
         fill_in 'core_aspect_post_short_desc', with: ''
         click_button 'send_post_aspect'
-        within :css, 'div#notice_messages' do
+        within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
       }.not_to change(Core::Aspect::Post, :count)
@@ -67,14 +64,17 @@ describe 'Cabinet Aspects' do
   it 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_collect_info_posts_path(project)
-    click_link "edit_aspect_#{aspect.id}"
-    expect {
-      fill_in 'core_aspect_post_content', with: new_content
-      click_button 'send_post_aspect'
-      expect(page).to have_content t('form.aspect.edit_success')
-    }.not_to change(Core::Aspect::Post, :count)
+    within :css, "form#edit_core_aspect_post_#{aspect.id}" do
+      expect {
+        fill_in 'core_aspect_post_content', with: new_content
+        click_button 'send_post_aspect'
+        expect(page).to have_content t('form.aspect.edit_success')
+      }.not_to change(Core::Aspect::Post, :count)
+    end
     visit user_content_collect_info_posts_path(project)
-    expect(page).to have_content new_content
+    within :css, "form#edit_core_aspect_post_#{aspect.id}" do
+      expect(page).to have_field('core_aspect_post_content', text: new_content)
+    end
   end
 
   context 'destroy' do
@@ -91,5 +91,12 @@ describe 'Cabinet Aspects' do
   it 'created by current user' do
     click_link 'open_my_collect_info_posts'
     expect(page).to have_content aspect.content
+  end
+
+  it 'publish', js: true do
+    visit user_content_collect_info_posts_path(project)
+    click_link "publish_aspect_#{aspect.id}"
+    refresh_page
+    expect(page).not_to have_link "publish_aspect_#{aspect.id}"
   end
 end
