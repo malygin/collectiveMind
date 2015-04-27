@@ -6,7 +6,6 @@ class ChangeNovationFields < ActiveRecord::Migration
     remove_column :novation_posts, :tools, :text
     remove_column :novation_posts, :impact_group, :text
     remove_column :novation_posts, :impact_env, :text
-    remove_column :novation_posts, :content, :text
 
     add_column :novation_posts, :project_change, :text
     add_column :novation_posts, :project_goal, :text
