@@ -341,6 +341,7 @@ ru:
       status_other: Дополнительная
       new_success: "Вы успешно создали аспект"
       edit_success: "Вы успешно отредактировали аспект"
+      user_content_success: "Вы успешно отредактировали аспект"
     discontent:
       title: Форма добавления несовершенства
       style_negative: Имеющиеся недостатки
@@ -531,6 +532,7 @@ ru:
     save: Добавить
     new: Добавить
     edit: Сохранить
+    user_content: Сохранить
     save_load: Сохранение...
     notes: 'Замечания:'
 

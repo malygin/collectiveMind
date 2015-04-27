@@ -11,9 +11,6 @@
         .post-text
           %h5.bold
             = post.content
-          - if current_user?(post.user) and cabinet?
-            = link_to 'Редактировать', edit_aspect_post_path(@project, post), id: "edit_aspect_#{post.id}"
-            = link_to 'Удалить', aspect_post_path(@project, post), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{post.id}"
           .divider15
           %p
             %span.badge.badge_type1.color_me{'data-me-action' => 'background', 'data-me-color' => "#{post.color}", 'data-me-type' => 'aspect'} Обоснование

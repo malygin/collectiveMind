@@ -1,19 +1,8 @@
-= render partial: 'shared/create_success', locals: {model_name: 'aspect'}
-
-= form_for aspect, url: {project: @project.id, action: aspect.persisted? ? 'update' : 'create'}, remote: true do |f|
-  - content_for :aspect_content do
-    .form-group
-      = f.text_field :content, class: 'form-control', placeholder: t('activerecord.attributes.core/aspect/post.content')
-    .divider15
-  - content_for :aspect_description do
-    %p
-      %span.badge.badge_type1.grey
-        = t('activerecord.attributes.core/aspect/post.short_desc')
-    .divider15
-    .form-group
-      = f.text_area :short_desc, class: 'form-control', rows: '6'
+= form_for aspect, url: {controller: 'core/aspect/posts', project: @project.id, action: aspect.persisted? ? 'update' : 'create', id: aspect.id}, remote: true, class: 'cabinet-aspect-form' do |f|
+  %div{id: "aspect_notices_#{aspect.id}"}
+    = render partial: 'shared/create_success', locals: {model_name: 'aspect', id: aspect.id}
   .post.post_add_type1
-    .post-header.grey
+    .post-header.color_me{style: "background-color: #{aspect.color};"}
     .post-body
       .media
         .media-left.text-center.gradient2.post-poster
@@ -24,7 +13,22 @@
         .media-body.white
           .post-text
             .divider10
-            = render partial: "#{@mechanic_type}_form", locals: {f: f, aspect: aspect}
-            - if @project.try(:project_type).try(:custom_fields?)
-              = render partial: "#{@project.project_type.code}_fields", locals: {f: f}
-  = f.submit t("form.#{action_name}"), id: 'send_post_aspect', class: 'btn add-button type2 pull-right'
+            .form-group
+              = f.text_area :content, class: 'form-control p_name ta_icon', rows: 1, placeholder: t('activerecord.attributes.core/aspect/post.content')
+            .divider15
+            %p
+              %span.badge.badge_type1.color_me{style: "background-color: #{aspect.color};"}
+                = t('activerecord.attributes.core/aspect/post.short_desc')
+            .divider15
+            .form-group
+              = f.text_area :short_desc, class: 'form-control p_descr ta_icon', rows: '4'
+            -# Закомментил, все равно для аспектов нет никакой специфики (по крайней мере пока), а как появится - верну обратно, и будет как ра на чем протестировать
+            -#= render partial: "core/aspect/posts/#{@mechanic_type}_form", locals: {f: f, aspect: aspect}
+            -#- if @project.try(:project_type).try(:custom_fields?)
+            -#  = render partial: "#{@project.project_type.code}_fields", locals: {f: f}
+    .post-bottom.text-right.white
+      - if aspect.persisted?
+        = link_to 'Удалить', aspect_post_path(@project, aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{aspect.id}", class: 'btn add-button type2 del'
+      = f.submit t("form.#{action_name}"), id: 'send_post_aspect', class: 'btn add-button type2 color_me', style: "background-color: #{aspect.color};"
+      - if aspect.persisted? and !aspect.published?
+        = link_to 'Опубликовать', publish_collect_info_post_path(@project, aspect), remote: true, method: :put, id: "publish_aspect_#{aspect.id}", class: 'btn add-button type2'

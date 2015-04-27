@@ -6,6 +6,5 @@
         role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}"
     %li{role: 'presentation', class: ('active' if action_name == 'user_content')}
       = link_to "#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})", self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'a_font_reset text-right', id: "open_my_#{@project.current_stage_type}"
-.col-md-9.col-md-offset-1
-  .tab-content#cabinet_form
-    = yield :cabinet_form
+.col-md-9.col-md-offset-1#cabinet_form
+  = yield :cabinet_form
