@@ -62,44 +62,168 @@
                   = t('show.novation.actions')
               %p
                 %strong
-                  = t('show.desc')
-                = @post.actions_desc
+                  = t('activerecord.attributes.novation/post.project_change')
+              %p
+                = @post.project_change
+
               %p
                 %strong
-                  = t('show.ground')
-                = @post.actions_ground
+                  = t('activerecord.attributes.novation/post.project_goal')
+              %p
+                = @post.project_goal
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.project_results')
+              %p
+                = @post.project_results
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.project_time')
+              %p
+                = @post.project_time
+
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
                   = t('show.novation.actors')
               %p
                 %strong
-                  = t('show.desc')
-                = @post.actors
+                  = t('activerecord.attributes.novation/post.members_new')
+              %p
+                = @post.members_new_bool ? 'Да' : 'Нет'
+                %br
+                = @post.members_new
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.members_who')
+              %p
+                = @post.members_who_bool ? 'Да' : 'Нет'
+                %br
+                = @post.members_who
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.members_education')
+              %p
+                = @post.members_education_bool ? 'Да' : 'Нет'
+                %br
+                = @post.members_education
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.members_motivation')
+              %p
+                = @post.members_motivation_bool ? 'Да' : 'Нет'
+                %br
+                = @post.members_motivation
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.members_execute')
+              %p
+                = @post.members_execute_bool ? 'Да' : 'Нет'
+                %br
+                = @post.members_execute
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.resource_commands')
+              %p
+                = @post.resource_commands_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_commands
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.resource_support')
+              %p
+                = @post.resource_support_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_support
+
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
                   = t('show.novation.tools')
               %p
                 %strong
-                  = t('show.desc')
-                = @post.tools
+                  = t('activerecord.attributes.novation/post.resource_internal')
+              %p
+                = @post.resource_internal_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_internal
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.resource_external')
+              %p
+                = @post.resource_external_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_external
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.resource_financial')
+              %p
+                = @post.resource_financial_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_financial
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.resource_competition')
+              %p
+                = @post.resource_competition_bool ? 'Да' : 'Нет'
+                %br
+                = @post.resource_competition
+
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
                   = t('show.novation.impact_group')
               %p
                 %strong
-                  = t('show.desc')
-                = @post.impact_group
+                  = t('activerecord.attributes.novation/post.project_members')
+              %p
+                = @post.project_members_bool ? 'Да' : 'Нет'
+                %br
+                = @post.project_members
+
             .stripe-qa
               .lined-heading
                 %span.bold-stripe
                   = t('show.novation.impact_env')
               %p
                 %strong
-                  = t('show.desc')
-                = @post.impact_env
+                  = t('activerecord.attributes.novation/post.confidence_commands')
+              %p
+                = @post.confidence_commands_bool ? 'Да' : 'Нет'
+                %br
+                = @post.confidence_commands
+
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  = t('show.novation.negative')
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.confidence_remove_discontent')
+              %p
+                = @post.confidence_remove_discontent_bool ? 'Да' : 'Нет'
+                %br
+                = @post.confidence_remove_discontent
+
+              %p
+                %strong
+                  = t('activerecord.attributes.novation/post.confidence_negative_results')
+              %p
+                = @post.confidence_negative_results_bool ? 'Да' : 'Нет'
+                %br
+                = @post.confidence_negative_results
+
 
           .col-md-6.comment_col.popup_expandable_col.ps_cont{"data-col" => "6"}
             %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
