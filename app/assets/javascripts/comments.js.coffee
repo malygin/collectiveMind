@@ -115,7 +115,9 @@
 
   this.submit_enter = (e) ->
     if e.keyCode == 13
+      e.preventDefault();
       $(this).closest('form').trigger 'submit'
+      return false;
 
   #  this.toggle_scores = ->
   #    $(this).toggleClass('label-danger label-success')
@@ -154,6 +156,7 @@
 @comments_sumbit = ->
   this.submit_enter = (e) ->
     if e.keyCode == 13
+      e.preventDefault();
       $(this).closest('form').trigger 'submit'
       return false;
 

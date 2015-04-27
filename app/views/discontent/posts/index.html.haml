@@ -1,7 +1,12 @@
 .stage-info-sort-block
   #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
     %span Фильтр аспектов:
-    %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"} все
+    %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"}
+      %span
+        %span.vert_stripe.back1
+        %span.vert_stripe.back2
+        %span.vert_stripe.back3
+      %span.text_label Все аспекты
     %ul.dropdown-menu.index-of-aspects#filter
       %li{data: {aspect: "*"}}
         %input#ex2_2_0{:name => "ex2_2", :type => "radio", :value => "0"}/
@@ -31,7 +36,7 @@
           - if new_posts > 0
             %span.cb_doc
               = new_posts
-          - new_comments = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
+          - new_comments = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).count(' DISTINCT "discontent_comments"."id" ')
           - if new_comments > 0
             %span.cb_com
               = new_comments
@@ -67,10 +72,12 @@
         %span.sort-label Сортировать по новым:
         %span#sorter
           %span.sort-1.sort_btn.sprite_com.sprite-item2_2_1.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
             - if new_comments > 0
               %span
                 = new_comments
           %span#tooltip2_2.sort-2.sort_btn.sprite_doc.sprite-item2_1.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+            - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
             - if new_posts > 0
               %span
                 = new_posts
