@@ -3,9 +3,12 @@
     .heading_cont
       %h6
         = trim_string(post_vote.content, size = 50)
-    .vote_tag{style: "background: #{post_vote.aspect.color if post_vote.aspect}"}
-      Аспект:
-      = post_vote.aspect.content if post_vote.aspect
+
+    .post-theme{id: "stripe#{post_vote.id}"}
+      - post_vote.post_aspects.each_with_index do |aspect, index|
+        %span.tag-stripes{class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};"}
+          %span.tags
+            = trim_content(aspect.content, 30)
     .divider10
     .vote_controls.text-center
       -#= link_to vote_discontent_post_path(@project, post_vote.id, status: 1), remote: true, method: :put do
