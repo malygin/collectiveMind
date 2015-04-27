@@ -3,7 +3,18 @@
     .heading_cont
       %h6
         = post_vote.content
-
+    %p.bold
+      = t('activerecord.attributes.discontent/post.what')
+    %p
+      = post_vote.what
+    %p.bold
+      = t('activerecord.attributes.discontent/post.whered')
+    %p
+      = post_vote.whered
+    %p.bold
+      = t('activerecord.attributes.discontent/post.whend')
+    %p
+      = post_vote.whend
     .post-theme{id: "stripe#{post_vote.id}"}
       - post_vote.post_aspects.each_with_index do |aspect, index|
         %span.tag-stripes{class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};"}
