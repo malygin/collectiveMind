@@ -720,4 +720,21 @@ $(document).ready(function(){
 
     */
 
+
+
+    /* rating cell bigger - */
+    $('.rating_cell:contains("-")').css('font-size', '20px');
+
+
+
+    /* popup digest btn */
+    $(".btn_dia").click(function() {
+        if ($(this).text() == 'Подробнее')
+            $(this).html($(this).find('i')).append('Свернуть');
+        else $(this).html($(this).find('i')).append('Подробнее');
+        $('.dia_icon').toggleClass('active');
+        $('.dia_legend').toggleClass('active');
+    });
+
+
 });
