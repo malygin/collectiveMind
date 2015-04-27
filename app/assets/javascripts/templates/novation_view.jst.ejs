@@ -1,6 +1,6 @@
-<div id="concept_post_<%= id %>" class="<%= discontent_class %> col-md-6 concept-block" data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
+<div id="novation_post_<%= id %>" class="<%= concept_class %> col-md-6 novation-block" data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
     <div class="post post_type_3 themes_cont">
-        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>">
+        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/novation/posts/<%= id %>">
             <div class="post-header white">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
@@ -50,17 +50,17 @@
         </div>
         <div class="post-bottom white">
             <div class="row">
-                <div class="col-md-2 col_padding_right_3">
+                <div class="col-md-1 col_padding_right_3">
                     <small class="pull-left" style="margin-right: 3px;">
-                        Несовершенства
+                        Идеи
                     </small>
                 </div>
-                <div class="col-md-7 col_padding_right_3 themes_cont">
+                <div class="col-md-8 col_padding_right_3 themes_cont">
                     <div id="stripe<%= id %>" class="post-theme">
-                        <% for(var i=0; i<discontents.length; i++) {%>
+                        <% for(var i=0; i<concepts.length; i++) {%>
                         <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
                                 <span class="tags">
-                                  <%= discontents[i].content %>
+                                  <%= concepts[i].content %>
                                 </span>
                             </span>
                         <% } %>
@@ -75,7 +75,7 @@
                           <i class="fa fa-comment-o"></i>
                         </span>
 
-                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
+                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=false">
                               <span class="popup2">
                                 <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
                                     <%= count_likes %>
@@ -83,7 +83,7 @@
                                 <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
                               </span>
                         </a>
-                        <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
+                        <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=true">
                               <span class="popup2">
                                 <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
                                     <%= count_dislikes %>

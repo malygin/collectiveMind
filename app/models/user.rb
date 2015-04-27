@@ -398,7 +398,7 @@ class User < ActiveRecord::Base
     project.discontent_for_vote.where.not(id: vote_discontents)
   end
 
-  # идеи для голосования (необходимые, важные, неважные)
+  # идеи для голосования (да, нет)
   def concepts_for_vote(project, status)
     self.voted_concept_post.by_project(project.id).where(concept_votings: {status: status})
   end
@@ -407,6 +407,17 @@ class User < ActiveRecord::Base
   def unvote_concepts_for_vote(project)
     vote_concepts = project.concept_ongoing_post.joins(:final_votings).where(concept_votings: {user_id: self.id}).pluck('concept_posts.id')
     project.concept_ongoing_post.where.not(id: vote_concepts)
+  end
+
+  # пакеты для голосования (да, нет)
+  def novations_for_vote(project, status)
+    self.voted_novation_post.by_project(project.id).where(novation_votings: {status: status})
+  end
+
+  # пакеты за которые пользователь еще не проголосовал
+  def unvote_novations_for_vote(project)
+    vote_novations = project.novations.joins(:final_votings).where(novation_votings: {user_id: self.id}).pluck('novation_posts.id')
+    project.novations.where.not(id: vote_novations)
   end
 
   def content_for_project(project)

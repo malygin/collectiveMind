@@ -6,9 +6,9 @@
     %p
       =post_vote.content
 
-    .post-theme{id: "stripe-p-#{post_vote.id}"}
+    .post-theme{id: "stripe#{post_vote.id}"}
       - post_vote.concept_disposts.each_with_index do |post, index|
-        %span.tag-stripes{class: "#{'active' if index == 0} color-N#{index + 1}"}
+        %span.tag-stripes.color_me{class: "#{'active' if index == 0}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
           %span.tags
             = trim_content(post.content, 30)
 

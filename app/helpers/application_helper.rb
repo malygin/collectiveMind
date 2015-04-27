@@ -865,6 +865,8 @@ module ApplicationHelper
       'discontent_cabinet'
     elsif name_controller == :concept_posts
       'concept_discuss'
+    elsif name_controller == :novation_posts
+      'novation_discuss'
     end
   end
 

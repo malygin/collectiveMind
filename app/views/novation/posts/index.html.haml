@@ -5,23 +5,31 @@
       %span.stage-heading
         Нововведения
         ="(#{@posts.count})"
-        %i.fa.fa-question-circle
+        -#%i.fa.fa-question-circle
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span
-          %span.sort-1.sort-date
-            %span 25
-          %span.sort-2.sort-rate
-            %span 2
-        -#%span.sort-all ВСЕ
-        = link_to project_user_path(@project, current_user) do
+        %span#sorter
+          %span.sort-1.sort_btn.sprite_com.sprite-item3_2_1.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.novations.after_last_visit_comments(last_time_visit_page('novation')).size
+            - if new_comments > 0
+              %span
+                = new_comments
+          %span#tooltip3_2.sort-2.sort_btn.sprite_doc.sprite-item3_1.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться нововведения."}
+            - new_posts = @project.novations.after_last_visit_posts(last_time_visit_page('novation')).size
+            - if new_posts > 0
+              %span
+                = new_posts
+
+        = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_post' do
           %button.btn.add-button
-            %span> +
-            Нововведение
+            %span
+              + Нововведение
+
+
 .stage-post-block
-  .row
-    = render partial: 'post_short', collection: @posts
+  .row#tab_concept_novations
+    -#= render partial: 'post_short', collection: @posts
 
 
 #render_novation_post

@@ -123,6 +123,7 @@
       $.ajax
         url: "/project/#{project_id}/#{stage}/posts/#{post_id}/vote"
         type: "put"
+        dataType: "script"
         data:
           status: status
 

@@ -338,12 +338,12 @@ class PostsController < ProjectsController
       vote = saved_vote.first
       if vote.status != params[:status].to_i
         saved_vote.destroy_all
-        @post_vote.final_votings.create(user: current_user, status: params[:status])
+        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
       elsif vote.status == params[:status].to_i
         saved_vote.destroy_all
       end
     else
-      @post_vote.final_votings.create(user: current_user, status: params[:status])
+      @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
     end
 
     # @post_vote = voting_model.find(params[:post_id])

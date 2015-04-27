@@ -48,6 +48,7 @@
 #= require backbone_datalink
 #= require discontent/discontents
 #= require concept/concepts
+#= require novation/novations
 
 #= require custom_ready
 
