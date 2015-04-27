@@ -364,43 +364,76 @@
                       %button.btn.add-button.type2.pull-right{:type => "submit"} Опубликовать
                       %button.btn.add-button.type2.del.pull-right{:type => "submit"} Удалить
                 #cabinet_4_2.tab-pane.fade{:role => "tabpanel"}
-                  .row
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back1
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom.ideas
-                            4 идеи
-                            %i.fa.fa-angle-right.font_grey
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back1
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom.ideas
-                            4 идеи
-                            %i.fa.fa-angle-right.font_grey
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back2
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom.ideas
-                            4 идеи
-                            %i.fa.fa-angle-right.font_grey
+                  .divider10
+                  .content_window.white
+                    .cont_heading.bold.pocket_name
+                      %textarea#t_textarea1.form-control.transp_ta{:placeholder => "Название пакета", :rows => "1", :type => "text"}
+                    /
+                      <div class="cont_heading bold toggled_textarea_cont">
+                      <span id="tgl_ta_target1">Название пакета</span><i class="fa fa-pencil edit_tgl_ta" data-for="#t_textarea1"></i>
+                      <textarea class="form-control toggled_textarea" type="text" rows="1" placeholder="" id="t_textarea1"></textarea>
+                      </div>
+                    .divider25
+                    %form
+                      .row
+                        .col-md-7
+                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"} Деятельность (5)
+                          #cab4-1.collapse
+                            .divider5
+                            %h6.bold Опишите деятельность
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                            .divider15
+                            %h6.bold Опишите деятельность
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                            .divider15
+                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"} Участники (2)
+                          #cab4-2.collapse
+                            .divider5
+                            %h6.bold Опишите ожидаемые качества участников
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                            .divider15
+                            %h6.bold Опишите ожидаемые качества участников
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                            .divider15
+                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"} Инструменты (10)
+                          #cab4-3.collapse
+                            .divider5
+                            %h6.bold Опишите инструменты
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                            .divider15
+                            %h6.bold Опишите инструменты
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                            .divider15
+                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"} ЦУ (8)
+                          #cab4-4.collapse
+                            .divider5
+                            %h6.bold Опишите ЦУ
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                            .divider15
+                            %h6.bold Опишите ЦУ
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                            .divider15
+                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-5"} Внешняя среда (2)
+                          #cab4-5.collapse
+                            .divider5
+                            %h6.bold Опишите ожидаемые качества участников
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                            .divider15
+                            %h6.bold Опишите ожидаемые качества участников
+                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                            .divider15
+                        .col-md-5
+                          %h6.bold.open-popup.cab_modal_opnr{"data-placement" => "cabinet4", "data-target" => "1"} Выберите идеи
+                          .divider_1_grey
+                          .divider20
+                          %p.bold Низкие потолки в офисах
+                          %p.bold Большое количество народа
+                          %p.bold Недостаточное технологическое оснащение
+                      .divider50
+                      .divider_1_grey
+                      .divider20
+                      %button.btn.add-button.type2.pull-right{:type => "submit"} Опубликовать
+                      %button.btn.add-button.type2.del.pull-right{:type => "submit"} Удалить
       / Main Block ends
       #popup-cabinet4-1.popup-window.popup-w1030.mfp-hide
         .popup.transparent
