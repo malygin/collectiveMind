@@ -18,6 +18,9 @@ class ProjectsController < ApplicationController
   def journal_data
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
+    if @my_journals_count == 0
+      @my_journals = current_user.my_journals_viewed @project
+    end
   end
 
   def check_access_to_project

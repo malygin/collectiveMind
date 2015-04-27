@@ -62,6 +62,10 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true).order('created_at DESC')
   end
 
+  def self.events_for_my_feed_viewed(project_id, user_id, lim=10)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true).limit(lim).order('created_at DESC')
+  end
+
   def self.events_for_content(project_id, user_id, first_id)
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id).order('created_at DESC')
   end

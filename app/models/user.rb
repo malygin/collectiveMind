@@ -342,6 +342,12 @@ class User < ActiveRecord::Base
     g.collect { |k, v| [v.first, v.size] }
   end
 
+  def my_journals_viewed(project)
+    events = Journal.events_for_my_feed_viewed project.id, id
+    g = events.group_by { |e| [e.first_id, e.type_event] }
+    g.collect { |k, v| [v.first, v.size] }
+  end
+
 
   def looked_chat
     update_attributes! last_seen_chat_at: Time.now
