@@ -2,7 +2,8 @@ class PostsController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about, :user_content]
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
-  before_filter :check_type_mechanics, only: [:new, :edit]
+  before_filter :check_type_mechanics, only: [:new, :edit, :user_content]
+  before_action :set_current_post
 
   def autocomplete
     results = current_model.autocomplete params[:term]
@@ -11,6 +12,10 @@ class PostsController < ProjectsController
 
   def user_content
     @content = current_model.by_project(@project).by_user(current_user)
+  end
+
+  def publish
+    @post.update status: current_model::STATUSES[:published]
   end
 
   def journal_data
@@ -536,5 +541,9 @@ class PostsController < ProjectsController
 
   def correct_mechanic?
     Technique::List.by_stage(current_model.to_s.sub('Core::', '').sub('::', '_').underscore.pluralize).where(code: params[:type_mechanic]).any?
+  end
+
+  def set_current_post
+    @post = current_model.find(params[:id]) if params[:id].present?
   end
 end
