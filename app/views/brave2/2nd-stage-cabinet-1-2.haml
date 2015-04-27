@@ -300,37 +300,42 @@
                     .col-md-12
                       .divider10
                       .content_window.white
+                        .cont_heading.bold.cab2_heading
+                          .row
+                            .col-sm-8
+                              %textarea#t_textarea1.form-control.transp_ta.min.cab2_head_text_ar.cab2_add_head{:placeholder => "Название (краткое описание) несовершенства", :rows => "1", :type => "text"}
+                            .col-sm-4.text-right
+                              .btn-group.cab_drop
+                                %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                                  %span Название аспекта
+                                %ul.dropdown-menu
+                                  %li
+                                    %input#ex2_3_1{:name => "ex2_3", :type => "radio", :value => "1"}/
+                                    %label{:for => "ex2_3_1"}
+                                      %span
+                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"}
+                                      %span.text_label Персонал как инструмент продаж
+                                  %li
+                                    %input#ex2_3_2{:name => "ex2_3", :type => "radio", :value => "2"}/
+                                    %label{:for => "ex2_3_2"}
+                                      %span
+                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                      %span.text_label Персонал как инструмент продаж
+                                  %li
+                                    %input#ex2_3_3{:name => "ex2_3", :type => "radio", :value => "3"}/
+                                    %label{:for => "ex2_3_3"}
+                                      %span
+                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                      %span.text_label Персонал как инструмент продаж
+                                  %li
+                                    %input#ex2_3_4{:name => "ex2_3", :type => "radio", :value => "4"}/
+                                    %label{:for => "ex2_3_4"}
+                                      %span
+                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                      %span.text_label Персонал как инструмент продаж
+                              .divider25
                         .divider25
                         %form
-                          .btn-group.cab_drop
-                            %a.dropdown-toggle{"data-toggle" => "dropdown"}
-                              %span Выберите аспект
-                            %ul.dropdown-menu
-                              %li
-                                %input#ex2_2_1{:name => "ex2_2", :type => "radio", :value => "1"}/
-                                %label{:for => "ex2_2_1"}
-                                  %span
-                                    %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"}
-                                  %span.text_label Персонал как инструмент продаж
-                              %li
-                                %input#ex2_2_2{:name => "ex2_2", :type => "radio", :value => "2"}/
-                                %label{:for => "ex2_2_2"}
-                                  %span
-                                    %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                  %span.text_label Персонал как инструмент продаж
-                              %li
-                                %input#ex2_2_3{:name => "ex2_2", :type => "radio", :value => "3"}/
-                                %label{:for => "ex2_2_3"}
-                                  %span
-                                    %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                  %span.text_label Персонал как инструмент продаж
-                              %li
-                                %input#ex2_2_4{:name => "ex2_2", :type => "radio", :value => "4"}/
-                                %label{:for => "ex2_2_4"}
-                                  %span
-                                    %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                  %span.text_label Персонал как инструмент продаж
-                          .divider25
                           %p
                             Название (краткое описание несовершенства)
                           %textarea.form-control{:rows => "1", :type => "text"}
@@ -347,14 +352,16 @@
                             Чья работа от этого зависит?
                           %textarea.form-control{:rows => "2", :type => "text"}
                         .divider25
+                        .row
+                          .col-md-12.text-right
+                            %button.btn.add-button.del.type2 Удалить
+                            %button.btn.add-button.type2 Сохранить
+                            %button.btn.add-button.type2 Опубликовать
                       .row
-                        .col-md-6
+                        .col-md-12
                           %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs1"}
                             Пример несовершенства
                             %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-                        .col-md-6
-                          %p
-                            %button.btn.add-button.type2.pull-right Добавить
                       .divider25
                       #imperfs1.content_window.white.collapse.font_lighter_grey
                         .divider15
@@ -428,9 +435,13 @@
                               %tr.what
                                 %td.bold
                                   Винни-Пух постоянно
-                              %tr
+                                  %button.btn.btn_reset.btn_del
+                                    %i.fa.fa-trash-o.fa-lg
+                              %tr.post_text
                                 %td.col-md-12
-                                  При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                  %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
+                                    При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                    %i.fa.fa-angle-right.cab2_post_open.font_grey
                     .post-bottom.white
                       .row
                         .col-md-12
@@ -452,13 +463,17 @@
                               %tr.what
                                 %td.bold
                                   Винни-Пух постоянно
-                              %tr
+                                  %button.btn.btn_reset.btn_del
+                                    %i.fa.fa-trash-o.fa-lg
+                              %tr.post_text
                                 %td.col-md-12
-                                  При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                  %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
+                                    При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
+                                    %i.fa.fa-angle-right.cab2_post_open.font_grey
                     .post-bottom.white
                       .row
                         .col-md-12
-                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "aspect"}
+                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
                             %span.tags Взаимоотношения четвероногих
       / Main Block ends
       #popup-cab2-1.popup-window.detailed_popup.popup-w800.mfp-hide
