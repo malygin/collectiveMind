@@ -88,7 +88,7 @@ class Core::Aspect::Post < ActiveRecord::Base
 
   def color
     color = read_attribute(:color)
-    color.present? ? color : '#eac85e'
+    color.present? ? color : '#9d9d9d'
   end
 
   def rate_aspect
