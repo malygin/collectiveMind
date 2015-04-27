@@ -1,8 +1,16 @@
 module BasePost
   extend ActiveSupport::Concern
   include Util::Filterable
+
+  # Статусы поста: черновик, опубликовано, одобрено, в архиве
+  STATUSES = {
+      new: 0,
+      published: 1,
+      approved: 2,
+      archive: 3
+  }
+
   included do
-    # status 0 - new, 1 -post expert, 2 - expeted, 3- archive
     belongs_to :user
     belongs_to :project, class_name: 'Core::Project'
     has_many :notes
@@ -36,18 +44,18 @@ module BasePost
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
 
     # скоуп для отбора постов с последнего захода на страницу
-    scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present?}
-    scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts','_comments')}.created_at >= ?", last_time) if last_time.present?}
-
+    scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present? }
+    scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts', '_comments')}.created_at >= ?", last_time) if last_time.present? }
 
     validates :user_id, :project_id, presence: true
+    validates :status, inclusion: {in: STATUSES.values}
 
     # вывод постов по дате последних комментов
     def self.sort_comments
-      select("#{table_name}.*, max(#{table_name.gsub('_posts','_comments')}.created_at) as last_date").
-        joins("LEFT OUTER JOIN #{table_name.gsub('_posts','_comments')} ON #{table_name.gsub('_posts','_comments')}.post_id = #{table_name}.id").
-        group("#{table_name}.id").
-        reorder("max(#{table_name.gsub('_posts','_comments')}.created_at) DESC NULLS LAST")
+      select("#{table_name}.*, max(#{table_name.gsub('_posts', '_comments')}.created_at) as last_date").
+          joins("LEFT OUTER JOIN #{table_name.gsub('_posts', '_comments')} ON #{table_name.gsub('_posts', '_comments')}.post_id = #{table_name}.id").
+          group("#{table_name}.id").
+          reorder("max(#{table_name.gsub('_posts', '_comments')}.created_at) DESC NULLS LAST")
     end
 
     def last_comment
