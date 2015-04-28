@@ -302,11 +302,9 @@
                       .content_window.white
                         .cont_heading.bold.cab2_heading
                           .row
-                            .col-sm-8
-                              %textarea#t_textarea1.form-control.transp_ta.min.cab2_head_text_ar.cab2_add_head{:placeholder => "Название (краткое описание) несовершенства", :rows => "1", :type => "text"}
-                            .col-sm-4.text-right
+                            .col-sm-12
                               .btn-group.cab_drop
-                                %a.dropdown-toggle{"data-toggle" => "dropdown"}
+                                %a.dropdown-toggle.rounded_3.white{"data-toggle" => "dropdown"}
                                   %span Название аспекта
                                 %ul.dropdown-menu
                                   %li
@@ -333,7 +331,6 @@
                                       %span
                                         %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
                                       %span.text_label Персонал как инструмент продаж
-                              .divider25
                         .divider25
                         %form
                           %p

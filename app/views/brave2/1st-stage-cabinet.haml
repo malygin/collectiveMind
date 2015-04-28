@@ -285,6 +285,18 @@
                 %li{:role => "presentation"}
                   %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_1_2", :role => "tab"} Мои аспекты
             .col-md-9.col-md-offset-1
+              .cab_notice.white
+                %span.success
+                  Вы успешно создали аспект
+              .cab_notice.white
+                %span.fail
+                  Сохранение не удалось из-за 3 ошибок:
+                  %br/
+                  Название (краткое описание несовершенства) не может быть пустым
+                  %br/
+                  Чья работа от этого зависит? не может быть пустым
+                  %br/
+                  От чего это зависит? не может быть пустым
               .tab-content
                 #cabinet_1_1.tab-pane.active.fade.in{:role => "tabpanel"}
                   .post.post_add_type1
@@ -358,21 +370,6 @@
                     .post-bottom.text-right.white
                       %button.btn.add-button.type2.del Удалить
                       %button.btn.add-button.type2.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Сохранить
-          / Уведомления о действии
-          .cab_notice.white
-            %span.success
-              Вы успешно создали аспект
-          .divider15
-          .cab_notice.white
-            %span.fail
-              Сохранение не удалось из-за 3 ошибок:
-              %br/
-              Название (краткое описание несовершенства) не может быть пустым
-              %br/
-              Чья работа от этого зависит? не может быть пустым
-              %br/
-              От чего это зависит? не может быть пустым
-          / 
       / Main Block ends
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded

@@ -901,6 +901,37 @@
                     %p
                       %strong> Описание:
                       lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  .q_pop_block.light-grey.rounded_2
+                    .divider15
+                    %p
+                      Согласны ли вы с тем, что эти идеи целесообразно объединить в пакет для разработки проектного предложения?
+                      %br/
+                      Если нет, объясните почему.
+                      %i.fa.fa-lg.fa-question-circle.font_color_stage4
+                    %form.form.instruments-block
+                      .btn-group{"data-toggle" => "buttons"}
+                        .form-group
+                          %button.btn.btn-xs.btn-white.text-center
+                            Да
+                          %i.fa.fa-check.font_color_stage3
+                        .form-group
+                          %button.btn.btn-xs.btn-white
+                            Нет
+                          %i.fa.fa-check.font_color_stage3
+                      .divider10
+                      %p
+                        Пояснения
+                      .divider5
+                      %textarea.form-control{:rows => "2", :type => "text"}
+                      .clearfix
+                      .divider5
+                      .form-group.bottom-buttons
+                        %button.btn.answer-button.back_color_stage4 Ответить
+                    .divider10
+                  .thank.light-grey.rounded_2
+                    %h1.text-center.font_color_stage4
+                      %i.fa.fa-lg.fa-check-circle
+                    %p.text-center Спасибо за ваш ответ!
                 .col-md-6.comment_col.popup_expandable_col.ps_cont
                   %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
                   .divider15
