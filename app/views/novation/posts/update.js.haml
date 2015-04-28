@@ -1,0 +1,5 @@
+- if @novation.valid?
+  $('.notice_messages').hide();
+  $('#novation_notices_#{@novation.id} #create_novation_success').fadeIn(5000).fadeOut('slow');
+- else
+  $('#novation_notices_#{@novation.id} .notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @novation)}");

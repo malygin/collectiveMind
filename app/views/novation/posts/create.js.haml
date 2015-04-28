@@ -1,0 +1,7 @@
+- if @novation.valid?
+  $('.notice_messages').hide();
+  $('#create_novation_success').fadeIn(3000).fadeOut('slow');
+  $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
+- else
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @novation)}");

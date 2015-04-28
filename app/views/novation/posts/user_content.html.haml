@@ -1,0 +1,15 @@
+.row
+  - @content.each do |novation|
+    .col-md-4
+      .media.type_cab
+        .media-left.gradient2
+          .cab_folder.back1
+            %span.percentage.font_white.bold.text-center 32%
+          %p.time.text-center
+            = Russian::strftime(novation.created_at,'%d.%m.%Y')
+        .media-body.white
+          %h6
+            = novation.title
+          %a.media-bottom.ideas.a_font_reset{:href => "4th-stage-cabinet-2.html"}
+            4
+            %i.fa.fa-angle-right.font_grey
