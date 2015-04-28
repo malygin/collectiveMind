@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :concept_post_votings, class_name: 'Concept::Voting'
   has_many :voted_concept_post, through: :concept_post_votings, source: :concept_post, class_name: 'Concept::Post'
 
+  has_many :novation_posts, class_name: 'Novation::Post'
   has_many :novation_post_votings, class_name: 'Novation::Voting'
   has_many :voted_novation_post, through: :novation_post_votings, source: :novation_post, class_name: 'Novation::Post'
 

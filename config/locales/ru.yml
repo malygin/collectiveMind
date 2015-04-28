@@ -600,6 +600,7 @@ ru:
     delete_group_task: "Удалить задачу?"
     delete_news: "Удалить новость?"
     delete_discontent: "Удалить несовершенство?"
+    delete_novation: "Удалить?"
   show:
     without_name: 'Без названия'
     note: замечание

@@ -27,26 +27,24 @@ class Novation::PostsController < PostsController
   end
 
   def edit
+    render action: :new
   end
 
   def create
-    @novation = current_model.new(novation_params)
-
-    if @novation.save
-      redirect_to @novation, notice: 'Novation was successfully created.'
-    else
-      render :new
+    @novation = @project.novations.create novation_params.merge(user: current_user)
+    respond_to do |format|
+      format.js
     end
   end
 
   def update
-    if @novation.update(novation_params)
-      redirect_to @novation, notice: 'Novation was successfully updated.'
-    else
-      render :edit
-    end
+    @novation.update_attributes novation_params
   end
 
+  def destroy
+    @novation.destroy if current_user?(@novation.user)
+    redirect_back_or user_content_novation_posts_path(@project)
+  end
 
   private
   def set_novation_post

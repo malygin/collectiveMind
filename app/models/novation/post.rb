@@ -14,4 +14,7 @@ class Novation::Post < ActiveRecord::Base
   scope :by_project, ->(p) { where(project_id: p) }
 
 
+  def attributes_for_form
+    attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status)
+  end
 end
