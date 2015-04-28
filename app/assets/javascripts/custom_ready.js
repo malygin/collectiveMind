@@ -364,4 +364,30 @@ $(document).ready(function () {
     });
 
 
+
+    /* cabinet 3rd stage check-and-push */
+    var ch_its = $('.item', '.checked_items').length;
+    var unch_its = $('.item', '.unchecked_items').length;
+    $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+
+    $('.check_push_box').click(function(){
+        if ($(this).is(':checked')){
+            var item = $(this).closest('.item').detach();
+            $('.checked_items').append(item);
+            ch_its++; unch_its--;
+            $('.hideable_checks').show();
+            $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
+            $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+        } else {
+            var item = $(this).closest('.item').detach();
+            $('.unchecked_items').append(item);
+            ch_its--; unch_its++;
+            if (ch_its == 0) {
+                $('.hideable_checks').hide();
+            }
+            $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+        }
+    });
+
+
 });

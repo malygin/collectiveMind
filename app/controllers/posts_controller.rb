@@ -3,7 +3,8 @@ class PostsController < ProjectsController
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
   before_filter :check_type_mechanics, only: [:new, :edit, :user_content]
-  before_action :set_current_post
+  # @todo если нужно то поставь на нужные методы
+  # before_action :set_current_post, except: [:plus_comment, :like_comment, :vote, :edit_comment, :update_comment, :destroy_comment]
 
   def autocomplete
     results = current_model.autocomplete params[:term]

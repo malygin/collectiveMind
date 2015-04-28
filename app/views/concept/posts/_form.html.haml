@@ -39,10 +39,10 @@
             = render partial: 'discontent', collection: @concept_post.concept_disposts
       .divider10
     .content_window.white
-      %a.theme_font_color.with_arrow.collapsed.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+      %a.theme_font_color.with_arrow.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
         %span.enter_lenght
           = 'Привязать идею к несовершенству'
           %span.unch_lenght
         %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-      #imperfs1.collapse.check_push_cont.rotate_arrow.unchecked_items
+      #imperfs1.collapse.in.check_push_cont.rotate_arrow.unchecked_items
         = render partial: 'discontent', collection: @discontent_posts
