@@ -39,7 +39,7 @@ class Discontent::Post < ActiveRecord::Base
     elsif project.status == 5 or project.status == 6
       where(status: [2, 4])
     elsif project.status > 6
-      where(status: 1)
+      where(status: [0, 1, 2, 4]) # вывод всех
     else
       where(status: 0)
     end
