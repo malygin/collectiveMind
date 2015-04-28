@@ -86,6 +86,9 @@ $ ->
     $(this).datepicker "hide"
     return
 
+  # аутосайз полей в кабинете
+  $('#cabinet_form textarea').autosize()
+
   # Используется в кабинете на стадии несовершенств, во вспомогательной технике
   $('.open-popup').each ->
     stageNum = $(this).attr('data-placement')
