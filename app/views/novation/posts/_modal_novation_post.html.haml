@@ -228,25 +228,26 @@
           .col-md-6.comment_col.popup_expandable_col.ps_cont{"data-col" => "6"}
             %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
             .divider15
-            #myCarousel.carousel.slide{"data-ride" => "carousel"}
-              .carousel-inner.chat-messages{:role => "listbox"}
-                -if @comments.present?
-                  - @comments.each_slice(5).with_index do |slice, i|
-                    .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
-                      = render partial:'shared/comment', collection: slice
-                -else
-                  .item.active
-
+            -##myCarousel.carousel.slide{"data-ride" => "carousel"}
+            -#  .carousel-inner.chat-messages{:role => "listbox"}
+            -#    -if @comments.present?
+            -#      - @comments.each_slice(5).with_index do |slice, i|
+            -#        .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
+            -#          = render partial:'shared/comment', collection: slice
+            -#    -else
+            -#      .item.active
+            .chat-messages
+              = render partial:'shared/comment', collection: @comments
             .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
-            -if @comments.count > 5
-              %nav.text-center
-                %ul.pagination
-                  - @comments.each_slice(5).with_index do |slice, i|
-                    %li
-                      %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-                        ="#{i+1}"
+            -#-if @comments.count > 5
+            -#  %nav.text-center
+            -#    %ul.pagination
+            -#      - @comments.each_slice(5).with_index do |slice, i|
+            -#        %li
+            -#          %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
+            -#            ="#{i+1}"
 
       .divider25
 

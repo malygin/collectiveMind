@@ -17,7 +17,7 @@
     }
   -else
     $("#comment_text_area").val('');
-    $('.chat-messages .item.active').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    $('.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 
 
   $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html())+1)
