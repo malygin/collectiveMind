@@ -21,10 +21,11 @@
               %span
                 = new_posts
 
-        = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_post' do
-          %button.btn.add-button
-            %span
-              = t('techniques.concept_posts_simple')
+        - if @project.can_add_content?(name_controller)
+          = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_post' do
+            %button.btn.add-button
+              %span
+                = t('techniques.concept_posts_simple')
 
 .stage-post-block
   .row#tab_dispost_concepts

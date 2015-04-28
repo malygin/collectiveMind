@@ -21,10 +21,11 @@
               %span
                 = new_posts
 
-        = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_post' do
-          %button.btn.add-button
-            %span
-              + Нововведение
+        - if @project.can_add_content?(name_controller)
+          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_post' do
+            %button.btn.add-button
+              %span
+                + Нововведение
 
 
 .stage-post-block

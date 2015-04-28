@@ -18,9 +18,10 @@
             - if new_posts > 0
               %span
                 = new_posts
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
-          %span
-            = t('techniques.aspect_posts_simple')
+        - if @project.can_add_content?(name_controller)
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
+            %span
+              = t('techniques.aspect_posts_simple')
 .divider10
 .divider_1_grey
 .divider10

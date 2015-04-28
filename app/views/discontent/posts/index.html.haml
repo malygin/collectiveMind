@@ -82,11 +82,11 @@
               %span
                 = new_posts
 
-        -#%span#filter_all.sort-all{data: {aspect: "*"}} ВСЕ
-        = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'add_record' do
-          %button.btn.add-button
-            %span
-              = t('techniques.discontent_posts_simple')
+        - if @project.can_add_content?(name_controller)
+          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'add_record' do
+            %button.btn.add-button
+              %span
+                = t('techniques.discontent_posts_simple')
 
 .stage-post-block
   .row#tab_aspect_posts

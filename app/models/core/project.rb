@@ -287,15 +287,17 @@ class Core::Project < ActiveRecord::Base
   def status_number(status)
     case status
       when :collect_info_posts
-        1
+        0
       when :discontent_posts
         3
       when :concept_posts
         7
-      when :plan_posts
+      when :novation_posts
         9
+      when :plan_posts
+        11
       when :estimate_posts
-        10
+        13
     end
   end
 
@@ -307,13 +309,32 @@ class Core::Project < ActiveRecord::Base
         3
       when 'concept_post'
         7
-      when 'plan_post'
+      when 'novation_post'
         9
+      when 'plan_post'
+        11
       when 'estimate_post'
-        10
+        13
       else
         0
     end
+  end
+
+  def can_add_content?(stage)
+    if stage == :collect_info_posts
+      return [0,1].include?(self.status)
+    elsif stage == :discontent_posts
+      return self.status == 3
+    elsif stage == :concept_posts
+      return self.status == 7
+    elsif stage == :novation_posts
+      return self.status == 9
+    elsif stage == :plan_posts
+      return self.status == 11
+    elsif stage == :estimate_posts
+      return self.status == 13
+    end
+    false
   end
 
   def demo?

@@ -12,10 +12,11 @@
         %span.sort-date
         %span.sort-rate
         %span.sort-all ВСЕ
-        = link_to project_user_path(@project, current_user) do
-          %button.btn.add-button
-            %span> +
-            Проект
+        - if @project.can_add_content?(name_controller)
+          = link_to project_user_path(@project, current_user) do
+            %button.btn.add-button
+              %span> +
+              Проект
 .stage-post-block
   .row
     = render partial: 'post_short', collection: @posts
