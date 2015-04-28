@@ -859,10 +859,8 @@ module ApplicationHelper
       'collect_info_questions_1'
     elsif name_controller == :collect_info_posts and @project.status > 1 and @questions_progress == 100
       'collect_info_discuss_1'
-    elsif name_controller == :discontent_posts and action_name == 'index'
+    elsif name_controller == :discontent_posts
       'discontent_discuss'
-    elsif name_controller == :discontent_posts and action_name == 'new'
-      'discontent_cabinet'
     elsif name_controller == :concept_posts
       'concept_discuss'
     elsif name_controller == :novation_posts
@@ -881,10 +879,10 @@ module ApplicationHelper
       'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' +
           'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' +
           'Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'
-    elsif name_controller == :discontent_posts and action_name == 'index'
+    elsif name_controller == :discontent_posts
       'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
-    elsif name_controller == :discontent_posts and action_name == 'new'
-      'Опишите несовершенство в свободной форме или воспользуйтесь вспомогательной техникой для поиска несовершенств. Вы можете добавить неограниченное количество несовершенств. Удачи!'
+    elsif name_controller == :concept_posts
+      'Идеи, предложенные на этой стадии, в дальнейшем будут объединяться в пакеты.'
     else
       'Здесь могла быть подсказка, но пока ее нет!'
     end
