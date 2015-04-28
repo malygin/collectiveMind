@@ -116,7 +116,8 @@
   this.submit_enter = (e) ->
     if e.keyCode == 13
       e.preventDefault();
-      $(this).closest('form').trigger 'submit'
+      if this.value? and this.value.length > 1
+        $(this).closest('form').trigger 'submit'
       return false;
 
   #  this.toggle_scores = ->
@@ -157,7 +158,8 @@
   this.submit_enter = (e) ->
     if e.keyCode == 13
       e.preventDefault();
-      $(this).closest('form').trigger 'submit'
+      if this.value? and this.value.length > 1
+        $(this).closest('form').trigger 'submit'
       return false;
 
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
