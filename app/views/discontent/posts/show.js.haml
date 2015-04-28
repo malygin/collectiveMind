@@ -3,4 +3,5 @@ $("#render_discontent_post").html('#{escape_javascript(render partial: 'modal_di
 magnificPopupOpen('#popup-imperf');
 comments_feed();
 comments_expandable_column();
+history_change("#{discontent_posts_path(@project)}");
 
