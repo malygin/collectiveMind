@@ -31,4 +31,4 @@
         = link_to 'Удалить', aspect_post_path(@project, aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{aspect.id}", class: 'btn add-button type2 del'
       = f.submit t("form.#{action_name}"), id: 'send_post_aspect', class: 'btn add-button type2 color_me', style: "background-color: #{aspect.color};"
       - if aspect.persisted? and !aspect.published?
-        = link_to 'Опубликовать', publish_collect_info_post_path(@project, aspect), remote: true, method: :put, id: "publish_aspect_#{aspect.id}", class: 'btn add-button type2'
+        = link_to 'Опубликовать', publish_collect_info_post_path(@project, aspect), remote: true, method: :put, id: "publish_#{aspect.id}", class: 'btn add-button type2'
