@@ -5693,10 +5693,10 @@ i.fa.sticker_close {
     padding-left: 50px;
 }
 .stage4_theme .r_u_sure {
-    background: image-url('icon-!.png') no-repeat left 13px center;
+    background: image-url('icon.png') no-repeat left 13px center;
 }
 .r_u_sure.del {
-    background: image-url('icon-!-del.png') no-repeat left 13px center;
+    background: image-url('icon-del.png') no-repeat left 13px center;
 }
 .r_u_sure .btn {
     padding: 2px;
