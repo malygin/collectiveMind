@@ -8,8 +8,6 @@ describe 'Cabinet Discontents' do
   let! (:discontent) { create :discontent, user: user, project: project }
 
   before do
-    # тут еще нужно прицеплять техники к проекту
-    #Rake::Task['seed:migrate'].invoke
     project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'simple')
     project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'detailed')
 
@@ -43,6 +41,10 @@ describe 'Cabinet Discontents' do
 
     before do
       click_link 'new_discontent_posts_simple'
+    end
+
+    it 'open example of discontents' do
+
     end
 
     context 'correct', js: true do
@@ -107,9 +109,18 @@ describe 'Cabinet Discontents' do
     expect(page).to have_content new_content
   end
 
-  context 'destroy' do
-    it 'author - ok', js: true do
+  context 'destroy', js: true do
+    it 'from user content page' do
       visit user_content_discontent_posts_path(project)
+      expect {
+        click_link "destroy_discontent_#{discontent.id}"
+        page.driver.browser.accept_js_confirms
+        expect(current_path) == user_content_discontent_posts_path(project)
+      }.to change(Discontent::Post, :count).by(-1)
+    end
+
+    it 'from edit form' do
+      visit edit_discontent_post_path(project, discontent)
       expect {
         click_link "destroy_discontent_#{discontent.id}"
         page.driver.browser.accept_js_confirms
@@ -124,5 +135,12 @@ describe 'Cabinet Discontents' do
     discontent.post_aspects.each do |aspect|
       expect(page).to have_content aspect.content
     end
+  end
+
+  it 'publish', js: true do
+    visit edit_discontent_post_path(project, discontent)
+    click_link "publish_#{discontent.id}"
+    refresh_page
+    expect(page).not_to have_link "publish_#{discontent.id}"
   end
 end
