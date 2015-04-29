@@ -631,6 +631,9 @@ $('.check_push_box').click(function(){
 $('.with_arrow').click(function(){
     $(this).find('i.collapse_arrow').toggleClass('fa-rotate-90');
 });
+$('.with_plus').click(function(){
+    $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus');
+});
 
 /* cabinet sticker */
 function close_sticker (id) {
