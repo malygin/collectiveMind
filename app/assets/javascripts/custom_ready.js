@@ -373,11 +373,16 @@ $(document).ready(function () {
     $('.check_push_box').click(function(){
         if ($(this).is(':checked')){
             var item = $(this).closest('.item').detach();
+            var item_id = $(item).find('.description').attr('id').replace(/^\D+/g, '');
             $('.checked_items').append(item);
             ch_its++; unch_its--;
             $('.hideable_checks').show();
             $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
             $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+            /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
+            if ($('#for_hidden_fields').length > 0) {
+                $('#for_hidden_fields').append('<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>');
+            }
         } else {
             var item = $(this).closest('.item').detach();
             $('.unchecked_items').append(item);
@@ -386,6 +391,10 @@ $(document).ready(function () {
                 $('.hideable_checks').hide();
             }
             $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+            /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
+            if ($('#for_hidden_fields').length > 0) {
+                $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove();
+            }
         }
     });
 

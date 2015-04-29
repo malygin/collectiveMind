@@ -251,6 +251,9 @@ ru:
       other: '%{count} ответов'
 
   form:
+    novation:
+      new_success: Ваш пакет успешно добавлен!
+      edit_success: Ваш пакет успешно отредактирован!
     concept:
       new_success: Ваша идея успешно добавлена!
       edit_success: Ваша идея успешно отредактирована!

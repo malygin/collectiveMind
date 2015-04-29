@@ -33,6 +33,11 @@ class Novation::PostsController < PostsController
 
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
+    if params[:novation_post_concept]
+      params[:novation_post_concept].each do |asp|
+        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
+      end
+    end
     respond_to do |format|
       format.js
     end
