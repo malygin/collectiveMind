@@ -15,6 +15,15 @@ class Novation::Post < ActiveRecord::Base
 
 
   def attributes_for_form
-    attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status)
+    result = {}
+    (attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status)).each do |attribute|
+      attribute_parts = attribute.split('_')
+      unless attribute_parts.last == 'bool'
+        result[attribute_parts[0]] ||= []
+        result[attribute_parts[0]] << attribute
+      end
+    end
+
+    result
   end
 end

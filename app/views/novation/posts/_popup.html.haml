@@ -1,0 +1,25 @@
+#popup-cabinet4-1.popup-window.popup-w1030.mfp-hide
+  .popup.transparent
+    .row
+      .col-md-6.col_padding_7
+        .left_col.rounded_5.white
+          .mod_col_top
+            %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{'data-show' => 'collapse', 'data-usage' => 'modal_4_top'} Список несовершенств с их идеями
+            %button.btn.btn_cab_mod.btn_toggle.btn_reset{'data-show' => 'all', 'data-usage' => 'modal_4_top_left'} Список идей
+          .items.ps_cont.check_push_cont.unchecked_items
+            - @discontents.each do |discontent|
+              %a.a_font_reset.collapser_type2.with_arrow.collapsed{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}"}
+                = discontent.content
+                %i.fa.fa-angle-right.fa-lg.collapse_arrow.bold.font_grey
+              .collapse{id: "discontent_show_#{discontent.id}"}
+                = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
+                .divider_1_grey
+                .divider5
+      .col-md-6.col_padding_7
+        .right_col.rounded_5.white
+          .mod_col_top
+            %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right'} Выбранные идеи
+            %i.fa.fa-info-circle.fa-lg.font_color_stage4.open_sticker
+          .items.ps_cont.check_push_cont.checked_items
+            - if @novation.persisted?
+              = render partial: 'novation/posts/concept', collection: @novation.novation_concepts

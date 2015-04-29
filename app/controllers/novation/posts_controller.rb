@@ -24,6 +24,7 @@ class Novation::PostsController < PostsController
 
   def new
     @novation = current_model.new
+    @discontents = Discontent::Post.by_project(@project)
   end
 
   def edit
