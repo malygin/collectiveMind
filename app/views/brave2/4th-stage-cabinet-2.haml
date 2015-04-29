@@ -306,7 +306,9 @@
                     %form
                       .row
                         .col-md-7
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"} Деятельность (5)
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                            Деятельность (5)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-1.collapse
                             .divider5
                             %h6.bold Опишите деятельность
@@ -315,7 +317,9 @@
                             %h6.bold Опишите деятельность
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"} Участники (2)
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                            Участники (2)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-2.collapse
                             .divider5
                             %h6.bold Опишите ожидаемые качества участников
@@ -324,7 +328,9 @@
                             %h6.bold Опишите ожидаемые качества участников
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"} Инструменты (10)
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                            Инструменты (10)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-3.collapse
                             .divider5
                             %h6.bold Опишите инструменты
@@ -333,7 +339,9 @@
                             %h6.bold Опишите инструменты
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"} ЦУ (8)
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                            ЦУ (8)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-4.collapse
                             .divider5
                             %h6.bold Опишите ЦУ
@@ -342,7 +350,9 @@
                             %h6.bold Опишите ЦУ
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-5"} Внешняя среда (2)
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-5"}
+                            Внешняя среда (2)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-5.collapse
                             .divider5
                             %h6.bold Опишите ожидаемые качества участников
@@ -361,13 +371,18 @@
                       .divider50
                       .divider_1_grey
                       .divider20
-                      %button.btn.add-button.type2.pull-right{:type => "submit"} Опубликовать
-                      %button.btn.add-button.type2.del.pull-right{:type => "submit"} Удалить
+                      .text-right.white
+                        %button.btn.add-button.type2.del Удалить
+                        %button.btn.add-button.type2 Сохранить и выйти
                 #cabinet_4_2.tab-pane.fade{:role => "tabpanel"}
                   .divider10
                   .content_window.white
-                    .cont_heading.bold.pocket_name
-                      %textarea#t_textarea1.form-control.transp_ta{:placeholder => "Название пакета", :rows => "1", :type => "text"}
+                    .cont_heading.bold
+                      %span.pocket_name.breadcr
+                        %a.a_font_reset.bold{:href => "4th-stage-cabinet-1.html"}
+                          Мои пакеты
+                          %small &gt;
+                      %textarea#t_textarea1.form-control.transp_ta{:placeholder => "название пакета", :rows => "1", :type => "text"}
                     /
                       <div class="cont_heading bold toggled_textarea_cont">
                       <span id="tgl_ta_target1">Название пакета</span><i class="fa fa-pencil edit_tgl_ta" data-for="#t_textarea1"></i>
@@ -377,8 +392,10 @@
                     %form
                       .row
                         .col-md-7
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"} Деятельность (5)
-                          #cab4-1.collapse
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2-1"}
+                            Деятельность (5)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
+                          #cab4-2-1.collapse
                             .divider5
                             %h6.bold Опишите деятельность
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
@@ -386,8 +403,10 @@
                             %h6.bold Опишите деятельность
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"} Участники (2)
-                          #cab4-2.collapse
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2-2"}
+                            Участники (2)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
+                          #cab4-2-2.collapse
                             .divider5
                             %h6.bold Опишите ожидаемые качества участников
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
@@ -395,8 +414,10 @@
                             %h6.bold Опишите ожидаемые качества участников
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"} Инструменты (10)
-                          #cab4-3.collapse
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2-3"}
+                            Инструменты (10)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
+                          #cab4-2-3.collapse
                             .divider5
                             %h6.bold Опишите инструменты
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
@@ -404,8 +425,10 @@
                             %h6.bold Опишите инструменты
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"} ЦУ (8)
-                          #cab4-4.collapse
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2-4"}
+                            ЦУ (8)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
+                          #cab4-2-4.collapse
                             .divider5
                             %h6.bold Опишите ЦУ
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
@@ -413,8 +436,10 @@
                             %h6.bold Опишите ЦУ
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-5"} Внешняя среда (2)
-                          #cab4-5.collapse
+                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2-5"}
+                            Внешняя среда (2)
+                            %i.fa.fa-plus.font_color_stage4.collapse_plus
+                          #cab4-2-5.collapse
                             .divider5
                             %h6.bold Опишите ожидаемые качества участников
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
@@ -432,8 +457,17 @@
                       .divider50
                       .divider_1_grey
                       .divider20
-                      %button.btn.add-button.type2.pull-right{:type => "submit"} Опубликовать
-                      %button.btn.add-button.type2.del.pull-right{:type => "submit"} Удалить
+                      .text-right.white
+                        .content_window.r_u_sure.pull-left
+                          Вы уверены, что хотите опубликовать пакет?
+                          %button.btn.btn_reset.back_color_stage4.font_white Да
+                          %button.btn.btn_reset.back_color_stage4.font_white Нет
+                        .content_window.r_u_sure.pull-left.del
+                          Вы уверены, что хотите опубликовать пакет?
+                          %button.btn.btn_reset.font_white Да
+                          %button.btn.btn_reset.font_white Нет
+                        %button.btn.add-button.type2.del Удалить
+                        %button.btn.add-button.type2 Сохранить и выйти
       / Main Block ends
       #popup-cabinet4-1.popup-window.popup-w1030.mfp-hide
         .popup.transparent
