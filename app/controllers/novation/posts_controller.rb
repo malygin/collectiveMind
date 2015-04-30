@@ -33,7 +33,7 @@ class Novation::PostsController < PostsController
 
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
-    @novation.fullness = @novation.count_fullness
+    @novation.fullness = @novation.update_fullness
 
     if params[:novation_post_concept]
       params[:novation_post_concept].each do |asp|
