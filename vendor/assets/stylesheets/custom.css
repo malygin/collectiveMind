@@ -557,9 +557,9 @@ textarea:focus {
     border-width: 6px;
 }
 .stage5_theme .main_menu li.active a:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 7px;
-    border-bottom-color: #42777f;
+     border-color: rgba(211, 211, 211, 0);
+     border-width: 7px;
+     border-bottom-color: #42777f;
 }
 .stage5_theme .add-button {
     background: #659ca8;
@@ -1025,7 +1025,7 @@ a.active{
 }
 
 .auth-form input::-webkit-input-placeholder {
-    color: #797979;
+ color: #797979;
 }
 .auth-form input:-moz-placeholder {
     color: #797979;
@@ -1805,10 +1805,10 @@ p .add-button + .add-button {
 }
 
 
-/* unread comment backgr */
-.popup_color_theme_stage3 .media.comment.unread {
-    background: #fbf9fa;
-}
+            /* unread comment backgr */
+            .popup_color_theme_stage3 .media.comment.unread {
+                background: #fbf9fa;
+            }
 
 .comment .media-body {
     vertical-align: middle;
