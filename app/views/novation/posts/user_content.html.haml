@@ -7,8 +7,9 @@
           .post-body
             .media
               .media-left.text-center.gradient2
-                .cab_folder.back2
-                  %span.percentage.font_white.bold.text-center 32%
+                .cab_folder{class: (novation.published? ? 'back1' : 'back2')}
+                  %span.percentage.font_white.bold.text-center
+                    = "#{novation.fullness}%"
                 %p.time.text-center
                   = Russian::strftime(novation.created_at,'%d.%m.%Y')
               .media-body.white

@@ -16,6 +16,7 @@ class PostsController < ProjectsController
   end
 
   def publish
+    @post = current_model.find params[:id]
     @post.update status: current_model::STATUSES[:published]
   end
 
