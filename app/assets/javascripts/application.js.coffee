@@ -383,4 +383,6 @@ $colors_imperf_codes = [
   '978ac2'
 ]
 
-
+$('.with_plus').click ->
+  $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
+  return

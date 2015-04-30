@@ -2468,7 +2468,6 @@ button.mfp-close {
 
 .popup .popup-post-info .popup-post-block img {
     display: block;
-    float: left;
     border-radius: 48px;
     border: 1px solid #bfbfbf;
     margin-right: 12px;
@@ -2536,6 +2535,7 @@ button.mfp-close {
 
 .popup-project .popup .popup-post-info .info-block {
     border-bottom: 1px solid #d3d3d3;
+    box-shadow: inset 0px 2px 5px 0px rgba(0,0,0,0.15);
 }
 
 .popup-project .popup-header h2 {
@@ -2551,22 +2551,21 @@ button.mfp-close {
 
 /* poster line перевести на новый попап */
 .popup-project .popup .popup-post-info .popup-post-block {
-    padding-bottom: 15px;
-    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-top: 12px;
+    margin-right: 25px;
 }
 
 .popup .popup-post-info .popup-post-block img {
     display: block;
-    float: left;
+    margin: 0 auto;
     border-radius: 48px;
     border: 1px solid #bfbfbf;
-    margin-right: 12px;
 }
 
 .popup .popup-post-info .popup-post-block > span {
-    color: #000;
-    font-size: 15px;
-    font-weight: bold;
+    display: block;
+    font-size: 13px;
 }
 
 .popup .popup-post-info .popup-post-block .info-stripe {
@@ -2594,12 +2593,21 @@ button.mfp-close {
 }
 
 .popup-project .nav-tabs {
-    margin-top: 52px;
-    float: right;
+    margin-top: 38px;
+    padding-left: 20px;
     font-size: 15.3px;
     position: relative;
-    z-index: 10000;
+    z-index: 100;
     margin-bottom: -1px;
+    background: #f7f7f7;
+}
+
+.popup-project .nav-tabs > li {
+    margin-right: 4px;
+}
+
+.popup-project .btn_cab_mod.type2 {
+    margin: 0;
 }
 
 .popup-project .tab-pane#tab-1 {
@@ -2614,24 +2622,25 @@ button.mfp-close {
 
 }
 
-.nav-tabs-one ul.nav-tabs li {
-    margin-right: 0px;
+.nav-tabs-one ul.nav-tabs li a {
+    background: #e4e4e4;
+    padding: 9px 12px 9px 14px;
+    border: 1px solid #d0d0d0;
+    border-bottom: 0px !important;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-.nav-tabs-one ul.nav-tabs li a {
-    background: #eee;
-    margin-right: 0px;
-    padding: 13px 35px;
-    border-bottom: 0px !important;
-    border-radius: 0px;
-    color: #6b6b6b;
+.nav-tabs-one ul.nav-tabs li a .btn_cab_mod {
+    cursor: pointer;
+}
+
+.nav-tabs-one ul.nav-tabs li a .btn_cab_mod.warm_sandy {
+    border-color: #e0b27e;
 }
 
 .nav-tabs-one ul.nav-tabs li.active a {
     background: #fff;
-    color: #e9212f;
-    padding-bottom: 14px;
-
 }
 
 .nav-tabs-one .nav-tabs .tab-content {
@@ -5019,6 +5028,9 @@ ul.vote_nav>li>a {
     font-size: 12px;
     padding: 0 17px;
 }
+.modal_body .poster-name.mod_line {
+    padding: 0px;
+}
 .modal_body .post-text {
     line-height: 1.5;
     padding: 10px 20px 10px 18px;
@@ -5274,6 +5286,7 @@ ul.vote_nav>li>a {
     margin-bottom: 15px;
     overflow: hidden;
     font-size: 12px;
+    position: relative;
 }
 .content_window p {
     margin-bottom: 10px;
@@ -5558,6 +5571,13 @@ i.fa.sticker_close {
     font-size: 13px;
 }
 
+.publish {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+
 
 /*
 .toggled_textarea_cont {
@@ -5693,10 +5713,10 @@ i.fa.sticker_close {
     padding-left: 50px;
 }
 .stage4_theme .r_u_sure {
-    background: image-url('icon.png') no-repeat left 13px center;
+    background: image-url('icon-exclamation.png') no-repeat left 13px center;
 }
 .r_u_sure.del {
-    background: image-url('icon-del.png') no-repeat left 13px center;
+    background: image-url('icon-exclamation-del.png') no-repeat left 13px center;
 }
 .r_u_sure .btn {
     padding: 2px;
@@ -5958,10 +5978,10 @@ i.fa.sticker_close {
     color: #666;
 }
 .cab_notice span.success {
-    background: image-url('smile-yes.png') no-repeat left center ;
+    background: image-url('smile-yes.png') no-repeat left top 15px;
 }
 .cab_notice span.fail {
-    background: image-url('smile-no.png') no-repeat left center ;
+    background: image-url('smile-no.png') no-repeat left top 10px;
 }
 
 

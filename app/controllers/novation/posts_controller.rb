@@ -1,7 +1,8 @@
 class Novation::PostsController < PostsController
   include Novation::PostsHelper
   include CloudinaryHelper
-  before_action :set_novation_post, only: [:edit, :update]
+  before_action :set_novation_post, only: [:edit, :update, :destroy]
+  before_action :set_discontents, only: [:new, :edit]
 
   def index
     @posts= nil
@@ -24,7 +25,6 @@ class Novation::PostsController < PostsController
 
   def new
     @novation = current_model.new
-    @discontents = Discontent::Post.by_project(@project)
   end
 
   def edit
@@ -33,6 +33,8 @@ class Novation::PostsController < PostsController
 
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
+    @novation.fullness = @novation.count_fullness
+
     if params[:novation_post_concept]
       params[:novation_post_concept].each do |asp|
         @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
@@ -45,6 +47,15 @@ class Novation::PostsController < PostsController
 
   def update
     @novation.update_attributes novation_params
+    @novation.update_fullness
+
+    if params[:novation_post_concept]
+      @novation.novation_post_concepts.destroy_all
+      params[:novation_post_concept].each do |asp|
+        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
+      end
+    end
+
   end
 
   def destroy
@@ -57,12 +68,20 @@ class Novation::PostsController < PostsController
     @novation = current_model.find(params[:id])
   end
 
+  def set_discontents
+    @discontents = Discontent::Post.by_project(@project)
+  end
+
   def novation_params
     params.require(:novation_post).permit(:title, :status, :content, :approve_status, :project_change, :project_goal,
                                           :project_members, :project_results, :project_time, :members_new, :members_who,
                                           :members_education, :members_motivation, :members_execute, :resource_commands,
                                           :resource_support, :resource_internal, :resource_external, :resource_financial,
                                           :resource_competition, :confidence_commands, :confidence_remove_discontent,
-                                          :confidence_negative_results)
+                                          :confidence_negative_results,
+                                          :members_new_bool, :members_education_bool, :members_motivation_bool,
+                                          :resource_commands_bool, :resource_support_bool, :resource_competition_bool,
+                                          :confidence_commands_bool, :confidence_remove_discontent_bool,
+                                          :confidence_negative_results_bool)
   end
 end

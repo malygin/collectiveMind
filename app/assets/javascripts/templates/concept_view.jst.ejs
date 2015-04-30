@@ -1,26 +1,25 @@
-<div id="concept_post_<%= id %>" class="<%= discontent_class %> col-md-6 concept-block" data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
-    <div class="post post_type_3 themes_cont">
-        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>">
+<div id="concept_post_<%= id %>" class="<%= discontent_class %> col-md-6 " data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
+    <div class="post post_type_3 merged">
             <div class="post-header white">
-                <div class="row">
-                    <div class="col-md-12 col-xs-12">
-                        <h5 class="font_purple bold">
-                            <%= title %>
-                        </h5>
-                    </div>
-                </div>
-                <i class="fa fa-angle-right"></i>
+
             </div>
-        </a>
+
         <div class="post-body ch_action" data-for="post_ch<%= id %>">
             <div class="media">
                 <div class="media-left text-center gradient post-poster">
-                    <img class="img-circle img50" src="<%= user_avatar %>" alt="No ava">
+                    <img class="img-circle img50" src="<%= user_avatar %>" >
                     <p class="poster-name">
                         <%= user %>
                     </p>
                 </div>
                 <div class='media-body white-gray'>
+                    <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>">
+                        <h5 class="font_purple bold">
+                            <%= title %>
+                            <i class="fa fa-angle-right"></i>
+
+                        </h5>
+                    </a>
                     <div class="post-text">
                         <p>
                             <%= content %>

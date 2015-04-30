@@ -49,7 +49,7 @@
             .innov-tags
               - @post.concept_disposts.each_with_index do |post, index|
                 .innov-tags-tag.popup_tooltip.color_me{class: "tooltip3_tag_#{index + 1}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
-                  = trim_content(post.content, 50)
+                  = trim_content(post.content, 100)
 
       .container.modal_content
         .row
