@@ -45,7 +45,7 @@ class Concept::PostsController < PostsController
                                                       count_likes: item.users_pro.count,
                                                       count_dislikes: item.users_against.count,
                                                       discontents: item.concept_disposts.map { |dispost| {id: dispost.id, content: trim_post_content(dispost.content, 30)} },
-                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_post_content(comment.content, 50)} }} } }
+                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_post_content(comment.content, 100)} }} } }
 
     end
   end
