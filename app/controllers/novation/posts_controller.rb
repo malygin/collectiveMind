@@ -70,6 +70,11 @@ class Novation::PostsController < PostsController
 
   def set_discontents
     @discontents = Discontent::Post.by_project(@project)
+    @concepts = []
+    @discontents.each do |discontent|
+      @concepts << discontent.dispost_concepts
+    end
+    @concepts.flatten!.uniq!
   end
 
   def novation_params

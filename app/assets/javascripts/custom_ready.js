@@ -372,7 +372,10 @@ $(document).ready(function () {
 
     $('.check_push_box').click(function(){
         var item = $(this).closest('.item').detach();
-        var item_id = $(item).find('.description').attr('id').replace(/^\D+/g, '');
+        var item_id = $(item).attr('data-id');
+        $('#discontents').find('.item[data-id=' + item_id + ']').remove();
+        $('#ideas').find('.item[data-id=' + item_id + ']').remove();
+        $('.checked_items').find('.item[data-id=' + item_id + ']').remove();
         if ($(this).is(':checked')){
             $('.checked_items').append(item);
             ch_its++; unch_its--;

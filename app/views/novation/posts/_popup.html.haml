@@ -19,7 +19,7 @@
                   .divider_1_grey
                   .divider5
             #ideas.items.ps_cont.check_push_cont.unchecked_items.tab-pane
-              | ideas here
+              = render partial: 'novation/posts/concept', collection: @concepts
       .col-md-6.col_padding_7
         .right_col.rounded_5.white
           .mod_col_top
