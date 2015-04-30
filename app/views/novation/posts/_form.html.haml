@@ -20,7 +20,7 @@
                 = t("activerecord.attributes.novation/post.#{attribute}")
               - if bool_attribute
                 .input-group
-                  = f.radio_button "#{attribute}_bool".to_sym, 0
+                  = f.radio_button "#{attribute}_bool".to_sym, 1
                   = label "#{attribute}_bool".to_sym, 'Да'
                 .input-group
                   = f.radio_button "#{attribute}_bool".to_sym, 0
