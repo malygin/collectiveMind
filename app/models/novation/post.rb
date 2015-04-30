@@ -27,4 +27,26 @@ class Novation::Post < ActiveRecord::Base
 
     result
   end
+
+  def update_fullness
+    count_all = 0
+    count_filled = 0
+    attributes_for_form.each do |type_attribute|
+      type_attribute.second.each do |attribute, bool_attribute|
+        count_all += 1
+        if send(attribute) != ''
+          count_filled += 1
+        end
+        if bool_attribute
+          count_all += 1
+          if send("#{attribute}_bool") != nil
+            count_filled += 1
+          end
+        end
+      end
+    end
+
+    self.fullness = ((count_filled.to_f / count_all) * 100).to_i
+    save!
+  end
 end

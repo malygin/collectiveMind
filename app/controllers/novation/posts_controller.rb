@@ -1,7 +1,7 @@
 class Novation::PostsController < PostsController
   include Novation::PostsHelper
   include CloudinaryHelper
-  before_action :set_novation_post, only: [:edit, :update]
+  before_action :set_novation_post, only: [:edit, :update, :destroy]
   before_action :set_discontents, only: [:new, :edit]
 
   def index
@@ -33,6 +33,7 @@ class Novation::PostsController < PostsController
 
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
+    @novation.fullness = @novation.count_fullness
 
     if params[:novation_post_concept]
       params[:novation_post_concept].each do |asp|
@@ -46,6 +47,8 @@ class Novation::PostsController < PostsController
 
   def update
     @novation.update_attributes novation_params
+    @novation.update_fullness
+
     if params[:novation_post_concept]
       @novation.novation_post_concepts.destroy_all
       params[:novation_post_concept].each do |asp|
