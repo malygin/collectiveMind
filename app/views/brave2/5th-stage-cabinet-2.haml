@@ -287,16 +287,19 @@
             .col-md-2
               %ul.list-unstyled.tabs_type_1{:role => "tablist"}
                 %li.active{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_1", :role => "tab"} + Идея
-                %li{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_2", :role => "tab"} Мои идеи (3)
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_1", :role => "tab"} Мои проектные предложения (2)
             .col-md-9.col-md-offset-1
               .tab-content
                 #cabinet_5_1.tab-pane.active.fade.in{:role => "tabpanel"}
                   .divider10
-                  .content_window.bottom_panel_stop
+                  .content_window.c_w_5_top.bottom_panel_stop
                     / stop bottom panel here
-                    %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{"data-placement" => "cabinet5", "data-target" => "1"} Название пакета
+                    .cont_heading.bold
+                      %span.pocket_name.breadcr
+                        %a.a_font_reset.bold{:href => "5th-stage-cabinet-1.html"}
+                          Мои пакеты
+                          %small &gt;
+                      %textarea#t_textarea1.form-control.transp_ta{:placeholder => "название пакета", :rows => "1", :type => "text"}
                   .content_window.white.c_w_5
                     .cont_heading
                       %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
@@ -337,41 +340,7 @@
                           #cabinet_5_cont_2.tab-pane.fade{:role => "tabpanel"}
                           #cabinet_5_cont_3.tab-pane.fade{:role => "tabpanel"}
                           #cabinet_5_cont_4.tab-pane.fade{:role => "tabpanel"}
-                #cabinet_5_2.tab-pane.fade{:role => "tabpanel"}
-                  .row
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back3
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom
-                            %i.fa.fa-angle-right.font_grey
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back3
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom
-                            %i.fa.fa-angle-right.font_grey
-                    .col-md-4
-                      .media.type_cab
-                        .media-left.gradient2
-                          .cab_folder.back4
-                            %span.percentage.font_white.bold.text-center 32%
-                          %p.time.text-center 21.12.2014
-                        .media-body.white
-                          %h6
-                            Название пакета с идеями идеями пакета
-                          .media-bottom
-                            %i.fa.fa-angle-right.font_grey
+                    %img.publish{:src => "img/published.png"}/
           .divider70
         #bottom-panel.bottom_fix
           .container

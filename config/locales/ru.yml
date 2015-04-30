@@ -6,16 +6,19 @@ ru:
     discontent_posts_detailed: 'Воспользоваться вспомогательной техникой'
     concept_posts_simple: "+ Идея"
     novation_posts_simple: "+ Пакет"
+    plan_posts_simple: "+ Проект"
   my:
     collect_info_posts: 'Мои аспекты'
     discontent_posts: 'Мои несовершенства'
     concept_posts: "Мои идеи"
     novation_posts: "Мои пакеты"
+    plan_posts: "Мои проекты"
   cabinet:
     collect_info_posts_sticker: Предложите название нового аспекта. В поле «Обоснование» объясните, почему этот аспект необходим.
     discontent_posts_sticker: Опишите несовершенство в свободной форме или воспользуйтесь вспомогательной техникой для поиска несовершенств. Вы можете добавить неограниченное количество несовершенств. Удачи!
     concept_posts_sticker: Ваша идея – это образ желаемого будущего. Понять, чем желаемое будущее отличается от текущей ситуации, вам помогут наши вопросы.
     novation_posts_sticker: Предложите пакет
+    plan_posts_sticker: Предложите проект
   activerecord:
     attributes:
       core/aspect/post:

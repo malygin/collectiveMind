@@ -20,8 +20,7 @@
     %link{:href => "css/custom.css", :rel => "stylesheet"}/
     %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
     %link{:href => "css/colors.css", :rel => "stylesheet"}/
-    %link{:href => "css/dropdowns-enhancement.css", :rel => "stylesheet"}/
-  %body.stage2_theme
+  %body.stage5_theme
     .outer
       / Top bar starts
       %header.navbar.top_bar
@@ -33,7 +32,7 @@
             %li
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li.active
-              %a.menu_a{:href => "2nd-stage-cabinet.html"} Кабинет
+              %a.menu_a{:href => "5th-stage-cabinet.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -276,8 +275,8 @@
             .border_grey.rounded_3.stages_block
               .btn-toolbar{:role => "toolbar"}
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage2{:href => "2nd-stage.html", :role => "button"} 2 СТАДИЯ: АНАЛИЗ СИТУАЦИИ
-                %i.fa.fa-info-circle.fa-lg.font_color_stage2.open_sticker{"data-for" => "#sticker1"}
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5 СТАДИЯ: ПРОЕКТНОЕ ПРЕДЛОЖЕНИЕ
+                %i.fa.fa-info-circle.fa-lg.font_color_stage5.open_sticker{"data-for" => "#sticker1"}
                 #sticker1.sticker.rounded_3.font_white
                   Тут будет текст, объясняющий, что надо делать на этом экране
                   %i.sticker_close.fa.fa-times.fa-lg{"data-for" => "#sticker1"}
@@ -288,254 +287,147 @@
             .col-md-2
               %ul.list-unstyled.tabs_type_1{:role => "tablist"}
                 %li.active{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_3_1", :role => "tab"} + Несовершенство
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_1", :role => "tab"} + Проектное предложение
                 %li{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_3_2", :role => "tab"} Воспользоваться вспомогательной техникой
-                %li{:role => "presentation"}
-                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_3_3", :role => "tab"} Мои несовершенства (2)
+                  %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_2", :role => "tab"} Мои проектные предложения (2)
             .col-md-9.col-md-offset-1
               .tab-content
-                #cabinet_3_1.tab-pane.active.fade.in{:role => "tabpanel"}
+                #cabinet_5_1.tab-pane.active.fade.in{:role => "tabpanel"}
+                  .divider10
+                  .content_window.bottom_panel_stop
+                    / stop bottom panel here
+                    %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{"data-placement" => "cabinet5", "data-target" => "1"} Название пакета
+                  .content_window.white.c_w_5
+                    .cont_heading
+                      %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
+                    .divider10
+                    .row
+                      .col-md-4
+                        %ul.list-unstyled.tabs_type_2{:role => "tablist"}
+                          %li{:role => "presentation"}
+                            %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1", :role => "tab"} Описание проекта
+                          %li{:role => "presentation"}
+                            %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_2", :role => "tab"} Организационные риски
+                          %li{:role => "presentation"}
+                            %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_3", :role => "tab"} Ресурсные риски
+                          %li{:role => "presentation"}
+                            %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_4", :role => "tab"} Риски реализации
+                      .col-md-8
+                        .tab-content.tab_cont5.ps_cont
+                          #cabinet_5_cont_0.tab-pane.active.fade.in{:role => "tabpanel"}
+                            .divider35
+                            .text-center
+                              %img{:src => "img/cab_5_qsign.png"}/
+                              .divider35
+                              %p.cab5_placeholder
+                                Здесь вы ответите на вопросы по пунктам слева,
+                                %br/
+                                для этого нажмите на одну из панелей, или знак вопроса
+                            .divider70
+                          #cabinet_5_cont_1.tab-pane.fade{:role => "tabpanel"}
+                            %h6.bold Цели и ожидаемые результаты
+                            %textarea.form-control{:rows => "5", :type => "text"}
+                            .divider15
+                            %h6.bold Краткое описание Проекта (усовершенствования)
+                            %textarea.form-control{:rows => "5", :type => "text"}
+                            .divider15
+                            %h6.bold Краткое описание Проекта (усовершенствования)
+                            %textarea.form-control{:rows => "5", :type => "text"}
+                            .divider25
+                          #cabinet_5_cont_2.tab-pane.fade{:role => "tabpanel"}
+                          #cabinet_5_cont_3.tab-pane.fade{:role => "tabpanel"}
+                          #cabinet_5_cont_4.tab-pane.fade{:role => "tabpanel"}
+                #cabinet_5_2.tab-pane.fade{:role => "tabpanel"}
                   .row
-                    .col-md-12
-                      .divider10
-                      .content_window.white
-                        .cont_heading.bold.cab2_heading
-                          .row
-                            .col-sm-12
-                              .btn-group.cab_drop
-                                %a.dropdown-toggle.rounded_3.white{"data-toggle" => "dropdown"}
-                                  %span Название аспекта
-                                %ul.dropdown-menu
-                                  %li
-                                    %input#ex2_3_1{:name => "ex2_3", :type => "radio", :value => "1"}/
-                                    %label{:for => "ex2_3_1"}
-                                      %span
-                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "0", "data-me-type" => "aspect"}
-                                      %span.text_label Персонал как инструмент продаж
-                                  %li
-                                    %input#ex2_3_2{:name => "ex2_3", :type => "radio", :value => "2"}/
-                                    %label{:for => "ex2_3_2"}
-                                      %span
-                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                      %span.text_label Персонал как инструмент продаж
-                                  %li
-                                    %input#ex2_3_3{:name => "ex2_3", :type => "radio", :value => "3"}/
-                                    %label{:for => "ex2_3_3"}
-                                      %span
-                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                      %span.text_label Персонал как инструмент продаж
-                                  %li
-                                    %input#ex2_3_4{:name => "ex2_3", :type => "radio", :value => "4"}/
-                                    %label{:for => "ex2_3_4"}
-                                      %span
-                                        %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
-                                      %span.text_label Персонал как инструмент продаж
-                        .divider25
-                        %form
-                          %p
-                            Название (краткое описание несовершенства)
-                          %textarea.form-control{:rows => "1", :type => "text"}
-                          .divider15
-                          %p
-                            На каком этапе это происходит?
-                          %textarea.form-control{:rows => "2", :type => "text"}
-                          .divider15
-                          %p
-                            От чего это зависит?
-                          %textarea.form-control{:rows => "2", :type => "text"}
-                          .divider15
-                          %p
-                            Чья работа от этого зависит?
-                          %textarea.form-control{:rows => "2", :type => "text"}
-                        .divider25
-                        .row
-                          .col-md-12.text-right
-                            %button.btn.add-button.del.type2 Удалить
-                            %button.btn.add-button.type2 Сохранить
-                            %button.btn.add-button.type2 Опубликовать
-                      .row
-                        .col-md-12
-                          %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs1"}
-                            Пример несовершенства
-                            %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-                      .divider25
-                      #imperfs1.content_window.white.collapse.font_lighter_grey
-                        .divider15
-                        %a.with_arrow.collapsed.a_font_reset.not_full_width.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperf_example"}
-                          Невозможно дышать при большом количестве людей в комнате
-                          %i.fa.fa-angle-right.fa-lg.collapse_arrow.font_grey
-                        #imperf_example.collapse
-                          .divider25
-                          %p.font_dark_grey
-                            Название (краткое описание несовершенства)
-                          %p
-                            Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                          .divider15
-                          %p.font_dark_grey
-                            На каком этапе это происходит?
-                          %p
-                            Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                          .divider15
-                          %p.font_dark_grey
-                            От чего это зависит?
-                          %p
-                            Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                          .divider15
-                          %p.font_dark_grey
-                            Чья работа от этого зависит?
-                          %p
-                            Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-                          .divider20
-                        .divider15
-                #cabinet_3_2.tab-pane.fade{:role => "tabpanel"}
-                  .container
-                    .row.cabinet_popup_links
-                      .col-md-6.no_padding_col
-                        .cab_pop_l.l_col1.open-popup{"data-placement" => "cab2", "data-target" => "1"}
-                          %span
-                            То, что не достаточно хорошо
-                            %br/
-                            %small (Объяснительная строка)
-                      .col-md-6.no_padding_col
-                        .cab_pop_l.l_col2.open-popup{"data-placement" => "cab2", "data-target" => "1"}
-                          %span
-                            То, что хорошо, но можно существенно улучшить
-                            %br/
-                            %small (Объяснительная строка)
-                      .col-md-6.no_padding_col
-                        .cab_pop_l.l_col3.open-popup{"data-placement" => "cab2", "data-target" => "1"}
-                          %span
-                            То, что мешает работе
-                            %br/
-                            %small (Объяснительная строка)
-                      .col-md-6.no_padding_col
-                        .cab_pop_l.l_col4.open-popup{"data-placement" => "cab2", "data-target" => "1"}
-                          %span
-                            То, чего не хватает
-                            %br/
-                            %small (Объяснительная строка)
-                #cabinet_3_3.tab-pane.fade{:role => "tabpanel"}
-                  .post.post_add_type1
-                    .post-header
-                    .post-body
-                      .media
-                        .media-left.text-center.gradient2.post-poster
-                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                          %p.poster-name Имя
-                          %p.poster-name Фамилия
-                          .divider10
-                          %p.time 21.12.2014
-                        .media-body
-                          %table.table
-                            %tbody
-                              %tr.what
-                                %td.bold
-                                  Винни-Пух постоянно
-                                  %span.post_btns_cont
-                                    %button.btn.btn_reset.btn_del
-                                      %i.fa.fa-pencil.fa-lg
-                                    %button.btn.btn_reset.btn_del
-                                      %i.fa.fa-trash-o.fa-lg
-                              %tr.post_text
-                                %td.col-md-12
-                                  %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
-                                    При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
-                                    %i.fa.fa-angle-right.cab2_post_open.font_grey
-                    .post-bottom.white
-                      .row
-                        .col-md-12
-                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
-                            %span.tags Взаимоотношения четвероногих
-                  .post.post_add_type1
-                    .post-header
-                    .post-body
-                      .media
-                        .media-left.text-center.gradient2.post-poster
-                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                          %p.poster-name Имя
-                          %p.poster-name Фамилия
-                          .divider10
-                          %p.time 21.12.2014
-                        .media-body
-                          %table.table
-                            %tbody
-                              %tr.what
-                                %td.bold
-                                  Винни-Пух постоянно
-                                  %span.post_btns_cont
-                                    %button.btn.btn_reset.btn_del
-                                      %i.fa.fa-pencil.fa-lg
-                                    %button.btn.btn_reset.btn_del
-                                      %i.fa.fa-trash-o.fa-lg
-                              %tr.post_text
-                                %td.col-md-12
-                                  %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
-                                    При выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда выслеживании удачного момента для кражи меда
-                                    %i.fa.fa-angle-right.cab2_post_open.font_grey
-                    .post-bottom.white
-                      .row
-                        .col-md-12
-                          %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
-                            %span.tags Взаимоотношения четвероногих
+                    .col-md-6
+                      .media.type_cab
+                        .divider5.white
+                        .media-left.gradient2
+                          .cab_folder.back3
+                            %span.percentage.font_white.bold.text-center 32%
+                          %p.time.text-center 21.12.2014
+                        .media-body.white
+                          %a.a_font_reset{:href => "5th-stage-cabinet-2.html"}
+                            Название пакета с идеями идеями пакета
+                          %span.post_btns_cont
+                            %button.btn.btn_reset.btn_del
+                              %i.fa.fa-pencil.fa-lg
+                            %button.btn.btn_reset.btn_del
+                              %i.fa.fa-trash-o.fa-lg
+                          %i.fa.fa-2x.fa-angle-right.font_grey
+                    .col-md-6
+                      .media.type_cab
+                        .divider5.white
+                        .media-left.gradient2
+                          .cab_folder.back3
+                            %span.percentage.font_white.bold.text-center 32%
+                          %p.time.text-center 21.12.2014
+                        .media-body.white
+                          %a.a_font_reset{:href => "5th-stage-cabinet-2.html"}
+                            Название пакета с идеями идеями пакета
+                          %span.post_btns_cont
+                            %button.btn.btn_reset.btn_del
+                              %i.fa.fa-pencil.fa-lg
+                            %button.btn.btn_reset.btn_del
+                              %i.fa.fa-trash-o.fa-lg
+                          %i.fa.fa-2x.fa-angle-right.font_grey
+          .divider70
+        #bottom-panel.bottom_fix
+          .container
+            .row
+              .col-md-3
+              .col-md-9
+                .content_window.white
+                  .cont_heading
+                    %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Добавление задач в проектное предложение
+                    %button#bottom-opener.btn.btn_reset.btn_round30
+                      %i.fa.fa-arrow-up.font_white
+                  .divider10
       / Main Block ends
-      #popup-cab2-1.popup-window.detailed_popup.popup-w800.mfp-hide
+      #popup-cabinet5-1.popup-window.detailed_popup.popup-w1030.mfp-hide
         .content_window.white
-          .divider25
-          %form
-            %p
-              Название (краткое описание несовершенства)
-            %textarea.form-control{:rows => "1", :type => "text"}
-            .divider15
-            %p
-              На каком этапе это происходит?
-            %textarea.form-control{:rows => "2", :type => "text"}
-            .divider15
-            %p
-              От чего это зависит?
-            %textarea.form-control{:rows => "2", :type => "text"}
-            .divider15
-            %p
-              Чья работа от этого зависит?
-            %textarea.form-control{:rows => "2", :type => "text"}
-          .divider25
-        .row
-          .col-md-6
-            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#p-imperfs1"}
-              Пример несовершенства
-              %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-          .col-md-6
-            %p
-              %button.btn.add-button.type2.pull-right Добавить
-        .divider25
-        #p-imperfs1.content_window.white.collapse.font_lighter_grey
+          .cont_heading
+            %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Выбор пакета
           .divider15
-          %a.with_arrow.collapsed.a_font_reset.not_full_width.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#p-imperf_example"}
-            Невозможно дышать при большом количестве людей в комнате
-            %i.fa.fa-angle-right.fa-lg.collapse_arrow.font_grey
-          #p-imperf_example.collapse
-            .divider25
-            %p.font_dark_grey
-              Название (краткое описание несовершенства)
-            %p
-              Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-            .divider15
-            %p.font_dark_grey
-              На каком этапе это происходит?
-            %p
-              Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-            .divider15
-            %p.font_dark_grey
-              От чего это зависит?
-            %p
-              Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-            .divider15
-            %p.font_dark_grey
-              Чья работа от этого зависит?
-            %p
-              Текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
-            .divider20
-          .divider15
+          .row
+            .col-md-5
+              %ul.list-unstyled.tabs_type_2.less_margin{:role => "tablist"}
+                %li.active{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_1", :role => "tab"} Название проекта 1
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_2", :role => "tab"} Название проекта 2
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_3", :role => "tab"} Название проекта 3
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_4", :role => "tab"} Название проекта 4
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_5", :role => "tab"} Название проекта 5
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_6", :role => "tab"} Название проекта 6
+                %li{:role => "presentation"}
+                  %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1_7", :role => "tab"} Название проекта 7
+            .col-md-7
+              .tab-content
+                .divider3
+                #cabinet_5_cont_1_1.tab-pane.fade.in.active{:role => "tabpanel"}
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab5-1"} Деятельность (5)
+                  #cab5-1.collapse
+                    .divider5
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab5-2"} Участники (2)
+                  #cab5-2.collapse
+                    .divider5
+                    %h6.bold Опишите ожидаемые качества участников
+                    %textarea.form-control{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
+                    .divider15
+                    %h6.bold Опишите ожидаемые качества участников
+                    %textarea.form-control{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
+                    .divider15
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab5-3"} Инструменты (10)
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab5-4"} ЦУ (8)
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab5-5"} Внешняя среда (2)
+                #cabinet_5_cont_1_2.tab-pane.fade{:role => "tabpanel"}
+                #cabinet_5_cont_1_3.tab-pane.fade{:role => "tabpanel"}
+                #cabinet_5_cont_1_4.tab-pane.fade{:role => "tabpanel"}
       #popup-database.popup-window.popup_database.popup-w770.mfp-hide
         .popup.popup_rounded
           .row
@@ -658,7 +550,6 @@
     %script{:src => "js/jquery.js"}
     / Bootstrap JS
     %script{:src => "js/bootstrap.min.js"}
-    %script{:src => "js/dropdowns-enhancement.js"}
     / Magnific Popup
     %script{:src => "js/jquery.magnific-popup.min.js"}
     / Owl carousel

@@ -32,7 +32,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "2nd-stage-cabinet.html"} Кабинет
+              %a.menu_a{:href => "2nd-stage-cabinet-1-2.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -510,7 +510,7 @@
                       .col-md-3.col_padding_left_3
                         .text-right.small_icons
                           %span.popup2.comments_icon{"data-for" => "post_ch1"}
-                            5
+                            %small 5
                             %i.fa.fa-comment-o
                           %span.popup2
                             %small 9
@@ -664,702 +664,697 @@
                 .col-md-7.comment_col.popup_expandable_col.ps_cont
                   %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
                   .divider15
-                  #myCarousel.carousel.slide{"data-ride" => "carousel"}
-                    .carousel-inner{:role => "listbox"}
-                      .item.active
-                        #comment1.media.comment
-                          .media-left
-                            %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                          .media-body
-                            %h5.media-heading.bold Винни-Пух
-                            %span.comment_interf
-                              %span.date_time.theme_font_color 15:28
-                              %span.dropdown.edit_comment
-                                %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                                  %i.fa.fa-cog.fa-lg.theme_font_color
-                                %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
-                                  %li
-                                    %a{:href => "#", :tabindex => "-1"}
-                                      %i.fa.fa-pencil>
-                                      Редактировать
-                                  %li
-                                    %a{:href => "#", :tabindex => "-1"}
-                                      %i.fa.fa-close>
-                                      Удалить
-                              %span.badge.badge_important.theme_back_color важно
-                          %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                          .post-interfaces-buttons.text-left
-                            %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
-                              %span.bold
-                                9
-                                %i.fa.fa-thumbs-up.theme_font_color
-                            %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
-                              %span.bold
-                                1
-                                %i.fa.fa-thumbs-down.theme_font_color
-                            %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
-                              %span.bold
-                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                        %form#reply_form_1.form-group.comment_add.collapse
-                          .input_cont
-                            %textarea{:placeholder => "Ваш комментарий"}
-                          %button.btn{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                        %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
-                          %span 3 ответа
-                        #answers-3-1.com_answers.collapse
-                          .answers_subblock.level1
-                            #comment2.media.comment.unread
-                              .media-left
-                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                              .media-body
-                                %h5.media-heading.bold Винни-Пух
-                                %span.comment_interf
-                                  %span.date_time.theme_font_color 17:28
-                                  %span.badge.badge_important.theme_back_color важно
-                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                              .post-interfaces-buttons.text-left
-                                %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
-                                  %span.bold
-                                    9
-                                    %i.fa.fa-thumbs-up.theme_font_color
-                                %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
-                                  %span.bold
-                                    1
-                                    %i.fa.fa-thumbs-down.theme_font_color
-                                %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
-                                  %span.bold
-                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %form#reply_form_2.form-group.comment_add.collapse
-                              .input_cont
-                                %textarea{:placeholder => "Ваш комментарий"}
-                              %button.btn{:type => "button"}
-                                %span.bold
-                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            #comment3.media.comment.unread
-                              .media-left
-                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                              .media-body
-                                %h5.media-heading.bold Винни-Пух
-                                %span.comment_interf
-                                  %span.date_time.theme_font_color 15:28
-                                  %span.dropdown.edit_comment
-                                    %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                                      %i.fa.fa-cog.fa-lg.theme_font_color
-                                    %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
-                                      %li
-                                        %a{:href => "#", :tabindex => "-1"}
-                                          %i.fa.fa-pencil>
-                                          Редактировать
-                                      %li
-                                        %a{:href => "#", :tabindex => "-1"}
-                                          %i.fa.fa-close>
-                                          Удалить
-                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                              .post-interfaces-buttons.text-left
-                                %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
-                                  %span.bold
-                                    9
-                                    %i.fa.fa-thumbs-up.theme_font_color
-                                %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
-                                  %span.bold
-                                    1
-                                    %i.fa.fa-thumbs-down.theme_font_color
-                                %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
-                                  %span.bold
-                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %form#reply_form_3.form-group.comment_add.collapse
-                              .input_cont
-                                %textarea{:placeholder => "Ваш комментарий"}
-                              %button.btn{:type => "button"}
-                                %span.bold
-                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                          .answers_subblock.level2
-                            #comment4.media.comment
-                              .media-left
-                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                              .media-body
-                                %h5.media-heading.bold Винни-Пух
-                                %span.comment_interf
-                                  %span.date_time.theme_font_color 15:28
-                              %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                              .post-interfaces-buttons.text-left
-                                %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
-                                  %span.bold
-                                    9
-                                    %i.fa.fa-thumbs-up.theme_font_color
-                                %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
-                                  %span.bold
-                                    1
-                                    %i.fa.fa-thumbs-down.theme_font_color
-                                %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
-                                  %span.bold
-                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %form#reply_form_4.form-group.comment_add.collapse
-                              .input_cont
-                                %textarea{:placeholder => "Ваш комментарий"}
-                              %button.btn{:type => "button"}
-                                %span.bold
-                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                        #comment5.media.comment.unread
-                          .media-left
-                            %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                          .media-body
-                            %h5.media-heading.bold Винни-Пух
-                            %span.comment_interf
-                              %span.date_time.theme_font_color 27.03.2015 15:28
-                              %span.badge.badge_important.theme_back_color важно
-                          %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
-                          .post-interfaces-buttons.text-left
-                            %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
-                              %span.bold
-                                9
-                                %i.fa.fa-thumbs-up.theme_font_color
-                            %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
-                              %span.bold
-                                1
-                                %i.fa.fa-thumbs-down.theme_font_color
-                            %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
-                              %span.bold
-                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                        %form#reply_form_5.form-group.comment_add.collapse
-                          .input_cont
-                            %textarea{:placeholder => "Ваш комментарий"}
-                          %button.btn{:type => "button"}
-                            %span.bold
-                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      .item
-                      .item
-                  .divider15
-                  %form.form-group.comment_add.main_add
+                  #comment1.media.comment
+                    .media-left
+                      %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                    .media-body
+                      %h5.media-heading.bold Винни-Пух
+                      %span.comment_interf
+                        %span.date_time.theme_font_color 15:28
+                        %span.dropdown.edit_comment
+                          %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                            %i.fa.fa-cog.fa-lg.theme_font_color
+                          %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                            %li
+                              %a{:href => "#", :tabindex => "-1"}
+                                %i.fa.fa-pencil>
+                                Редактировать
+                            %li
+                              %a{:href => "#", :tabindex => "-1"}
+                                %i.fa.fa-close>
+                                Удалить
+                        %span.badge.badge_important.theme_back_color важно
+                    %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                    .post-interfaces-buttons.text-left
+                      %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                        %span.bold
+                          9
+                          %i.fa.fa-thumbs-up.theme_font_color
+                      %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                        %span.bold
+                          1
+                          %i.fa.fa-thumbs-down.theme_font_color
+                      %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                        %span.bold
+                          %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                  %form#reply_form_1.form-group.comment_add.collapse
                     .input_cont
                       %textarea{:placeholder => "Ваш комментарий"}
                     %button.btn{:type => "button"}
                       %span.bold
                         %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                  %nav.text-center
-                    %ul.pagination
-                      %li
-                        %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
-                      %li
-                        %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
-                      %li
-                        %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
-              .divider25
-      #results.popup-window.detailed_popup.popup-w860.mfp-hide
-        .popup.popup_rounded
-          .modal_title
-            .row
-              .col-md-12
-                %h4.bold.font_dark_grey
-                  Результаты стадии 2
-          .modal_body
-            .row.modal_subhead
-              .col-md-4.mod_sub_l
-                %h5.font_white Вклад в процедуру
-              .col-md-8.mod_sub_r
-                .dia_legend.pull-left.font_white
-                  %span
-                    %i.fa.fa-file-text
-                    несовершенства
-                  %span
-                    %i.fa.fa-comment
-                    комментарии
-                  %span
-                    %i.fa.fa-thumbs-up
-                    лайки
-                  %span
-                    %i.fa.fa-star
-                    важный материал
-                %button.pull-right.btn.btn_reset.btn_dia.font_white
-                  %i>
-                  Подробнее
-            .dia_block
-              .row
-                .col-md-4
-                .col-md-4
-                  .dia_cell
-                    %span.num_cell 1
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 2
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 3
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 4
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 5
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                .col-md-4
-                  .dia_cell
-                    %span.num_cell 6
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 7
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 8
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 9
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-                  .dia_cell
-                    %span.num_cell 10
-                    %span
-                      %img.img35.img-circle{:src => "img/ava1.jpg"}/
-                    %span
-                      %p Пятый элемент
-                      %span.dia_icon
-                        4
-                        %i.fa.fa-file-text
-                      %span.dia_icon
-                        3
-                        %i.fa.fa-comment
-                      %span.dia_icon
-                        50
-                        %i.fa.fa-thumbs-up
-                      %span.dia_icon
-                        1
-                        %i.fa.fa-star
-            .row.modal_subhead
-              .col-md-9.mod_sub_l
-                %h5.font_white Популярность контента
-              .col-md-3
-            .top3.gradient_t3
-              .row
-                .col-md-4.top3_col
-                  %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                  %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
-                  .clearfix
-                  .divider10
-                  %span.t3_likes.white.font_dark_grey.text-center
-                    45
-                    %i.fa.fa-thumbs-up.theme_font_color
-                .col-md-4.top3_col
-                  %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                  %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
-                  .clearfix
-                  .divider10
-                  %span.t3_likes.white.font_dark_grey.text-center
-                    45
-                    %i.fa.fa-thumbs-up.theme_font_color
-                .col-md-4.top3_col
-                  %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
-                  %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
-                  .clearfix
-                  .divider10
-                  %span.t3_likes.white.font_dark_grey.text-center
-                    45
-                    %i.fa.fa-thumbs-up.theme_font_color
-            .stats
-              .row
-                .col-md-4
-                  .stat_block
-                    %span
-                      %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3 27
-                    %h4 ДОБАВЛЕНО НЕСОВЕРШЕНСТВ
-                .col-md-8
-                  .stat_block
-                    %span
-                      %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3 20
-                    %h4
-                      НЕСОВЕРШЕНСТВ,
-                      %br/
-                      ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ
-      #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
-        .popup.popup_rounded
-          .modal_title
-            .row
-              .col-md-12
-                %h4.bold.font_dark_grey
-                  Голосование по несовершенствам
-          .vote_progress_cont.progress
-            .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
-          .modal_body
-            .container.vote_folders_cont.folders_4.no_padding_col
-              %ul.nav.vote_nav.row{:role => "tablist"}
-                %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
-                    .vote_folder_inn.poll-2-1
-                      %span.vote_counter
-                      %h5.font_color_stage2 Общий список
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
-                    .vote_folder_inn.poll-2-2
-                      %span.vote_counter
-                      %h5 Необходимо
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
-                    .vote_folder_inn.poll-2-3
-                      %span.vote_counter
-                      %h5 Важно
-                %li.col-md-3.no_padding_col{:role => "presentation"}
-                  %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
-                    .vote_folder_inn.poll-2-4
-                      %span.vote_counter
-                      %h5 Неважно
-            .divider25
-            .container
-              .row
-                .divider25
-                .tab-content
-                  #vote_tab1.tab-pane.all_vote.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
-                    .container.padding30
-                      .row
-                        .col-sm-4.vote_item_cont
-                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "imperf"}
-                            .heading_cont
-                              %h6 Нечем дышать
-                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "5", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
-                            .divider10
-                            .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                                %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-minus
-                            .divider15
-                        .col-sm-4.vote_item_cont
-                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "imperf"}
-                            .heading_cont
-                              %h6 Нечем дышать
-                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
-                            .divider10
-                            .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                                %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-minus
-                            .divider15
-                        .col-sm-4.vote_item_cont
-                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "imperf"}
-                            .heading_cont
-                              %h6 Нечем дышать
-                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "6", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
-                            .divider10
-                            .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                                %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-minus
-                            .divider15
-                        .col-sm-4.vote_item_cont
-                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "imperf"}
-                            .heading_cont
-                              %h6 Нечем дышать
-                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "8", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
-                            .divider10
-                            .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                                %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-minus
-                            .divider15
-                        .col-sm-4.vote_item_cont
-                          .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "imperf"}
-                            .heading_cont
-                              %h6 Нечем дышать
-                            .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "10", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
-                            .divider10
-                            .vote_controls.text-center
-                              %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                                %i.fa.fa-exclamation
-                              %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                                %i.fa.fa-check
-                              %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                                %i.fa.fa-minus
-                            .divider15
-                    .divider50
-                  #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
-                    .container.padding30
-                      .row
-                      .divider50
-                  #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
-                    .container.padding30
-                      .row
-                      .divider50
-                  #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
-                    .container.padding30
-                      .row
-                      .divider50
-                .divider35
-      #popup-explanation-2nd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
-        .popup.popup_rounded
-          .modal_badge.back_color_stage2.rounded_2.font_white 2 СТАДИЯ
-          %h2
-            %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
-            Цель стадии
-          %p.expl-sub-heading Выявление несовершенств текущей ситуации, описанной в базе знаний.
-          %h2
-            %img.expl-header-img-2{:src => "img/flag1.png"}>/
-            Что делать?
-          %ol
-            %li Читайте и обсуждайте несовершенства, сформулированные участниками процедуры.
-            %li Формулируйте собственные несовершенства и выставляйте их на всеобщее обсуждение.
-            %li В конце стадии примите участие в голосовании и распределите несовершенства по степени важности.
-          %button.btn.red.close_magnific Начать работу
-      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
-        .popup.popup_rounded
+                  %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                    %span 3 ответа
+                  #answers-3-1.com_answers.collapse
+                    .answers_subblock.level1
+                      #comment2.media.comment.unread
+                        .media-left
+                          %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                        .media-body
+                          %h5.media-heading.bold Винни-Пух
+                          %span.comment_interf
+                            %span.date_time.theme_font_color 17:28
+                            %span.badge.badge_important.theme_back_color важно
+                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                        .post-interfaces-buttons.text-left
+                          %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
+                            %span.bold
+                              9
+                              %i.fa.fa-thumbs-up.theme_font_color
+                          %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
+                            %span.bold
+                              1
+                              %i.fa.fa-thumbs-down.theme_font_color
+                          %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
+                            %span.bold
+                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      %form#reply_form_2.form-group.comment_add.collapse
+                        .input_cont
+                          %textarea{:placeholder => "Ваш комментарий"}
+                        %button.btn{:type => "button"}
+                          %span.bold
+                            %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      #comment3.media.comment.unread
+                        .media-left
+                          %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                        .media-body
+                          %h5.media-heading.bold Винни-Пух
+                          %span.comment_interf
+                            %span.date_time.theme_font_color 15:28
+                            %span.dropdown.edit_comment
+                              %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                %i.fa.fa-cog.fa-lg.theme_font_color
+                              %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                %li
+                                  %a{:href => "#", :tabindex => "-1"}
+                                    %i.fa.fa-pencil>
+                                    Редактировать
+                                %li
+                                  %a{:href => "#", :tabindex => "-1"}
+                                    %i.fa.fa-close>
+                                    Удалить
+                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                        .post-interfaces-buttons.text-left
+                          %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
+                            %span.bold
+                              9
+                              %i.fa.fa-thumbs-up.theme_font_color
+                          %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
+                            %span.bold
+                              1
+                              %i.fa.fa-thumbs-down.theme_font_color
+                          %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
+                            %span.bold
+                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      %form#reply_form_3.form-group.comment_add.collapse
+                        .input_cont
+                          %textarea{:placeholder => "Ваш комментарий"}
+                        %button.btn{:type => "button"}
+                          %span.bold
+                            %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                    .answers_subblock.level2
+                      #comment4.media.comment
+                        .media-left
+                          %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                        .media-body
+                          %h5.media-heading.bold Винни-Пух
+                          %span.comment_interf
+                            %span.date_time.theme_font_color 15:28
+                        %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                        .post-interfaces-buttons.text-left
+                          %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
+                            %span.bold
+                              9
+                              %i.fa.fa-thumbs-up.theme_font_color
+                          %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
+                            %span.bold
+                              1
+                              %i.fa.fa-thumbs-down.theme_font_color
+                          %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
+                            %span.bold
+                              %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      %form#reply_form_4.form-group.comment_add.collapse
+                        .input_cont
+                          %textarea{:placeholder => "Ваш комментарий"}
+                        %button.btn{:type => "button"}
+                          %span.bold
+                            %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                  #comment5.media.comment.unread
+                    .media-left
+                      %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                    .media-body
+                      %h5.media-heading.bold Винни-Пух
+                      %span.comment_interf
+                        %span.date_time.theme_font_color 27.03.2015 15:28
+                        %span.badge.badge_important.theme_back_color важно
+                    %p.font_grey.bold Ничего не правда. Я люблю гулять, а от вашего дуба тень большая.
+                    .post-interfaces-buttons.text-left
+                      %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
+                        %span.bold
+                          9
+                          %i.fa.fa-thumbs-up.theme_font_color
+                      %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
+                        %span.bold
+                          1
+                          %i.fa.fa-thumbs-down.theme_font_color
+                      %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
+                        %span.bold
+                          %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                  %form#reply_form_5.form-group.comment_add.collapse
+                    .input_cont
+                      %textarea{:placeholder => "Ваш комментарий"}
+                    %button.btn{:type => "button"}
+                      %span.bold
+                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
+              .divider15
+              %form.form-group.comment_add.main_add
+                .input_cont
+                  %textarea{:placeholder => "Ваш комментарий"}
+                %button.btn{:type => "button"}
+                  %span.bold
+                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+              %nav.text-center
+                %ul.pagination
+                  %li
+                    %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
+                  %li
+                    %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
+                  %li
+                    %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
+          .divider25
+    #results.popup-window.detailed_popup.popup-w860.mfp-hide
+      .popup.popup_rounded
+        .modal_title
           .row
             .col-md-12
-              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
-                / Indicators
-                %ul.list-unstyled.list-inline.carousel-indicators.text-center
-                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-                    Аспект 1
-                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
-                    Аспект 2
-                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
-                    Аспект 3
-                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
-                    Аспект 4
-                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
-                    Аспект 5
-                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
-                    Аспект 6
-                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
-                    Аспект 7
-                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
-                    Аспект 8
-                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
-                    Аспект 9
-                / Wrapper for slides
-                .carousel-inner{:role => "listbox"}
-                  .item.active.color-theme-1
+              %h4.bold.font_dark_grey
+                Результаты стадии 2
+        .modal_body
+          .row.modal_subhead
+            .col-md-4.mod_sub_l
+              %h5.font_white Вклад в процедуру
+            .col-md-8.mod_sub_r
+              .dia_legend.pull-left.font_white
+                %span
+                  %i.fa.fa-file-text
+                  несовершенства
+                %span
+                  %i.fa.fa-comment
+                  комментарии
+                %span
+                  %i.fa.fa-thumbs-up
+                  лайки
+                %span
+                  %i.fa.fa-star
+                  важный материал
+              %button.pull-right.btn.btn_reset.btn_dia.font_white
+                %i>
+                Подробнее
+          .dia_block
+            .row
+              .col-md-4
+              .col-md-4
+                .dia_cell
+                  %span.num_cell 1
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 2
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 3
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 4
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 5
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+              .col-md-4
+                .dia_cell
+                  %span.num_cell 6
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 7
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 8
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 9
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+                .dia_cell
+                  %span.num_cell 10
+                  %span
+                    %img.img35.img-circle{:src => "img/ava1.jpg"}/
+                  %span
+                    %p Пятый элемент
+                    %span.dia_icon
+                      4
+                      %i.fa.fa-file-text
+                    %span.dia_icon
+                      3
+                      %i.fa.fa-comment
+                    %span.dia_icon
+                      50
+                      %i.fa.fa-thumbs-up
+                    %span.dia_icon
+                      1
+                      %i.fa.fa-star
+          .row.modal_subhead
+            .col-md-9.mod_sub_l
+              %h5.font_white Популярность контента
+            .col-md-3
+          .top3.gradient_t3
+            .row
+              .col-md-4.top3_col
+                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
+                .clearfix
+                .divider10
+                %span.t3_likes.white.font_dark_grey.text-center
+                  45
+                  %i.fa.fa-thumbs-up.theme_font_color
+              .col-md-4.top3_col
+                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
+                .clearfix
+                .divider10
+                %span.t3_likes.white.font_dark_grey.text-center
+                  45
+                  %i.fa.fa-thumbs-up.theme_font_color
+              .col-md-4.top3_col
+                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                %span.t3_name.white.font_dark_grey.text-center Лиза Школьник
+                .clearfix
+                .divider10
+                %span.t3_likes.white.font_dark_grey.text-center
+                  45
+                  %i.fa.fa-thumbs-up.theme_font_color
+          .stats
+            .row
+              .col-md-4
+                .stat_block
+                  %span
+                    %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3 27
+                  %h4 ДОБАВЛЕНО НЕСОВЕРШЕНСТВ
+              .col-md-8
+                .stat_block
+                  %span
+                    %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3 20
+                  %h4
+                    НЕСОВЕРШЕНСТВ,
+                    %br/
+                    ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ
+    #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
+      .popup.popup_rounded
+        .modal_title
+          .row
+            .col-md-12
+              %h4.bold.font_dark_grey
+                Голосование по несовершенствам
+        .vote_progress_cont.progress
+          .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
+        .modal_body
+          .container.vote_folders_cont.folders_4.no_padding_col
+            %ul.nav.vote_nav.row{:role => "tablist"}
+              %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
+                %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
+                  .vote_folder_inn.poll-2-1
+                    %span.vote_counter
+                    %h5.font_color_stage2 Общий список
+              %li.col-md-3.no_padding_col{:role => "presentation"}
+                %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
+                  .vote_folder_inn.poll-2-2
+                    %span.vote_counter
+                    %h5 Необходимо
+              %li.col-md-3.no_padding_col{:role => "presentation"}
+                %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
+                  .vote_folder_inn.poll-2-3
+                    %span.vote_counter
+                    %h5 Важно
+              %li.col-md-3.no_padding_col{:role => "presentation"}
+                %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
+                  .vote_folder_inn.poll-2-4
+                    %span.vote_counter
+                    %h5 Неважно
+          .divider25
+          .container
+            .row
+              .divider25
+              .tab-content
+                #vote_tab1.tab-pane.all_vote.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
+                  .container.padding30
                     .row
-                      .col-md-12
-                        .container
-                          .row
-                            .col-md-12.col-sm-12
-                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                                %li.active{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
-                                %li{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
-                                %li{:role => "presentation"}
-                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
-                          .row
-                            .col-md-12.col-sm-12
-                              .aspect-main-block
-                                .tab-content
-                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
-                                    %h6.aspect-main-block-heading Ситуация с пчелами
-                                    %p.aspect-main-block-text
-                                      Пчелы недовольны тем, что на их мед
-                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                      конфликт мирным способом, они обратились к мудрой Сове.
-                                    %img{:src => "img/aspect-pic1.jpg"}/
-                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
-                                    %p.aspect-main-block-text
-                                      Пчелы недовольны тем, что на их мед
-                                      постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                      конфликт мирным способом, они обратились к мудрой Сове.
-                                    %img{:src => "img/aspect-pic1.jpg"}/
-                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
-                                    %img{:src => "img/aspect-pic1.jpg"}/
-                  .item.color-theme-2
+                      .col-sm-4.vote_item_cont
+                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "imperf"}
+                          .heading_cont
+                            %h6 Нечем дышать
+                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "5", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
+                          .divider10
+                          .vote_controls.text-center
+                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %i.fa.fa-exclamation
+                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                              %i.fa.fa-check
+                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %i.fa.fa-minus
+                          .divider15
+                      .col-sm-4.vote_item_cont
+                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                          .heading_cont
+                            %h6 Нечем дышать
+                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
+                          .divider10
+                          .vote_controls.text-center
+                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %i.fa.fa-exclamation
+                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                              %i.fa.fa-check
+                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %i.fa.fa-minus
+                          .divider15
+                      .col-sm-4.vote_item_cont
+                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                          .heading_cont
+                            %h6 Нечем дышать
+                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "6", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
+                          .divider10
+                          .vote_controls.text-center
+                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %i.fa.fa-exclamation
+                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                              %i.fa.fa-check
+                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %i.fa.fa-minus
+                          .divider15
+                      .col-sm-4.vote_item_cont
+                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                          .heading_cont
+                            %h6 Нечем дышать
+                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "8", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
+                          .divider10
+                          .vote_controls.text-center
+                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %i.fa.fa-exclamation
+                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                              %i.fa.fa-check
+                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %i.fa.fa-minus
+                          .divider15
+                      .col-sm-4.vote_item_cont
+                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                          .heading_cont
+                            %h6 Нечем дышать
+                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "10", "data-me-type" => "aspect"} Аспект: Слишком низкие потолки в офисах
+                          .divider10
+                          .vote_controls.text-center
+                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+                              %i.fa.fa-exclamation
+                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+                              %i.fa.fa-check
+                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+                              %i.fa.fa-minus
+                          .divider15
+                  .divider50
+                #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
+                  .container.padding30
                     .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                          %p.aspect-main-block-text
-                            В популярной сказке Винни-Пух и его
-                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
-                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
-                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
-                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
-                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
-                            был отвергнут.
-                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
-                            друзья Пятачок и Кролик.
-                          %img{:src => "img/aspect-pic2.jpg"}/
-                  .item.color-theme-3
+                    .divider50
+                #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
+                  .container.padding30
                     .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                          %h6.aspect-main-block-heading
-                            Трудности, связанные с
-                            расположением конфликтующих сторон
-                          %p.aspect-main-block-text
-                            Как видно на карте, Винни-Пух с
-                            друзьями живут достаточно близко к Высокому дубу.
-                            Это часто обостряет конфликт, потому что пчелы не могут нормально
-                            собирать мед,
-                            постоянно беспокоясь, что их ограбят.
-                          %img{:src => "img/aspect-pic3.jpg"}/
-                  .item.color-theme-4
+                    .divider50
+                #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+                  .container.padding30
                     .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                  .item.color-theme-5
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                  .item.color-theme-6
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                  .item.color-theme-7
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                  .item.color-theme-8
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                  .item.color-theme-9
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block
-                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
-                  %i.fa.fa-3x.fa-caret-left
-                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
-                  %i.fa.fa-3x.fa-caret-right
+                    .divider50
+              .divider35
+    #popup-explanation-2nd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
+      .popup.popup_rounded
+        .modal_badge.back_color_stage2.rounded_2.font_white 2 СТАДИЯ
+        %h2
+          %img.expl-header-img-1{:src => "img/good-shot1.png"}>/
+          Цель стадии
+        %p.expl-sub-heading Выявление несовершенств текущей ситуации, описанной в базе знаний.
+        %h2
+          %img.expl-header-img-2{:src => "img/flag1.png"}>/
+          Что делать?
+        %ol
+          %li Читайте и обсуждайте несовершенства, сформулированные участниками процедуры.
+          %li Формулируйте собственные несовершенства и выставляйте их на всеобщее обсуждение.
+          %li В конце стадии примите участие в голосовании и распределите несовершенства по степени важности.
+        %button.btn.red.close_magnific Начать работу
+    #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+      .popup.popup_rounded
+        .row
+          .col-md-12
+            #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+              / Indicators
+              %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                  Аспект 1
+                %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                  Аспект 2
+                %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                  Аспект 3
+                %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                  Аспект 4
+                %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                  Аспект 5
+                %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                  Аспект 6
+                %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                  Аспект 7
+                %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                  Аспект 8
+                %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                  Аспект 9
+              / Wrapper for slides
+              .carousel-inner{:role => "listbox"}
+                .item.active.color-theme-1
+                  .row
+                    .col-md-12
+                      .container
+                        .row
+                          .col-md-12.col-sm-12
+                            %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                              %li.active{:role => "presentation"}
+                                %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
+                              %li{:role => "presentation"}
+                                %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                              %li{:role => "presentation"}
+                                %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                        .row
+                          .col-md-12.col-sm-12
+                            .aspect-main-block
+                              .tab-content
+                                #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                  %h6.aspect-main-block-heading Ситуация с пчелами
+                                  %p.aspect-main-block-text
+                                    Пчелы недовольны тем, что на их мед
+                                    постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                    конфликт мирным способом, они обратились к мудрой Сове.
+                                  %img{:src => "img/aspect-pic1.jpg"}/
+                                #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                  %p.aspect-main-block-text
+                                    Пчелы недовольны тем, что на их мед
+                                    постоянно покушаются Винни-Пух и его друзья. Желая разрешить
+                                    конфликт мирным способом, они обратились к мудрой Сове.
+                                  %img{:src => "img/aspect-pic1.jpg"}/
+                                #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                  %img{:src => "img/aspect-pic1.jpg"}/
+                .item.color-theme-2
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                        %p.aspect-main-block-text
+                          В популярной сказке Винни-Пух и его
+                          друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                          труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                          пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                          момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                          втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                          был отвергнут.
+                          Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                          друзья Пятачок и Кролик.
+                        %img{:src => "img/aspect-pic2.jpg"}/
+                .item.color-theme-3
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                        %h6.aspect-main-block-heading
+                          Трудности, связанные с
+                          расположением конфликтующих сторон
+                        %p.aspect-main-block-text
+                          Как видно на карте, Винни-Пух с
+                          друзьями живут достаточно близко к Высокому дубу.
+                          Это часто обостряет конфликт, потому что пчелы не могут нормально
+                          собирать мед,
+                          постоянно беспокоясь, что их ограбят.
+                        %img{:src => "img/aspect-pic3.jpg"}/
+                .item.color-theme-4
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                .item.color-theme-5
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                .item.color-theme-6
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                .item.color-theme-7
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                .item.color-theme-8
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+                .item.color-theme-9
+                  .row
+                    .col-md-12.col-sm-12
+                      .aspect-main-block
+              %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                %i.fa.fa-3x.fa-caret-left
+              %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                %i.fa.fa-3x.fa-caret-right
     / Outer Ends
     / Javascript files
     / jQuery
