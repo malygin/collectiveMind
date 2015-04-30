@@ -22,7 +22,7 @@
         #cabinet_5_cont_0.tab-pane.active.fade.in{:role => "tabpanel"}
           .divider35
           .text-center
-            %img{:src => "img/cab_5_qsign.png"}/
+            =image_tag 'cab_5_qsign.png'
             .divider35
             %p.cab5_placeholder
               Здесь вы ответите на вопросы по пунктам слева,
@@ -90,7 +90,6 @@
       <button onclick="ge.gantt.showCriticalPath=!ge.gantt.showCriticalPath; ge.redraw();" class="button textual" title="Critical Path"><span class="teamworkIcon">£</span></button>
       <span class="ganttButtonSeparator"></span>
       <button onclick="editResources();" class="button textual" title="edit resources"><span class="teamworkIcon">M</span></button>
-      \       
       <button onclick="saveGanttOnServer();" class="button first big" title="save">save</button>
       </div></div>
   .__template__{:type => "TASKSEDITHEAD"}
