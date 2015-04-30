@@ -399,5 +399,29 @@ $(document).ready(function () {
         }
     });
 
+    /* slide panel 3rd stage */
+    $('#opener').on('click', function() {
+        var panel = $('#slide-panel');
+        if (panel.hasClass("visible")) {
+            panel.removeClass('visible').animate({'margin-left':'-400px'});
+        } else {
+            panel.addClass('visible').animate({'margin-left':'0px'});
+        }
+        return false;
+    });
+    $('#bottom-opener').on('click', function() {
+        var panel = $('#bottom-panel');
+        if (panel.hasClass("visible")) {
+            panel.removeClass('visible').animate({'top':'100%'});
+            $(this).toggleClass('fa-rotate-180');
+        } else {
+            var offset = $('.bottom_panel_stop').offset();
+            var marg_offset = $('.bottom_fix .cont_heading').innerHeight();
+            panel.addClass('visible').animate({'top':offset.top + marg_offset + 'px'});
+            $(this).toggleClass('fa-rotate-180');
+        }
+        return false;
+    });
+
 
 });
