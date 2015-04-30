@@ -16,11 +16,12 @@ class Novation::Post < ActiveRecord::Base
 
   def attributes_for_form
     result = {}
+    attributes_with_bool = %w(members_new members_education members_motivation resource_commands resource_support resource_competition confidence_commands confidence_remove_discontent confidence_negative_results)
     (attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status)).each do |attribute|
       attribute_parts = attribute.split('_')
       unless attribute_parts.last == 'bool'
         result[attribute_parts[0]] ||= []
-        result[attribute_parts[0]] << attribute
+        result[attribute_parts[0]] << [attribute, attributes_with_bool.include?(attribute)]
       end
     end
 
