@@ -371,9 +371,9 @@ $(document).ready(function () {
     $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
 
     $('.check_push_box').click(function(){
+        var item = $(this).closest('.item').detach();
+        var item_id = $(item).find('.description').attr('id').replace(/^\D+/g, '');
         if ($(this).is(':checked')){
-            var item = $(this).closest('.item').detach();
-            var item_id = $(item).find('.description').attr('id').replace(/^\D+/g, '');
             $('.checked_items').append(item);
             ch_its++; unch_its--;
             $('.hideable_checks').show();
@@ -382,9 +382,9 @@ $(document).ready(function () {
             /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
             if ($('#for_hidden_fields').length > 0) {
                 $('#for_hidden_fields').append('<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>');
+                $('.selected_concepts').append('<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>');
             }
         } else {
-            var item = $(this).closest('.item').detach();
             $('.unchecked_items').append(item);
             ch_its--; unch_its++;
             if (ch_its == 0) {
@@ -394,6 +394,7 @@ $(document).ready(function () {
             /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
             if ($('#for_hidden_fields').length > 0) {
                 $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove();
+                $('.selected_concepts').find('p#selected_concept_' + item_id).remove();
             }
         }
     });
