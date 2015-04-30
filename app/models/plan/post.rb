@@ -2,11 +2,11 @@ class Plan::Post < ActiveRecord::Base
   include BasePost
   belongs_to :user
 
-  has_many :post_aspects, foreign_key: 'plan_post_id', class_name: 'Plan::PostAspect'
+  has_many :post_novations, foreign_key: 'plan_post_id', class_name: 'Plan::PostNovation'
   has_many :estimates, class_name: 'Estimate::Post'
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'plan_post_id', class_name: 'Plan::Voting'
-  has_many :stages, class_name: 'Plan::PostStage'
+  # has_many :stages, class_name: 'Plan::PostStage'
 
   scope :by_project, ->(p) { where(project_id: p) }
 
@@ -17,11 +17,11 @@ class Plan::Post < ActiveRecord::Base
   end
 
 
-  def first_stage
-    stages.first.id unless self.post_stages.first.nil?
-  end
+  # def first_stage
+  #   stages.first.id unless self.post_stages.first.nil?
+  # end
 
-  def post_stages
-    stages.where('plan_post_stages.status = ?', 0).order(:date_begin)
-  end
+  # def post_stages
+  #   stages.where('plan_post_stages.status = ?', 0).order(:date_begin)
+  # end
 end

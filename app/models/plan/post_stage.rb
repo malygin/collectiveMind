@@ -1,6 +1,6 @@
 class Plan::PostStage < ActiveRecord::Base
   belongs_to :post, class_name: 'Plan::Post'
-  has_many :plan_post_aspects, class_name: 'Plan::PostAspect', foreign_key: :post_stage_id
+  # has_many :plan_post_aspects, class_name: 'Plan::PostAspect', foreign_key: :post_stage_id
 
   def actions_rowcount
     self.plan_post_aspects.
