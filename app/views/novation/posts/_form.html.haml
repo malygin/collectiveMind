@@ -26,10 +26,10 @@
               - if bool_attribute
                 .input-group
                   = f.radio_button "#{attribute}_bool".to_sym, true
-                  = label "#{attribute}_bool".to_sym, 'Да'
+                  = label "#{attribute}_bool".to_sym, 'Да', style: 'padding-left: 10px;'
                 .input-group
                   = f.radio_button "#{attribute}_bool".to_sym, false
-                  = label "#{attribute}_bool".to_sym, 'Нет'
+                  = label "#{attribute}_bool".to_sym, 'Нет', style: 'padding-left: 10px;'
               = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
               .divider15
 

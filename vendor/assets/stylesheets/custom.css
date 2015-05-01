@@ -4883,7 +4883,7 @@ ul.vote_nav>li>a {
     line-height: 1.5;
     border-bottom: 1px solid #d8d8d8;
     font-size: 13px;
-    height: 54px;
+    min-height: 54px;
 }
 .post.post_type_3.merged .media-body h5 i {
     position: absolute;
@@ -5559,6 +5559,7 @@ i.fa.sticker_close {
 }
 .stage4_theme .cont_heading, .stage4_theme .collapser_type2, .stage4_theme .mod_col_top, .stage4_theme .btn_cab_mod {
     background: #d5d6ea;
+    color: rgb(51, 51, 51);
 }
 .stage4_pale_back {
     background: #d5d6ea !important;

@@ -155,7 +155,11 @@ $(document).ready(function () {
         $('.owl-nav').css('display', 'none');
     }
 
-
+    //  табы в форме для идей в пакетах переключалка
+    $('#tabs_form_navation a').click(function (e) {
+        $('#tabs_form_navation a button.active').removeClass('active')
+        $(this).children('button').addClass('active')
+    });
 
 
     /* слайдер для аспектов для 1 стадии */

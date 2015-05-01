@@ -3,9 +3,9 @@
     .row
       .col-md-6.col_padding_7
         .left_col.rounded_5.white
-          .mod_col_top
+          .mod_col_top#tabs_form_navation
             %a{'data-show' => 'collapse', 'data-toggle' => 'tab', :href => '#discontents'}
-              %button.btn.btn_cab_mod.btn_toggle.btn_reset Список несовершенств с их идеями
+              %button.btn.btn_cab_mod.btn_toggle.btn_reset.active Список несовершенств с их идеями
             %a{'data-show' => 'collapse', 'data-toggle' => 'tab', :href => '#ideas'}
               %button.btn.btn_cab_mod.btn_toggle.btn_reset{'data-show' => 'all', 'data-toggle' => 'tab'} Список идей
           .tab-content

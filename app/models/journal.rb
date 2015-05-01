@@ -26,7 +26,7 @@ class Journal < ActiveRecord::Base
 
   # after_save :send_last_news
 
-  validates :body, :type_event, :project_id, presence: true
+  validates :type_event, :project_id, presence: true
 
   @types = []
   @my_types = [11]
