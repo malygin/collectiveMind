@@ -54,19 +54,19 @@
 
 
 # GANTT
-#= require gantt/date
-#= require gantt/ganttDrawer
-#= require gantt/ganttGridEditor
-#= require gantt/ganttMaster
-#= require gantt/ganttTask
-#= require gantt/ganttUtilities
-#= require gantt/i18nJs
-#= require gantt/jquery.dateField
-#= require gantt/jquery.dateField
-#= require gantt/jquery.JST
-#= require gantt/jquery.livequery.min
-#= require gantt/jquery.timers
-#= require gantt/platform
+# require gantt/date
+# require gantt/ganttDrawer
+# require gantt/ganttGridEditor
+# require gantt/ganttMaster
+# require gantt/ganttTask
+# require gantt/ganttUtilities
+# require gantt/i18nJs
+# require gantt/jquery.dateField
+# require gantt/jquery.dateField
+# require gantt/jquery.JST
+# require gantt/jquery.livequery.min
+# require gantt/jquery.timers
+# require gantt/platform
 
 $ ->
   start_vote()
@@ -194,8 +194,8 @@ $ ->
     return
 
   # GANTT
-  ge = new GanttMaster()
-  ge.init($("#workSpace"))
+#  ge = new GanttMaster()
+#  ge.init($("#workSpace"))
 
 
 #show comments panel on post hover
