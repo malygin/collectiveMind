@@ -3,25 +3,30 @@
 .back_color_stage1 {
     background: #80b2d6;
 }
+
 .back_color_stage2 {
     background: #678cca;
 }
+
 .back_color_stage3 {
     background: #c292bd;
 }
+
 .back_color_stage4 {
     background: #8e8bc7;
 }
+
 .back_color_stage5 {
     background: #559499;
 }
+
 .back_color_stage6 {
     background: #84b9bd;
 }
-.back_color_stage7 {
-    background: #86c3cf;
-}
 
+.back_color_stage7 {
+    background: #8cccd8;
+}
 
 /* colors */
 /* background */
@@ -105,27 +110,32 @@
     background: transparent !important;
 }
 
-
 /* fonts */
 /* font colors for stages */
 .font_color_stage1 {
     color: #80b2d6 !important;
 }
+
 .font_color_stage2 {
     color: #678cca !important;
 }
+
 .font_color_stage3 {
     color: #c292bd !important;
 }
+
 .font_color_stage4 {
     color: #8e8bc7 !important;
 }
+
 .font_color_stage5 {
     color: #559499 !important;
 }
+
 .font_color_stage6 {
     color: #84b9bd !important;
 }
+
 .font_color_stage7 {
     color: #86c3cf !important;
 }
@@ -133,27 +143,35 @@
 .font_white {
     color: #fff !important;
 }
+
 .font_black {
     color: #000 !important;
 }
+
 .font_grey {
     color: #787878 !important;
 }
+
 .font_lighter_grey {
     color: #9e9e9e !important;
 }
+
 .font_mid_grey {
     color: #666 !important;
 }
+
 .font_dark_grey {
     color: #414040 !important;
 }
+
 .font_red {
     color: #e71d2b !important;
 }
+
 .font_purple {
     color: #8f8eb0 !important;
 }
+
 .font_light_blue {
     color: #e3f2f6 !important;
 }
@@ -186,54 +204,64 @@
     color: #bfc122 !important;
 }
 
-
 /* borders */
 .border_grey {
     border: 1px solid #d1d1d1;
 }
+
 .border_light_grey {
     border: 1px solid #e6e6e6;
 }
-
-
 
 /* aspect colors */
 li.active > .aspect_color0_background {
     background-color: #cfa7cc !important;
 }
+
 li.active > .aspect_color1_background {
     background-color: #a4b1db !important;
 }
+
 li.active > .aspect_color2_background {
     background-color: #88a2c3 !important;
 }
+
 li.active > .aspect_color3_background {
     background-color: #8a99ae !important;
 }
+
 li.active > .aspect_color4_background {
     background-color: #8abdea !important;
 }
+
 li.active > .aspect_color5_background {
     background-color: #8fc8d3 !important;
 }
+
 li.active > .aspect_color6_background {
     background-color: #a3bead !important;
 }
+
 li.active > .aspect_color7_background {
     background-color: #a5cba2 !important;
 }
+
 li.active > .aspect_color8_background {
     background-color: #b9dd9d !important;
 }
+
 li.active > .aspect_color9_background {
     background-color: #d7d69e !important;
 }
+
 li.active > .aspect_color10_background {
     background-color: #e9dd93 !important;
 }
+
 li.active > .aspect_color11_background {
     background-color: #e7b288 !important;
 }
+
 li.active > .aspect_color12_background {
     background-color: #d59d9e !important;
 }

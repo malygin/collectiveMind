@@ -33,10 +33,6 @@ p {
     margin-top: 5px;
 }
 
-
-
-
-
 .project_win {
     background: image-url("stripe.png") repeat;
     margin-top: 20px;
@@ -96,12 +92,10 @@ p {
     height: 120px;
 }
 
-.list_win {
-    margin-top: 20px;
-}
-
 .list_win li {
     color: #a4a4a4;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .list_win li:hover {
@@ -111,6 +105,10 @@ p {
 
 .list_win .active {
     color: #323232;
+}
+
+.list_win .active .back_color_stage7 {
+    background: #9ee7f4;
 }
 
 .letters {
@@ -129,7 +127,7 @@ p {
 
 .colorT1 {
 
-    color: #6184bd;;
+    color: #6184bd;
 }
 
 .colorT2 {
@@ -180,3 +178,14 @@ a.dropdown-toggle i {
     padding: 10px;
 }
 
+.arrow {
+    position: relative;
+    top: 5px;
+}
+
+.arrow i {
+
+    font-size: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
