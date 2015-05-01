@@ -1,9 +1,14 @@
 .divider10
-.content_window.white
-  = form_for @novation, url: {project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id}, remote: true, class: 'cabinet-aspect-form' do |f|
-    %div{id: "novation_notices_#{@novation.id}"}
-      = render partial: 'shared/create_success', locals: {model_name: 'novation', id: @novation.id}
+%div{id: "novation_notices_#{@novation.id}"}
+  = render partial: 'shared/create_success', locals: {model_name: 'novation', id: @novation.id}
+= form_for @novation, url: {project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id}, remote: true, class: 'cabinet-aspect-form' do |f|
+  .content_window.white
     .cont_heading.bold
+      - if @novation.persisted?
+        %span.pocket_name.breadcr
+        = link_to user_content_novation_posts_path(@project), class: 'a_font_reset bold', id: 'open_user_content_from_edit' do
+          Мои пакеты
+          %small &gt;
       = f.text_area :title, rows: 1, class: 'form-control transp_ta', placeholder: t('activerecord.attributes.novation/post.title')
     .divider25
     .row

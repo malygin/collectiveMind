@@ -17,9 +17,9 @@
                   = novation.title
                 - if current_user?(novation.user)
                   %span.post_btns_cont
-                    = link_to edit_novation_post_path(@project, novation), class: 'btn btn_reset btn_del', id: "edit_novation_#{novation.id}" do
+                    = link_to edit_novation_post_path(@project, novation), class: 'btn btn_reset btn_del a_font_reset', id: "edit_novation_#{novation.id}" do
                       %i.fa.fa-pencil.fa-lg
-                    = link_to novation_post_path(@project, novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, class: 'btn btn_reset btn_del', id: "destroy_novation_#{novation.id}" do
+                    = link_to novation_post_path(@project, novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_novation_#{novation.id}" do
                       %i.fa.fa-trash-o.fa-lg
           .post-bottom.white
             .row
