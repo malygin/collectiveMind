@@ -103,7 +103,7 @@ $ ->
     return
 
   # аутосайз полей в кабинете
-  $('#cabinet_form textarea').autosize()
+  $('#cabinet_form textarea').not('.without_autosize').autosize()
 
   # Используется в кабинете на стадии несовершенств, во вспомогательной технике
   $('.open-popup').each ->
