@@ -80,7 +80,7 @@ class Core::Project < ActiveRecord::Base
       vote_discontent: 6,
       concept: 7,
       vote_concept: 8,
-      navation: 9,
+      novation: 9,
       vote_novation: 10,
       plan: 11,
       vote_plan: 12,
