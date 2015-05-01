@@ -24,7 +24,7 @@
         .right_col.rounded_5.white
           .mod_col_top
             %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right'} Выбранные идеи
-            %i.fa.fa-info-circle.fa-lg.font_color_stage4.open_sticker
+            = render partial: 'application/cabinet_sticker'
           .items.ps_cont.check_push_cont.checked_items
             - if @novation.persisted?
               = render partial: 'novation/posts/concept', collection: @novation.novation_concepts
