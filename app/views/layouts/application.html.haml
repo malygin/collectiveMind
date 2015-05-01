@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en")
   = render 'application/meta'
-  %body{class: stage_theme}
+  %body{class: stage_theme, style: "background-color: #f4f4f4;"}
     .outer
       - unless cabinet?
         = render partial: 'application/left_rollover'

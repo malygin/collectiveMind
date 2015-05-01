@@ -30,7 +30,7 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "5th-stage-cabinet.html"} Кабинет
+              %a.menu_a{:href => "5th-stage-cabinet-1.html"} Кабинет
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -281,7 +281,7 @@
                   %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3
                   %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5 СТАДИЯ: РАЗРАБОТКА ПРОЕКТОВ
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5 СТАДИЯ: ПРОЕКТНОЕ ПРЕДЛОЖЕНИЕ
                 .btn-group{:role => "group"}
                   %a.btn.back_color_stage6.icon_new.i_new_stage{:href => "6th-stage.html", :role => "button"} 6
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
@@ -316,38 +316,33 @@
           .stage-info-sort-block
             .row
               %br/
-              .col-md-7
-                %span.stage-heading
-                  Проекты (2)
-                  %i.fa.fa-question-circle
-              .col-md-5
+              .col-md-6
+                %span.stage-heading Проектные предложения (2)
+              .col-md-6
                 .sort-block.pull-right
                   %span.sort-label Сортировать по новым:
                   .sort-1.sort_btn.sprite_com.sprite-item5_2_1
                     %span 25
                   .sort-2.sort_btn.sprite_doc.sprite-item5_1
                     %span 2
-                  %a{:href => "cabinet-stage4.html"}
+                  %a{:href => "5th-stage-cabinet.html"}
                     %button.btn.add-button
                       %span> +
-                      Проект
+                      Проектное предложение
           .stage-post-block
             .row
               .col-md-6
-                #tooltip5_1.post.post_type_3.tooltip1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Проект – это план действий по воплощению идей, поданных на прошлой стадии."}
-                  .post-header.white.open-popup{"data-placement" => "5", "data-target" => "1"}
-                    .row
-                      .col-md-12.col-xs-12
-                        %h5.font-S4.bold Заключение мира
-                    %i.fa.fa-angle-right
+                #tooltip5_1.post.post_type_3.no_head.tooltip1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Проект – это план действий по воплощению идей, поданных на прошлой стадии."}
+                  .post-header.white
                   .post-body.ch_action{"data-for" => "post_ch1"}
                     .media
                       .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img50{:src => "img/ava-rabb.jpg"}/
-                        %p.poster-name Кролик
+                        %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                        %p.poster-name Пятачок
+                        %p.time.text-center 21.12.2014
                       .media-body.white-gray
-                        .post-text
-                          %p В проекте описывается механизм урегулирования конфликтной ситуации.
+                        .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
+                          %p Взаимное недоверие четвероногих и пчёл
                         #post_ch1.post_cont_hover.post_tall.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
@@ -378,9 +373,9 @@
                               .comment_preview
                                 %span.bold irivertime:
                                 И обратная сортировка должна тоже как-то выделяться
-                  .post-bottom.white
+                  #tooltip4_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
                     .row
-                      .col-md-12.col-xs-12
+                      .col-md-3.col-md-offset-9.col_padding_left_3
                         .text-right.small_icons
                           %span.popup2.comments_icon{"data-for" => "post_ch1"}
                             %small 5
@@ -394,23 +389,17 @@
                           %span.popup2
                             %i.fa.fa-exclamation-triangle.font_lighter_grey
               .col-md-6
-                .post.post_type_3
-                  .post-header.white.white.open-popup{"data-placement" => "5", "data-target" => "1"}
-                    .row
-                      .col-md-12.col-xs-12
-                        %h5.font-S4.bold Цветник у Высокого дуба
-                      %i.fa.fa-angle-right
+                .post.post_type_3.no_head
+                  .post-header.white
                   .post-body.ch_action{"data-for" => "post_ch2"}
                     .media
                       .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
+                        %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
                         %p.poster-name Пятачок
+                        %p.time.text-center 21.12.2014
                       .media-body.white-gray
-                        .post-text
-                          %p
-                            Четвероногие наконец-то нашли способ заинтересовать пчел. Высадив
-                            медоносные растения прямо у Высокого дуба, Винни и его друзья добьются
-                            расположения пчел...
+                        .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
+                          %p Взаимное недоверие четвероногих и пчёл
                         #post_ch2.post_cont_hover.post_tall.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
@@ -443,7 +432,7 @@
                                 И обратная сортировка должна тоже как-то выделяться
                   .post-bottom.white
                     .row
-                      .col-md-12.col-xs-12
+                      .col-md-3.col-md-offset-9.col_padding_left_3
                         .text-right.small_icons
                           %span.popup2.comments_icon{"data-for" => "post_ch2"}
                             %small 5
@@ -483,18 +472,19 @@
           .modal_body
             .popup-post-info
               .row.info-block
-                .col-md-4.popup-post-block
-                  %img{:src => "img/ava-rabb.jpg"}/
-                  %span Кролик
-                .col-md-8.popup-right-tabs
+                .col-md-9.popup-right-tabs
                   .nav-tabs-one
-                    / Nav tabs
                     %ul.nav.nav-tabs
                       %li.active
-                        %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
+                        %a{"data-toggle" => "tab", :href => "#tab-1"}
+                          %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
                       %li
-                        %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
-                  / Tab content
+                        %a{"data-toggle" => "tab", :href => "#tab-2"}
+                          %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active График реализации проекта
+                .col-md-3
+                  .popup-post-block.pull-right
+                    %img{:src => "img/ava-rabb.jpg"}/
+                    %span.font_black.text-center Кролик
             .clearfix
             .tab-content.modal_content
               #tab-1.tab-pane.fade.in.active
@@ -502,23 +492,51 @@
                   .row
                     .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
                       %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
-                      .description-block
-                        %span.description-title Коротко о проекте
-                        %p
-                          В проекте описывается механизм урегулирования конфликтной ситуации.
-                      .description-block
-                        %span.description-title Эссе по проекту. Пояснения и обоснования
-                        %p
-                          Причины, из-за которых возникла конфликтная ситуация, будут разрешены.
-                      .description-block
-                        %span.description-title Этапы проекта
-                        .stages-blocks
-                          .lined-heading
-                            %span.bold-stripe 01 февр. 2015 - 02 февр. 2015
-                            %span.normal-stripe Поиск компромиссов
-                          .lined-heading
-                            %span.bold-stripe 03 февр. 2015 - 08 февр. 2015
-                            %span.normal-stripe Подготовка и подбор участников
+                      .divider25
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                        Описание проекта
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-1.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                        Организационные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-2.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                        Ресурсные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-3.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                        Риски реализации
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-4.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
                     .col-md-6.comment_col.popup_expandable_col.ps_cont
                       %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
                       .divider15
