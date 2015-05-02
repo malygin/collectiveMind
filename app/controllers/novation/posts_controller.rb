@@ -6,7 +6,7 @@ class Novation::PostsController < PostsController
 
   def index
     @posts= nil
-    @posts = @project.novations.created_order
+    @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
     respond_to do |format|
 
       format.html # show.html.erb

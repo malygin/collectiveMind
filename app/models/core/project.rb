@@ -22,7 +22,7 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_accepted_post, -> { where status: 2 }, class_name: 'Concept::Post'
   has_many :concept_for_admin_post, -> { where status: 1 }, class_name: 'Concept::Post'
 
-  has_many :novations, -> { where status: 0 }, class_name: 'Novation::Post'
+  has_many :novations, class_name: 'Novation::Post'
 
   has_many :plan_post, -> { where status: 0 }, class_name: 'Plan::Post'
   has_many :estimate_posts, -> { where status: 0 }, class_name: 'Estimate::Post'
@@ -106,7 +106,7 @@ class Core::Project < ActiveRecord::Base
 
   # тип вопроса в зависимости от этапа
   def type_for_questions
-    [STATUS_CODES[:prepare],STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
+    [STATUS_CODES[:prepare], STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
   end
 
   def current_stage
@@ -322,7 +322,7 @@ class Core::Project < ActiveRecord::Base
 
   def can_add_content?(stage)
     if stage == :collect_info_posts
-      return [0,1].include?(self.status)
+      return [0, 1].include?(self.status)
     elsif stage == :discontent_posts
       return self.status == 3
     elsif stage == :concept_posts
