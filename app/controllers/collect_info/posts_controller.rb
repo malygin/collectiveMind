@@ -44,6 +44,8 @@ class CollectInfo::PostsController < PostsController
   def render_slider
   end
 
+
+
   def answer_question
     @aspect = Core::Aspect::Post.find(params[:id])
     @question = CollectInfo::Question.find(params[:question_id])

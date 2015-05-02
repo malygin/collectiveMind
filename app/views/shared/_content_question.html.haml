@@ -1,0 +1,32 @@
+.q_pop_block.light-grey.rounded_2
+  .divider15
+  %p
+    =content_question.content
+    %i.fa.fa-lg.fa-question-circle.font_color_stage4
+  = form_tag(answer_content_question_novation_post_path(@project, id: @post.id, question_id: content_question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+    .btn-group{"data-toggle" => "buttons"}
+      - content_question.answers.each do |answer|
+        .form-group
+          %submit.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
+            -#= check_box_tag 'answers[]', answer.id
+            = radio_button_tag 'answers[]', answer.id
+            = answer.content
+
+      -#.form-group
+      -#  %button.btn.btn-xs.btn-white.text-center
+      -#    Да
+      -#  %i.fa.fa-check.font_color_stage3
+      -#.form-group
+      -#  %button.btn.btn-xs.btn-white
+      -#    Нет
+      -#  %i.fa.fa-check.font_color_stage3
+    .divider10
+    %p
+      Пояснения
+    .divider5
+    = text_area_tag 'content', nil, rows: 2, placeholder: 'Ваше пояснение', class: "form-control"
+    .clearfix
+    .divider5
+    .form-group.bottom-buttons
+      %button.btn.answer-button.back_color_stage4 Ответить
+  .divider10
