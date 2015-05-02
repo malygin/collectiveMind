@@ -406,16 +406,7 @@ $(document).ready(function () {
         }
     });
 
-    /* slide panel 3rd stage */
-    $('#opener').on('click', function() {
-        var panel = $('#slide-panel');
-        if (panel.hasClass("visible")) {
-            panel.removeClass('visible').animate({'margin-left':'-400px'});
-        } else {
-            panel.addClass('visible').animate({'margin-left':'0px'});
-        }
-        return false;
-    });
+
     $('#bottom-opener').on('click', function() {
         var panel = $('#bottom-panel');
         if (panel.hasClass("visible")) {
