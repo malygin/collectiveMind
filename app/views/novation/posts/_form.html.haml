@@ -45,8 +45,7 @@
     .divider50
     .divider_1_grey
     .divider20
+    = f.submit 'Опубликовать', id: 'send_post_novation', class: 'btn add-button type2 pull-right', name: 'novation_post[published]'
     = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button type2 pull-right'
-    - if @novation.persisted? and !@novation.published?
-      = link_to 'Опубликовать', publish_novation_post_path(@project, @novation), remote: true, method: :put, id: "publish_#{@novation.id}", class: 'btn add-button type2 pull-right'
     - if @novation.persisted?
       = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del pull-right'
