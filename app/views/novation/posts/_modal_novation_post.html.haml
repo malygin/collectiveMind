@@ -4,8 +4,7 @@
       .row
         .col-md-8
           %h4.bold.font_dark_grey
-            Нововведение
-            ="\"#{trim_content(@post.title)}\""
+            =trim_content(@post.title)
         .col-md-4
           .row
             .col-md-12
@@ -53,180 +52,167 @@
 
       .container.modal_content
         .row
-          .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+          .col-md-6.com_dashed_border.right.popup_collapsable_col
             %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
             .divider25
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.actions')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.project_change')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-1" aria-expanded="false")
+              = t('show.novation.actions')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-1.collapse
+              .divider5
+              %h5.bold= t('activerecord.attributes.novation/post.project_change')
               %p
                 = @post.project_change
+              .divider15
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.project_goal')
+              %h5.bold= t('activerecord.attributes.novation/post.project_goal')
               %p
                 = @post.project_goal
+              .divider15
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.project_results')
+              %h5.bold= t('activerecord.attributes.novation/post.project_results')
               %p
                 = @post.project_results
+              .divider15
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.project_time')
+              %h5.bold= t('activerecord.attributes.novation/post.project_time')
               %p
                 = @post.project_time
-
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.actors')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.members_new')
+              .divider15
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-2" aria-expanded="false")
+              = t('show.novation.actors')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-2.collapse
+              .divider5
+              %h5.bold= t('activerecord.attributes.novation/post.members_new')
               %p
                 = @post.members_new_bool ? 'Да' : 'Нет'
                 %br
                 = @post.members_new
+              .divider15
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.members_who')
+              %h5.bold=t('activerecord.attributes.novation/post.members_who')
               %p
                 = @post.members_who_bool ? 'Да' : 'Нет'
                 %br
                 = @post.members_who
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.members_education')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.members_education')
               %p
                 = @post.members_education_bool ? 'Да' : 'Нет'
                 %br
                 = @post.members_education
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.members_motivation')
+              .divider15
+              %h5.bold=  t('activerecord.attributes.novation/post.members_motivation')
               %p
                 = @post.members_motivation_bool ? 'Да' : 'Нет'
                 %br
                 = @post.members_motivation
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.members_execute')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.members_execute')
               %p
                 = @post.members_execute_bool ? 'Да' : 'Нет'
                 %br
                 = @post.members_execute
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_commands')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.resource_commands')
               %p
                 = @post.resource_commands_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_commands
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_support')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.resource_support')
               %p
                 = @post.resource_support_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_support
+              .divider15
 
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.tools')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_internal')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-3" aria-expanded="false")
+              = t('show.novation.tools')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-3.collapse
+              .divider5
+              %h5.bold= t('activerecord.attributes.novation/post.resource_internal')
               %p
                 = @post.resource_internal_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_internal
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_external')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.resource_external')
               %p
                 = @post.resource_external_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_external
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_financial')
+              .divider15
+              %h5.bold= ('activerecord.attributes.novation/post.resource_financial')
               %p
                 = @post.resource_financial_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_financial
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.resource_competition')
+              .divider15
+              %h5.bold=  t('activerecord.attributes.novation/post.resource_competition')
               %p
                 = @post.resource_competition_bool ? 'Да' : 'Нет'
                 %br
                 = @post.resource_competition
+              .divider15
 
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.impact_group')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.project_members')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-4" aria-expanded="false")
+              = t('show.novation.impact_group')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-4.collapse
+              .divider5
+              %h5.bold=  t('activerecord.attributes.novation/post.project_members')
               %p
                 = @post.project_members_bool ? 'Да' : 'Нет'
                 %br
                 = @post.project_members
+              .divider15
 
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.impact_env')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.confidence_commands')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-5" aria-expanded="false")
+              =t('show.novation.impact_env')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-5.collapse
+              .divider5
+              %h5.bold= t('activerecord.attributes.novation/post.confidence_commands')
               %p
                 = @post.confidence_commands_bool ? 'Да' : 'Нет'
                 %br
                 = @post.confidence_commands
+              .divider15
 
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  = t('show.novation.negative')
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.confidence_remove_discontent')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-6" aria-expanded="false")
+              = t('show.novation.negative')
+              %i.fa.fa-plus.font_color_stage4.collapse_plus
+            #cab4-6.collapse
+              .divider5
+              %h5.bold= t('activerecord.attributes.novation/post.confidence_remove_discontent')
               %p
                 = @post.confidence_remove_discontent_bool ? 'Да' : 'Нет'
                 %br
                 = @post.confidence_remove_discontent
 
-              %p
-                %strong
-                  = t('activerecord.attributes.novation/post.confidence_negative_results')
+              .divider15
+              %h5.bold= t('activerecord.attributes.novation/post.confidence_negative_results')
               %p
                 = @post.confidence_negative_results_bool ? 'Да' : 'Нет'
                 %br
                 = @post.confidence_negative_results
+              .divider15
 
+            = render partial: 'shared/content_question', collection: @questions
 
           .col-md-6.comment_col.popup_expandable_col.ps_cont{"data-col" => "6"}
-            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
+            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание пакета
             .divider15
             -##myCarousel.carousel.slide{"data-ride" => "carousel"}
             -#  .carousel-inner.chat-messages{:role => "listbox"}

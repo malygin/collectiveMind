@@ -7,6 +7,7 @@ class Novation::Post < ActiveRecord::Base
   has_many :novation_post_concepts, class_name: 'Novation::PostConcept'
   has_many :novation_concepts, through: :novation_post_concepts, source: :concept_post, class_name: 'Concept::Post'
 
+  has_many :core_content_questions,  -> { where post_type: 'novation' }, :class_name => 'Core::ContentQuestion'
 
   validates :status, presence: true
 

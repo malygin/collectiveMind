@@ -4,3 +4,6 @@ magnificPopupOpen('#popup-novation');
 comments_feed();
 comments_expandable_column();
 colors_discontents();
+
+$('.with_arrow').click(function () {$(this).find('i.collapse_arrow').toggleClass('fa-rotate-90');});
+$('.with_plus').click(function () { $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus');});

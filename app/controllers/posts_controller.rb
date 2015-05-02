@@ -159,7 +159,7 @@ class PostsController < ProjectsController
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.main_comments
-
+    @questions = Core::ContentQuestion.where(project_id:  @project, post_type: name_of_model_for_param)
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
     end
@@ -493,7 +493,9 @@ class PostsController < ProjectsController
       redirect_to path
     end
   end
-
+  def answer_content_question
+    puts 1
+  end
   # def sort_aspects
   #   @project.set_position_for_aspects if @project.status == 3
   # end

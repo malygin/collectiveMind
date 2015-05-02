@@ -234,6 +234,7 @@ CollectiveMind::Application.routes.draw do
           put :create_note
           put :destroy_note
           put :discuss_status
+          put :answer_content_question
         end
       end
     end
