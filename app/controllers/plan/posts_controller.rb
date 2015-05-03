@@ -1,4 +1,6 @@
 class Plan::PostsController < PostsController
+  before_action :set_plan, only: [:edit, :update, :destroy]
+  before_action :set_novations, only: [:new, :edit]
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
   def voting_model
@@ -22,12 +24,10 @@ class Plan::PostsController < PostsController
   end
 
   def edit
-    @post = Plan::Post.find(params[:id])
   end
 
   def create
-    @post = @project.plan_post.new plan_post_params
-    @post.user = current_user
+    @post = @project.plan_post.new plan_post_params.merge(user: current_user)
     if @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
@@ -38,15 +38,18 @@ class Plan::PostsController < PostsController
   end
 
   def update
-    @plan_post = Plan::Post.find(params[:id])
-    @plan_post.update_attributes plan_post_params
+    @post.update_attributes plan_post_params
     respond_to do |format|
-      if @plan_post.save
-        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
-        format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
+      if @post.save
+        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
         format.js
       end
     end
+  end
+
+  def destroy
+    @post.destroy if current_user?(@post.user)
+    redirect_back_or user_content_plan_posts_path(@project)
   end
 
   def render_table
@@ -116,6 +119,14 @@ class Plan::PostsController < PostsController
   end
 
   private
+  def set_novations
+    @novations = @project.novations
+  end
+
+  def set_plan
+    @post = Plan::Post.find(params[:id])
+  end
+
   def plan_post_params
     params.require(:plan_post).permit(:goal, :name, :content)
   end

@@ -1,5 +1,7 @@
-$('#edit_plan_post_model').html("#{escape_javascript(render 'form')}");
-$('#PlanTabs li#second a').on("click", function(e) {
-$('#spinner_tab2').show();
-render_table('edit');
-});
+- if @post.valid?
+  $('.notice_messages').hide();
+  $('#create_plan_success').fadeIn(5000).fadeOut('slow');
+  $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
+- else
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");
