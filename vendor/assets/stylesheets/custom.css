@@ -2279,7 +2279,7 @@ p .add-button + .add-button {
     color: #8e8bc7;
 }
 
-.stage5_theme .theme_font_color {
+.stage5_theme .theme_font_color, .stage7_theme .theme_font_color {
     color: #559499;
 }
 
@@ -6037,7 +6037,7 @@ i.fa.sticker_close {
     background: #d5d6ea !important;
 }
 
-.stage5_theme .cont_heading, .stage5_theme .collapser_type2, .stage5_theme .mod_col_top, .stage5_theme .btn_cab_mod {
+.stage5_theme .cont_heading, .stage5_theme .collapser_type2, .stage7_theme .collapser_type2, .stage5_theme .mod_col_top, .stage7_theme .mod_col_top, .stage5_theme .btn_cab_mod, .stage7_theme .btn_cab_mod {
     background: #cee1e5;
 }
 
@@ -6250,7 +6250,7 @@ i.fa.sticker_close {
     color: #fff;
 }
 
-.stage5_theme .btn_cab_mod.active {
+.stage5_theme .btn_cab_mod.active, .stage7_theme .btn_cab_mod.active {
     background: #7fb8c3;
     color: #fff;
 }
@@ -6895,4 +6895,8 @@ i.fa.sticker_close {
     -moz-opacity: 1;
     filter: alpha(opacity=100) black;
     -khtml-opacity: 1;
+}
+
+.popup_w805 {
+    width: 805px !important;
 }
