@@ -6,13 +6,13 @@ ru:
     discontent_posts_detailed: 'Воспользоваться вспомогательной техникой'
     concept_posts_simple: "+ Идея"
     novation_posts_simple: "+ Пакет"
-    plan_posts_simple: "+ Проект"
+    plan_posts_simple: "+ Проектное предложение"
   my:
     collect_info_posts: 'Мои аспекты'
     discontent_posts: 'Мои несовершенства'
     concept_posts: "Мои идеи"
     novation_posts: "Мои пакеты"
-    plan_posts: "Мои проекты"
+    plan_posts: "Мои проектные предложения"
   cabinet:
     collect_info_posts_sticker: Предложите название нового аспекта. В поле «Обоснование» объясните, почему этот аспект необходим.
     discontent_posts_sticker: Опишите несовершенство в свободной форме или воспользуйтесь вспомогательной техникой для поиска несовершенств. Вы можете добавить неограниченное количество несовершенств. Удачи!
@@ -611,6 +611,7 @@ ru:
     delete_news: "Удалить новость?"
     delete_discontent: "Удалить несовершенство?"
     delete_novation: "Удалить?"
+    delete_plan: "Вы уверены, что хотите удалить пакет?"
   show:
     without_name: 'Без названия'
     note: замечание
