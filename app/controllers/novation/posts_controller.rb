@@ -51,6 +51,9 @@ class Novation::PostsController < PostsController
   def update
     @novation.update_attributes novation_params
     @novation.update_fullness
+    if params[:novation_post][:published]
+      @novation.update status: current_model::STATUSES[:published]
+    end
 
     if params[:novation_post_concept]
       @novation.novation_post_concepts.destroy_all
