@@ -3,8 +3,8 @@ class PostsController < ProjectsController
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
   before_filter :check_type_mechanics, only: [:new, :edit, :user_content]
-  # @todo если нужно то поставь на нужные методы
-  # before_action :set_current_post, except: [:plus_comment, :like_comment, :vote, :edit_comment, :update_comment, :destroy_comment]
+  before_filter :check_stage_for_cabinet, only: [:new, :edit, :user_content]
+
 
   def autocomplete
     results = current_model.autocomplete params[:term]
@@ -159,7 +159,7 @@ class PostsController < ProjectsController
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.main_comments
-    @questions = Core::ContentQuestion.where(project_id:  @project, post_type: name_of_model_for_param)
+    @questions = Core::ContentQuestion.where(project_id: @project, post_type: name_of_model_for_param)
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
     end
@@ -493,15 +493,23 @@ class PostsController < ProjectsController
       redirect_to path
     end
   end
+
   def answer_content_question
     @question = Core::ContentQuestion.find(params[:question_id])
-    current_user.core_content_user_answers.create( post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
+    current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
 
   end
+
   # def sort_aspects
   #   @project.set_position_for_aspects if @project.status == 3
   # end
   private
+  def check_stage_for_cabinet
+    unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
+      redirect_to url_for(params.merge(controller: @project.current_stage_type.to_s.sub('_', '/')))
+    end
+  end
+
   def create_advice(post)
     @advice = post.advices.new content: params[name_of_comment_for_param][:content]
     @advice.user = current_user
@@ -547,9 +555,5 @@ class PostsController < ProjectsController
 
   def correct_mechanic?
     Technique::List.by_stage(current_model.to_s.sub('Core::', '').sub('::', '_').underscore.pluralize).where(code: params[:type_mechanic]).any?
-  end
-
-  def set_current_post
-    @post = current_model.find(params[:id]) if params[:id].present?
   end
 end
