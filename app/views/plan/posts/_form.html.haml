@@ -1,57 +1,65 @@
 .divider10
-.content_window.bottom_panel_stop
-  / stop bottom panel here
-  %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{"data-placement" => "cabinet5", "data-target" => "1"} Название пакета
+- if @post.persisted?
+  .content_window.c_w_5_top.bottom_panel_stop
+    .cont_heading.bold
+      %span.pocket_name.breadcr
+        = link_to user_content_plan_posts_path(@project), class: 'a_font_reset bold' do
+          Мои пакеты
+          %small &gt;
+      %textarea#t_textarea1.form-control.transp_ta{placeholder: "название пакета", rows: "1", type: "text"}
+- else
+  .content_window.bottom_panel_stop
+    %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
+%div{id: "plan_notices_#{@post.id}"}
+  = render partial: 'shared/create_success', locals: {model_name: 'novation', id: @post.id}
 .content_window.white.c_w_5
   .cont_heading
     %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
   .divider10
   .row
     .col-md-4
-      %ul.list-unstyled.tabs_type_2{:role => "tablist"}
-        %li{:role => "presentation"}
-          %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_1", :role => "tab"} Описание проекта
-        %li{:role => "presentation"}
-          %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_2", :role => "tab"} Организационные риски
-        %li{:role => "presentation"}
-          %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_3", :role => "tab"} Ресурсные риски
-        %li{:role => "presentation"}
-          %a.a_font_reset{"data-toggle" => "tab", :href => "#cabinet_5_cont_4", :role => "tab"} Риски реализации
+      %ul.list-unstyled.tabs_type_2{role: 'tablist'}
+        %li{role: 'presentation'}
+          %a.a_font_reset{'data-toggle' => 'tab', href: '#cabinet_5_cont_1', role: 'tab'} Описание проекта
+        %li{role: 'presentation'}
+          %a.a_font_reset{'data-toggle' => 'tab', href: '#cabinet_5_cont_2', role: 'tab'} Организационные риски
+        %li{role: 'presentation'}
+          %a.a_font_reset{'data-toggle' => 'tab', href: '#cabinet_5_cont_3', role: 'tab'} Ресурсные риски
+        %li{role: 'presentation'}
+          %a.a_font_reset{'data-toggle' => 'tab', href: '#cabinet_5_cont_4', role: 'tab'} Риски реализации
     .col-md-8
       .tab-content.tab_cont5.ps_cont
-        #cabinet_5_cont_0.tab-pane.active.fade.in{:role => "tabpanel"}
+        #cabinet_5_cont_0.tab-pane.active.fade.in{role: 'tabpanel'}
           .divider35
           .text-center
-            =image_tag 'cab_5_qsign.png'
+            = image_tag 'cab_5_qsign.png'
             .divider35
             %p.cab5_placeholder
               Здесь вы ответите на вопросы по пунктам слева,
               %br/
               для этого нажмите на одну из панелей, или знак вопроса
           .divider70
-        #cabinet_5_cont_1.tab-pane.fade{:role => "tabpanel"}
+        #cabinet_5_cont_1.tab-pane.fade{role: 'tabpanel'}
           %h6.bold Цели и ожидаемые результаты
-          %textarea.form-control{:rows => "5", :type => "text"}
+          %textarea.form-control{rows: '5', type: 'text'}
           .divider15
           %h6.bold Краткое описание Проекта (усовершенствования)
-          %textarea.form-control{:rows => "5", :type => "text"}
+          %textarea.form-control{rows: '5', type: 'text'}
           .divider15
           %h6.bold Краткое описание Проекта (усовершенствования)
-          %textarea.form-control{:rows => "5", :type => "text"}
+          %textarea.form-control{rows: '5', type: 'text'}
           .divider25
-        #cabinet_5_cont_2.tab-pane.fade{:role => "tabpanel"}
-        #cabinet_5_cont_3.tab-pane.fade{:role => "tabpanel"}
-        #cabinet_5_cont_4.tab-pane.fade{:role => "tabpanel"}
-
-
-
-
-
+        #cabinet_5_cont_2.tab-pane.fade{role: 'tabpanel'}
+        #cabinet_5_cont_3.tab-pane.fade{role: 'tabpanel'}
+        #cabinet_5_cont_4.tab-pane.fade{role: 'tabpanel'}
+  - if @post.published?
+    = image_tag 'published.png', class: 'publish'
 .divider70
 #bottom-panel.bottom_fix
   .container
     .row
-      .col-md-10
+      .col-md-3
+      .col-md-9
         .content_window.white
           .cont_heading
             %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Добавление задач в проектное предложение
@@ -60,11 +68,38 @@
           .divider10
           #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:900px; height:600px;")
 
+%div
+  #popup-cabinet5-1.popup-window.detailed_popup.popup-w1030.mfp-hide
+    .content_window.white
+      .cont_heading
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Выбор пакета
+      .divider15
+      .row
+        .col-md-5
+          %ul.list-unstyled.tabs_type_2.less_margin{role: "tablist"}
+            - @novations.each_with_index do |novation, index|
+              %li{role: 'presentation', class: ('active' if index == 0)}
+                %a.a_font_reset{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
+                  = novation.title
+        .col-md-7
+          .tab-content
+            .divider3
+            - @novations.each_with_index do |novation, index|
+              .tab-pane.fade{role: 'tabpanel', id: "show_novation_#{novation.id}", class: ('in active' if index == 0)}
+                - novation.attributes_for_form.each do |type_attribute|
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}"}
+                    = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                  .collapse{id: "novation_#{novation.id}_attributes_#{type_attribute.first}"}
+                    .divider5
+                    - type_attribute.second.each do |attribute, bool_attribute|
+                      %h6.bold
+                        = t("activerecord.attributes.novation/post.#{attribute}")
+                      %textarea.form-control{rows: '3', value: novation.send(attribute)}
+                      .divider15
 
-
-#gantEditorTemplates{:style => "display:none;"}
-  .__template__{:type => "GANTBUTTONS"}
-    /
+-##gantEditorTemplates{style: "display:none;"}
+  /.__template__{type: "GANTBUTTONS"}
+  /
       <div class="ganttButtonBar noprint">
       <h1 style="float:left">task tree/gantt</h1>
       <div class="buttons">
@@ -87,8 +122,8 @@
       <span class="ganttButtonSeparator"></span>
       <button onclick="saveGanttOnServer();" class="button first big" title="save">save</button>
       </div></div>
-  .__template__{:type => "TASKSEDITHEAD"}
-    /
+  .__template__{type: "TASKSEDITHEAD"}
+  /
       <table class="gdfTable" cellspacing="0" cellpadding="0">
       <thead>
       <tr style="height:40px">
@@ -104,8 +139,8 @@
       </tr>
       </thead>
       </table>
-  .__template__{:type => "TASKROW"}
-    /
+  .__template__{type: "TASKROW"}
+  /
       <tr taskId="(#=obj.id#)" class="taskEditRow" level="(#=level#)">
       <th class="gdfCell edit" align="right" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span> <span class="teamworkIcon" style="font-size:12px;" >e</span></th>
       <td class="gdfCell noClip" align="center"><div class="taskStatus cvcColorSquare" status="(#=obj.status#)"></div></td>
@@ -120,8 +155,8 @@
       <td class="gdfCell"><input type="text" name="depends" value="(#=obj.depends#)" (#=obj.hasExternalDep?"readonly":""#)></td>
       <td class="gdfCell taskAssigs">(#=obj.getAssigsString()#)</td>
       </tr>
-  .__template__{:type => "TASKEMPTYROW"}
-    /
+  .__template__{type: "TASKEMPTYROW"}
+  /
       <tr class="taskEditRow emptyRow" >
       <th class="gdfCell" align="right"></th>
       <td class="gdfCell noClip" align="center"></td>
@@ -133,8 +168,8 @@
       <td class="gdfCell"></td>
       <td class="gdfCell"></td>
       </tr>
-  .__template__{:type => "TASKBAR"}
-    /
+  .__template__{type: "TASKBAR"}
+  /
       <div class="taskBox taskBoxDiv" taskId="(#=obj.id#)" >
       <div class="layout (#=obj.hasExternalDep?'extDep':''#)">
       <div class="taskStatus" status="(#=obj.status#)"></div>
@@ -144,8 +179,8 @@
       <div class="milestone end (#=obj.endIsMilestone?'active':''#)" ></div>
       </div>
       </div>
-  .__template__{:type => "CHANGE_STATUS"}
-    /
+  .__template__{type: "CHANGE_STATUS"}
+  /
       <div class="taskStatusBox">
       <div class="taskStatus cvcColorSquare" status="STATUS_ACTIVE" title="active"></div>
       <div class="taskStatus cvcColorSquare" status="STATUS_DONE" title="completed"></div>
@@ -153,7 +188,7 @@
       <div class="taskStatus cvcColorSquare" status="STATUS_SUSPENDED" title="suspended"></div>
       <div class="taskStatus cvcColorSquare" status="STATUS_UNDEFINED" title="undefined"></div>
       </div>
-  .__template__{:type => "TASK_EDITOR"}
+  .__template__{type: "TASK_EDITOR"}
     /
       <div class="ganttTaskEditor">
       <table width="100%">
