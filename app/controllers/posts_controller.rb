@@ -494,7 +494,9 @@ class PostsController < ProjectsController
     end
   end
   def answer_content_question
-    puts 1
+    @question = Core::ContentQuestion.find(params[:question_id])
+    current_user.core_content_user_answers.create( post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
+
   end
   # def sort_aspects
   #   @project.set_position_for_aspects if @project.status == 3
