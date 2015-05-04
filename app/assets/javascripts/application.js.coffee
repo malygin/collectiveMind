@@ -53,20 +53,22 @@
 #= require custom_ready
 
 
-# GANTT
-# require gantt/date
-# require gantt/ganttDrawer
-# require gantt/ganttGridEditor
-# require gantt/ganttMaster
-# require gantt/ganttTask
-# require gantt/ganttUtilities
-# require gantt/i18nJs
-# require gantt/jquery.dateField
-# require gantt/jquery.dateField
-# require gantt/jquery.JST
-# require gantt/jquery.livequery.min
-# require gantt/jquery.timers
-# require gantt/platform
+#GANTT
+#= require gantt/date
+#= require gantt/ganttDrawer
+#= require gantt/ganttGridEditor
+#= require gantt/ganttMaster
+#= require gantt/ganttTask
+#= require gantt/ganttUtilities
+#= require gantt/i18nJs
+#= require gantt/jquery.dateField
+#= require gantt/jquery.dateField
+#= require gantt/jquery.JST
+#= require gantt/jquery.livequery.min
+#= require gantt/jquery.browser.min
+#= require gantt/jquery.timers
+#= require gantt/platform
+
 
 $ ->
   start_vote()
@@ -406,3 +408,14 @@ $colors_imperf_codes = [
 $('.with_plus').click ->
   $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
   return
+
+# GANTT
+@ge = new GanttMaster()
+@ge.init($("#workSpace"))
+ret = JSON.parse($("#ta").val())
+offset = (new Date).getTime() - ret.tasks[0].start
+i = 0
+while i < ret.tasks.length
+  ret.tasks[i].start = ret.tasks[i].start + offset
+  i++;
+@ge.loadProject(ret);

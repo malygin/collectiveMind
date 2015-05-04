@@ -24,7 +24,7 @@ Date.LZ = function(x) {return(x<0||x>9?"":"0")+x};
 // Full month names. Change this for local month names
 Date.monthNames = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
 // Month abbreviations. Change this for local month names
-Date.monthAbbreviations = new Array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+Date.monthAbbreviations = new Array('Jan','Feb','Mar','Apr','Май','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 // Full day names. Change this for local month names
 Date.dayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 // Day abbreviations. Change this for local month names
@@ -37,7 +37,7 @@ Date.preferAmericanFormat = true;
 Date.firstDayOfWeek = 0;
 
 //default 
-Date.defaultFormat="dd/MM/yyyy";
+Date.defaultFormat="dd.MM.yyyy";
 
 // If the getFullYear() method is not defined, create it
 if (!Date.prototype.getFullYear) { 

@@ -1,3 +1,5 @@
+@save_plan = () ->
+  console.log(ge.saveProject())
 #animate knob progress bar from data-end
 @animateKnobChange = (el)->
   $(el).each ->

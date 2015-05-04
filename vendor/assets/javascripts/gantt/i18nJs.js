@@ -77,9 +77,9 @@
 
   //override date format i18n
   
-  Date.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  Date.monthNames = ["Январь","Феварль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
   // Month abbreviations. Change this for local month names
-  Date.monthAbbreviations = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  Date.monthAbbreviations = ["Jan","Feb","Mar","Apr","Май","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   // Full day names. Change this for local month names
   Date.dayNames =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   // Day abbreviations. Change this for local month names
@@ -89,7 +89,7 @@
   Date.preferAmericanFormat = false;
 
   Date.firstDayOfWeek =1;
-  Date.defaultFormat = "dd/MM/yyyy";
+  Date.defaultFormat = "dd.MM.yyyy";
 
 
   Number.decimalSeparator = ".";
