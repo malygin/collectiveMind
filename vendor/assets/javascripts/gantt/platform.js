@@ -892,7 +892,7 @@ function createBlackPage(width,height,onCloseCallBack){
   ret.css({width:width, height:height,top:10, "-moz-box-shadow":'1px 1px 6px #333333',overflow:'auto',"-webkit-box-shadow":'1px 1px 6px #333333', border:'8px solid #777', backgroundColor:"#fff", margin:"auto" });
 
   var bdiv= $("<div>").css({width:width,position:"relative",height:"0px", textAlign:"right", margin:"auto" });
-  var img=$("<img src='res/closeBig.png' style='cursor:pointer;position:absolute;right:-40px;top:5px;' title='close'>");
+  var img=$('<button title="Close (Esc)" type="button" class="mfp-close" style="color: black">×</button>');
   bdiv.append(img);
   img.click( function(){
     bg.trigger("close");
