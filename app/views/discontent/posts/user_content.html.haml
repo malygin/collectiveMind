@@ -17,13 +17,14 @@
                 %tr.what
                   %td.bold
                     = discontent.content
-                  - if current_user?(discontent.user)
-                    %td
-                      = link_to 'Редактировать', edit_discontent_post_path(@project, discontent), id: "edit_discontent_#{discontent.id}"
-                      = link_to 'Удалить', discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}"
-                %tr
+                    - if current_user?(discontent.user)
+                      = link_to discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}", class: 'btn btn_reset btn_del' do
+                        %i.fa.fa-trash-o.fa-lg
+                %tr.post_text
                   %td.col-md-12
-                    = discontent.what
+                    = link_to edit_discontent_post_path(@project, discontent), class: 'a_font_reset', id: "edit_discontent_#{discontent.id}" do
+                      = discontent.what
+                      %i.fa.fa-angle-right.cab2_post_open.font_grey
       .post-bottom.white
         .row
           .col-md-12
