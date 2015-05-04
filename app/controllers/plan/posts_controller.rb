@@ -1,4 +1,6 @@
 class Plan::PostsController < PostsController
+  before_action :set_plan, only: [:edit, :update, :destroy]
+  before_action :set_novations, only: [:new, :edit]
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
   def voting_model
@@ -22,12 +24,10 @@ class Plan::PostsController < PostsController
   end
 
   def edit
-    @post = Plan::Post.find(params[:id])
   end
 
   def create
-    @post = @project.plan_post.new plan_post_params
-    @post.user = current_user
+    @post = @project.plan_post.new plan_post_params.merge(user: current_user)
     if @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
@@ -38,84 +38,95 @@ class Plan::PostsController < PostsController
   end
 
   def update
-    @plan_post = Plan::Post.find(params[:id])
-    @plan_post.update_attributes plan_post_params
+    @post.update_attributes plan_post_params
     respond_to do |format|
-      if @plan_post.save
-        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
-        format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
+      if @post.save
+        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
         format.js
       end
     end
   end
 
-  def render_table
-    @post = Plan::Post.find(params[:id])
-    @render_type = params[:render_type]
+  def destroy
+    @post.destroy if current_user?(@post.user)
+    redirect_back_or user_content_plan_posts_path(@project)
   end
 
-  def render_concept_side
-    @post = Plan::Post.find(params[:id])
-  end
-
-  def view_concept
-    @post = Plan::Post.find(params[:id])
-    if params[:new_idea]
-      @concept_post = Plan::PostAspect.find(params[:con_id])
-    elsif params[:what_view]
-      @dispost = Discontent::Post.find(params[:post_id])
-      @post_stage = Plan::PostStage.find(params[:stage_id])
-    else
-      @dispost = Discontent::Post.find(params[:post_id])
-      @concept_post = Concept::Post.find(params[:con_id])
-    end
-  end
-
-  def view_concept_table
-    @post = Plan::Post.find(params[:id])
-    @concept_post = Plan::PostAspect.find(params[:con_id])
-  end
-
-  def change_estimate_status
-    @est_stat = params[:est_stat]
-    posts = Plan::Post.where(project_id: @project, status: 0)
-    if posts.present? and @est_stat.present?
-      posts.each do |est|
-        est.update_attributes(estimate_status: @est_stat)
-      end
-    end
-  end
-
-  # @todo methods for note
-  def new_note
-    super()
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-  end
-
-  def create_note
-    @post = current_model.find(params[:id])
-    @type = params[:plan_note][:type_field]
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
-    @post_note.user = current_user
-
-    current_user.journals.build(type_event: 'my_plan_note', user_informed: @post.user, project: @project, body: trim_content(@post_note.content), body2: trim_content(@post.name), first_id: @post.id, second_id: @post_aspect_note.id, personal: true, viewed: false).save!
-
-    respond_to do |format|
-      if @post_note.save
-        format.js
-      else
-        format.js { render action: "new_note" }
-      end
-    end
-  end
-
-  def destroy_note
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    super()
-  end
+  # def render_table
+  #   @post = Plan::Post.find(params[:id])
+  #   @render_type = params[:render_type]
+  # end
+  #
+  # def render_concept_side
+  #   @post = Plan::Post.find(params[:id])
+  # end
+  #
+  # def view_concept
+  #   @post = Plan::Post.find(params[:id])
+  #   if params[:new_idea]
+  #     @concept_post = Plan::PostAspect.find(params[:con_id])
+  #   elsif params[:what_view]
+  #     @dispost = Discontent::Post.find(params[:post_id])
+  #     @post_stage = Plan::PostStage.find(params[:stage_id])
+  #   else
+  #     @dispost = Discontent::Post.find(params[:post_id])
+  #     @concept_post = Concept::Post.find(params[:con_id])
+  #   end
+  # end
+  #
+  # def view_concept_table
+  #   @post = Plan::Post.find(params[:id])
+  #   @concept_post = Plan::PostAspect.find(params[:con_id])
+  # end
+  #
+  # def change_estimate_status
+  #   @est_stat = params[:est_stat]
+  #   posts = Plan::Post.where(project_id: @project, status: 0)
+  #   if posts.present? and @est_stat.present?
+  #     posts.each do |est|
+  #       est.update_attributes(estimate_status: @est_stat)
+  #     end
+  #   end
+  # end
+  #
+  # # @todo methods for note
+  # def new_note
+  #   super()
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  # end
+  #
+  # def create_note
+  #   @post = current_model.find(params[:id])
+  #   @type = params[:plan_note][:type_field]
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  #   @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
+  #   @post_note.user = current_user
+  #
+  #   current_user.journals.build(type_event: 'my_plan_note', user_informed: @post.user, project: @project, body: trim_content(@post_note.content), body2: trim_content(@post.name), first_id: @post.id, second_id: @post_aspect_note.id, personal: true, viewed: false).save!
+  #
+  #   respond_to do |format|
+  #     if @post_note.save
+  #       format.js
+  #     else
+  #       format.js { render action: "new_note" }
+  #     end
+  #   end
+  # end
+  #
+  # def destroy_note
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  #   super()
+  # end
 
   private
+  def set_novations
+    @novations = @project.novations
+  end
+
+  def set_plan
+    @post = Plan::Post.find(params[:id])
+  end
+
   def plan_post_params
     params.require(:plan_post).permit(:goal, :name, :content)
   end

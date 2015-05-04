@@ -166,7 +166,7 @@ CollectiveMind::Application.routes.draw do
     get 'discontent/posts/to_work', to: 'discontent/posts#to_work'
     get 'concept/posts/to_work', to: 'concept/posts#to_work'
     get 'novation/posts/to_work', to: 'novation/posts#to_work'
-    get 'plan/posts/to_work', to: 'plan/posts#to_work'
+    #get 'plan/posts/to_work', to: 'plan/posts#to_work'
     get 'estimate/posts/to_work', to: 'estimate/posts#to_work'
 
     get 'collect_info/posts/render_slider', to: 'collect_info/posts#render_slider'
@@ -239,7 +239,7 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    put 'plan/posts/change_estimate_status', to: 'plan/posts#change_estimate_status'
+    #put 'plan/posts/change_estimate_status', to: 'plan/posts#change_estimate_status'
 
     namespace :plan do
       posts_routes
@@ -252,19 +252,19 @@ CollectiveMind::Application.routes.draw do
             post :get_concepts
           end
         end
-        member do
-          put :add_concept
-          get :get_concept
-          put :update_get_concept
-          get :view_concept
-          get :view_concept_table
-          put :render_concept_side
-
-          put :render_table
-          put :new_note
-          put :create_note
-          put :destroy_note
-        end
+        # member do
+        #   put :add_concept
+        #   get :get_concept
+        #   put :update_get_concept
+        #   get :view_concept
+        #   get :view_concept_table
+        #   put :render_concept_side
+        #
+        #   put :render_table
+        #   put :new_note
+        #   put :create_note
+        #   put :destroy_note
+        # end
       end
     end
 

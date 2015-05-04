@@ -1,0 +1,462 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Perfect scrollbar
+    %link{:href => "css/perfect-scrollbar.min.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+    %link{:href => "css/sprites.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage7_theme
+    .outer
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li.active
+              %a{:href => "1st-stage.html"} Процедура
+            %li
+              %a{:href => "cabinet-stage1.html"} Кабинет
+            %li
+              %a#popover_news.has_circle.popover_news{"data-content" => "\n                    <div class='popover_cont'>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                        <img src='img/icon-news-1.png'>\n                        <span class='news-tooltip-bottom-text'>добавлено</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                        <img src='img/icon-news-2.png'>\n                        <span class='news-tooltip-bottom-text'>комментария</span>\n                    </a>\n                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                        <img src='img/icon-news-3.png'>\n                        <span class='top-circle'>36</span>\n                        <span class='news-tooltip-bottom-text'>пометок</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                        <img src='img/icon-news-4.png'>\n                        <span class='top-circle'>1</span>\n                        <span class='news-tooltip-bottom-text'>отредактировано</span>\n                    </a>\n                    </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
+                Новости
+                %span.top-circle 36
+          .navbar-right.text-right.user_block.font_grey
+            %a.book_icon{:href => "#"}
+            %span.auth-divider |
+            %a.font_lighter_grey.bold{:href => "#"}
+              %i.fa.fa-exclamation-triangle
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %span.auth-divider |
+            %span.badge.grey 500
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
+                %i.fa.fa-angle-down
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white Решение конфликта, возникшего из-за меда
+        %button.btn.btn-tooltip{:type => "button"}
+          %i.fa.fa-lightbulb-o
+          Открыть тултипы
+      .container
+        .row
+          .col-md-8.col_padding_right_3
+            .border_grey.rounded_3.stages_block
+              .btn-toolbar{:role => "toolbar"}
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"} 1
+                  %a.btn.back_color_stage2{:href => "2nd-stage.html", :role => "button"} 2
+                  %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3
+                  %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5
+                  %a.btn.back_color_stage6{:href => "6th-stage.html", :role => "button"} 6
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"}
+                    7 СТАДИЯ: ЗАВЕРШЕНИЕ
+                    ПРОЦЕДУРЫ
+      / Main Block starts
+      .main-block
+        .container
+          .stage-post-block.letters
+            .row
+              .col-md-12
+                #myCarousel.carousel.slide{"data-interval" => "false"}
+                  / Wrapper for slides
+                  .carousel-inner{:role => "listbox"}
+                    .item{"data-slide-no" => "0"}
+                      .row
+                        .col-md-10.col-md-offset-1
+                          .project_win
+                            .radial-gradient
+                              .row
+                                .col-md-10.col-md-offset-1
+                                  .post-win
+                                    %h5.text-center
+                                      Дорогие участники процедуры “Видра”!
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в
+                                      аптеке.
+                                      Генерация роста продаж через активные
+                                      рекомендации
+                                      первостольника и поддержка DTC - активности
+                                      в
+                                      аптеке
+                                    %p
+                                      Обеспечить высокую отдачу от одного
+                                      Медицинского
+                                      представителя в аптеку за счет решений,
+                                      разрабатываемых
+                                      в
+                                      проекте с учетом новой стратегии в компании
+                                      2014-2018
+                                      гг,
+                                      ключевые таргентые аудитории в рамках
+                                      проекта -
+                                      ПС-ки,
+                                      ЗА,
+                                      аптеки и АС.
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в
+                                      аптеке.
+                                      Генерация роста продаж через активные
+                                      рекомендации
+                                      первостольника и поддержка DTC - активности
+                                      в
+                                      аптеке
+                                    %p
+                                      Обеспечить высокую отдачу от одного
+                                      Медицинского
+                                      представителя в аптеку за счет решений,
+                                      разрабатываемых
+                                      в
+                                      проекте с учетом новой стратегии в компании
+                                      2014-2018
+                                      гг,
+                                      ключевые таргентые аудитории в рамках
+                                      проекта -
+                                      ПС-ки,
+                                      ЗА,
+                                      аптеки и АС.
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в
+                                      аптеке.
+                                      Генерация роста продаж через активные
+                                      рекомендации
+                                      первостольника и поддержка DTC - активности
+                                      в
+                                      аптеке
+                      .divider10
+                    .item.active{"data-slide-no" => "1"}
+                      .row
+                        .col-md-10.col-md-offset-1
+                          .project_win
+                            .radial-gradient
+                              .row
+                                .col-md-3
+                                  .poster_win.text-center
+                                    %img.img-circle{:alt => "150x150", "data-holder-rendered" => "true", :src => "img/ava2.jpg"}/
+                                    %h5 Авторы:
+                                    %h5 Елена Сударкина
+                                .col-md-7
+                                  .post-win
+                                    %h4.bold
+                                      Максимизация эффективности работы в
+                                      аптеках
+                                      с
+                                      учетом новой стратегии "Инвара" по ОТС
+                                    %h5 Цель:
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в аптеке.
+                                      Генерация роста продаж через активные рекомендации
+                                      первостольника и поддержка DTC - активности в аптеке
+                                    %p
+                                      Обеспечить высокую отдачу от одного Медицинского
+                                      представителя в аптеку за счет решений,
+                                      разрабатываемых
+                                      в
+                                      проекте с учетом новой стратегии в компании
+                                      2014-2018
+                                      гг,
+                                      ключевые таргентые аудитории в рамках проекта -
+                                      ПС-ки,
+                                      ЗА,
+                                      аптеки и АС.
+                                    %button.btn.btn-danger.open-popup{"data-placement" => "7", "data-target" => "1"}
+                                      Просмотреть
+                                     
+                                    %button.btn.btn-danger
+                                      Скачать
+                                .col-md-2
+                                  .badge-win
+                      .divider10
+                    .item{"data-slide-no" => "2"}
+                      .row
+                        .col-md-10.col-md-offset-1
+                          .project_win
+                            .radial-gradient
+                              .row
+                                .col-md-3
+                                  .poster_win.text-center
+                                    %img.img-circle{:alt => "150x150", "data-holder-rendered" => "true", :src => "img/ava2.jpg"}/
+                                    %h5 Авторы:
+                                    %h5 Елена Сударкина
+                                .col-md-7
+                                  .post-win
+                                    %h4.bold
+                                      Максимизация эффективности работы в
+                                      аптеках
+                                      с
+                                      учетом новой стратегии "Инвара" по ОТС
+                                    %h5 Цель:
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в аптеке.
+                                      Генерация роста продаж через активные рекомендации
+                                      первостольника и поддержка DTC - активности в аптеке
+                                    %p
+                                      Обеспечить высокую отдачу от одного Медицинского
+                                      представителя в аптеку за счет решений,
+                                      разрабатываемых
+                                      в
+                                      проекте с учетом новой стратегии в компании
+                                      2014-2018
+                                      гг,
+                                      ключевые таргентые аудитории в рамках проекта -
+                                      ПС-ки,
+                                      ЗА,
+                                      аптеки и АС.
+                                    %button.btn.btn-danger.open-popup{"data-placement" => "7", "data-target" => "1"}
+                                      Просмотреть
+                                     
+                                    %button.btn.btn-danger
+                                      Скачать
+                                .col-md-2
+                                  .badge-win
+                      .divider10
+                    .item{"data-slide-no" => "3"}
+                      .row
+                        .col-md-10.col-md-offset-1
+                          .project_win
+                            .radial-gradient
+                              .row
+                                .col-md-3
+                                  .poster_win.text-center
+                                    %img.img-circle{:alt => "150x150", "data-holder-rendered" => "true", :src => "img/ava2.jpg"}/
+                                    %h5 Авторы:
+                                    %h5 Елена Сударкина
+                                .col-md-7
+                                  .post-win
+                                    %h4.bold
+                                      Максимизация эффективности работы в
+                                      аптеках
+                                      с
+                                      учетом новой стратегии "Инвара" по ОТС
+                                    %h5 Цель:
+                                    %p
+                                      Обеспечить рост продаж за счет рекомендаций в аптеке.
+                                      Генерация роста продаж через активные рекомендации
+                                      первостольника и поддержка DTC - активности в аптеке
+                                    %p
+                                      Обеспечить высокую отдачу от одного Медицинского
+                                      представителя в аптеку за счет решений,
+                                      разрабатываемых
+                                      в
+                                      проекте с учетом новой стратегии в компании
+                                      2014-2018
+                                      гг,
+                                      ключевые таргентые аудитории в рамках проекта -
+                                      ПС-ки,
+                                      ЗА,
+                                      аптеки и АС.
+                                    %button.btn.btn-danger.open-popup{"data-placement" => "7", "data-target" => "1"}
+                                      Просмотреть
+                                     
+                                    %button.btn.btn-danger
+                                      Скачать
+                                .col-md-2
+                                  .badge-win
+                      .divider10
+                  %ul.list_win.list-unstyled.list-inline.text-center.rate_buttons
+                    %li.arrow{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                      %i.fa.fa-angle-left
+                    %li.myCarousel-target{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                      %button.btn.btn_reset.back_color_stage7.font_white.bold 1
+                    %li.myCarousel-target.active{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                      %button.btn.btn_reset.back_color_stage7.font_white.bold 2
+                    %li.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                      %button.btn.btn_reset.back_color_stage7.font_white.bold 3
+                    %li.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                      %button.btn.btn_reset.back_color_stage7.font_white.bold 4
+                    %li.arrow{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                      %i.fa.fa-angle-right
+                  .divider20
+      / Main Block ends
+      #popup-7-1.popup-window.popup-project.detailed_popup.popup_w805.mfp-hide
+        .popup.popup_rounded.popup_color_theme_stage5
+          .modal_title
+            .row
+              .col-md-8
+                %h4.bold.font_dark_grey
+                  Lorem ipsum
+              .col-md-4
+                .row
+                  .col-md-12
+                    .text-right.post_likes
+                      %span.bold
+                        5
+                        %i.fa.fa-comment.theme_font_color
+                      %span.bold
+                        9
+                        %i.fa.fa-thumbs-up.theme_font_color
+                      %span.bold
+                        1
+                        %i.fa.fa-thumbs-down.theme_font_color
+                      %span
+                        %i.fa.fa-exclamation-triangle.font_lighter_grey
+                      %small 21.12.2014
+          .modal_body
+            .popup-post-info
+              .row.info-block
+                .col-md-9.popup-right-tabs
+                  .nav-tabs-one
+                    %ul.nav.nav-tabs
+                      %li.active
+                        %a{"data-toggle" => "tab", :href => "#tab-1"}
+                          %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                            Описание
+                            проектного предложения
+                      %li
+                        %a{"data-toggle" => "tab", :href => "#tab-2"}
+                          %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                            График реализации проекта
+                .col-md-3
+                  .popup-post-block.pull-right
+                    %img{:src => "img/ava-rabb.jpg"}/
+                    %span.font_black.text-center Кролик
+            .clearfix
+            .tab-content.modal_content
+              #tab-1.tab-pane.fade.in.active
+                .container.modal_content
+                  .row
+                    .col-md-12.com_dashed_border.popup_collapsable_col.collapse.in
+                      .divider25
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                        Описание проекта
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-1.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                        Организационные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-2.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                        Ресурсные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-3.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                        Риски реализации
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-4.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                  .divider25
+              #tab-2.tab-pane.fade
+                .container.timeline-cont
+                  .vertical-timeline
+                    .row
+                      .col-md-12.col-sm-12
+                        / time line col
+                        .v-timeline-col
+                          .entry-top-badge.timeline_bg_1
+                            Формирование списка активный ПС
+                          .row
+                            .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 15 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Инструменты
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                            .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 14 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Ресурсы
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                                  %span Шевелидзе Антон Иванович
+      .toTop
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
+    / Javascript for this page
+    / Excanvas JS for Knob Support in IE 8
+    %script{:src => "js/excanvas.js"}
+    / jQuery Knob
+    %script{:src => "js/jquery.knob.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

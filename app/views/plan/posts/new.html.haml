@@ -1,3 +1,16 @@
 - content_for :cabinet_form do
-  = render 'form'
-=render 'gantt_panel'
+  = render partial: 'form'
+
+- content_for :cabinet_sidebar do
+  .divider200
+  .content_window.white.r_u_sure_vert.del
+    %p.text-center Вы уверены, что хотите удалить пакет?
+    %div
+      %button.btn.btn_reset.font_white Да
+      %button.btn.btn_reset.font_white Нет
+  .divider20
+  %button.btn.add-button.type3.del Удалить
+  .divider10
+  %button.btn.add-button.type3.dark-green Сохранить и выйти
+
+= render 'gantt_panel'

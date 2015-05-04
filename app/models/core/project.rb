@@ -55,7 +55,7 @@ class Core::Project < ActiveRecord::Base
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Сбор идей', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Объединение идей в пакеты', type_stage: :novation_posts, status: [9, 10]},
-                 5 => {name: 'Разработка проектов', type_stage: :plan_posts, status: [11, 12]},
+                 5 => {name: 'Проектное предложение', type_stage: :plan_posts, status: [11, 12]},
                  6 => {name: 'Оценивание проектов', type_stage: :estimate_posts, status: [13, 14, 15]}}.freeze
 
   TYPE_ACCESS = {

@@ -4,10 +4,6 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %title
-    / Description, Keywords and Author
-    %meta{:content => "Your description", :name => "description"}/
-    %meta{:content => "Your,Keywords", :name => "keywords"}/
-    %meta{:content => "Ian", :name => "author"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     / Styles
     / Bootstrap CSS
@@ -36,7 +32,9 @@
             %li.active
               %a.menu_a{:href => "1st-stage.html"} Процедура
             %li
-              %a.menu_a{:href => "cabinet-stage1.html"} Кабинет
+              %a.menu_a{:href => "1st-stage-cabinet.html"} Кабинет
+            %li
+              %a.menu_a{:href => "rating.html"} Рейтинг
             %li.has_dropwindow
               %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
                 Мои уведомления
@@ -76,7 +74,11 @@
                                   = succeed ":" do
                                     %span.bold Модератор
                                 %p
-                                  На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
+                                  На этой стадии вам предстоит выявить проблемы, связанные
+                                  с ситуацией, описанной в базе знаний, и принять участие
+                                  в обсуждении проблем, выявленных другими участниками. В
+                                  нашей терминологии такие проблемы называются
+                                  несовершенствами.
                             .dd_nav_divider.font_color_stage4
                               %span 4
                             .divider10
@@ -128,7 +130,7 @@
                             .divider10
                     .divider20
           .navbar-right.text-right.user_block.font_grey
-            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %a#tooltip_db.book_icon.open-popup-link.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :href => "#popup-database", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."}
             %span.auth-divider |
             %span.has_dropwindow
               %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
@@ -160,7 +162,10 @@
                                 %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
                               .col-xs-9
                                 %h4 Лиза Школьник
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
                             .divider20
                           .dd_expert
                             .divider20
@@ -169,7 +174,10 @@
                                 %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
                               .col-xs-9
                                 %h4 Владимир Видро
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
                             .divider20
                           .dd_expert
                             .divider20
@@ -178,7 +186,10 @@
                                 %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
                               .col-xs-9
                                 %h4 Владимир Видро
-                                %p Эксперт в электронной коммерции, опыт с 1997 года. Имеет обширный опыт в интернет-маркетинге, включая создание и продвижение интернет-проектов, любые виды рекламы
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
                             .divider20
                         .dd_xprt_notice
                           %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
@@ -190,14 +201,20 @@
                                 %i.fa.fa-angle-right.font_grey.bold
                         #xprt_2.dd_xprt_article.collapse
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                         .dd_xprt_notice
                           %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
@@ -209,14 +226,20 @@
                                 %i.fa.fa-angle-right.font_grey.bold
                         #xprt_3.dd_xprt_article.collapse
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                         .dd_xprt_notice
                           %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
@@ -228,14 +251,20 @@
                                 %i.fa.fa-angle-right.font_grey.bold
                         #xprt_4.dd_xprt_article.collapse
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                         .dd_xprt_notice
                           %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
@@ -247,14 +276,20 @@
                                 %i.fa.fa-angle-right.font_grey.bold
                         #xprt_5.dd_xprt_article.collapse
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                           %p
-                            На этой стадии вам предстоит выявить проблемы, связанные с ситуацией, описанной в базе знаний, и принять участие
-                            в обсуждении проблем, выявленных другими участниками. В нашей терминологии такие проблемы называются несовершенствами.
-                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш взгляд, совершенно необходимо устранить для
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
                             исправления текущей ситуации.
                     .divider20
             %span.auth-divider |
@@ -285,7 +320,9 @@
                   %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
                   %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"} 5
                 .btn-group{:role => "group"}
-                  %a.btn.back_color_stage6.icon_new.i_new_stage{:href => "6th-stage.html", :role => "button"} 6 СТАДИЯ: ОЦЕНИВАНИЕ ПРОЕКТОВ
+                  %a.btn.back_color_stage6{:href => "6th-stage.html", :role => "button"}
+                    6 СТАДИЯ: ПОДВЕДЕНИЕ
+                    ИТОГОВ
                 .btn-group{:role => "group"}
                   %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
           .col-md-4.col_padding_left_3
@@ -316,504 +353,713 @@
       / Main Block starts
       .main-block
         .container
-          .stage-info-sort-block
+          .row
+            .container
+              .col-sm-3.col_padding_left_0.col_padding_right_3
+                .border_grey.col_rate_head
+                  Проект
+              .col-sm-4.col_padding_left_3.col_padding_right_3
+                .border_grey.col_rate_head
+                  Этот проект важен для проблемы,
+                  %br/
+                  заданной заказчиком?
+              .col-sm-5.col_padding_right_0.col_padding_left_3
+                .border_grey.col_rate_head
+                  Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом
+                  рисков проекта?
+          .divider10
+          .rating_line
             .row
-              %br/
-              .col-md-7
-                %span.stage-heading
-                  Проекты (2)
-                  %i.fa.fa-question-circle
-          / projects' block starts
-          .stage-post-block
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+                    %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+              .col-sm-4.no_padding_col.divided
+                .rate_buttons.color_1.text-center
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+              .col-sm-5.col_padding_left_0.divided
+                .row
+                  .col-md-10
+                    .rate_buttons.color_2.text-center
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+                  .col-md-2.col_padding_left_0.divided.text-center
+                    %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+                      %i.fa.fa-2x.font_grey.fa-angle-right
+          .rating_line
             .row
-              .col-md-6
-                .post.post_5
-                  .post-header.white
-                    .row
-                      .col-md-9.col-xs-9
-                        %h5.font_purple.bold Соглашение и арбитр.
-                      .col-md-1.col-xs-1
-                        %h4.pull-right
-                          %i.fa.fa-exclamation-triangle.font_lighter_grey
-                      .col-md-2.col-xs-2
-                        %h5.time 20.12.2014
-                  .post-body
-                    .media
-                      .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
-                        %p.poster-name Пятачок
-                      .media-body.white-gray
-                        .post-text
-                          %p Взаимное недоверие четвероногих и пчёл
-                  .project-bottom-progress-block
-                    %a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
-                      .user-ratings-block
-                        .progress-userpic
-                          %img{:src => "img/ava-mod.jpg"}/
-                        .progress-username
-                          Модератор
-                      .progress-container
-                        .progress.pb-lg
-                          .progress-bar.pb-animated{"data-pbmax" => "12.39", :role => "progressbar"}
-                            / progress limit value
-                            %span.pb-limit 12.39%
-                      .progress-ratings
-                        %span.label.label-sm.back-color-7297c9.test 1.54
-                        %span.label.label-sm.back-color-75b5d3 0.73
-                        %span.label.label-sm.back-color-7ed8e3 0.47
-                        %span.label.label-sm.back-color-81ded2 6.29
-                    %a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
-                      .user-ratings-block
-                        .progress-userpic
-                          %img{:src => "img/ava-mod.jpg"}/
-                        .progress-username
-                          Модератор
-                      .progress-container
-                        .progress.pb-lg
-                          .progress-bar.pb-animated{"data-pbmax" => "12.39", :role => "progressbar"}
-                            / progress limit value
-                            %span.pb-limit 12.39%
-                      .progress-ratings
-                        %span.label.label-sm.back-color-7297c9.test 1.54
-                        %span.label.label-sm.back-color-75b5d3 0.73
-                        %span.label.label-sm.back-color-7ed8e3 0.47
-                        %span.label.label-sm.back-color-81ded2 6.29
-              .col-md-6
-                .post.post_5
-                  .post-header.white
-                    .row
-                      .col-md-9.col-xs-9
-                        %h5.font_purple.bold Соглашение и арбитр.
-                      .col-md-1.col-xs-1
-                        %h4.pull-right
-                          %i.fa.fa-exclamation-triangle.font_lighter_grey
-                      .col-md-2.col-xs-2
-                        %h5.time 20.12.2014
-                  .post-body
-                    .media
-                      .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img50{:src => "img/ava-pyat.jpg"}/
-                        %p.poster-name Пятачок
-                      .media-body.white-gray
-                        .post-text
-                          %p Взаимное недоверие четвероногих и пчёл
-                  .project-bottom-progress-block
-                    %a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
-                      .user-ratings-block
-                        .progress-userpic
-                          %img{:src => "img/ava-mod.jpg"}/
-                        .progress-username
-                          Модератор
-                      .progress-container
-                        .progress.pb-lg
-                          .progress-bar.pb-animated{"data-pbmax" => "12.39", :role => "progressbar"}
-                            / progress limit value
-                            %span.pb-limit 12.39%
-                      .progress-ratings
-                        %span.label.label-sm.back-color-7297c9.test 1.54
-                        %span.label.label-sm.back-color-75b5d3 0.73
-                        %span.label.label-sm.back-color-7ed8e3 0.47
-                        %span.label.label-sm.back-color-81ded2 6.29
-                    %a.single-progress-block.open-popup-link{:href => "#popup-rating-detail"}
-                      .user-ratings-block
-                        .progress-userpic
-                          %img{:src => "img/ava-mod.jpg"}/
-                        .progress-username
-                          Модератор
-                      .progress-container
-                        .progress.pb-lg
-                          .progress-bar.pb-animated{"data-pbmax" => "12.39", :role => "progressbar"}
-                            / progress limit value
-                            %span.pb-limit 12.39%
-                      .progress-ratings
-                        %span.label.label-sm.back-color-7297c9.test 1.54
-                        %span.label.label-sm.back-color-75b5d3 0.73
-                        %span.label.label-sm.back-color-7ed8e3 0.47
-                        %span.label.label-sm.back-color-81ded2 6.29
-          / projects' block ends
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+                    %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+              .col-sm-4.no_padding_col.divided
+                .rate_buttons.color_1.text-center
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+                  %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+              .col-sm-5.col_padding_left_0.divided
+                .row
+                  .col-md-10
+                    .rate_buttons.color_2.text-center
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+                      %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+                  .col-md-2.col_padding_left_0.divided.text-center
+                    %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+                      %i.fa.fa-2x.font_grey.fa-angle-right
+          .rating_line
+            .row
+              .col-sm-3
+                .rating_user
+                  .media-left
+                    %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                  .media-body
+                    %h5.media-heading.bold Винни-Пух
+                    %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+              .col-sm-4.no_padding_col.divided
+                .rate_buttons.color_1
+                  .progress
+                    .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 100%;"}
+                      10
+              .col-sm-5.col_padding_left_0.divided
+                .row
+                  .col-md-10
+                    .rate_buttons.color_2
+                      .progress
+                        .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "7", :role => "progressbar", :style => "width: 70%;"}
+                          7
+                  .col-md-2.col_padding_left_0.divided.text-center
+                    %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+                      %i.fa.fa-2x.font_grey.fa-angle-right
       / Main Block ends
-      #popup-rating-detail.popup-window.popup-rating-detail.info-popup.mfp-hide
-        .popup.popup-top-rounded.popup-bottom-rounded
-          .row.popup-post-info
-            .popup-header.popup-top-rounded.col-sm-12
-              %h2.font_red Проверенный способ добыть мед
-            .col-lg-6.popup-post-block
-              %img{:src => "img/ava-mod.jpg"}/
-              %span Модератор
-              .info-stripe
-                %span.popup-date 17.12.2014
-                %span.popup-comments
-                  +5
-                  %i.fa.fa-comment-o
-                %span.popup-likes
-                  +9
-                  %i.fa.fa-thumbs-o-up
-                %span.popup-dislikes
-                  +1
-                  %i.fa.fa-thumbs-o-down
-          .popup-bottom-ratings
-            .popup-bottom-rating-overall.back-color-e71d2b
-              %p.popup-bottom-rating-fieldname Общая оценка
-              %p.popup-bottom-rating-field-value 12.39%
-            .popup-bottom-rating-formula.back-color-9eb5d5
-              %p.popup-bottom-rating-fieldname Формула
-              %p.popup-bottom-rating-field-value = ( 0.73 + 0.47 ) / 6.29
-            .popup-bottom-rating-maximum.back-color-5f84b9
-              %p.popup-bottom-rating-fieldname Максимальная оценка
-              %p.popup-bottom-rating-field-value 1.54
-        .popup.popup-bottom-rounded.popup-top-rounded
-          #accordion-1.panel-group
-            .panel
-              / Panel heading
-              %a{"data-parent" => "#accordion-1", "data-toggle" => "collapse", :href => "#accord-1-1"}
-                .panel-heading
-                  %h4.panel-title
-                    %span.accordion-rating> 0.73
-                    Ожидаемая эффективность первого шага проекта
-                  %img.panel-head-arrow{:src => "img/arrow-fifth.png"}/
-              #accord-1-1.collapseLevel1.panel-collapse.collapse
-                / Panel body
-                .panel-body.panel-body-first-level
-                  #accordion-2.panel-group
-                    / Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color.
-                    .panel
-                      / Panel heading
-                      %a{"data-parent" => "#accordion-2", "data-toggle" => "collapse", :href => "#accord-2-1"}
-                        .panel-heading-second-level
-                          %h5.panel-title
-                            %span.accordion-head-left-second-level> Стадия 1
-                            Подготовка
-                            и организация работы группы
-                            %img.panel-head-arrow{:src => "img/arrow-fifth1.png"}/
-                      #accord-2-1.collapseLevel2.panel-collapse.panel-collapse-second-level.collapse
-                        / Panel body
-                        .panel-body
-                          #accordion-3.panel-group
-                            / Panel. Use "panel-XXX" class for different colors. Replace "XXX" with color.
-                            .panel
-                              / Panel heading
-                              %a{"data-parent" => "#accordion-3", "data-toggle" => "collapse", :href => "#accord-3-1"}
-                                .panel-heading-third-level
-                                  %h6.panel-title
-                                    %span.accordion-head-left-third-level> 25.43%
-                                    1.
-                                    Обучение четвероногих воровству
-                                  %img.panel-head-arrow{:src => "img/arrow-fifth2.png"}/
-                              #accord-3-1.collapseLevel3.panel-collapse.collapse
-                                / Panel body
-                                .panel-body
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p
-                                      Для создания ресурсов, необходимых в будущем, в
-                                      проекте предлагаются определенные средства.
-                                    %p
-                                      Проанализируйте их и оцените, какова вероятность
-                                      того, что при помощи этих средств ресурсы будут
-                                      созданы
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в полном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшом объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          очень
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge2
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "max"}
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p
-                                      Использование вышеназванных средств потребует
-                                      материальных и трудовых затрат. Какова вероятность,
-                                      что эти затраты окажутся
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в полном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшом объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          очень
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge2
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "max"}
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p
-                                      Какова вероятность, что улучшение ситуации
-                                      прогнозируемое в разделе А2 действительно
-                                      произойдет.
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в полном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшом объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          очень
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge2
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge1
-                                          маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "max"}
-                                        .panel-graph-bar-col
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p
-                                      Какова вероятность, что улучшение ситуации
-                                      прогнозируемое в разделе А2 действительно
-                                      произойдет.
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в полном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшом объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        .panel-graph-left-col-badge.panel-graph-left-badge3
-                                          очень
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge2
-                                          вероятно
-                                        .panel-graph-left-col-badge.panel-graph-left-badge1
-                                          маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "max"}
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-                                        .panel-graph-bar-col
-        #popup-database.popup-window.popup_database.popup-w770.mfp-hide
-          .popup.popup_rounded
+      #popup-6-1.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
+        .popup.popup_rounded.popup_color_theme_stage5
+          .modal_title
             .row
-              .col-md-12
-                #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
-                  / Indicators
-                  %ul.list-unstyled.list-inline.carousel-indicators.text-center
-                    %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
-                      Аспект 1
-                    %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
-                      Аспект 2
-                    %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
-                      Аспект 3
-                    %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
-                      Аспект 4
-                    %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
-                      Аспект 5
-                    %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
-                      Аспект 6
-                    %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
-                      Аспект 7
-                    %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
-                      Аспект 8
-                    %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
-                      Аспект 9
-                  / Wrapper for slides
-                  .carousel-inner{:role => "listbox"}
-                    .item.active.color-theme-1
-                      .row
-                        .col-md-12
-                          .container
-                            .row
-                              .col-md-12.col-sm-12
-                                %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                                  %li.active{:role => "presentation"}
-                                    %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"} Статья 1
-                                  %li{:role => "presentation"}
-                                    %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
-                                  %li{:role => "presentation"}
-                                    %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
-                            .row
-                              .col-md-12.col-sm-12
-                                .aspect-main-block
-                                  .tab-content
-                                    #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
-                                      %h6.aspect-main-block-heading Ситуация с пчелами
-                                      %p.aspect-main-block-text
-                                        Пчелы недовольны тем, что на их мед
-                                        постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                        конфликт мирным способом, они обратились к мудрой Сове.
-                                      %img{:src => "img/aspect-pic1.jpg"}/
-                                    #article1-2.tab-pane.fade{:role => "tabpanel"}
-                                      %p.aspect-main-block-text
-                                        Пчелы недовольны тем, что на их мед
-                                        постоянно покушаются Винни-Пух и его друзья. Желая разрешить
-                                        конфликт мирным способом, они обратились к мудрой Сове.
-                                      %img{:src => "img/aspect-pic1.jpg"}/
-                                    #article1-3.tab-pane.fade{:role => "tabpanel"}
-                                      %img{:src => "img/aspect-pic1.jpg"}/
-                    .item.color-theme-2
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                            %p.aspect-main-block-text
-                              В популярной сказке Винни-Пух и его
-                              друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
-                              труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
-                              пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
-                              момент, когда все пчелы вылетят из улья, — не дождался; пытался
-                              втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
-                              был отвергнут.
-                              Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
-                              друзья Пятачок и Кролик.
-                            %img{:src => "img/aspect-pic2.jpg"}/
-                    .item.color-theme-3
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                            %h6.aspect-main-block-heading
-                              Трудности, связанные с
-                              расположением конфликтующих сторон
-                            %p.aspect-main-block-text
-                              Как видно на карте, Винни-Пух с
-                              друзьями живут достаточно близко к Высокому дубу.
-                              Это часто обостряет конфликт, потому что пчелы не могут нормально
-                              собирать мед,
-                              постоянно беспокоясь, что их ограбят.
-                            %img{:src => "img/aspect-pic3.jpg"}/
-                    .item.color-theme-4
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                    .item.color-theme-5
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                    .item.color-theme-6
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                    .item.color-theme-7
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                    .item.color-theme-8
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                    .item.color-theme-9
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block
-                  %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
-                    %i.fa.fa-3x.fa-caret-left
-                  %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
-                    %i.fa.fa-3x.fa-caret-right
-      / Outer Ends
-      / Javascript files
-      / jQuery
-      %script{:src => "js/jquery.js"}
-      / Bootstrap JS
-      %script{:src => "js/bootstrap.min.js"}
-      / Magnific Popup
-      %script{:src => "js/jquery.magnific-popup.min.js"}
-      / Owl carousel
-      %script{:src => "js/owl.carousel.min.js"}
-      / Respond JS for IE8
-      %script{:src => "js/respond.min.js"}
-      / HTML5 Support for IE
-      %script{:src => "js/html5shiv.js"}
-      / Content hover JS
-      %script{:src => "js/jquery.contenthover.min.js"}
-      / Javascript for this page
-      / Excanvas JS for Knob Support in IE 8
-      %script{:src => "js/waypoints.min.js"}
-      %script{:src => "js/excanvas.js"}
-      / jQuery Knob
-      %script{:src => "js/jquery.knob.js"}
-      / Perfect scrollbar
-      %script{:src => "js/perfect-scrollbar.jquery.min.js"}
-      / Custom JS. Type your JS code in custom.js file
-      %script{:src => "js/custom.js"}
-      :javascript
-        /* perfect scrollbar */
-        $('.ps_cont.half_wheel_speed').perfectScrollbar({
-            wheelSpeed: 0.3
-        });
-        $('.ps_cont').perfectScrollbar();
+              .col-md-8
+                %h4.bold.font_dark_grey
+                  Lorem ipsum
+              .col-md-4
+                .row
+                  .col-md-12
+                    .text-right.post_likes
+                      %span.bold
+                        5
+                        %i.fa.fa-comment.theme_font_color
+                      %span.bold
+                        9
+                        %i.fa.fa-thumbs-up.theme_font_color
+                      %span.bold
+                        1
+                        %i.fa.fa-thumbs-down.theme_font_color
+                      %span
+                        %i.fa.fa-exclamation-triangle.font_lighter_grey
+                      %small 21.12.2014
+          .modal_body
+            .popup-post-info
+              .row.info-block
+                .col-md-9.popup-right-tabs
+                  .nav-tabs-one
+                    %ul.nav.nav-tabs
+                      %li.active
+                        %a{"data-toggle" => "tab", :href => "#tab-1"}
+                          %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                            Описание
+                            проектного предложения
+                      %li
+                        %a{"data-toggle" => "tab", :href => "#tab-2"}
+                          %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                            График реализации проекта
+                      %li
+                        %a{"data-toggle" => "tab", :href => "#tab-3"}
+                          %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                            Оценки других
+                            участников
+                .col-md-3
+                  .popup-post-block.pull-right
+                    %img{:src => "img/ava-rabb.jpg"}/
+                    %span.font_black.text-center Кролик
+            .clearfix
+            .tab-content.modal_content
+              #tab-1.tab-pane.fade.in.active
+                .container.modal_content
+                  .row
+                    .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+                      %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                      .divider25
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                        Описание проекта
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-1.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                        Организационные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-2.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                        Ресурсные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-3.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                        Риски реализации
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-4.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                    .col-md-6.comment_col.popup_expandable_col.ps_cont
+                      %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                        открыть описание проекта
+                      .divider15
+                      #myCarousel.carousel.slide{"data-ride" => "carousel"}
+                        .carousel-inner{:role => "listbox"}
+                          .item.active
+                            #comment1.media.comment
+                              .media-left
+                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                                %span.comment_interf
+                                  %span.date_time.theme_font_color 15:28
+                                  %span.dropdown.edit_comment
+                                    %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                      %i.fa.fa-cog.fa-lg.theme_font_color
+                                    %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                      %li
+                                        %a{:href => "#", :tabindex => "-1"}
+                                          %i.fa.fa-pencil>
+                                          Редактировать
+                                      %li
+                                        %a{:href => "#", :tabindex => "-1"}
+                                          %i.fa.fa-close>
+                                          Удалить
+                                  %span.badge.badge_important.theme_back_color важно
+                              %p.font_grey.bold
+                                Ничего не правда. Я люблю гулять, а от
+                                вашего дуба тень большая.
+                              .post-interfaces-buttons.text-left
+                                %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                  %span.bold
+                                    9
+                                    %i.fa.fa-thumbs-up.theme_font_color
+                                %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                  %span.bold
+                                    1
+                                    %i.fa.fa-thumbs-down.theme_font_color
+                                %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            %form#reply_form_1.form-group.comment_add.collapse
+                              .input_cont
+                                %textarea{:placeholder => "Ваш комментарий"}
+                              %button.btn{:type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                              %span 3 ответа
+                            #answers-3-1.com_answers.collapse
+                              .answers_subblock.level1
+                                #comment2.media.comment.unread
+                                  .media-left
+                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                                    %span.comment_interf
+                                      %span.date_time.theme_font_color 17:28
+                                      %span.badge.badge_important.theme_back_color важно
+                                  %p.font_grey.bold
+                                    Ничего не правда. Я люблю гулять,
+                                    а от вашего дуба тень большая.
+                                  .post-interfaces-buttons.text-left
+                                    %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
+                                      %span.bold
+                                        9
+                                        %i.fa.fa-thumbs-up.theme_font_color
+                                    %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
+                                      %span.bold
+                                        1
+                                        %i.fa.fa-thumbs-down.theme_font_color
+                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
+                                      %span.bold
+                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                                %form#reply_form_2.form-group.comment_add.collapse
+                                  .input_cont
+                                    %textarea{:placeholder => "Ваш комментарий"}
+                                  %button.btn{:type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                                #comment3.media.comment.unread
+                                  .media-left
+                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                                    %span.comment_interf
+                                      %span.date_time.theme_font_color 15:28
+                                      %span.dropdown.edit_comment
+                                        %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                          %i.fa.fa-cog.fa-lg.theme_font_color
+                                        %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                          %li
+                                            %a{:href => "#", :tabindex => "-1"}
+                                              %i.fa.fa-pencil>
+                                              Редактировать
+                                          %li
+                                            %a{:href => "#", :tabindex => "-1"}
+                                              %i.fa.fa-close>
+                                              Удалить
+                                  %p.font_grey.bold
+                                    Ничего не правда. Я люблю гулять,
+                                    а от вашего дуба тень большая.
+                                  .post-interfaces-buttons.text-left
+                                    %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
+                                      %span.bold
+                                        9
+                                        %i.fa.fa-thumbs-up.theme_font_color
+                                    %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
+                                      %span.bold
+                                        1
+                                        %i.fa.fa-thumbs-down.theme_font_color
+                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
+                                      %span.bold
+                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                                %form#reply_form_3.form-group.comment_add.collapse
+                                  .input_cont
+                                    %textarea{:placeholder => "Ваш комментарий"}
+                                  %button.btn{:type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              .answers_subblock.level2
+                                #comment4.media.comment
+                                  .media-left
+                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                                    %span.comment_interf
+                                      %span.date_time.theme_font_color 15:28
+                                  %p.font_grey.bold
+                                    Ничего не правда. Я люблю гулять,
+                                    а от вашего дуба тень большая.
+                                  .post-interfaces-buttons.text-left
+                                    %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
+                                      %span.bold
+                                        9
+                                        %i.fa.fa-thumbs-up.theme_font_color
+                                    %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
+                                      %span.bold
+                                        1
+                                        %i.fa.fa-thumbs-down.theme_font_color
+                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
+                                      %span.bold
+                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                                %form#reply_form_4.form-group.comment_add.collapse
+                                  .input_cont
+                                    %textarea{:placeholder => "Ваш комментарий"}
+                                  %button.btn{:type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            #comment5.media.comment.unread
+                              .media-left
+                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                                %span.comment_interf
+                                  %span.date_time.theme_font_color 27.03.2015 15:28
+                                  %span.badge.badge_important.theme_back_color важно
+                              %p.font_grey.bold
+                                Ничего не правда. Я люблю гулять, а от
+                                вашего дуба тень большая.
+                              .post-interfaces-buttons.text-left
+                                %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
+                                  %span.bold
+                                    9
+                                    %i.fa.fa-thumbs-up.theme_font_color
+                                %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
+                                  %span.bold
+                                    1
+                                    %i.fa.fa-thumbs-down.theme_font_color
+                                %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            %form#reply_form_5.form-group.comment_add.collapse
+                              .input_cont
+                                %textarea{:placeholder => "Ваш комментарий"}
+                              %button.btn{:type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          .item
+                          .item
+                      .divider15
+                      %form.form-group.comment_add.main_add
+                        .input_cont
+                          %textarea{:placeholder => "Ваш комментарий"}
+                        %button.btn{:type => "button"}
+                          %span.bold
+                            %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      %nav.text-center
+                        %ul.pagination
+                          %li
+                            %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
+                          %li
+                            %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
+                          %li
+                            %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
+                  .divider25
+              #tab-2.tab-pane.fade
+                .container.timeline-cont
+                  .vertical-timeline
+                    .row
+                      .col-md-12.col-sm-12
+                        / time line col
+                        .v-timeline-col
+                          .entry-top-badge.timeline_bg_1
+                            Формирование списка активный ПС
+                          .row
+                            .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 15 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Инструменты
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                            .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 14 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Ресурсы
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                                  %span Шевелидзе Антон Иванович
+              #tab-3.tab-pane.fade
+                .container
+                  .divider15
+                  .row
+                    .container
+                      .col-sm-3.col_padding_left_0.col_padding_right_3
+                        .border_grey.col_rate_head
+                          Проект
+                      .col-sm-4.col_padding_left_3.col_padding_right_3
+                        .border_grey.col_rate_head
+                          Этот проект важен для проблемы,
+                          %br/
+                          заданной заказчиком?
+                      .col-sm-5.col_padding_right_0.col_padding_left_3
+                        .border_grey.col_rate_head
+                          Этот проект реализуем в предложенные сроки при наличии запланированных
+                          ресурсов с учетом рисков проекта?
+                  .divider10
+                  .rating_line
+                    .row
+                      .col-sm-3
+                        .rating_user
+                          .media-left
+                            %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                          .media-body
+                            %h5.media-heading.bold Винни-Пух
+                      .col-sm-4.no_padding_col.divided
+                        .rate_buttons.color_1
+                          .progress
+                            .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "3", :role => "progressbar", :style => "width: 30%;"}
+                              3
+                      .col-sm-5.col_padding_left_0.divided
+                        .row
+                          .col-md-12
+                            .rate_buttons.color_2
+                              .progress
+                                .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "5", :role => "progressbar", :style => "width: 50%;"}
+                                  5
+                  .rating_line
+                    .row
+                      .col-sm-3
+                        .rating_user
+                          .media-left
+                            %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                          .media-body
+                            %h5.media-heading.bold Винни-Пух
+                      .col-sm-4.no_padding_col.divided
+                        .rate_buttons.color_1
+                          .progress
+                            .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "6", :role => "progressbar", :style => "width: 60%;"}
+                              6
+                      .col-sm-5.col_padding_left_0.divided
+                        .row
+                          .col-md-12
+                            .rate_buttons.color_2
+                              .progress
+                                .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "7", :role => "progressbar", :style => "width: 70%;"}
+                                  7
+                  .rating_line
+                    .row
+                      .col-sm-3
+                        .rating_user
+                          .media-left
+                            %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+                          .media-body
+                            %h5.media-heading.bold Винни-Пух
+                      .col-sm-4.no_padding_col.divided
+                        .rate_buttons.color_1
+                          .progress
+                            .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 100%;"}
+                              10
+                      .col-sm-5.col_padding_left_0.divided
+                        .row
+                          .col-md-12
+                            .rate_buttons.color_2
+                              .progress
+                                .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "7", :role => "progressbar", :style => "width: 70%;"}
+                                  7
+      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+        .popup.popup_rounded
+          .row
+            .col-md-12
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                / Indicators
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
+                / Wrapper for slides
+                .carousel-inner{:role => "listbox"}
+                  .item.active.color-theme-1
+                    .row
+                      .col-md-12
+                        .container
+                          .row
+                            .col-md-12.col-sm-12
+                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                %li.active{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"}
+                                    Статья
+                                    1
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                          .row
+                            .col-md-12.col-sm-12
+                              .aspect-main-block
+                                .tab-content
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                    %h6.aspect-main-block-heading
+                                      Ситуация с
+                                      пчелами
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем,
+                                      что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая
+                                      разрешить
+                                      конфликт мирным способом, они обратились к мудрой
+                                      Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем,
+                                      что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая
+                                      разрешить
+                                      конфликт мирным способом, они обратились к мудрой
+                                      Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                  .item.color-theme-2
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %p.aspect-main-block-text
+                            В популярной сказке Винни-Пух и его
+                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                            был отвергнут.
+                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                            друзья Пятачок и Кролик.
+                          %img{:src => "img/aspect-pic2.jpg"}/
+                  .item.color-theme-3
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %h6.aspect-main-block-heading
+                            Трудности, связанные с
+                            расположением конфликтующих сторон
+                          %p.aspect-main-block-text
+                            Как видно на карте, Винни-Пух с
+                            друзьями живут достаточно близко к Высокому дубу.
+                            Это часто обостряет конфликт, потому что пчелы не могут нормально
+                            собирать мед,
+                            постоянно беспокоясь, что их ограбят.
+                          %img{:src => "img/aspect-pic3.jpg"}/
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
+    / Javascript for this page
+    / Excanvas JS for Knob Support in IE 8
+    %script{:src => "js/waypoints.min.js"}
+    %script{:src => "js/excanvas.js"}
+    / jQuery Knob
+    %script{:src => "js/jquery.knob.js"}
+    / Perfect scrollbar
+    %script{:src => "js/perfect-scrollbar.jquery.min.js"}
+    %script{:src => "js/waypoints.min.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}
+    :javascript
+      /* first stage slider */
+
+      $(document).ready(function () {
+
+          $('.open_welcome_popup').magnificPopup({
+              type: 'inline',
+              midClick: true
+          });
+          $('.open_welcome_popup').magnificPopup('open');
+
+          /* perfect scrollbar */
+          $('.ps_cont.half_wheel_speed').perfectScrollbar({
+              wheelSpeed: 0.3
+          });
+          $('.ps_cont').perfectScrollbar();
