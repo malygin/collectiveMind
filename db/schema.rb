@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503090429) do
+ActiveRecord::Schema.define(version: 20150504204021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -947,6 +947,7 @@ ActiveRecord::Schema.define(version: 20150503090429) do
     t.boolean  "confidence_remove_discontent_bool"
     t.boolean  "confidence_negative_results_bool"
     t.integer  "fullness"
+    t.boolean  "useful"
   end
 
   create_table "novation_votings", force: :cascade do |t|

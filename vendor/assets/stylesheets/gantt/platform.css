@@ -12,69 +12,69 @@
 
 
 
-*{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing:border-box;
-  box-sizing: border-box;
-}
+/**{*/
+  /*-webkit-box-sizing: border-box;*/
+  /*-moz-box-sizing: border-box;*/
+  /*-o-box-sizing:border-box;*/
+  /*box-sizing: border-box;*/
+/*}*/
 
-  /*
-  -------------------------------------------------------
-  body styles
-  -------------------------------------------------------
-  */
-BODY, TBODY {
-  font-family: arial;
-  font-size: 14px;
-  margin: 0;
-  color: #000000;
-  text-decoration: none;
-}
+  /**/
+  /*-------------------------------------------------------*/
+  /*body styles*/
+  /*-------------------------------------------------------*/
+  /**/
+/*BODY, TBODY {*/
+  /*font-family: arial;*/
+  /*font-size: 14px;*/
+  /*margin: 0;*/
+  /*color: #000000;*/
+  /*text-decoration: none;*/
+/*}*/
 
-BODY {
-  background-color: #91B4B7; 
-}
+/*BODY {*/
+  /*background-color: #91B4B7; */
+/*}*/
 
-a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #16ABDD;
-}
+/*a {*/
+  /*text-decoration: none;*/
+  /*font-weight: bold;*/
+  /*color: #16ABDD;*/
+/*}*/
 
-a:hover, a.aHover {
-  color: #0C85AD;
-  text-decoration: underline;
-}
+/*a:hover, a.aHover {*/
+  /*color: #0C85AD;*/
+  /*text-decoration: underline;*/
+/*}*/
 
-h1 {
-  font-size:32px;
-  line-height: 34px;
-  color:#91B4B7;
-  font-weight:normal;
-  margin:0 0 10px 0
-}
+/*h1 {*/
+  /*font-size:32px;*/
+  /*line-height: 34px;*/
+  /*color:#91B4B7;*/
+  /*font-weight:normal;*/
+  /*margin:0 0 10px 0*/
+/*}*/
 
-h2 {
-  font-size:22px;
-  color:#373737;
-  font-weight:normal;
-  margin:0 0 10px 0
-}
+/*h2 {*/
+  /*font-size:22px;*/
+  /*color:#373737;*/
+  /*font-weight:normal;*/
+  /*margin:0 0 10px 0*/
+/*}*/
 
-h3 {
-  text-decoration: none;
-  color: #000000;
-  font-size: 16px;
-  margin: 0;
-}
+/*h3 {*/
+  /*text-decoration: none;*/
+  /*color: #000000;*/
+  /*font-size: 16px;*/
+  /*margin: 0;*/
+/*}*/
 
-h4 {
-  font-size:16px;
-  padding:5px 0;
-  color:#617777;
-  margin:0
-}
+/*h4 {*/
+  /*font-size:16px;*/
+  /*padding:5px 0;*/
+  /*color:#617777;*/
+  /*margin:0*/
+/*}*/
 
 #savingMessage{
   background-color:#E3EDED;
