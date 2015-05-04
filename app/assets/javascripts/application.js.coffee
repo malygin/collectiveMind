@@ -195,9 +195,6 @@ $ ->
     $(stick_id).hide()
     return
 
-  # GANTT
-#  ge = new GanttMaster()
-#  ge.init($("#workSpace"))
 
 
 #show comments panel on post hover
@@ -410,12 +407,14 @@ $('.with_plus').click ->
   return
 
 # GANTT
-@ge = new GanttMaster()
-@ge.init($("#workSpace"))
-ret = JSON.parse($("#ta").val())
-offset = (new Date).getTime() - ret.tasks[0].start
-i = 0
-while i < ret.tasks.length
-  ret.tasks[i].start = ret.tasks[i].start + offset
-  i++;
-@ge.loadProject(ret);
+
+if $('#gantEditorTemplates').length >0
+  @ge = new GanttMaster()
+  @ge.init($("#workSpace"))
+  ret = JSON.parse($("#ta").val())
+  offset = (new Date).getTime() - ret.tasks[0].start
+  i = 0
+  while i < ret.tasks.length
+    ret.tasks[i].start = ret.tasks[i].start + offset
+    i++;
+  @ge.loadProject(ret);
