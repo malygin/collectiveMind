@@ -616,8 +616,8 @@ module ApplicationHelper
       50
     elsif post.instance_of? Plan::Post
       500
-    elsif post.instance_of? Essay::Post
-      25
+    # elsif post.instance_of? Essay::Post
+    #   25
     else
       0
     end
