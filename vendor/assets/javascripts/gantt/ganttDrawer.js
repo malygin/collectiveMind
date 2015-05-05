@@ -334,7 +334,6 @@ Ganttalendar.prototype.drawTask = function (task) {
   var self = this;
   editorRow = task.rowElement;
   var top = editorRow.position().top+ editorRow.offsetParent().scrollTop();
-
   var x = Math.round((task.start - self.startMillis) * self.fx);
 
   var taskBox = $.JST.createFromTemplate(task, "TASKBAR");
@@ -349,7 +348,6 @@ Ganttalendar.prototype.drawTask = function (task) {
     taskBox.addClass("hasChild");
 
   taskBox.css({top:top,left:x,width:Math.round((task.end - task.start) * self.fx)});
-
   if (this.master.canWrite && task.canWrite) {
     taskBox.resizable({
       handles: 'e' + ( task.depends ? "" : ",w"), //if depends cannot move start

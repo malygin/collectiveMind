@@ -170,7 +170,10 @@
                 = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
             .divider25
-        #tab-2.tab-pane.fade
-          .container
+        #tab-2.tab-pane.fade(style='background: white;')
+          .container.modal_content
             .row
               .col-md-12.col-sm-12
+                #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;")
+
+                = render 'shared/gantt_template'

@@ -297,7 +297,7 @@ body{
 }
 
 input[readonly]{
-  color: #c0c0c0;
+  color: black;
 }
 
 .taskStatusBox{

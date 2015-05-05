@@ -378,12 +378,12 @@ GanttMaster.prototype.loadProject = function (project) {
   this.deletedTaskIds = [];
   
   //recover saved splitter position
-  if (project.splitterPosition)
-    this.splitter.resize(project.splitterPosition);
+//  if (project.splitterPosition)
+//    this.splitter.resize(project.splitterPosition);
 
   //recover saved zoom level
-  if (project.zoom)
-    this.gantt.zoom=project.zoom;
+//  if (project.zoom)
+//    this.gantt.zoom=project.zoom;
 
 
   //[expand]
