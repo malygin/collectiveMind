@@ -865,6 +865,8 @@ module ApplicationHelper
       'concept_discuss'
     elsif name_controller == :novation_posts
       'novation_discuss'
+    elsif name_controller == :plan_posts
+      'plan_discuss'
     end
   end
 

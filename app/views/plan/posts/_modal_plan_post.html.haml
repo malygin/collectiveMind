@@ -4,156 +4,173 @@
       .row
         .col-md-8
           %h4.bold.font_dark_grey
-            Проект
-            ="\"#{trim_content(@post.name)}\""
+            =trim_content(@post.name)
         .col-md-4
           .row
             .col-md-12
               .text-right.post_likes
                 %span.bold
-                  = @post.comments.count
+                  %span(class="cc_post_#{@post.id}")
+                    = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}") do
                   %span.bold
-                    %span(id="plus_counter_#{@post.id}")
+                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}") do
                   %span.bold
-                    %span(id="minus_counter_#{@post.id}")
+                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
                       = @post.users_against.count
                     %i.fa.fa-thumbs-down.theme_font_color
-                %span
-                  %i.fa.fa-exclamation-triangle.font_lighter_grey
+                - if @post.notes.present?
+                  %span
+                    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
                   = Russian::strftime(@post.created_at, '%d.%m.%Y')
-    .popup-post-info
-      .row.info-block
-        .col-md-4.popup-post-block
-          =image_tag 'no-ava.png'
-          %span
-            = @post.user
-        .col-md-8.popup-right-tabs
-          .nav-tabs-one
-            %ul.nav.nav-tabs
-              %li.active
-                %a{"data-toggle" => "tab", :href => "#tab-1"} Описание проекта
-              %li
-                %a{"data-toggle" => "tab", :href => "#tab-2"} Нововведения и план мероприятий
+                - if boss? or role_expert? or stat_expert?
+                  = link_to({controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{@post.id}") do
+                    %span.label_approve.label(class="#{label_approve_stat(@post)}")
+                      = t('show.important')
+                - elsif @post.approve_status
+                  %span.label.label-success=t('show.important')
+    .modal_body
+      .popup-post-info
+        .row.info-block
+          .col-md-9.popup-right-tabs
+            .nav-tabs-one
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#tab-1"}
+                    %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                      Описание
+                      проектного предложения
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab-2"}
+                    %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                      График реализации проекта
+          .col-md-3
+            .popup-post-block.pull-right
+              =image_tag 'no-ava.png'
+              %span.font_black.text-center
+                =@post.user
 
-    .clearfix
-    .tab-content
-      #tab-1.tab-pane.fade.in.active
-        .container
-          .row
-            .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
-              %button.expand_button.remove_col.btn_reset{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
-              .divider25
-              .stripe-qa
-                .lined-heading
-                  %span.bold-stripe
-                    Коротко о проекте
-                %p
-                  = @post.goal
-              .stripe-qa
-                .lined-heading
-                  %span.bold-stripe
-                    Эссе по проекту. Пояснения и обоснования
-                %p
-                  = @post.content
-              .stripe-qa
-                .lined-heading
-                  %span.bold-stripe
-                    Этапы проекта
-                .stages-blocks
-                  - @post.stages.each do |stage|
-                    .lined-heading
-                      -if stage.date_begin and stage.date_end
-                        = "#{Russian::strftime(stage.date_begin, '%d %b %Y')} - #{Russian::strftime(stage.date_end, '%d %b %Y')}"
-                      %span.normal-stripe
-                        = stage.name
+      .clearfix
+      .tab-content.modal_content
+        #tab-1.tab-pane.fade.in.active
+          .container.modal_content
+            .row
+              .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+                %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                .divider25
+                %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                  Описание проекта
+                  %i.fa.fa-plus.font_color_stage5.collapse_plus
+                #cab4-1.collapse
+                  .divider5
+                  %h5.bold Цели и ожидаемые результаты
+                  %p
+                    =@post.goal
+                  .divider15
+                  %h5.bold Краткое описание проекта (усовершенствования)
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Для кого этот проект (выгода)
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Ожидаемые результаты
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Длительность проекта
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Потенциальный руководитель
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Потенциальная  команда
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Необходимые финансовые ресурсы
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Необходимые технические ресурсы
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Необходимые внешние ресурсы
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Привлекаемые смежные подразделения и команды
+                  %p.text
+                    =@post.goal
+                  .divider15
+                %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                  Организационные риски
+                  %i.fa.fa-plus.font_color_stage5.collapse_plus
+                #cab4-2.collapse
+                  .divider5
+                  %h5.bold Недостаточно  человеческих ресурсов
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Участники проекта слабо вовлечены в работу над проектом
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Квалификации участников проекта не позволяет достичь необходимых  результатов
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold В Компании не поддерживаются изменения, связанные с реализацией проекта
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Нет поддержки проекта со стороны  смежных  подразделений и команд
+                  %p.text
+                    =@post.goal
+                  .divider15
+                %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                  Ресурсные риски
+                  %i.fa.fa-plus.font_color_stage5.collapse_plus
+                #cab4-3.collapse
+                  .divider5
+                  %h5.bold Высокая конкуренция за ограниченные ресурсы Компании
+                  %p.text
+                    =@post.goal
+                  .divider15
+                %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                  Риски реализации
+                  %i.fa.fa-plus.font_color_stage5.collapse_plus
+                #cab4-4.collapse
+                  .divider5
+                  %h5.bold Полезный эффект проекта возможно не будет достигнут
+                  %p.text
+                    =@post.goal
+                  .divider15
+                  %h5.bold Возможны негативные последствия в связи с реализацией проекта
+                  %p.text
+                    =@post.goal
+                  .divider15
 
-              -#.description-block
-              -#  %span.description-title Коротко о проекте
-              -#  %p
-              -#    = simple_format(post.goal)
-              -#.description-block
-              -#  %span.description-title Эссе по проекту. Пояснения и обоснования
-              -#  %p
-              -#    = post.content
-              -#.description-block
-              -#  %span.description-title Этапы проекта
-              -#  .stages-blocks
-              -#    - post.stages.each do |stage|
-              -#      .lined-heading
-              -#        -if stage.date_begin and stage.date_end
-              -#          = "#{Russian::strftime(stage.date_begin, '%d %b %Y')} - #{Russian::strftime(stage.date_end, '%d %b %Y')}"
-              -#        %span.normal-stripe
-              -#          = stage.name
+              .col-md-6.comment_col.popup_expandable_col.ps_cont
+                %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                  открыть описание проекта
+                .divider15
+                .chat-messages
+                  = render partial:'shared/comment', collection: @comments
+                .divider15
+                = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
-            .col-md-6.comment_col.popup_expandable_col
-              %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание проекта
-              .divider15
-              #myCarousel.carousel.slide{"data-ride" => "carousel"}
-                .carousel-inner.chat-messages{:role => "listbox"}
-                  -if @comments.present?
-                    - @comments.each_slice(5).with_index do |slice, i|
-                      .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
-                        = render partial:'shared/comment', collection: slice
-                  -else
-                    .item.active
-
-              .divider15
-              = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
-
-              -if @comments.count > 5
-                %nav.text-center
-                  %ul.pagination
-                    - @comments.each_slice(5).with_index do |slice, i|
-                      %li
-                        %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-                          ="#{i+1}"
-
-        .divider25
-      #tab-2.tab-pane.fade
-        .container.timeline-cont
-          .vertical-timeline
+            .divider25
+        #tab-2.tab-pane.fade
+          .container
             .row
               .col-md-12.col-sm-12
-                .v-timeline-col
-                  - @post.stages.each_with_index do |stage, number|
-                    .entry-top-badge.timel-back-b1f0c1
-                      %span.top-badge-entry-stage
-                        = "#{number + 1} этап"
-                      %span.top-badge-entry-date
-                        -if stage.date_begin and stage.date_end
-                          = "#{Russian::strftime(stage.date_begin, '%d %b %Y')} - #{Russian::strftime(stage.date_end, '%d %b %Y')}"
-                      %span.top-badge-entry-theme
-                        = stage.name
-                    - stage.plan_post_aspects.each do |aspect|
-                      .row
-                        .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
-                          .entry
-                            .entry-head.timel-back-8cf0ba
-                              = aspect.title
-                            .entry-content
-                              %p
-                                = aspect.name
-                              .entry-descript-tags
-                                - aspect.plan_post_resources do |resource|
-                                  %span.timel-back-8cf0ba
-                                    = resource.name
-                        .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
-                          .entry-dates-block
-                            - aspect.plan_post_actions.each do |action|
-                              .badge-wrap
-                                .badge-arrow
-                                  %span.entry-icon.timel-back-b1f0c1
-                                  %span.badge-date
-                                    = Russian::strftime(stage.date_end, '%d %b %Y')
-                                  %span.badge-name
-                                    = action.name
-                                .badge-tags
-                                  - action.plan_post_resources.each do |action_resource|
-                                    .badge-tag.timel-back-8cf0ba
-                                      = action_resource.name

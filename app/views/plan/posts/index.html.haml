@@ -1,28 +1,72 @@
 .stage-info-sort-block
   .row
     %br/
-    .col-md-7
+    .col-md-6
       %span.stage-heading
-        Проекты
-        ="(#{@posts.count})"
-        %i.fa.fa-question-circle
-    .col-md-5
+        Проектные предложения
+        %span#count_plans
+          ="(#{@posts.count})"
+    .col-md-6
       .sort-block.pull-right
-        %span.sort-label Сортировать:
-        %span.sort-date
-        %span.sort-rate
-        %span.sort-all ВСЕ
+        %span.sort-label Сортировать по новым:
+        %span#sorter
+          %span.sort-1.sort_btn.sprite_com.sprite-item5_2_1.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.plan_post.after_last_visit_comments(last_time_visit_page('plan')).size
+            - if new_comments > 0
+              %span
+                = new_comments
+          %span#tooltip3_2.sort-2.sort_btn.sprite_doc.sprite-item5_1.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения."}
+            - new_posts = @project.plan_post.after_last_visit_posts(last_time_visit_page('plan')).size
+            - if new_posts > 0
+              %span
+                = new_posts
+
         - if @project.can_add_content?(name_controller)
-          = link_to project_user_path(@project, current_user) do
+          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_plan_post' do
             %button.btn.add-button
-              %span> +
-              Проект
+              %span
+                + Проектное предложение
+
+
 .stage-post-block
-  .row
+  .row#tab_novation_plans
     = render partial: 'post_short', collection: @posts
 
 
 #render_plan_post
+
+
+
+
+
+
+
+
+-#.stage-info-sort-block
+-#  .row
+-#    %br/
+-#    .col-md-7
+-#      %span.stage-heading
+-#        Проекты
+-#        ="(#{@posts.count})"
+-#        %i.fa.fa-question-circle
+-#    .col-md-5
+-#      .sort-block.pull-right
+-#        %span.sort-label Сортировать:
+-#        %span.sort-date
+-#        %span.sort-rate
+-#        %span.sort-all ВСЕ
+-#        - if @project.can_add_content?(name_controller)
+-#          = link_to project_user_path(@project, current_user) do
+-#            %button.btn.add-button
+-#              %span> +
+-#              Проект
+-#.stage-post-block
+-#  .row
+-#    = render partial: 'post_short', collection: @posts
+-#
+-#
+-##render_plan_post
 
 
 

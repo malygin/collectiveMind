@@ -252,6 +252,9 @@ CollectiveMind::Application.routes.draw do
             post :get_concepts
           end
         end
+        member do
+          put :discuss_status
+        end
         # member do
         #   put :add_concept
         #   get :get_concept

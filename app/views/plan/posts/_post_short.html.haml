@@ -1,39 +1,48 @@
-.col-md-6
-  .post
+.col-md-6.plan-block{id: "plan_post_#{post_short.id}", data: {id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
+                            comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"}}
+  .post.post_type_3.no_head
     .post-header.white
-      .row
-        .col-md-10.col-xs-10
-          %h5.font-S4.bold
-            = trim_string(post_short.name, size = 50)
-        .col-md-2.col-xs-2
-          %h5.time
-            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
-    .post-body
+    .post-body.ch_action{"data-for" => "post_ch#{post_short.id}"}
       .media
         .media-left.text-center.gradient.post-poster
-          = image_tag 'no-ava.png', class: "img-circle img50"
+          = image_tag 'no-ava.png', class: "img-circle img40"
           %p.poster-name
             = post_short.user
+          %p.time.text-center
+            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
         .media-body.white-gray
-          .post-text
-            %p
-              = trim_string(post_short.goal, size = 50)
-    .contenthover
-      = link_to({action: :show, project: @project, id: post_short.id, asp: params[:asp]}, remote: true, id: 'show_record') do
-        .arrow
-          %i.fa.fa-angle-right
+          = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+            .post-text
+              %p
+                = trim_string(post_short.name, size = 50)
+          .post_cont_hover.post_tall.white{id: "post_ch#{post_short.id}"}
+            .wrapper.ps_cont.half_wheel_speed
+              .post_cont_inner
+                -post_short.comments.preview.each do |comment|
+                  .comment_preview
+                    %span.bold.com_date
+                      = Russian::strftime(comment.created_at,'%k:%M %d.%m.%y')
+                    %span.bold
+                      ="#{comment.user}:"
+                    =comment.content
     .post-bottom.white
       .row
-        .col-md-12.col-xs-12
+        .col-md-3.col-md-offset-9.col_padding_left_3
           .text-right.small_icons
-            %span.popup2
-              = post_short.comments.count
-              %i.fa.fa-comment
-            %span.popup2
-              = post_short.users_pro.count
-              %i.fa.fa-thumbs-up
-            %span.popup2
-              = post_short.users_against.count
-              %i.fa.fa-thumbs-down
-            %span.popup2
-              %i.fa.fa-exclamation-triangle.font_lighter_grey
+            %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}"}
+              %small(class="cc_post_#{post_short.id}")
+                = post_short.comments.count
+              %i.fa.fa-comment-o
+            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}") do
+              %span.popup2
+                %small(id="lk_post_#{post_short.id}" class="lk_post_#{post_short.id}")
+                  = post_short.users_pro.count
+                %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+            = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}") do
+              %span.popup2
+                %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
+                  = post_short.users_against.count
+                %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+            -if post_short.notes.present?
+              %span.popup2
+                %i.fa.fa-exclamation-triangle.font_lighter_grey

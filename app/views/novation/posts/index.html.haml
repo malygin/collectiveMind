@@ -4,8 +4,8 @@
     .col-md-7
       %span.stage-heading
         Пакеты идей
-        ="(#{@posts.count})"
-        -#%i.fa.fa-question-circle
+        %span#count_novations
+          ="(#{@posts.count})"
     .col-md-5
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
