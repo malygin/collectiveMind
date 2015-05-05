@@ -7,7 +7,7 @@ class Novation::Post < ActiveRecord::Base
   has_many :novation_post_concepts, class_name: 'Novation::PostConcept'
   has_many :novation_concepts, through: :novation_post_concepts, source: :concept_post, class_name: 'Concept::Post'
 
-  has_many :core_content_questions,  -> { where post_type: 'novation' }, :class_name => 'Core::ContentQuestion'
+  has_many :core_content_questions, -> { where post_type: 'novation' }, :class_name => 'Core::ContentQuestion'
 
   validates :status, presence: true
 
@@ -18,7 +18,7 @@ class Novation::Post < ActiveRecord::Base
   def attributes_for_form
     result = {}
     attributes_with_bool = %w(members_new members_education members_motivation resource_commands resource_support resource_competition confidence_commands confidence_remove_discontent confidence_negative_results)
-    (attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status fullness)).each do |attribute|
+    used_attributes.each do |attribute|
       attribute_parts = attribute.split('_')
       unless attribute_parts.last == 'bool'
         result[attribute_parts[0]] ||= []
@@ -27,6 +27,10 @@ class Novation::Post < ActiveRecord::Base
     end
 
     result
+  end
+
+  def used_attributes
+    (attribute_names - %w(id title user_id number_views status project_id created_at updated_at content approve_status fullness useful))
   end
 
   def update_fullness
