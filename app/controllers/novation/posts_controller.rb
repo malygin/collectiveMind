@@ -75,12 +75,15 @@ class Novation::PostsController < PostsController
   end
 
   def set_discontents
-    @discontents = Discontent::Post.by_project(@project)
-    @concepts = []
-    @discontents.each do |discontent|
-      @concepts << discontent.dispost_concepts
-    end
-    @concepts.flatten!.uniq!
+    # @todo Нужно выбирать все идеи, в том числе и те, которые не привязаны к несовершенствам
+    # @discontents = Discontent::Post.by_project(@project)
+    # @concepts = []
+    # @discontents.each do |discontent|
+    #   @concepts << discontent.dispost_concepts
+    # end
+    # @concepts.flatten!.uniq!
+    @discontents = @project.discontents
+    @concepts = @project.concept_ongoing_post
   end
 
   def novation_params
