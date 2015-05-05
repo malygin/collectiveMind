@@ -19,7 +19,7 @@
                     = discontent.content
                     - if current_user?(discontent.user)
                       = link_to discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}", class: 'btn btn_reset btn_del' do
-                        %i.fa.fa-trash-o.fa-lg
+                        %i.glyphicon.glyphicon-trash
                 %tr.post_text
                   %td.col-md-12
                     = link_to edit_discontent_post_path(@project, discontent), class: 'a_font_reset', id: "edit_discontent_#{discontent.id}" do

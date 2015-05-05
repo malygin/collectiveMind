@@ -15,11 +15,11 @@
           %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{comment.id}", :role => "menu"}
             %li
               %a.edit-comment{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}", href: "#", tabindex: "-1"}
-                %i.fa.fa-pencil>
+                %i.glyphicon.glyphicon-pencil>
                 Редактировать
             %li
               = link_to({action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
-                %i.fa.fa-close>
+                %i.glyphicon.glyphicon-remove>
                 Удалить
 
       -#%span.badge.badge_important.theme_back_color важно

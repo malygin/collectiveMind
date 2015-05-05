@@ -15,7 +15,7 @@
             %span.post_btns_cont
               - if current_user?(plan.user)
                 = link_to edit_plan_post_path(@project, plan), class: 'btn btn_reset btn_del a_font_reset', id: "edit_plan_#{plan.id}" do
-                  %i.fa.fa-pencil.fa-lg
+                  %i.glyphicon.glyphicon-pencil
                 = link_to plan_post_path(@project, plan), method: :delete, data: {confirm: t('confirm.delete_plan')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_plan_#{plan.id}" do
-                  %i.fa.fa-trash-o.fa-lg
+                  %i.glyphicon.glyphicon-trash
             %i.fa.fa-2x.fa-angle-right.font_grey
