@@ -128,6 +128,6 @@ class Plan::PostsController < PostsController
   end
 
   def plan_post_params
-    params.require(:plan_post).permit(:goal, :name, :content)
+    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant)
   end
 end

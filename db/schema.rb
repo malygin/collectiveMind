@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504204021) do
+ActiveRecord::Schema.define(version: 20150505084305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1132,6 +1132,7 @@ ActiveRecord::Schema.define(version: 20150504204021) do
     t.integer  "estimate_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.json     "tasks_gant"
   end
 
   add_index "plan_posts", ["created_at"], name: "index_plan_posts_on_created_at", using: :btree
