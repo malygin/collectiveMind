@@ -418,3 +418,7 @@ if $('#gantEditorTemplates').length >0
     ret.tasks[i].start = ret.tasks[i].start + offset
     i++;
   @ge.loadProject(ret);
+
+$('button#to_save_plan').click ->
+  $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
+  $('input#save_plan_post').click()
