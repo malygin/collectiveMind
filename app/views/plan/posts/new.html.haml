@@ -16,5 +16,5 @@
   .divider10
   - unless @post.published?
     %button.btn.add-button.type3.dark-green#to_publish_plan Опубликовать
-
-= render 'gantt_panel'
+- content_for :special_for_gantt do
+  = render 'gantt_panel'

@@ -88,11 +88,14 @@
       .main-block
         .container
           - if cabinet?
+            = yield :special_for_gantt
             .row
               = render partial: 'core/project_users/sidebar'
               = yield
           - else
             = yield
+        - if cabinet?
+          = yield :special_for_gantt
     #render_knowbase_posts
     = render 'shared/moderator_chat'
 
