@@ -337,16 +337,21 @@ class PostsController < ProjectsController
   def vote
     @post_vote = voting_model.find(params[:id])
     saved_vote = @post_vote.final_votings.where(user_id: current_user)
-    if saved_vote.present?
-      vote = saved_vote.first
-      if vote.status != params[:status].to_i
-        saved_vote.destroy_all
-        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
-      elsif vote.status == params[:status].to_i
-        saved_vote.destroy_all
-      end
+    if @post_vote.instance_of? Plan::Post
+      saved_vote.where(type_vote: params[:type_vote].to_i).destroy_all
+      @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
     else
-      @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+      if saved_vote.present?
+        vote = saved_vote.first
+        if vote.status != params[:status].to_i
+          saved_vote.destroy_all
+          @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+        elsif vote.status == params[:status].to_i
+          saved_vote.destroy_all
+        end
+      else
+        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+      end
     end
 
     # @post_vote = voting_model.find(params[:post_id])

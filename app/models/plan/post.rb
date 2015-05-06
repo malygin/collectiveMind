@@ -14,8 +14,14 @@ class Plan::Post < ActiveRecord::Base
 
   validates :project_id, :user_id, :status, presence: true
 
-  def voted(user)
-    self.voted_users.where(id: user)
+  def voted(user, type_vote)
+    self.final_votings.where(user_id: user, type_vote: type_vote)
+  end
+
+  def vote_progress(type_vote)
+    sum_all = self.final_votings.where(type_vote: type_vote).uniq.sum('plan_votings.status')
+    count_all = self.final_votings.where(type_vote: type_vote).uniq.count
+    count_all == 0 ? 0 : (sum_all.to_f/count_all.to_f).round
   end
 
 

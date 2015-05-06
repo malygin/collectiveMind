@@ -129,7 +129,22 @@
         data:
           status: status
 
+  this.vote_plan = ->
+    project_id = $(this).data('project')
+    post_id = $(this).data('id')
+    type_vote = $(this).data('type-vote')
+    status = $(this).data('status')
+    if project_id and post_id and type_vote and status
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/#{post_id}/vote"
+        type: "put"
+        dataType: "script"
+        data:
+          type_vote: type_vote
+          status: status
+
   $('.vote_controls').on('click', '.vote_button', this.vote_post)
+  $('.rate_buttons').on('click', '.btn_plan_vote', this.vote_plan)
 
 
 #----------
