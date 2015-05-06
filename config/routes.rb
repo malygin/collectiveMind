@@ -161,6 +161,7 @@ CollectiveMind::Application.routes.draw do
     put 'novation/posts/check_field', to: 'novation/posts#check_field'
     put 'plan/posts/check_field', to: 'plan/posts#check_field'
     put 'estimate/posts/check_field', to: 'estimate/posts#check_field'
+    put 'completion_proc/posts/check_field', to: 'completion_proc/posts#check_field'
 
     get 'collect_info/posts/to_work', to: 'collect_info/posts#to_work'
     get 'discontent/posts/to_work', to: 'discontent/posts#to_work'
@@ -272,6 +273,10 @@ CollectiveMind::Application.routes.draw do
     end
 
     namespace :estimate do
+      posts_routes
+    end
+
+    namespace :completion_proc do
       posts_routes
     end
 

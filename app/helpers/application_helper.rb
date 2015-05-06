@@ -867,6 +867,10 @@ module ApplicationHelper
       'novation_discuss'
     elsif name_controller == :plan_posts
       'plan_discuss'
+    elsif name_controller == :estimate_posts
+      'estimate_discuss'
+    elsif name_controller == :completion_proc_posts
+      'completion_proc_discuss'
     end
   end
 

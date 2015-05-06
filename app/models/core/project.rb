@@ -55,8 +55,9 @@ class Core::Project < ActiveRecord::Base
                  2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
                  3 => {name: 'Сбор идей', type_stage: :concept_posts, status: [7, 8]},
                  4 => {name: 'Объединение идей в пакеты', type_stage: :novation_posts, status: [9, 10]},
-                 5 => {name: 'Проектное предложение', type_stage: :plan_posts, status: [11, 12]},
-                 6 => {name: 'Оценивание проектов', type_stage: :estimate_posts, status: [13, 14, 15]}}.freeze
+                 5 => {name: 'Проектное предложение', type_stage: :plan_posts, status: [11]},
+                 6 => {name: 'Подведение итогов', type_stage: :estimate_posts, status: [12]},
+                 7 => {name: 'Завершение процедуры', type_stage: :completion_proc_posts, status: [13, 14, 15]}}.freeze
 
   TYPE_ACCESS = {
       0 => I18n.t('form.project.opened'),
@@ -83,10 +84,11 @@ class Core::Project < ActiveRecord::Base
       novation: 9,
       vote_novation: 10,
       plan: 11,
-      vote_plan: 12,
-      estimate: 13,
-      vote_final: 14,
-      wait_decision: 15,
+      # vote_plan: 12,
+      estimate: 12,
+      vote_final: 13,
+      wait_decision: 14,
+      wait_final: 15,
       complete: 20
   }.freeze
 
@@ -297,6 +299,8 @@ class Core::Project < ActiveRecord::Base
       when :plan_posts
         11
       when :estimate_posts
+        12
+      when :completion_proc_posts
         13
     end
   end
@@ -314,6 +318,8 @@ class Core::Project < ActiveRecord::Base
       when 'plan_post'
         11
       when 'estimate_post'
+        12
+      when 'completion_proc_post'
         13
       else
         0

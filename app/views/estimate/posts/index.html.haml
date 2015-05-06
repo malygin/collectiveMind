@@ -1,19 +1,144 @@
-.stage-info-sort-block
+.row
+  .container
+    .col-sm-3.col_padding_left_0.col_padding_right_3
+      .border_grey.col_rate_head
+        Проект
+    .col-sm-4.col_padding_left_3.col_padding_right_3
+      .border_grey.col_rate_head
+        Этот проект важен для проблемы, заданной заказчиком?
+    .col-sm-5.col_padding_right_0.col_padding_left_3
+      .border_grey.col_rate_head
+        Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
+.divider10
+.rating_line
   .row
-    %br/
-    .col-md-7
-      %span.stage-heading
-        Проекты
-        ="(#{@posts.count})"
-        %i.fa.fa-question-circle
+    .col-sm-3
+      .rating_user
+        .media-left
+          %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+        .media-body
+          %h5.media-heading.bold Винни-Пух
+          %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+    .col-sm-4.no_padding_col.divided
+      .rate_buttons.color_1.text-center
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+    .col-sm-5.col_padding_left_0.divided
+      .row
+        .col-md-10
+          .rate_buttons.color_2.text-center
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+        .col-md-2.col_padding_left_0.divided.text-center
+          %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+            %i.fa.fa-2x.font_grey.fa-angle-right
+.rating_line
+  .row
+    .col-sm-3
+      .rating_user
+        .media-left
+          %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+        .media-body
+          %h5.media-heading.bold Винни-Пух
+          %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+    .col-sm-4.no_padding_col.divided
+      .rate_buttons.color_1.text-center
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+        %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+    .col-sm-5.col_padding_left_0.divided
+      .row
+        .col-md-10
+          .rate_buttons.color_2.text-center
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 1
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 2
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 3
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 4
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 5
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 6
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 7
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 8
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 9
+            %button.btn.btn_reset.back_color_stage6.font_white.bold 10
+        .col-md-2.col_padding_left_0.divided.text-center
+          %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+            %i.fa.fa-2x.font_grey.fa-angle-right
+.rating_line
+  .row
+    .col-sm-3
+      .rating_user
+        .media-left
+          %img.media-object.img-circle.img40.img_bordered{:src => "img/ava-vinnie.jpg"}/
+        .media-body
+          %h5.media-heading.bold Винни-Пух
+          %p.font_color_stage6 Lorem ipsum lorem ipsum lorem ipsum
+    .col-sm-4.no_padding_col.divided
+      .rate_buttons.color_1
+        .progress
+          .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 100%;"}
+            10
+    .col-sm-5.col_padding_left_0.divided
+      .row
+        .col-md-10
+          .rate_buttons.color_2
+            .progress
+              .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "7", :role => "progressbar", :style => "width: 70%;"}
+                7
+        .col-md-2.col_padding_left_0.divided.text-center
+          %a.rating_a.open-popup{"data-placement" => "6", "data-target" => "1", :href => "#"}
+            %i.fa.fa-2x.font_grey.fa-angle-right
 
-  .stage-post-block
-    .row
-      = render partial: 'post_short', collection: @posts
 
 
 
-#render_estimate_post
+
+
+
+
+
+
+
+
+
+-#.stage-info-sort-block
+-#  .row
+-#    %br/
+-#    .col-md-7
+-#      %span.stage-heading
+-#        Проекты
+-#        ="(#{@posts.count})"
+-#        %i.fa.fa-question-circle
+-#
+-#  .stage-post-block
+-#    .row
+-#      = render partial: 'post_short', collection: @posts
+-#
+-#
+-#
+-##render_estimate_post
 
 
 
