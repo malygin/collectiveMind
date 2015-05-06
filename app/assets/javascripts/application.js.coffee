@@ -421,4 +421,5 @@ if $('#gantEditorTemplates').length >0
 
 $('button#to_save_plan').click ->
   $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
+  $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
   $('input#save_plan_post').click()
