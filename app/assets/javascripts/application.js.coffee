@@ -160,31 +160,6 @@ $ ->
     $('.item_expandable_imperf').not($(this).parents('.vote_item').find('.item_expandable_imperf')).removeClass 'opened'
     $(this).parents('.vote_item').find('.item_expandable_imperf').toggleClass 'opened'
 
-
-#  # Выбор несовершенства для идеи
-#  ch_its = $('.item', '.checked_items').length
-#  unch_its = $('.item', '.unchecked_items').length
-#  $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
-#
-#  $('.check_push_box').click ->
-#    item = $(this).closest('.item').detach()
-#    if $(this).is(':checked')
-#      $('.checked_items').append item
-#      ch_its++
-#      unch_its--
-#      $('.hideable_checks').show()
-#      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-#      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
-#    else
-#      $('.unchecked_items').append item
-#      ch_its--
-#      unch_its++
-#      if ch_its == 0
-#        $('.hideable_checks').hide()
-#      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
-#      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-#    return
-
   # Открывает и закрывает стикеры в кабинете
   $('.open_sticker').click ->
     stick_id = $(this).attr('data-for')
@@ -194,8 +169,6 @@ $ ->
     stick_id = $(this).attr('data-for')
     $(stick_id).hide()
     return
-
-
 
 #show comments panel on post hover
 @show_comments_hover = ->
@@ -329,8 +302,6 @@ $ ->
     $('.item_expandable').not($(this).parents()).removeClass 'opened'
     $(this).parents('.item_expandable').toggleClass 'opened'
     return
-
-
 
 # временно!!!
 # цвета для несовершенств
