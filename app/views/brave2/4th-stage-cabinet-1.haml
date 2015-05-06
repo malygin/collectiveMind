@@ -350,8 +350,9 @@
                       .row
                         .col-md-7
                           %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
-                            Деятельность
-                            (5)
+                            %span О пакете
+                            .progress.progress_collapse
+                              .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 80%;"}
                             %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-1.collapse
                             .divider5
@@ -362,7 +363,9 @@
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
                           %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
-                            Участники (2)
+                            Об участниках
+                            .progress.progress_collapse
+                              .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 80%;"}
                             %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-2.collapse
                             .divider5
@@ -373,8 +376,9 @@
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
                           %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
-                            Инструменты
-                            (10)
+                            О ресурсах
+                            .progress.progress_collapse
+                              .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 50%;"}
                             %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-3.collapse
                             .divider5
@@ -384,20 +388,10 @@
                             %h6.bold Опишите инструменты
                             %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
                             .divider15
-                          %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
-                            ЦУ (8)
-                            %i.fa.fa-plus.font_color_stage4.collapse_plus
-                          #cab4-4.collapse
-                            .divider5
-                            %h6.bold Опишите ЦУ
-                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "3", :type => "text"}
-                            .divider15
-                            %h6.bold Опишите ЦУ
-                            %textarea.form-control.ta_icon{:placeholder => "Опишите ожидаемые качества участников", :rows => "2", :type => "text"}
-                            .divider15
                           %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-5"}
-                            Внешняя среда
-                            (2)
+                            Об уверенности в проекте
+                            .progress.progress_collapse
+                              .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 20%;"}
                             %i.fa.fa-plus.font_color_stage4.collapse_plus
                           #cab4-5.collapse
                             .divider5
@@ -436,9 +430,9 @@
                                 Название пакета с идеями идеями пакета
                               %span.post_btns_cont
                                 %a.a_font_reset.btn.btn_reset.btn_del{:href => "4th-stage-cabinet-2.html"}
-                                  %i.fa.fa-pencil.fa-lg
+                                  %i.glyphicon.glyphicon-pencil
                                 %button.btn.btn_reset.btn_del
-                                  %i.fa.fa-trash-o.fa-lg
+                                  %i.glyphicon.glyphicon-trash
                         .post-bottom.white
                           .row
                             .col-md-1.col_padding_right_3
@@ -467,9 +461,9 @@
                                 Название пакета с идеями идеями пакета
                               %span.post_btns_cont
                                 %a.a_font_reset.btn.btn_reset.btn_del{:href => "4th-stage-cabinet-2.html"}
-                                  %i.fa.fa-pencil.fa-lg
+                                  %i.glyphicon.glyphicon-pencil
                                 %button.btn.btn_reset.btn_del
-                                  %i.fa.fa-trash-o.fa-lg
+                                  %i.glyphicon.glyphicon-trash
                         .post-bottom.white
                           .row
                             .col-md-1.col_padding_right_3
@@ -841,15 +835,3 @@
     %script{:src => "js/waypoints.min.js"}
     / Custom JS. Type your JS code in custom.js file
     %script{:src => "js/custom.js"}
-    :javascript
-      /* first stage slider */
-
-      $(document).ready(function () {
-
-          /* perfect scrollbar */
-          $('.ps_cont.half_wheel_speed').perfectScrollbar({
-              wheelSpeed: 0.3
-          });
-          $('.ps_cont').perfectScrollbar();
-
-      });

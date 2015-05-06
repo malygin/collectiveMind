@@ -382,6 +382,8 @@
                       .media-body.white-gray
                         .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
                           %p Взаимное недоверие четвероногих и пчёл
+                          .pull-right
+                            %i.fa.fa-angle-right
                         #post_ch1.post_cont_hover.post_tall.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
@@ -450,6 +452,8 @@
                       .media-body.white-gray
                         .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
                           %p Взаимное недоверие четвероногих и пчёл
+                          .pull-right
+                            %i.fa.fa-angle-right
                         #post_ch2.post_cont_hover.post_tall.white
                           .wrapper.ps_cont.half_wheel_speed
                             .post_cont_inner
@@ -615,187 +619,271 @@
                           lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
                           lorem ipsum lorem ipsum lorem ipsum lorem ipsum
                         .divider15
-                    .col-md-6.comment_col.popup_expandable_col.ps_cont
+                    .col-md-6.comment_col.popup_expandable_col
                       %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
-                        открыть описание проекта
+                        открыть
+                        описание проекта
                       .divider15
-                      #myCarousel.carousel.slide{"data-ride" => "carousel"}
-                        .carousel-inner{:role => "listbox"}
-                          .item.active
-                            #comment1.media.comment
-                              .media-left
-                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                              .media-body
-                                %h5.media-heading.bold Винни-Пух
-                                %span.comment_interf
-                                  %span.date_time.theme_font_color 15:28
-                                  %span.dropdown.edit_comment
-                                    %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                                      %i.fa.fa-cog.fa-lg.theme_font_color
-                                    %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
-                                      %li
-                                        %a{:href => "#", :tabindex => "-1"}
-                                          %i.glyphicon.glyphicon-pencil>
-                                          Редактировать
-                                      %li
-                                        %a{:href => "#", :tabindex => "-1"}
-                                          %i.glyphicon.glyphicon-remove>
-                                          Удалить
-                                  %span.badge.badge_important.theme_back_color важно
-                              %p.font_grey.bold
-                                Ничего не правда. Я люблю гулять, а от
-                                вашего дуба тень большая.
-                              .post-interfaces-buttons.text-left
-                                %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
-                                  %span.bold
-                                    9
-                                    %i.fa.fa-thumbs-up.theme_font_color
-                                %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
-                                  %span.bold
-                                    1
-                                    %i.fa.fa-thumbs-down.theme_font_color
-                                %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
-                                  %span.bold
-                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %form#reply_form_1.form-group.comment_add.collapse
-                              .input_cont
-                                %textarea{:placeholder => "Ваш комментарий"}
-                              %button.btn{:type => "button"}
+                      .modal-comment-body
+                        .ps_cont
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
                                 %span.bold
                                   %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
-                              %span 3 ответа
-                            #answers-3-1.com_answers.collapse
-                              .answers_subblock.level1
-                                #comment2.media.comment.unread
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    %h5.media-heading.bold Винни-Пух
-                                    %span.comment_interf
-                                      %span.date_time.theme_font_color 17:28
-                                      %span.badge.badge_important.theme_back_color важно
-                                  %p.font_grey.bold
-                                    Ничего не правда. Я люблю гулять,
-                                    а от вашего дуба тень большая.
-                                  .post-interfaces-buttons.text-left
-                                    %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
-                                      %span.bold
-                                        9
-                                        %i.fa.fa-thumbs-up.theme_font_color
-                                    %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
-                                      %span.bold
-                                        1
-                                        %i.fa.fa-thumbs-down.theme_font_color
-                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
-                                      %span.bold
-                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                                %form#reply_form_2.form-group.comment_add.collapse
-                                  .input_cont
-                                    %textarea{:placeholder => "Ваш комментарий"}
-                                  %button.btn{:type => "button"}
-                                    %span.bold
-                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                                #comment3.media.comment.unread
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    %h5.media-heading.bold Винни-Пух
-                                    %span.comment_interf
-                                      %span.date_time.theme_font_color 15:28
-                                      %span.dropdown.edit_comment
-                                        %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                                          %i.fa.fa-cog.fa-lg.theme_font_color
-                                        %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
-                                          %li
-                                            %a{:href => "#", :tabindex => "-1"}
-                                              %i.glyphicon.glyphicon-pencil>
-                                              Редактировать
-                                          %li
-                                            %a{:href => "#", :tabindex => "-1"}
-                                              %i.glyphicon.glyphicon-remove>
-                                              Удалить
-                                  %p.font_grey.bold
-                                    Ничего не правда. Я люблю гулять,
-                                    а от вашего дуба тень большая.
-                                  .post-interfaces-buttons.text-left
-                                    %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
-                                      %span.bold
-                                        9
-                                        %i.fa.fa-thumbs-up.theme_font_color
-                                    %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
-                                      %span.bold
-                                        1
-                                        %i.fa.fa-thumbs-down.theme_font_color
-                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
-                                      %span.bold
-                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                                %form#reply_form_3.form-group.comment_add.collapse
-                                  .input_cont
-                                    %textarea{:placeholder => "Ваш комментарий"}
-                                  %button.btn{:type => "button"}
-                                    %span.bold
-                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                              .answers_subblock.level2
-                                #comment4.media.comment
-                                  .media-left
-                                    %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                                  .media-body
-                                    %h5.media-heading.bold Винни-Пух
-                                    %span.comment_interf
-                                      %span.date_time.theme_font_color 15:28
-                                  %p.font_grey.bold
-                                    Ничего не правда. Я люблю гулять,
-                                    а от вашего дуба тень большая.
-                                  .post-interfaces-buttons.text-left
-                                    %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
-                                      %span.bold
-                                        9
-                                        %i.fa.fa-thumbs-up.theme_font_color
-                                    %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
-                                      %span.bold
-                                        1
-                                        %i.fa.fa-thumbs-down.theme_font_color
-                                    %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
-                                      %span.bold
-                                        %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                                %form#reply_form_4.form-group.comment_add.collapse
-                                  .input_cont
-                                    %textarea{:placeholder => "Ваш комментарий"}
-                                  %button.btn{:type => "button"}
-                                    %span.bold
-                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            #comment5.media.comment.unread
-                              .media-left
-                                %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
-                              .media-body
-                                %h5.media-heading.bold Винни-Пух
-                                %span.comment_interf
-                                  %span.date_time.theme_font_color 27.03.2015 15:28
-                                  %span.badge.badge_important.theme_back_color важно
-                              %p.font_grey.bold
-                                Ничего не правда. Я люблю гулять, а от
-                                вашего дуба тень большая.
-                              .post-interfaces-buttons.text-left
-                                %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
-                                  %span.bold
-                                    9
-                                    %i.fa.fa-thumbs-up.theme_font_color
-                                %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
-                                  %span.bold
-                                    1
-                                    %i.fa.fa-thumbs-down.theme_font_color
-                                %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
-                                  %span.bold
-                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                            %form#reply_form_5.form-group.comment_add.collapse
-                              .input_cont
-                                %textarea{:placeholder => "Ваш комментарий"}
-                              %button.btn{:type => "button"}
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
                                 %span.bold
                                   %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                          .item
-                          .item
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #answers-3-1.com_answers.collapse
+                            .answers_subblock.level1
+                              #comment2.media.comment.unread
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 17:28
+                                    %span.badge.badge_important.theme_back_color важно
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_2.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              #comment3.media.comment.unread
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.theme_font_color
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_3.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            .answers_subblock.level2
+                              #comment4.media.comment
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 15:28
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_4.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          #comment5.media.comment.unread
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 27.03.2015 15:28
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_5.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
                       .divider15
                       %form.form-group.comment_add.main_add
                         .input_cont
@@ -803,14 +891,6 @@
                         %button.btn{:type => "button"}
                           %span.bold
                             %i.fa.fa-reply.fa-rotate-180.theme_font_color
-                      %nav.text-center
-                        %ul.pagination
-                          %li
-                            %a.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"} 1
-                          %li
-                            %a.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"} 2
-                          %li
-                            %a.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"} 3
                   .divider25
               #tab-2.tab-pane.fade
                 .container.timeline-cont
@@ -999,9 +1079,3 @@
     %script{:src => "js/perfect-scrollbar.jquery.min.js"}
     / Custom JS. Type your JS code in custom.js file
     %script{:src => "js/custom.js"}
-    :javascript
-      /* perfect scrollbar */
-      $('.ps_cont.half_wheel_speed').perfectScrollbar({
-          wheelSpeed: 0.3
-      });
-      $('.ps_cont').perfectScrollbar();

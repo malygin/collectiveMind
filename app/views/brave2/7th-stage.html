@@ -33,43 +33,358 @@
             </div>
 
             <ul class="nav navbar-nav main_menu">
-                <li class="active"><a href="1st-stage.html">Процедура</a></li>
-                <li><a href="cabinet-stage1.html">Кабинет</a></li>
-                <li>
-                    <a href="#" class="has_circle popover_news" id="popover_news"
-                       data-toggle="popover"
-                       data-html="true"
-                       data-placement="bottom"
-                       data-content="
-                    <div class='popover_cont'>
-                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>
-                        <img src='img/icon-news-1.png'>
-                        <span class='news-tooltip-bottom-text'>добавлено</span>
+                <li class="active"><a href="1st-stage.html" class="menu_a">Процедура</a></li>
+                <li><a href="1st-stage-cabinet.html" class="menu_a">Кабинет</a></li>
+                <li><a href="rating.html" class="menu_a">Рейтинг</a></li>
+                <li class="has_dropwindow">
+                    <a class="has_circle drop_opener menu_a" data-dd-opener="dd_2">Мои уведомления<span
+                            class="top-circle">1</span>
                     </a>
-                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>
-                        <img src='img/icon-news-2.png'>
-                        <span class='news-tooltip-bottom-text'>комментария</span>
-                    </a>
-                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>
-                        <img src='img/icon-news-3.png'>
-                        <span class='top-circle'>36</span>
-                        <span class='news-tooltip-bottom-text'>пометок</span>
-                    </a>
-                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>
-                        <img src='img/icon-news-4.png'>
-                        <span class='top-circle'>1</span>
-                        <span class='news-tooltip-bottom-text'>отредактировано</span>
-                    </a>
-                    </div>">Новости<span class="top-circle">36</span></a></li>
+
+                    <div class="dropdown_window dd_435 notifications_drop text-left" id="dd_2">
+                        <div class="dd_wrapper">
+                            <div class="dd_top thin light-grey">
+                                <i class="fa fa-close fa-lg dd_close" data-dd-closer="dd_2"></i>
+                            </div>
+                            <div class="dd_bottom white">
+                                <div class="divider10"></div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="ps_cont">
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left font_color_stage4">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right font_color_stage4">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+                                                <a href="#" class="dd_notice moder">
+                                                        <span class="dd_n_cell left">
+                                                            <i class="fa fa-lg fa-exclamation-triangle"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right">
+                                                            <span>22:00 11.03.2015 <span class="bold">Модератор</span>:</span>
+                                                            <p>
+                                                                На этой стадии вам предстоит выявить проблемы, связанные
+                                                                с ситуацией, описанной в базе знаний, и принять участие
+                                                                в обсуждении проблем, выявленных другими участниками. В
+                                                                нашей терминологии такие проблемы называются
+                                                                несовершенствами.
+                                                            </p>
+                                                        </span>
+                                                </a>
+
+                                                <div class="dd_nav_divider font_color_stage4">
+                                                    <span>4</span>
+                                                </div>
+                                                <div class="divider10"></div>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left font_color_stage2">
+                                                            <i class="fa fa-lg fa-thumbs-up"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right font_color_stage2">
+                                                            <span>19:45 12.03.2015 <span class="bold">Liza</span> в теме</span>
+                                                        </span>
+                                                </a>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+
+                                                <div class="dd_nav_divider font_color_stage2">
+                                                    <span>2</span>
+                                                </div>
+                                                <div class="divider10"></div>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left font_color_stage1">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right font_color_stage1">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left font_color_stage1">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right font_color_stage1">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+                                                <a href="#" class="dd_notice">
+                                                        <span class="dd_n_cell left font_color_stage1">
+                                                            <i class="fa fa-lg fa-thumbs-down"></i>
+                                                        </span>
+                                                        <span class="dd_n_cell right font_color_stage1">
+                                                            <span>20:15 12.03.2015 <span class="bold">Рахель</span> в теме</span>
+                                                        </span>
+                                                </a>
+
+                                                <div class="dd_nav_divider font_color_stage1">
+                                                    <span>1</span>
+                                                </div>
+                                                <div class="divider10"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider20"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
 
             <div class="navbar-right text-right user_block font_grey">
-                <a href="#" class="book_icon">
+                <a href="#popup-database" class="book_icon open-popup-link tooltip1" data-toggle="tooltip"
+                   id="tooltip_db" data-trigger="manual" data-placement="bottom"
+                   title="Жмите сюда, чтобы освежить в памяти базу знаний.">
                 </a>
                 <span class="auth-divider"> |</span>
-                <a href="#" class="font_lighter_grey bold">
-                    <i class="fa fa-exclamation-triangle"></i>
-                </a>
+                    <span class="has_dropwindow">
+                        <button class="btn_reset font_lighter_grey bold drop_opener" data-dd-opener="dd_1">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </button>
+                        <div class="dropdown_window dd_570 expert_news_drop text-left" id="dd_1">
+                            <div class="dd_badge"><i class="fa fa-exclamation-triangle"></i>
+                                <small>Новости от эксперта</small>
+                            </div>
+                            <div class="dd_wrapper white">
+                                <div class="dd_top light-grey">
+                                    <i class="fa fa-close fa-lg dd_close" data-dd-closer="dd_1"></i>
+                                </div>
+                                <div class="dd_bottom">
+                                    <div class="divider20"></div>
+                                    <div class="container">
+                                        <div class="ps_cont">
+                                            <div class="dd_xprt_notice">
+                                                <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_1"
+                                                   aria-expanded="false">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            Представляем вам наш экспертный комитет:
+                                                        </div>
+                                                        <div class="col-xs-3 text-right">
+                                                            <span class="dd_n_date">1.12.2015</span> <i
+                                                                class="fa fa-angle-right font_grey bold"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="dd_xprt_article collapse" id="xprt_1">
+                                                <div class="dd_expert">
+                                                    <div class="divider20"></div>
+                                                    <div class="row">
+                                                        <div class="col-xs-3 text-center">
+                                                            <img src="http://placehold.it/100x100"
+                                                                 class="img100 img-circle">
+                                                        </div>
+                                                        <div class="col-xs-9">
+                                                            <h4>Лиза Школьник</h4>
+
+                                                            <p>Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                                                обширный опыт в интернет-маркетинге, включая создание и
+                                                                продвижение интернет-проектов, любые виды рекламы</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="divider20"></div>
+                                                </div>
+                                                <div class="dd_expert">
+                                                    <div class="divider20"></div>
+                                                    <div class="row">
+                                                        <div class="col-xs-3 text-center">
+                                                            <img src="http://placehold.it/100x100"
+                                                                 class="img100 img-circle">
+                                                        </div>
+                                                        <div class="col-xs-9">
+                                                            <h4>Владимир Видро</h4>
+
+                                                            <p>Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                                                обширный опыт в интернет-маркетинге, включая создание и
+                                                                продвижение интернет-проектов, любые виды рекламы</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="divider20"></div>
+                                                </div>
+                                                <div class="dd_expert">
+                                                    <div class="divider20"></div>
+                                                    <div class="row">
+                                                        <div class="col-xs-3 text-center">
+                                                            <img src="http://placehold.it/100x100"
+                                                                 class="img100 img-circle">
+                                                        </div>
+                                                        <div class="col-xs-9">
+                                                            <h4>Владимир Видро</h4>
+
+                                                            <p>Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                                                обширный опыт в интернет-маркетинге, включая создание и
+                                                                продвижение интернет-проектов, любые виды рекламы</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="divider20"></div>
+                                                </div>
+                                            </div>
+                                            <div class="dd_xprt_notice">
+                                                <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_2"
+                                                   aria-expanded="false">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            Заголовок 1
+                                                        </div>
+                                                        <div class="col-xs-3 text-right">
+                                                            <span class="dd_n_date">1.12.2015</span> <i
+                                                                class="fa fa-angle-right font_grey bold"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="dd_xprt_article collapse" id="xprt_2">
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+                                            </div>
+                                            <div class="dd_xprt_notice">
+                                                <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_3"
+                                                   aria-expanded="false">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            Заголовок 2
+                                                        </div>
+                                                        <div class="col-xs-3 text-right">
+                                                            <span class="dd_n_date">1.12.2015</span> <i
+                                                                class="fa fa-angle-right font_grey bold"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="dd_xprt_article collapse" id="xprt_3">
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+                                            </div>
+                                            <div class="dd_xprt_notice">
+                                                <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_4"
+                                                   aria-expanded="false">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            Заголовок 3
+                                                        </div>
+                                                        <div class="col-xs-3 text-right">
+                                                            <span class="dd_n_date">1.12.2015</span> <i
+                                                                class="fa fa-angle-right font_grey bold"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="dd_xprt_article collapse" id="xprt_4">
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+                                            </div>
+                                            <div class="dd_xprt_notice">
+                                                <a class="a_font_reset collapsed" data-toggle="collapse" href="#xprt_5"
+                                                   aria-expanded="false">
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            Заголовок 4
+                                                        </div>
+                                                        <div class="col-xs-3 text-right">
+                                                            <span class="dd_n_date">1.12.2015</span> <i
+                                                                class="fa fa-angle-right font_grey bold"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="dd_xprt_article collapse" id="xprt_5">
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+
+                                                <p>
+                                                    На этой стадии вам предстоит выявить проблемы, связанные с
+                                                    ситуацией, описанной в базе знаний, и принять участие
+                                                    в обсуждении проблем, выявленных другими участниками. В нашей
+                                                    терминологии такие проблемы называются несовершенствами.
+                                                    В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                                                    взгляд, совершенно необходимо устранить для
+                                                    исправления текущей ситуации.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="divider20"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
                 <span class="auth-divider"> |</span>
                 <a href="#" class="font_grey bold">
                     <i class="fa fa-globe font_lighter_grey"></i>
@@ -136,73 +451,108 @@
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
 
-                                <div data-slide-no="0" class="item">
+                                <div data-slide-no="0" class="item active">
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
 
                                             <div class="project_win">
+
                                                 <div class="radial-gradient">
-                                                    <div class="row">
-                                                        <div class="col-md-10 col-md-offset-1">
-                                                            <div class="post-win">
-                                                                <h5 class="text-center">
-                                                                    Дорогие участники процедуры “Видра”!</h5>
+                                                    <div class="ps_cont">
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
 
-                                                                <p>Обеспечить рост продаж за счет рекомендаций в
-                                                                    аптеке.
-                                                                    Генерация роста продаж через активные
-                                                                    рекомендации
-                                                                    первостольника и поддержка DTC - активности
-                                                                    в
-                                                                    аптеке
-                                                                </p>
+                                                                <div class="post-accost">
+                                                                    <h5 class="text-center">
+                                                                        Дорогие участники процедуры “Видра”!</h5>
 
-                                                                <p>Обеспечить высокую отдачу от одного
-                                                                    Медицинского
-                                                                    представителя в аптеку за счет решений,
-                                                                    разрабатываемых
-                                                                    в
-                                                                    проекте с учетом новой стратегии в компании
-                                                                    2014-2018
-                                                                    гг,
-                                                                    ключевые таргентые аудитории в рамках
-                                                                    проекта -
-                                                                    ПС-ки,
-                                                                    ЗА,
-                                                                    аптеки и АС.</p>
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
 
-                                                                <p>Обеспечить рост продаж за счет рекомендаций в
-                                                                    аптеке.
-                                                                    Генерация роста продаж через активные
-                                                                    рекомендации
-                                                                    первостольника и поддержка DTC - активности
-                                                                    в
-                                                                    аптеке
-                                                                </p>
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
 
-                                                                <p>Обеспечить высокую отдачу от одного
-                                                                    Медицинского
-                                                                    представителя в аптеку за счет решений,
-                                                                    разрабатываемых
-                                                                    в
-                                                                    проекте с учетом новой стратегии в компании
-                                                                    2014-2018
-                                                                    гг,
-                                                                    ключевые таргентые аудитории в рамках
-                                                                    проекта -
-                                                                    ПС-ки,
-                                                                    ЗА,
-                                                                    аптеки и АС.</p>
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
 
-                                                                <p>Обеспечить рост продаж за счет рекомендаций в
-                                                                    аптеке.
-                                                                    Генерация роста продаж через активные
-                                                                    рекомендации
-                                                                    первостольника и поддержка DTC - активности
-                                                                    в
-                                                                    аптеке
-                                                                </p>
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
+
+                                                                    <p>Обеспечить высокую отдачу от одного
+                                                                        Медицинского
+                                                                        представителя в аптеку за счет решений,
+                                                                        разрабатываемых
+                                                                        в
+                                                                        проекте с учетом новой стратегии в компании
+                                                                        2014-2018
+                                                                        гг,
+                                                                        ключевые таргентые аудитории в рамках
+                                                                        проекта -
+                                                                        ПС-ки,
+                                                                        ЗА,
+                                                                        аптеки и АС.</p>
+
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
+
+                                                                    <p>Обеспечить высокую отдачу от одного
+                                                                        Медицинского
+                                                                        представителя в аптеку за счет решений,
+                                                                        разрабатываемых
+                                                                        в
+                                                                        проекте с учетом новой стратегии в компании
+                                                                        2014-2018
+                                                                        гг,
+                                                                        ключевые таргентые аудитории в рамках
+                                                                        проекта -
+                                                                        ПС-ки,
+                                                                        ЗА,
+                                                                        аптеки и АС.</p>
+
+                                                                    <p>Обеспечить рост продаж за счет рекомендаций в
+                                                                        аптеке.
+                                                                        Генерация роста продаж через активные
+                                                                        рекомендации
+                                                                        первостольника и поддержка DTC - активности
+                                                                        в
+                                                                        аптеке
+                                                                    </p>
+
+                                                                    <p class="text-center">
+                                                                        <img src="img/thanks.png"/></p>
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +563,7 @@
                                     </div>
                                     <div class="divider10"></div>
                                 </div>
-                                <div data-slide-no="1" class="item active">
+                                <div data-slide-no="1" class="item">
                                     <div class="row">
                                         <div class="col-md-10 col-md-offset-1">
 
@@ -397,10 +747,10 @@
                             <ul class="list_win list-unstyled list-inline  text-center rate_buttons">
                                 <li class="arrow" href="#myCarousel" role="button" data-slide="prev"><i
                                         class="fa fa-angle-left"></i></li>
-                                <li data-target="#myCarousel" data-slide-to="0" class="myCarousel-target">
+                                <li data-target="#myCarousel" data-slide-to="0" class="myCarousel-target active">
                                     <button class="btn btn_reset back_color_stage7 font_white bold">1</button>
                                 </li>
-                                <li data-target="#myCarousel" data-slide-to="1" class="myCarousel-target active">
+                                <li data-target="#myCarousel" data-slide-to="1" class="myCarousel-target">
                                     <button class="btn btn_reset back_color_stage7 font_white bold">2</button>
                                 </li>
                                 <li data-target="#myCarousel" data-slide-to="2" class="myCarousel-target">
@@ -652,6 +1002,9 @@
 <script src="js/excanvas.js"></script>
 <!-- jQuery Knob -->
 <script src="js/jquery.knob.js"></script>
+<!-- Perfect scrollbar -->
+<script src='js/perfect-scrollbar.jquery.min.js'></script>
+<script src="js/waypoints.min.js"></script>
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
 </body>

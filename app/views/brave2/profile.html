@@ -169,30 +169,6 @@
 <script src="js/respond.min.js"></script>
 <!-- HTML5 Support for IE -->
 <script src="js/html5shiv.js"></script>
-
-<!-- Javascript for this page -->
-<script type="text/javascript">
-    $('.cabinet-aspect-form-checkb input').click(function () {
-        var me = $(this);
-        var attrname = me.attr('name');
-        $("input[name='" + attrname + "']").removeClass('active-radio');
-        me.addClass('active-radio');
-    });
-    $('.cabinet-tabs-subblock-2ndlev-li a').click(function () {
-        if (!$(this).hasClass('active-2ndlev-li')) {
-            $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-                $(this).removeClass('active-2ndlev-li');
-            });
-            $(this).addClass('active-2ndlev-li');
-        }
-        ;
-    });
-    $('.cabinet-tabs .cabinet-tabs-subblock>li>a').click(function () {
-        $('.cabinet-tabs-subblock-2ndlev-li a').each(function () {
-            $(this).removeClass('active-2ndlev-li');
-        });
-    });
-</script>
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
 </body>

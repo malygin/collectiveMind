@@ -727,11 +727,11 @@
                           %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
                             %li
                               %a{:href => "#", :tabindex => "-1"}
-                                %i.fa.fa-pencil>
+                                %i.glyphicon.glyphicon-pencil>
                                 Редактировать
                             %li
                               %a{:href => "#", :tabindex => "-1"}
-                                %i.fa.fa-close>
+                                %i.glyphicon.glyphicon-remove>
                                 Удалить
                         %span.badge.badge_important.theme_back_color важно
                     %p.font_grey.bold
@@ -801,11 +801,11 @@
                               %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
                                 %li
                                   %a{:href => "#", :tabindex => "-1"}
-                                    %i.fa.fa-pencil>
+                                    %i.glyphicon.glyphicon-pencil>
                                     Редактировать
                                 %li
                                   %a{:href => "#", :tabindex => "-1"}
-                                    %i.fa.fa-close>
+                                    %i.glyphicon.glyphicon-remove>
                                     Удалить
                         %p.font_grey.bold
                           Ничего не правда. Я люблю гулять, а от вашего дуба
@@ -1462,15 +1462,3 @@
     %script{:src => "js/perfect-scrollbar.jquery.min.js"}
     / Custom JS. Type your JS code in custom.js file
     %script{:src => "js/custom.js"}
-    :javascript
-      $('.open_welcome_popup').magnificPopup({
-          type: 'inline',
-          midClick: true
-      });
-      $('.open_welcome_popup').magnificPopup('open');
-
-      /* perfect scrollbar */
-      $('.ps_cont.half_wheel_speed').perfectScrollbar({
-          wheelSpeed: 0.3
-      });
-      $('.ps_cont').perfectScrollbar();

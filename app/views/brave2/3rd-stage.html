@@ -1172,53 +1172,212 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6 comment_col popup_expandable_col ps_cont">
+                        <div class="col-md-6 comment_col popup_expandable_col">
                             <button class="expand_button add_col btn_reset theme_font_color bold" type="button"
                                     data-toggle="collapse" data-target=".popup_collapsable_col" data-col="6">открыть
                                 описание проекта
                             </button>
                             <div class="divider15"></div>
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner" role="listbox">
+                            <div class="modal-comment-body ">
+                                <div class="ps_cont">
+                                    <div class="media comment" id="comment1">
+                                        <div class="media-left">
+                                            <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="media-heading bold">Винни-Пух</h5>
+                                                    <span class="comment_interf">
+                                                        <span class="date_time theme_font_color">15:28</span>
+                                                        <span class="dropdown edit_comment">
+                                                            <button class="btn_reset" id="edit_comment1" type="button"
+                                                                    data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                                    class="fa fa-cog fa-lg theme_font_color"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu"
+                                                                aria-labelledby="edit_comment1">
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-pencil"></i>Редактировать</a>
+                                                                </li>
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-remove"></i>Удалить</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                        <span class="badge badge_important theme_back_color">важно</span>
+                                                    </span>
+                                        </div>
+                                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
+                                            тень большая.</p>
 
-                                    <div class="item active">
-                                        <div class="media comment" id="comment1">
+                                        <div class="post-interfaces-buttons text-left">
+                                            <button type="button" data-for="comment1" data-rate-action="like"
+                                                    class="rate_button"><span class="bold">9 <i
+                                                    class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                            <button type="button" data-for="comment1" data-rate-action="dislike"
+                                                    class="rate_button"><span class="bold">1 <i
+                                                    class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                            <button type="button" data-toggle="collapse" data-target="#reply_form_1"
+                                                    class="reply_btn collapsed"><span class="bold"><i
+                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <form class="form-group comment_add collapse" id="reply_form_1">
+                                        <div class="input_cont">
+                                            <textarea placeholder="Ваш комментарий"></textarea>
+                                        </div>
+                                        <button class="btn" type="button"><span class="bold"><i
+                                                class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                        </button>
+                                    </form>
+                                    <a class="answers_collapse theme_font_color" data-toggle="collapse"
+                                       href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
+
+                                    <div class="media comment" id="comment1">
+                                        <div class="media-left">
+                                            <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="media-heading bold">Винни-Пух</h5>
+                                                    <span class="comment_interf">
+                                                        <span class="date_time theme_font_color">15:28</span>
+                                                        <span class="dropdown edit_comment">
+                                                            <button class="btn_reset" id="edit_comment1" type="button"
+                                                                    data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                                    class="fa fa-cog fa-lg theme_font_color"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu"
+                                                                aria-labelledby="edit_comment1">
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-pencil"></i>Редактировать</a>
+                                                                </li>
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-remove"></i>Удалить</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                        <span class="badge badge_important theme_back_color">важно</span>
+                                                    </span>
+                                        </div>
+                                        <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
+                                            тень большая.</p>
+
+                                        <div class="post-interfaces-buttons text-left">
+                                            <button type="button" data-for="comment1" data-rate-action="like"
+                                                    class="rate_button"><span class="bold">9 <i
+                                                    class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                            <button type="button" data-for="comment1" data-rate-action="dislike"
+                                                    class="rate_button"><span class="bold">1 <i
+                                                    class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                            <button type="button" data-toggle="collapse" data-target="#reply_form_1"
+                                                    class="reply_btn collapsed"><span class="bold"><i
+                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <form class="form-group comment_add collapse" id="reply_form_1">
+                                        <div class="input_cont">
+                                            <textarea placeholder="Ваш комментарий"></textarea>
+                                        </div>
+                                        <button class="btn" type="button"><span class="bold"><i
+                                                class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                        </button>
+                                    </form>
+                                    <a class="answers_collapse theme_font_color" data-toggle="collapse"
+                                       href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
+
+                                    <div class="media comment" id="comment1">
+                                    <div class="media-left">
+                                        <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                                                    <span class="comment_interf">
+                                                        <span class="date_time theme_font_color">15:28</span>
+                                                        <span class="dropdown edit_comment">
+                                                            <button class="btn_reset" id="edit_comment1" type="button"
+                                                                    data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                                    class="fa fa-cog fa-lg theme_font_color"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu"
+                                                                aria-labelledby="edit_comment1">
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-pencil"></i>Редактировать</a>
+                                                                </li>
+                                                                <li><a tabindex="-1" href="#"><i
+                                                                        class="glyphicon glyphicon-remove"></i>Удалить</a>
+                                                                </li>
+                                                            </ul>
+                                                        </span>
+                                                        <span class="badge badge_important theme_back_color">важно</span>
+                                                    </span>
+                                    </div>
+                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
+                                        тень большая.</p>
+
+                                    <div class="post-interfaces-buttons text-left">
+                                        <button type="button" data-for="comment1" data-rate-action="like"
+                                                class="rate_button"><span class="bold">9 <i
+                                                class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                        <button type="button" data-for="comment1" data-rate-action="dislike"
+                                                class="rate_button"><span class="bold">1 <i
+                                                class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                        <button type="button" data-toggle="collapse" data-target="#reply_form_1"
+                                                class="reply_btn collapsed"><span class="bold"><i
+                                                class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <form class="form-group comment_add collapse" id="reply_form_1">
+                                    <div class="input_cont">
+                                        <textarea placeholder="Ваш комментарий"></textarea>
+                                    </div>
+                                    <button class="btn" type="button"><span class="bold"><i
+                                            class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                    </button>
+                                </form>
+                                <a class="answers_collapse theme_font_color" data-toggle="collapse"
+                                   href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
+
+                                <div class="com_answers collapse" id="answers-3-1">
+                                    <div class="answers_subblock level1">
+                                        <div class="media comment unread" id="comment2">
                                             <div class="media-left">
-                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                                <img class="media-object img35 img-circle"
+                                                     src="img/ava-vinnie.jpg">
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading bold">Винни-Пух</h5>
                         <span class="comment_interf">
-                            <span class="date_time theme_font_color">15:28</span>
-                            <span class="dropdown edit_comment">
-                                <button class="btn_reset" id="edit_comment1" type="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false"><i
-                                        class="fa fa-cog fa-lg theme_font_color"></i></button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a></li>
-                                    <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
-                                </ul>
-                            </span>
+                            <span class="date_time theme_font_color">17:28</span>
                             <span class="badge badge_important theme_back_color">важно</span>
                         </span>
                                             </div>
-                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
-                                                тень большая.</p>
+                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
+                                                вашего дуба тень большая.</p>
 
                                             <div class="post-interfaces-buttons text-left">
-                                                <button type="button" data-for="comment1" data-rate-action="like"
-                                                        class="rate_button"><span class="bold">9 <i
-                                                        class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                                <button type="button" data-for="comment1" data-rate-action="dislike"
-                                                        class="rate_button"><span class="bold">1 <i
-                                                        class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                                <button type="button" data-toggle="collapse" data-target="#reply_form_1"
-                                                        class="reply_btn collapsed"><span class="bold"><i
-                                                        class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                                <button type="button" data-for="comment2"
+                                                        data-rate-action="like" class="rate_button"><span
+                                                        class="bold">9 <i
+                                                        class="fa fa-thumbs-up theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-for="comment2"
+                                                        data-rate-action="dislike" class="rate_button"><span
+                                                        class="bold">1 <i
+                                                        class="fa fa-thumbs-down theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-toggle="collapse"
+                                                        data-target="#reply_form_2" class="reply_btn collapsed">
+                                                            <span class="bold"><i
+                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
                                                 </button>
                                             </div>
                                         </div>
-                                        <form class="form-group comment_add collapse" id="reply_form_1">
+                                        <form class="form-group comment_add collapse" id="reply_form_2">
                                             <div class="input_cont">
                                                 <textarea placeholder="Ваш комментарий"></textarea>
                                             </div>
@@ -1226,59 +1385,13 @@
                                                     class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
                                             </button>
                                         </form>
-                                        <a class="answers_collapse theme_font_color" data-toggle="collapse"
-                                           href="#answers-3-1" aria-expanded="false"><span>3 ответа</span></a>
-
-                                        <div class="com_answers collapse" id="answers-3-1">
-                                            <div class="answers_subblock level1">
-                                                <div class="media comment unread" id="comment2">
-                                                    <div class="media-left">
-                                                        <img class="media-object img35 img-circle"
-                                                             src="img/ava-vinnie.jpg">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">17:28</span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
-                                                    </div>
-                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
-                                                        вашего дуба тень большая.</p>
-
-                                                    <div class="post-interfaces-buttons text-left">
-                                                        <button type="button" data-for="comment2"
-                                                                data-rate-action="like" class="rate_button"><span
-                                                                class="bold">9 <i
-                                                                class="fa fa-thumbs-up theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-for="comment2"
-                                                                data-rate-action="dislike" class="rate_button"><span
-                                                                class="bold">1 <i
-                                                                class="fa fa-thumbs-down theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-toggle="collapse"
-                                                                data-target="#reply_form_2" class="reply_btn collapsed">
-                                                            <span class="bold"><i
-                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <form class="form-group comment_add collapse" id="reply_form_2">
-                                                    <div class="input_cont">
-                                                        <textarea placeholder="Ваш комментарий"></textarea>
-                                                    </div>
-                                                    <button class="btn" type="button"><span class="bold"><i
-                                                            class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                    </button>
-                                                </form>
-                                                <div class="media comment unread" id="comment3">
-                                                    <div class="media-left">
-                                                        <img class="media-object img35 img-circle"
-                                                             src="img/ava-vinnie.jpg">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                                        <div class="media comment unread" id="comment3">
+                                            <div class="media-left">
+                                                <img class="media-object img35 img-circle"
+                                                     src="img/ava-vinnie.jpg">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading bold">Винни-Пух</h5>
                                 <span class="comment_interf">
                                     <span class="date_time theme_font_color">15:28</span>
                                     <span class="dropdown edit_comment">
@@ -1286,115 +1399,36 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                 class="fa fa-cog fa-lg theme_font_color"></i></button>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="edit_comment1">
-                                            <li><a tabindex="-1" href="#"><i class="fa fa-pencil"></i>Редактировать</a>
+                                            <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-pencil"></i>Редактировать</a>
                                             </li>
-                                            <li><a tabindex="-1" href="#"><i class="fa fa-close"></i>Удалить</a></li>
+                                            <li><a tabindex="-1" href="#"><i class="glyphicon glyphicon-remove"></i>Удалить</a>
+                                            </li>
                                         </ul>
                                     </span>
                                 </span>
-                                                    </div>
-                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
-                                                        вашего дуба тень большая.</p>
-
-                                                    <div class="post-interfaces-buttons text-left">
-                                                        <button type="button" data-for="comment3"
-                                                                data-rate-action="like" class="rate_button"><span
-                                                                class="bold">9 <i
-                                                                class="fa fa-thumbs-up theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-for="comment3"
-                                                                data-rate-action="dislike" class="rate_button"><span
-                                                                class="bold">1 <i
-                                                                class="fa fa-thumbs-down theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-toggle="collapse"
-                                                                data-target="#reply_form_3" class="reply_btn collapsed">
-                                                            <span class="bold"><i
-                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <form class="form-group comment_add collapse" id="reply_form_3">
-                                                    <div class="input_cont">
-                                                        <textarea placeholder="Ваш комментарий"></textarea>
-                                                    </div>
-                                                    <button class="btn" type="button"><span class="bold"><i
-                                                            class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                    </button>
-                                                </form>
                                             </div>
-                                            <div class="answers_subblock level2">
-                                                <div class="media comment" id="comment4">
-                                                    <div class="media-left">
-                                                        <img class="media-object img35 img-circle"
-                                                             src="img/ava-vinnie.jpg">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">15:28</span>
-                        </span>
-                                                    </div>
-                                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
-                                                        вашего дуба тень большая.</p>
-
-                                                    <div class="post-interfaces-buttons text-left">
-                                                        <button type="button" data-for="comment4"
-                                                                data-rate-action="like" class="rate_button"><span
-                                                                class="bold">9 <i
-                                                                class="fa fa-thumbs-up theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-for="comment4"
-                                                                data-rate-action="dislike" class="rate_button"><span
-                                                                class="bold">1 <i
-                                                                class="fa fa-thumbs-down theme_font_color"></i></span>
-                                                        </button>
-                                                        <button type="button" data-toggle="collapse"
-                                                                data-target="#reply_form_4" class="reply_btn collapsed">
-                                                            <span class="bold"><i
-                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <form class="form-group comment_add collapse" id="reply_form_4">
-                                                    <div class="input_cont">
-                                                        <textarea placeholder="Ваш комментарий"></textarea>
-                                                    </div>
-                                                    <button class="btn" type="button"><span class="bold"><i
-                                                            class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="media comment unread" id="comment5">
-                                            <div class="media-left">
-                                                <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading bold">Винни-Пух</h5>
-                        <span class="comment_interf">
-                            <span class="date_time theme_font_color">27.03.2015 15:28</span>
-                            <span class="badge badge_important theme_back_color">важно</span>
-                        </span>
-                                            </div>
-                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
-                                                тень большая.</p>
+                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
+                                                вашего дуба тень большая.</p>
 
                                             <div class="post-interfaces-buttons text-left">
-                                                <button type="button" data-for="comment5" data-rate-action="like"
-                                                        class="rate_button"><span class="bold">9 <i
-                                                        class="fa fa-thumbs-up theme_font_color"></i></span></button>
-                                                <button type="button" data-for="comment5" data-rate-action="dislike"
-                                                        class="rate_button"><span class="bold">1 <i
-                                                        class="fa fa-thumbs-down theme_font_color"></i></span></button>
-                                                <button type="button" data-toggle="collapse" data-target="#reply_form_5"
-                                                        class="reply_btn collapsed"><span class="bold"><i
-                                                        class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                                <button type="button" data-for="comment3"
+                                                        data-rate-action="like" class="rate_button"><span
+                                                        class="bold">9 <i
+                                                        class="fa fa-thumbs-up theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-for="comment3"
+                                                        data-rate-action="dislike" class="rate_button"><span
+                                                        class="bold">1 <i
+                                                        class="fa fa-thumbs-down theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-toggle="collapse"
+                                                        data-target="#reply_form_3" class="reply_btn collapsed">
+                                                            <span class="bold"><i
+                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
                                                 </button>
                                             </div>
                                         </div>
-                                        <form class="form-group comment_add collapse" id="reply_form_5">
+                                        <form class="form-group comment_add collapse" id="reply_form_3">
                                             <div class="input_cont">
                                                 <textarea placeholder="Ваш комментарий"></textarea>
                                             </div>
@@ -1403,15 +1437,90 @@
                                             </button>
                                         </form>
                                     </div>
-                                    <div class="item">
-                                    </div>
-                                    <div class="item">
-                                    </div>
+                                    <div class="answers_subblock level2">
+                                        <div class="media comment" id="comment4">
+                                            <div class="media-left">
+                                                <img class="media-object img35 img-circle"
+                                                     src="img/ava-vinnie.jpg">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                        <span class="comment_interf">
+                            <span class="date_time theme_font_color">15:28</span>
+                        </span>
+                                            </div>
+                                            <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от
+                                                вашего дуба тень большая.</p>
 
+                                            <div class="post-interfaces-buttons text-left">
+                                                <button type="button" data-for="comment4"
+                                                        data-rate-action="like" class="rate_button"><span
+                                                        class="bold">9 <i
+                                                        class="fa fa-thumbs-up theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-for="comment4"
+                                                        data-rate-action="dislike" class="rate_button"><span
+                                                        class="bold">1 <i
+                                                        class="fa fa-thumbs-down theme_font_color"></i></span>
+                                                </button>
+                                                <button type="button" data-toggle="collapse"
+                                                        data-target="#reply_form_4" class="reply_btn collapsed">
+                                                            <span class="bold"><i
+                                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <form class="form-group comment_add collapse" id="reply_form_4">
+                                            <div class="input_cont">
+                                                <textarea placeholder="Ваш комментарий"></textarea>
+                                            </div>
+                                            <button class="btn" type="button"><span class="bold"><i
+                                                    class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="media comment unread" id="comment5">
+                                    <div class="media-left">
+                                        <img class="media-object img35 img-circle" src="img/ava-vinnie.jpg">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading bold">Винни-Пух</h5>
+                        <span class="comment_interf">
+                            <span class="date_time theme_font_color">27.03.2015 15:28</span>
+                            <span class="badge badge_important theme_back_color">важно</span>
+                        </span>
+                                    </div>
+                                    <p class="font_grey bold">Ничего не правда. Я люблю гулять, а от вашего дуба
+                                        тень большая.</p>
+
+                                    <div class="post-interfaces-buttons text-left">
+                                        <button type="button" data-for="comment5" data-rate-action="like"
+                                                class="rate_button"><span class="bold">9 <i
+                                                class="fa fa-thumbs-up theme_font_color"></i></span></button>
+                                        <button type="button" data-for="comment5" data-rate-action="dislike"
+                                                class="rate_button"><span class="bold">1 <i
+                                                class="fa fa-thumbs-down theme_font_color"></i></span></button>
+                                        <button type="button" data-toggle="collapse" data-target="#reply_form_5"
+                                                class="reply_btn collapsed"><span class="bold"><i
+                                                class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <form class="form-group comment_add collapse" id="reply_form_5">
+                                    <div class="input_cont">
+                                        <textarea placeholder="Ваш комментарий"></textarea>
+                                    </div>
+                                    <button class="btn" type="button"><span class="bold"><i
+                                            class="fa fa-reply fa-rotate-180 theme_font_color"></i></span>
+                                    </button>
+                                </form>
                                 </div>
                             </div>
-
                             <div class="divider15"></div>
+
+
                             <form class="form-group comment_add main_add">
                                 <div class="input_cont">
                                     <textarea placeholder="Ваш комментарий"></textarea>
@@ -1419,16 +1528,6 @@
                                 <button class="btn" type="button"><span class="bold"><i
                                         class="fa fa-reply fa-rotate-180 theme_font_color"></i></span></button>
                             </form>
-                            <nav class="text-center">
-                                <ul class="pagination">
-                                    <li><a data-target="#myCarousel" data-slide-to="0" class="myCarousel-target active">1</a>
-                                    </li>
-                                    <li><a data-target="#myCarousel" data-slide-to="1" class="myCarousel-target">2</a>
-                                    </li>
-                                    <li><a data-target="#myCarousel" data-slide-to="2" class="myCarousel-target">3</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -1777,18 +1876,5 @@
 <script src='js/perfect-scrollbar.jquery.min.js'></script>
 <!-- Custom JS. Type your JS code in custom.js file -->
 <script src="js/custom.js"></script>
-<script>
-    $('.open_welcome_popup').magnificPopup({
-        type: 'inline',
-        midClick: true
-    });
-    $('.open_welcome_popup').magnificPopup('open');
-
-    /* perfect scrollbar */
-    $('.ps_cont.half_wheel_speed').perfectScrollbar({
-        wheelSpeed: 0.3
-    });
-    $('.ps_cont').perfectScrollbar();
-</script>
 </body>
 </html>

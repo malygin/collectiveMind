@@ -46,6 +46,7 @@ p {
     height: 100%;
     border-radius: 6px;
     background: radial-gradient(circle, rgba(253, 255, 254, 0.70) 30%, rgba(227, 232, 236, 0.7) 60%);
+    padding-bottom: 40px;
 }
 
 .poster_win {
@@ -63,20 +64,24 @@ p {
     margin-top: 20px;
 }
 
-.post-win {
+.post-win, .post-accost {
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-.post-win h4 {
+.post-accost {
+    padding-left: 10px;
+}
+
+.post-win h4, .post-accost h4 {
     line-height: 1.4;
 }
 
-.post-win h5 {
+.post-win h5, .post-accost h5 {
     margin-top: 30px;
 }
 
-.post-win p {
+.post-win p, .post-accost p {
     font-size: 13px;
     margin-top: 20px;
 }
@@ -113,7 +118,7 @@ p {
 
 .letters {
     height: 100%;
-    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom -30px right no-repeat;
+    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom 10px right no-repeat;
 }
 
 .PositionRelative {

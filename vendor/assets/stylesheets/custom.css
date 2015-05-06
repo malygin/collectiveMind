@@ -635,6 +635,12 @@ textarea:focus {
     border-bottom-color: #5c878c;
 }
 
+.stage7_theme .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 7px;
+    border-bottom-color: #558590;
+}
+
 .grey_theme .main_menu li.active a:after {
     border-color: rgba(211, 211, 211, 0);
     border-width: 6px;
@@ -1869,6 +1875,16 @@ p .add-button + .add-button {
 .com_dashed_border.right {
     border-right: 1px dashed #e4cae2;
     position: relative;
+}
+.com_dashed_border.left {
+    border-left: 1px dashed #e4cae2;
+    position: relative;
+}
+
+.com_dashed_border.left.comment_col{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .expand_button {
@@ -4791,6 +4807,11 @@ ul.vote_nav > li > a {
     margin: 0px 0 5px;
 }
 
+.radial-gradient > .ps-container > .ps-scrollbar-y-rail {
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
 .ps-container > .ps-scrollbar-y-rail, .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
     width: 6px;
 }
@@ -4827,15 +4848,27 @@ ul.vote_nav > li > a {
     position: relative;
     line-height: 1.2;
 }
-
-.post .what .fa-angle-right {
+.post .what .fa-angle-right, .post.post_type_3.merged .media-body h5 i {
     position: absolute;
     top: 50%;
-    right: 8px;
     margin-top: -18px;
     font-size: 36px;
 }
+.post .what .fa-angle-right{
+    right: 8px;
+}
 
+.media-body .pull-right .fa-angle-right{
+    right: 8px;
+    position: absolute;
+    font-size: 36px;
+    top: 50%;
+    margin-top: -44px;
+}
+
+.post.post_type_3.merged .media-body h5 i{
+    right:0;
+}
 .stage2_theme .fa-angle-right {
     color: #6588c2;
 }
@@ -5266,14 +5299,6 @@ ul.vote_nav > li > a {
     min-height: 54px;
 }
 
-.post.post_type_3.merged .media-body h5 i {
-    position: absolute;
-    font-size: 26px;
-    top: 50%;
-    right: 0;
-    margin-top: -16px;
-}
-
 .post_type_3 .post_cont_hover {
     top: 110px;
 }
@@ -5472,17 +5497,22 @@ ul.vote_nav > li > a {
 .modal_body .post-text p {
     padding-top: 7px;
 }
-
-.tag-stripes {
-    line-height: 1.1;
-    display: inline-block;
-    float: left;
+.tag-stripes, .stripes{
     height: 16px;
     width: 18px;
     margin-right: 3px;
+    float: left;
+}
+.tag-stripes {
+    line-height: 1.1;
+    display: inline-block;
+
     white-space: nowrap;
     box-sizing: border-box;
     cursor: default;
+}
+.list_stripes li{
+    padding-bottom: 10px;
 }
 
 .tag-stripes.active .tags {
@@ -5757,7 +5787,7 @@ ul.vote_nav > li > a {
 .collapser_type2 {
     display: block;
     position: relative;
-    padding: 7px 9px;
+    padding: 9px 9px;
     font-size: 12px;
     margin-bottom: 10px;
     border-radius: 2px;
@@ -5802,6 +5832,7 @@ ul.vote_nav > li > a {
 .check_push_cont .item > span a[data-toggle="collapse"] {
     padding: 0;
     padding-left: 15px;
+    padding-right: 20px;
     color: #5c5c5c;
     vertical-align: top;
 }
@@ -6899,4 +6930,29 @@ i.fa.sticker_close {
 
 .popup_w805 {
     width: 805px !important;
+}
+
+.modal-comment-body{
+    height: 250px;
+}
+
+
+.ps-container .ps-scrollbar-y-rail {
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+}
+.list li{
+    padding-bottom: 15px;
+}
+
+.progress_collapse{
+    width: 220px;
+   position: absolute;
+    top: 50%;
+    right: 30px;
+    margin-top: -10px;
+}
+
+.stage4_theme .progress-bar{
+    background: #AEABE2;
 }
