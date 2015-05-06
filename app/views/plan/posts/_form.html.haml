@@ -27,7 +27,7 @@
               %a.a_font_reset{'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}"}
                 = t("activerecord.attributes.plan/post_novation.#{link}")
       .col-md-8
-        .tab-content.tab_cont5.ps_cont
+        .tab-content.tab_cont5.ps_cont#plan_post_novations
           #cabinet_5_cont_0.tab-pane.active.fade.in{role: 'tabpanel'}
             .divider35
             .text-center
@@ -61,7 +61,7 @@
           %ul.list-unstyled.tabs_type_2.less_margin{role: "tablist"}
             - @novations.each_with_index do |novation, index|
               %li{role: 'presentation', class: ('active' if index == 0)}
-                %a.a_font_reset{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
+                %a.a_font_reset.open_novation{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
                   = novation.title
         .col-md-7
           .tab-content#list_novations
@@ -76,7 +76,7 @@
                     - type_attribute.second.each do |attribute, bool_attribute|
                       %h6.bold
                         = t("activerecord.attributes.novation/post.#{attribute}")
-                      %textarea.form-control{rows: '3'}
+                      %p.novation_attribute{'data-attribute': attribute}
                         = novation.send(attribute)
                       .divider15
   = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
