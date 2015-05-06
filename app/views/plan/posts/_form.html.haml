@@ -11,7 +11,7 @@
           = link_to user_content_plan_posts_path(@project), class: 'a_font_reset bold' do
             Мои пакеты
             %small &gt;
-        = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1
+        = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
   - else
     .content_window.bottom_panel_stop
       %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
