@@ -401,13 +401,11 @@ $('button#to_publish_plan').click ->
 $('button#to_save_plan').click ->
   save_plan_post('save_plan_post')
 
-@copyNovation = ->
-  $('#list_novations .active .novation_attribute').each ->
-    $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').val($.trim($(this).text()))
-  return
-
 if $('#list_novations').length > 0
-  $('a.pocket_name.open-popup').click ->
-    copyNovation()
-  $('a.open_novation').click ->
-    copyNovation()
+  $('#ul_novations').on 'click', '.open_novation', (event) ->
+    $('#selected_novation').text($(this).text()).removeClass('hidden')
+    $('#select_novation').text('Выбранный пакет:')
+    $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
+      $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
+      return
+    return

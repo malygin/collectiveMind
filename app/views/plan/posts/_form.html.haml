@@ -54,20 +54,21 @@
   #popup-cabinet5-1.popup-window.detailed_popup.popup-w1030.mfp-hide
     .content_window.white
       .cont_heading
-        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Выбор пакета
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#select_novation Выбор пакета
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active.hidden#selected_novation
       .divider15
       .row
         .col-md-5
-          %ul.list-unstyled.tabs_type_2.less_margin{role: "tablist"}
-            - @novations.each_with_index do |novation, index|
-              %li{role: 'presentation', class: ('active' if index == 0)}
-                %a.a_font_reset.open_novation{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
+          %ul.list-unstyled.tabs_type_2.less_margin#ul_novations{role: 'tablist'}
+            - @novations.each do |novation|
+              %li.open_novation{role: 'presentation'}
+                %a.a_font_reset{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
                   = novation.title
         .col-md-7
           .tab-content#list_novations
             .divider3
-            - @novations.each_with_index do |novation, index|
-              .tab-pane.fade{role: 'tabpanel', id: "show_novation_#{novation.id}", class: ('in active' if index == 0), 'data-id' => novation.id}
+            - @novations.each do |novation|
+              .tab-pane.fade{role: 'tabpanel', id: "show_novation_#{novation.id}", 'data-id' => novation.id}
                 - novation.attributes_for_form.each do |type_attribute|
                   %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}"}
                     = t("activerecord.attributes.novation/post.#{type_attribute.first}")
