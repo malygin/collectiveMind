@@ -432,7 +432,7 @@ $('button#to_save_plan').click ->
 
 @copyNovation = ->
   $('#list_novations .active .novation_attribute').each ->
-    $('#plan_post_novations textarea[id="plan_post_plan_post_novation_attributes_' + $(this).attr('data-attribute') + '"]').val($.trim($(this).text()))
+    $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').val($.trim($(this).text()))
   return
 
 if $('#list_novations').length > 0
