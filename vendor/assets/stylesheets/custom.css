@@ -6050,7 +6050,7 @@ i.fa.sticker_close {
 
 /* 4 */
 
-.popup_collapsable_col h5, .popup_collapsable_col p {
+.popup_collapsable_col h5, .popup_collapsable_col p,.popup_collapsable_col a {
     font-size: 12px;
 }
 
@@ -6955,4 +6955,73 @@ i.fa.sticker_close {
 
 .stage4_theme .progress-bar{
     background: #AEABE2;
+}
+
+.popover{
+    z-index: 2000;
+}
+.list_stripes .popover{
+    min-width: 500px;
+}
+.ideas_popover p{
+    margin-bottom: 10px;
+}
+.ideas_popover p b{
+    margin-right:5px ;
+}
+
+.metro_block{
+    padding-left: 11px;
+    padding-top: 10px;
+}
+.metro_block ul li{
+    background-image: image-url('arrow-right.png');
+    background-repeat: no-repeat;
+    padding-right: 30px;
+    background-position: right center;
+}
+.metro_block ul li,.metro_block ul li a{
+    color: #b9b9b9;
+}
+.metro_block ul li.active a,.metro_block ul li a:hover{
+    color: #5b5b5b;
+}
+.metro_block ul li a {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left:10px;
+    margin-top:-10px
+}
+.metro_block ul li.last{
+    background-image: none;
+}
+.rating_agreement .progress{
+    margin-bottom: 5px;
+    background: none;
+    box-shadow: none;
+    border-radius: 2px;
+}
+.rating_agreement dt{
+    font-weight: 400;
+}
+.progress-bar-default{
+    background-color: #bababa;
+}
+
+.label-success{
+    background: #72b07e;
+
+}
+.label{
+     font-weight: 500;
+}
+.font12{
+    font-size: 12px;
+}
+.modal-footer{
+    text-align: left;
+}
+
+.modal-footer h4,.modal_content h4{
+    margin-left: 15px;
 }
