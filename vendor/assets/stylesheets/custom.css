@@ -6449,7 +6449,7 @@ i.fa.sticker_close {
     right: 5px;
 }
 
-.type_cab .media-body a {
+.type_cab .media-body a.a_font-reset {
     display: table-cell;
     height: 56px;
     font-size: 12px;
