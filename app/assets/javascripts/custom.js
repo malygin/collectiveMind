@@ -1,5 +1,8 @@
 /* Your JS codes here */
 $(document).ready(function () {
+    $('.metro_block ul li').hover(
+        function(){ $(this).toggleClass('theme_font_color') }
+    );
     $(window).scroll(function () {
         console.log(232);
         if ($(this).scrollTop() > 0) {
@@ -22,7 +25,17 @@ $(document).ready(function () {
     $('.ps_cont.half_wheel_speed').perfectScrollbar({
         wheelSpeed: 0.3
     });
-
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+            var content = $(this).attr("data-popover-content");
+            return $(content).children(".popover-body").html();
+        },
+        title: function() {
+            var title = $(this).attr("data-popover-content");
+            return $(title).children(".popover-heading").html();
+        }
+    });
     /* number colors for aspects and imperfects (class '.color_me') */
     var colors_aspect_codes = [
         'cfa7cc',
