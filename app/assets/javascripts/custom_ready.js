@@ -422,6 +422,7 @@ $(document).ready(function () {
         }
         return false;
     });
+
     $('a.scroll_tab').on('click', function (e) {
         var href = $(this).attr('href');
         $('.tab_cont5').animate({

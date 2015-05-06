@@ -17,7 +17,10 @@
       %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
   .content_window.white.c_w_5
     .cont_heading
-      %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
+      - if @post.content
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form=@post.content
+      -else
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form Пакет еще не выбран
     .divider10
     .row
       .col-md-4

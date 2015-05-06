@@ -404,11 +404,9 @@ $('button#to_save_plan').click ->
 if $('#list_novations').length > 0
   $('#ul_novations').on 'click', '.open_novation', (event) ->
     $('#selected_novation').text($(this).text()).removeClass('hidden')
+    $('#selected_novation_main_form').text($(this).text())
     $('#select_novation').text('Выбранный пакет:')
     $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
       $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
       return
-    evt = document.createEvent('Event')
-    evt.initEvent('autosize:update', true, false)
-    ta.dispatchEvent(evt)
     return
