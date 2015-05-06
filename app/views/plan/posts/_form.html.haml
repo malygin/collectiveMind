@@ -1,4 +1,6 @@
 .divider10
+%div{id: "plan_notices_#{@post.id}"}
+  = render partial: 'shared/create_success', locals: {model_name: 'plan', id: @post.id}
 = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create', id: @post.id}, remote: true do |f|
   = f.hidden_field :tasks_gant
   = hidden_field_tag 'plan_post[novation_id]'
@@ -13,8 +15,6 @@
   - else
     .content_window.bottom_panel_stop
       %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
-  %div{id: "plan_notices_#{@post.id}"}
-    = render partial: 'shared/create_success', locals: {model_name: 'novation', id: @post.id}
   .content_window.white.c_w_5
     .cont_heading
       %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Описание проектного предложения
@@ -39,7 +39,7 @@
                 для этого нажмите на одну из панелей, или знак вопроса
             .divider70
           - @post.post_novations.first.attributes_for_form.each do |link, attributes|
-            = f.fields_for @post.post_novations.first do |n|
+            = f.fields_for :plan_post_novation_attributes do |n|
               .tab-pane.fade{role: 'tabpanel', id: "cabinet_5_cont_#{link}"}
                 - attributes.each do |attribute, bool|
                   - if bool == -1 or bool == true

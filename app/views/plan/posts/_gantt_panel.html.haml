@@ -13,7 +13,7 @@
           #taZone.noprint{:style => "display:none;"}
             - if @post.persisted?
               %textarea#ta{:cols => "150", :rows => "8"}
-                = @post.tasks_gant
+                = @post.tasks_gant.to_json.html_safe
             - else
               %textarea#ta{:cols => "150", :rows => "8"}
                 :preserve

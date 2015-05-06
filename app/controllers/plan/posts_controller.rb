@@ -51,11 +51,12 @@ class Plan::PostsController < PostsController
 
   def update
     @post.update_attributes plan_post_params
+    @post.post_novations.first.update_attributes plan_post_novation_params
     respond_to do |format|
       if @post.save
         current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
-        format.js
       end
+      format.js
     end
   end
 
@@ -140,16 +141,19 @@ class Plan::PostsController < PostsController
   end
 
   def plan_post_params
-    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant,
-                                      plan_post_novation_attributes: [:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
-                                                                      :project_members, :project_results, :project_time, :members_new, :members_who,
-                                                                      :members_education, :members_motivation, :members_execute, :resource_commands,
-                                                                      :resource_support, :resource_internal, :resource_external, :resource_financial,
-                                                                      :resource_competition, :confidence_commands, :confidence_remove_discontent,
-                                                                      :confidence_negative_results, :members_new_bool, :members_education_bool,
-                                                                      :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
-                                                                      :resource_competition_bool, :confidence_commands_bool,
-                                                                      :confidence_remove_discontent_bool,
-                                                                      :confidence_negative_results_bool])
+    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant)
+  end
+
+  def plan_post_novation_params
+    params.require(:plan_post).require(:plan_post_novation_attributes).permit(:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
+                                                                              :project_members, :project_results, :project_time, :members_new, :members_who,
+                                                                              :members_education, :members_motivation, :members_execute, :resource_commands,
+                                                                              :resource_support, :resource_internal, :resource_external, :resource_financial,
+                                                                              :resource_competition, :confidence_commands, :confidence_remove_discontent,
+                                                                              :confidence_negative_results, :members_new_bool, :members_education_bool,
+                                                                              :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
+                                                                              :resource_competition_bool, :confidence_commands_bool,
+                                                                              :confidence_remove_discontent_bool,
+                                                                              :confidence_negative_results_bool)
   end
 end
