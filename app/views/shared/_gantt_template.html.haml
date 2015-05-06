@@ -82,17 +82,18 @@
       </div>
   .__template__{:type => "TASK_EDITOR"}
     /
-      <div class="ganttTaskEditor">
-      <table width="100%">
-      <tr>
-      <td>
+      <div class="ganttTaskEditor" style="margin: 5px;">
+      <div style="text-align: left; padding-top: 20px"><button id="saveButton" class="button big">Сохранить</button></div>
       <table cellpadding="5">
       <tr>
-      <td><label for="code">code/short name</label><br><input type="text" name="code" id="code" value="" class="formElements"></td>
-      </tr><tr>
-      <td><label for="name">name</label><br><input type="text" name="name" id="name" value=""  size="35" class="formElements"></td>
+      <td><label for="name">Имя задачи</label><br><input type="text" name="name" id="name" value=""  size="35" class="formElements"></td>
       </tr>
-      <tr></tr>
+      <tr>
       <td>
-      <label for="description">description</label><br>
+      <label for="description">Подробное описание</label><br>
       <textarea rows="5" cols="30" id="description" name="description" class="formElements">
+      </td>
+      </tr>
+      </table>
+
+      </div>

@@ -520,6 +520,7 @@ GridEditor.prototype.openFullEditor = function (task, taskRow) {
     taskEditor.find("input,textarea").attr("readOnly", true);
     taskEditor.find("input:checkbox,select").attr("disabled", true);
     taskEditor.find("#saveButton").remove();
+    console.log('remove');
 
   } else {
 
@@ -593,15 +594,15 @@ GridEditor.prototype.openFullEditor = function (task, taskRow) {
     //save task
     taskEditor.find("#saveButton").click(function () {
       var task = self.master.getTask(taskId); // get task again because in case of rollback old task is lost
-
+      console.log('sav!!');
       self.master.beginTransaction();
       task.name = taskEditor.find("#name").val();
       task.description = taskEditor.find("#description").val();
-      task.code = taskEditor.find("#code").val();
-      task.progress = parseFloat(taskEditor.find("#progress").val());
-      task.duration = parseInt(taskEditor.find("#duration").val());
-      task.startIsMilestone = taskEditor.find("#startIsMilestone").is(":checked");
-      task.endIsMilestone = taskEditor.find("#endIsMilestone").is(":checked");
+//      task.code = taskEditor.find("#code").val();
+//      task.progress = parseFloat(taskEditor.find("#progress").val());
+//      task.duration = parseInt(taskEditor.find("#duration").val());
+//      task.startIsMilestone = taskEditor.find("#startIsMilestone").is(":checked");
+//      task.endIsMilestone = taskEditor.find("#endIsMilestone").is(":checked");
 
       //set assignments
       taskEditor.find("tr[assigId]").each(function () {
@@ -649,10 +650,10 @@ GridEditor.prototype.openFullEditor = function (task, taskRow) {
       });
 
       //change dates
-      task.setPeriod(Date.parseString(taskEditor.find("#start").val()).getTime(), Date.parseString(taskEditor.find("#end").val()).getTime() + (3600000 * 24));
+//      task.setPeriod(Date.parseString(taskEditor.find("#start").val()).getTime(), Date.parseString(taskEditor.find("#end").val()).getTime() + (3600000 * 24));
 
       //change status
-      task.changeStatus(taskEditor.find("#status").attr("status"));
+//      task.changeStatus(taskEditor.find("#status").attr("status"));
 
       if (self.master.endTransaction()) {
         $("#__blackpopup__").trigger("close");

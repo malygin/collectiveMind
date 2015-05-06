@@ -90,6 +90,7 @@ Date.parseString = function(val, format) {
 
 
   this.decodeShortcut=function(str){
+    if(str){
     var dateUpper = str.trim().toUpperCase();
     var ret=new Date();
     ret.clearTime();
@@ -155,7 +156,7 @@ Date.parseString = function(val, format) {
     }
 
     return ret;
-  };
+  }};
 
   var ret=this.decodeShortcut(val);
   if (ret)
