@@ -1,29 +1,20 @@
 class Estimate::PostsController < PostsController
-  def note_model
-    Estimate::PostNote
-  end
+  # def note_model
+  #   Estimate::PostNote
+  # end
 
   def voting_model
     Plan::Post
   end
 
   def prepare_data
-    @status = params[:status]
-    @aspects = Core::Aspect::Post.where(project_id: @project)
-    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
+    # @status = params[:status]
+    # @aspects = Core::Aspect::Post.where(project_id: @project)
+    # @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 
   def index
-    @posts = Plan::Post.where(project_id: @project, status: 0).paginate(page: params[:page])
-    @est_stat = @posts.first.estimate_status.nil? ? 0 : @posts.first.estimate_status if @posts.first
-    if current_user.can_vote_for(:plan, @project)
-      @number_v = @project.stage5 - current_user.voted_plan_posts.by_project(@project.id).size
-      @votes = @project.stage5
-    end
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts }
-    end
+    @posts = Plan::Post.where(project_id: @project, status: 0)
   end
 
   def show
