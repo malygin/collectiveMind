@@ -35,6 +35,9 @@ class Plan::PostsController < PostsController
   def create
     @novation = Novation::Post.find(params[:plan_post][:novation_id])
     @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id, content: @novation.title)
+    if params[:plan_post][:published]
+      @post.update status: current_model::STATUSES[:published]
+    end
     if @post.save
       @plan_novation = @post.post_novations.build
       @novation.used_attributes.each do |attribute|
@@ -51,6 +54,9 @@ class Plan::PostsController < PostsController
 
   def update
     @post.update_attributes plan_post_params
+    if params[:plan_post][:published]
+      @post.update status: current_model::STATUSES[:published]
+    end
     @post.post_novations.first.update_attributes plan_post_novation_params
     respond_to do |format|
       if @post.save
@@ -145,15 +151,15 @@ class Plan::PostsController < PostsController
   end
 
   def plan_post_novation_params
-    params.require(:plan_post).require(:plan_post_novation_attributes).permit(:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
-                                                                              :project_members, :project_results, :project_time, :members_new, :members_who,
-                                                                              :members_education, :members_motivation, :members_execute, :resource_commands,
-                                                                              :resource_support, :resource_internal, :resource_external, :resource_financial,
-                                                                              :resource_competition, :confidence_commands, :confidence_remove_discontent,
-                                                                              :confidence_negative_results, :members_new_bool, :members_education_bool,
-                                                                              :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
-                                                                              :resource_competition_bool, :confidence_commands_bool,
-                                                                              :confidence_remove_discontent_bool,
-                                                                              :confidence_negative_results_bool)
+    params.require(:plan_post_novation).permit(:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
+                                               :project_members, :project_results, :project_time, :members_new, :members_who,
+                                               :members_education, :members_motivation, :members_execute, :resource_commands,
+                                               :resource_support, :resource_internal, :resource_external, :resource_financial,
+                                               :resource_competition, :confidence_commands, :confidence_remove_discontent,
+                                               :confidence_negative_results, :members_new_bool, :members_education_bool,
+                                               :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
+                                               :resource_competition_bool, :confidence_commands_bool,
+                                               :confidence_remove_discontent_bool,
+                                               :confidence_negative_results_bool)
   end
 end

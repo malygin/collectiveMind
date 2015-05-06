@@ -39,7 +39,7 @@
                 для этого нажмите на одну из панелей, или знак вопроса
             .divider70
           - @post.post_novations.first.attributes_for_form.each do |link, attributes|
-            = f.fields_for :plan_post_novation_attributes do |n|
+            = fields_for @post.post_novations.first do |n|
               .tab-pane.fade{role: 'tabpanel', id: "cabinet_5_cont_#{link}"}
                 - attributes.each do |attribute, bool|
                   - if bool == -1 or bool == true
@@ -80,3 +80,4 @@
                         = novation.send(attribute)
                       .divider15
   = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
+  = f.submit 'Save', class: 'hidden', id: 'save_plan_post_published', name: 'plan_post[published]'

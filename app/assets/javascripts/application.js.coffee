@@ -419,10 +419,16 @@ if $('#gantEditorTemplates').length >0
     i++;
   @ge.loadProject(ret);
 
-$('button#to_save_plan').click ->
+@save_plan_post = (input_id) ->
   $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
   $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
-  $('input#save_plan_post').click()
+  $('input#' + input_id).click()
+  return
+
+$('button#to_publish_plan').click ->
+  save_plan_post('save_plan_post_published')
+$('button#to_save_plan').click ->
+  save_plan_post('save_plan_post')
 
 @copyNovation = ->
   $('#list_novations .active .novation_attribute').each ->

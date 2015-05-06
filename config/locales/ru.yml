@@ -641,7 +641,7 @@ ru:
     delete_news: "Удалить новость?"
     delete_discontent: "Удалить несовершенство?"
     delete_novation: "Удалить?"
-    delete_plan: "Вы уверены, что хотите удалить пакет?"
+    delete_plan: "Вы уверены, что хотите удалить проект?"
   show:
     without_name: 'Без названия'
     note: замечание
