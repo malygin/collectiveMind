@@ -8,6 +8,8 @@ class Plan::Post < ActiveRecord::Base
   has_many :final_votings, foreign_key: 'plan_post_id', class_name: 'Plan::Voting'
   # has_many :stages, class_name: 'Plan::PostStage'
 
+  accepts_nested_attributes_for :post_novations
+
   scope :by_project, ->(p) { where(project_id: p) }
 
   validates :project_id, :user_id, :status, presence: true

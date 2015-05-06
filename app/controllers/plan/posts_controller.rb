@@ -22,14 +22,25 @@ class Plan::PostsController < PostsController
 
   def new
     @post = current_model.new
+    @post.post_novations.build
   end
 
   def edit
+    if @post.post_novations.empty?
+      @post.post_novations.build
+    end
+    render action: :new
   end
 
   def create
-    @post = @project.plan_post.new plan_post_params.merge(user: current_user)
+    @novation = Novation::Post.find(params[:plan_post][:novation_id])
+    @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id, content: @novation.title)
     if @post.save
+      @plan_novation = @post.post_novations.build
+      @novation.used_attributes.each do |attribute|
+        @plan_novation.send("#{attribute}=", @novation.send(attribute))
+      end
+      @plan_novation.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
 
@@ -129,6 +140,16 @@ class Plan::PostsController < PostsController
   end
 
   def plan_post_params
-    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant)
+    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant,
+                                      plan_post_novation_attributes: [:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
+                                                                      :project_members, :project_results, :project_time, :members_new, :members_who,
+                                                                      :members_education, :members_motivation, :members_execute, :resource_commands,
+                                                                      :resource_support, :resource_internal, :resource_external, :resource_financial,
+                                                                      :resource_competition, :confidence_commands, :confidence_remove_discontent,
+                                                                      :confidence_negative_results, :members_new_bool, :members_education_bool,
+                                                                      :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
+                                                                      :resource_competition_bool, :confidence_commands_bool,
+                                                                      :confidence_remove_discontent_bool,
+                                                                      :confidence_negative_results_bool])
   end
 end
