@@ -69,8 +69,9 @@
             - @novations.each_with_index do |novation, index|
               .tab-pane.fade{role: 'tabpanel', id: "show_novation_#{novation.id}", class: ('in active' if index == 0), 'data-id' => novation.id}
                 - novation.attributes_for_form.each do |type_attribute|
-                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}"}
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}"}
                     = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                    %i.fa.fa-plus.font_color_stage4.collapse_plus
                   .collapse{id: "novation_#{novation.id}_attributes_#{type_attribute.first}"}
                     .divider5
                     - type_attribute.second.each do |attribute, bool_attribute|
