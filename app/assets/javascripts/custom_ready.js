@@ -409,6 +409,7 @@ $(document).ready(function () {
 
     // Открытие "Добавления задач" в кабинете проектов
     $('#bottom-opener').on('click', function () {
+        console.log(111);
         var panel = $('#bottom-panel');
         if (panel.hasClass("visible")) {
             panel.removeClass('visible').animate({'top': '100%'});
@@ -420,6 +421,13 @@ $(document).ready(function () {
             $(this).toggleClass('fa-rotate-180');
         }
         return false;
+    });
+    $('a.scroll_tab').on('click', function (e) {
+        var href = $(this).attr('href');
+        $('.tab_cont5').animate({
+            scrollTop: 0
+        }, 'slow');
+        e.preventDefault();
     });
 
 

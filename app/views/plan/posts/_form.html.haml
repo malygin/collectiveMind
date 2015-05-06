@@ -24,7 +24,7 @@
         %ul.list-unstyled.tabs_type_2{role: 'tablist'}
           - @post.post_novations.first.attributes_for_form.each do |link, values|
             %li{role: 'presentation'}
-              %a.a_font_reset{'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}"}
+              %a.a_font_reset.scroll_tab{'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}"}
                 = t("activerecord.attributes.plan/post_novation.#{link}")
       .col-md-8
         .tab-content.tab_cont5.ps_cont#plan_post_novations
