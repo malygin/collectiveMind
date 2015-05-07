@@ -96,7 +96,9 @@
         - if cabinet?
           = yield :special_for_gantt
     #render_knowbase_posts
-    = render 'shared/moderator_chat'
+    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
 
-    %script(src="https://cdn.pubnub.com/pubnub.min.js")
+    -#= render 'shared/moderator_chat'
+    -#
+    -#%script(src="https://cdn.pubnub.com/pubnub.min.js")
     = javascript_include_tag 'application'
