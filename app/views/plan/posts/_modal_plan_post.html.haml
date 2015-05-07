@@ -64,11 +64,11 @@
                 %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
                 .divider25
                 - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
-                  %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}"}
+                  %a.a_font_reset.collapser_type2.with_plus{class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}"}
                     = t("activerecord.attributes.plan/post_novation.#{link}")
-                    %i.fa.fa-plus.font_color_stage5.collapse_plus
+                    %i.fa.font_color_stage5.collapse_plus{class: "#{link == :project ? 'fa-minus' : 'fa-plus'}"}
 
-                  .collapse{id: "cab4-#{link}"}
+                  .collapse{id: "cab4-#{link}", class: "#{'in' if link == :project}"}
                     .divider5
                     - attributes.each do |attribute, bool|
                       - if bool == -1 or bool == true

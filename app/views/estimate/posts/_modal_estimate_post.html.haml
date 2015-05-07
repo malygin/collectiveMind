@@ -1,382 +1,530 @@
-#popup-rating-detail.popup-window.popup-rating-detail.info-popup.mfp-hide
-  .popup.popup-top-rounded.popup-bottom-rounded
-    .row.popup-post-info
-      .popup-header.popup-top-rounded.col-sm-12
-        %h2.font_red
-          =@plan_post.name
-      .col-lg-6.popup-post-block
-        = image_tag 'no-ava.png'
-        %span
-          =@post.user
-        .info-stripe
-          %span.popup-date= Russian::strftime(@post.created_at, '%d.%m.%Y')
-          %span.popup-comments
-            = @post.comments.count
-            %i.fa.fa-comment-o
-          = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
-            %span.bold
-              %span(id="plus_counter_#{@post.id}")
-                = @post.users_pro.count
-              %i.fa.fa-thumbs-up.theme_font_color
-          = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
-            %span.bold
-              %span(id="minus_counter_#{@post.id}")
-                = @post.users_against.count
-              %i.fa.fa-thumbs-down.theme_font_color
+#popup-estimate.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
+  .popup.popup_rounded.popup_color_theme_stage5
+    .modal_title
+      .row
+        .col-md-8
+          %h4.bold.font_dark_grey
+            =trim_content(@post.name)
+        .col-md-4
+          .row
+            .col-md-12
+              .text-right.post_likes
+                %span.bold
+                  %span(class="cc_post_#{@post.id}")
+                    = @post.comments.count
+                  %i.fa.fa-comment.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
+                      = @post.users_pro.count
+                    %i.fa.fa-thumbs-up.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
+                      = @post.users_against.count
+                    %i.fa.fa-thumbs-down.theme_font_color
+                - if @post.notes.present?
+                  %span
+                    %i.fa.fa-exclamation-triangle.font_lighter_grey
+                %small
+                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+                - if boss? or role_expert? or stat_expert?
+                  = link_to({controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{@post.id}") do
+                    %span.label_approve.label(class="#{label_approve_stat(@post)}")
+                      = t('show.important')
+                - elsif @post.approve_status
+                  %span.label.label-success=t('show.important')
+    .modal_body
+      .popup-post-info
+        .row.info-block
+          .col-md-9.popup-right-tabs
+            .nav-tabs-one
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#tab-1"}
+                    %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                      Описание
+                      проектного предложения
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab-2"}
+                    %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                      График реализации проекта
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab-3"}
+                    %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                      Оценки других
+                      участников
+          .col-md-3
+            .popup-post-block.pull-right
+              =image_tag 'no-ava.png'
+              %span.font_black.text-center
+                =@post.user
 
-          -#%span.popup-likes
-          -#  +9
-          -#  %i.fa.fa-thumbs-o-up
-          -#%span.popup-dislikes
-          -#  +1
-          -#  %i.fa.fa-thumbs-o-down
-    .popup-bottom-ratings
-      .popup-bottom-rating-overall.back-color-e71d2b
-        %p.popup-bottom-rating-fieldname Общая оценка
-        %p.popup-bottom-rating-field-value="#{ @post.score(@est_stat) } %"
-      .popup-bottom-rating-formula.back-color-9eb5d5
-        %p.popup-bottom-rating-fieldname Формула
-        %p.popup-bottom-rating-field-value="= ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}"
-      .popup-bottom-rating-maximum.back-color-5f84b9
-        %p.popup-bottom-rating-fieldname Максимальная оценка
-        %p.popup-bottom-rating-field-value= @post.max_score
-  .popup.popup-bottom-rounded.popup-top-rounded
-    #accordion.panel-group
-      .panel
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
-          .panel-heading
-            %h4.panel-title
-              %span.accordion-rating= @post.second_c
-              Ожидаемая эффективность первого шага проекта
-            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
-        #collapseOne.collapseLevel1.collapse-one.panel-collapse.collapse
-          .panel-body.panel-body-first-level
-            #subAccordion.panel-group
-              .panel
-                %a{"data-parent" => "#subAccordion", "data-toggle" => "collapse", :href => "#collapseSubOne"}
-                  .panel-heading-second-level
-                    %h5.panel-title
-                      %span.accordion-head-left-second-level Этап 1
-                      =@plan_post.post_stages.first.name
-                      = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
-                #collapseSubOne.collapseLevel2.collapse-sub-one.panel-collapse.panel-collapse-second-level.collapse
-                  .panel-body
-                    #subSubAccordion.panel-group
-                      -@plan_post.post_stages.first.plan_post_aspects.each_with_index do |concept, index|
-                        .panel
-                          %a{"data-parent" => "#subSubAccordion", "data-toggle" => "collapse", :href => "#collapseSubSubOne_#{concept.id}"}
-                            .panel-heading-third-level
-                              %h6.panel-title
-                                %span.accordion-head-left-third-level
-                                  -if concept.estimate_post_aspect(@post.id)
-                                    = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
-                                = concept.title
-                              = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
-                          .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
-                            .panel-body
-                              .panel-collapse-inside-block.rounded-1
-                                %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-                                %p Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы
-                                .panel-graph-block
-                                  .panel-graph-top-center
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в полном объеме
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span более 90%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в значительном объеме
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span от 50% до 90%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в небольшом объеме
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span от 10% до 50%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в ничтожном объеме
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span менее 10%
-                                  .panel-graph-left-col
-                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                  .panel-graph-right-col
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on1)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on2)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on3)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on4)}"}
-                              .panel-collapse-inside-block.rounded-1
-                                %p Использование вышеназванных средств потребует материальных и трудовых затрат.
-                                %p Какова вероятность, что эти затраты окажутся
-                                .panel-graph-block
-                                  .panel-graph-top-center
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span значительными
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span средними
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span незначительными
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span ничтожными
-                                  .panel-graph-left-col
-                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                  .panel-graph-right-col
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs1)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs2)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs3)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs4)}"}
-                              .panel-collapse-inside-block.rounded-1
-                                %p Какова вероятность, что улучшение ситуации прогнозируемое в разделе А2 действительно произойдет.
-                                .panel-graph-block
-                                  .panel-graph-top-center
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span полностью
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span более 90%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в значительной мере
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span от 50% до 90%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в небольшой мере
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span от 10% до 50%
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span в ничтожной мере
-                                      .panel-graph-top-badge-bottom-stripe
-                                        %span менее 10%
-                                  .panel-graph-left-col
-                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                  .panel-graph-right-col
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op1)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op2)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op3)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op4)}"}
-                              .panel-collapse-inside-block.rounded-1
-                                %p Функционирование ресурсов потребует материальных и трудовых затрат.
-                                %p Какова вероятность, что эти затраты окажутся
-                                .panel-graph-block
-                                  .panel-graph-top-center
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span значительными
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span средними
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span незначительными
-                                    .panel-graph-top-badge-col
-                                      .panel-graph-top-badge-top-stripe
-                                        %span ничтожными
-                                  .panel-graph-left-col
-                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                  .panel-graph-right-col
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf1)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf2)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf3)}"}
-                                    .panel-graph-bar-col
-                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf4)}"}
+      .clearfix
+      .tab-content.modal_content
+        #tab-1.tab-pane.fade.in.active
+          .container.modal_content
+            .row
+              .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+                %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                .divider25
+                - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
+                  %a.a_font_reset.collapser_type2.with_plus{class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}"}
+                    = t("activerecord.attributes.plan/post_novation.#{link}")
+                    %i.fa.font_color_stage5.collapse_plus{class: "#{link == :project ? 'fa-minus' : 'fa-plus'}"}
+
+                  .collapse{id: "cab4-#{link}", class: "#{'in' if link == :project}"}
+                    .divider5
+                    - attributes.each do |attribute, bool|
+                      - if bool == -1 or bool == true
+                        %h5.bold
+                          = t("activerecord.attributes.plan/post_novation.#{attribute}")
+                        %p.text
+                          =@post.send(attribute)
+                        .divider15
+
+              .col-md-6.comment_col.popup_expandable_col.ps_cont
+                %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                  открыть описание проекта
+                .divider15
+                .chat-messages
+                  = render partial:'shared/comment', collection: @comments
+                .divider15
+                = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+
+            .divider25
+        #tab-2.tab-pane.fade(style='background: white;')
+          .container.modal_content
+            .row
+              .col-md-12.col-sm-12
+                #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;")
+
+                = render 'shared/gantt_template'
+
+        #tab-3.tab-pane.fade
+          .container
+            .divider15
+            .row
+              .container
+                .col-sm-3.col_padding_left_0.col_padding_right_3
+                  .border_grey.col_rate_head
+                    Проект
+                .col-sm-4.col_padding_left_3.col_padding_right_3
+                  .border_grey.col_rate_head
+                    Этот проект важен для проблемы, заданной заказчиком?
+                .col-sm-5.col_padding_right_0.col_padding_left_3
+                  .border_grey.col_rate_head
+                    Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
+            .divider10
+            - @post.voted_users.each do |user|
+              .rating_line
+                .row
+                  .col-sm-3
+                    .rating_user
+                      .media-left
+                        = image_tag 'no-ava.png', class: 'media-object img-circle img40 img_bordered'
+                      .media-body
+                        %h5.media-heading.bold
+                          = user
+                  .col-sm-4.no_padding_col.divided
+                    .rate_buttons.color_1
+                      .progress
+                        .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 1)}", :role => "progressbar", :style => "width: #{user.plan_vote_status(@post, 1)*10}%;"}
+                          = user.plan_vote_status(@post, 1)
+                  .col-sm-5.col_padding_left_0.divided
+                    .row
+                      .col-md-12
+                        .rate_buttons.color_2
+                          .progress
+                            .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 2)}", :role => "progressbar", :style => "width: #{user.plan_vote_status(@post, 2)*10}%;"}
+                              = user.plan_vote_status(@post, 2)
 
 
 
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
-          .panel-heading
-            %h4.panel-title
-              %span.accordion-rating= @post.first_c
-              Ожидаемая эффективность остальных шагов проекта
-            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
-        #collapseTwo.collapseLevel1.panel-collapse.collapse
-          .panel-body.panel-body-first-level
-            #subAccordionTwo.panel-group
-              -@plan_post.post_stages.each_with_index do |stage, index|
-                -if index > 0
-                  .panel
-                    %a{"data-parent" => "#subAccordionTwo", "data-toggle" => "collapse", :href => "#collapseSubOne_#{stage.id}"}
-                      .panel-heading-second-level
-                        %h5.panel-title
-                          %span.accordion-head-left-second-level="Этап #{index+1}"
-                          =stage.name
-                        = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
-                    .collapseLevel2.panel-collapse.panel-collapse-second-level.collapse.collapse-sub-one{id: "collapseSubOne_#{stage.id}"}
-                      .panel-body
-                        .panel-group{id: "subSubAccordion_#{stage.id}"}
-                          - stage.plan_post_aspects.each_with_index do |concept, ind|
-                            .panel
-                              %a{"data-parent" => "#subSubAccordion_#{stage.id}", "data-toggle" => "collapse", :href => "#collapseSubSubOne_#{concept.id}"}
-                                .panel-heading-third-level
-                                  %h6.panel-title
-                                    %span.accordion-head-left-third-level
-                                      -if concept.estimate_post_aspect(@post.id)
-                                        = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
-                                    = concept.title
-                                  = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
-                              .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
-                                .panel-body
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
-                                    %p Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в полном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшом объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожном объеме
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on1)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on2)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on3)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on4)}"}
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p Использование вышеназванных средств потребует материальных и трудовых затрат.
-                                    %p Какова вероятность, что эти затраты окажутся
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span значительными
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span средними
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span незначительными
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span ничтожными
-                                      .panel-graph-left-col
-                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs1)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs2)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs3)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs4)}"}
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p Какова вероятность, что улучшение ситуации прогнозируемое в разделе А2 действительно произойдет.
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span полностью
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span более 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в значительной мере
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 50% до 90%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в небольшой мере
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span от 10% до 50%
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span в ничтожной мере
-                                          .panel-graph-top-badge-bottom-stripe
-                                            %span менее 10%
-                                      .panel-graph-left-col
-                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op1)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op2)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op3)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op4)}"}
-                                  .panel-collapse-inside-block.rounded-1
-                                    %p Функционирование ресурсов потребует материальных и трудовых затрат.
-                                    %p Какова вероятность, что эти затраты окажутся
-                                    .panel-graph-block
-                                      .panel-graph-top-center
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span значительными
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span средними
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span незначительными
-                                        .panel-graph-top-badge-col
-                                          .panel-graph-top-badge-top-stripe
-                                            %span ничтожными
-                                      .panel-graph-left-col
-                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
-                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
-                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
-                                      .panel-graph-right-col
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf1)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf2)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf3)}"}
-                                        .panel-graph-bar-col
-                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf4)}"}
+
+
+
+
+
+-##popup-rating-detail.popup-window.popup-rating-detail.info-popup.mfp-hide
+-#  .popup.popup-top-rounded.popup-bottom-rounded
+-#    .row.popup-post-info
+-#      .popup-header.popup-top-rounded.col-sm-12
+-#        %h2.font_red
+-#          =@plan_post.name
+-#      .col-lg-6.popup-post-block
+-#        = image_tag 'no-ava.png'
+-#        %span
+-#          =@post.user
+-#        .info-stripe
+-#          %span.popup-date= Russian::strftime(@post.created_at, '%d.%m.%Y')
+-#          %span.popup-comments
+-#            = @post.comments.count
+-#            %i.fa.fa-comment-o
+-#          = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false, remote: true}, method: :put, id: "plus_post_#{@post.id}") do
+-#            %span.bold
+-#              %span(id="plus_counter_#{@post.id}")
+-#                = @post.users_pro.count
+-#              %i.fa.fa-thumbs-up.theme_font_color
+-#          = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true, remote: true}, method: :put, id: "minus_post_#{@post.id}") do
+-#            %span.bold
+-#              %span(id="minus_counter_#{@post.id}")
+-#                = @post.users_against.count
+-#              %i.fa.fa-thumbs-down.theme_font_color
+-#
+-#          -#%span.popup-likes
+-#          -#  +9
+-#          -#  %i.fa.fa-thumbs-o-up
+-#          -#%span.popup-dislikes
+-#          -#  +1
+-#          -#  %i.fa.fa-thumbs-o-down
+-#    .popup-bottom-ratings
+-#      .popup-bottom-rating-overall.back-color-e71d2b
+-#        %p.popup-bottom-rating-fieldname Общая оценка
+-#        %p.popup-bottom-rating-field-value="#{ @post.score(@est_stat) } %"
+-#      .popup-bottom-rating-formula.back-color-9eb5d5
+-#        %p.popup-bottom-rating-fieldname Формула
+-#        %p.popup-bottom-rating-field-value="= ( #{@post.second_c} + #{@post.first_c} ) / #{@post.third_c}"
+-#      .popup-bottom-rating-maximum.back-color-5f84b9
+-#        %p.popup-bottom-rating-fieldname Максимальная оценка
+-#        %p.popup-bottom-rating-field-value= @post.max_score
+-#  .popup.popup-bottom-rounded.popup-top-rounded
+-#    #accordion.panel-group
+-#      .panel
+-#        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseOne"}
+-#          .panel-heading
+-#            %h4.panel-title
+-#              %span.accordion-rating= @post.second_c
+-#              Ожидаемая эффективность первого шага проекта
+-#            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
+-#        #collapseOne.collapseLevel1.collapse-one.panel-collapse.collapse
+-#          .panel-body.panel-body-first-level
+-#            #subAccordion.panel-group
+-#              .panel
+-#                %a{"data-parent" => "#subAccordion", "data-toggle" => "collapse", :href => "#collapseSubOne"}
+-#                  .panel-heading-second-level
+-#                    %h5.panel-title
+-#                      %span.accordion-head-left-second-level Этап 1
+-#                      =@plan_post.post_stages.first.name
+-#                      = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
+-#                #collapseSubOne.collapseLevel2.collapse-sub-one.panel-collapse.panel-collapse-second-level.collapse
+-#                  .panel-body
+-#                    #subSubAccordion.panel-group
+-#                      -@plan_post.post_stages.first.plan_post_aspects.each_with_index do |concept, index|
+-#                        .panel
+-#                          %a{"data-parent" => "#subSubAccordion", "data-toggle" => "collapse", :href => "#collapseSubSubOne_#{concept.id}"}
+-#                            .panel-heading-third-level
+-#                              %h6.panel-title
+-#                                %span.accordion-head-left-third-level
+-#                                  -if concept.estimate_post_aspect(@post.id)
+-#                                    = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
+-#                                = concept.title
+-#                              = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
+-#                          .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
+-#                            .panel-body
+-#                              .panel-collapse-inside-block.rounded-1
+-#                                %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
+-#                                %p Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы
+-#                                .panel-graph-block
+-#                                  .panel-graph-top-center
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в полном объеме
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span более 90%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в значительном объеме
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span от 50% до 90%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в небольшом объеме
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span от 10% до 50%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в ничтожном объеме
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span менее 10%
+-#                                  .panel-graph-left-col
+-#                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                  .panel-graph-right-col
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on1)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on2)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on3)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on4)}"}
+-#                              .panel-collapse-inside-block.rounded-1
+-#                                %p Использование вышеназванных средств потребует материальных и трудовых затрат.
+-#                                %p Какова вероятность, что эти затраты окажутся
+-#                                .panel-graph-block
+-#                                  .panel-graph-top-center
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span значительными
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span средними
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span незначительными
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span ничтожными
+-#                                  .panel-graph-left-col
+-#                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                  .panel-graph-right-col
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs1)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs2)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs3)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs4)}"}
+-#                              .panel-collapse-inside-block.rounded-1
+-#                                %p Какова вероятность, что улучшение ситуации прогнозируемое в разделе А2 действительно произойдет.
+-#                                .panel-graph-block
+-#                                  .panel-graph-top-center
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span полностью
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span более 90%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в значительной мере
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span от 50% до 90%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в небольшой мере
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span от 10% до 50%
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span в ничтожной мере
+-#                                      .panel-graph-top-badge-bottom-stripe
+-#                                        %span менее 10%
+-#                                  .panel-graph-left-col
+-#                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                  .panel-graph-right-col
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op1)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op2)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op3)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op4)}"}
+-#                              .panel-collapse-inside-block.rounded-1
+-#                                %p Функционирование ресурсов потребует материальных и трудовых затрат.
+-#                                %p Какова вероятность, что эти затраты окажутся
+-#                                .panel-graph-block
+-#                                  .panel-graph-top-center
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span значительными
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span средними
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span незначительными
+-#                                    .panel-graph-top-badge-col
+-#                                      .panel-graph-top-badge-top-stripe
+-#                                        %span ничтожными
+-#                                  .panel-graph-left-col
+-#                                    #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                    #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                    #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                  .panel-graph-right-col
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf1)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf2)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf3)}"}
+-#                                    .panel-graph-bar-col
+-#                                      .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf4)}"}
+-#
+-#
+-#
+-#        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseTwo"}
+-#          .panel-heading
+-#            %h4.panel-title
+-#              %span.accordion-rating= @post.first_c
+-#              Ожидаемая эффективность остальных шагов проекта
+-#            = image_tag 'arrow-fifth.png', class: "panel-head-arrow"
+-#        #collapseTwo.collapseLevel1.panel-collapse.collapse
+-#          .panel-body.panel-body-first-level
+-#            #subAccordionTwo.panel-group
+-#              -@plan_post.post_stages.each_with_index do |stage, index|
+-#                -if index > 0
+-#                  .panel
+-#                    %a{"data-parent" => "#subAccordionTwo", "data-toggle" => "collapse", :href => "#collapseSubOne_#{stage.id}"}
+-#                      .panel-heading-second-level
+-#                        %h5.panel-title
+-#                          %span.accordion-head-left-second-level="Этап #{index+1}"
+-#                          =stage.name
+-#                        = image_tag 'arrow-fifth1.png', class: "panel-head-arrow"
+-#                    .collapseLevel2.panel-collapse.panel-collapse-second-level.collapse.collapse-sub-one{id: "collapseSubOne_#{stage.id}"}
+-#                      .panel-body
+-#                        .panel-group{id: "subSubAccordion_#{stage.id}"}
+-#                          - stage.plan_post_aspects.each_with_index do |concept, ind|
+-#                            .panel
+-#                              %a{"data-parent" => "#subSubAccordion_#{stage.id}", "data-toggle" => "collapse", :href => "#collapseSubSubOne_#{concept.id}"}
+-#                                .panel-heading-third-level
+-#                                  %h6.panel-title
+-#                                    %span.accordion-head-left-third-level
+-#                                      -if concept.estimate_post_aspect(@post.id)
+-#                                        = "#{concept.estimate_post_aspect(@post.id).score(@est_stat)} %"
+-#                                    = concept.title
+-#                                  = image_tag 'arrow-fifth2.png', class: "panel-head-arrow"
+-#                              .collapseLevel3.panel-collapse.collapse.collapse-sub-sub-one{id: "collapseSubSubOne_#{concept.id}"}
+-#                                .panel-body
+-#                                  .panel-collapse-inside-block.rounded-1
+-#                                    %p Для создания ресурсов, необходимых в будущем, в проекте предлагаются определенные средства.
+-#                                    %p Проанализируйте их и оцените, какова вероятность того, что при помощи этих средств ресурсы будут созданы
+-#                                    .panel-graph-block
+-#                                      .panel-graph-top-center
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в полном объеме
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span более 90%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в значительном объеме
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span от 50% до 90%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в небольшом объеме
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span от 10% до 50%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в ничтожном объеме
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span менее 10%
+-#                                      .panel-graph-left-col
+-#                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                      .panel-graph-right-col
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on1)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on2)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on3)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).on4)}"}
+-#                                  .panel-collapse-inside-block.rounded-1
+-#                                    %p Использование вышеназванных средств потребует материальных и трудовых затрат.
+-#                                    %p Какова вероятность, что эти затраты окажутся
+-#                                    .panel-graph-block
+-#                                      .panel-graph-top-center
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span значительными
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span средними
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span незначительными
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span ничтожными
+-#                                      .panel-graph-left-col
+-#                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                      .panel-graph-right-col
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs1)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs2)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs3)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozs4)}"}
+-#                                  .panel-collapse-inside-block.rounded-1
+-#                                    %p Какова вероятность, что улучшение ситуации прогнозируемое в разделе А2 действительно произойдет.
+-#                                    .panel-graph-block
+-#                                      .panel-graph-top-center
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span полностью
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span более 90%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в значительной мере
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span от 50% до 90%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в небольшой мере
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span от 10% до 50%
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span в ничтожной мере
+-#                                          .panel-graph-top-badge-bottom-stripe
+-#                                            %span менее 10%
+-#                                      .panel-graph-left-col
+-#                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                      .panel-graph-right-col
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op1)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op2)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op3)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).op4)}"}
+-#                                  .panel-collapse-inside-block.rounded-1
+-#                                    %p Функционирование ресурсов потребует материальных и трудовых затрат.
+-#                                    %p Какова вероятность, что эти затраты окажутся
+-#                                    .panel-graph-block
+-#                                      .panel-graph-top-center
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span значительными
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span средними
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span незначительными
+-#                                        .panel-graph-top-badge-col
+-#                                          .panel-graph-top-badge-top-stripe
+-#                                            %span ничтожными
+-#                                      .panel-graph-left-col
+-#                                        #panel-graph-left-badge3.panel-graph-left-col-badge очень вероятно
+-#                                        #panel-graph-left-badge2.panel-graph-left-col-badge вероятно
+-#                                        #panel-graph-left-badge1.panel-graph-left-col-badge маловероятно
+-#                                      .panel-graph-right-col
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf1)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf2)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf3)}"}
+-#                                        .panel-graph-bar-col
+-#                                          .panel-graph-vertical-bar{"data-limit" => "#{estimate_all_for_vertical_bar(concept.estimate_post_aspect(@post.id).ozf4)}"}

@@ -434,4 +434,8 @@ class User < ActiveRecord::Base
       send(project.current_stage_values[:type_stage]).for_project(project.id)
     end
   end
+
+  def plan_vote_status(post, type)
+    self.plan_post_votings.by_post(post).by_type(type).first.try(:status) || 0
+  end
 end

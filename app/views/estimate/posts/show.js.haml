@@ -1,5 +1,14 @@
 $('#render_estimate_post').empty();
 $("#render_estimate_post").html('#{escape_javascript(render partial: 'modal_estimate_post')}');
-magnificPopupOpen('#popup-rating-detail');
+magnificPopupOpen('#popup-estimate');
 comments_feed();
-PanelVerticalBar();
+comments_expandable_column();
+if ($('#gantEditorTemplates').length >0){
+ge = new GanttMaster();
+ge.init($("#workSpace"));
+project = #{@post.tasks_gant.to_json.html_safe};
+project.canWrite = false;
+ge.loadProject(project);
+setTimeout(function() { ge.gantt.refreshGantt()}, 3000);
+-#ge.gantt.refreshGantt();
+}

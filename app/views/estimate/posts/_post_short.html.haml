@@ -51,7 +51,7 @@
               %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 10}} 10
 
         .col-md-2.col_padding_left_0.divided.text-center
-          %a.rating_a{:href => "#"}
+          = link_to({action: :show, project: @project, id: post_short.id}, remote: true, class: "rating_a", id: "show_record_#{post_short.id}") do
             %i.fa.fa-2x.font_grey.fa-angle-right
 
 

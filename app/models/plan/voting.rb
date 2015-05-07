@@ -7,4 +7,5 @@ class Plan::Voting < ActiveRecord::Base
   scope :uniq_user, -> { select('distinct user_id') }
   scope :by_status, ->(s) { where(status: s) }
   scope :by_type, ->(type) { where(type_vote: type) }
+  scope :by_post, ->(p) { where(plan_post_id: p.id) }
 end

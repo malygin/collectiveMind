@@ -18,11 +18,9 @@ class Estimate::PostsController < PostsController
   end
 
   def show
-    @post = Estimate::Post.find(params[:id])
-    @plan_post = @post.post
-    @est_stat = @plan_post.estimate_status.nil? ? 0 : @plan_post.estimate_status
+    @post = Plan::Post.find(params[:id])
     @comment = comment_model.new
-    @comments = @post.comments.paginate(page: params[:page], per_page: 10)
+    @comments = @post.main_comments
     respond_to do |format|
       format.html
       format.js
