@@ -62,7 +62,6 @@
 #= require gantt/ganttUtilities
 #= require gantt/i18nJs
 #= require gantt/jquery.dateField
-#= require gantt/jquery.dateField
 #= require gantt/jquery.JST
 #= require gantt/jquery.livequery.min
 #= require gantt/jquery.browser.min

@@ -28,7 +28,7 @@ Date.monthAbbreviations = new Array('Jan','Feb','Mar','Apr','Май','Jun','Jul'
 // Full day names. Change this for local month names
 Date.dayNames = new Array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 // Day abbreviations. Change this for local month names
-Date.dayAbbreviations = new Array('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+Date.dayAbbreviations = new Array('Вс.','Пн.','Вт.','Ср.','Чт.','Пт.','Сб.');
 // Used for parsing ambiguous dates like 1/2/2000 - default to preferring 'American' format meaning Jan 2.
 // Set to false to prefer 'European' format meaning Feb 1
 Date.preferAmericanFormat = true;
