@@ -101,8 +101,10 @@
   margin-left: 10px;
 }
 
-.ps-scrollbar-y-rail{
-  opacity: 0.5 !important;
+/* to make scrollbars always visible */
+.always-visible.ps-container > .ps-scrollbar-x-rail,
+.always-visible.ps-container > .ps-scrollbar-y-rail {
+  opacity: 1;
 }
 
 //.select_aspect {

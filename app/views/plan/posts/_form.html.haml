@@ -26,24 +26,15 @@
       .col-md-4
         %ul.list-unstyled.tabs_type_2{role: 'tablist'}
           - @post.post_novations.first.attributes_for_form.each do |link, values|
-            %li{role: 'presentation'}
+            %li{role: 'presentation', class: "#{'active' if link ==:project}" }
+
               %a.a_font_reset.scroll_tab{'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}"}
                 = t("activerecord.attributes.plan/post_novation.#{link}")
       .col-md-8
-        .tab-content.tab_cont5.ps_cont#plan_post_novations
-          #cabinet_5_cont_0.tab-pane.active.fade.in{role: 'tabpanel'}
-            .divider35
-            .text-center
-              = image_tag 'cab_5_qsign.png'
-              .divider35
-              %p.cab5_placeholder
-                Здесь вы ответите на вопросы по пунктам слева,
-                %br/
-                для этого нажмите на одну из панелей, или знак вопроса
-            .divider70
+        .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations
           - @post.post_novations.first.attributes_for_form.each do |link, attributes|
             = fields_for @post.post_novations.first do |n|
-              .tab-pane.fade{role: 'tabpanel', id: "cabinet_5_cont_#{link}"}
+              .tab-pane.fade.in{role: 'tabpanel', id: "cabinet_5_cont_#{link}",  class: "#{'active' if link ==:project}"}
                 - attributes.each do |attribute, bool|
                   - if bool == -1 or bool == true
                     %h6.bold
