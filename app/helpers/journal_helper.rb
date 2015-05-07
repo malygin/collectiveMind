@@ -8,6 +8,10 @@ module JournalHelper
         'fa-exclamation font_color_stage2'
       when 'concept_post_approve_status', 'my_concept_post_approve_status', 'concept_comment_approve_status', 'my_concept_comment_approve_status'
         'fa-exclamation font_color_stage3'
+      when 'novation_post_approve_status', 'my_novation_post_approve_status', 'novation_comment_approve_status', 'my_novation_comment_approve_status'
+        'fa-exclamation font_color_stage4'
+      when 'plan_post_approve_status', 'my_plan_post_approve_status', 'plan_comment_approve_status', 'my_plan_comment_approve_status'
+        'fa-exclamation font_color_stage5'
       # лайки
       when 'my_core_aspect_post_like', 'my_core_aspect_comment_like'
         'fa-thumbs-up font_color_stage1'
@@ -15,6 +19,10 @@ module JournalHelper
         'fa-thumbs-up font_color_stage2'
       when 'my_concept_post_like', 'my_concept_comment_like'
         'fa-thumbs-up font_color_stage3'
+      when 'my_novation_post_like', 'my_novation_comment_like'
+        'fa-thumbs-up font_color_stage4'
+      when 'my_plan_post_like', 'my_plan_comment_like'
+        'fa-thumbs-up font_color_stage5'
       #  дислайки
       when 'my_core_aspect_post_dislike', 'my_core_aspect_comment_dislike'
         'fa-thumbs-down font_color_stage1'
@@ -22,6 +30,10 @@ module JournalHelper
         'fa-thumbs-down font_color_stage2'
       when 'my_concept_post_dislike', 'my_concept_comment_dislike'
         'fa-thumbs-down font_color_stage3'
+      when 'my_novation_post_dislike', 'my_novation_comment_dislike'
+        'fa-thumbs-down font_color_stage4'
+      when 'my_plan_post_dislike', 'my_plan_comment_dislike'
+        'fa-thumbs-down font_color_stage5'
       # комменты
       when 'core_aspect_comment_save', 'my_core_aspect_comment'
         'fa-comment font_color_stage1'
@@ -29,6 +41,10 @@ module JournalHelper
         'fa-comment font_color_stage2'
       when 'concept_comment_save', 'my_concept_comment'
         'fa-comment font_color_stage3'
+      when 'novation_comment_save', 'my_novation_comment'
+        'fa-comment font_color_stage4'
+      when 'plan_comment_save', 'my_plan_comment'
+        'fa-comment font_color_stage5'
       # ответы на комменты
       when 'reply_core_aspect_comment'
         'fa-reply font_color_stage1'
@@ -36,6 +52,10 @@ module JournalHelper
         'fa-reply font_color_stage2'
       when 'reply_concept_comment'
         'fa-reply font_color_stage3'
+      when 'reply_novation_comment'
+        'fa-reply font_color_stage4'
+      when 'reply_plan_comment'
+        'fa-reply font_color_stage5'
       # добавление постов
       when 'core_aspect_post_save'
         'fa-plus font_color_stage1'
@@ -43,8 +63,10 @@ module JournalHelper
         'fa-plus font_color_stage2'
       when 'concept_post_save'
         'fa-plus font_color_stage3'
-
-
+      when 'novation_post_save'
+        'fa-plus font_color_stage4'
+      when 'plan_post_save'
+        'fa-plus font_color_stage5'
       # when 'plan_post_save'
       #   'fa fa-plus color-green'
       # when 'plan_post_update'
@@ -323,27 +345,91 @@ module JournalHelper
 
 
 
+      # NOVATIONS
+
+      when 'novation_post_save'
+        'добавил(а) пакет  ' + link_to("#{j.body}", "/project/#{project}/novation/posts?jr_post=#{j.first_id}")
+      when 'novation_comment_save'
+        "добавил(а) комментарий: '#{j.body}'"+ ' к пакету '+ link_to("#{j.body2} ... ", "/project/#{project}/novation/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_novation_comment'
+        "добавил(а) комментарий '#{j.body}...' к вашему пакету "+ link_to(j.body2, "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'reply_novation_comment'
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'novation_post_approve_status'
+        'выделил(а) пакет  ' + link_to("#{j.body}", "/project/#{project}/novation/posts?jr_post=#{j.first_id}") + ' как важный'
+      when 'my_novation_post_approve_status'
+        'выделил(а) ваш пакет  ' + link_to("#{j.body}", "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true") + ' как важный'
+      when 'novation_comment_approve_status'
+        "выделил(а) комментарий '#{j.body}...' к пакету "+ link_to(j.body2, "/project/#{project}/novation/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      when 'my_novation_comment_approve_status'
+        "выделил(а) ваш комментарий '#{j.body}...' к пакету "+ link_to(j.body2, "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+      when 'my_novation_post_like'
+        'понравился ваш пакет ' + link_to("#{j.body}", "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_novation_comment_like'
+        "понравился ваш комментарий: '#{j.body}'" + link_to(' к пакету ', "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_novation_post_dislike'
+        'не понравился ваш пакет ' + link_to("#{j.body}", "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_novation_comment_dislike'
+        "не понравился ваш комментарий: '#{j.body}'" + link_to(' к пакету ', "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+
       # PLANS
-      when 'plan_comment_save'
-        "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+ link_to("#{j.body2} ... ", "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+
       when 'plan_post_save'
-        'добавил(а) проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts/#{j.first_id}")
-      when 'plan_post_update'
-        'отредактировал(а) проект '+ link_to("#{j.body}...", "/project/#{project}/plan/posts/#{j.first_id}")
+        'добавил(а) проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts?jr_post=#{j.first_id}")
+      when 'plan_comment_save'
+        "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+ link_to("#{j.body2} ... ", "/project/#{project}/plan/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'my_plan_comment'
-        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+        "добавил(а) комментарий '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       when 'reply_plan_comment'
-        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
-      when 'my_plan_note'
-        "добавил(а) замечание  '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
-      when 'plan_comment_discuss_status'
-        "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
-      when 'my_plan_comment_discuss_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+        "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+      when 'plan_post_approve_status'
+        'выделил(а) проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts?jr_post=#{j.first_id}") + ' как важный'
+      when 'my_plan_post_approve_status'
+        'выделил(а) ваш проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true") + ' как важный'
       when 'plan_comment_approve_status'
-        "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
       when 'my_plan_comment_approve_status'
-        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+        "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
+      when 'my_plan_post_like'
+        'понравился ваш проект ' + link_to("#{j.body}", "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_plan_comment_like'
+        "понравился ваш комментарий: '#{j.body}'" + link_to(' к проекту ', "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+      when 'my_plan_post_dislike'
+        'не понравился ваш проект ' + link_to("#{j.body}", "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true")
+      when 'my_plan_comment_dislike'
+        "не понравился ваш комментарий: '#{j.body}'" + link_to(' к проекту ', "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+
+
+      # PLANS
+      # when 'plan_comment_save'
+      #   "добавил(а) комментарий: '#{j.body}'"+ ' к проекту '+ link_to("#{j.body2} ... ", "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'plan_post_save'
+      #   'добавил(а) проект  ' + link_to("#{j.body}", "/project/#{project}/plan/posts/#{j.first_id}")
+      # when 'plan_post_update'
+      #   'отредактировал(а) проект '+ link_to("#{j.body}...", "/project/#{project}/plan/posts/#{j.first_id}")
+      # when 'my_plan_comment'
+      #   "добавил(а) комментарий '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'reply_plan_comment'
+      #   "добавил(а) комментарий '#{j.body}...' в ответ на ваш "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}")
+      # when 'my_plan_note'
+      #   "добавил(а) замечание  '#{j.body}...' к вашему проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true")
+      # when 'plan_comment_discuss_status'
+      #   "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'my_plan_comment_discuss_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как требующий обсуждения'
+      # when 'plan_comment_approve_status'
+      #   "выделил(а) комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+      # when 'my_plan_comment_approve_status'
+      #   "выделил(а) ваш комментарий '#{j.body}...' к проекту "+ link_to(j.body2, "/project/#{project}/plan/posts/#{j.first_id}?viewed=true&req_comment=#{j.second_id}#comment_#{j.second_id}") + ' как важный'
+
+
       # ESSAY
       when 'essay_comment_save'
         "добавил(а) комментарий: '#{j.body}'"+ ' к рефлексии '+ link_to("#{j.body2 == '' ? 'подробнее' : j.body2} ... ", "/project/#{project}/stage/1/essay/posts/#{j.first_id}?req_comment=#{j.second_id}#comment_#{j.second_id}")

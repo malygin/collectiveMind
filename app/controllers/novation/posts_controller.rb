@@ -48,7 +48,12 @@ class Novation::PostsController < PostsController
       end
     end
     respond_to do |format|
-      format.js
+      if @novation.save
+        current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project).save!
+        format.js
+      else
+        format.js
+      end
     end
   end
 
