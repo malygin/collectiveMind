@@ -72,7 +72,7 @@
                     - type_attribute.second.each do |attribute, bool_attribute|
                       %h6.bold
                         = t("activerecord.attributes.novation/post.#{attribute}")
-                      %p.novation_attribute{'data-attribute': attribute}
+                      %p.novation_attribute{'data-attribute' => attribute}
                         = novation.send(attribute)
                       .divider15
   = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
