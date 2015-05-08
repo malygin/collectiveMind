@@ -169,14 +169,12 @@ $ ->
     $(stick_id).hide()
     return
 
-
   $('.with_plus').click ->
     $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
     return
 
   # GANTT
-
-  if $('#gantEditorTemplates').length >0
+  if $('#gantEditorTemplates').length > 0
     @ge = new GanttMaster()
     @ge.init($("#workSpace"))
     ret = JSON.parse($("#ta").val())
@@ -203,10 +201,19 @@ $ ->
       return
 
 @save_plan_post = (input_id) ->
-  $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
+  $('#plan_post_tasks_gant').val(JSON.stringify(document.ge.saveProject(), null, 2))
   $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
   $('input#' + input_id).click()
   return
+
+#@save_plan = ->
+#  this.save_plan_post = (input_id) ->
+#    $('#plan_post_tasks_gant').val(JSON.stringify(document.ge.saveProject(), null, 2))
+#    $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
+#    $('input#' + input_id).click()
+#
+#  $('body').on('click', 'button#to_publish_plan', this.save_plan_post('save_plan_post_published'))
+#  $('body').on('click', 'button#to_save_plan', this.save_plan_post('save_plan_post'))
 
 #show comments panel on post hover
 @show_comments_hover = ->
