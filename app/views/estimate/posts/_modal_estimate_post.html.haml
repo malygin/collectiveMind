@@ -80,7 +80,7 @@
                         %h5.bold
                           = t("activerecord.attributes.plan/post_novation.#{attribute}")
                         %p.text
-                          =@post.send(attribute)
+                          = @post.post_novations.first.send(attribute)
                         .divider15
 
               .col-md-6.comment_col.popup_expandable_col.ps_cont
