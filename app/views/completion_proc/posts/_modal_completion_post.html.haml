@@ -4,7 +4,7 @@
       .row
         .col-md-8
           %h4.bold.font_dark_grey
-            =@post.name
+            = @post.name
         .col-md-4
           .row
             .col-md-12
@@ -38,7 +38,7 @@
                       График реализации проекта
           .col-md-3
             .popup-post-block.pull-right
-              = user_image_tag @post.user.try(:avatar)
+              = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
               %span.font_black.text-center
                 = @post.user
       .clearfix
