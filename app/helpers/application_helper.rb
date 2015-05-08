@@ -904,7 +904,7 @@ module ApplicationHelper
 
   def current_stage_url(project)
     sub_url = project.current_stage_type.to_s.gsub('_', '/')
-    if project.current_stage_type == :collect_info_posts
+    if [:collect_info_posts, :completion_proc_posts].include? project.current_stage_type
       sub_url.sub!('/', '_')
     end
     "/project/#{project.id}/#{sub_url}"
