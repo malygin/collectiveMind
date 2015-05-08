@@ -3,7 +3,8 @@
     .col-sm-3
       .rating_user
         .media-left
-          = image_tag 'no-ava.png', class: "media-object img-circle img40 img_bordered"
+          -#= image_tag 'no-ava.png', class: "media-object img-circle img40 img_bordered"
+          = user_image_tag post_short.user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
         .media-body
           %h5.media-heading.bold
             = post_short.user

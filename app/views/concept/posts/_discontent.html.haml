@@ -12,7 +12,7 @@
     .description.collapse.rotate_arrow{id: "imperfs3-#{discontent.id}"}
       .media.comment
         .media-left
-          = cl_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle' if discontent.user
+          = user_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle' if discontent.user
         .media-body
           .row
             .col-md-4

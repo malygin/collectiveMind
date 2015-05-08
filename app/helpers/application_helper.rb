@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def user_image_tag(source, options = {})
+    if source
+      cl_image_tag source, options
+    else
+      image_tag 'no-ava.png', options
+    end
+  end
+
   def escape_text(t)
     t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'", "\\'")
   end

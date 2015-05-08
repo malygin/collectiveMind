@@ -42,7 +42,7 @@
           .col-md-6
             .innov-poster-cont
               -#=image_tag 'no-ava.png', class: 'img-circle'
-              = cl_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
               %span.poster-name
                 = @post.user
           .col-md-6.col_padding_right_0

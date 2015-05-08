@@ -51,9 +51,9 @@
                       График реализации проекта
           .col-md-3
             .popup-post-block.pull-right
-              =image_tag 'no-ava.png'
+              = user_image_tag @post.user.try(:avatar)
               %span.font_black.text-center
-                =@post.user
+                = @post.user
 
       .clearfix
       .tab-content.modal_content

@@ -56,9 +56,9 @@
                       участников
           .col-md-3
             .popup-post-block.pull-right
-              =image_tag 'no-ava.png'
+              = user_image_tag @post.user.try(:avatar)
               %span.font_black.text-center
-                =@post.user
+                = @post.user
 
       .clearfix
       .tab-content.modal_content
@@ -90,7 +90,7 @@
                 .chat-messages
                   = render partial:'shared/comment', collection: @comments
                 .divider15
-                = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+                -#= render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
             .divider25
         #tab-2.tab-pane.fade(style='background: white;')
@@ -116,13 +116,13 @@
                   .border_grey.col_rate_head
                     Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
             .divider10
-            - @post.voted_users.each do |user|
+            - @post.voted_users.uniq.each do |user|
               .rating_line
                 .row
                   .col-sm-3
                     .rating_user
                       .media-left
-                        = image_tag 'no-ava.png', class: 'media-object img-circle img40 img_bordered'
+                        = user_image_tag user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
                       .media-body
                         %h5.media-heading.bold
                           = user

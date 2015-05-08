@@ -6,7 +6,7 @@
       .media
         .media-left.text-center.gradient.post-poster
           -#= image_tag 'no-ava.png', class: "img-circle img50"
-          = cl_image_tag post_short.user.try(:avatar), class: 'img-circle img50'
+          = user_image_tag post_short.user.try(:avatar), class: 'img-circle img50'
           %p.poster-name
             =post_short.user
           %p.time

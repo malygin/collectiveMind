@@ -1,8 +1,6 @@
-$('#render_estimate_post').empty();
-$("#render_estimate_post").html('#{escape_javascript(render partial: 'modal_estimate_post')}');
-magnificPopupOpen('#popup-estimate');
-comments_feed();
-comments_expandable_column();
+$('#render_completion_post').empty();
+$("#render_completion_post").html('#{escape_javascript(render partial: 'modal_completion_post')}');
+magnificPopupOpen('#popup-completion');
 if ($('#gantEditorTemplates').length >0){
 ge = new GanttMaster();
 ge.init($("#workSpace"));
@@ -12,4 +10,3 @@ ge.loadProject(project);
 setTimeout(function() { ge.gantt.refreshGantt()}, 3000);
 -#ge.gantt.refreshGantt();
 }
-history_change("#{estimate_posts_path(@project)}");

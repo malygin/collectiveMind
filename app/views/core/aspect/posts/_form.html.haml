@@ -6,7 +6,7 @@
     .post-body
       .media
         .media-left.text-center.gradient2.post-poster
-          = cl_image_tag current_user.avatar, class: 'img-circle img40'
+          = user_image_tag current_user.avatar, class: 'img-circle img40'
           %p.poster-name
             = current_user
           %p.poster-name
