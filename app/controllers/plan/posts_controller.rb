@@ -13,7 +13,7 @@ class Plan::PostsController < PostsController
   end
 
   def index
-    @posts = @project.plan_post.created_order
+    @posts = @project.plan_post.where(status: 1).created_order
     # @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC')
     # post = Plan::Post.where(project_id: @project, status: 0).first
     # @est_stat = post.estimate_status if post
