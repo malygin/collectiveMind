@@ -25,6 +25,7 @@ class Core::Project < ActiveRecord::Base
   has_many :novations, class_name: 'Novation::Post'
 
   has_many :plan_post, class_name: 'Plan::Post'
+  has_many :plan_published_post, -> { where status: 1 }, class_name: 'Plan::Post'
   has_many :completion_plan_posts, -> { where completion_status: true }, class_name: 'Plan::Post'
   has_many :estimate_posts, -> { where status: 0 }, class_name: 'Estimate::Post'
 

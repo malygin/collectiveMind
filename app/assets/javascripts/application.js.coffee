@@ -143,7 +143,7 @@ $ ->
   post_colored_stripes()
   colors_discontents()
   comments_expandable_column()
-#  vote_scripts()
+  #  vote_scripts()
 
   ### sort button active ###
   # выделение кнопок сортировки
@@ -168,6 +168,45 @@ $ ->
     stick_id = $(this).attr('data-for')
     $(stick_id).hide()
     return
+
+
+  $('.with_plus').click ->
+    $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
+    return
+
+  # GANTT
+
+  if $('#gantEditorTemplates').length >0
+    @ge = new GanttMaster()
+    @ge.init($("#workSpace"))
+    ret = JSON.parse($("#ta").val())
+    offset = (new Date).getTime() - ret.tasks[0].start
+    i = 0
+    while i < ret.tasks.length
+      ret.tasks[i].start = ret.tasks[i].start + offset
+      i++;
+    @ge.loadProject(ret);
+
+  $('button#to_publish_plan').click ->
+    save_plan_post('save_plan_post_published')
+  $('button#to_save_plan').click ->
+    save_plan_post('save_plan_post')
+
+  if $('#list_novations').length > 0
+    $('#ul_novations').on 'click', '.open_novation', (event) ->
+      $('#selected_novation').text($(this).text()).removeClass('hidden')
+      $('#selected_novation_main_form').text($(this).text())
+      $('#select_novation').text('Выбранный пакет:')
+      $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
+        $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
+        return
+      return
+
+@save_plan_post = (input_id) ->
+  $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
+  $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
+  $('input#' + input_id).click()
+  return
 
 #show comments panel on post hover
 @show_comments_hover = ->
@@ -372,40 +411,4 @@ $colors_imperf_codes = [
   '978ac2'
 ]
 
-$('.with_plus').click ->
-  $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
-  return
-
-# GANTT
-
-if $('#gantEditorTemplates').length >0
-  @ge = new GanttMaster()
-  @ge.init($("#workSpace"))
-  ret = JSON.parse($("#ta").val())
-  offset = (new Date).getTime() - ret.tasks[0].start
-  i = 0
-  while i < ret.tasks.length
-    ret.tasks[i].start = ret.tasks[i].start + offset
-    i++;
-  @ge.loadProject(ret);
-
-@save_plan_post = (input_id) ->
-  $('#plan_post_tasks_gant').val(JSON.stringify(ge.saveProject(), null, 2))
-  $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
-  $('input#' + input_id).click()
-  return
-
-$('button#to_publish_plan').click ->
-  save_plan_post('save_plan_post_published')
-$('button#to_save_plan').click ->
-  save_plan_post('save_plan_post')
-
-if $('#list_novations').length > 0
-  $('#ul_novations').on 'click', '.open_novation', (event) ->
-    $('#selected_novation').text($(this).text()).removeClass('hidden')
-    $('#selected_novation_main_form').text($(this).text())
-    $('#select_novation').text('Выбранный пакет:')
-    $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
-      $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
-      return
-    return
+# @todo ниже ничего не добавлять!!! здесь только функции! для начальной инициализации блок выше!

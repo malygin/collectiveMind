@@ -8,7 +8,7 @@ module BasePost
       published: 1,
       approved: 2,
       archived: 3
-  }
+  }.freeze
 
   SCORE = 10
 
