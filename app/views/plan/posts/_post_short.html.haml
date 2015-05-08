@@ -33,6 +33,9 @@
       .row
         .col-md-3.col-md-offset-9.col_padding_left_3
           .text-right.small_icons
+            %span.popup2
+              = link_to plus_plan_post_path(@project, post_short), remote: true, method: :put, id: "plus_post_#{post_short.id}" do
+                %i.fa.fa-trophy.font_red
             %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}"}
               %small(class="cc_post_#{post_short.id}")
                 = post_short.comments.count

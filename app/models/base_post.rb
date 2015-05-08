@@ -10,6 +10,8 @@ module BasePost
       archived: 3
   }
 
+  SCORE = 10
+
   included do
     belongs_to :user
     belongs_to :project, class_name: 'Core::Project'

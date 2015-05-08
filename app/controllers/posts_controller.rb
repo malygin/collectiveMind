@@ -259,21 +259,22 @@ class PostsController < ProjectsController
   #todo check if user already voted
   def plus
     @post = current_model.find(params[:id])
-    if boss? or role_expert?
-      @post.toggle!(:useful)
-      if @post.useful
-        @post.user.add_score(type: :plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-        Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
+    if current_user.admin?
+      @post.update(useful: true)
+      project_user = @post.user.core_project_users.by_project(@project.id).first
+      project_user.update_attributes("#{current_model.to_s.underscore.pluralize.gsub('/', '_')}_score" => current_model::SCORE)
+      if project_user.score.nil?
+        project_user.update_attributes(score: current_model::SCORE)
       else
-        @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, path: @post.class.name.underscore.pluralize)
-        Award.reward(user: @post.user, post: @post, project: @project, type: 'remove')
+        project_user.update_attributes(score: (project_user.score + current_model::SCORE))
       end
+      #Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
     end
-    if @post.instance_of? Discontent::Post
-      @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
-      # elsif @post.instance_of? Concept::Post
-      #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
-    end
+    # if @post.instance_of? Discontent::Post
+    #   @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
+    #   # elsif @post.instance_of? Concept::Post
+    #   #   @post.update_attributes(status_name: true, status_content: true, status_positive: true, status_positive_r: true, status_negative: true, status_negative_r: true, status_problems: true, status_reality: true, status_positive_s: true, status_negative_s: true, status_control: true, status_control_r: true, status_control_s: true, status_obstacles: true)
+    # end
 
     #@against =  params[:against] == 'true'
     #if boss? and post.admins_vote.count != 0

@@ -1,5 +1,6 @@
 class Core::Aspect::Post < ActiveRecord::Base
   include BasePost
+  SCORE = 20
 
   belongs_to :core_aspect, class_name: 'Core::Aspect::Post', foreign_key: 'core_aspect_id'
 

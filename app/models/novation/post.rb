@@ -1,5 +1,6 @@
 class Novation::Post < ActiveRecord::Base
   include BasePost
+  SCORE = 100
 
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'novation_post_id', class_name: 'Novation::Voting'

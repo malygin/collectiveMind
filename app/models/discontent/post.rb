@@ -1,6 +1,7 @@
 class Discontent::Post < ActiveRecord::Base
   include PgSearch
   include BasePost
+  SCORE = 50
 
   belongs_to :discontent_post, foreign_key: 'discontent_post_id', class_name: 'Discontent::Post'
   # has_many :discontent_posts, class_name: 'Discontent::Post', foreign_key: 'discontent_post_id'
