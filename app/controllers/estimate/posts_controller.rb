@@ -14,7 +14,7 @@ class Estimate::PostsController < PostsController
   end
 
   def index
-    @posts = Plan::Post.where(project_id: @project, status: 0)
+    @posts = Plan::Post.where(project_id: @project, status: 1)
   end
 
   def show
