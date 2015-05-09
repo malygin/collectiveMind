@@ -409,7 +409,7 @@ $(document).ready(function () {
 
     // Открытие "Добавления задач" в кабинете проектов
     $('#bottom-opener').on('click', function () {
-        console.log(111);
+        $('#plan_buttons button').toggleClass('disabled');
         var panel = $('#bottom-panel');
         if (panel.hasClass("visible")) {
             panel.removeClass('visible').animate({'top': '100%'});

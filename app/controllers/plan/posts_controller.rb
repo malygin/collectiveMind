@@ -38,12 +38,13 @@ class Plan::PostsController < PostsController
     if params[:plan_post][:published]
       @post.update status: current_model::STATUSES[:published]
     end
+    @post.post_novations.build plan_post_novation_params
     if @post.save
-      @plan_novation = @post.post_novations.build
-      @novation.used_attributes.each do |attribute|
-        @plan_novation.send("#{attribute}=", @novation.send(attribute))
-      end
-      @plan_novation.save
+      # @plan_novation = @post.post_novations.build plan_post_novation_params
+      # @novation.used_attributes.each do |attribute|
+      #   @plan_novation.send("#{attribute}=", @novation.send(attribute))
+      # end
+      # @plan_novation.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
 
