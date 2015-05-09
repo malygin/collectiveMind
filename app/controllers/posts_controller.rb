@@ -329,9 +329,11 @@ class PostsController < ProjectsController
     @against = params[:against]
     @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.users.include? current_user
     Journal.like_comment_event(current_user, @project, name_of_comment_for_param, @comment, @against)
+
     respond_to do |format|
       format.js
     end
+
   end
 
   #write fact of voting in db
