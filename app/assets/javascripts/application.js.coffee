@@ -39,8 +39,9 @@
 #= require perfect-scrollbar.jquery.min
 #= require dropdowns-enhancement
 
-#= require isotope.pkgd.min
 
+
+#= require isotope.pkgd.min
 #= require underscore
 #= require_tree ./templates
 #= require backbone
