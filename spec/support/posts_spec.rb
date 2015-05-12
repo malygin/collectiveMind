@@ -1,3 +1,11 @@
+shared_examples 'correct status in post' do |factory_name|
+  it { expect(build(factory_name, status: -1)).not_to be_valid }
+
+  it { expect(build(factory_name, status: 1)).to be_valid }
+
+  it { expect(build(factory_name, status: 4)).not_to be_valid }
+end
+
 shared_examples 'content with comments' do |moderator = false, count = 2, project_status = 1|
   let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
   let(:comment_model_name) { @comment_2.class.name.constantize }

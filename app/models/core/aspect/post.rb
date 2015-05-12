@@ -15,7 +15,7 @@ class Core::Aspect::Post < ActiveRecord::Base
 
   # has_many :missed_questions, -> { where(status: 0).includes(:user_answers).where(collect_info_user_answers: {question_id: nil}) }, class_name: 'CollectInfo::Question'
 
-  validates :content, :project_id, presence: true
+  validates :content, presence: true
 
   default_scope { order :id }
 
