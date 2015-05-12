@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe 'Discontent::Post', type: :model do
-  it 'default factory - valid' do
-    expect(build(:discontent)).to be_valid
-  end
-
   context 'invalid without' do
     it 'content' do
       expect(build(:discontent, content: '')).to be_invalid
@@ -17,17 +13,6 @@ describe 'Discontent::Post', type: :model do
     it 'whered' do
       expect(build(:discontent, whered: '')).to be_invalid
     end
-
-    it 'project' do
-      expect(build(:discontent, project: nil)).to be_invalid
-    end
-  end
-
-  it 'by project' do
-    create :discontent
-    post2 = create :discontent
-    post3 = create :discontent, project: post2.project
-    expect(Discontent::Post.by_project(post2.project.id)).to match_array([post2, post3])
   end
 
   it 'for union' do
@@ -36,4 +21,6 @@ describe 'Discontent::Post', type: :model do
     post3 = create :discontent, project: post2.project
     expect(Discontent::Post.for_union(post2.project.id)).to match_array([post3])
   end
+
+  it_behaves_like 'base post', :discontent, Discontent::Post
 end

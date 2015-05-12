@@ -1,9 +1,6 @@
 FactoryGirl.define do
   factory :novation, class: 'Novation::Post' do
     sequence(:title) { |n| "what #{n}" }
-
-    status 0
-
     association :user, factory: :ordinary_user
     association :project, factory: :core_project
 

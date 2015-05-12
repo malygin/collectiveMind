@@ -2,14 +2,13 @@ FactoryGirl.define do
   factory :concept, class: 'Concept::Post' do
     association :user
     association :project, factory: :core_project
-    status 0
     sequence(:title) { |n| "title #{n}" }
     sequence(:goal) { |n| "goal #{n}" }
     sequence(:actors) { |n| "actors #{n}" }
     sequence(:impact_env) { |n| "impact_env #{n}" }
 
     after :create do |post|
-      discontent = create :discontent, project: post.project, status: 4
+      discontent = create :discontent, project: post.project, status: BasePost::STATUSES[:approved]
       create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
     end
   end

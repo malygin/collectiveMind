@@ -1,4 +1,38 @@
-shared_examples 'correct status in post' do |factory_name|
+shared_examples 'base post' do |factory_name, class_name|
+  it 'default factory - valid' do
+    expect(build(factory_name)).to be_valid
+  end
+
+  context 'invalid without' do
+    it 'user' do
+      expect(build(factory_name, user: nil)).to be_invalid
+    end
+
+    it 'project' do
+      expect(build(factory_name, project: nil)).to be_invalid
+    end
+  end
+
+  it 'by project' do
+    create factory_name
+    post2 = create factory_name
+    post3 = create factory_name, project: post2.project
+    expect(class_name.by_project(post2.project)).to match_array([post2, post3])
+  end
+
+  it 'by status' do
+    post2 = create factory_name, status: BasePost::STATUSES[:published]
+    post3 = create factory_name, project: post2.project, status: BasePost::STATUSES[:approved]
+    expect(class_name.by_status(2)).to match_array([post3])
+  end
+
+  it 'by user' do
+    post1 = create factory_name
+    post2 = create factory_name
+    post3 = create factory_name, project: post2.project, user: post1.user
+    expect(class_name.by_user(post1.user)).to match_array([post1, post3])
+  end
+
   it { expect(build(factory_name, status: -1)).not_to be_valid }
 
   it { expect(build(factory_name, status: 1)).to be_valid }
