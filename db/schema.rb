@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508110026) do
+ActiveRecord::Schema.define(version: 20150512173918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "project_id",                  null: false
   end
 
+  add_index "advices", ["adviseable_id", "adviseable_type"], name: "index_advices_on_adviseable_id_and_adviseable_type", using: :btree
+  add_index "advices", ["project_id"], name: "index_advices_on_project_id", using: :btree
   add_index "advices", ["user_id"], name: "index_advices_on_user_id", using: :btree
 
   create_table "awards", force: :cascade do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
   end
 
   add_index "collect_info_answers", ["created_at"], name: "index_collect_info_answers_on_created_at", using: :btree
+  add_index "collect_info_answers", ["question_id"], name: "index_collect_info_answers_on_question_id", using: :btree
   add_index "collect_info_answers", ["user_id"], name: "index_collect_info_answers_on_user_id", using: :btree
 
   create_table "collect_info_questions", force: :cascade do |t|
@@ -73,7 +76,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "type_stage"
   end
 
+  add_index "collect_info_questions", ["aspect_id"], name: "index_collect_info_questions_on_aspect_id", using: :btree
   add_index "collect_info_questions", ["created_at"], name: "index_collect_info_questions_on_created_at", using: :btree
+  add_index "collect_info_questions", ["project_id"], name: "index_collect_info_questions_on_project_id", using: :btree
   add_index "collect_info_questions", ["user_id"], name: "index_collect_info_questions_on_user_id", using: :btree
 
   create_table "collect_info_user_answers", force: :cascade do |t|
@@ -101,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "status"
   end
 
+  add_index "collect_info_votings", ["aspect_id", "user_id"], name: "index_collect_info_votings_on_aspect_id_and_user_id", using: :btree
   add_index "collect_info_votings", ["aspect_id"], name: "index_collect_info_votings_on_aspect_id", using: :btree
   add_index "collect_info_votings", ["user_id"], name: "index_collect_info_votings_on_user_id", using: :btree
 
@@ -112,7 +118,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against",    default: true
   end
 
+  add_index "concept_comment_votings", ["comment_id", "user_id"], name: "index_concept_comment_votings_on_comment_id_and_user_id", using: :btree
   add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_voitings_on_created_at_and_comment_id", using: :btree
+  add_index "concept_comment_votings", ["user_id"], name: "index_concept_comment_votings_on_user_id", using: :btree
 
   create_table "concept_comments", force: :cascade do |t|
     t.text     "content"
@@ -131,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "isFile"
   end
 
+  add_index "concept_comments", ["comment_id"], name: "index_concept_comments_on_comment_id", using: :btree
   add_index "concept_comments", ["created_at"], name: "index_concept_comments_on_created_at", using: :btree
   add_index "concept_comments", ["post_id"], name: "index_concept_comments_on_post_id", using: :btree
   add_index "concept_comments", ["user_id"], name: "index_concept_comments_on_user_id", using: :btree
@@ -144,6 +153,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "concept_notes", ["post_id"], name: "index_concept_notes_on_post_id", using: :btree
+  add_index "concept_notes", ["user_id"], name: "index_concept_notes_on_user_id", using: :btree
+
   create_table "concept_post_discontents", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
@@ -152,6 +164,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "complite"
     t.integer  "status"
   end
+
+  add_index "concept_post_discontents", ["discontent_post_id"], name: "index_concept_post_discontents_on_discontent_post_id", using: :btree
+  add_index "concept_post_discontents", ["post_id", "discontent_post_id"], name: "concept_post_discontents_post_discontent", using: :btree
+  add_index "concept_post_discontents", ["post_id"], name: "index_concept_post_discontents_on_post_id", using: :btree
 
   create_table "concept_post_resources", force: :cascade do |t|
     t.string   "name",                     limit: 255
@@ -166,6 +182,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "style"
   end
 
+  add_index "concept_post_resources", ["post_id"], name: "index_concept_post_resources_on_post_id", using: :btree
+  add_index "concept_post_resources", ["project_id"], name: "index_concept_post_resources_on_project_id", using: :btree
+
   create_table "concept_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -175,6 +194,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
   end
 
   add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_voitings_on_post_id_and_user_id", using: :btree
+  add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_votings_on_post_id_and_user_id", using: :btree
   add_index "concept_post_votings", ["post_id"], name: "index_concept_post_voitings_on_post_id", using: :btree
   add_index "concept_post_votings", ["user_id"], name: "index_concept_post_voitings_on_user_id", using: :btree
 
@@ -208,6 +228,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer "project_id"
   end
 
+  add_index "concept_resources", ["project_id"], name: "index_concept_resources_on_project_id", using: :btree
+
   create_table "concept_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "concept_post_id"
@@ -217,7 +239,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "status"
   end
 
+  add_index "concept_votings", ["concept_post_id", "user_id"], name: "index_concept_votings_on_concept_post_id_and_user_id", using: :btree
   add_index "concept_votings", ["concept_post_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
+  add_index "concept_votings", ["discontent_post_id"], name: "index_concept_votings_on_discontent_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
 
   create_table "core_aspect_comment_votings", force: :cascade do |t|
@@ -227,6 +251,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  add_index "core_aspect_comment_votings", ["comment_id", "user_id"], name: "index_core_aspect_comment_votings_on_comment_id_and_user_id", using: :btree
+  add_index "core_aspect_comment_votings", ["comment_id"], name: "index_core_aspect_comment_votings_on_comment_id", using: :btree
+  add_index "core_aspect_comment_votings", ["user_id"], name: "index_core_aspect_comment_votings_on_user_id", using: :btree
 
   create_table "core_aspect_comments", force: :cascade do |t|
     t.text     "content"
@@ -243,6 +271,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "core_aspect_comments", ["comment_id"], name: "index_core_aspect_comments_on_comment_id", using: :btree
+  add_index "core_aspect_comments", ["post_id"], name: "index_core_aspect_comments_on_post_id", using: :btree
+  add_index "core_aspect_comments", ["user_id"], name: "index_core_aspect_comments_on_user_id", using: :btree
+
   create_table "core_aspect_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -250,6 +282,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "core_aspect_post_votings", ["post_id", "user_id"], name: "index_core_aspect_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "core_aspect_post_votings", ["post_id"], name: "index_core_aspect_post_votings_on_post_id", using: :btree
+  add_index "core_aspect_post_votings", ["user_id"], name: "index_core_aspect_post_votings_on_user_id", using: :btree
 
   create_table "core_aspect_posts", force: :cascade do |t|
     t.text     "content"
@@ -267,7 +303,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "approve_status"
   end
 
+  add_index "core_aspect_posts", ["core_aspect_id"], name: "index_core_aspect_posts_on_core_aspect_id", using: :btree
   add_index "core_aspect_posts", ["project_id"], name: "index_core_aspect_posts_on_project_id", using: :btree
+  add_index "core_aspect_posts", ["user_id"], name: "index_core_aspect_posts_on_user_id", using: :btree
 
   create_table "core_content_answers", force: :cascade do |t|
     t.text     "content"
@@ -284,6 +322,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "core_content_questions", ["project_id"], name: "index_core_content_questions_on_project_id", using: :btree
+
   create_table "core_content_user_answers", force: :cascade do |t|
     t.text     "content"
     t.integer  "content_question_id"
@@ -294,6 +334,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "post_id"
   end
 
+  add_index "core_content_user_answers", ["content_answer_id"], name: "index_core_content_user_answers_on_content_answer_id", using: :btree
+  add_index "core_content_user_answers", ["content_question_id"], name: "index_core_content_user_answers_on_content_question_id", using: :btree
+  add_index "core_content_user_answers", ["user_id"], name: "index_core_content_user_answers_on_user_id", using: :btree
+
   create_table "core_essay_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -302,7 +346,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against"
   end
 
+  add_index "core_essay_comment_votings", ["comment_id", "user_id"], name: "index_core_essay_comment_votings_on_comment_id_and_user_id", using: :btree
   add_index "core_essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
+  add_index "core_essay_comment_votings", ["user_id"], name: "index_core_essay_comment_votings_on_user_id", using: :btree
 
   create_table "core_essay_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -321,7 +367,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "isFile"
   end
 
+  add_index "core_essay_comments", ["comment_id"], name: "index_core_essay_comments_on_comment_id", using: :btree
   add_index "core_essay_comments", ["post_id"], name: "index_core_essay_comments_on_post_id", using: :btree
+  add_index "core_essay_comments", ["user_id"], name: "index_core_essay_comments_on_user_id", using: :btree
 
   create_table "core_essay_post_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -331,7 +379,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against"
   end
 
+  add_index "core_essay_post_votings", ["post_id", "user_id"], name: "index_core_essay_post_votings_on_post_id_and_user_id", using: :btree
   add_index "core_essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
+  add_index "core_essay_post_votings", ["user_id"], name: "index_core_essay_post_votings_on_user_id", using: :btree
 
   create_table "core_essay_posts", force: :cascade do |t|
     t.integer  "user_id"
@@ -350,6 +400,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "useful"
     t.boolean  "approve_status"
   end
+
+  add_index "core_essay_posts", ["project_id"], name: "index_core_essay_posts_on_project_id", using: :btree
+  add_index "core_essay_posts", ["user_id"], name: "index_core_essay_posts_on_user_id", using: :btree
 
   create_table "core_help_posts", force: :cascade do |t|
     t.text     "content"
@@ -371,6 +424,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "aspect_id"
   end
 
+  add_index "core_knowbase_posts", ["aspect_id"], name: "index_core_knowbase_posts_on_aspect_id", using: :btree
+  add_index "core_knowbase_posts", ["project_id"], name: "index_core_knowbase_posts_on_project_id", using: :btree
+
   create_table "core_project_scores", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -381,6 +437,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "core_project_scores", ["project_id"], name: "index_core_project_scores_on_project_id", using: :btree
+  add_index "core_project_scores", ["user_id"], name: "index_core_project_scores_on_user_id", using: :btree
 
   create_table "core_project_settings", force: :cascade do |t|
     t.json     "stage_dates"
@@ -417,6 +476,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "score",                    default: 0
   end
 
+  add_index "core_project_users", ["project_id", "user_id"], name: "index_core_project_users_on_project_id_and_user_id", using: :btree
   add_index "core_project_users", ["project_id"], name: "index_core_project_users_on_project_id", using: :btree
   add_index "core_project_users", ["user_id"], name: "index_core_project_users_on_user_id", using: :btree
 
@@ -456,6 +516,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.text     "completion_text"
   end
 
+  add_index "core_projects", ["project_type_id"], name: "index_core_projects_on_project_type_id", using: :btree
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
 
   create_table "core_user_award_clicks", force: :cascade do |t|
@@ -466,6 +527,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "core_user_award_clicks", ["project_id"], name: "index_core_user_award_clicks_on_project_id", using: :btree
+  add_index "core_user_award_clicks", ["user_id"], name: "index_core_user_award_clicks_on_user_id", using: :btree
+
   create_table "core_user_awards", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "award_id"
@@ -475,6 +539,11 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "position"
   end
 
+  add_index "core_user_awards", ["award_id", "user_id"], name: "index_core_user_awards_on_award_id_and_user_id", using: :btree
+  add_index "core_user_awards", ["award_id"], name: "index_core_user_awards_on_award_id", using: :btree
+  add_index "core_user_awards", ["project_id"], name: "index_core_user_awards_on_project_id", using: :btree
+  add_index "core_user_awards", ["user_id"], name: "index_core_user_awards_on_user_id", using: :btree
+
   create_table "discontent_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -483,7 +552,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against",    default: true
   end
 
+  add_index "discontent_comment_votings", ["comment_id", "user_id"], name: "index_discontent_comment_votings_on_comment_id_and_user_id", using: :btree
   add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_voitings_on_comment_id", using: :btree
+  add_index "discontent_comment_votings", ["user_id"], name: "index_discontent_comment_votings_on_user_id", using: :btree
 
   create_table "discontent_comments", force: :cascade do |t|
     t.text     "content"
@@ -502,6 +573,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "isFile"
   end
 
+  add_index "discontent_comments", ["comment_id"], name: "index_discontent_comments_on_comment_id", using: :btree
+  add_index "discontent_comments", ["post_id"], name: "index_discontent_comments_on_post_id", using: :btree
+  add_index "discontent_comments", ["user_id"], name: "index_discontent_comments_on_user_id", using: :btree
+
   create_table "discontent_notes", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -511,12 +586,19 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "discontent_notes", ["post_id"], name: "index_discontent_notes_on_post_id", using: :btree
+  add_index "discontent_notes", ["user_id"], name: "index_discontent_notes_on_user_id", using: :btree
+
   create_table "discontent_post_aspects", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "aspect_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "discontent_post_aspects", ["aspect_id", "post_id"], name: "index_discontent_post_aspects_on_aspect_id_and_post_id", using: :btree
+  add_index "discontent_post_aspects", ["aspect_id"], name: "index_discontent_post_aspects_on_aspect_id", using: :btree
+  add_index "discontent_post_aspects", ["post_id"], name: "index_discontent_post_aspects_on_post_id", using: :btree
 
   create_table "discontent_post_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -527,6 +609,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
   end
 
   add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_voitings_on_post_id_and_user_id", using: :btree
+  add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_votings_on_post_id_and_user_id", using: :btree
   add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_voitings_on_post_id", using: :btree
   add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_voitings_on_user_id", using: :btree
 
@@ -535,10 +618,14 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer "project_id"
   end
 
+  add_index "discontent_post_whens", ["project_id"], name: "index_discontent_post_whens_on_project_id", using: :btree
+
   create_table "discontent_post_wheres", force: :cascade do |t|
     t.string  "content",    limit: 255
     t.integer "project_id"
   end
+
+  add_index "discontent_post_wheres", ["project_id"], name: "index_discontent_post_wheres_on_project_id", using: :btree
 
   create_table "discontent_posts", force: :cascade do |t|
     t.text     "content"
@@ -568,8 +655,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.text     "what"
   end
 
+  add_index "discontent_posts", ["discontent_post_id"], name: "index_discontent_posts_on_discontent_post_id", using: :btree
   add_index "discontent_posts", ["project_id", "status"], name: "index_discontent_posts_on_project_id_and_status", using: :btree
   add_index "discontent_posts", ["project_id"], name: "index_discontent_posts_on_project_id", using: :btree
+  add_index "discontent_posts", ["user_id"], name: "index_discontent_posts_on_user_id", using: :btree
 
   create_table "discontent_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -580,6 +669,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "status"
   end
 
+  add_index "discontent_votings", ["discontent_post_id", "user_id"], name: "index_discontent_votings_on_discontent_post_id_and_user_id", using: :btree
   add_index "discontent_votings", ["discontent_post_id"], name: "index_discontent_votings_on_discontent_post_id", using: :btree
   add_index "discontent_votings", ["user_id"], name: "index_discontent_votings_on_user_id", using: :btree
 
@@ -591,7 +681,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against",    default: true
   end
 
+  add_index "estimate_comment_votings", ["comment_id", "user_id"], name: "index_estimate_comment_votings_on_comment_id_and_user_id", using: :btree
   add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_voitings_on_comment_id", using: :btree
+  add_index "estimate_comment_votings", ["user_id"], name: "index_estimate_comment_votings_on_user_id", using: :btree
 
   create_table "estimate_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -610,7 +702,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "isFile"
   end
 
+  add_index "estimate_comments", ["comment_id"], name: "index_estimate_comments_on_comment_id", using: :btree
   add_index "estimate_comments", ["post_id"], name: "index_estimate_comments_on_post_id", using: :btree
+  add_index "estimate_comments", ["user_id"], name: "index_estimate_comments_on_user_id", using: :btree
 
   create_table "estimate_post_aspects", force: :cascade do |t|
     t.integer  "post_id"
@@ -647,6 +741,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "first_stage"
     t.integer  "plan_post_first_cond_id"
   end
+
+  add_index "estimate_post_aspects", ["plan_post_aspect_id"], name: "index_estimate_post_aspects_on_plan_post_aspect_id", using: :btree
+  add_index "estimate_post_aspects", ["post_id"], name: "index_estimate_post_aspects_on_post_id", using: :btree
 
   create_table "estimate_post_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -790,6 +887,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_index "journal_loggers", ["project_id"], name: "index_journal_loggers_on_project_id", using: :btree
+  add_index "journal_loggers", ["user_id"], name: "index_journal_loggers_on_user_id", using: :btree
+  add_index "journal_loggers", ["user_informed"], name: "index_journal_loggers_on_user_informed", using: :btree
+
   create_table "journal_mailers", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "content"
@@ -804,6 +905,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "journal_mailers", ["project_id"], name: "index_journal_mailers_on_project_id", using: :btree
+  add_index "journal_mailers", ["user_id"], name: "index_journal_mailers_on_user_id", using: :btree
 
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
@@ -859,6 +963,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                null: false
   end
 
+  add_index "novation_comment_votings", ["comment_id", "user_id"], name: "index_novation_comment_votings_on_comment_id_and_user_id", using: :btree
+  add_index "novation_comment_votings", ["comment_id"], name: "index_novation_comment_votings_on_comment_id", using: :btree
+  add_index "novation_comment_votings", ["user_id"], name: "index_novation_comment_votings_on_user_id", using: :btree
+
   create_table "novation_comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -874,6 +982,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "novation_comments", ["comment_id"], name: "index_novation_comments_on_comment_id", using: :btree
+  add_index "novation_comments", ["post_id"], name: "index_novation_comments_on_post_id", using: :btree
+  add_index "novation_comments", ["user_id"], name: "index_novation_comments_on_user_id", using: :btree
+
   create_table "novation_notes", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -883,6 +995,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "novation_notes", ["post_id"], name: "index_novation_notes_on_post_id", using: :btree
+  add_index "novation_notes", ["user_id"], name: "index_novation_notes_on_user_id", using: :btree
+
   create_table "novation_post_concepts", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "concept_post_id"
@@ -891,6 +1006,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                  null: false
   end
 
+  add_index "novation_post_concepts", ["concept_post_id", "post_id"], name: "index_novation_post_concepts_on_concept_post_id_and_post_id", using: :btree
+  add_index "novation_post_concepts", ["concept_post_id"], name: "index_novation_post_concepts_on_concept_post_id", using: :btree
+  add_index "novation_post_concepts", ["post_id"], name: "index_novation_post_concepts_on_post_id", using: :btree
+
   create_table "novation_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -898,6 +1017,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "novation_post_votings", ["post_id", "user_id"], name: "index_novation_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "novation_post_votings", ["post_id"], name: "index_novation_post_votings_on_post_id", using: :btree
+  add_index "novation_post_votings", ["user_id"], name: "index_novation_post_votings_on_user_id", using: :btree
 
   create_table "novation_posts", force: :cascade do |t|
     t.string   "title"
@@ -951,6 +1074,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "useful"
   end
 
+  add_index "novation_posts", ["project_id"], name: "index_novation_posts_on_project_id", using: :btree
+  add_index "novation_posts", ["user_id"], name: "index_novation_posts_on_user_id", using: :btree
+
   create_table "novation_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "novation_post_id"
@@ -958,6 +1084,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",       null: false
     t.integer  "status"
   end
+
+  add_index "novation_votings", ["novation_post_id", "user_id"], name: "index_novation_votings_on_novation_post_id_and_user_id", using: :btree
+  add_index "novation_votings", ["novation_post_id"], name: "index_novation_votings_on_novation_post_id", using: :btree
+  add_index "novation_votings", ["user_id"], name: "index_novation_votings_on_user_id", using: :btree
 
   create_table "plan_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -967,7 +1097,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against",    default: true
   end
 
+  add_index "plan_comment_votings", ["comment_id", "user_id"], name: "index_plan_comment_votings_on_comment_id_and_user_id", using: :btree
   add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_voitings_on_comment_id", using: :btree
+  add_index "plan_comment_votings", ["user_id"], name: "index_plan_comment_votings_on_user_id", using: :btree
 
   create_table "plan_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -986,7 +1118,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "isFile"
   end
 
+  add_index "plan_comments", ["comment_id"], name: "index_plan_comments_on_comment_id", using: :btree
   add_index "plan_comments", ["post_id"], name: "index_plan_comments_on_post_id", using: :btree
+  add_index "plan_comments", ["user_id"], name: "index_plan_comments_on_user_id", using: :btree
 
   create_table "plan_notes", force: :cascade do |t|
     t.text     "content"
@@ -996,6 +1130,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "plan_notes", ["post_id"], name: "index_plan_notes_on_post_id", using: :btree
+  add_index "plan_notes", ["user_id"], name: "index_plan_notes_on_user_id", using: :btree
 
   create_table "plan_post_actions", force: :cascade do |t|
     t.integer  "plan_post_aspect_id"
@@ -1007,6 +1144,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
+
+  add_index "plan_post_actions", ["plan_post_aspect_id"], name: "index_plan_post_actions_on_plan_post_aspect_id", using: :btree
 
   create_table "plan_post_aspects", force: :cascade do |t|
     t.integer  "core_aspect_id"
@@ -1079,6 +1218,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                        null: false
   end
 
+  add_index "plan_post_novations", ["novation_post_id"], name: "index_plan_post_novations_on_novation_post_id", using: :btree
+  add_index "plan_post_novations", ["plan_post_id"], name: "index_plan_post_novations_on_plan_post_id", using: :btree
+
   create_table "plan_post_resources", force: :cascade do |t|
     t.string   "name",                  limit: 255
     t.text     "desc"
@@ -1092,6 +1234,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "style"
   end
 
+  add_index "plan_post_resources", ["post_id"], name: "index_plan_post_resources_on_post_id", using: :btree
+  add_index "plan_post_resources", ["project_id"], name: "index_plan_post_resources_on_project_id", using: :btree
+
   create_table "plan_post_stages", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "name",       limit: 255
@@ -1103,6 +1248,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",                         null: false
   end
 
+  add_index "plan_post_stages", ["post_id"], name: "index_plan_post_stages_on_post_id", using: :btree
+
   create_table "plan_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -1111,7 +1258,9 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.boolean  "against",    default: true
   end
 
+  add_index "plan_post_votings", ["post_id", "user_id"], name: "index_plan_post_votings_on_post_id_and_user_id", using: :btree
   add_index "plan_post_votings", ["post_id"], name: "index_plan_post_voitings_on_post_id", using: :btree
+  add_index "plan_post_votings", ["user_id"], name: "index_plan_post_votings_on_user_id", using: :btree
 
   create_table "plan_posts", force: :cascade do |t|
     t.integer  "user_id"
@@ -1151,6 +1300,10 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.integer  "type_vote"
   end
 
+  add_index "plan_votings", ["plan_post_id", "user_id"], name: "index_plan_votings_on_plan_post_id_and_user_id", using: :btree
+  add_index "plan_votings", ["plan_post_id"], name: "index_plan_votings_on_plan_post_id", using: :btree
+  add_index "plan_votings", ["user_id"], name: "index_plan_votings_on_user_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "code"
@@ -1178,6 +1331,7 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",        null: false
   end
 
+  add_index "technique_list_projects", ["project_id", "technique_list_id"], name: "technique_list_projects_project_list", using: :btree
   add_index "technique_list_projects", ["project_id"], name: "index_technique_list_projects_on_project_id", using: :btree
   add_index "technique_list_projects", ["technique_list_id"], name: "index_technique_list_projects_on_technique_list_id", using: :btree
 
@@ -1219,6 +1373,8 @@ ActiveRecord::Schema.define(version: 20150508110026) do
     t.datetime "updated_at",              null: false
     t.string   "value",       limit: 255
   end
+
+  add_index "user_checks", ["user_id"], name: "index_user_checks_on_user_id", using: :btree
 
   create_table "user_roles", force: :cascade do |t|
     t.integer  "user_id"
