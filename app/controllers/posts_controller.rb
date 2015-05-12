@@ -499,6 +499,12 @@ class PostsController < ProjectsController
   #   @project.set_position_for_aspects if @project.status == 3
   # end
   private
+  def check_stage_for_cabinet
+    unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
+      redirect_to url_for(params.merge(controller: @project.current_stage_type.to_s.sub('_', '/')))
+    end
+  end
+
   def create_advice(post)
     @advice = post.advices.new content: params[name_of_comment_for_param][:content]
     @advice.user = current_user
