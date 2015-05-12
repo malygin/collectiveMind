@@ -159,6 +159,7 @@ class PostsController < ProjectsController
     end
     # per_page = ["Concept", "Essay"].include?(@post.class.name.deconstantize) ? 10 : 30
     @comments = @post.main_comments
+    @questions = Core::ContentQuestion.where(project_id: @project, post_type: name_of_model_for_param)
 
     if current_model.column_names.include? 'number_views'
       @post.update_column(:number_views, @post.number_views.nil? ? 1 : @post.number_views+1)
@@ -338,16 +339,21 @@ class PostsController < ProjectsController
   def vote
     @post_vote = voting_model.find(params[:id])
     saved_vote = @post_vote.final_votings.where(user_id: current_user)
-    if saved_vote.present?
-      vote = saved_vote.first
-      if vote.status != params[:status].to_i
-        saved_vote.destroy_all
-        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
-      elsif vote.status == params[:status].to_i
-        saved_vote.destroy_all
-      end
+    if @post_vote.instance_of? Plan::Post
+      saved_vote.where(type_vote: params[:type_vote].to_i).destroy_all
+      @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
     else
-      @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+      if saved_vote.present?
+        vote = saved_vote.first
+        if vote.status != params[:status].to_i
+          saved_vote.destroy_all
+          @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+        elsif vote.status == params[:status].to_i
+          saved_vote.destroy_all
+        end
+      else
+        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
+      end
     end
 
     # @post_vote = voting_model.find(params[:post_id])
@@ -493,6 +499,11 @@ class PostsController < ProjectsController
       path = page ? request.fullpath + "&page=#{page}#comment_#{params[:req_comment]}" : request.fullpath + "#comment_#{params[:req_comment]}"
       redirect_to path
     end
+  end
+
+  def answer_content_question
+    @question = Core::ContentQuestion.find(params[:question_id])
+    current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
   end
 
   # def sort_aspects
