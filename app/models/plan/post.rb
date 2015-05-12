@@ -11,10 +11,6 @@ class Plan::Post < ActiveRecord::Base
 
   accepts_nested_attributes_for :post_novations
 
-  scope :by_project, ->(p) { where(project_id: p) }
-
-  validates :project_id, :user_id, :status, presence: true
-
   def voted(user, type_vote)
     self.final_votings.where(user_id: user, type_vote: type_vote)
   end

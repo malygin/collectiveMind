@@ -22,13 +22,10 @@ class Discontent::Post < ActiveRecord::Base
 
   has_many :advices, class_name: 'Advice', as: :adviseable
 
-  validates :content, :whend, :whered, :project_id, presence: true
+  validates :content, :whend, :whered, presence: true
 
   default_scope { order :id }
-  #@deprecated нужно использовать for_project из BasePost
-  scope :by_project, ->(p) { where(project_id: p) }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
-  scope :by_status, ->(p) { where(status: p) }
   scope :by_style, ->(p) { where(style: p) }
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }

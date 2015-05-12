@@ -31,8 +31,11 @@ module BasePost
     has_many :admins_vote, -> { where users: {type_user: [1, 6]} }, through: :post_votings, source: :user
     has_many :admins_against, -> { where users: {type_user: [1, 6]} }, through: :post_votings_against, source: :user
 
+    #@todo оставить только один скоуп
     scope :for_project, -> (project) { where(project_id: project) }
+    scope :by_project, ->(p) { where(project_id: p) }
     scope :by_user, ->(user) { where(user_id: user.id) }
+    scope :by_status, ->(status) { where(status: status) }
     scope :for_expert, -> { where(status: 1) }
     scope :accepted, -> { where(status: 2) }
     scope :archive, -> { where(status: 3) }

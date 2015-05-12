@@ -23,10 +23,8 @@ class Core::Aspect::Post < ActiveRecord::Base
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
 
-  scope :by_project, ->(project_id) { where('core_aspect_posts.project_id = ?', project_id) }
   scope :minus_view, ->(aspects) { where.not(core_aspect_posts: {id: aspects}) }
   scope :main_aspects, -> { where(core_aspect_posts: {core_aspect_id: nil}) }
-  scope :by_status, ->(status) { where(status: status) }
   scope :vote_top, ->(revers) {
     if revers == '0'
       order('count("collect_info_votings"."user_id") DESC')
