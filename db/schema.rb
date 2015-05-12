@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503090429) do
+ActiveRecord::Schema.define(version: 20150508110026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -453,6 +453,7 @@ ActiveRecord::Schema.define(version: 20150503090429) do
     t.date     "date_end"
     t.integer  "count_stages"
     t.integer  "project_type_id"
+    t.text     "completion_text"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
@@ -947,6 +948,7 @@ ActiveRecord::Schema.define(version: 20150503090429) do
     t.boolean  "confidence_remove_discontent_bool"
     t.boolean  "confidence_negative_results_bool"
     t.integer  "fullness"
+    t.boolean  "useful"
   end
 
   create_table "novation_votings", force: :cascade do |t|
@@ -1116,21 +1118,23 @@ ActiveRecord::Schema.define(version: 20150503090429) do
     t.text     "goal"
     t.text     "first_step"
     t.text     "other_steps"
-    t.integer  "status",                      default: 0
-    t.integer  "number_views",                default: 0
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.integer  "status",                        default: 0
+    t.integer  "number_views",                  default: 0
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.integer  "project_id"
     t.text     "content"
-    t.integer  "step",                        default: 1
-    t.boolean  "censored",                    default: false
+    t.integer  "step",                          default: 1
+    t.boolean  "censored",                      default: false
     t.text     "plan_first"
     t.text     "plan_other"
     t.text     "plan_control"
-    t.string   "name",            limit: 255
+    t.string   "name",              limit: 255
     t.integer  "estimate_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
+    t.json     "tasks_gant"
+    t.boolean  "completion_status"
   end
 
   add_index "plan_posts", ["created_at"], name: "index_plan_posts_on_created_at", using: :btree
@@ -1144,6 +1148,7 @@ ActiveRecord::Schema.define(version: 20150503090429) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "status"
+    t.integer  "type_vote"
   end
 
   create_table "roles", force: :cascade do |t|
