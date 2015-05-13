@@ -138,6 +138,10 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def current_stage_type_for_cabinet_url
+    current_stage_type_for_cabinet.to_s.downcase.singularize
+  end
+
   def current_stage_num
     current_stage.first[0]
   end
