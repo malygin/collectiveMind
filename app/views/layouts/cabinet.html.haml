@@ -1,0 +1,26 @@
+!!! 5
+%html(lang="en")
+  = render 'application/meta'
+  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
+    .outer
+      = render partial: 'application/header'
+      .main-block
+        .container
+          .row
+            .col-md-2
+              %ul.list-unstyled.tabs_type_1{role: 'tablist'}
+                - @project.techniques.by_stage(@project.current_stage_values[:type_stage]).each do |technique|
+                  %li{role: 'presentation', class: ('active' if current_page?(action: 'new', type_mechanic: technique.code))}
+                    = link_to t("techniques.#{technique.name}"), self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
+                    role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}"
+                %li{role: 'presentation', class: ('active' if action_name == 'user_content')}
+                  = link_to "#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})", self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'a_font_reset text-right', id: "open_my_#{@project.current_stage_type}"
+              -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
+              = yield :cabinet_sidebar
+            .col-md-9.col-md-offset-1#cabinet_form
+              = yield
+        -# а этот yield только для ганта
+        = yield :special_for_gantt
+    #render_knowbase_posts
+    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
+    = javascript_include_tag 'application'
