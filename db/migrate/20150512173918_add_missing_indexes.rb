@@ -7,7 +7,6 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :core_user_awards, :project_id
     add_index :core_user_awards, :user_id
     add_index :core_user_awards, [:award_id, :user_id]
-    add_index :concept_post_votings, [:post_id, :user_id]
     add_index :concept_comment_votings, :user_id
     add_index :concept_comment_votings, [:comment_id, :user_id]
     add_index :discontent_post_whens, :project_id
@@ -30,7 +29,6 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :discontent_post_aspects, :post_id
     add_index :discontent_post_aspects, :aspect_id
     add_index :discontent_post_aspects, [:aspect_id, :post_id]
-    add_index :discontent_post_votings, [:post_id, :user_id]
     add_index :collect_info_questions, :project_id
     add_index :collect_info_questions, :aspect_id
     add_index :collect_info_answers, :question_id
