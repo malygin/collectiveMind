@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513120816) do
+ActiveRecord::Schema.define(version: 20150513130915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1098,19 +1098,6 @@ ActiveRecord::Schema.define(version: 20150513120816) do
   add_index "plan_notes", ["post_id"], name: "index_plan_notes_on_post_id", using: :btree
   add_index "plan_notes", ["user_id"], name: "index_plan_notes_on_user_id", using: :btree
 
-  create_table "plan_post_actions", force: :cascade do |t|
-    t.integer  "plan_post_aspect_id"
-    t.string   "name"
-    t.text     "desc"
-    t.date     "date_begin"
-    t.date     "date_end"
-    t.integer  "status",              default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plan_post_actions", ["plan_post_aspect_id"], name: "index_plan_post_actions_on_plan_post_aspect_id", using: :btree
-
   create_table "plan_post_aspects", force: :cascade do |t|
     t.integer  "core_aspect_id"
     t.integer  "plan_post_id"
@@ -1184,35 +1171,6 @@ ActiveRecord::Schema.define(version: 20150513120816) do
 
   add_index "plan_post_novations", ["novation_post_id"], name: "index_plan_post_novations_on_novation_post_id", using: :btree
   add_index "plan_post_novations", ["plan_post_id"], name: "index_plan_post_novations_on_plan_post_id", using: :btree
-
-  create_table "plan_post_resources", force: :cascade do |t|
-    t.string   "name"
-    t.text     "desc"
-    t.integer  "post_id"
-    t.integer  "resource_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type_res"
-    t.integer  "project_id"
-    t.integer  "plan_post_resource_id"
-    t.integer  "style"
-  end
-
-  add_index "plan_post_resources", ["post_id"], name: "index_plan_post_resources_on_post_id", using: :btree
-  add_index "plan_post_resources", ["project_id"], name: "index_plan_post_resources_on_project_id", using: :btree
-
-  create_table "plan_post_stages", force: :cascade do |t|
-    t.integer  "post_id"
-    t.string   "name"
-    t.text     "desc"
-    t.date     "date_begin"
-    t.date     "date_end"
-    t.integer  "status",     default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "plan_post_stages", ["post_id"], name: "index_plan_post_stages_on_post_id", using: :btree
 
   create_table "plan_post_votings", force: :cascade do |t|
     t.integer  "user_id"

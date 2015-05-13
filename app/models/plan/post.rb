@@ -7,7 +7,6 @@ class Plan::Post < ActiveRecord::Base
   has_many :estimates, class_name: 'Estimate::Post'
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'plan_post_id', class_name: 'Plan::Voting'
-  # has_many :stages, class_name: 'Plan::PostStage'
 
   accepts_nested_attributes_for :post_novations
 

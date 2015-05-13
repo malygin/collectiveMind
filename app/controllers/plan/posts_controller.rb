@@ -87,7 +87,6 @@ class Plan::PostsController < PostsController
   #     @concept_post = Plan::PostAspect.find(params[:con_id])
   #   elsif params[:what_view]
   #     @dispost = Discontent::Post.find(params[:post_id])
-  #     @post_stage = Plan::PostStage.find(params[:stage_id])
   #   else
   #     @dispost = Discontent::Post.find(params[:post_id])
   #     @concept_post = Concept::Post.find(params[:con_id])
