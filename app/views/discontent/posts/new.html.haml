@@ -1,2 +1,85 @@
-- content_for :cabinet_form do
-  = render partial: 'form'
+- content_for :discontent_form do
+  = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
+    .col-md-12
+      = render partial: 'shared/create_success', locals: {model_name: 'discontent'}
+      .divider10
+      .content_window.white
+        .divider25
+        .btn-group.cab_drop
+          %a.dropdown-toggle#select_aspect{'data-toggle' => 'dropdown'}
+            - if @post.post_aspects.empty?
+              %span
+                = t('form.discontent.select_aspect')
+            - @post.post_aspects.each do |aspect|
+              %span
+                %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+              %span.text_label
+                = aspect.content
+
+          %ul.dropdown-menu#list_aspects
+            - @aspects.each do |aspect|
+              %li
+                = check_box_tag 'discontent_post_aspects[]', aspect.id, @post.post_aspects.include?(aspect), id: "discontent_post_aspects_#{aspect.id}"
+                %label{for: "discontent_post_aspects_#{aspect.id}"}
+                  %span
+                    %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                  %span.text_label
+                    = aspect.content
+
+        .divider25
+        %p
+          = t('activerecord.attributes.discontent/post.content')
+        = f.text_area :content, rows: 1, class: 'form-control'
+        .divider15
+        %p
+          = t('activerecord.attributes.discontent/post.what')
+        = f.text_area :what, rows: 2, class: 'form-control'
+        .divider15
+        %p
+          = t('activerecord.attributes.discontent/post.whered')
+        = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
+        .divider15
+        %p
+          = t('activerecord.attributes.discontent/post.whend')
+        = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
+        .divider25
+        .row
+          .col-md-12.text-right
+            - if @post.persisted?
+              = link_to 'Удалить', discontent_post_path(@project, @post), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{@post.id}", class: 'btn add-button del type2'
+            = f.submit t("form.#{action_name}"), class: 'btn add-button type2', id: 'send_post'
+            - if @post.persisted? and !@post.published?
+              = link_to 'Опубликовать', publish_discontent_post_path(@project, @post), remote: true, method: :put, id: "publish_#{@post.id}", class: 'btn add-button type2'
+      .row
+        .col-md-12
+          - if @mechanic_type == 'simple'
+            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+              Пример несовершенства
+              %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
+      .divider25
+      #imperfs1.content_window.white.collapse.font_lighter_grey
+        .divider15
+
+        %p.font_dark_grey
+          = t('activerecord.attributes.discontent/post.content')
+        %p
+          Нет понятного потребителю описания, что за продукт у нас есть, зачем и кому он нужен
+        .divider15
+        %p.font_dark_grey
+          = t('activerecord.attributes.discontent/post.what')
+        %p
+          При определении целевой аудитории и проведении переговоров
+        .divider15
+        %p.font_dark_grey
+          = t('activerecord.attributes.discontent/post.whered')
+        %p
+          От понимания анализа практического применения МД в тестовых процедурах
+        .divider15
+        %p.font_dark_grey
+          = t('activerecord.attributes.discontent/post.whend')
+        %p
+          Дистрибьюторов и Продавцов
+        .divider20
+        .divider15
+
+= render partial: "#{@mechanic_type}_form"

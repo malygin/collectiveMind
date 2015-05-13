@@ -1,34 +1,33 @@
-- content_for :cabinet_form do
-  - @content.each do |discontent|
-    .post.post_add_type1
-      .post-header
-      .post-body
-        .media
-          .media-left.text-center.gradient2.post-poster
-            = user_image_tag discontent.user.try(:avatar), class: 'img-circle img40'
-            %p.poster-name
-              = discontent.user
-            .divider10
-            %p.time
-              = Russian::strftime(discontent.created_at,'%d.%m.%Y')
-          .media-body
-            %table.table
-              %tbody
-                %tr.what
-                  %td.bold
-                    = discontent.content
-                    - if current_user?(discontent.user)
-                      = link_to discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}", class: 'btn btn_reset btn_del' do
-                        %i.glyphicon.glyphicon-trash
-                %tr.post_text
-                  %td.col-md-12
-                    = link_to edit_discontent_post_path(@project, discontent), class: 'a_font_reset', id: "edit_discontent_#{discontent.id}" do
-                      = discontent.what
-                      %i.fa.fa-angle-right.cab2_post_open.font_grey
-      .post-bottom.white
-        .row
-          .col-md-12
-            - discontent.post_aspects.each do |aspect|
-              %span.tag-stripes.active.color_me{class: 'active', style: "background-color: #{aspect.color};"}
-                %span.tags
-                  = aspect.content
+- @content.each do |discontent|
+  .post.post_add_type1
+    .post-header
+    .post-body
+      .media
+        .media-left.text-center.gradient2.post-poster
+          = user_image_tag discontent.user.try(:avatar), class: 'img-circle img40'
+          %p.poster-name
+            = discontent.user
+          .divider10
+          %p.time
+            = Russian::strftime(discontent.created_at,'%d.%m.%Y')
+        .media-body
+          %table.table
+            %tbody
+              %tr.what
+                %td.bold
+                  = discontent.content
+                  - if current_user?(discontent.user)
+                    = link_to discontent_post_path(@project, discontent), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{discontent.id}", class: 'btn btn_reset btn_del' do
+                      %i.glyphicon.glyphicon-trash
+              %tr.post_text
+                %td.col-md-12
+                  = link_to edit_discontent_post_path(@project, discontent), class: 'a_font_reset', id: "edit_discontent_#{discontent.id}" do
+                    = discontent.what
+                    %i.fa.fa-angle-right.cab2_post_open.font_grey
+    .post-bottom.white
+      .row
+        .col-md-12
+          - discontent.post_aspects.each do |aspect|
+            %span.tag-stripes.active.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+              %span.tags
+                = aspect.content
