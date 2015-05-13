@@ -40,7 +40,7 @@ describe 'Cabinet Aspects' do
       click_link 'new_aspect_posts_simple'
     end
 
-    it 'correct' do
+    xit 'correct' do
       expect {
         fill_in 'core_aspect_post_content', with: 'new aspect'
         fill_in 'core_aspect_post_short_desc', with: 'because'
@@ -49,7 +49,7 @@ describe 'Cabinet Aspects' do
       }.to change(Core::Aspect::Post, :count).by(1)
     end
 
-    it 'empty fields - error' do
+    xit 'empty fields - error' do
       expect {
         fill_in 'core_aspect_post_content', with: ''
         fill_in 'core_aspect_post_short_desc', with: ''
@@ -93,7 +93,7 @@ describe 'Cabinet Aspects' do
     expect(page).to have_content aspect.content
   end
 
-  it 'publish', js: true do
+  xit 'publish', js: true do
     visit user_content_collect_info_posts_path(project)
     click_link "publish_aspect_#{aspect.id}"
     refresh_page

@@ -35,7 +35,7 @@ describe 'Cabinet Discontents' do
     expect(page).not_to have_content t('cabinet.discontent_posts_sticker')
   end
 
-  describe 'create with simple form', js: true do
+  describe 'create with simple form', js: true, skip: true do
     let! (:aspect_1) { create :aspect, user: user, project: project }
     let! (:aspect_2) { create :aspect, user: user, project: project }
 
@@ -84,7 +84,7 @@ describe 'Cabinet Discontents' do
       find('#first').click
     end
 
-    it 'correct' do
+    xit 'correct' do
       expect {
         fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
@@ -96,7 +96,7 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  it 'edit', js: true do
+  xit 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_discontent_posts_path(project)
     click_link "edit_discontent_#{discontent.id}"

@@ -40,7 +40,7 @@ describe 'Cabinet Plans' do
       click_link 'new_plan_posts_simple'
     end
 
-    it 'correct' do
+    xit 'correct' do
       expect {
         fill_in 'plan_post_title', with: 'new plan'
         click_button 'send_post_plan'
@@ -48,7 +48,7 @@ describe 'Cabinet Plans' do
       }.to change(Plan::Post, :count).by(1)
     end
 
-    it 'empty fields - error' do
+    xit 'empty fields - error' do
       expect {
         click_button 'send_post_plan'
         within :css, 'div.notice_messages' do
@@ -58,7 +58,7 @@ describe 'Cabinet Plans' do
     end
   end
 
-  it 'edit', js: true do
+  xit 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_plan_posts_path(project)
     click_link "edit_plan_#{plan.id}"
@@ -87,7 +87,7 @@ describe 'Cabinet Plans' do
     expect(page).to have_content plan.content
   end
 
-  it 'publish', js: true do
+  xit 'publish', js: true do
     visit edit_plan_post_path(project, plan)
     click_link "publish_#{plan.id}"
     refresh_page

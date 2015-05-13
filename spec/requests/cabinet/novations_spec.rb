@@ -26,7 +26,7 @@ describe 'Cabinet Novations' do
     end
   end
 
-  it 'close sticker' do
+  xit 'close sticker' do
     expect(page).to have_content t('cabinet.novation_posts_sticker')
     expect {
       click_link 'close_sticker'
@@ -40,7 +40,7 @@ describe 'Cabinet Novations' do
       click_link 'new_novation_posts_simple'
     end
 
-    it 'correct' do
+    xit 'correct' do
       expect {
         fill_in 'novation_post_title', with: 'new novation'
         click_button 'send_post_novation'
@@ -48,7 +48,7 @@ describe 'Cabinet Novations' do
       }.to change(Novation::Post, :count).by(1)
     end
 
-    it 'empty fields - error' do
+    xit 'empty fields - error' do
       expect {
         click_button 'send_post_novation'
         within :css, 'div.notice_messages' do
@@ -58,7 +58,7 @@ describe 'Cabinet Novations' do
     end
   end
 
-  it 'edit', js: true do
+  xit 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_novation_posts_path(project)
     click_link "edit_novation_#{novation.id}"
@@ -87,7 +87,7 @@ describe 'Cabinet Novations' do
     expect(page).to have_content novation.content
   end
 
-  it 'publish', js: true do
+  xit 'publish', js: true do
     visit edit_novation_post_path(project, novation)
     click_link "publish_#{novation.id}"
     refresh_page

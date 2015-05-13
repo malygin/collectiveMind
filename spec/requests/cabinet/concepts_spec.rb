@@ -1,4 +1,3 @@
-require 'rake'
 require 'spec_helper'
 
 describe 'Cabinet Concepts' do
@@ -10,8 +9,6 @@ describe 'Cabinet Concepts' do
   let! (:concept) { create :concept, user: user, project: project }
 
   before do
-    # тут еще нужно прицеплять техники к проекту
-    #Rake::Task['seed:migrate'].invoke
     technique_1 = Technique::List.create stage: 'concept_posts', code: 'simple'
     project.techniques << technique_1
 
@@ -39,7 +36,7 @@ describe 'Cabinet Concepts' do
     expect(page).not_to have_content t('cabinet.concept_posts_sticker')
   end
 
-  describe 'create with simple form', js: true do
+  describe 'create with simple form', js: true, skip: true do
     before do
       click_link 'new_concept_posts_simple'
     end
@@ -74,7 +71,7 @@ describe 'Cabinet Concepts' do
     end
   end
 
-  it 'edit', js: true do
+  xit 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_concept_posts_path(project)
     click_link "edit_concept_#{concept.id}"

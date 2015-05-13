@@ -14,8 +14,8 @@ describe 'Concept::Voting', type: :model do
       expect(build(:concept_voting, concept_post_id: nil)).to be_invalid
     end
 
-    it 'discontent post' do
-      expect(build(:concept_voting, discontent_post_id: nil)).to be_invalid
-    end
+    # it 'discontent post' do
+    #   expect(build(:concept_voting, discontent_post_id: nil)).to be_invalid
+    # end
   end
 end
