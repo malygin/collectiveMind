@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Collect info', skip: true do
+describe 'Collect info' do
   subject { page }
 
   let!(:user) { @user = create :user }
@@ -52,19 +52,17 @@ describe 'Collect info', skip: true do
       expect(page).to have_content 'Введение в процедуру'
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
-      find(:css, "#li_aspect_#{@aspect1.id}").trigger('click')
+      find(:css, "#li_aspect_#{@aspect1.id} a").trigger('click')
       expect(page).to have_content @knowbase_post1.content
       expect(page).to have_content @question_0_1.content
       expect(page).to have_content @answer_0_1.content
       expect(page).to have_content @answer_0_2.content
-      find(:css, "#li_aspect_#{@aspect2.id}").trigger('click')
+      find(:css, "#li_aspect_#{@aspect2.id} a").trigger('click')
       expect(page).to have_content @knowbase_post2.content
       expect(page).to have_content @question_0_2.content
       expect(page).to have_content @answer_0_3.content
       expect(page).to have_content @answer_0_4.content
     end
-
-    it_behaves_like 'likes posts'
   end
 
   shared_examples 'answers the first questions' do
@@ -73,7 +71,7 @@ describe 'Collect info', skip: true do
     end
 
     it 'answer to question', js: true do
-      find(:css, "#li_aspect_#{@aspect1.id}").trigger('click')
+      find(:css, "#li_aspect_#{@aspect1.id} a").trigger('click')
       expect(page).to have_content @question_0_1.content
       expect(page).to have_content @answer_0_1.content
       expect(page).to have_content @answer_0_2.content
@@ -104,6 +102,8 @@ describe 'Collect info', skip: true do
       expect(page).to have_link 'new_aspect_posts'
     end
 
+    it_behaves_like 'likes posts'
+
     context 'show popup aspect ', js: true do
       before do
         find(:css, "#show_record_#{@post1.id}").trigger('click')
@@ -122,7 +122,7 @@ describe 'Collect info', skip: true do
     end
 
     it 'success answer to question', js: true do
-      find(:css, "#li_aspect_#{@aspect1.id}").trigger('click')
+      find(:css, "#li_aspect_#{@aspect1.id} a").trigger('click')
       expect(page).to have_content @question_1_1.content
       expect(page).to have_content @answer_1_1.content
       expect(page).to have_content @answer_1_2.content
@@ -136,7 +136,7 @@ describe 'Collect info', skip: true do
     end
 
     it 'failed answer to question', js: true do
-      find(:css, "#li_aspect_#{@aspect1.id}").trigger('click')
+      find(:css, "#li_aspect_#{@aspect1.id} a").trigger('click')
       expect(page).to have_content @question_1_1.content
       expect(page).to have_content @answer_1_1.content
       expect(page).to have_content @answer_1_2.content
@@ -146,7 +146,6 @@ describe 'Collect info', skip: true do
       end
       expect(page).not_to have_content @question_1_2.content
       expect(page).to have_content 'Ответ неправильный, воспользуйтесь подсказкой'
-      expect(page).to have_link "notice_question_#{@question_1_1.id}"
       find(:css, "#notice_question_#{@question_1_1.id}").trigger('click')
       expect(page).to have_content @question_1_1.hint
     end
@@ -197,7 +196,7 @@ describe 'Collect info', skip: true do
 
     it_behaves_like 'discuss second aspects'
 
-    it_behaves_like 'vote popup', 2, 'Голосование по аспектам'
+    it_behaves_like 'vote popup', 2, 'Голосование по аспектам', 'collect_info'
   end
 
   # context 'moderator sign in ' do

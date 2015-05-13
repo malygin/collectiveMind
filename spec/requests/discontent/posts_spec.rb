@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Discontent', skip: true do
+describe 'Discontent' do
   subject { page }
 
   let!(:user) { @user = create :user }
@@ -14,6 +14,9 @@ describe 'Discontent', skip: true do
 
     @user_check = create :user_check, user: user, project: project, check_field: 'discontent_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_intro'
+
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'discontent_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'discontent_discuss'
 
     @aspect1 = create :aspect, project: project
 
@@ -53,14 +56,14 @@ describe 'Discontent', skip: true do
       visit discontent_posts_path(project)
     end
 
-    it 'can see all discontents' do
+    it 'can see all discontents', js: true do
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       expect(page).to have_content @discontent3.content
     end
 
-    it 'can select first aspect in dropdown' do
-      find(:css, "a#select-aspect").trigger('click')
+    it 'can select first aspect in dropdown', js: true do
+      find(:css, "a.select-aspect").trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
@@ -70,8 +73,8 @@ describe 'Discontent', skip: true do
       expect(page).not_to have_content @discontent3.content
     end
 
-    it 'can select second aspect in dropdown' do
-      find(:css, "a#select-aspect").trigger('click')
+    it 'can select second aspect in dropdown', js: true do
+      find(:css, "a.select-aspect").trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
@@ -87,14 +90,14 @@ describe 'Discontent', skip: true do
       visit discontent_posts_path(project)
     end
 
-    it 'can sort to date' do
+    it 'can sort to comment', js: true do
       find(:css, "span#sorter span.sort-1").trigger('click')
       sleep(5)
       first(:css, "#tab_aspect_posts .discontent-block .what a").click
       expect(page).to have_content @discontent1.content
     end
 
-    it 'can sort to popular' do
+    it 'can sort to date', js: true do
       find(:css, "span#sorter span.sort-2").trigger('click')
       sleep(5)
       first(:css, "#tab_aspect_posts .discontent-block .what a").click
@@ -107,7 +110,7 @@ describe 'Discontent', skip: true do
       visit discontent_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content 'Несовершенства (2)'
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
@@ -119,7 +122,7 @@ describe 'Discontent', skip: true do
         find(:css, "#show_record_#{@post1.id}").trigger('click')
       end
 
-      it 'have content' do
+      it 'have content', js: true do
         expect(page).to have_content @post1.content
         expect(page).to have_content @post1.what
         expect(page).to have_content @post1.whend
@@ -146,7 +149,7 @@ describe 'Discontent', skip: true do
 
     it_behaves_like 'discuss discontents'
 
-    it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам'
+    it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам', 'discontent'
   end
 
   # context 'moderator sign in ' do
