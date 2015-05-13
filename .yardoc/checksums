@@ -6,7 +6,6 @@ app/models/user.rb 4f7ce353493fc6ed44d72f26c3a9adf9c44b379e
 app/models/news.rb e20573a7acf36ac61afb3c0facff0cf42fbf2ab2
 app/models/award.rb 7dfd269f3922d50caaa71f067c5cdc05d805d3d8
 app/models/skill.rb ab84f7bffa8ab3a194adfc57ad0b7de6c2584675
-app/models/advice.rb 7b65a7b9bc809bd5bf6371c28a0d4fd8976fe2eb
 app/jobs/test_logs.rb 573ee7f7e7a02640223fbb19990ecfeccfaaa042
 app/models/journal.rb 93e1fff86e7d84b224c265a8a92c6ef9b5745bb1
 app/models/concept.rb 48e63309ee4b4be1d108bb5f1b7e5a899b5f3d94
@@ -40,8 +39,6 @@ app/models/novation/note.rb 835741f5dbed92d13f6c7a955744d0a7fae8c4c0
 app/models/novation/post.rb 00d2e406931a1146ebbb4b527358eadf82524973
 app/models/core/knowbase.rb 8c8988a51ff4f259c13ca7c0491ff35d626c9130
 app/models/core/help/post.rb 060df5a1031b29d95b294f73d2aaf774672b1c1e
-app/models/advice_comment.rb 625ee5b916da2746cc003a6ffc04f4c744547d14
-app/helpers/advice_helper.rb afceccfd77c3e3b52a227df9f7895aec9e4887fb
 app/models/journal_logger.rb dbafa48391a52c9d3be28e953ece5edfb091cd3f
 app/models/journal_mailer.rb e7d7bed24842047cd38f21ec30f476e7fb9fe77a
 app/jobs/moderator_mailer.rb ba1356319ae07949003636294513383870a00f43
@@ -123,7 +120,6 @@ app/models/technique/list_project.rb 57fff6647c3e172aab236f30cb96c2374c25072a
 app/models/concept/post_discontent.rb 47bd33dca96be731f2c3fabfbce79560db03b7af
 app/models/core/aspect/post_voting.rb f5bf393f869dc55347c9d42b713a2a51ad3286b9
 app/models/novation/comment_voting.rb 8ae7edd0d3f9b43f9f40805204bf70a7e94456d3
-app/controllers/advices_controller.rb 3525bac3dd0177ac330623d1d9ed129b13daaf16
 app/models/estimate/comment_voting.rb b6e8a5385449e6554bf6cc249942db635cb46742
 app/controllers/journal_controller.rb fa012a3e62d5b3819eaa5493d82f144c87832f82
 app/controllers/projects_controller.rb e68ed0df2ac524e63b9eec711854a4d8ad6d7ff7
@@ -152,7 +148,6 @@ app/controllers/auth_websocket_controller.rb 9afc3450815a9debaa67ef32bc06a6363a1
 app/controllers/journal_logger_controller.rb 1361edb1ddebfa641c9d026f4a3cfa1eee17501a
 app/controllers/concerns/discontent_group.rb a5e54dfefcd319cf87b7529f2ed624a7828d40d4
 app/controllers/core/help/posts_controller.rb d35acf79efe09318ff279de532fcc29bec8406b3
-app/controllers/advice_comments_controller.rb 518ba00082162fae9662a30d49ec3c94c84c254a
 app/controllers/technique/lists_controller.rb bd79bb93c7b34d200d6b3483a726bf9fdcb9c041
 app/controllers/discontent/posts_controller.rb 6bc2d4a805f58de5329886f272734cf3a336a2b9
 app/controllers/plan/post_stages_controller.rb 4d6b65044d35dd01dfa2b704bb2491073b5a5163

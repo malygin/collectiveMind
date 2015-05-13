@@ -20,8 +20,6 @@ class Discontent::Post < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
 
-  has_many :advices, class_name: 'Advice', as: :adviseable
-
   validates :content, :whend, :whered, presence: true
 
   default_scope { order :id }

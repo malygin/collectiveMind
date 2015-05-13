@@ -11,8 +11,6 @@ class Concept::Post < ActiveRecord::Base
   # has_many :concept_post_resources, class_name: 'Concept::PostResource'
   has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
 
-  has_many :advices, class_name: 'Advice', as: :adviseable
-
   validates :title, presence: true
 
   scope :for_discontents, ->(discontents) { where(concept_post_discontents: {discontent_post_id: discontents}) }

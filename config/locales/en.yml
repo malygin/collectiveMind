@@ -527,7 +527,6 @@ en:
     delete_comment: Удалить комментарий?
     delete_concept: 'Удалить нововведение?'
     delete_stage: Удалить этап?
-    delete_advice: 'Удалить совет?'
 
     delete_group: "Delete group?"
     delete_group_task: "Delete?"
@@ -695,8 +694,6 @@ en:
       other: "Идет %{count} этап"
     fill_name_paper: 'Заполните название статьи'
     fill_content_paper: 'Заполните поле контента'
-
-    advice: "Advice"
   link:
     more: 'подробнее'
     top: наверх
@@ -774,17 +771,6 @@ en:
     account_new: 'Create a new account'
     memory: 'Remember me'
     auth: "Авторизуйтесь пожалуйста!"
-
-  left_side:
-    discontent_post_advices: "Advices"
-  discontent:
-    unapproved_post_advices: "Unapproved advices"
-    advice_success_created: "Ваш совет добавлен и ожидает проверки модератором"
-    advice_success_approved: "Advice approved"
-    advice_success_not_approved: "Advice not approved"
-  advice:
-    advices: "Advices"
-    disapproved_notify_text: "Ваш совет не одобрен, Ознакомиться с причиной"
   groups:
     groups: "Groups"
     creating: "Creating group"

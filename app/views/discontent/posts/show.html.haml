@@ -47,13 +47,6 @@
 
     %br
     %br
-    - if @project.advices_discontent?
-      %h3
-        = t('advice.advices')
-      %ul.media-list#advices.chat-messages
-        = render 'advices/advices'
-      %br
-
     %h3
       Комментарии участников
     %ul.media-list#comments.chat-messages
