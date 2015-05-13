@@ -35,5 +35,7 @@
 
 #render_novation_post
 
+- if shown_intro('novation_intro') == ''
+  = render partial: 'popup_welcome'
 - if current_user.can_vote_for(:novation, @project)
   = render partial: 'popup_vote'

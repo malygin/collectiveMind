@@ -16,4 +16,11 @@ FactoryGirl.define do
     association :concept_post, factory: :concept
     association :post, factory: :novation
   end
+
+  factory :novation_comment, class: 'Novation::Comment' do
+    sequence(:content) { |n| "novation comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :novation
+  end
 end

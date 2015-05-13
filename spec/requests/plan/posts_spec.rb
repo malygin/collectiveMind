@@ -3,160 +3,119 @@ require 'spec_helper'
 describe 'Plan ', skip: true do
   subject { page }
 
-  let (:user) { create :user }
-  let (:project) { create :core_project, status: 9 }
-  let (:prime_admin) { create :prime_admin }
-  let (:moderator) { create :moderator }
+  let!(:user) { @user = create :user }
+  let (:user_data) { create :user }
+  let!(:moderator) { @moderator = create :moderator }
+  let (:project) { @project = create :closed_project, status: 11 }
 
   before do
-    @plan1 = create :plan, project: project, user: user
-    @plan_stage1 = create :plan_stage, post_id: @plan1.id
-    @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id
-    @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id
+    create :core_project_user, user: user, core_project: project
+    create :core_project_user, user: moderator, core_project: project
+
+    @user_check = create :user_check, user: user, project: project, check_field: 'plan_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'plan_intro'
+
+    @novation1 = create :novation, user: user, project: project
+
+    @plan1 = create :plan, user: user, project: project
+    @plan2 = create :plan, user: user, project: project
+
+    create :plan_novation, plan_post: @plan1.id, novation_post: @novation1.id
+    create :plan_novation, plan_post: @plan2.id, novation_post: @novation1.id
+
+    @post1 = @novation1
+    @post2 = @novation2
+
+    @comment_1 = create :plan_comment, post: @post1, user: user
+    @comment_2 = create :plan_comment, post: @post1, comment: @comment_1
   end
 
-  shared_examples 'plan list' do
-    it ' can see plan' do
+  shared_examples 'show list plans' do
+    before do
+      visit plan_posts_path(project)
+    end
+
+    it 'have content', js: true do
+      expect(page).to have_content 'Проектные предложения (2)'
       expect(page).to have_content @plan1.name
-      expect(page).to have_selector '#add_record'
+      expect(page).to have_content @plan2.name
     end
+
+    it_behaves_like 'likes posts'
   end
 
-  shared_examples 'create plan' do
+  shared_examples 'sort plans' do
     before do
-      click_link 'add_record'
+      visit plan_posts_path(project)
     end
 
-    it ' add new plan', js: true do
-      fill_in 'name_plan', with: 'plan name'
-      fill_in 'goals', with: 'plan goal'
-      fill_in 'desc_plan', with: 'plan content'
-      click_button 'send_plan_post'
-      expect(page).to have_content 'Добавить этап в проект'
-    end
-
-    it ' add new stage', js: true do
-      fill_in 'name_plan', with: 'plan name'
-      fill_in 'goals', with: 'plan goal'
-      fill_in 'desc_plan', with: 'plan content'
-      click_button 'send_plan_post'
-      expect(page).to have_content 'Добавить этап в проект'
-      find('#btn_new_stage').click
-      expect(page).to have_content 'Добавление этапа в проект'
-      fill_in 'name_stage', with: 'name_stage'
-      fill_in 'desc_stage', with: 'desc_stage'
-      click_button 'send_post'
-      expect(page).to have_content 'name_stage'
-    end
-  end
-
-  shared_examples 'show plan' do
-    before do
-      visit plan_post_path(project, @plan1)
-    end
-
-    it 'can see right form' do
+    it 'can sort to date' do
+      find(:css, "span#sorter span.sort-1").trigger('click')
+      sleep(5)
+      first(:css, "#tab_novation_plans .plan-block .media-body a").click
       expect(page).to have_content @plan1.name
-      expect(page).to have_content @plan1.goal
-      expect(page).to have_content @plan1.content
-      expect(page).to have_selector 'textarea#comment_text_area'
     end
 
-    it ' can add comments ', js: true do
-      fill_in 'comment_text_area', with: 'plan comment 1'
-      click_button 'send_comment'
-      expect(page).to have_content 'plan comment 1'
+    it 'can sort to popular' do
+      find(:css, "span#sorter span.sort-2").trigger('click')
+      sleep(5)
+      first(:css, "#tab_novation_plans .plan-block .media-body a").click
+      expect(page).to have_content @plan2.name
     end
   end
 
-  shared_examples 'edit plan' do
+  shared_examples 'discuss plans' do
     before do
-      visit edit_plan_post_path(project, @plan1)
+      visit plan_posts_path(project)
     end
 
-    it 'can see right form' do
-      expect(page).to have_field('name_plan', with: @plan1.name)
-      expect(page).to have_css('textarea#goals', text: @plan1.goal)
-      expect(page).to have_css('textarea#desc_plan', text: @plan1.content)
+    it 'have content' do
+      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content @plan1.name
+      expect(page).to have_content @plan2.name
+      expect(page).to have_link 'add_record'
     end
 
-    it 'can see edit stage modal', js: true do
-      find("#edit_post_stage_#{@plan_stage1.id}").click
-      expect(page).to have_content 'Добавление этапа в проект'
-      fill_in 'name_stage', with: 'new name_stage'
-      click_button 'send_post'
-      expect(page).to have_content 'new name_stage'
-    end
+    context 'show popup plan ', js: true do
+      before do
+        find(:css, "#show_record_#{@post1.id}").trigger('click')
+      end
 
-    it 'can see edit action modal', js: true do
-      find('li#second a').click
-      expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
-      find("#edit_post_action_#{@plan_action1.id}").click
-      expect(page).to have_content 'Добавление мероприятия к нововведению:'
-      fill_in 'name_stage', with: 'new name stage'
-      click_button 'send_post'
-      expect(page).to have_content 'new name stage'
-    end
+      it 'have content' do
+        expect(page).to have_content @post1.name
+      end
 
-    it 'can see edit link concept add modal', js: true do
-      find('li#second a').click
-      expect(page).to have_content 'Добавить нововведение'
-      expect(page).to have_content 'Запланировать мероприятие'
-      click_link 'Добавить нововведение'
-      expect(page).to have_content 'Добавление нововведений'
-      expect(page).to have_content 'Добавить пустое нововведение'
-    end
-
-    it 'can see edit link action add modal', js: true do
-      find('li#second a').click
-      expect(page).to have_content 'Добавить нововведение'
-      expect(page).to have_content 'Запланировать мероприятие'
-      click_link 'Запланировать мероприятие'
-      expect(page).to have_content 'Добавление мероприятия к нововведению:'
-    end
-
-    it 'can see edit link action add modal', js: true do
-      find('li#third a').click
-      expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
-      find("#li_concept_#{@plan_aspect1.id} a").click
-      expect(page).to have_content @plan_aspect1.name
-      expect(page).to have_content @plan_aspect1.content
-      expect(page).to have_content @plan_aspect1.positive
-      expect(page).to have_content @plan_aspect1.negative
-      expect(page).to have_content @plan_aspect1.control
-      expect(page).to have_content @plan_aspect1.obstacles
-      expect(page).to have_content @plan_aspect1.reality
-      expect(page).to have_content @plan_aspect1.problems
+      it_behaves_like 'content with comments'
     end
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit plan_posts_path(project)
     end
 
-    it_behaves_like 'plan list'
+    it_behaves_like 'welcome popup', 'plan'
 
-    it_behaves_like 'create plan'
+    it_behaves_like 'show list plans'
 
-    it_behaves_like 'show plan'
+    it_behaves_like 'sort plans'
 
-    it_behaves_like 'edit plan'
+    it_behaves_like 'discuss plans'
   end
 
-  context 'moderator sign in' do
-    before do
-      sign_in moderator
-      visit plan_posts_path(project)
-    end
+  # context 'moderator sign in ' do
+  #   before do
+  #     sign_in moderator
+  #   end
+  #
+  #
+  # it_behaves_like 'welcome popup', 'plan'
+  #
+  # it_behaves_like 'show list plans'
+  #
+  # it_behaves_like 'sort plans'
+  #
+  # it_behaves_like 'discuss plans'
+  # end
 
-    it_behaves_like 'plan list'
-
-    it_behaves_like 'create plan'
-
-    it_behaves_like 'show plan'
-
-    it_behaves_like 'edit plan'
-  end
 end

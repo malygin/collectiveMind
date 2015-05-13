@@ -9,21 +9,11 @@ FactoryGirl.define do
     association :project, factory: :core_project
   end
 
-  factory :plan_stage, class: 'Plan::PostStage' do
-    sequence(:name) { |n| "name #{n}" }
-    sequence(:desc) { |n| "desc #{n}" }
-    status 0
-  end
-
-  factory :plan_aspect, class: 'Plan::PostAspect' do
-    sequence(:positive) { |n| "positive #{n}" }
-    sequence(:negative) { |n| "negative #{n}" }
+  factory :plan_novation, class: 'Plan::PostNovation' do
     sequence(:title) { |n| "title #{n}" }
-    sequence(:name) { |n| "name #{n}" }
-    sequence(:control) { |n| "control #{n}" }
-    sequence(:content) { |n| "content #{n}" }
-    sequence(:reality) { |n| "reality #{n}" }
-    sequence(:problems) { |n| "problems #{n}" }
+
+    association :plan_post, factory: :plan
+    association :novation_post, factory: :novation
   end
 
   factory :plan_action, class: 'Plan::PostAction' do

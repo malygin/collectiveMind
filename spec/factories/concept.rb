@@ -3,6 +3,7 @@ FactoryGirl.define do
     association :user
     association :project, factory: :core_project
     sequence(:title) { |n| "title #{n}" }
+    sequence(:content) { |n| "content #{n}" }
     sequence(:goal) { |n| "goal #{n}" }
     sequence(:actors) { |n| "actors #{n}" }
     sequence(:impact_env) { |n| "impact_env #{n}" }

@@ -3,85 +3,134 @@ require 'spec_helper'
 describe 'Concept ', skip: true do
   subject { page }
 
-  let (:user) { create :user }
+  let!(:user) { @user = create :user }
   let (:user_data) { create :user }
-  let (:prime_admin) { create :prime_admin }
-  let (:moderator) { create :moderator }
-  let (:project) { create :core_project, status: 7 }
-  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_concept: true }
+  let!(:moderator) { @moderator = create :moderator }
+  let (:project) { @project = create :closed_project, status: 7 }
 
   before do
-    prepare_concepts(project, user_data)
+    create :core_project_user, user: user, core_project: project
+    create :core_project_user, user: moderator, core_project: project
+
+    @user_check = create :user_check, user: user, project: project, check_field: 'concept_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_intro'
+
+    @aspect1 = create :aspect, project: project
+    @discontent1 = create :discontent, project: project, status: 4
+    create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
+    @discontent2 = create :discontent, project: project, status: 4
+    create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
+
+    @concept1 = create :concept, user: user, project: project
+    @concept2 = create :concept, user: user, project: project
+    create :concept_post_discontent, post_id: @concept1.id, discontent_post_id: @discontent1.id
+    create :concept_post_discontent, post_id: @concept2.id, discontent_post_id: @discontent1.id
+
     @post1 = @concept1
+    @post2 = @concept2
     @comment_1 = create :concept_comment, post: @post1, user: user
     @comment_2 = create :concept_comment, post: @post1, comment: @comment_1
   end
 
-  shared_examples 'concept list' do
+  shared_examples 'show list concepts' do
     before do
-      visit "/project/#{project.id}/concept/posts?asp=#{@aspect1.id}"
-    end
-
-    it ' can see all concepts in aspect' do
-      expect(page).to have_content 'Нововведения'
-      expect(page).to have_content I18n.t('show.improve.ideas')
-      expect(page).to have_content @discontent1.content
-      expect(page).to have_content @discontent2.content
-      expect(page).to have_content @concept_aspect1.title
-      expect(page).to have_content @concept_aspect2.title
-      expect(page).to have_selector "#new_concept_#{@discontent1.id}"
-      expect(page).to have_selector "#new_concept_#{@discontent2.id}"
-    end
-  end
-
-  shared_examples 'show concept' do
-    before do
-      visit concept_post_path(project, @concept1)
-    end
-
-    it 'can see right form' do
-      expect(page).to have_content @discontent1.content
-      expect(page).to have_content @concept_aspect1.title
-      expect(page).to have_content @concept_aspect1.name
-      expect(page).to have_content @concept_aspect1.positive
-      expect(page).to have_content @concept_aspect1.negative
-      expect(page).to have_content @concept_aspect1.content
-      expect(page).to have_content @concept_aspect1.control
-      expect(page).to have_content @concept_aspect1.obstacles
-      expect(page).to have_content @concept_aspect1.reality
-      expect(page).to have_content @concept_aspect1.problems
-      expect(page).to have_selector 'textarea#comment_text_area'
-      expect(page).not_to have_link("plus_post_#{@concept1.id}", text: 'Выдать баллы', href: plus_concept_post_path(project, @concept1))
-    end
-
-    context 'concept comments' do
-      it_behaves_like 'content with comments', false, 2, 7
-    end
-  end
-
-  shared_examples 'vote discontent' do
-    before do
-      project.update_attributes(status: 8)
       visit concept_posts_path(project)
     end
 
-    it 'have content ', js: true do
-      expect(page).to have_content 'Голосование за нововведения'
+    it 'have content', js: true do
+      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content @concept1.content
+      expect(page).to have_content @concept2.content
+    end
+
+    it_behaves_like 'likes posts'
+  end
+
+  shared_examples 'filter concepts' do
+    before do
+      #create new concept
+      @concept3 = create :concept, user: user, project: project
+      create :concept_post_discontent, post_id: @concept3.id, discontent_post_id: @discontent2.id
+
+      visit concept_posts_path(project)
+    end
+
+    it 'can see all concepts' do
+      expect(page).to have_content @concept1.title
+      expect(page).to have_content @concept2.title
+      expect(page).to have_content @concept3.title
+    end
+
+    it 'can select first discontent in slider' do
+      find(:css, "span#opener").trigger('click')
       expect(page).to have_content @discontent1.content
-      expect(page).to have_content 'Пара: 1 из 1'
-      expect(page).to have_content 'Нововведение 1'
-      expect(page).to have_content @concept_aspect1.title
-      expect(page).to have_content 'Нововведение 2'
-      expect(page).to have_content @concept_aspect2.title
-      expect(page).to have_selector '#btn_vote_1', 'Нововведение 1'
-      expect(page).to have_selector '#btn_vote_2', 'Нововведение 2'
-      click_link 'btn_vote_1'
-      expect(page).to have_content 'Спасибо за участие в голосовании!'
-      expect(page).to have_selector 'a', 'Перейти к рефлексии'
-      expect(page).to have_selector 'a', 'Перейти к списку нововведений'
-      click_link 'Перейти к списку нововведений'
-      expect(page).to have_content 'Нововведения'
-      expect(page).to have_content I18n.t('show.improve.ideas')
+      expect(page).to have_content @discontent2.content
+      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent1.id}']").trigger('click')
+      sleep(5)
+      expect(page).to have_content @concept1.title
+      expect(page).to have_content @concept2.title
+      expect(page).not_to have_content @concept3.title
+    end
+
+    it 'can select second discontent in slider' do
+      find(:css, "span#opener").trigger('click')
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent2.id}']").trigger('click')
+      sleep(5)
+      expect(page).not_to have_content @concept1.title
+      expect(page).not_to have_content @concept2.title
+      expect(page).to have_content @concept3.title
+    end
+  end
+
+  shared_examples 'sort concepts' do
+    before do
+      visit concept_posts_path(project)
+    end
+
+    it 'can sort to date' do
+      find(:css, "span#sorter span.sort-1").trigger('click')
+      sleep(5)
+      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      expect(page).to have_content @concept1.content
+    end
+
+    it 'can sort to popular' do
+      find(:css, "span#sorter span.sort-2").trigger('click')
+      sleep(5)
+      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      expect(page).to have_content @concept2.content
+    end
+  end
+
+  shared_examples 'discuss concepts' do
+    before do
+      visit concept_posts_path(project)
+    end
+
+    it 'have content' do
+      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content @concept1.content
+      expect(page).to have_content @concept2.content
+      expect(page).to have_link 'add_record'
+    end
+
+    context 'show popup aspect ', js: true do
+      before do
+        find(:css, "#show_record_#{@post1.id}").trigger('click')
+      end
+
+      it 'have content' do
+        expect(page).to have_content @post1.title
+        expect(page).to have_content @post1.goal
+        expect(page).to have_content @post1.content
+        expect(page).to have_content @post1.actors
+        expect(page).to have_content @post1.impact_env
+        expect(page).to have_content @discontent1.content
+      end
+
+      it_behaves_like 'content with comments'
     end
   end
 
@@ -90,39 +139,35 @@ describe 'Concept ', skip: true do
       sign_in user
     end
 
-    it_behaves_like 'concept list'
+    it_behaves_like 'welcome popup', 'concept'
 
-    it_behaves_like 'show concept'
+    it_behaves_like 'show list concepts'
 
-    it_behaves_like 'vote discontent'
+    it_behaves_like 'filter concepts'
+
+    it_behaves_like 'sort concepts'
+
+    it_behaves_like 'discuss concepts'
+
+    it_behaves_like 'vote popup', 8, 'Голосование по идеям'
   end
 
-  context 'moderator sign in' do
-    before do
-      sign_in moderator
-    end
+  # context 'moderator sign in ' do
+  #   before do
+  #     sign_in moderator
+  #   end
+  #
+  # it_behaves_like 'welcome popup', 'concept'
+  #
+  # it_behaves_like 'show list concepts'
+  #
+  # it_behaves_like 'filter concepts'
+  #
+  # it_behaves_like 'sort concepts'
+  #
+  # it_behaves_like 'discuss concepts'
+  #
+  # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
+  # end
 
-    it_behaves_like 'concept list'
-
-    it_behaves_like 'show concept'
-
-    it_behaves_like 'vote discontent'
-
-    context 'note for concept ' do
-      before do
-        visit concept_post_path(project, @concept1)
-      end
-
-      it 'can add note ', js: true do
-        find(:css, "a#btn_note_1 div").trigger('click')
-        expect(page).to have_selector "form#note_for_post_#{@concept1.id}_1"
-        find("#note_for_post_#{@concept1.id}_1").find('#edit_post_note_text_area').set 'new note for first field concept post'
-        find("#note_for_post_#{@concept1.id}_1").find("#send_post_1").click
-        expect(page).to have_content "new note for first field concept post"
-        find("ul#note_form_#{@concept1.id}_1 a").trigger('click')
-        sleep 5
-        expect(page).not_to have_content 'new note for first field concept post'
-      end
-    end
-  end
 end

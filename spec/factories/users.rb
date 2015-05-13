@@ -44,4 +44,10 @@ FactoryGirl.define do
     password 'foobar1'
     password_confirmation 'foobar'
   end
+
+  factory :user_check, class: 'UserCheck' do
+    status true
+    association :user, factory: :ordinary_user
+    association :project, factory: :core_project
+  end
 end

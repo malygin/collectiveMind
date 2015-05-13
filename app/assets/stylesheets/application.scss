@@ -107,6 +107,11 @@
   opacity: 1;
 }
 
+// welcome screen high popover
+.help_popover_content{
+  z-index: 1000 !important;
+}
+
 //.select_aspect {
 //  background-color: gray;
 //}
