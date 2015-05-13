@@ -22,9 +22,12 @@ FactoryGirl.define do
 
   factory :collect_info_question, class: 'CollectInfo::Question' do
     sequence(:content) { |n| "collect info question #{n}" }
+    sequence(:hint) { |n| "collect info hint #{n}" }
     status 0
+    type_stage 0
     association :user
     association :project, factory: :core_project
+    association :core_aspect, factory: :aspect
   end
 
   factory :collect_info_answer, class: 'CollectInfo::Answer' do
@@ -39,7 +42,7 @@ FactoryGirl.define do
     association :user, factory: :ordinary_user
     association :question, factory: :collect_info_question
     association :project, factory: :core_project
-    association :aspect
+    association :aspect, factory: :aspect
   end
 
   factory :collect_info_voting, class: 'CollectInfo::Voting' do

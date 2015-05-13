@@ -6,7 +6,6 @@ describe 'Discontent', skip: true do
   let (:user_data) { create :user }
   let (:moderator) { create :moderator }
   let (:project) { create :core_project, status: 3 }
-  let (:project_for_group) { create :core_project, status: 4 }
 
   before do
     @aspect1 = create :aspect, project: project
@@ -30,46 +29,6 @@ describe 'Discontent', skip: true do
       expect(page).to have_content @discontent2.content
       expect(page).to have_selector '#add_record'
     end
-
-    # @todo move to cabinet
-    # it ' add new discontent send', js: true do
-    #   click_link 'add_record'
-    #   fill_in 'discontent_post_content', with: 'dis content'
-    #   fill_in 'discontent_post_whered', with: 'dis where'
-    #   fill_in 'discontent_post_whend', with: 'dis when'
-    #   expect(page).to have_selector "span", 'aspect 1'
-    #   expect(page).to have_selector 'span', 'aspect 1'
-    #   click_button 'send_post'
-    #   expect(page).to have_content 'Перейти к списку'
-    #   expect(page).to have_content 'Добавить еще одно'
-    #   click_link 'Перейти к списку'
-    #   expect(page).to have_content 'dis content'
-    # end
-    #
-    # it 'user profile works fine after add discontent', js: true do
-    #   click_link 'add_record'
-    #   fill_in 'discontent_post_content', with: 'disсontent content'
-    #   fill_in 'discontent_post_whered', with: 'disсontent where'
-    #   fill_in 'discontent_post_whend', with: 'disсontent when'
-    #   expect(page).to have_selector 'span', 'aspect 1'
-    #   click_button 'send_post'
-    #   visit user_path(id: user.id, project: project)
-    #   click_link 'tab-imperfections'
-    #   expect(page).to have_content 'disсontent'
-    # end
-
-    # it 'add anonym discontent and get fine feed' do
-    #   click_link 'add_record'
-    #
-    #   fill_in 'discontent_post_content', with: 'disсontent content'
-    #   fill_in 'discontent_post_whered', with: 'disсontent where'
-    #   fill_in 'discontent_post_whend', with: 'disсontent when'
-    #   find(:css, "#discontent_post_anonym[value='1']").set(true)
-    #
-    #   click_button 'send_post'
-    #   visit journals_path(project: project)
-    #   expect(page).to have_content I18n.t('journal.add_anonym_discontent')
-    # end
   end
 
   shared_examples 'show discontents' do
@@ -79,10 +38,11 @@ describe 'Discontent', skip: true do
 
     it 'can see popup' do
       expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent1.what
       expect(page).to have_content @discontent1.whend
       expect(page).to have_content @discontent1.whered
       find(:css, "a#show_record_#{@discontent1.id}").trigger('click')
-      expect(page).to have_content "Несовершенство \"#{@discontent1.content}\""
+      expect(page).to have_content @discontent1.content
       expect(page).to have_selector "div", @aspect1.content
       expect(page).to have_selector 'textarea#comment_text_area'
       expect(page).to have_content @comment_1.content
@@ -181,24 +141,5 @@ describe 'Discontent', skip: true do
 
     it_behaves_like 'sort discontents'
 
-    # not functional
-    # context 'like concept' do
-    #   before do
-    #     visit discontent_post_path(project, @discontent1)
-    #     prepare_awards
-    #   end
-    #
-    #   it ' like post and have award', js: true do
-    #     expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
-    #
-    #     find(:css, "a#plus_post_#{@discontent1.id} span").trigger('click')
-    #
-    #     sleep 2
-    #     visit journals_path(project: project)
-    #     expect(page).to have_selector('i.fa.fa-trophy')
-    #     visit user_path(project: project, id: user.id)
-    #     expect(page).to have_content('25')
-    #   end
-    # end
   end
 end

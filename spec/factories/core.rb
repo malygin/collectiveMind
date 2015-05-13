@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :core_project, class: 'Core::Project' do
     sequence(:name) { |n| "Project #{n}" }
     type_access 0
-    status 1
+    status 0
 
     factory :closed_project do
       type_access Core::Project::TYPE_ACCESS_CODE[:closed]
@@ -35,8 +35,14 @@ FactoryGirl.define do
   factory :core_knowbase_post, class: 'Core::Knowbase::Post' do
     sequence(:title) { |n| "title for knowbase #{n}" }
     sequence(:content) { |n| "content for knowbase #{n}" }
-    sequence(:stage) { |n| n }
 
-    association :aspect
+    association :core_aspect, factory: :aspect
+  end
+
+  factory :aspect_comment, class: 'Core::Aspect::Comment' do
+    sequence(:content) { |n| "aspect comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :aspect
   end
 end
