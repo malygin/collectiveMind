@@ -28,6 +28,9 @@
         .divider15
         %p
           = f.submit t("form.#{action_name}"), class: 'btn add-button type2 pull-right', id: 'send_post_concept'
+          - if @concept_post.persisted? and !@concept_post.published?
+            = link_to 'Опубликовать', publish_concept_post_path(@project, @concept_post), remote: true, method: :put, id: "publish_#{@concept_post.id}", class: 'btn add-button type2'
+
         .divider15
         .check_push_cont.checked_items
           %p.hideable_checks.enter_lenght{style: ('display: block;' if @concept_post.persisted?)}
