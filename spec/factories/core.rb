@@ -11,6 +11,12 @@ FactoryGirl.define do
     factory :club_project do
       type_access Core::Project::TYPE_ACCESS_CODE[:club]
     end
+
+    after(:create) do |project|
+      stage_name = project.current_stage_type.to_s == 'collect_info_posts' ? 'aspect_posts' : project.current_stage_type.to_s
+      technique_1 = Technique::List.create stage: stage_name, code: 'simple'
+      project.techniques << technique_1
+    end
   end
 
   factory :core_project_user, class: 'Core::ProjectUser' do

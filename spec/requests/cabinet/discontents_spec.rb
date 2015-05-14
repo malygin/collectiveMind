@@ -2,38 +2,16 @@ require 'spec_helper'
 
 describe 'Cabinet Discontents' do
   subject { page }
-  let (:project) { create :core_project, status: Core::Project::STATUS_CODES[:discontent] }
-  let (:core_project_user) { create :core_project_user, core_project: project }
-  let (:user) { core_project_user.user }
-  let! (:discontent) { create :discontent, user: user, project: project }
+  let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
-    project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'simple')
-    project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'detailed')
-
-    sign_in user
-    visit project_user_path(project, user)
+    create_project_and_user_for :discontent
+    @discontent = create :discontent, user: @user, project: @project
+    sign_in @user
+    visit cabinet_stage_url
   end
 
-  it 'correct link to cabinet' do
-    click_link 'open_cabinet'
-    expect(current_path) == new_discontent_post_path(project, type_mechanic: 'simple')
-  end
-
-  it 'list forms for techniques' do
-    project.techniques.each do |technique|
-      expect(page).to have_content t("techniques.#{technique.name}")
-    end
-  end
-
-  it 'close sticker' do
-    expect(page).to have_content t('cabinet.discontent_posts_sticker')
-    expect {
-      click_link 'close_sticker'
-    }.to change(UserCheck, :count).by(1)
-    refresh_page
-    expect(page).not_to have_content t('cabinet.discontent_posts_sticker')
-  end
+  it_behaves_like 'base cabinet'
 
   describe 'create with simple form', js: true, skip: true do
     let! (:aspect_1) { create :aspect, user: user, project: project }
