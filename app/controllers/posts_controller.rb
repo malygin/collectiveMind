@@ -509,7 +509,10 @@ class PostsController < ProjectsController
   private
   def check_stage_for_cabinet
     unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
-      redirect_to url_for(params.merge(controller: @project.current_stage_type.to_s.sub('_', '/')))
+      # Обрабатываем единственный такой случай, когда имя стадии не совпадает с именем контроллера для нее
+      unless @project.current_stage_type == :collect_info_posts and params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
+        redirect_to url_for(params.merge(controller: @project.current_stage_type.to_s.sub('_', '/')))
+      end
     end
   end
 
