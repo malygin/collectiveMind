@@ -18,7 +18,7 @@ describe 'Cabinet Plans' do
       click_link 'new_plan_posts_simple'
     end
 
-    xit 'correct' do
+    it 'correct' do
       expect {
         fill_in 'plan_post_title', with: 'new plan'
         click_button 'send_post_plan'
@@ -26,9 +26,9 @@ describe 'Cabinet Plans' do
       }.to change(Plan::Post, :count).by(1)
     end
 
-    xit 'empty fields - error' do
+    it 'empty fields - error' do
       expect {
-        click_button 'send_post_plan'
+        click_button 'to_save_plan'
         within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
@@ -36,39 +36,41 @@ describe 'Cabinet Plans' do
     end
   end
 
-  xit 'edit', js: true do
+  it 'edit', js: true do
     new_content = 'new cool content'
-    visit user_content_plan_posts_path(project)
-    click_link "edit_plan_#{plan.id}"
+    visit user_content_plan_posts_path(@project)
+    click_link "edit_plan_#{@plan.id}"
     expect {
-      fill_in 'plan_post_title', with: new_content
-      click_button 'send_post_plan'
+      fill_in 'plan_post_content', with: new_content
+      click_button 'to_save_plan'
       expect(page).to have_content t('form.plan.edit_success')
     }.not_to change(Plan::Post, :count)
-    visit user_content_plan_posts_path(project)
+    visit user_content_plan_posts_path(@project)
     expect(page).to have_content new_content
   end
 
   context 'destroy' do
     it 'author - ok', js: true do
-      visit user_content_plan_posts_path(project)
+      visit user_content_plan_posts_path(@project)
       expect {
-        click_link "destroy_plan_#{plan.id}"
+        click_link "destroy_plan_#{@plan.id}"
         page.driver.browser.accept_js_confirms
-        expect(current_path) == user_content_plan_posts_path(project)
+        expect(current_path) == user_content_plan_posts_path(@project)
       }.to change(Plan::Post, :count).by(-1)
     end
   end
 
   it 'created by current user' do
     click_link 'open_my_plan_posts'
-    expect(page).to have_content plan.content
+    expect(page).to have_content @plan.content
   end
 
-  xit 'publish', js: true do
-    visit edit_plan_post_path(project, plan)
-    click_link "publish_#{plan.id}"
-    refresh_page
-    expect(page).not_to have_link "publish_#{plan.id}"
+  it 'publish', js: true do
+    visit edit_plan_post_path(@project, @plan)
+    expect {
+      click_button 'to_publish_plan'
+      refresh_page
+      expect(page).not_to have_button 'to_publish_plan'
+    }.to change(Plan::Post.published, :count).by(1)
   end
 end

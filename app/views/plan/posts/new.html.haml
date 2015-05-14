@@ -22,6 +22,8 @@
   = render partial: 'shared/create_success', locals: {model_name: 'plan', id: @post.id}
 = form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create', id: @post.id}, remote: true do |f|
   = f.hidden_field :tasks_gant
+  - unless @post.persisted?
+    = f.hidden_field :content
   = hidden_field_tag 'plan_post[novation_id]'
   - if @post.persisted?
     .content_window.c_w_5_top.bottom_panel_stop

@@ -1,22 +1,19 @@
-- content_for :cabinet_form do
-  .row
-    - @content.each do |plan|
-      .col-md-6
-        .media.type_cab
-          .divider5.white
-          .media-left.gradient2
-            .cab_folder.back3
-              %span.percentage.font_white.bold.text-center
-            %p.time.text-center
-              = Russian::strftime(plan.created_at,'%d.%m.%Y')
-          .media-body.white
-            %h6
-              = plan.content
-            %span.post_btns_cont
-              - if current_user?(plan.user)
-                = link_to edit_plan_post_path(@project, plan), class: 'btn btn_reset btn_del a_font_reset', id: "edit_plan_#{plan.id}" do
-                  %i.glyphicon.glyphicon-pencil
-                = link_to plan_post_path(@project, plan), method: :delete, data: {confirm: t('confirm.delete_plan')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_plan_#{plan.id}" do
-                  %i.glyphicon.glyphicon-trash
-            = link_to edit_plan_post_path(@project, plan), class: 'btn btn_reset btn_del a_font_reset', id: "edit_plan_#{plan.id}" do
-              %i.fa.fa-2x.fa-angle-right.font_grey
+.row
+  - @content.each do |plan|
+    .col-md-6
+      .media.type_cab
+        .divider5.white
+        .media-left.gradient2
+          .cab_folder.back3
+            %span.percentage.font_white.bold.text-center
+          %p.time.text-center
+            = Russian::strftime(plan.created_at,'%d.%m.%Y')
+        .media-body.white
+          %h6
+            = plan.content
+          %span.post_btns_cont
+            - if current_user?(plan.user)
+              = link_to edit_plan_post_path(@project, plan), class: 'btn btn_reset btn_del a_font_reset', id: "edit_plan_#{plan.id}" do
+                %i.glyphicon.glyphicon-pencil
+              = link_to plan_post_path(@project, plan), method: :delete, data: {confirm: t('confirm.delete_plan')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_plan_#{plan.id}" do
+                %i.glyphicon.glyphicon-trash

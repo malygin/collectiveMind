@@ -67,8 +67,10 @@ describe 'Cabinet Novations' do
 
   it 'publish', js: true do
     visit edit_novation_post_path(@project, @novation)
-    click_button "publish_#{@novation.id}"
-    refresh_page
-    expect(page).not_to have_link "publish_#{@novation.id}"
+    expect {
+      click_button "publish_#{@novation.id}"
+      refresh_page
+      expect(page).not_to have_link "publish_#{@novation.id}"
+    }.to change(Novation::Post.published, :count).by(1)
   end
 end

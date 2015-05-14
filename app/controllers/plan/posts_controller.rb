@@ -33,19 +33,13 @@ class Plan::PostsController < PostsController
   end
 
   def create
-    @novation = Novation::Post.find(params[:plan_post][:novation_id])
-    @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id, content: @novation.title)
-    if params[:plan_post][:published]
-      @post.update status: current_model::STATUSES[:published]
+    @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id)
+    if @post.save
+      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
     @post.post_novations.build plan_post_novation_params
-    if @post.save
-      # @plan_novation = @post.post_novations.build plan_post_novation_params
-      # @novation.used_attributes.each do |attribute|
-      #   @plan_novation.send("#{attribute}=", @novation.send(attribute))
-      # end
-      # @plan_novation.save
-      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
+    if params[:plan_post][:published]
+      @post.update status: current_model::STATUSES[:published]
     end
 
     respond_to do |format|

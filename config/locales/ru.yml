@@ -654,6 +654,7 @@ ru:
     delete_news: "Удалить новость?"
     delete_discontent: "Удалить несовершенство?"
     delete_novation: "Удалить?"
+    delete_plan: "Удалить план?"
   show:
     without_name: 'Без названия'
     note: замечание
