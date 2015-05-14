@@ -1,104 +1,14 @@
 !!! 5
 %html(lang="en")
   = render 'application/meta'
-  %body{class: stage_theme, style: "background-color: #f4f4f4;"}
+  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
     .outer
-      - unless cabinet?
-        = render partial: 'application/left_rollover'
-      / Top bar starts
-      %header.navbar.top_bar
-        .container
-          .navbar-header
-            %a.navbar-brand{href: @project ? "/project/#{@project.id}" : '/', id: 'go_to_logo'}
-              = image_tag 'logo1.png'
-          %ul.nav.navbar-nav.main_menu
-            %li{class: "#{'active' unless (cabinet? or rating? or profile?)}"}
-              = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
-            %li{class: "#{'active' if cabinet?}"}
-              = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet.to_s.downcase.singularize}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
-            %li.has_dropwindow
-              = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
-            -#%li{class: "#{'active' if name_controller == :journal}"}
-            -#  = link_to 'Новости', journals_path(@project), class: "menu_a"
-            - if @project.closed?
-              %li{class: "#{'active' if rating?}"}
-                = link_to 'Рейтинг', users_path(@project), class: 'menu_a'
-            - if current_user.admin?
-              - if @project.prev_status
-                %li
-                  = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'
-              - if @project.next_status
-                %li
-                  = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
-
-          .navbar-right.text-right.user_block.font_grey
-            = link_to '', knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'book_icon tooltip1', "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы освежить в памяти базу знаний."
-            %span.auth-divider
-              = '|'
-            %span.has_dropwindow
-              = render partial: 'application/expert_news', locals: {expert_news: @expert_news, project: @project}
-            %span.auth-divider
-              = '|'
-            %span.dropdown
-              %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
-                %i.fa.fa-globe.font_lighter_grey
-                %small
-                  Русский
-                  %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
-                %li
-                  %a{href: '#'} English
-                %li
-                  %a{href: '#'} Русский
-            %span.auth-divider
-              = '|'
-            %span.dropdown
-              %span.badge.grey
-                = current_user.score
-              %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
-                %small
-                  = current_user
-                  %i.fa.fa-angle-down
-              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
-                %li{role: 'presentation'}
-                  = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-                -#%li{role: 'presentation'}
-                -#  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
-                %li{role: 'presentation'}
-                  %a{:href => "/users/sign_out/", "data-method" => "delete", :id => "sign_out"}
-                    =t('menu.sign_out')
-
-      / Top Bar ends
-      -# В верстке профиля нет ничего про процедуру
-      - unless profile?
-        .subhead
-          .container
-            %h4.font_white
-              Тема процедуры:
-              = @project.name
-          - unless cabinet?
-            %button#tooltip_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
-              %i.fa.fa-lightbulb-o
-              Открыть подсказки
-        - unless controller_name == 'users'
-          .container
-            .row
-              = render partial: 'stages'
+      = render partial: 'application/left_rollover'
+      = render partial: 'application/header'
       / Main Block starts
       .main-block
         .container
-          - if cabinet?
-            .row
-              = render partial: 'core/project_users/sidebar'
-              = yield
-          - else
-            = yield
-        - if cabinet?
-          = yield :special_for_gantt
+          = yield
     #render_knowbase_posts
     %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
-
-    -#= render 'shared/moderator_chat'
-    -#
-    -#%script(src="https://cdn.pubnub.com/pubnub.min.js")
     = javascript_include_tag 'application'

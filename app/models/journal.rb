@@ -139,8 +139,6 @@ class Journal < ActiveRecord::Base
          "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_status","my_concept_comment_discuss_status","concept_comment_approve_status","my_concept_comment_approve_status",
          "plan_comment_discuss_status","my_plan_comment_discuss_status","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_status","my_essay_comment_discuss_status","essay_comment_approve_status","my_essay_comment_approve_status"
         ]
-      when "by_advice"
-        ["advice_approve","my_advice_approved","my_advice_useful","my_advice_commented"]
       when "by_content"
         ["life_tape_post_save","discontent_post_save","concept_post_save","plan_post_save","essay_post_save"] |
             ["discontent_post_update","concept_post_update","plan_post_update","essay_post_update"]

@@ -316,28 +316,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#advices_for-instance_method" title="#advices_for (instance method)">- (Object) <strong>advices_for</strong>(post) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#answered_for_help_stage%3F-instance_method" title="#answered_for_help_stage? (instance method)">- (Boolean) <strong>answered_for_help_stage?</strong>(stage) </a>
     
 
@@ -1358,6 +1336,10 @@
       <pre class="lines">
 
 
+304
+305
+306
+307
 308
 309
 310
@@ -1380,14 +1362,10 @@
 327
 328
 329
-330
-331
-332
-333
-334</pre>
+330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 308</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 304</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_able_concept_posts_for_vote'>able_concept_posts_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_disposts'>disposts</span><span class='comma'>,</span> <span class='id identifier rubyid_last_vote'>last_vote</span><span class='comma'>,</span> <span class='id identifier rubyid_num'>num</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_last_vote'>last_vote</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_votings'>concept_post_votings</span><span class='period'>.</span><span class='id identifier rubyid_by_project_votings'>by_project_votings</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span> <span class='kw'>if</span> <span class='id identifier rubyid_last_vote'>last_vote</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1518,11 +1496,7 @@
 266
 267
 268
-269
-270
-271
-272
-273</pre>
+269</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/models/user.rb', line 187</span>
@@ -1583,8 +1557,6 @@
       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>-</span><span class='int'>10</span><span class='comma'>,</span> <span class='symbol'>:score_g</span><span class='rparen'>)</span>
     <span class='kw'>when</span> <span class='symbol'>:add_discontent_post</span>
       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='int'>20</span><span class='comma'>,</span> <span class='symbol'>:score_g</span><span class='rparen'>)</span>
-    <span class='kw'>when</span> <span class='symbol'>:approve_advice</span>
-      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='symbol'>:score_g</span><span class='rparen'>)</span>
     <span class='kw'>when</span> <span class='symbol'>:to_archive_plus_comment</span>
       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>-</span><span class='int'>5</span><span class='comma'>,</span> <span class='symbol'>:score_a</span><span class='rparen'>)</span>
       <span class='const'>Journal</span><span class='period'>.</span><span class='id identifier rubyid_destroy_journal_record'>destroy_journal_record</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my_add_score_comment</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -1610,8 +1582,6 @@
       <span class='kw'>if</span> <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:post</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_instance_of?'>instance_of?</span> <span class='const'>Concept</span><span class='op'>::</span><span class='const'>Post</span>
         <span class='const'>Journal</span><span class='period'>.</span><span class='id identifier rubyid_destroy_journal_record'>destroy_journal_record</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>my_add_score_concept</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:post</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span>
       <span class='kw'>end</span>
-    <span class='kw'>when</span> <span class='symbol'>:useful_advice</span>
-      <span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_h'>h</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='int'>10</span><span class='comma'>,</span> <span class='symbol'>:score_g</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1634,15 +1604,15 @@
       <pre class="lines">
 
 
+271
+272
+273
+274
 275
-276
-277
-278
-279
-280</pre>
+276</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_score_by_type'>add_score_by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_score'>score</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='symbol'>:score_g</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_ps'>ps</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_core_project_scores'>core_project_scores</span><span class='period'>.</span><span class='id identifier rubyid_by_project'>by_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first_or_create'>first_or_create</span>
@@ -1701,36 +1671,6 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_admin?'>admin?</span>
   <span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>6</span><span class='comma'>,</span> <span class='int'>7</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_type_user'>type_user</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="advices_for-instance_method">
-  
-    - (<tt>Object</tt>) <strong>advices_for</strong>(post) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-336
-337
-338</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 336</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_advices_for'>advices_for</span><span class='lparen'>(</span><span class='id identifier rubyid_post'>post</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_post'>post</span><span class='period'>.</span><span class='id identifier rubyid_advices'>advices</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>user:</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1853,12 +1793,12 @@
       <pre class="lines">
 
 
-387
-388
-389</pre>
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 387</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_aspects_for_vote'>aspects_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_voted_aspects'>voted_aspects</span><span class='period'>.</span><span class='id identifier rubyid_by_project'>by_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>collect_info_votings:</span> <span class='lbrace'>{</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1965,14 +1905,14 @@
       <pre class="lines">
 
 
-361
-362
-363
-364
-365</pre>
+353
+354
+355
+356
+357</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 361</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can_edit_project?'>can_edit_project?</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='comment'>#@todo нужно мигрировать все данные всех проектов
@@ -1999,6 +1939,10 @@
       <pre class="lines">
 
 
+278
+279
+280
+281
 282
 283
 284
@@ -2019,14 +1963,10 @@
 299
 300
 301
-302
-303
-304
-305
-306</pre>
+302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 282</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 278</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can_vote_for'>can_vote_for</span><span class='lparen'>(</span><span class='id identifier rubyid_stage'>stage</span><span class='comma'>,</span> <span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_stage'>stage</span> <span class='op'>==</span> <span class='symbol'>:collect_info</span> <span class='kw'>and</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>==</span> <span class='int'>2</span> <span class='kw'>and</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_get_free_votes_for'>get_free_votes_for</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>collect_info</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&gt;</span> <span class='int'>0</span>
@@ -2136,12 +2076,12 @@
       <pre class="lines">
 
 
-409
-410
-411</pre>
+401
+402
+403</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 409</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 401</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_concepts_for_vote'>concepts_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_voted_concept_post'>voted_concept_post</span><span class='period'>.</span><span class='id identifier rubyid_by_project'>by_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>concept_votings:</span> <span class='lbrace'>{</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2166,16 +2106,16 @@
       <pre class="lines">
 
 
-430
-431
-432
-433
-434
-435
-436</pre>
+422
+423
+424
+425
+426
+427
+428</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 430</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 422</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_content_for_project'>content_for_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_current_stage_values'>current_stage_values</span><span class='lbracket'>[</span><span class='symbol'>:type_stage</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='const'>Core</span><span class='op'>::</span><span class='const'>Project</span><span class='op'>::</span><span class='const'>LIST_STAGES</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_second'>second</span><span class='lbracket'>[</span><span class='symbol'>:type_stage</span><span class='rbracket'>]</span>
@@ -2324,12 +2264,12 @@
       <pre class="lines">
 
 
-398
-399
-400</pre>
+390
+391
+392</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 398</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 390</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_discontents_for_vote'>discontents_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_voted_discontent_posts'>voted_discontent_posts</span><span class='period'>.</span><span class='id identifier rubyid_by_project'>by_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>discontent_votings:</span> <span class='lbrace'>{</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2428,15 +2368,15 @@
       <pre class="lines">
 
 
-367
-368
-369
-370
-371
-372</pre>
+359
+360
+361
+362
+363
+364</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 367</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_group_include_user?'>group_include_user?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_groups'>groups</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_group'>group</span><span class='op'>|</span>
@@ -2576,12 +2516,12 @@
       <pre class="lines">
 
 
-353
-354
-355</pre>
+345
+346
+347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 353</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_looked_chat'>looked_chat</span>
   <span class='id identifier rubyid_update_attributes!'>update_attributes!</span> <span class='label'>last_seen_chat_at:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
@@ -2628,12 +2568,12 @@
       <pre class="lines">
 
 
-357
-358
-359</pre>
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 357</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 349</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_moderator_in_project?'>moderator_in_project?</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_project_users'>project_users</span><span class='period'>.</span><span class='id identifier rubyid_by_type'>by_type</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='kw'>self</span>
@@ -2658,14 +2598,14 @@
       <pre class="lines">
 
 
-340
-341
-342
-343
-344</pre>
+332
+333
+334
+335
+336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 340</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_my_journals'>my_journals</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='const'>Journal</span><span class='period'>.</span><span class='id identifier rubyid_events_for_my_feed'>events_for_my_feed</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span>
@@ -2692,14 +2632,14 @@
       <pre class="lines">
 
 
-346
-347
-348
-349
-350</pre>
+338
+339
+340
+341
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 338</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_my_journals_viewed'>my_journals_viewed</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='const'>Journal</span><span class='period'>.</span><span class='id identifier rubyid_events_for_my_feed_viewed'>events_for_my_feed_viewed</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span>
@@ -2748,16 +2688,16 @@
       <pre class="lines">
 
 
-378
-379
-380
-381
-382
-383
-384</pre>
+370
+371
+372
+373
+374
+375
+376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 378</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 370</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_not_ready_for_concept?'>not_ready_for_concept?</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_project_user_for'>project_user_for</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -2797,12 +2737,12 @@
       <pre class="lines">
 
 
-420
-421
-422</pre>
+412
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 420</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 412</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_novations_for_vote'>novations_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='comma'>,</span> <span class='id identifier rubyid_status'>status</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_voted_novation_post'>voted_novation_post</span><span class='period'>.</span><span class='id identifier rubyid_by_project'>by_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>novation_votings:</span> <span class='lbrace'>{</span><span class='label'>status:</span> <span class='id identifier rubyid_status'>status</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2827,12 +2767,12 @@
       <pre class="lines">
 
 
-438
-439
-440</pre>
+430
+431
+432</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 438</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 430</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_plan_vote_status'>plan_vote_status</span><span class='lparen'>(</span><span class='id identifier rubyid_post'>post</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_plan_post_votings'>plan_post_votings</span><span class='period'>.</span><span class='id identifier rubyid_by_post'>by_post</span><span class='lparen'>(</span><span class='id identifier rubyid_post'>post</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_by_type'>by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:status</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='int'>0</span>
@@ -2909,12 +2849,12 @@
       <pre class="lines">
 
 
-374
-375
-376</pre>
+366
+367
+368</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 374</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 366</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_project_user_for'>project_user_for</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_core_project_users'>core_project_users</span><span class='period'>.</span><span class='id identifier rubyid_find_by'>find_by</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
@@ -3192,13 +3132,13 @@
       <pre class="lines">
 
 
-392
-393
-394
-395</pre>
+384
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 392</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 384</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unvote_aspects_for_vote'>unvote_aspects_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_aspects'>vote_aspects</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_proc_main_aspects'>proc_main_aspects</span><span class='period'>.</span><span class='id identifier rubyid_joins'>joins</span><span class='lparen'>(</span><span class='symbol'>:final_votings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>collect_info_votings:</span> <span class='lbrace'>{</span><span class='label'>user_id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pluck'>pluck</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>core_aspect_posts.id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -3235,13 +3175,13 @@
       <pre class="lines">
 
 
-414
-415
-416
-417</pre>
+406
+407
+408
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 414</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 406</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unvote_concepts_for_vote'>unvote_concepts_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_concepts'>vote_concepts</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_concept_ongoing_post'>concept_ongoing_post</span><span class='period'>.</span><span class='id identifier rubyid_joins'>joins</span><span class='lparen'>(</span><span class='symbol'>:final_votings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>concept_votings:</span> <span class='lbrace'>{</span><span class='label'>user_id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pluck'>pluck</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>concept_posts.id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -3278,13 +3218,13 @@
       <pre class="lines">
 
 
-403
-404
-405
-406</pre>
+395
+396
+397
+398</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 395</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unvote_discontents_for_vote'>unvote_discontents_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_discontents'>vote_discontents</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_discontent_for_vote'>discontent_for_vote</span><span class='period'>.</span><span class='id identifier rubyid_joins'>joins</span><span class='lparen'>(</span><span class='symbol'>:final_votings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>discontent_votings:</span> <span class='lbrace'>{</span><span class='label'>user_id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pluck'>pluck</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>discontent_posts.id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -3321,13 +3261,13 @@
       <pre class="lines">
 
 
-425
-426
-427
-428</pre>
+417
+418
+419
+420</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 425</span>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 417</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_unvote_novations_for_vote'>unvote_novations_for_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_novations'>vote_novations</span> <span class='op'>=</span> <span class='id identifier rubyid_project'>project</span><span class='period'>.</span><span class='id identifier rubyid_novations'>novations</span><span class='period'>.</span><span class='id identifier rubyid_joins'>joins</span><span class='lparen'>(</span><span class='symbol'>:final_votings</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>novation_votings:</span> <span class='lbrace'>{</span><span class='label'>user_id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pluck'>pluck</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>novation_posts.id</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -3491,7 +3431,7 @@
 </div>
 
     <div id="footer">
-  Generated on Tue May 12 16:42:05 2015 by
+  Generated on Wed May 13 15:35:10 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.0).
 </div>

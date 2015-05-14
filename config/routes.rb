@@ -285,16 +285,6 @@ CollectiveMind::Application.routes.draw do
         posts_routes
       end
     end
-
-    resources :advices, only: [:index, :edit, :update, :destroy] do
-      member do
-        put :approve
-        put :not_approve
-        put :useful
-        put :not_useful
-      end
-      resources :comments, only: [:new, :create, :destroy], controller: 'advice_comments'
-    end
   end
 
   ############

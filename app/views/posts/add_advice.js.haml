@@ -1,5 +1,0 @@
-$('#comment_text_area').val('');
-$('#advices').append("#{escape_javascript(render partial: 'advices/advice', locals:{advice: @advice})}").fadeIn();
-$('#advice_success_created').fadeIn('slow').delay(1000).fadeOut('slow');
-$('#label_advice_status').click();
-$('#advise_status').prop( "checked", false );

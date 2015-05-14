@@ -34,8 +34,6 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :collect_info_answers, :question_id
     add_index :discontent_post_wheres, :project_id
     add_index :discontent_votings, [:discontent_post_id, :user_id]
-    add_index :advices, [:adviseable_id, :adviseable_type]
-    add_index :advices, :project_id
     add_index :core_project_scores, :project_id
     add_index :core_project_scores, :user_id
     add_index :concept_comments, :comment_id

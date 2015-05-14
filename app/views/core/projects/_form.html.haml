@@ -29,13 +29,6 @@
     .form-group
       = f.label 'Количество этапов'
       = f.text_field :count_stages, class: 'form-control'
-    Включить механизм советов для
-    .form-group
-      = f.check_box :advices_discontent
-      = f.label 'Несовершенств'
-      %br
-      = f.check_box :advices_concept
-      = f.label 'Нововведений'
 
     .form-group
       = f.label t('form.project.color'), class: 'control-label', for: 'color'

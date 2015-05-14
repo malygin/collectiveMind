@@ -5,7 +5,7 @@ describe 'Users ', skip: true do
   let (:user) { create :user }
   let (:moderator) { create :moderator }
   let (:expert) { create :expert }
-  let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
+  let (:project) { create :core_project, status: 1}
   let!(:project_user) { create :core_project_user, user: user, core_project: project }
   let!(:project_user2) { create :core_project_user, user: moderator, core_project: project }
 

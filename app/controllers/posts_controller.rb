@@ -1,4 +1,5 @@
 class PostsController < ProjectsController
+  layout 'cabinet', only: [:new, :edit, :user_content]
   before_filter :journal_data, only: [:index, :new, :edit, :show, :vote_result, :to_work, :about, :user_content]
   before_filter :boss_authenticate, only: [:vote_result]
   before_filter :comment_page, only: [:index, :show]
@@ -68,11 +69,7 @@ class PostsController < ProjectsController
   def add_comment
     @aspects = Core::Aspect::Post.where(project_id: @project)
     post = current_model.find(params[:id])
-    if params[:advise_status]
-      create_advice post
-    else
-      create_comment post
-    end
+    create_comment post
   end
 
   def comment_status
@@ -514,16 +511,6 @@ class PostsController < ProjectsController
     unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
       redirect_to url_for(params.merge(controller: @project.current_stage_type.to_s.sub('_', '/')))
     end
-  end
-
-  def create_advice(post)
-    @advice = post.advices.new content: params[name_of_comment_for_param][:content]
-    @advice.user = current_user
-    @advice.project = @project
-    @advice.save
-    @advice.notify_moderators(@project, current_user)
-
-    render template: 'posts/add_advice'
   end
 
   def create_comment(post)

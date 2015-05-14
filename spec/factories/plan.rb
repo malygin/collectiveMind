@@ -16,12 +16,6 @@ FactoryGirl.define do
     association :novation_post, factory: :novation
   end
 
-  factory :plan_action, class: 'Plan::PostAction' do
-    sequence(:name) { |n| "name #{n}" }
-    sequence(:desc) { |n| "desc #{n}" }
-    status 0
-  end
-
   factory :plan_voting, class: 'Plan::Voting' do
     association :user
     association :plan_post, factory: :plan

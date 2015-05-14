@@ -45,12 +45,6 @@
       =t('menu.reflection_stage')
       %b="(#{@project.essay_count(current_stage == 'essay/posts' ? params[:stage].to_i : number_stage(current_stage)).count})"
 
-  - if current_user.admin?
-    %li
-      = link_to advices_path(@project), id: 'open_unapproved_advices' do
-        = t('left_side.discontent_post_advices')
-        %b
-          = " (#{Advice.unapproved.by_project(@project).count})"
   %li
     = link_to t('menu.list_groups'), groups_path(@project), id: 'open_groups_list'
     #left_side_list_groups
