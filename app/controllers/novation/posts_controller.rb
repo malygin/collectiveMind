@@ -37,6 +37,9 @@ class Novation::PostsController < PostsController
 
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
+    if @novation.save
+      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project).save!
+    end
     @novation.fullness = @novation.update_fullness
     if params[:novation_post][:published]
       @novation.update status: current_model::STATUSES[:published]
@@ -48,12 +51,7 @@ class Novation::PostsController < PostsController
       end
     end
     respond_to do |format|
-      if @novation.save
-        current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project).save!
-        format.js
-      else
-        format.js
-      end
+      format.js
     end
   end
 

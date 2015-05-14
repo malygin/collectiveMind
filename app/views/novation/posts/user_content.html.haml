@@ -1,33 +1,32 @@
-- content_for :cabinet_form do
-  .row
-    - @content.each do |novation|
-      .col-md-6
-        .post.post_type_3.cab
-          .post-header.white
-          .post-body
-            .media
-              .media-left.text-center.gradient2
-                .cab_folder{class: (novation.published? ? 'back1' : 'back2')}
-                  %span.percentage.font_white.bold.text-center
-                    = "#{novation.fullness}%"
-                %p.time.text-center
-                  = Russian::strftime(novation.created_at,'%d.%m.%Y')
-              .media-body.white
-                %h6
-                  = novation.title
-                - if current_user?(novation.user)
-                  %span.post_btns_cont
-                    = link_to edit_novation_post_path(@project, novation), class: 'btn btn_reset btn_del a_font_reset', id: "edit_novation_#{novation.id}" do
-                      %i.glyphicon.glyphicon-pencil
-                    = link_to novation_post_path(@project, novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_novation_#{novation.id}" do
-                      %i.glyphicon.glyphicon-trash
-          .post-bottom.white
-            .row
-              .col-md-1.col_padding_right_3
-                %small.pull-left{style: 'margin-right: 3px;'} Идеи
-              .col-md-8.col_padding_right_3.themes_cont
-                #stripe1.post-theme
-                  - novation.novation_concepts.each do |concept|
-                    %span.tag-stripes.color_me.active{'data-me-action' => 'background-color', 'data-me-color' => '1', 'data-me-type' => 'imperf'}
-                      %span.tags
-                        = concept.title
+.row
+  - @content.each do |novation|
+    .col-md-6
+      .post.post_type_3.cab
+        .post-header.white
+        .post-body
+          .media
+            .media-left.text-center.gradient2
+              .cab_folder{class: (novation.published? ? 'back1' : 'back2')}
+                %span.percentage.font_white.bold.text-center
+                  = "#{novation.fullness}%"
+              %p.time.text-center
+                = Russian::strftime(novation.created_at,'%d.%m.%Y')
+            .media-body.white
+              %h6
+                = novation.title
+              - if current_user?(novation.user)
+                %span.post_btns_cont
+                  = link_to edit_novation_post_path(@project, novation), class: 'btn btn_reset btn_del a_font_reset', id: "edit_novation_#{novation.id}" do
+                    %i.glyphicon.glyphicon-pencil
+                  = link_to novation_post_path(@project, novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, class: 'btn btn_reset btn_del a_font_reset', id: "destroy_novation_#{novation.id}" do
+                    %i.glyphicon.glyphicon-trash
+        .post-bottom.white
+          .row
+            .col-md-1.col_padding_right_3
+              %small.pull-left{style: 'margin-right: 3px;'} Идеи
+            .col-md-8.col_padding_right_3.themes_cont
+              #stripe1.post-theme
+                - novation.novation_concepts.each do |concept|
+                  %span.tag-stripes.color_me.active{'data-me-action' => 'background-color', 'data-me-color' => '1', 'data-me-type' => 'imperf'}
+                    %span.tags
+                      = concept.title
