@@ -1,7 +1,9 @@
+.col-md-12
+  = render partial: 'shared/create_success', locals: {model_name: 'discontent'}
+
 - content_for :discontent_form do
   = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
     .col-md-12
-      = render partial: 'shared/create_success', locals: {model_name: 'discontent'}
       .divider10
       .content_window.white
         .divider25
@@ -53,13 +55,12 @@
       .row
         .col-md-12
           - if @mechanic_type == 'simple'
-            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_example_discontent{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
               Пример несовершенства
               %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       .divider25
       #imperfs1.content_window.white.collapse.font_lighter_grey
         .divider15
-
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.content')
         %p
