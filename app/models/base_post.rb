@@ -46,6 +46,8 @@ module BasePost
     scope :updated_order, -> { reorder("#{table_name}.updated_at DESC") }
     scope :popular_posts, -> { order('number_views DESC') }
 
+    scope :published, -> { where status: STATUSES[:published] }
+
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
 
     # скоуп для отбора постов с последнего захода на страницу

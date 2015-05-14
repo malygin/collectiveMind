@@ -4,7 +4,7 @@ shared_examples 'base cabinet' do
 
   context 'from procedure to cabinet' do
     before do
-      visit Rails.application.routes.url_helpers.send("#{stage_name}_path", @project)
+      visit Rails.application.routes.url_helpers.send("#{@project.current_stage_type.to_s}_path", @project)
     end
 
     it 'correct link from header' do
@@ -30,7 +30,7 @@ shared_examples 'base cabinet' do
     end
 
     it 'close sticker' do
-      expect(page).to have_content t("cabinet.#{stage_name}_sticker")[0..130]
+      expect(page).to have_content t("cabinet.#{@project.current_stage_type.to_s}_sticker")[0..130]
       expect {
         within :css, '.stages_block' do
           click_link 'close_sticker'

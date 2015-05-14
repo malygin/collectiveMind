@@ -29,8 +29,6 @@ describe 'Cabinet Aspects' do
 
     it 'empty fields - error' do
       expect {
-        fill_in 'core_aspect_post_content', with: ''
-        fill_in 'core_aspect_post_short_desc', with: ''
         click_button 'send_post_aspect'
         within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
@@ -66,15 +64,19 @@ describe 'Cabinet Aspects' do
     end
   end
 
-  it 'created by current user', js: true do
+  it 'created by current user' do
     click_link 'open_my_collect_info_posts'
-    expect(page).to have_content @aspect.content
+    within :css, "form#edit_core_aspect_post_#{@aspect.id}" do
+      expect(page).to have_selector('textarea', text: @aspect.content)
+    end
   end
 
   it 'publish', js: true do
     visit user_content_collect_info_posts_path(@project)
-    click_link "publish_#{@aspect.id}"
-    refresh_page
-    expect(page).not_to have_link "publish_#{@aspect.id}"
+    expect {
+      click_link "publish_#{@aspect.id}"
+      refresh_page
+      expect(page).not_to have_link "publish_#{@aspect.id}"
+    }.to change(Core::Aspect::Post.published, :count).by(1)
   end
 end
