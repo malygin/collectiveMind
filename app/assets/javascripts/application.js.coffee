@@ -179,12 +179,13 @@ $ ->
     @ge = new GanttMaster()
     @ge.init($("#workSpace"))
     ret = JSON.parse($("#ta").val())
-    offset = (new Date).getTime() - ret.tasks[0].start
-    i = 0
-    while i < ret.tasks.length
-      ret.tasks[i].start = ret.tasks[i].start + offset
-      i++;
-    @ge.loadProject(ret);
+    unless ret == null
+      offset = (new Date).getTime() - ret.tasks[0].start
+      i = 0
+      while i < ret.tasks.length
+        ret.tasks[i].start = ret.tasks[i].start + offset
+        i++;
+      @ge.loadProject(ret);
 
   $('button#to_publish_plan').click ->
     save_plan_post('save_plan_post_published')

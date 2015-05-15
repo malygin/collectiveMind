@@ -37,7 +37,7 @@ class Plan::PostsController < PostsController
     if @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
-    @post.post_novations.build plan_post_novation_params
+    @post.post_novations.create plan_post_novation_params
     if params[:plan_post][:published]
       @post.update status: current_model::STATUSES[:published]
     end
@@ -48,15 +48,16 @@ class Plan::PostsController < PostsController
   end
 
   def update
-    @post.update_attributes plan_post_params
+    if @post.update_attributes plan_post_params
+      current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
+    end
     if params[:plan_post][:published]
       @post.update status: current_model::STATUSES[:published]
     end
-    @post.post_novations.first.update_attributes plan_post_novation_params
+    if @post.post_novations.any?
+      @post.post_novations.first.update_attributes plan_post_novation_params
+    end
     respond_to do |format|
-      if @post.save
-        current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
-      end
       format.js
     end
   end

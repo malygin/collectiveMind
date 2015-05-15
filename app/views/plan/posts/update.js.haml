@@ -1,5 +1,7 @@
 - if @post.valid?
   $('.notice_messages').hide();
+  - if @post.published?
+    $('#to_publish_plan').hide();
   $('#plan_notices_#{@post.id} #create_plan_success').fadeIn(5000).fadeOut('slow');
 - else
   $('#plan_notices_#{@post.id} .notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");

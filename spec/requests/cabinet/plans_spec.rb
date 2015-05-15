@@ -13,7 +13,7 @@ describe 'Cabinet Plans' do
 
   it_behaves_like 'base cabinet'
 
-  context 'create with simple form', js: true do
+  context 'create with simple form', js: true, skip: true do
     before do
       click_link 'new_plan_posts_simple'
     end
@@ -70,6 +70,7 @@ describe 'Cabinet Plans' do
     expect {
       click_button 'to_publish_plan'
       refresh_page
+      expect(page).to have_css 'img.publish'
       expect(page).not_to have_button 'to_publish_plan'
     }.to change(Plan::Post.published, :count).by(1)
   end
