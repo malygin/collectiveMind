@@ -10,11 +10,13 @@ FactoryGirl.define do
     association :user, factory: :ordinary_user
     association :project, factory: :core_project
 
-    after(:create) do |post|
-      aspect1 = create :aspect, project: post.project
-      aspect2 = create :aspect, project: post.project
-      create :discontent_post_aspect, post_id: post.id, aspect_id: aspect1.id
-      create :discontent_post_aspect, post_id: post.id, aspect_id: aspect2.id
+    factory :discontent_with_aspects do
+      after(:create) do |post|
+        aspect1 = create :aspect, project: post.project
+        aspect2 = create :aspect, project: post.project
+        create :discontent_post_aspect, post_id: post.id, aspect_id: aspect1.id
+        create :discontent_post_aspect, post_id: post.id, aspect_id: aspect2.id
+      end
     end
   end
 

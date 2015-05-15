@@ -7,7 +7,7 @@ describe 'Cabinet Discontents' do
   before do
     create_project_and_user_for :discontent
     @project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'detailed')
-    @discontent = create :discontent, user: @user, project: @project
+    @discontent = create :discontent_with_aspects, user: @user, project: @project
     sign_in @user
     visit cabinet_stage_url
   end
