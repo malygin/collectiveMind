@@ -1,119 +1,7 @@
 ---
 en:
-  activerecord:
-    attributes:
-      concept/post:
-        actors: "Кто будет делать иначе?"
-        content: "Что будет иначе?"
-        goal: "Суть идеи"
-        impact_env: "Чьи интересы будут затронуты?"
-        title: "Название идеи"
-      concept/post_aspect:
-        content: A2 field
-        name: A1 field
-        title: Short Title field
-      core/aspect/post:
-        content: "Название аспекта"
-        short_desc: "Обоснование аспекта"
-      discontent/post:
-        content: What is that you do not like about the current situation? field
-        discontent_post_aspects: Aspects field
-        what: "На каком этапе деятельности (бизнес процесса) это происходит?"
-        whend: When does it happen? field
-        whered: Where is it located? field
-      group:
-        description: "Описание группы"
-        name: "Название группы"
-      group_task:
-        description: "Описание задачи"
-        name: "Название задачи"
-      knowbase/post:
-        content: "Описание"
-        title: "Название"
-      novation/post:
-        approve_status: Approve status
-        confidence: "Об уверенности в проекте"
-        confidence_commands: "Уверены ли вы в поддержке руководства и сотрудников  Компании?"
-        confidence_negative_results: "Могут ли появиться негативные последствия в связи с реализацией проекта? Если «да», то какие и почему?"
-        confidence_remove_discontent: "Вы уверены, что реализация пакета идей устранит несовершенства. Если «нет», то, по каким причинам?"
-        content: Content
-        members: "Об участниках"
-        members_education: "Нужно ли обучение членов команды для повышения квалификации? Если «да», то чему надо учить?"
-        members_execute: "Готовы ли вы сами руководить реализацией этого пакета идей? Если нет, то кого вы считаете нужным назначить руководителем? Впишите имя и фамилию."
-        members_motivation: "Все ли члены команды будут достаточно мотивированы для этой работы?"
-        members_new: "Надо ли привлекать дополнительных людей в Компанию для реализации этого пакета идей?"
-        members_who: "Кого вы считаете нужным включить в команду для реализации этого пакета идей?"
-        project: "О пакете"
-        project_change: "Опишите кратко, в чем будет состоять изменение в работе (бизнес-процессах, стратегии) после реализации пакета идей? Представьте  образ будущего."
-        project_goal: "Какие цели планируется достичь? Опишите, насколько это возможно, используя концепцию SMART"
-        project_members: "Кто непосредственно получит выгоду от достижения этих целей?"
-        project_results: "Какие результаты будут получены непосредственными выгодополучателями?"
-        project_time: "Сколько месяцев потребуется на реализацию пакета идей?"
-        resource: "О ресурсах"
-        resource_commands: "Считаете ли вы нужным привлечь к этой работе смежные подразделения или команды? Если «да» , то какие?"
-        resource_competition: "Предполагаете ли вы, что будет конкуренция за ресурсы между вашей командой и другими командами? Если «да», то поясните, каких ресурсов может быть недостаточно."
-        resource_external: "Какие внешние ресурсы (партнеры, технологии, оборудование, услуги) необходимы для реализации пакета идей?"
-        resource_financial: "Какие финансовые ресурсы необходимы для реализации пакета идей? Опишите ключевые статьи затрат и, если возможно, ориентировочно необходимую сумму."
-        resource_internal: "Какие внутренние материально-технические и технологические ресурсы Компании необходимы для реализации пакета идей?"
-        resource_support: "Уверены ли вы в достаточной поддержке со стороны привлеченных подразделений и команд? Если «нет», то опишите в чем причина."
-        status: Status
-        title: "Название пакета"
-      plan/post_novation:
-        approve_status: Approve status
-        confidence: "Риски реализации"
-        confidence_commands: "В Компании не поддерживаются изменения, связанные с реализацией проекта"
-        confidence_negative_results: "Возможны негативные последствия в связи с реализацией проекта"
-        confidence_remove_discontent: "Полезный эффект проекта возможно не будет достигнут"
-        content: Content
-        members: "Риски"
-        members_education: "Квалификации участников проекта не позволяет достичь необходимых  результатов"
-        members_execute: "Потенциальный руководитель"
-        members_motivation: "Участники проекта слабо вовлечены в работу над проектом"
-        members_new: "Недостаточно  человеческих ресурсов"
-        members_who: "Потенциальная  команда"
-        project: "Описание проекта"
-        project_change: "Краткое описание Проекта (усовершенствования)"
-        project_goal: "Цели и ожидаемые результаты"
-        project_members: "Для кого этот проект (выгода)"
-        project_results: "Ожидаемые результаты"
-        project_time: "Длительность проекта"
-        resource: "Ресурсные риски"
-        resource_commands: "Привлекаемые смежные подразделения и команды"
-        resource_competition: "Высокая конкуренция за ограниченные ресурсы Компании"
-        resource_external: "Необходимые внешние ресурсы"
-        resource_financial: "Необходимые финансовые ресурсы"
-        resource_internal: "Необходимые технические ресурсы"
-        resource_support: "Нет поддержки проекта со стороны  смежных  подразделений и команд"
-        status: Status
-        title: "Название проекта"
-    errors:
-      models:
-        concept/post_aspect:
-          attributes: Attributes
-        discontent/post:
-          attributes: Attributes
-        knowbase/post:
-          attributes: Attributes
-        user:
-          attributes:
-            email:
-              blank: Please enter your email
-            password:
-              blank: Please enter your password
-              confirmation: Incorrect password
-              too_short: The password is too short
   analytic:
     graph_visits: Graph visits
-  aspect:
-    content: Content
-    content_business: "Бизнес определение аспекта"
-  cabinet:
-    collect_info_posts_sticker: "Предложите название нового аспекта. В поле «Обоснование» объясните, почему этот аспект необходим."
-    concept_posts_sticker: "Ваша идея – это образ желаемого будущего. Понять, чем желаемое будущее отличается от текущей ситуации, вам помогут наши вопросы."
-    discontent_posts_sticker: "Опишите несовершенство в свободной форме или воспользуйтесь вспомогательной техникой для поиска несовершенств. Вы можете добавить неограниченное количество несовершенств. Удачи!"
-    novation_posts_sticker: |
-      При составлении пакета постарайтесь выбрать из списка те идеи, которые разумно реализовывать одновременно, поскольку они затрагивают:</br> • изменения одних и тех же элементов деятельности (бизнес-процесса, стратегии и т.д.);</br> • деятельность одних и тех же людей;</br> • интересы одних и тех же сторон.</br>
-    plan_posts_sticker: "Предложите проект"
   confirm:
     accept: "Точно?"
     delete_aspect: "Удалить тему?"
@@ -122,206 +10,56 @@ en:
     delete_discontent: Delete discontent?
     delete_group: Delete group?
     delete_group_task: Delete?
-    delete_knowbase: "Удалить статью?"
     delete_news: Delete news?
     delete_note: "Удалить замечание?"
     delete_novation: Delete?
     delete_plan: "Удалить план?"
-    delete_stage: "Удалить этап?"
-  date:
-    common_abbr_day_names:
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
-    common_abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - June
-    - July
-    - Aug
-    - Sept
-    - Oct
-    - Nov
-    - Dec
-    common_day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    common_month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-    formats:
-      default: "%d.%m.%Y"
-      long: "%d %B %Y"
-      short: "%d %b"
-    order:
-    - :day
-    - :month
-    - :year
-    standalone_abbr_day_names:
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
-    standalone_abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - June
-    - July
-    - Aug
-    - Sept
-    - Oct
-    - Nov
-    - Dec
-    standalone_day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    standalone_month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-  devise:
-    account: "Зайдите в ваш аккаунт!"
-    account_new: Create a new account
-    auth: "Авторизуйтесь пожалуйста!"
-    change_password: Change password
-    forget: Forgot your password?
-    ignor: If you did not send the request, please ignore this message.
-    instr: Send instructions
-    mailer: "Кто-то (вероятнее все вы) послал запрос на восстанволение пароля на сайте http://mass-decision.ru"
-    memory: Remember me
-    regard: Yours, MASSDECISION™ team
   errors:
     messages:
       not_saved: Not saved
   form:
     add_more: "Добавить еще одно"
     aspect:
-      create_success: "Аспект создан!"
-      desc: Please enter the description of the subject
-      edit_success: "Вы успешно отредактировали аспект"
-      name: Please enter the title of the subject
-      new_success: "Вы успешно создали аспект"
       status_main: Main
       status_other: Secondary
-      title: New subject addition
-      user_content_success: "Вы успешно отредактировали аспект"
     cancel: "Отмена"
     close: "Закрыть"
     comment_answer: "Ваш комментарий или вопрос"
     comment_promt: "Ваш комментарий"
     comment_success: "Комментарий успешно добавлен"
     concept:
-      actors: "Кто будет делать иначе?"
-      add_desc: Description
       add_desc_btn: Add a description
       add_desc_btn_desc: Adds a field for a description of a corresponding resource or a tool
-      add_mean: Tool
       add_mean_btn: Add a tool
       add_mean_btn_desc: Adds a new tool field
       add_res_btn: Add a resource
       add_res_btn_desc: Adds a new resource field
-      add_success: The shortfall added successfully
       cond: Please describe future functioning of  your suggested change, including description of associated conditions and tasks.
-      cond_h: How will your suggested change function in the future?
       cond_res: What resources will be required to keep the suggested change functioning?
-      cond_s: What are the tools required to create the resources?
-      content: "Что будет иначе?"
       control: Who will control development and support of proper conditions and prevention of negative side effects, and how will it be done?
       control_res: What resources will be required for this control?
-      control_s: What tools are required to create the resources?
-      create_success: Your suggested change was added successfully. You can add another change or go to the list of changes.
       del_mean_btn: "Удалить средство"
-      del_res: Remove
       del_res_btn: Remove a resource
       del_res_btn_desc: Removes a corresponding resource or a tool
-      edit_success: "Ваша идея успешно отредактирована!"
-      goal: "Суть идеи"
-      has_one: Please choose at least one shortfall that will be solved by your suggested change!
-      impact_env: "Чьи интересы будут затронуты?"
       mean_desc_promt: "Пояснение к средству"
       mean_promt: "Введите свое средство или выберите из списка"
       negative: What negative side effects associated with support of conditions and tasks may arise in the future?
       negative_h: What negative side effects are possible?
       negative_res: What resources will be required to prevent these effects?
-      negative_s: What tools are required to create these resources?
-      new_success: "Ваша идея успешно добавлена!"
       novation_how: Please explain how your suggested change will improve the current situation.
       novation_what: Please describe the new factor(s) acting in the future to resolve the shortfall.
-      obstacles_bc: What may prevent future efficient functioning of the resources from sections B and C, and what measures are suggested to deal with it?
       obstacles_bcd: What may prevent future efficient functioning of the resources from sections B, C and В, and what measures are suggested to deal with it?
       problems: Please prove that the effect brought by your suggested change will be worth of associated material and labor costs.
-      problems_h: Is your suggested change practical and realistic?
       reality: Please justify that implementation of your suggested change will not involve major obstacles.
       res_buttons: Button Assignments
       res_desc_promt: A resource explanation
       res_promt: Please enter your resource or choose from the list
       resources_rules: You can add resources of the shortfall functioning, their descriptions and descriptions of the tools for their achievement
-      rule_1: Please enter the title of suggested change and fill A1 field
-      rule_2: Please add the shortfalls solved by your suggested change
-      rule_3: You can specify solvability level for any added shortfall
-      rule_4: and flag the shortfalls from the group solved by the suggested change
-      rule_5: After that, you can fill the remaining fields
-      rule_6: Please do not forget to specify solvability level of the chosen shortfalls
-      rule_7: and flag the shortfalls from the group solved by the suggested change
-      rules: 'Change Template: the Rules'
-      select_discontents: Please choose the shortfalls solved by your change
-      select_promt: What other shortfalls are solved by your suggested change?
-      solve_discontents: Removable Shortfalls
       title: Short title of the suggested change
       title_promt: Please enter short title of the suggested change
-      update_success: Your suggested change was modified successfully. You can now review your entry or go to the list of suggested changes.
     cond_res: Cond res
     discontent:
       create_success: Your shortfall was added successfully. You can add another shortfall or go to the list of shortfalls.
-      edit_success: "Ваше несовершенство успешно отредактированно! Вы можете перейти к его просмотру или к просмотру списка несовершенств."
-      examples: Examples
-      field_content: Name of discontent
       field_what: Field what
       field_what_promt: "Отрицательное действие, явление, установление, черта"
       field_when: Field when
@@ -329,14 +67,12 @@ en:
       field_where: Field where
       field_where_promt: "Место, организация, общность, в которой это происходит"
       group: Addition of a new group of shortfalls
-      new_success: "Ваше несовершенство успешно добавлено! Вы можете добавить еще одно или перейти к просмотру списка несовершенств."
       select_aspect: What aspect does your shortfall belong to?
       select_aspect_prompt: Please choose the aspect
       select_style: Please choose the type of shortfall
       style_negative: Present faults
       style_nun: Not determined
       style_positive: Absent benefits
-      title: Shortfall addition form
       update_success: Your shortfall was modified successfully. You can add another shortfall or go to the list of shortfalls.
       what: What
       when: When
@@ -415,37 +151,13 @@ en:
       fail_name: "Заполните название статьи"
       new_post: "+добавить статью"
       post_success: "Статья успешно добавлена"
-      save_notice: "Для сохранения статьи:"
       sort_success: "Список успешно обновлен"
     new: "Сохранить и выйти"
     notes: "Замечания:"
-    novation:
-      edit_success: "Ваш пакет успешно отредактирован!"
-      new_success: "Ваш пакет успешно добавлен!"
     plan:
-      action:
-        add: "Добавление мероприятия к нововведению:"
-        add_res: "Добавить ресурс"
-        date_begin: "Дата начала реализации"
-        date_end: "Дата окончания реализации"
-        desc: "Описание мероприятия"
-        desc_promt: "Введите описание мероприятия"
-        desc_res: "Для функционирования выбранного нововведения в будущем ему будут are required следующие resources:"
-        desc_short: "Опишите подробно мероприятие"
-        inphase: "в рамках этапа:"
-        name: "Название мероприятия"
-        name_promt: "Введите название мероприятия"
-        name_short: "Короткое название мероприятия"
-        new: "Добавить мероприятие"
-        res_desc: "Пояснение к ресурсу"
-        res_promt: "Введите свой ресурс или выберите из списка"
-        title: "Мероприятия по реализации"
-        title_full: "Мероприятия по реализации нововведения"
-        title_res: Are requiredе resources
       actions: Plan of actions
       add_action: "Запланировать мероприятие"
       add_concept: Add your change
-      add_est: "+ Add evaluation"
       concept:
         add: "Добавлено"
         add_empty: "Добавить пустое нововведение"
@@ -464,51 +176,25 @@ en:
         update_success: "Нововведение успешно отредактировано"
       concepts: Changes
       desc: Project description
-      desc_future: Please describe your vision of the future of your project
-      edit_success: "Проект успешно обновлен"
       essay: 'Project essay: explanations and grounding'
-      est_easy: "Упрощенная оценка"
-      est_normal: Standard evaluation
-      goal_promt: Please try to present the essence of your project briefly while attracting attention of other participants
-      goal_promt_1: 'The goal: what is the gain from your project? Why would the implementers be interested?'
-      goal_promt_2: 'Methods, tools and other resources:  как, при помощи чего эта выгода будет получаться?'
-      goal_promt_3: 'Implementation phasing: what are you going to start with, what comes next etc.'
       name: Project title
-      new: "+ Add your project"
-      new_success: "Проект успешно создан"
-      save: Save and go to adding stages
       short_desc: Short description of the project
       stage:
         actions: "Мероприятия этапа"
-        concepts: "Нововведения этапа"
-        date_begin: "Дата начала реализации"
-        date_end: "Дата окончания реализации"
-        desc_future: "Опишите ваше видение проекта в будущем в рамках данного этапа"
         doc: "Этап"
-        essay: "Эссе по этапу"
-        name: "Название этапа"
-        name_promt: "Введите название этапа"
-        name_short: "Короткое название этапа"
-        new: "Добавить этап в проект"
-        title: "Добавление этапа в проект"
       stages: Project stages
-      study: Explanations and grounding
-      update_success: The project was successfully updated
     project:
       closed: Classified
       club: For club members
       code: "Код"
       color: "Цвет"
-      demo: Demo
       desc: Description
       edit: Procedure modification form
       name: Title
       new: New procedure creation form
       opened: Open
-      prepare: Preparatory
       project_type: Type procedure
       short_desc: Short description
-      test: Test
       type_access: Procedure type
     save: "Сохранить"
     save_load: "Сохранение..."
@@ -516,13 +202,6 @@ en:
     select_topic: "Выберите тему записи"
     send: "Отправить"
     user:
-      avatar: "Выберите файл для аватара"
-      email: "Почта"
-      name: "Имя"
-      phone: Phone
-      skype: Skype
-      surname: "Фамилия"
-      title: "Отредактируйте информацию о себе"
       update: Save
     user_content: "Сохранить"
   groups:
@@ -533,47 +212,8 @@ en:
     groups: Groups
   journal:
     add_anonym_discontent: Add anonym discontent
-    add_aspect: "добавил(а) тему"
-    add_award: "заработал(а) достижение"
-    add_comment: "добавил(а) комментарий:"
-    add_concept: "добавил(а) нововведение"
-    add_discontent: "добавил(а) несовершенство  "
-    add_note: "добавил(а) замечание к"
-    add_plan: "добавил(а) проект"
-    add_reflec: "добавил(а) свою рефлексию об этапе"
-    add_score: "вы получили  #{count} баллов за несовершенство"
-    add_score_improve: "вы получили  #{count} баллов за то, что вашу проблему доработали в несовершенство "
-    as_discuss: " как требующий обсуждения"
-    as_discuss_it: " как требующее обсуждения"
-    disscuss_comment: "выделил(а) комментарий:"
-    disscuss_dis: "выделил(а) несовершенство"
-    edit_concept: "отредактировал(а) нововведение"
-    edit_discontent: "отредактировал(а) несовершенство"
-    edit_plan: "отредактировал(а) проект"
-    edit_reflec: "отредактировал(а) рефлексию"
-    my_award: "вы заработали достижение! Продолжайте в том же духе!"
-    my_disscuss_comment: "выделил(а) ваш комментарий:"
-    my_disscuss_dis: "выделил(а) ваше несовершенство"
-    other: "что то другое"
-    score_comment: "получил(а) баллы за полезный комментарий "
-    score_essay: "получил(а)  #{count} баллов за эссе"
-    score_first_stage: "получил(а)  #{count} баллов за участие в сборе информации"
-    score_use: "получил(а) баллы за полезный материал "
-    self_score: "вы получили #{count} баллов за полезный комментарий!"
-    to_aspect: "к теме:"
-    to_concept: "к нововведению"
-    to_discontent: "к несовершенству"
-    to_my_concept: "к вашему нововведению"
-    to_my_discontent: "к вашему несовершенству"
-    to_my_plan: "к вашему проекту"
-    to_my_reflec: "к вашей рефлексии"
-    to_plan: "к проекту"
-    to_reflec: "к рефлексии"
-    to_reply: "в ответ на ваш"
-    to_self_aspect: "к вашей теме:"
   link:
     add: "Добавить"
-    add_record: "+ Добавить"
     back: "Назад"
     back_list: Back to списку
     back_proc: Back to процедуре
@@ -584,28 +224,18 @@ en:
     go_show: "Перейти к просмотру"
     go_to_project: "Перейти к процедуре"
     issue: "Выдано!"
-    know_more: "Узнать больше!"
     more: "подробнее"
-    move: "Перейти"
-    new_aspect: "+ Добавить новую тему"
-    new_project: "Создать проект"
     phone: "тел."
-    profile: "Профиль"
     remove: "Убрать"
-    to_work: "Приступить к работе!"
     top: "наверх"
-    users: "Участники"
   menu:
-    about: O проекте
     account: Profile
     analytics: "Аналитика"
     base_knowledge: Knowledge Data Base
     general_news: "Общие новости"
     general_rating: "Общий рейтинг"
     help: Help
-    help_note: "Посмотреть помощь по стадии"
     help_stage: Stage Help
-    journal_clear: Clear
     journal_count:
       few: and %{count} similar results
       one: and one similar result
@@ -616,43 +246,15 @@ en:
     list_groups: List of gorups
     list_projects: Project List
     main: Main Page
-    news: News
-    news_from_expert: News from expert
     notice_edit: Edit notice
     profile_edit: Edit profile
-    raiting: Rating
-    raiting_rc: Club Rating
     reflection_stage: Stage Analysis
-    search: Search
-    search_text: I am looking for…
     settings:
-      admin_set_1: Go to Voting for Subjects
-      admin_set_10: Back to Discussion on Groups
-      admin_set_11: Start Gathering Changes
-      admin_set_12: Back to Voting for Shortfalls
-      admin_set_13: Start Voting for Changes
-      admin_set_14: Back to Gathering Changes
-      admin_set_15: Start Gathering Projects
-      admin_set_16: Back to Voting for Changes
-      admin_set_17: Start Evaluation
-      admin_set_18: Back to Gathering Projects
-      admin_set_19: Start Voting for Projects
-      admin_set_2: Back to Gathering Subjects
-      admin_set_20: Back to Evaluation
-      admin_set_21: Finish the Procedure
-      admin_set_3: Start Gathering Shortfalls
-      admin_set_4: Back to Voting for Subjects
-      admin_set_5: Start Grouping of Shortfalls
-      admin_set_6: Back to Gathering Shortfalls
-      admin_set_7: Start Discussion on Groups
-      admin_set_8: Back to Grouping of Shortfalls
-      admin_set_9: Start Voting for Shortfalls
       settings_admin: Admin Settings
       settings_title: Settings
     sign_in: Sign in
     sign_out: Sign out
     sign_up: Sign up
-    switch_procedure: Go to
     user_analytic: User analytic
     vote_result: "Результаты голосования"
   my:
@@ -664,64 +266,33 @@ en:
   news:
     body: Full text
     title: Announce
-  proc:
-    collect_info_discuss_popover: "Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br> Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br> Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них."
-    collect_info_questions_0_popover: "Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br> Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br> Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!"
-    collect_info_questions_1_popover: "Еще раз прочитайте базу знаний и ответьте на несколько несложных вопросов на ее понимание."
-    concept_posts_popover: "Идеи, предложенные на этой стадии, в дальнейшем будут объединяться в пакеты."
-    discontent_posts_popover: "Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными."
-    novation_posts_popover: "Здесь могла быть подсказка, но пока ее нет!"
-    plan_posts_popover: "Здесь могла быть подсказка, но пока ее нет!"
   project_settings:
     success_update: Dates successful update
   show:
     activity: "Активность:"
     add_score: "Выдать баллы"
     all_from_post: "Всего за пост:"
-    answer: "Ответить"
-    aspect:
-      new: "+ Добавить новую тему"
-      title: "Аспект:"
     back_list_proc: Back to списку процедур
     close_proc: "закрыта"
     commenting: "Комментировать"
     completed_proc: "Завершена"
     concept:
-      actions: "Деятельность"
-      actors: "Деятели"
-      add_concept: "Добавить нововведение"
-      add_my_concept: "Добавить свое решение"
       check: "Проверено"
       check_now: "Проверяется"
       comments: "Комментарии к нововведению"
-      complite: "несовершенство решается"
       complite_1: "в незначительной мере"
       complite_2: "в значительной мере"
       complite_3: "полностью"
       desc_res: "Пояснение"
-      fullness: "Заполненность"
-      impact_env: "Воздействие на среду"
-      impact_group: "Воздействие на целевую аудиторию"
       name: "Название"
       name_res: "Название"
       not_use: "не определено"
       notes: "Замечания"
-      proposed_solutions: "Предложенные решения"
       solved: "Решаемость"
-      solved_discontent: "Решаемое несовершенство:"
-      solved_others_discontents: "Другие решаемые несовершенства:"
-      solved_problem: "Решаемая проблема"
-      status: "Статус"
-      title: "Нововведение"
-      title_plural: "Нововведения"
-      title_plural_0: "Новые идеи!"
-      tools: "Ресурсы и инструменты"
-      view_other_concepts: "Смотрите также другие решения:"
     demo_proc: "демонстрационная"
     desc: "Описание:"
     discontent:
       add_group_success: "Несовершенство успешно добавлено в группу"
-      add_required: "+ Добавить обязательное несовершенство"
       added_group: "Добавлено в группу"
       complite: "несовершенство решается "
       complite_1: "частично"
@@ -732,26 +303,18 @@ en:
       edit_group: "Редактировать группу"
       grouped: "Группа"
       grouped_success: "Несовершенство сделано группой"
-      groups: "Группы несовершенств"
-      new_group: "Добавить новую группу"
-      origin: "Исходные"
       remove_from_group: "Удалить из объединения"
       required: "Добавлено"
       required_revert: "Несовершенство возвращено в обычные"
       required_success: "Несовершенство добавлено в обязательные"
       select_prompt: "Добавьте несовершенство"
-      title: "Несовершенства"
       ungroup: "Разгруппировать"
       union: "Объединяет:"
-      unions: "Объединенные"
     discuss: "ТРЕБУЕТ ОБСУЖДЕНИЯ"
     essay:
       comment: "Комментарии к рефлексии"
       new_essay: "Добавить свой отзыв об этапе"
       title: "Рефлексия по этапу:"
-    expert: "Эксперт"
-    fill_content_paper: "Заполните поле контента"
-    fill_name_paper: "Заполните название статьи"
     general_analytics: "ВСЯ АНАЛИТИКА"
     general_news: "ВСЕ НОВОСТИ"
     general_rating: "ВСЕ УЧАСТНИКИ"
@@ -759,17 +322,13 @@ en:
       few: "Идет %{count} этап"
       one: "Идет 1 этап"
       other: "Идет %{count} этап"
-    ground: "Обоснование:"
     idea: "Идея"
     important: "ВАЖНОЕ"
     improve:
       concept: "Доработано до нововведения"
       discontent: "Доработано до несовершенства"
-      ideas: "Неоформленные идеи"
-      name: "Доработать"
       name_concept: "Сформулировать как нововведение"
       name_discontent: "Сформулировать как несовершенство"
-      problem: "Неоформленные проблемы"
     improved: "Доработано из"
     improver: "Источник"
     imrove_deal: "предложения "
@@ -782,16 +341,7 @@ en:
         other: "%{count} сообщений"
       team: "Команда проекта"
       title: "К вашему материалу на портале mass-decision.ru добавлен комментарий"
-    name: "Название"
     note: "замечание"
-    novation:
-      actions: "Деятельность"
-      actors: "Участники"
-      impact_env: "Внешняя среда"
-      impact_group: "Целевая аудитория"
-      negative: "Контр-негатив"
-      tools: "Инструменты"
-      what: "Опишите, что новое появится в будущем, чтобы улучшить положение."
     open_proc: "открыта с возможностью участвовать"
     open_view_proc: "открыта для просмотра"
     prepare_proc: "Идет подготовка к процедуре"
@@ -799,11 +349,8 @@ en:
     project:
       closed: "Закрытые процедуры"
       club: "Клубные процедуры"
-      demo: "Демо процедуры"
       new: "Создать проект"
       opened: "Открытые процедуры"
-      prepare: "Подготовка"
-      test: "Тестовые процедуры"
     rating:
       sort: "Показан рейтинг"
       sort_analysts: "Аналитиков"
@@ -811,34 +358,20 @@ en:
       sort_generators: "Генераторов идей"
       sort_voters: "Оценщиков"
       title: "Рейтинг участников"
-    reset: "Отменить"
     revert_score: "Забрать баллы"
-    sort: "Показана сортировка,"
-    sort_default: "по умолчанию"
-    sort_vote_asc: "по голосам(убыванию)"
-    sort_vote_desc: "по голосам(возрастанию)"
-    status: "Статус"
     support: "Поддержать"
     to_work:
       fifth_title: '5 этап: Оценка проектов. Ознакомьтесь перед началом работы!'
-      first_title: '1 этап: Сбор информации. Ознакомьтесь перед началом работы!'
       fourth_title: '4 этап: Создание проектов. Ознакомьтесь перед началом работы!'
       second_title: '2 этап: Сбор несовершенств. Ознакомьтесь перед началом работы!'
       third_title: '3 этап: Сбор нововведений. Ознакомьтесь перед началом работы!'
-    transfer_success: "Перенесено"
     unlike: "Против:"
     user:
-      activity: "Активность"
       added: "Добавленные"
       all_score: "Всего:"
       analyst: "Аналитик"
-      aspects: "Темы"
-      award: "Достижения (%{num} из %{all})"
       club_rating: "Клубный рейтинг участников"
-      concepts: "Нововведения"
-      discontents: "Несовершенства"
       generator: "Генератор идей"
-      not_group: "Не состоит ни в одной группе"
       others: "Пользователи"
       searsh_users_promt: "Введите имя или email пользователя и нажмите Enter"
       select_users: "Выберите участников для закрытой процедуры"
@@ -846,7 +379,6 @@ en:
     view_more: "Посмотреть еще"
     votes: "Голосов:"
     votes_users: "Голосовавших:"
-    warning: "Обратите внимание!"
     without_name: "Без названия"
   stages:
     comments:
@@ -854,40 +386,12 @@ en:
       one: 1 ответ
       other: "%{count} ответов"
     concept: Gathering Changes
-    concept_title: "<h5><b>The main goal of the stage</b></h5> is to find the solutions for all identified shortfalls. <br/><b>The participants are encouraged to</b> bring forward any ideas and suggestions.<br/> <b>It is recommended to</b><br> to fill all provided fields in order to describe the idea as  accurately as possible. <br> If needed, the shortfalls should be modified on a moderator’s request."
-    concepts:
-      few: "%{count} changes"
-      one: One change
-      other: "%{count} changes"
     discontent: Gathering Shortfalls
-    discontent_title: "<h5><b>The main goal of the stage</b></h5> is to identify shortfalls for every aspect. <br/> <b>The participants are encouraged to</b> add as many shortfalls as possible.<br/> <b>It is recommended to</b><br> lay down the shortfalls in a short and clear manner while using the comments field for all explanations. <br> If needed, the shortfalls should be modified on a moderator’s request."
-    discontents:
-      few: "%{count} shortfalls"
-      one: One shortfall
-      other: "%{count} shortfalls"
-    essays:
-      few: "%{count} feedbacks"
-      one: One feedback
-      other: "%{count} feedbacks"
     estimate: Estimation of Projects
-    estimates:
-      few: "%{count} evaluations"
-      one: One evaluation
-      other: "%{count} evaluations"
     glossary: "Глоссарий"
     intro: Intro
     life_tape: Data Gathering
-    life_tape_title: "<h5><b>The main goal of the stage</b></h5> is to introduce the users to different aspects presented in the Knowledge Data Base. <br/><b>The participants are encouraged</b> to hold active discussions on the aspects and introduce new aspects for consideration. <br/> <b> It is recommended to</b> <br>- ask as many questions as possible to better understand the content of the Knowledge Data Base, <br>- and flag your messages as PROBLEMS or IDEAS for further developing of Shortfalls or Changes, respectively."
     plan: Development of Projects
-    plan_title: "<h5><b>The main goal of the stage</b></h5> is to shape a project within the assigned subject of the procedure. <br/> <b>The participants are encouraged</b> to develop their projects either individually or collectively. <br/> <b>It is recommended to</b><br> - to describe a chosen change in as much detail as possible in the context of the participant’s project <br> - to follow the website manuals and moderators’ instructions."
-    plans:
-      few: "%{count} projects"
-      one: One project
-      other: "%{count} projects"
-    record:
-      few: "%{count} subjects"
-      one: One subject
-      other: "%{count} subjects"
     result: "Подведение итогов"
     stage:
       few: "%{count} Stage"
@@ -903,39 +407,11 @@ en:
     discontent_posts_simple: "+ Несовершенство"
     novation_posts_simple: "+ Пакет"
     plan_posts_simple: "+ Проектное предложение"
-  time:
-    am: am
-    formats:
-      default: "%a, %d %b %Y, %H:%M:%S %z"
-      long: "%d %B %Y, %H:%M"
-      short: "%d %b, %H:%M"
-    pm: pm
   voting:
-    concept:
-      go_list: "Перейти к списку нововведений"
-      pair: "Пара:"
-      select: "Выберите одно из двух нововведений, которое на Ваш взгляд является лучшим решением поставленной проблемы"
-      title: "Голосование за нововведения"
-    discontent:
-      go_list: "Перейти к списку несовершенств"
-      important: "Определение наиболее важных проблем:"
-      important_aspects: "Определение наиболее важных проблем:"
-      name: "Несовершенство:"
-      not_important: "Не важная"
-      title: "Голосование за несовершенства"
-    fail_create: "Ошибка при добавлении! Попробуйте еще раз."
-    fifth_title: '5 этап: Оценка проектов. Голосование.'
     go_reflection: "Перейти к рефлексии"
     have_votes: "Осталось голосов:"
-    lifetape:
-      go_list: "Перейти к списку тем"
-      name: "Определение наиболее важных тем процедуры"
-      select: "Вы можете выбрать %{num} тем(ы), которые на Ваш взгляд являются наиболее важными"
-      title: '1 этап: Сбор информации. Голосование'
     plan:
       go_list: "Перейти к списку проектов"
       select: "Вы можете выбрать %{num} проект, который на Ваш взгляд является лучшим"
       title: "Голосование за проеты"
-    second_title: '2 этап: Сбор несовершенств. Голосование'
     thanks: "Спасибо за участие в голосовании!"
-    vote: "Проголосовать"
