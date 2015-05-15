@@ -308,8 +308,8 @@ shared_examples 'welcome popup' do |stage|
   before do
     @user_check.destroy
     @moderator_check.destroy
-    @user_check_popover.destroy
-    @moderator_check_popover.destroy
+    @user_check_popover.destroy if @user_check_popover
+    @moderator_check_popover.destroy if @moderator_check_popover
     stage_path = Rails.application.routes.url_helpers.send("#{stage}_posts_path", project)
     visit stage_path
   end
@@ -337,8 +337,8 @@ shared_examples 'vote popup' do |status, title, stage|
   before do
     project.update_attributes(status: status)
     if status == 6
-      @post1.update_attributes(status: 4)
-      @post2.update_attributes(status: 4)
+      @post1.update_attributes(status: 2)
+      @post2.update_attributes(status: 2)
     end
     stage_path = Rails.application.routes.url_helpers.send("#{stage}_posts_path", project)
     visit stage_path
@@ -346,6 +346,7 @@ shared_examples 'vote popup' do |status, title, stage|
 
   it 'correct voted', js: true do
     tab = status > 2 ? 1 : 0
+    # @todo title popup
     expect(page).to have_content title
     expect(page).to have_content @post1.content
     expect(page).to have_content @post2.content

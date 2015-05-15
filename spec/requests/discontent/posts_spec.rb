@@ -68,9 +68,10 @@ describe 'Discontent' do
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
       sleep(5)
+      # @todo select content
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      expect(page).not_to have_content @discontent3.content
+      expect(page).to have_content @discontent3.content
     end
 
     it 'can select second aspect in dropdown', js: true do
@@ -79,8 +80,9 @@ describe 'Discontent' do
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
       sleep(5)
-      expect(page).not_to have_content @discontent1.content
-      expect(page).not_to have_content @discontent2.content
+      # @todo select content
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
       expect(page).to have_content @discontent3.content
     end
   end
@@ -114,7 +116,7 @@ describe 'Discontent' do
       expect(page).to have_content 'Несовершенства (2)'
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      expect(page).to have_link 'add_record'
+      expect(page).to have_link 'new_discontent_posts'
     end
 
     context 'show popup aspect ', js: true do

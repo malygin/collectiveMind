@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Completion proc ', skip: true do
+describe 'Completion proc ' do
   subject { page }
 
   let!(:user) { @user = create :user }
@@ -19,8 +19,8 @@ describe 'Completion proc ', skip: true do
     @plan1 = create :plan, user: user, project: project, completion_status: true
     @plan2 = create :plan, user: user, project: project, completion_status: true
 
-    create :plan_novation, plan_post: @plan1.id, novation_post: @novation1.id
-    create :plan_novation, plan_post: @plan2.id, novation_post: @novation1.id
+    create :plan_novation, plan_post: @plan1, novation_post: @novation1
+    create :plan_novation, plan_post: @plan2, novation_post: @novation1
   end
 
   shared_examples 'show list completions' do
