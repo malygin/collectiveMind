@@ -15,16 +15,19 @@ describe 'Plan ' do
     @user_check = create :user_check, user: user, project: project, check_field: 'plan_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'plan_intro'
 
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'plan_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'plan_discuss'
+
     @novation1 = create :novation, user: user, project: project
 
-    @plan1 = create :plan, user: user, project: project
-    @plan2 = create :plan, user: user, project: project
+    @plan1 = create :plan, user: user, project: project, status: 1
+    @plan2 = create :plan, user: user, project: project, status: 1
 
     create :plan_novation, plan_post: @plan1, novation_post: @novation1
     create :plan_novation, plan_post: @plan2, novation_post: @novation1
 
-    @post1 = @novation1
-    @post2 = @novation2
+    @post1 = @plan1
+    @post2 = @plan2
 
     @comment_1 = create :plan_comment, post: @post1, user: user
     @comment_2 = create :plan_comment, post: @post1, comment: @comment_1
@@ -37,31 +40,11 @@ describe 'Plan ' do
 
     it 'have content', js: true do
       expect(page).to have_content 'Проектные предложения (2)'
-      expect(page).to have_content @plan1.name
-      expect(page).to have_content @plan2.name
+      expect(page).to have_content @plan1.content
+      expect(page).to have_content @plan2.content
     end
 
     it_behaves_like 'likes posts'
-  end
-
-  shared_examples 'sort plans' do
-    before do
-      visit plan_posts_path(project)
-    end
-
-    it 'can sort to date' do
-      find(:css, "span#sorter span.sort-1").trigger('click')
-      sleep(5)
-      first(:css, "#tab_novation_plans .plan-block .media-body a").click
-      expect(page).to have_content @plan1.name
-    end
-
-    it 'can sort to popular' do
-      find(:css, "span#sorter span.sort-2").trigger('click')
-      sleep(5)
-      first(:css, "#tab_novation_plans .plan-block .media-body a").click
-      expect(page).to have_content @plan2.name
-    end
   end
 
   shared_examples 'discuss plans' do
@@ -71,9 +54,9 @@ describe 'Plan ' do
 
     it 'have content' do
       expect(page).to have_content 'Проектные предложения (2)'
-      expect(page).to have_content @plan1.name
-      expect(page).to have_content @plan2.name
-      expect(page).to have_link 'add_record'
+      expect(page).to have_content @plan1.content
+      expect(page).to have_content @plan2.content
+      expect(page).to have_link 'new_plan_posts'
     end
 
     context 'show popup plan ', js: true do
@@ -97,8 +80,6 @@ describe 'Plan ' do
     it_behaves_like 'welcome popup', 'plan'
 
     it_behaves_like 'show list plans'
-
-    it_behaves_like 'sort plans'
 
     it_behaves_like 'discuss plans'
   end

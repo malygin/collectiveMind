@@ -20,4 +20,11 @@ FactoryGirl.define do
     association :user
     association :plan_post, factory: :plan
   end
+
+  factory :plan_comment, class: 'Plan::Comment' do
+    sequence(:content) { |n| "plan comment #{n}" }
+
+    association :user, factory: :ordinary_user
+    association :post, factory: :plan
+  end
 end

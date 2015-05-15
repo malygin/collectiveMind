@@ -15,10 +15,13 @@ describe 'Novation ' do
     @user_check = create :user_check, user: user, project: project, check_field: 'novation_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'novation_intro'
 
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'novation_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'novation_discuss'
+
     @concept1 = create :concept, user: user, project: project
 
-    @novation1 = create :novation, user: user, project: project
-    @novation2 = create :novation, user: user, project: project
+    @novation1 = create :novation, user: user, project: project, status: 1
+    @novation2 = create :novation, user: user, project: project, status: 1
 
     create :novation_post_concept, post: @novation1, concept_post: @concept1
     create :novation_post_concept, post: @novation2, concept_post: @concept1
@@ -37,8 +40,8 @@ describe 'Novation ' do
 
     it 'have content', js: true do
       expect(page).to have_content 'Пакеты идей (2)'
-      expect(page).to have_content @novation1.content
-      expect(page).to have_content @novation2.content
+      expect(page).to have_content @novation1.title
+      expect(page).to have_content @novation2.title
     end
 
     it_behaves_like 'likes posts'
@@ -49,17 +52,17 @@ describe 'Novation ' do
       visit novation_posts_path(project)
     end
 
-    it 'can sort to date' do
+    it 'can sort to date', js: true do
       find(:css, "span#sorter span.sort-1").trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .novation-block .media-body a").click
+      first(:css, "#tab_concept_novations .novation-block .post a").click
       expect(page).to have_content @novation1.content
     end
 
-    it 'can sort to popular' do
+    it 'can sort to popular', js: true do
       find(:css, "span#sorter span.sort-2").trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .novation-block .media-body a").click
+      first(:css, "#tab_concept_novations .novation-block .post a").click
       expect(page).to have_content @novation2.content
     end
   end
@@ -69,11 +72,11 @@ describe 'Novation ' do
       visit novation_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content 'Пакеты идей (2)'
       expect(page).to have_content @novation1.content
       expect(page).to have_content @novation2.content
-      expect(page).to have_link 'add_record'
+      expect(page).to have_link 'new_novation_posts'
     end
 
     context 'show popup novation ', js: true do
@@ -83,7 +86,7 @@ describe 'Novation ' do
 
       it 'have content' do
         expect(page).to have_content @post1.title
-        expect(page).to have_content @concept1.content
+        expect(page).to have_content @concept1.title
       end
 
       it_behaves_like 'content with comments'
@@ -103,7 +106,7 @@ describe 'Novation ' do
 
     it_behaves_like 'discuss novations'
 
-    it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей'
+    it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей', 'novation'
   end
 
   # context 'moderator sign in ' do

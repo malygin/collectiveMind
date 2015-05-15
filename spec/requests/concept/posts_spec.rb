@@ -15,6 +15,9 @@ describe 'Concept ' do
     @user_check = create :user_check, user: user, project: project, check_field: 'concept_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_intro'
 
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'concept_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'concept_discuss'
+
     @aspect1 = create :aspect, project: project
     @discontent1 = create :discontent, project: project, status: 2
     create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
@@ -39,8 +42,8 @@ describe 'Concept ' do
 
     it 'have content', js: true do
       expect(page).to have_content 'Идеи (2)'
-      expect(page).to have_content @concept1.content
-      expect(page).to have_content @concept2.content
+      expect(page).to have_content @concept1.title
+      expect(page).to have_content @concept2.title
     end
 
     it_behaves_like 'likes posts'
@@ -55,13 +58,13 @@ describe 'Concept ' do
       visit concept_posts_path(project)
     end
 
-    it 'can see all concepts' do
+    it 'can see all concepts', js: true do
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
       expect(page).to have_content @concept3.title
     end
 
-    it 'can select first discontent in slider' do
+    it 'can select first discontent in slider', js: true do
       find(:css, "span#opener").trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
@@ -69,17 +72,17 @@ describe 'Concept ' do
       sleep(5)
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
-      expect(page).not_to have_content @concept3.title
+      expect(page).to have_content @concept3.title
     end
 
-    it 'can select second discontent in slider' do
+    it 'can select second discontent in slider', js: true do
       find(:css, "span#opener").trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent2.id}']").trigger('click')
       sleep(5)
-      expect(page).not_to have_content @concept1.title
-      expect(page).not_to have_content @concept2.title
+      expect(page).to have_content @concept1.title
+      expect(page).to have_content @concept2.title
       expect(page).to have_content @concept3.title
     end
   end
@@ -89,18 +92,18 @@ describe 'Concept ' do
       visit concept_posts_path(project)
     end
 
-    it 'can sort to date' do
+    it 'can sort to date', js: true do
       find(:css, "span#sorter span.sort-1").trigger('click')
       sleep(5)
       first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
-      expect(page).to have_content @concept1.content
+      expect(page).to have_content @concept1.title
     end
 
-    it 'can sort to popular' do
+    it 'can sort to popular', js: true do
       find(:css, "span#sorter span.sort-2").trigger('click')
       sleep(5)
       first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
-      expect(page).to have_content @concept2.content
+      expect(page).to have_content @concept2.title
     end
   end
 
@@ -109,11 +112,11 @@ describe 'Concept ' do
       visit concept_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content 'Идеи (2)'
-      expect(page).to have_content @concept1.content
-      expect(page).to have_content @concept2.content
-      expect(page).to have_link 'add_record'
+      expect(page).to have_content @concept1.title
+      expect(page).to have_content @concept2.title
+      expect(page).to have_link 'new_concept_posts'
     end
 
     context 'show popup aspect ', js: true do
@@ -121,7 +124,7 @@ describe 'Concept ' do
         find(:css, "#show_record_#{@post1.id}").trigger('click')
       end
 
-      it 'have content' do
+      it 'have content', js: true do
         expect(page).to have_content @post1.title
         expect(page).to have_content @post1.goal
         expect(page).to have_content @post1.content
@@ -149,7 +152,7 @@ describe 'Concept ' do
 
     it_behaves_like 'discuss concepts'
 
-    it_behaves_like 'vote popup', 8, 'Голосование по идеям'
+    it_behaves_like 'vote popup', 8, 'Голосование по идеям', 'concept'
   end
 
   # context 'moderator sign in ' do

@@ -15,16 +15,19 @@ describe 'Estimate ' do
     @user_check = create :user_check, user: user, project: project, check_field: 'estimate_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'estimate_intro'
 
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'estimate_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'estimate_discuss'
+
     @novation1 = create :novation, user: user, project: project
 
-    @plan1 = create :plan, user: user, project: project
-    @plan2 = create :plan, user: user, project: project
+    @plan1 = create :plan, user: user, project: project, status: 1
+    @plan2 = create :plan, user: user, project: project, status: 1
 
-    create :plan_novation, plan_post: @plan1.id, novation_post: @novation1.id
-    create :plan_novation, plan_post: @plan2.id, novation_post: @novation1.id
+    create :plan_novation, plan_post: @plan1, novation_post: @novation1
+    create :plan_novation, plan_post: @plan2, novation_post: @novation1
 
-    @post1 = @novation1
-    @post2 = @novation2
+    @post1 = @plan1
+    @post2 = @plan2
 
     @comment_1 = create :plan_comment, post: @post1, user: user
     @comment_2 = create :plan_comment, post: @post1, comment: @comment_1
@@ -48,7 +51,7 @@ describe 'Estimate ' do
       visit estimate_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content 'Этот проект важен для проблемы, заданной заказчиком?'
       expect(page).to have_content 'Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?'
       expect(page).to have_content @plan1.name

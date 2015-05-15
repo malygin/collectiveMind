@@ -337,8 +337,8 @@ shared_examples 'vote popup' do |status, title, stage|
   before do
     project.update_attributes(status: status)
     if status == 6
-      @post1.update_attributes(status: 4)
-      @post2.update_attributes(status: 4)
+      @post1.update_attributes(status: 2)
+      @post2.update_attributes(status: 2)
     end
     stage_path = Rails.application.routes.url_helpers.send("#{stage}_posts_path", project)
     visit stage_path
