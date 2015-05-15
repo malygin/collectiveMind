@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Concept ', skip: true do
+describe 'Concept ' do
   subject { page }
 
   let!(:user) { @user = create :user }
@@ -16,9 +16,9 @@ describe 'Concept ', skip: true do
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_intro'
 
     @aspect1 = create :aspect, project: project
-    @discontent1 = create :discontent, project: project, status: 4
+    @discontent1 = create :discontent, project: project, status: 2
     create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-    @discontent2 = create :discontent, project: project, status: 4
+    @discontent2 = create :discontent, project: project, status: 2
     create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
 
     @concept1 = create :concept, user: user, project: project

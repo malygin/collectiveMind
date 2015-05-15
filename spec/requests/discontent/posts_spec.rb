@@ -68,6 +68,7 @@ describe 'Discontent' do
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
       sleep(5)
+      # @todo select content
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       expect(page).not_to have_content @discontent3.content
@@ -79,6 +80,7 @@ describe 'Discontent' do
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
       sleep(5)
+      # @todo select content
       expect(page).not_to have_content @discontent1.content
       expect(page).not_to have_content @discontent2.content
       expect(page).to have_content @discontent3.content

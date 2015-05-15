@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Novation ', skip: true do
+describe 'Novation ' do
   subject { page }
 
   let!(:user) { @user = create :user }
@@ -20,8 +20,8 @@ describe 'Novation ', skip: true do
     @novation1 = create :novation, user: user, project: project
     @novation2 = create :novation, user: user, project: project
 
-    create :novation_post_concept, post: @novation1.id, concept_post: @concept1.id
-    create :novation_post_concept, post: @novation2.id, concept_post: @concept1.id
+    create :novation_post_concept, post: @novation1, concept_post: @concept1
+    create :novation_post_concept, post: @novation2, concept_post: @concept1
 
     @post1 = @novation1
     @post2 = @novation2
