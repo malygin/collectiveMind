@@ -18,7 +18,16 @@ module ApplicationHelper
     end
   end
 
-
+  def label_approve_stat(comment)
+    case comment.approve_status
+      when false
+        'label-default'
+      when true
+        'label-success'
+      else
+        'label-default'
+    end
+  end
 
 
   # @todo for stage helper
@@ -265,7 +274,7 @@ module ApplicationHelper
   # необходимость показа приветсвенной модалки или поповера
   #@todo почему бы не возвращать boolean? он там
   def shown_intro(check_field)
-    current_user.user_checks.check_field(@project, check_field).present?
+    current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
   end
 
   # Показывать ли стикер в кабинете?

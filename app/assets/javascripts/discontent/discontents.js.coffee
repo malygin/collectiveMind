@@ -49,10 +49,10 @@ DiscontentCollectionView = Backbone.View.extend
     #    $('#tab_aspect_posts').isotope().isotope('reloadItems')
 
 
-    show_comments_hover()
-    activate_perfect_scrollbar()
-    colors_discontents()
-    post_colored_stripes()
+#    show_comments_hover()
+#    activate_perfect_scrollbar()
+#    colors_discontents()
+#    post_colored_stripes()
     return this
 
   addOne: (discontent)->
