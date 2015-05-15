@@ -1,8 +1,8 @@
 #!/bin/sh
-rubocop
-brakeman
+#rubocop
+#brakeman
 rails_best_practices
-rubycritic
-rake traceroute
-yard
-lol_dba db:find_indexes
+#rubycritic
+#rake traceroute
+#yard
+#lol_dba db:find_indexes

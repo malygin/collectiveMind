@@ -62,10 +62,11 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'i18n-tasks'
+  gem 'spring', '1.3.6'
+
 end
 
 group :development do
-  gem 'spring'
   gem 'rubocop'
   gem 'ruby-prof'
   gem 'rspec-prof'
