@@ -8,11 +8,11 @@ FactoryGirl.define do
     sequence(:actors) { |n| "actors #{n}" }
     sequence(:impact_env) { |n| "impact_env #{n}" }
 
-    status 0
-
-    after :create do |post|
-      discontent = create :discontent_with_aspects, project: post.project, status: BasePost::STATUSES[:approved]
-      create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
+    factory :concept_with_discontent do
+      after :create do |post|
+        discontent = create :discontent, project: post.project, status: BasePost::STATUSES[:approved]
+        create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
+      end
     end
   end
 

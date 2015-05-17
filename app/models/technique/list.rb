@@ -9,7 +9,7 @@ class Technique::List < ActiveRecord::Base
     "#{stage}_#{code}"
   end
 
-
+  # Формируем массив из всех техник, для отображения в форме редактирования проекта
   def self.all_in_array
     result = {}
     all.each do |tech|
@@ -18,5 +18,4 @@ class Technique::List < ActiveRecord::Base
     end
     result
   end
-
 end
