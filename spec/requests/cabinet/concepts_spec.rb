@@ -7,7 +7,8 @@ describe 'Cabinet Concepts' do
   before do
     create_project_and_user_for :concept
     @discontent = create :discontent, user: @user, project: @project
-    @concept = create :concept, user: @user, project: @project
+    @discontent_2 = create :discontent, user: @user, project: @project
+    @concept = create :concept_with_discontent, user: @user, project: @project
     sign_in @user
     visit cabinet_stage_url
   end
@@ -26,8 +27,17 @@ describe 'Cabinet Concepts' do
         fill_in 'concept_post_content', with: 'content concept'
         fill_in 'concept_post_actors', with: 'actors'
         fill_in 'concept_post_impact_env', with: 'impact environment'
-        find('#open_discontents').click
-        find("input#concept_post_discontents_#{@discontent.id}").click
+        find(:xpath, "//a[@id='open_discontents']").click
+        within :css, '.unchecked_items' do
+          execute_script("$('input#concept_post_discontents_#{@discontent.id}').show()")
+          execute_script("$('input#concept_post_discontents_#{@discontent_2.id}').show()")
+          find("input#concept_post_discontents_#{@discontent.id}").click
+          find("input#concept_post_discontents_#{@discontent_2.id}").click
+        end
+        within :css, '.checked_items' do
+          find("input#concept_post_discontents_#{@discontent_2.id}").click
+        end
+
         click_button 'send_post_concept'
       end
 
