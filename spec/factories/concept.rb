@@ -9,7 +9,7 @@ FactoryGirl.define do
     sequence(:impact_env) { |n| "impact_env #{n}" }
 
     after :create do |post|
-      discontent = create :discontent_with_aspects, project: post.project, status: BasePost::STATUSES[:approved]
+      discontent = create :discontent, project: post.project, status: BasePost::STATUSES[:approved]
       create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
     end
   end
@@ -26,7 +26,7 @@ FactoryGirl.define do
 
   factory :concept_voting, class: 'Concept::Voting' do
     association :user
-    association :discontent_post, factory: :discontent_with_aspects
+    association :discontent_post, factory: :discontent
     association :concept_post, factory: :concept
   end
 end
