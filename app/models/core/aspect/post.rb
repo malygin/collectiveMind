@@ -58,14 +58,6 @@ class Core::Aspect::Post < ActiveRecord::Base
         .vote_top(revers)
   end
 
-  # # вывод аспектов по дате последних комментов
-  # def self.sort_comments
-  #   select('core_aspect_posts.*, max(core_aspect_comments.created_at) as last_date').
-  #     joins('LEFT OUTER JOIN core_aspect_comments ON core_aspect_comments.post_id = core_aspect_posts.id').
-  #     group('core_aspect_posts.id').
-  #     reorder('last_date DESC NULLS LAST')
-  # end
-
   def to_s
     self.content
   end
@@ -80,10 +72,6 @@ class Core::Aspect::Post < ActiveRecord::Base
   def aspect_discontent
     Discontent::Post.joins(:post_aspects).where(discontent_post_aspects: {aspect_id: id})
   end
-
-  # def question_complete(user)
-  #   questions.joins(:user_answers).where(collect_info_user_answers: {user_id: user.id}).by_status(0).select('distinct collect_info_questions.id')
-  # end
 
   def color
     color = read_attribute(:color)

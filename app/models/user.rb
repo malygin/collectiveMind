@@ -106,10 +106,6 @@ class User < ActiveRecord::Base
     self.core_project_scores.where('core_project_scores.project_id = ?', project).first
   end
 
-  def answered_for_help_stage?(stage)
-    self.help_posts.pluck(:stage).include? stage
-  end
-
   def to_s
     if self.anonym
       self.nickname
@@ -170,18 +166,6 @@ class User < ActiveRecord::Base
 
   def stat_expert?
     self.role_stat == 3
-  end
-
-  def have_essay_for_stage(project, stage)
-    !self.essay_posts.where(project_id: project, stage: stage, status: 0).empty?
-  end
-
-  def aspects(id)
-    if self.core_aspects.empty?
-      Core::Aspect::Post.where(project_id: id)
-    else
-      self.core_aspects
-    end
   end
 
   def add_score(h={})
@@ -284,49 +268,8 @@ class User < ActiveRecord::Base
       return true
     elsif stage == :novation and project.status == 10 and project.get_free_votes_for(self, 'novation') > 0
       return true
-      # disposts = Discontent::Post.where(project_id: project, status: 4).order(:id)
-      # last_vote = self.concept_post_votings.by_project_votings(project).last
-      # return true if last_vote.nil?
-      # dispost = self.able_concept_posts_for_vote(project, disposts, last_vote)
-      # if dispost
-      #   concept_posts = dispost.dispost_concepts.by_status(0).order('concept_posts.id')
-      #   count_now = self.concept_post_votings.by_project_votings(project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
-      #   unless concept_posts[dispost.id != last_vote.discontent_post_id ? 0 : count_now].nil?
-      #     return true
-      #   end
-      # end
-    elsif stage == :estimate and project.status == 11 and self.voted_plan_posts.by_project(project.id).size == 0
-      return true
     end
     false
-  end
-
-  def able_concept_posts_for_vote(project, disposts, last_vote, num = 0)
-    last_vote = self.concept_post_votings.by_project_votings(project).last if last_vote.nil?
-    unless last_vote.nil?
-      dis_post = last_vote.discontent_post
-      num = disposts.index dis_post
-    end
-    i = num.nil? ? 0 : num
-    while disposts[i].nil? ? false : true
-      discontent_post = disposts[i]
-      concept_posts = discontent_post.dispost_concepts.by_status(0).order('concept_posts.id')
-      if last_vote.nil?
-        if concept_posts.size > 1
-          return discontent_post
-        end
-      elsif discontent_post.id != last_vote.discontent_post_id
-        if concept_posts.size > 1
-          return discontent_post
-        end
-      else
-        count_now = self.concept_post_votings.by_project_votings(project).where(discontent_post_id: last_vote.discontent_post_id, concept_post_aspect_id: last_vote.concept_post_aspect_id).count
-        unless concept_posts[count_now+1].nil?
-          return discontent_post
-        end
-      end
-      i += 1
-    end
   end
 
   def my_journals(project)
@@ -340,7 +283,6 @@ class User < ActiveRecord::Base
     g = events.group_by { |e| [e.first_id, e.type_event] }
     g.collect { |k, v| [v.first, v.size] }
   end
-
 
   def looked_chat
     update_attributes! last_seen_chat_at: Time.now
@@ -365,14 +307,6 @@ class User < ActiveRecord::Base
 
   def project_user_for(project)
     core_project_users.find_by(project_id: project.id)
-  end
-
-  def not_ready_for_concept?(project)
-    if project_user_for(project).nil?
-      false
-    else
-      !project_user_for(project).ready_to_concept
-    end
   end
 
   # аспекты для голосования (необходимые, важные, неважные)
@@ -415,8 +349,8 @@ class User < ActiveRecord::Base
 
   # пакеты за которые пользователь еще не проголосовал
   def unvote_novations_for_vote(project)
-    vote_novations = project.novations.joins(:final_votings).where(novation_votings: {user_id: self.id}).pluck('novation_posts.id')
-    project.novations.where.not(id: vote_novations)
+    vote_novations = project.novations_for_vote.joins(:final_votings).where(novation_votings: {user_id: self.id}).pluck('novation_posts.id')
+    project.novations_for_vote.where.not(id: vote_novations)
   end
 
   def content_for_project(project)

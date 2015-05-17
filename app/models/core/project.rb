@@ -23,6 +23,7 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_for_admin_post, -> { where status: 1 }, class_name: 'Concept::Post'
 
   has_many :novations, class_name: 'Novation::Post'
+  has_many :novations_for_vote, -> { where status: [1, 2] }, class_name: 'Novation::Post'
 
   has_many :plan_post, class_name: 'Plan::Post'
   has_many :plan_published_post, -> { where status: 1 }, class_name: 'Plan::Post'
@@ -150,28 +151,12 @@ class Core::Project < ActiveRecord::Base
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
   end
 
-  def current_aspects(current_stage)
-    if current_stage == 'collect_info/posts'
-      self.aspects.main_aspects.order(:id)
-    else
-      if self.proc_aspects.main_aspects.first.present? and self.proc_aspects.main_aspects.first.position.present?
-        self.proc_aspects.main_aspects.order("position DESC")
-      else
-        self.proc_aspects.main_aspects.order(:id)
-      end
-    end
-  end
-
   def concepts_without_aspect
     self.concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: {post_id: nil})
   end
 
   def discontents_without_aspect
     self.discontents.includes(:discontent_post_aspects).where(discontent_post_aspects: {post_id: nil})
-  end
-
-  def stage1_count
-    self.stage1 > self.proc_aspects.size ? self.proc_aspects.size : self.stage1
   end
 
   def get_free_votes_for(user, stage)
@@ -184,8 +169,6 @@ class Core::Project < ActiveRecord::Base
         self.concept_ongoing_post.size - user.voted_concept_post.by_project(self.id).size
       when 'novation'
         self.novations.size - user.voted_novation_post.by_project(self.id).size
-      when 'plan'
-        self.stage5.to_i - user.voted_plan_posts.by_project(self.id).size
     end
   end
 
@@ -217,25 +200,6 @@ class Core::Project < ActiveRecord::Base
     [3, 4, 5, 6].include?(self.status)
   end
 
-  # def proc_aspects
-  #   self.aspects.where(status: 0)
-  # end
-
-  def get_united_posts_for_vote(user)
-    voted = user.voted_discontent_posts.pluck(:id)
-    all_posts = Discontent::Post.where(project_id: id, status: [2, 4]).where.not(id: voted).includes(:post_aspects).order('core_aspect_posts.id')
-    one_posts = []
-    many_posts = []
-    all_posts.each do |post|
-      if post.post_aspects.size == 1
-        one_posts << post
-      else
-        many_posts << post
-      end
-    end
-    one_posts | many_posts
-  end
-
   def current_status?(status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
     sort_list.values[0][:status].include? self.status
@@ -262,17 +226,6 @@ class Core::Project < ActiveRecord::Base
       nil
     end
   end
-
-  def stage_style(status)
-    return 'disabled' if self.status < status_number(status)
-    return 'active' if current_status?(status)
-  end
-
-  def stage_style_link(name_page, status)
-    return 'disabled' if self.status < status_number(status)
-    return 'current' if current_page?(name_page, status)
-  end
-
 
   def current_page?(page, status)
     sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
@@ -353,10 +306,6 @@ class Core::Project < ActiveRecord::Base
     self.type_access == 3
   end
 
-  # def closed?
-  #   self.type_access == 2
-  # end
-
   def self.status_title(status)
     case status
       when 0
@@ -388,10 +337,6 @@ class Core::Project < ActiveRecord::Base
       else
         'завершена'
     end
-  end
-
-  def essay_count(stage)
-    self.essays.by_stage(stage)
   end
 
   def set_position_for_aspects

@@ -152,7 +152,9 @@ describe 'Concept ' do
 
     it_behaves_like 'discuss concepts'
 
-    it_behaves_like 'vote popup', 8, 'Голосование по идеям', 'concept'
+    context 'vote content', js: true do
+      it_behaves_like 'vote popup', 8, 'Голосование по идеям', 'concept'
+    end
   end
 
   # context 'moderator sign in ' do

@@ -67,42 +67,7 @@ class Plan::PostsController < PostsController
     redirect_back_or user_content_plan_posts_path(@project)
   end
 
-  # def render_table
-  #   @post = Plan::Post.find(params[:id])
-  #   @render_type = params[:render_type]
-  # end
-  #
-  # def render_concept_side
-  #   @post = Plan::Post.find(params[:id])
-  # end
-  #
-  # def view_concept
-  #   @post = Plan::Post.find(params[:id])
-  #   if params[:new_idea]
-  #     @concept_post = Plan::PostAspect.find(params[:con_id])
-  #   elsif params[:what_view]
-  #     @dispost = Discontent::Post.find(params[:post_id])
-  #   else
-  #     @dispost = Discontent::Post.find(params[:post_id])
-  #     @concept_post = Concept::Post.find(params[:con_id])
-  #   end
-  # end
-  #
-  # def view_concept_table
-  #   @post = Plan::Post.find(params[:id])
-  #   @concept_post = Plan::PostAspect.find(params[:con_id])
-  # end
-  #
-  # def change_estimate_status
-  #   @est_stat = params[:est_stat]
-  #   posts = Plan::Post.where(project_id: @project, status: 0)
-  #   if posts.present? and @est_stat.present?
-  #     posts.each do |est|
-  #       est.update_attributes(estimate_status: @est_stat)
-  #     end
-  #   end
-  # end
-  #
+
   # # @todo methods for note
   # def new_note
   #   super()

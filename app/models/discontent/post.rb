@@ -52,11 +52,6 @@ class Discontent::Post < ActiveRecord::Base
                       tsearch: {prefix: true}
                   }
 
-  def complite(concept)
-    post = self.concept_post_discontents.by_concept(concept).first
-    post.complite if post
-  end
-
   #привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
     discontent_post_aspects.destroy_all
@@ -86,19 +81,4 @@ class Discontent::Post < ActiveRecord::Base
     self.post_notes(type_fd).size > 0
   end
 
-  def concepts_for_vote(project, current_user, last_vote)
-    post_all = dispost_concepts.by_status(0).size - 1
-    concept_posts = dispost_concepts.by_status(0).order('concept_posts.id')
-    if last_vote.nil? or id != last_vote.discontent_post_id
-      concept1 = concept_posts[0]
-      concept2 = concept_posts[1]
-      votes = 1
-    else
-      concept1 = last_vote.concept_post_aspect
-      count_now = current_user.concept_post_votings.by_project_votings(project).where(discontent_post_id: id, concept_post_aspect_id: concept1.id).count
-      concept2 = concept_posts[count_now + 1] unless concept_posts[count_now + 1].nil?
-      votes = count_now == post_all ? count_now : count_now + 1
-    end
-    return post_all, concept1, concept2, votes
-  end
 end

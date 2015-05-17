@@ -24,17 +24,8 @@ class Concept::Post < ActiveRecord::Base
   #       .order('count("concept_votings"."user_id") DESC')
   # end
 
-  def complite(discontent)
-    post = discontent.concept_post_discontents.by_concept(self).first
-    post.complite if post
-  end
-
   def note_size?(type_fd)
     self.post_notes(type_fd).size > 0
-  end
-
-  def fullness_title
-    0
   end
 
   def update_statuses

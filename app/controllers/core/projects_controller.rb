@@ -80,7 +80,7 @@ class Core::ProjectsController < ApplicationController
     @project.settings.stage_dates[@project.status.to_s]['real']['start'] = Date.today
     @project.settings.stage_dates_will_change!
     @project.save
-    @project.set_position_for_aspects if @project.status == 3
+    # @project.set_position_for_aspects if @project.status == 3
     @project.set_date_for_stage
     respond_to do |format|
       format.js { render 'update_stage' }

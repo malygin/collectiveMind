@@ -13,25 +13,31 @@ module UsersHelper
     end
   end
 
-  def club_status_show_user(user)
-    case user.type_user
-      when 4, 7
-        content_tag(:span, 'RC', class: 'label label-primary')
-      when 5
-        content_tag(:span, 'RC WATCHER', class: 'label label-warning')
+  def score_order(score_name)
+    case score_name
+      when 'score_g'
+        "core_project_scores.score_g DESC"
+      when 'score_a'
+        "core_project_scores.score_a DESC"
+      when 'score_o'
+        "core_project_scores.score_o DESC"
       else
-        content_tag(:b, 'RC?', class: 'color-orange', id: "club_status_tag_#{user.id}")
+        "core_project_scores.score DESC"
     end
   end
 
-  def club_status(user)
-    case user.type_user
-      when 4, 7
-        content_tag(:b, 'RC', class: 'color-teal', style: 'text-decoration:none;', id: "club_status_tag_#{user.id}")
-      when 5
-        content_tag(:b, 'RC WATCHER', class: 'color-red', style: 'text-decoration:none;', id: "club_status_tag_#{user.id}")
-      else
-        content_tag(:b, 'RC?', class: 'color-orange', style: 'text-decoration:none;', id: "club_status_tag_#{user.id}")
+  # @todo only for mailer?
+  def date_stage_for_project(project)
+    date_now = 1.day.ago.utc
+    if project.date_12 >= date_now
+      'Сбор несовершенств'
+    elsif project.date_23 >= date_now
+      'Сбор нововведений'
+    elsif project.date_34 >= date_now
+      'Создание проектов'
+    elsif project.date_45 >= date_now
+      'Выставление оценок'
     end
   end
+
 end

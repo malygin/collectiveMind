@@ -196,7 +196,9 @@ describe 'Collect info' do
 
     it_behaves_like 'discuss second aspects'
 
-    it_behaves_like 'vote popup', 2, 'Голосование по аспектам', 'collect_info'
+    context 'vote content', js: true do
+      it_behaves_like 'vote popup', 2, 'Голосование по аспектам', 'collect_info'
+    end
   end
 
   # context 'moderator sign in ' do

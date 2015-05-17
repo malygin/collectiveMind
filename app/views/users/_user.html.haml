@@ -33,28 +33,3 @@
         %span.rating_cell.font_dark_grey
           =user.project_user_for(@project).try(:score) || '−'
 
-
-
-
-
-
-
--#%tr{class: set_class_for_top(number)}
--#  %td
--#    -#%span=number
--#  %td
--#    .media
--#      %a.pull-left(href="/project/#{@project.id}/users/#{user.id}")
--#        = image_tag user.avatar.url(:thumb),  class: 'media-object'
--#        %br
--#        =link_to user, user_path(@project, user)
--#        = render partial: '/shared/user_online', object: user
--#
--#  %td
--#
--#  %td
--#    %span.text-inverse
--#      -if user.user_project_scores(@project.id).present?
--#        %span.rate= user.user_project_scores(@project.id).send(@score_name ? @score_name : 'score')
--#      -else
--#        %span.rate 0

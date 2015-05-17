@@ -29,24 +29,6 @@ module ApplicationHelper
     end
   end
 
-
-  # @todo for stage helper
-  def current_stage?(stage)
-    if stage == 1 and @project.status == 2
-      true
-    elsif stage == 2 and @project.status == 6
-      true
-    elsif stage == 3 and @project.status == 8
-      true
-    elsif stage == 4 and @project.status == 9
-      true
-    elsif stage == 5 and @project.status == 11
-      true
-    else
-      false
-    end
-  end
-
   # @todo for refac
   def get_stage_for_improve(c)
     case c
@@ -64,46 +46,6 @@ module ApplicationHelper
         6
       when 'Essay'
         7
-    end
-  end
-  # @todo for refac
-  def improve_comment(post)
-    if post.improve_comment and post.improve_stage
-      comment =get_comment_for_stage(post.improve_stage.to_s, post.improve_comment)
-      case post.improve_stage
-        when 1
-          "| #{t('show.improved')} " + (link_to "#{t('show.imrove_deal')} #{comment.user}", "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.core_aspects.first.id}&req_comment=#{comment.id}#comment_#{comment.id}")
-        when 2
-          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
-        when 3
-          "| #{t('show.improved')} " + (link_to t('show.imrove_deal'), "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}") + (link_to comment.user, user_path(@project, comment.user))
-      end
-    end
-  end
-  # @todo for refac
-  def link_for_improve(comment)
-    comment_class = get_stage_for_improve(comment.get_class)
-    case comment_class
-      when 1
-        link_to "/project/#{@project.id}/collect_info/posts?asp=#{comment.post.core_aspects.first.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
-        end
-      when 2
-        link_to "/project/#{@project.id}/discontent/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
-        end
-      when 3
-        link_to "/project/#{@project.id}/concept/posts/#{comment.post.id}#comment_#{comment.id}" do
-          content_tag :span, t('show.improver'), class: 'btn btn-primary btn-xs'
-        end
-    end
-  end
-  # @todo for refac
-  def comment_stat_color(comment)
-    if comment.discuss_status
-      'discuss_comment'
-    elsif comment.user.role_stat == 2
-      'expert_comment'
     end
   end
 
@@ -134,26 +76,6 @@ module ApplicationHelper
       post.content
     end
   end
-
-
-
-  def show_flash(flash)
-    response = ""
-    flash.each do |name, msg|
-      response = response + content_tag(:div, msg, id: "flash_#{name}", class: "color-red", style: "font-size:15px;")
-    end
-    flash.discard
-    response
-  end
-
-  def role_label(user)
-    if user.boss?
-      content_tag :span, 'MD', class: 'label label-danger'
-      # elsif user.role_expert?
-      #   content_tag :span, t('show.expert'), class: 'label label-success'
-    end
-  end
-
 
   def name_controller
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
@@ -205,71 +127,23 @@ module ApplicationHelper
     end
   end
 
-
-
-  def label_for_comment_status(comment, status, title)
-    if comment.check_status_for_label(status)
-      if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
-        link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
-          content_tag(:span, title, class: "label #{css_label_status(status)}")
-        end
-      else
-        content_tag(:span, title, class: "label #{css_label_status(status)}")
-      end
-    else
-      if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
-        link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
-          content_tag(:span, title, class: "label label-default")
-        end
-      end
-    end
-  end
-
-  def grouped_discontent?(post)
-    if @concept_post.present?
-      if @concept_post.persisted?
-        post.concept_post_discontent_checks.by_concept(@concept_post).present?
-      else
-        true
-      end
-    elsif @post.present? and @post.persisted?
-      post.concept_post_discontent_checks.by_concept(@post).present?
-    else
-      true
-    end
-  end
-
-
-
-
-
-  def score_order(score_name)
-    case score_name
-      when 'score_g'
-        "core_project_scores.score_g DESC"
-      when 'score_a'
-        "core_project_scores.score_a DESC"
-      when 'score_o'
-        "core_project_scores.score_o DESC"
-      else
-        "core_project_scores.score DESC"
-    end
-  end
-
-  # @todo only for mailer?
-  def date_stage_for_project(project)
-    date_now = 1.day.ago.utc
-    if project.date_12 >= date_now
-      'Сбор несовершенств'
-    elsif project.date_23 >= date_now
-      'Сбор нововведений'
-    elsif project.date_34 >= date_now
-      'Создание проектов'
-    elsif project.date_45 >= date_now
-      'Выставление оценок'
-    end
-  end
-
+  # def label_for_comment_status(comment, status, title)
+  #   if comment.check_status_for_label(status)
+  #     if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
+  #       link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
+  #         content_tag(:span, title, class: "label #{css_label_status(status)}")
+  #       end
+  #     else
+  #       content_tag(:span, title, class: "label #{css_label_status(status)}")
+  #     end
+  #   else
+  #     if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
+  #       link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
+  #         content_tag(:span, title, class: "label label-default")
+  #       end
+  #     end
+  #   end
+  # end
 
   # необходимость показа приветсвенной модалки или поповера
   #@todo почему бы не возвращать boolean? он там
@@ -303,6 +177,7 @@ module ApplicationHelper
     @project.news.count - count_news_log > 0
   end
 
+  # @todo refac
   def current_stage_popover_status
     if name_controller == :collect_info_posts and @project.status == 0 and @questions_progress != 100
       'collect_info_questions_0'

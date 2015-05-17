@@ -13,12 +13,4 @@ describe 'User', type: :model do
     expect(cpu_1.user.project_user_for(cpu_1.core_project)).to eq cpu_1
     expect(cpu_1.user.project_user_for(project_2)).to eq cpu_2
   end
-
-  it 'not_ready_for_concept?' do
-    moderator = create :moderator
-    cpu = create :core_project_user
-
-    expect(cpu.user.not_ready_for_concept?(cpu.core_project)).to be true
-    expect(moderator.not_ready_for_concept?(cpu.core_project)).to be false
-  end
 end

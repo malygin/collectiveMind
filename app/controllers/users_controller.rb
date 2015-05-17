@@ -75,10 +75,6 @@ class UsersController < ProjectsController
     end
   end
 
-  # deprecated
-  # def users_rc
-  #   @users = User.where(type_user: [4, 7]).order('score DESC').paginate(page: params[:page])
-  # end
 
   def list_users
     @added_users = User.joins(:core_project_users).where('core_project_users.project_id = ?', @project.id)
@@ -103,15 +99,6 @@ class UsersController < ProjectsController
       end
     end
   end
-
-  # deprecated
-  # def club_toggle
-  #   respond_to do |format|
-  #     if @user.update_attributes!(type_user: club_toggle_user(@user))
-  #       format.js
-  #     end
-  #   end
-  # end
 
   def add_score
     if boss?

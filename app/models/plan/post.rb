@@ -20,12 +20,4 @@ class Plan::Post < ActiveRecord::Base
     count_all == 0 ? 0 : (sum_all.to_f/count_all.to_f).round
   end
 
-
-  # def first_stage
-  #   stages.first.id unless self.post_stages.first.nil?
-  # end
-
-  # def post_stages
-  #   stages.where('plan_post_stages.status = ?', 0).order(:date_begin)
-  # end
 end

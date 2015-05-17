@@ -1,5 +1,0 @@
--if params[:plan_id]
-  $('#tab-for_content').html('#{escape_javascript(render partial: 'form')}');
--else
-  $('#tab-for_content').html('#{escape_javascript(render partial: 'select_plan')}');
-  plan_stage();

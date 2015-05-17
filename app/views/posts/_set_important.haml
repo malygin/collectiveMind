@@ -1,3 +1,0 @@
--if boss?
-  =link_to({action: :set_important, id: post.id}, remote: true,method: :put) do
-    %span.glyphicon.text-success{class:"#{post.important? ? 'glyphicon-star' : 'glyphicon-star-empty'}", id:"set_important_post_#{post.id}"}
