@@ -14,9 +14,6 @@ ru:
     delete_note: "Удалить замечание?"
     delete_novation: "Удалить?"
     delete_plan: "Удалить план?"
-  errors:
-    messages:
-      not_saved: Not saved
   groups:
     call_moderator_success: "Модератор получил уведомление"
     creating: "Добавление группы"

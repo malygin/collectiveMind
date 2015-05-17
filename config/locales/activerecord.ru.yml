@@ -7,10 +7,6 @@ ru:
         goal: "Суть идеи"
         impact_env: "Чьи интересы будут затронуты?"
         title: "Название идеи"
-      concept/post_aspect:
-        content: Поле "A2"
-        name: Поле "A1"
-        title: Поле "Краткое название"
       core/aspect/post:
         content: "Название аспекта"
         short_desc: "Обоснование аспекта"
@@ -87,12 +83,6 @@ ru:
         title: "Название проекта"
     errors:
       models:
-        concept/post_aspect:
-          attributes: Attributes
-        discontent/post:
-          attributes: Attributes
-        knowbase/post:
-          attributes: Attributes
         user:
           attributes:
             email:

@@ -10,13 +10,10 @@ en:
     add_more: "Добавить еще одно"
     aspect:
       create_success: "Аспект создан!"
-      desc: "Введите описание аспекта"
       edit_success: "Вы успешно отредактировали аспект"
-      name: "Введите название аспекта"
       new_success: "Вы успешно создали аспект"
       status_main: "Основная"
       status_other: "Дополнительная"
-      title: "Предложите аспект"
       user_content_success: "Вы успешно отредактировали аспект"
       status_main: "Основная"
       status_other: "Дополнительная"
