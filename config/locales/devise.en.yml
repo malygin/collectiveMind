@@ -2,6 +2,16 @@
 
 en:
   devise:
+    account: "Зайдите в ваш аккаунт!"
+    account_new: Create a new account
+    auth: "Авторизуйтесь пожалуйста!"
+    change_password: Change password
+    forget: Forgot your password?
+    ignor: If you did not send the request, please ignore this message.
+    instr: Send instructions
+    mailer: "Кто-то (вероятнее все вы) послал запрос на восстанволение пароля на сайте http://mass-decision.ru"
+    memory: Remember me
+    regard: Yours, MASSDECISION™ team
     confirmations:
       confirmed: "Your account was successfully confirmed."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
