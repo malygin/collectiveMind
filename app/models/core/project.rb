@@ -50,57 +50,59 @@ class Core::Project < ActiveRecord::Base
   after_create { build_settings.save }
 
   default_scope { order('id DESC') }
-  scope :club_projects, ->(user) { where(type_access: TYPE_ACCESS_CODE[:club]) if user.cluber? or user.boss? }
   scope :active_proc, -> { where('core_projects.status < ?', STATUS_CODES[:complete]) }
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
-  LIST_STAGES = {1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, status: [0, 1, 2, 20]},
-                 2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, status: [3, 4, 5, 6]},
-                 3 => {name: 'Сбор идей', type_stage: :concept_posts, status: [7, 8]},
-                 4 => {name: 'Объединение идей в пакеты', type_stage: :novation_posts, status: [9, 10]},
-                 5 => {name: 'Проектное предложение', type_stage: :plan_posts, status: [11]},
-                 6 => {name: 'Подведение итогов', type_stage: :estimate_posts, status: [12]},
-                 7 => {name: 'Завершение процедуры', type_stage: :completion_proc_posts, status: [13, 14, 15]}}.freeze
+  STAGES = {
+            1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, active: true,
+                  substages: {
+                      0 => {name: 'Оценка и обсуждение аспектов', active: true, code: :aspects_esimate},
+                      1 => {name: 'Изучение БЗ', active: true, code: :aspects_learn},
+                      2 => {name: 'Голосование за аспекты', active: true, code: :aspects_voting}
+                  }
+            },
+            2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, active: true,
+                  substages: {
+                      0 => {name: 'Выдвижение несовершенств', active: true, code: :discontents_add},
+                      1 => {name: 'Голосование за несовершенства', active: true, code: :discontents_voting},
+                  }
+            },
+            3 => {name: 'Сбор идей', type_stage: :concept_posts, active: true,
+                  substages: {
+                      0 => {name: 'Выдвижение идей', active: true, code: :concepts_add},
+                      1 => {name: 'Голосование за идеи', active: true, code: :discontents_voting},
+                  }
+            },
+            4 => {name: 'Объединение идей в пакеты', type_stage: :novation_posts, active: true,
+                  substages: {
+                      0 => {name: 'Выдвижение пакетов', active: true, code: :novations_add},
+                      1 => {name: 'Голосование за пакеты', active: true, code: :novations_voting},
+                  }
+            },
+            5 => {name: 'Проектное предложение', type_stage: :plan_posts, active: true,
+                  substages: {
+                      0 => {name: 'Выдвижение проектов', active: true, code: :plans_add},
+                      1 => {name: 'Голосование за проекты', active: true, code: :plans_voting},
+                  }
+            },
+            6 => {name: 'Подведение итогов', type_stage: :estimate_posts, active: true,
+            },
+            7 => {name: 'Завершение процедуры', type_stage: :completion_proc_posts, active: true,
+            }
+  }.freeze
 
   TYPE_ACCESS = {
-      0 => I18n.t('form.project.opened'),
-      1 => I18n.t('form.project.club'),
-      2 => I18n.t('form.project.closed'),
+      opened: {name: I18n.t('form.project.opened'), code: 0},
+      club: {name: I18n.t('form.project.club'), code: 1},
+      closed: {name: I18n.t('form.project.closed'), code: 2},
   }.freeze
 
-  TYPE_ACCESS_CODE = {
-      opened: 0,
-      club: 1,
-      closed: 2
-  }.freeze
-
-  STATUS_CODES = {
-      prepare: 0, # 1 round questions
-      collect_info: 1, # 2 round questions
-      vote_aspects: 2, # vote
-      discontent: 3,
-      group_discontent: 4,
-      discuss_discontent: 5,
-      vote_discontent: 6,
-      concept: 7,
-      vote_concept: 8,
-      novation: 9,
-      vote_novation: 10,
-      plan: 11,
-      # vote_plan: 12,
-      estimate: 12,
-      vote_final: 13,
-      wait_decision: 14,
-      wait_final: 15,
-      complete: 20
-  }.freeze
 
   validates :name, presence: true
-  validates :status, inclusion: {in: STATUS_CODES.values}
-  validates :type_access, inclusion: {in: TYPE_ACCESS_CODE.values}
+
 
   def closed?
-    type_access == TYPE_ACCESS_CODE[:closed]
+    type_access == TYPE_ACCESS[:closed][:code]
   end
 
   STATUS_CODES.keys.each do |method_name|

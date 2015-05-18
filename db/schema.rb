@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513130915) do
+ActiveRecord::Schema.define(version: 20150518220542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,14 +264,14 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",                           default: 0
+    t.integer  "status",               default: 0
     t.integer  "core_aspect_id"
-    t.string   "color",                limit: 255
-    t.string   "short_name",           limit: 255
+    t.string   "color"
+    t.string   "short_name"
     t.text     "detailed_description"
     t.boolean  "approve_status"
   end
@@ -436,10 +436,10 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.integer  "user_id"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.boolean  "owner",                    default: false
-    t.integer  "type_user"
     t.boolean  "ready_to_concept",         default: false
     t.boolean  "ready_to_plan",            default: false
+    t.boolean  "owner",                    default: false
+    t.integer  "type_user"
     t.integer  "collect_info_posts_score", default: 0
     t.integer  "discontent_posts_score",   default: 0
     t.integer  "concept_posts_score",      default: 0
@@ -458,36 +458,20 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status",                      default: 1
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "url_logo",        limit: 255
     t.integer  "type_access"
-    t.integer  "stage1",                      default: 5
-    t.integer  "stage2",                      default: 5
-    t.integer  "stage3",                      default: 5
-    t.integer  "stage4",                      default: 5
-    t.integer  "stage5",                      default: 5
-    t.text     "knowledge"
     t.integer  "position",                    default: 0
-    t.string   "secret",          limit: 255
-    t.string   "secret2",         limit: 255
-    t.string   "secret3",         limit: 255
     t.string   "color",           limit: 255
     t.string   "code",            limit: 255
     t.integer  "moderator_id"
-    t.datetime "date_12"
-    t.datetime "date_23"
-    t.datetime "date_34"
-    t.datetime "date_45"
-    t.datetime "date_56"
     t.date     "date_start"
     t.date     "date_end"
-    t.integer  "count_stages"
-    t.integer  "project_type_id"
     t.text     "completion_text"
+    t.string   "stage",                       default: "0"
   end
 
-  add_index "core_projects", ["project_type_id"], name: "index_core_projects_on_project_type_id", using: :btree
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree
 
   create_table "core_user_award_clicks", force: :cascade do |t|
@@ -622,7 +606,7 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym",             default: false
+    t.boolean  "anonym"
     t.text     "what"
   end
 
@@ -883,7 +867,7 @@ ActiveRecord::Schema.define(version: 20150513130915) do
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type_event",    limit: 255
-    t.string   "body",          limit: 255
+    t.text     "body"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "project_id"
@@ -915,7 +899,7 @@ ActiveRecord::Schema.define(version: 20150513130915) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
@@ -1002,7 +986,6 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.text     "content"
-    t.boolean  "approve_status"
     t.text     "project_change"
     t.text     "project_goal"
     t.text     "project_members"
@@ -1022,6 +1005,7 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.text     "confidence_commands"
     t.text     "confidence_remove_discontent"
     t.text     "confidence_negative_results"
+    t.boolean  "approve_status"
     t.boolean  "project_change_bool"
     t.boolean  "project_goal_bool"
     t.boolean  "project_members_bool"
@@ -1234,14 +1218,14 @@ ActiveRecord::Schema.define(version: 20150513130915) do
   add_index "plan_votings", ["user_id"], name: "index_plan_votings_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version",     limit: 255
+    t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
@@ -1355,9 +1339,9 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",                          default: false
     t.datetime "last_seen_chat_at"
+    t.string   "skype",                  limit: 255
+    t.string   "phone",                  limit: 255
     t.string   "locale",                 limit: 255
-    t.string   "skype"
-    t.string   "phone"
     t.string   "avatar"
   end
 
