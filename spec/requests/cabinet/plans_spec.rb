@@ -13,15 +13,15 @@ describe 'Cabinet Plans' do
 
   it_behaves_like 'base cabinet'
 
-  context 'create with simple form', js: true, skip: true do
+  context 'create with simple form', js: true do
     before do
       click_link 'new_plan_posts_simple'
     end
 
     it 'correct' do
       expect {
-        fill_in 'plan_post_title', with: 'new plan'
-        click_button 'send_post_plan'
+        fill_in 'plan_post_novation_project_goal', with: 'new plan'
+        click_button 'to_save_plan'
         expect(page).to have_content t('form.plan.new_success')
       }.to change(Plan::Post, :count).by(1)
     end
@@ -29,9 +29,7 @@ describe 'Cabinet Plans' do
     it 'empty fields - error' do
       expect {
         click_button 'to_save_plan'
-        within :css, 'div.notice_messages' do
-          expect(page).to have_css 'div#error_explanation'
-        end
+        expect(page).to have_css 'div#error_explanation'
       }.not_to change(Plan::Post, :count)
     end
   end

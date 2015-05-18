@@ -11,6 +11,7 @@ FactoryGirl.define do
 
   factory :plan_novation, class: 'Plan::PostNovation' do
     sequence(:title) { |n| "title #{n}" }
+    sequence(:project_goal) { |n| "project_goal #{n}" }
 
     association :plan_post, factory: :plan
     association :novation_post, factory: :novation

@@ -1,7 +1,7 @@
 class Plan::PostNovation < ActiveRecord::Base
   belongs_to :novation_post, class_name: 'Novation::Post'
   belongs_to :plan_post, class_name: 'Plan::Post', foreign_key: :plan_post_id
-
+  validates :project_goal, presence: true
   def attributes_for_form
     {project: {
         project_goal: -1,

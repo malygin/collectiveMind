@@ -35,13 +35,12 @@ class Plan::PostsController < PostsController
 
   def create
     @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id)
-    if @post.save
+    @post.post_novations.new plan_post_novation_params
+    if @post.valid? and  @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
-    @post.post_novations.create plan_post_novation_params
-    if params[:plan_post][:published]
-      @post.update status: current_model::STATUSES[:published]
-    end
+
+    @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
 
     respond_to do |format|
       format.js
