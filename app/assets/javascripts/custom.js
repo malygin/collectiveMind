@@ -1,7 +1,20 @@
 /* Your JS codes here */
 $(document).ready(function () {
     $('.metro_block ul li').hover(
-        function(){ $(this).toggleClass('theme_font_color') }
+        function () {
+            $(this).toggleClass('theme_font_color')
+        }
+    );
+    $('.btn-white').click(
+        function () {
+            $(this).toggleClass('font_red')
+        }
+    );
+    $('[data-type ="important"]').click(
+        function () {
+            var id = $(this).attr("data-id");
+            $('[data-important=' + id + ']').toggleClass('important')
+        }
     );
     $(window).scroll(function () {
         console.log(232);
@@ -26,12 +39,12 @@ $(document).ready(function () {
         wheelSpeed: 0.3
     });
     $("[data-toggle=popover]").popover({
-        html : true,
-        content: function() {
+        html: true,
+        content: function () {
             var content = $(this).attr("data-popover-content");
             return $(content).children(".popover-body").html();
         },
-        title: function() {
+        title: function () {
             var title = $(this).attr("data-popover-content");
             return $(title).children(".popover-heading").html();
         }
@@ -498,12 +511,12 @@ $('.open-popup').each(function () {
         callbacks: {
             open: function () {
                 /*$('.modal_content', this).height()*/
-              /*  var me_id = $.magnificPopup.instance['items'][0]['src'];
-                var pop_h = $('.modal_content', me_id).height();
-                $('.modal_content', me_id).css({
-                    'height': pop_h + 'px',
-                    'overflow': 'hidden'
-                });*/
+                /*  var me_id = $.magnificPopup.instance['items'][0]['src'];
+                 var pop_h = $('.modal_content', me_id).height();
+                 $('.modal_content', me_id).css({
+                 'height': pop_h + 'px',
+                 'overflow': 'hidden'
+                 });*/
             },
             close: function () {
                 // Will fire when popup is closed
