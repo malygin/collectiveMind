@@ -1,34 +1,5 @@
 module ApplicationHelper
 
-  def user_image_tag(source, options = {})
-    if source
-      cl_image_tag source, options
-    else
-      image_tag 'no-ava.png', options
-    end
-  end
-
-  def escape_text(t)
-    t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'", "\\'")
-  end
-
-  def trim_content(s, l=100)
-    if s
-      s[0..l]
-    end
-  end
-
-  def label_approve_stat(comment)
-    case comment.approve_status
-      when false
-        'label-default'
-      when true
-        'label-success'
-      else
-        'label-default'
-    end
-  end
-
   # @todo for refac
   def get_stage_for_improve(c)
     case c
@@ -108,24 +79,7 @@ module ApplicationHelper
     0
   end
 
-  def color_progress_bar
-    case name_controller
-      when :collect_info_posts
-        "#649ac3"
-      when :discontent_posts
-        "#486795"
-      when :concept_posts
-        "#bd8cb8"
-      when :novation_posts
-        "#7373aa"
-      when :plan_posts
-        "#80bcc4"
-      when :estimate_posts
-        "#80bcc4"
-      else
-        "#649ac3"
-    end
-  end
+
 
   # def label_for_comment_status(comment, status, title)
   #   if comment.check_status_for_label(status)
@@ -235,15 +189,6 @@ module ApplicationHelper
     "/project/#{project.id}/#{sub_url}"
   end
 
-  # @todo bad markup in body not css for different stage
-  def stage_theme
-    if rating?
-      'grey_theme'
-    elsif profile?
-      'white_theme'
-    else
-      "stage#{current_stage_controller}_theme"
-    end
-  end
+
 
 end

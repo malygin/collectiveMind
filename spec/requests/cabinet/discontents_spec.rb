@@ -31,6 +31,7 @@ describe 'Cabinet Discontents' do
     context 'correct', js: true, skip: true do
       before do
         find('#select_aspect').click
+        # @todo не выбирается аспект
         execute_script("$('#discontent_post_aspects_#{@aspect_1.id}').show()")
         execute_script("$('#discontent_post_aspects_#{@aspect_2.id}').show()")
         within :css, '#list_aspects' do
