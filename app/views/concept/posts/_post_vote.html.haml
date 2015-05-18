@@ -2,7 +2,7 @@
   .vote_item.themes_cont
     .heading_cont.blackonwhite
       %h6
-        = trim_string(post_vote.title, 50)
+        = trim_content(post_vote.title, 50)
     %p
       =post_vote.content
 

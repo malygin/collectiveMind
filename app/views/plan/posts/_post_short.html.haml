@@ -14,7 +14,7 @@
           = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
             .post-text
               %p
-                = trim_string(post_short.content, size = 200)
+                = trim_content(post_short.content, size = 200)
           .post_cont_hover.post_tall.white{id: "post_ch#{post_short.id}"}
             .wrapper.ps_cont.half_wheel_speed
               .post_cont_inner

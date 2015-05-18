@@ -1,4 +1,5 @@
 class Plan::PostsController < PostsController
+  include MarkupHelper
   before_action :set_plan, only: [:edit, :update, :destroy]
   before_action :set_novations, only: [:new, :edit]
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
