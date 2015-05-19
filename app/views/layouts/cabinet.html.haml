@@ -9,7 +9,7 @@
           .row
             .col-md-2
               %ul.list-unstyled.tabs_type_1{role: 'tablist'}
-                - @project.techniques.by_stage(@project.current_stage_values[:type_stage]).each do |technique|
+                - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
                   %li{role: 'presentation', class: ('active' if current_page?(action: 'new', type_mechanic: technique.code))}
                     = link_to t("techniques.#{technique.name}"), self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
                     role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}"

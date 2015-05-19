@@ -18,7 +18,7 @@
             - if new_posts > 0
               %span
                 = new_posts
-        - if @project.can_add_content?(name_controller)
+        - if @project.stage == '1:1'
           = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
             %span
               = t('techniques.aspect_posts_simple')

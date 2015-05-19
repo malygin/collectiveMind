@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518220542) do
+ActiveRecord::Schema.define(version: 20150519103215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -470,6 +470,7 @@ ActiveRecord::Schema.define(version: 20150518220542) do
     t.date     "date_end"
     t.text     "completion_text"
     t.string   "stage",                       default: "0"
+    t.integer  "project_type_id"
   end
 
   add_index "core_projects", ["status"], name: "index_core_projects_on_status", using: :btree

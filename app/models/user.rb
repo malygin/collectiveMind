@@ -260,13 +260,13 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'collect_info') > 0
+    if stage == :collect_info and project.stage == '1:3' and project.get_free_votes_for(self, 'collect_info') > 0
       return true
-    elsif stage == :discontent and project.status == 6 and project.get_free_votes_for(self, 'discontent') > 0
+    elsif stage == :discontent and project.stage == '2:2' and project.get_free_votes_for(self, 'discontent') > 0
       return true
-    elsif stage == :concept and project.status == 8 and project.get_free_votes_for(self, 'concept') > 0
+    elsif stage == :concept and project.stage == '3:2' and project.get_free_votes_for(self, 'concept') > 0
       return true
-    elsif stage == :novation and project.status == 10 and project.get_free_votes_for(self, 'novation') > 0
+    elsif stage == :novation and project.stage == '4:2' and project.get_free_votes_for(self, 'novation') > 0
       return true
     end
     false
@@ -354,10 +354,10 @@ class User < ActiveRecord::Base
   end
 
   def content_for_project(project)
-    if project.current_stage_values[:type_stage] == Core::Project::LIST_STAGES.first.second[:type_stage]
+    if project.current_stage_type == :collect_info_posts
       core_aspects.by_project(project)
     else
-      send(project.current_stage_values[:type_stage]).for_project(project.id)
+      send(project.current_stage_type).for_project(project.id)
     end
   end
 

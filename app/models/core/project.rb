@@ -54,7 +54,7 @@ class Core::Project < ActiveRecord::Base
   scope :access_proc, -> access_proc { where(core_projects: {type_access: access_proc}) }
 
   STAGES = {
-            1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, active: true,
+            1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
                   substages: {
                       0 => {name: 'Оценка и обсуждение аспектов', active: true, code: :aspects_esimate},
                       1 => {name: 'Изучение БЗ', active: true, code: :aspects_learn},
@@ -105,49 +105,39 @@ class Core::Project < ActiveRecord::Base
     type_access == TYPE_ACCESS[:closed][:code]
   end
 
-  STATUS_CODES.keys.each do |method_name|
-    define_method :"stage_#{method_name}?" do
-      status == STATUS_CODES[method_name]
-    end
-  end
-
-  # тип вопроса в зависимости от этапа
-  def type_for_questions
-    [STATUS_CODES[:prepare], STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
-  end
-
-  def current_stage
-    LIST_STAGES.select { |key, hash| hash[:status].include? status }
-  end
-
-  def current_stage_values
-    current_stage.values[0]
-  end
-
-  def current_stage_number
-    current_stage.keys[0]
-  end
-
   def current_stage_type
-    current_stage_values[:type_stage]
+    STAGES[stage[0].to_i][:type_stage]
   end
 
-  #@todo нужно универсализовать эту логику
-  def current_stage_type_for_cabinet
-    if current_stage_values[:type_stage] == :collect_info_posts
-      'aspect_posts'
-    else
-      current_stage_values[:type_stage]
-    end
+  def current_stage_name
+    STAGES[stage[0].to_i][:name]
   end
 
   def current_stage_type_for_cabinet_url
-    current_stage_type_for_cabinet.to_s.downcase.singularize
+    if (STAGES[stage[0].to_i][:cabinet_url])
+      STAGES[stage[0].to_i][:cabinet_url].to_s.downcase.singularize
+    else
+      STAGES[stage[0].to_i][:type_stage].to_s.downcase.singularize
+    end
   end
 
-  def current_stage_num
-    current_stage.first[0]
+  # return main stage for stage '2:3' it will be 2
+  def main_stage
+    stage[0].to_i
   end
+
+  # return main stage for stage '2:3' it will be 3
+  def sub_stage
+    stage[2].to_i
+  end
+
+
+  # тип вопроса в зависимости от этапа
+  def type_for_questions
+    # [STATUS_CODES[:prepare], STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
+  end
+
+
 
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
@@ -229,10 +219,7 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
-  def current_page?(page, status)
-    sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
-    sort_list.values[0][:name] == page
-  end
+
 
   def can_edit_on_current_stage(p)
     if p.instance_of? Discontent::Post
@@ -247,99 +234,7 @@ class Core::Project < ActiveRecord::Base
     return false
   end
 
-  def status_number(status)
-    case status
-      when :collect_info_posts
-        0
-      when :discontent_posts
-        3
-      when :concept_posts
-        7
-      when :novation_posts
-        9
-      when :plan_posts
-        11
-      when :estimate_posts
-        12
-      when :completion_proc_posts
-        13
-    end
-  end
 
-  def model_min_stage(model)
-    case model
-      when 'collect_info_post'
-        0
-      when 'discontent_post'
-        3
-      when 'concept_post'
-        7
-      when 'novation_post'
-        9
-      when 'plan_post'
-        11
-      when 'estimate_post'
-        12
-      when 'completion_proc_post'
-        13
-      else
-        0
-    end
-  end
-
-  def can_add_content?(stage)
-    if stage == :collect_info_posts
-      return [0, 1].include?(self.status)
-    elsif stage == :discontent_posts
-      return self.status == 3
-    elsif stage == :concept_posts
-      return self.status == 7
-    elsif stage == :novation_posts
-      return self.status == 9
-    elsif stage == :plan_posts
-      return self.status == 11
-    elsif stage == :estimate_posts
-      return self.status == 13
-    end
-    false
-  end
-
-  def demo?
-    self.type_access == 3
-  end
-
-  def self.status_title(status)
-    case status
-      when 0
-        'подготовка к процедуре'
-      when 1, :collect_info_posts
-        I18n.t('stages.life_tape')
-      when 2
-        'голосование за темы и рефлексия'
-      when 3, :discontent_posts
-        I18n.t('stages.discontent')
-      when 4
-        'группировка несовершенств'
-      when 5
-        'обсуждение сгруппированных несовершенств'
-      when 6
-        'голосование за несовершенства и рефлексия'
-      when 7, :concept_posts
-        I18n.t('stages.concept')
-      when 8
-        'голосование за нововведения и рефлексия'
-      when 9, :plan_posts
-        'Создание проектов'
-      when 10, :estimate_posts
-        'Выставление оценок'
-      when 11
-        'голосование за проекты'
-      when 12
-        'подведение итогов'
-      else
-        'завершена'
-    end
-  end
 
   def set_position_for_aspects
     aspect = Core::Aspect::Post.where(project_id: self, status: 0).first
@@ -351,19 +246,7 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
-  def set_date_for_stage
-    if self.status == 3
-      self.update_attributes(date_12: Time.now.utc)
-    elsif self.status == 7
-      self.update_attributes(date_23: Time.now.utc)
-    elsif self.status == 9
-      self.update_attributes(date_34: Time.now.utc)
-    elsif self.status == 10
-      self.update_attributes(date_45: Time.now.utc)
-    elsif self.status == 20
-      self.update_attributes(date_56: Time.now.utc)
-    end
-  end
+
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").
@@ -375,95 +258,5 @@ class Core::Project < ActiveRecord::Base
         where("discontent_posts.project_id = ?", self.id)
   end
 
-  # @todo REF  move to helper
 
-  def date_begin_stage(table_name)
-    table_name = table_name.sub('_posts', '').sub('_comments', '')
-    if table_name == 'collect_info'
-      self.created_at
-    elsif table_name == 'discontent'
-      self.date_12
-    elsif table_name == 'concept'
-      self.date_23
-    elsif table_name == 'plan'
-      self.date_34
-    elsif table_name == 'estimate'
-      self.date_45
-    end
-  end
-
-  def date_end_stage(table_name)
-    table_name = table_name.sub('_posts', '').sub('_comments', '')
-    if table_name == 'collect_info'
-      self.date_12
-    elsif table_name == 'discontent'
-      self.date_23
-    elsif table_name == 'concept'
-      self.date_34
-    elsif table_name == 'plan'
-      self.date_45
-    elsif table_name == 'estimate'
-      self.date_56
-    end
-  end
-
-  # Аналитика
-  def statistic_visits(duration)
-    journals.unscoped.where(type_event: 'visit_save').where(project_id: id).where('journals.created_at > ?', duration)
-  end
-
-  # Возвращает статистику открытых страниц пользователями
-  # Формат дата: user.to_s: кол-во посещенных страниц
-  # type_users - строка, соответствующая скоупу в журнале
-  def count_pages(type_users = 'not_moderators', duration = 5.days.ago)
-    pages = statistic_visits(duration).send(type_users).joins(:user).
-        select("COUNT(*) AS count_pages, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
-        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_pages DESC')
-    dates = []
-    users = {}
-    pages.each do |page|
-      dates << page.day
-      users[page.user] ||= {}
-      users[page.user][page.day] = page.count_pages
-    end
-    {dates: dates.uniq.sort, users: users}
-  end
-
-  def count_people(type_users = 'not_moderators', duration = 5.days.ago)
-    # Запрос возвращает хеш, где ключ - дата, значение - количество юзеров
-    # например, {2015-01-25 00:00:00 +0300=>1, 2015-01-26 00:00:00 +0300=>1}
-    # и затем мы преобразуем дату для работы на клиенте (хз, почему именно так)
-    visits = statistic_visits(duration).send(type_users).select('DISTINCT user_id').group("DATE_TRUNC('day', journals.created_at)").count
-    visit_data = []
-    visits.each do |visit, minutes|
-      visit_data << {x: (visit.to_datetime.to_f * 1000).to_i, y: minutes}
-    end
-    [{key: 'Посетителей', values: visit_data}]
-  end
-
-  def average_time(type_users = 'not_moderators', duration = 5.days.ago)
-    visits = statistic_visits(duration).send(type_users).select("DATE_TRUNC('day', journals.created_at) as day,
-                  round(CAST(float8 (extract(epoch from sum(journals.updated_at - journals.created_at)::INTERVAL)/60) as numeric), 2) / count(DISTINCT journals.user_id) as minutes").
-        group("DATE_TRUNC('day', journals.created_at)")
-    visit_data = []
-    visits.each do |visit|
-      visit_data << {x: (visit.day.to_datetime.to_f * 1000).to_i, y: visit.minutes}
-    end
-    [{key: 'Среднее время', values: visit_data}]
-  end
-
-
-  def count_actions(type_users = 'for_moderators', duration = 5.days.ago)
-    actions = journals.joins(:user).where('journals.created_at > ?', duration).send(type_users).
-        select("COUNT(*) AS count_actions, DATE_TRUNC('day', journals.created_at) as day, user_id AS user_id").
-        group("DATE_TRUNC('day', journals.created_at), user_id").order('count_actions DESC')
-    dates = []
-    users = {}
-    actions.each do |action|
-      dates << action.day
-      users[action.user] ||= {}
-      users[action.user][action.day] = action.count_actions
-    end
-    {dates: dates.uniq.sort, users: users}
-  end
 end

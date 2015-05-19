@@ -11,18 +11,16 @@
         = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
       %li.has_dropwindow
         = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
-      -#%li{class: "#{'active' if name_controller == :journal}"}
-      -#  = link_to 'Новости', journals_path(@project), class: "menu_a"
       - if @project.closed?
         %li{class: "#{'active' if rating?}"}
           = link_to 'Рейтинг', users_path(@project), class: 'menu_a'
       - if current_user.admin?
         - if @project.prev_status
           %li
-            = link_to '<- стадия', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'
+            = link_to '<- ', pr_stage_core_project_path(@project), method: :put, id: "down_to_#{@project.prev_status}", class: 'menu_a'
         - if @project.next_status
           %li
-            = link_to '-> стадия', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
+            = link_to '-> ', next_stage_core_project_path(@project), method: :put, id: "up_to_#{@project.next_status}", class: 'menu_a'
 
     .navbar-right.text-right.user_block.font_grey
       = link_to '', knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'book_icon tooltip1', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Жмите сюда, чтобы освежить в памяти базу знаний.'
@@ -76,20 +74,20 @@
           .border_grey.rounded_3.stages_block
             .btn-toolbar{role: 'toolbar'}
               .btn-group{role: 'group'}
-                = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.current_stage_num}" do
-                  = "#{@project.current_stage_num} СТАДИЯ: #{@project.current_stage_values[:name]}"
+                = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.main_stage}" do
+                  = "#{@project.main_stage} СТАДИЯ:  #{@project.current_stage_name} "
               = render partial: 'application/cabinet_sticker'
       - else
         .col-md-8.col_padding_right_3
           #tooltip1_1.border_grey.rounded_3.stages_block{class: "#{'tooltip1' if name_controller == :collect_info_posts}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'В нашей процедуре стадии открываются поэтапно. Следующая стадия откроется, когда большинство участников ответит на все вопросы.'}
             .btn-toolbar{role: 'toolbar'}
-              - Core::Project::LIST_STAGES.each do |num_stage, stage|
+              - Core::Project::STAGES.each do |num_stage, stage|
                 .btn-group{role: 'group'}
                   - if name_controller == stage[:type_stage]
                     = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage}" do
                       ="#{num_stage} СТАДИЯ: "
                       = stage[:name]
-                  - elsif @project.status >= stage[:status].min
+                  - elsif @project.main_stage >= num_stage
                     = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage}" do
                       = num_stage
                   - else
