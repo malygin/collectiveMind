@@ -75,9 +75,8 @@ ConceptCollectionView = Backbone.View.extend
 
   sortByDiscontent: ()->
     #    evt.preventDefault();
-
     sortByValue = $(this).data('type')
-    console.log sortByValue
+    #    console.log sortByValue
     $('#tab_dispost_concepts').isotope
       sortBy: sortByValue,
       sortAscending: false
