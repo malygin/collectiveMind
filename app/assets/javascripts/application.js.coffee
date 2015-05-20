@@ -217,75 +217,6 @@ $ ->
 #  $('body').on('click', 'button#to_publish_plan', this.save_plan_post('save_plan_post_published'))
 #  $('body').on('click', 'button#to_save_plan', this.save_plan_post('save_plan_post'))
 
-#show comments panel on post hover
-@show_comments_hover = ->
-  $('.ch_action').unbind().hover ->
-    ch_id = $(this).attr('data-for')
-    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
-    $('#' + ch_id).toggleClass 'active'
-    return
-
-# perfect scrollbar
-@activate_perfect_scrollbar = ->
-  $('.ps_cont.half_wheel_speed').perfectScrollbar wheelSpeed: 0.3
-  $('.ps_cont').perfectScrollbar()
-
-#  post colored stripes
-#  показ цветных полосок -> упростить
-@post_colored_stripes = ->
-  count_themes_width = (cont) ->
-    width = 0
-    $('#' + cont + ' .tag-stripes').each ->
-      width = width + $(this).outerWidth()
-      return
-    width + 100
-
-  $('.post-theme').each ->
-    curId = $(this).attr('id')
-    $(this).width count_themes_width(curId)
-    return
-  $('.post-theme').hover ->
-    curId = $(this).attr('id')
-    $('#' + curId + ' .tag-stripes').hover ->
-      $('#' + curId + ' .tag-stripes').removeClass 'active'
-      $(this).addClass 'active'
-      return
-    return
-  $('.post-theme').mouseover ->
-    $(this).addClass 'shown'
-    $(this).closest('.themes_cont').addClass 'themesShown'
-    return
-  $('.post-theme').mouseleave ->
-    $(this).removeClass 'shown'
-    $(this).closest('.themes_cont').removeClass 'themesShown'
-    return
-  $('.tag-stripes').mouseover ->
-    $(this).closest('.post-theme').width count_themes_width($(this).closest('.post-theme').attr('id'))
-    return
-
-# сворачивание комментов и скролл
-@comments_expandable_column = ->
-  $('.expand_button').click ->
-    col = $(this).attr('data-col')
-    $('.popup_expandable_col').toggleClass('col-md-' + col).toggleClass('col-md-12').toggleClass 'exp'
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.comment_col .collapse').on 'shown.bs.collapse', ->
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.comment_col .collapse').on 'hidden.bs.collapse', ->
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.answers_collapse').click ->
-    $(this).toggleClass 'opened'
-    return
-  $('.com_answers').on 'shown.bs.collapse', ->
-    $('.modal_content.ps_cont').perfectScrollbar 'update'
-    return
-  $('.com_answers').on 'hidden.bs.collapse', ->
-    $('.modal_content.ps_cont').perfectScrollbar 'update'
-    return
-
 # временно!!!
 # голосование в попапе - прогресс и работа с папками - > упростить
 @vote_scripts = ->
@@ -351,22 +282,6 @@ $ ->
     return
 
 # временно!!!
-# цвета для несовершенств
-@colors_discontents = ->
-  color_item = (object, action, color) ->
-    object.css action, '#' + color
-    return
-
-  $('.color_me').each ->
-    me = $(this)
-    type = me.attr('data-me-type')
-    if type == 'imperf'
-      color = $colors_imperf_codes[me.attr('data-me-color')]
-    action = me.attr('data-me-action')
-    if action and color
-      color_item me, action, color
-    return
-
 $colors_imperf_codes = [
   'd3a5c9'
   'a7b3dd'
