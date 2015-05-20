@@ -101,9 +101,6 @@ class Core::Project < ActiveRecord::Base
   validates :name, presence: true
 
 
-  def closed?
-    type_access == TYPE_ACCESS[:closed][:code]
-  end
 
   def current_stage_type
     STAGES[stage[0].to_i][:type_stage]
@@ -128,11 +125,7 @@ class Core::Project < ActiveRecord::Base
 
   # return main stage for stage '2:3' it will be 3, if  it '2' return 0
   def sub_stage
-    if  stage[2]
-      stage[2].to_i
-    else
-      0
-    end
+    stage[2] ? stage[2].to_i : 0
   end
 
   # move to next stage if it '1:2' and we haven't '1:3' then go to '2:0', unless go to '1:3
@@ -157,12 +150,18 @@ class Core::Project < ActiveRecord::Base
     self.save
   end
 
-  # тип вопроса в зависимости от этапа
   def type_for_questions
-    # [STATUS_CODES[:prepare], STATUS_CODES[:collect_info]].include?(self.status) ? self.status : STATUS_CODES[:collect_info]
+    stage == '1:0' ? 0 : 1
   end
 
 
+  def closed?
+    type_access == TYPE_ACCESS[:closed][:code]
+  end
+
+  def type_access_name
+    TYPE_ACCESS[type_access]
+  end
 
   def moderators
     users_in_project.where(users: {type_user: User::TYPES_USER[:admin]})
@@ -189,60 +188,6 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
-  def project_access(user)
-    case type_access
-      when 0
-        return true
-      when 1
-        (user.cluber? && users.include?(user)) || user.boss?
-      when 2
-        users.include?(user) || user.boss?
-    end
-  end
-
-  def uniq_proc_access?(user)
-    return false if self.moderator_id.present? and not (self.moderator_id == user.id or user.type_user == 7)
-    true
-  end
-
-  def uniq_proc?
-    self.moderator_id.present?
-  end
-
-  def type_access_name
-    TYPE_ACCESS[type_access]
-  end
-
-  def able_add_note?
-    [3, 4, 5, 6].include?(self.status)
-  end
-
-  def current_status?(status)
-    sort_list = LIST_STAGES.select { |k, v| v[:type_stage] == status }
-    sort_list.values[0][:status].include? self.status
-  end
-
-  def current_stage?(stage)
-    Core::Project::LIST_STAGES[stage][:status].include? status
-  end
-
-
-
-
-  def can_edit_on_current_stage(p)
-    if p.instance_of? Discontent::Post
-      return self.status == 3
-    elsif p.instance_of? Concept::Post
-      return self.status == 7
-    elsif p.instance_of? Plan::Post
-      return self.status == 9
-    elsif p.instance_of? Estimate::Post
-      return self.status == 10
-    end
-    return false
-  end
-
-
 
   def set_position_for_aspects
     aspect = Core::Aspect::Post.where(project_id: self, status: 0).first
@@ -253,8 +198,6 @@ class Core::Project < ActiveRecord::Base
       end
     end
   end
-
-
 
   def concept_comments
     Concept::Comment.joins("INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id").

@@ -5,7 +5,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_project
-  # before_filter :check_access_to_project
+  before_filter :check_access_to_project
   before_filter :news_data
   # базовое логирование, отрабатывает после, чтобы дата была предпоследней
   after_action :start_visit
@@ -24,13 +24,6 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    if Core::Project::LIST_STAGES.map { |key, hash| hash[:type_stage] }.include? params[:controller].gsub('/', '_').to_sym
-      # @todo Рефакторинг model_min_stage
-      if @project.status < @project.model_min_stage(current_model.table_name.singularize)
-        redirect_to polymorphic_path(@project.current_stage_type)
-      end
-    end
-
     unless @project.users.include?(current_user) or prime_admin?
       redirect_to root_url
     end

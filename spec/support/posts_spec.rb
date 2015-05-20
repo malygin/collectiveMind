@@ -335,8 +335,8 @@ end
 
 shared_examples 'vote popup' do |status, title, stage|
   before do
-    project.update_attributes(status: status)
-    if status == 6
+    project.update_attributes(stage: status)
+    if status == '2:1'
       @post1.update_attributes(status: 2)
       @post2.update_attributes(status: 2)
     end
@@ -345,7 +345,7 @@ shared_examples 'vote popup' do |status, title, stage|
   end
 
   it 'correct voted', js: true do
-    tab = status > 2 ? 1 : 0
+    tab = 1
     # @todo title popup
     expect(page).to have_content title
     expect(page).to have_content @post1.content

@@ -6,7 +6,7 @@ describe 'Novation ' do
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, status: 9 }
+  let (:project) { @project = create :closed_project, stage: '4:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -107,7 +107,7 @@ describe 'Novation ' do
     it_behaves_like 'discuss novations'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей', 'novation'
+      it_behaves_like 'vote popup', '4:1', 'Голосование по пакетам идей', 'novation'
     end
   end
 

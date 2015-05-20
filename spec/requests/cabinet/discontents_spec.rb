@@ -5,7 +5,7 @@ describe 'Cabinet Discontents' do
   let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
-    create_project_and_user_for :discontent
+    create_project_and_user_for '2:0'
     @project.techniques << Technique::List.create(stage: 'discontent_posts', code: 'detailed')
     @discontent = create :discontent_with_aspects, user: @user, project: @project
     sign_in @user

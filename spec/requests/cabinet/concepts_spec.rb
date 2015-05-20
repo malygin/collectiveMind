@@ -5,7 +5,7 @@ describe 'Cabinet Concepts' do
   let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
-    create_project_and_user_for :concept
+    create_project_and_user_for '3:0'
     @discontent = create :discontent, user: @user, project: @project
     @discontent_2 = create :discontent, user: @user, project: @project
     @concept = create :concept_with_discontent, user: @user, project: @project

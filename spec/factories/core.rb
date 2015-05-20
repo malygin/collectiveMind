@@ -2,14 +2,14 @@ FactoryGirl.define do
   factory :core_project, class: 'Core::Project' do
     sequence(:name) { |n| "Project #{n}" }
     type_access 0
-    status 0
+    stage '1:0'
 
     factory :closed_project do
-      type_access Core::Project::TYPE_ACCESS_CODE[:closed]
+      type_access Core::Project::TYPE_ACCESS[:closed][:code]
     end
 
     factory :club_project do
-      type_access Core::Project::TYPE_ACCESS_CODE[:club]
+      type_access Core::Project::TYPE_ACCESS[:club][:code]
     end
 
     after(:create) do |project|

@@ -6,7 +6,7 @@ describe 'Discontent' do
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, status: 3 }
+  let (:project) { @project = create :closed_project, stage: '2:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -152,7 +152,7 @@ describe 'Discontent' do
     it_behaves_like 'discuss discontents'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам', 'discontent'
+      it_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
     end
   end
 

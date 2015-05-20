@@ -23,16 +23,13 @@ class CollectInfo::PostsController < PostsController
 
     # подсчет данных для прогресс-бара по вопросам
     # число вопросов по процедуре
-    if @project.status < 2
-      count_all = CollectInfo::Question.by_type(@project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count
-      # число вопросов на которые пользователь ответил
-      count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: {project_id: @project, type_stage: @project.type_for_questions} ).where(collect_info_user_answers: {user_id: current_user}).count
-      # прогресс для данного пользователя
-      @questions_progress = count_all == 0 ? 0 : (count_answered.to_f/count_all.to_f) * 100
-    else
-      @questions_progress = 100
-    end
-    # общее количество ответов пользователей закрытой процедуры
+    count_all = CollectInfo::Question.by_type(@project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count
+    # число вопросов на которые пользователь ответил
+    count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: {project_id: @project, type_stage: @project.type_for_questions} ).where(collect_info_user_answers: {user_id: current_user}).count
+    # прогресс для данного пользователя
+    @questions_progress = count_all == 0 ? 0 : (count_answered.to_f/count_all.to_f) * 100
+
+    # общее кол ичество ответов пользователей закрытой процедуры
     if @project.closed?
       count_all = count_all || CollectInfo::Question.by_type(@project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => @project).count
       users_count = @project.users_in_project.uniq.count
