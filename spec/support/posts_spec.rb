@@ -310,9 +310,10 @@ shared_examples 'admin panel post' do |moderator = false|
   let(:comment_model_name) { @post1.class.name.constantize }
 
   before do
-    create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect1, question: @question_0_1
-    create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect2, question: @question_0_2
-
+    if stage_model == 'collect_info_posts'
+      create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect1, question: @question_0_1
+      create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect2, question: @question_0_2
+    end
     stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
 
     visit stage_post_path
