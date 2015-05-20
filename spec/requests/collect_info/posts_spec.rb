@@ -117,7 +117,7 @@ describe 'Collect info' do
 
   shared_examples 'answers the second questions' do
     before do
-      project.update_attributes(status: 1)
+      project.update_attributes(stage: '1:1')
       visit collect_info_posts_path(project)
     end
 
@@ -153,7 +153,7 @@ describe 'Collect info' do
 
   shared_examples 'discuss second aspects' do |moder = false|
     before do
-      project.update_attributes(status: 1)
+      project.update_attributes(stage: '1:1')
       create :collect_info_user_answer, user: moder ? @moderator : @user, project: project, aspect: @aspect1, question: @question_1_1
       create :collect_info_user_answer, user: moder ? @moderator : @user, project: project, aspect: @aspect2, question: @question_1_2
       visit collect_info_posts_path(project)
@@ -165,7 +165,7 @@ describe 'Collect info' do
       expect(page).to have_content 'Аспекты, предложенные участниками (0)'
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
-      expect(page).to have_link 'new_aspect_posts'
+      # expect(page).to have_link 'new_aspect_posts'
     end
 
     context 'show popup aspect ', js: true do
@@ -199,7 +199,7 @@ describe 'Collect info' do
     it_behaves_like 'discuss second aspects'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', 2, 'Голосование по аспектам', 'collect_info'
+      it_behaves_like 'vote popup', '1:2', 'Голосование по аспектам', 'collect_info'
     end
   end
 

@@ -1,6 +1,6 @@
 class Core::ProjectSetting < ActiveRecord::Base
   belongs_to :project
-  before_create :set_stage_dates
+  # before_create :set_stage_dates
 
   private
   def set_stage_dates

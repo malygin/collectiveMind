@@ -43,7 +43,7 @@ shared_examples 'base cabinet' do
 end
 
 def create_project_and_user_for(stage)
-  @project = create :core_project, status: Core::Project::STATUS_CODES[stage]
+  @project = create :core_project, stage: stage
   core_project_user = create :core_project_user, core_project: @project
   @user = core_project_user.user
 end

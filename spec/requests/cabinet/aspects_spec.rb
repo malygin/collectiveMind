@@ -5,7 +5,7 @@ describe 'Cabinet Aspects' do
   let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
-    create_project_and_user_for :collect_info
+    create_project_and_user_for '1:0'
     @aspect = create :aspect, user: @user, project: @project
     sign_in @user
     visit cabinet_stage_url

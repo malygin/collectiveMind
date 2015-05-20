@@ -21,7 +21,7 @@
               %span
                 = new_posts
 
-        - if @project.can_add_content?(name_controller)
+        - if @project.stage == '3:0'
           = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
             %button.btn.add-button
               %span

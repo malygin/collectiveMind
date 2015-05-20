@@ -20,22 +20,6 @@ module ApplicationHelper
     end
   end
 
-  # @todo for stage helper
-  def status_project(project)
-    if [0, 1, 2].include? project.status
-      t('show.go_proc', count: 1)
-    elsif [3, 4, 5, 6].include? project.status
-      t('show.go_proc', count: 2)
-    elsif [7, 8].include? project.status
-      t('show.go_proc', count: 3)
-    elsif [9].include? project.status
-      t('show.go_proc', count: 4)
-    elsif [10, 11, 12].include? project.status
-      t('show.go_proc', count: 5)
-    elsif [20].include? project.status
-      t('show.completed_proc')
-    end
-  end
 
   # @todo for journal helper
   def field_for_journal(post)
@@ -68,39 +52,12 @@ module ApplicationHelper
     controller_name == 'users' and action_name == 'index'
   end
 
-  def current_stage_controller
-    # Если это контроллер для кабинета, возвращаем номер текущей стадии
-    if cabinet?
-      return @project.current_stage.first[0]
-    end
-    Core::Project::LIST_STAGES.each do |num_stage, stage|
-      return num_stage if name_controller == stage[:type_stage]
-    end
-    0
-  end
 
 
 
-  # def label_for_comment_status(comment, status, title)
-  #   if comment.check_status_for_label(status)
-  #     if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
-  #       link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
-  #         content_tag(:span, title, class: "label #{css_label_status(status)}")
-  #       end
-  #     else
-  #       content_tag(:span, title, class: "label #{css_label_status(status)}")
-  #     end
-  #   else
-  #     if (current_user?(comment.user) or boss? or role_expert? or stat_expert?) and (status == 'concept' or (status == 'discontent' and @project.status < 4))
-  #       link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, status => 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, id: "#{status}_comment_#{comment.id}") do
-  #         content_tag(:span, title, class: "label label-default")
-  #       end
-  #     end
-  #   end
-  # end
 
   # необходимость показа приветсвенной модалки или поповера
-  #@todo почему бы не возвращать boolean? он там
+  #@todo почему бы не возвращать boolean?
   def shown_intro(check_field)
     current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
   end
@@ -182,11 +139,7 @@ module ApplicationHelper
   end
 
   def current_stage_url(project)
-    sub_url = project.current_stage_type.to_s.gsub('_', '/')
-    if [:collect_info_posts, :completion_proc_posts].include? project.current_stage_type
-      sub_url.sub!('/', '_')
-    end
-    "/project/#{project.id}/#{sub_url}"
+    "/project/#{project.id}/"
   end
 
 

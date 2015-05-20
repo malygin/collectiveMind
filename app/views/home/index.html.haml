@@ -10,7 +10,7 @@
             %h3
               = project.name
             %b
-              ="(#{status_project(project)})"
+              ="(#{project.main_stage} стадия)"
           .col-md-3
             = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
@@ -27,28 +27,13 @@
             %h3
               = project.name
             %b
-              = "(#{status_project(project)})"
+              ="(#{project.main_stage} стадия)"
           .col-md-3
             = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
         %br
       %hr
-  - if @club_projects.present?
-    %h4
-      %strong
-        = t('show.project.club')
-    - @club_projects.each do |project|
-      .row
-        .col-md-9
-          %h3
-            = project.name
-          %b
-            = "(#{status_project(project)})"
-        .col-md-3
-          = link_to current_stage_url(project), class:'btn btn-lg btn-danger', id: "go_to_club_project_#{project.id}" do
-            = t('link.go_to_project')
-      %br
-  %br
+
 %h3
   %strong О проекте
 %p

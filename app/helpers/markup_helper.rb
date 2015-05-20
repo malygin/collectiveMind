@@ -7,7 +7,7 @@ module MarkupHelper
     elsif profile?
       'white_theme'
     else
-      "stage#{current_stage_controller}_theme"
+      "stage#{@project.main_stage}_theme"
     end
   end
 

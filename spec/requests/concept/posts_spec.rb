@@ -6,7 +6,7 @@ describe 'Concept ' do
   let!(:user) { @user = create :user }
   let (:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, status: 7 }
+  let (:project) { @project = create :closed_project, stage: '3:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -155,7 +155,7 @@ describe 'Concept ' do
     it_behaves_like 'discuss concepts'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', 8, 'Голосование по идеям', 'concept'
+      it_behaves_like 'vote popup', '3:1', 'Голосование по идеям', 'concept'
     end
   end
 

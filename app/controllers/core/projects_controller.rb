@@ -74,29 +74,18 @@ class Core::ProjectsController < ApplicationController
   end
 
   def next_stage
-    @project = @core_project
-    @project.settings.stage_dates[@project.status.to_s]['real']['end'] = Date.today
-    @project.status = @project.status + 1
-    @project.settings.stage_dates[@project.status.to_s]['real']['start'] = Date.today
-    @project.settings.stage_dates_will_change!
-    @project.save
-    # @project.set_position_for_aspects if @project.status == 3
-    @project.set_date_for_stage
+    @core_project.go_to_next_stage
     respond_to do |format|
       format.js { render 'update_stage' }
-      format.html { redirect_to "/project/#{@project.id}" }
+      format.html { redirect_to "/project/#{@core_project.id}" }
     end
   end
 
   def pr_stage
-    @project = @core_project
-    @project.settings.stage_dates[@project.status.to_s]['real']['start'] = ''
-    @project.status = @project.status - 1
-    @project.settings.stage_dates[@project.status.to_s]['real']['end'] = ''
-    @project.save
+    @core_project.go_to_prev_stage
     respond_to do |format|
       format.js { render 'update_stage' }
-      format.html { redirect_to "/project/#{@project.id}" }
+      format.html { redirect_to "/project/#{@core_project.id}" }
     end
   end
 
