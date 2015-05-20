@@ -79,23 +79,26 @@
                           </small>
                           <i class="fa fa-comment-o"></i>
                         </span>
+                        <span class="popup2">
 
-                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
-                              <span class="popup2">
-                                <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
+                           <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
                                     <%= count_likes %>
-                                </small>
+                           </small>
+                           <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
+
                                 <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
-                              </span>
-                        </a>
-                        <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
-                              <span class="popup2">
-                                <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
-                                    <%= count_dislikes %>
-                                </small>
-                                <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-                              </span>
-                        </a>
+
+                            </a>
+                        </span>
+                        <span class="popup2">
+                            <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
+                                <%= count_dislikes %>
+                            </small>
+                            <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
+                               <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
