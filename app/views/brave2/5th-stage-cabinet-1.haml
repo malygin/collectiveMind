@@ -333,12 +333,12 @@
                   %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_2", :role => "tab"}
                     Мои
                     проектные предложения (2)
-              .divider200
-              %button.btn.add-button.type3.del Удалить
-              .divider10
-              %button.btn.add-button.type3.dark-green Сохранить и выйти
-              .divider10
-              %button.btn.add-button.type3.dark-green Опубликовать проект
+              .bottom_btn
+                %button.btn.add-button.type3.del Удалить
+                .divider10
+                %button.btn.add-button.type3.dark-green Сохранить и выйти
+                .divider10
+                %button.btn.add-button.type3.dark-green Опубликовать проект
             .col-md-9.col-md-offset-1
               .tab-content
                 #cabinet_5_1.tab-pane.active.fade.in{:role => "tabpanel"}
@@ -346,7 +346,7 @@
                   .content_window.bottom_panel_stop
                     / stop bottom panel here
                     %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{"data-placement" => "cabinet5", "data-target" => "1"} Выбрать пакет
-                  .content_window.white.c_w_5
+                  .content_window.white.c_w_5.height100
                     .cont_heading
                       %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
                         Описание
@@ -368,7 +368,8 @@
                           #cabinet_5_cont_0.tab-pane.active.fade.in{:role => "tabpanel"}
                             .divider35
                             .text-center
-                              %img{:src => "img/cab_5_qsign.png"}/
+                              %a{"data-toggle" => "tab", :href => "#cabinet_5_cont_1", :role => "tab"}
+                                %img{:src => "img/cab_5_qsign.png"}/
                               .divider35
                               %p.cab5_placeholder
                                 Здесь вы ответите на вопросы по пунктам слева,
@@ -426,8 +427,7 @@
         #bottom-panel.bottom_fix
           .container
             .row
-              .col-md-3
-              .col-md-9
+              .col-md-9.col-md-offset-3
                 .content_window.white
                   .cont_heading
                     %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active

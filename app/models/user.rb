@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   include ApplicationHelper
+  include MarkupHelper
   include PgSearch
 
   devise :database_authenticatable, :registerable,
@@ -169,104 +170,113 @@ class User < ActiveRecord::Base
   end
 
   def add_score(h={})
-    #@todo нужно добавить project: h[:project]
     case h[:type]
-      when :add_life_tape_post
-        self.add_score_by_type(h[:project], 10, :score_g)
-      when :plus_comment
-        self.add_score_by_type(h[:project], 5, :score_a)
-        # self.journals.build(type_event:'useful_comment', project: h[:project], body:"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
-        self.journals.build(type_event: 'my_add_score_comment', project: h[:project], user_informed: self, body: "5", first_id: h[:comment].id, viewed: false, personal: true).save!
-
       when :plus_post
-        self.add_score_by_type(h[:project], 25, :score_g) if h[:post].instance_of? Core::Essay::Post
-        # self.add_score_by_type(h[:project], 50, :score_g) if h[:post].instance_of? Concept::Post
-        self.add_score_by_type(h[:project], 500, :score_g) if h[:post].instance_of? Plan::Post
+        self.add_score_by_type(h[:project], h[:score], h[:type_score])
+        self.journals.build(type_event: 'my_add_score_'+h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
 
-        if h[:post].instance_of? Discontent::Post
-          self.add_score_by_type(h[:project], 25, :score_g)
-          self.journals.build(type_event: 'my_add_score_discontent', project: h[:project], user_informed: self, body: "25", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-          if h[:post].improve_comment
-            # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
-            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
-            comment.user.add_score_by_type(h[:project], 10, :score_g)
-            self.journals.build(type_event: 'my_add_score_discontent_improve', project: h[:project], user_informed: comment.user, body: "10", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-          end
-        end
-        if h[:post].instance_of? Concept::Post
-          # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
-          self.add_score_by_type(h[:project], 50, :score_g)
-          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "50", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-          if h[:post].improve_comment
-            # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
-            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
-            comment.user.add_score_by_type(h[:project], 20, :score_g)
-            self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-          end
-        end
-      # self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? CollectInfo::Post
-      when :plus_field
-        if h[:post].instance_of? Concept::Post
-          # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
-          if h[:type_field] and score_for_concept_field(h[:post], h[:type_field]) > 0
-            self.add_score_by_type(h[:project], score_for_concept_field(h[:post], h[:type_field]), :score_g)
-            if ['status_name', 'status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
-              self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "40", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-            end
-          end
-        end
-      when :plus_field_all
-        if h[:post].instance_of? Concept::Post
-          self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness, :score_g)
-          self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
-        end
-      when :to_archive_life_tape_post
-        self.add_score_by_type(h[:project], -10, :score_g)
-      when :add_discontent_post
-        self.add_score_by_type(h[:project], 20, :score_g)
-      when :to_archive_plus_comment
-        self.add_score_by_type(h[:project], -5, :score_a)
-        Journal.destroy_journal_record(h[:project], 'my_add_score_comment', self, h[:comment], true)
       when :to_archive_plus_post
-        self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
+        self.add_score_by_type(h[:project], -h[:score], h[:type_score])
+        Journal.destroy_journal_record(h[:project], 'my_add_score_'+h[:model_score], self, h[:post], true)
 
-        if h[:post].instance_of? Discontent::Post
-          Journal.destroy_journal_record(h[:project], 'my_add_score_discontent', self, h[:post], true)
-          if h[:post].improve_comment
-            comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
-            comment.user.add_score_by_type(h[:project], -10, :score_g)
-            Journal.destroy_journal_record(h[:project], 'my_add_score_discontent_improve', comment.user, h[:post], true)
-          end
-        end
 
-      when :to_archive_plus_field
-        self.add_score_by_type(h[:project], -score_for_concept_field(h[:post], h[:type_field], true), :score_g)
-        if h[:post].instance_of? Concept::Post and ['status_name', 'status_content'].include?(h[:type_field])
-          Journal.destroy_journal_record(h[:project], 'my_add_score_concept', self, h[:post], true)
-        end
-      when :to_archive_plus_field_all
-        self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness), :score_g)
-        if h[:post].instance_of? Concept::Post
-          Journal.destroy_journal_record(h[:project], 'my_add_score_concept', self, h[:post], true)
-        end
+
+      # when :add_life_tape_post
+      #   self.add_score_by_type(h[:project], 10, :score_g)
+      # when :plus_comment
+      #   self.add_score_by_type(h[:project], 5, :score_a)
+      #   # self.journals.build(type_event:'useful_comment', project: h[:project], body:"#{h[:comment].content[0..24]}:#{h[:path]}/#{h[:comment].post.id}#comment_#{h[:comment].id}").save!
+      #   self.journals.build(type_event: 'my_add_score_comment', project: h[:project], user_informed: self, body: "5", first_id: h[:comment].id, viewed: false, personal: true).save!
+      #
+      # when :plus_post
+      #   self.add_score_by_type(h[:project], 25, :score_g) if h[:post].instance_of? Core::Essay::Post
+      #   # self.add_score_by_type(h[:project], 50, :score_g) if h[:post].instance_of? Concept::Post
+      #   self.add_score_by_type(h[:project], 500, :score_g) if h[:post].instance_of? Plan::Post
+      #
+      #   if h[:post].instance_of? Discontent::Post
+      #     self.add_score_by_type(h[:project], 25, :score_g)
+      #     self.journals.build(type_event: 'my_add_score_discontent', project: h[:project], user_informed: self, body: "25", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #     if h[:post].improve_comment
+      #       # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+      #       comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
+      #       comment.user.add_score_by_type(h[:project], 10, :score_g)
+      #       self.journals.build(type_event: 'my_add_score_discontent_improve', project: h[:project], user_informed: comment.user, body: "10", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #     end
+      #   end
+      #   if h[:post].instance_of? Concept::Post
+      #     # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+      #     self.add_score_by_type(h[:project], 50, :score_g)
+      #     self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "50", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #     if h[:post].improve_comment
+      #       # comment = "#{get_class_for_improve(h[:post].improve_stage)}::Comment".constantize.find(h[:post].improve_comment)
+      #       comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
+      #       comment.user.add_score_by_type(h[:project], 20, :score_g)
+      #       self.journals.build(type_event: 'my_add_score_concept_improve', project: h[:project], user_informed: comment.user, body: "20", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #     end
+      #   end
+      # # self.add_score_by_type(h[:project], 10, :score_g) if h[:post].instance_of? CollectInfo::Post
+      # when :plus_field
+      #   if h[:post].instance_of? Concept::Post
+      #     # self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness + 39, :score_g)
+      #     if h[:type_field] and score_for_concept_field(h[:post], h[:type_field]) > 0
+      #       self.add_score_by_type(h[:project], score_for_concept_field(h[:post], h[:type_field]), :score_g)
+      #       if ['status_name', 'status_content'].include?(h[:type_field]) and h[:post].status_name and h[:post].status_content
+      #         self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "40", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #       end
+      #     end
+      #   end
+      # when :plus_field_all
+      #   if h[:post].instance_of? Concept::Post
+      #     self.add_score_by_type(h[:project], h[:post].fullness.nil? ? 40 : h[:post].fullness, :score_g)
+      #     self.journals.build(type_event: 'my_add_score_concept', project: h[:project], user_informed: self, body: "#{h[:post].fullness.nil? ? 40 : h[:post].fullness}", first_id: h[:post].id, body2: trim_content(h[:post].content), viewed: false, personal: true).save!
+      #   end
+      # when :to_archive_life_tape_post
+      #   self.add_score_by_type(h[:project], -10, :score_g)
+      # when :add_discontent_post
+      #   self.add_score_by_type(h[:project], 20, :score_g)
+      # when :to_archive_plus_comment
+      #   self.add_score_by_type(h[:project], -5, :score_a)
+      #   Journal.destroy_journal_record(h[:project], 'my_add_score_comment', self, h[:comment], true)
+      # when :to_archive_plus_post
+      #   self.add_score_by_type(h[:project], -score_for_plus_post(h[:post]), :score_g)
+      #
+      #   if h[:post].instance_of? Discontent::Post
+      #     Journal.destroy_journal_record(h[:project], 'my_add_score_discontent', self, h[:post], true)
+      #     if h[:post].improve_comment
+      #       comment = get_comment_for_stage(h[:post].improve_stage, h[:post].improve_comment)
+      #       comment.user.add_score_by_type(h[:project], -10, :score_g)
+      #       Journal.destroy_journal_record(h[:project], 'my_add_score_discontent_improve', comment.user, h[:post], true)
+      #     end
+      #   end
+      #
+      # when :to_archive_plus_field
+      #   self.add_score_by_type(h[:project], -score_for_concept_field(h[:post], h[:type_field], true), :score_g)
+      #   if h[:post].instance_of? Concept::Post and ['status_name', 'status_content'].include?(h[:type_field])
+      #     Journal.destroy_journal_record(h[:project], 'my_add_score_concept', self, h[:post], true)
+      #   end
+      # when :to_archive_plus_field_all
+      #   self.add_score_by_type(h[:project], -(h[:post].fullness.nil? ? 40 : h[:post].fullness), :score_g)
+      #   if h[:post].instance_of? Concept::Post
+      #     Journal.destroy_journal_record(h[:project], 'my_add_score_concept', self, h[:post], true)
+      #   end
     end
   end
 
-  def add_score_by_type(project, score, type = :score_g)
-    ps = self.core_project_scores.by_project(project).first_or_create
-    ps.update_attributes!(score: score +ps.score, type => ps.read_attribute(type)+score)
-    Award.reward(user: self, old_score: ps.score-score, project: project, score: ps.score, type: 'max')
+  def add_score_by_type(project, score, type = :collect_info_posts_score)
+    ps = self.core_project_users.by_project(project).first_or_create
+    ps.update_attributes!(score: score + (ps.score || 0), type => (ps.read_attribute(type) || 0) + score)
+    # Award.reward(user: self, old_score: ps.score-score, project: project, score: ps.score, type: 'max')
     # self.user_project_scores(project).update_attributes!(score: score+self.score, type => self.read_attribute(type)+score)
   end
 
   def can_vote_for(stage, project)
-    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, 'collect_info') > 0
+    if stage == :collect_info and project.status == 2 and project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :discontent and project.status == 6 and project.get_free_votes_for(self, 'discontent') > 0
+    elsif stage == :discontent and project.status == 6 and project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :concept and project.status == 8 and project.get_free_votes_for(self, 'concept') > 0
+    elsif stage == :concept and project.status == 8 and project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :novation and project.status == 10 and project.get_free_votes_for(self, 'novation') > 0
+    elsif stage == :novation and project.status == 10 and project.get_free_votes_for(self, stage) > 0
       return true
     end
     false

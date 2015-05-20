@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   include ApplicationHelper
+  include MarkupHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :start_visit
 

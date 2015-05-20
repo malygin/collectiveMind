@@ -257,17 +257,19 @@ class PostsController < ProjectsController
   #todo check if user already voted
   def plus
     @post = current_model.find(params[:id])
-    if current_user.admin?
-      @post.update(useful: true)
-      project_user = @post.user.core_project_users.by_project(@project.id).first
-      project_user.update_attributes("#{current_model.to_s.underscore.pluralize.gsub('/', '_')}_score" => current_model::SCORE)
-      if project_user.score.nil?
-        project_user.update_attributes(score: current_model::SCORE)
-      else
-        project_user.update_attributes(score: (project_user.score + current_model::SCORE))
+    if current_user.boss? or current_user.role_expert? or current_user.stat_expert?
+      @post.toggle!(:useful)
+      if @post.user
+        if @post.useful
+          @post.user.add_score(type: :plus_post, project: @project, post: @post, type_score: "#{@post.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : @post.class.table_name}_score", score: current_model::SCORE, model_score: @post.class.table_name.singularize)
+        else
+          @post.user.add_score(type: :to_archive_plus_post, project: @project, post: @post, type_score: "#{@post.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : @post.class.table_name}_score", score: current_model::SCORE, model_score: @post.class.table_name.singularize)
+        end
       end
-      #Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
     end
+
+
+    #Award.reward(user: @post.user, post: @post, project: @project, type: 'add')
     # if @post.instance_of? Discontent::Post
     #   @post.update_attributes(status_content: true, status_whered: true, status_whend: true)
     #   # elsif @post.instance_of? Concept::Post

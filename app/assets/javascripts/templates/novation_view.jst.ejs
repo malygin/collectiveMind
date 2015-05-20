@@ -1,105 +1,103 @@
 <div id="novation_post_<%= id %>" class="<%= concept_class %> col-md-6 novation-block" data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
-    <div class="post post_type_3 themes_cont">
-        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/novation/posts/<%= id %>">
-            <div class="post-header white">
-                <div class="row">
-                    <div class="col-md-12 col-xs-12">
-                        <h5 class="font_purple bold">
-                            <%= title %>
-                        </h5>
-                    </div>
-                </div>
-                <i class="fa fa-angle-right"></i>
-            </div>
-        </a>
-        <div class="post-body ch_action" data-for="post_ch<%= id %>">
-            <div class="media">
-                <div class="media-left text-center gradient post-poster">
-                    <img class="img-circle img50" src="<%= user_avatar %>" alt="No ava">
-                    <p class="poster-name">
-                        <%= user %>
-                    </p>
-                </div>
-                <div class='media-body white-gray'>
-                    <div class="post-text">
-                        <p>
-                            <%= content %>
+    <div class="full-post">
+        <% if(admin_panel) { %>
+        <div class="post-top-header">
+            <a class="btn btn-white btn-xs link_status <%= useful ? 'font_red' : '' %>" id="plus_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/plus"><i class="fa fa-trophy fa-lg"></i>
+            </a>
+            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'font_red' : '' %>" id="approve_stat_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/discuss_status?approve_status=true"><b>Важно</b>
+            </a>
+        </div>
+        <% } %>
+        <div class="post post_type_3 no_head">
+            <div class="<%= approve_status ? 'important' : '' %>" data-important="<%= id %>"></div>
+            <div class="post-header white"></div>
+            <div class="post-body ch_action" data-for="post_ch<%= id %>">
+                <div class="media">
+                    <div class="media-left text-center gradient post-poster">
+                        <img class="img-circle img40" src="<%= user_avatar %>" alt="No ava">
+                        <p class="poster-name">
+                            <%= user %>
+                        </p>
+                        <p class="time">
+                            <%= post_date %>
                         </p>
                     </div>
-                    <% if(comments.length > 0) { %>
-                    <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
-                        <div class="wrapper ps_cont half_wheel_speed">
-                            <div class="post_cont_inner">
-                                <% for(var i=0; i<comments.length; i++) {%>
-                                <div class="comment_preview">
-                                        <span class="bold com_date">
-                                            <%= comments[i].date %>
-                                        </span>
-                                        <span class="bold">
-                                            <%= comments[i].user %>
-                                        </span>
-                                    <%= comments[i].content %>
+                    <div class='media-body white-gray'>
+                        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/novation/posts/<%= id %>">
+                            <div class="post-text">
+                                <p>
+                                    <%= title %>
+                                </p>
+                                <div class="pull-right">
+                                    <i class="fa fa-angle-right"></i>
                                 </div>
-                                <% } %>
+                            </div>
+                        </a>
+                        <% if(comments.length > 0) { %>
+                        <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
+                            <div class="wrapper ps_cont half_wheel_speed">
+                                <div class="post_cont_inner">
+                                    <% for(var i=0; i<comments.length; i++) {%>
+                                    <div class="comment_preview">
+                                            <span class="bold com_date">
+                                                <%= comments[i].date %>
+                                            </span>
+                                            <span class="bold">
+                                                <%= comments[i].user %>
+                                            </span>
+                                        <%= comments[i].content %>
+                                    </div>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
-                </div>
-            </div>
-        </div>
-        <div class="post-bottom white">
-            <div class="row">
-                <div class="col-md-1 col_padding_right_3">
-                    <small class="pull-left" style="margin-right: 3px;">
-                        Идеи
-                    </small>
-                </div>
-                <div class="col-md-8 col_padding_right_3 themes_cont">
-                    <div id="stripe<%= id %>" class="post-theme">
-                        <% for(var i=0; i<concepts.length; i++) {%>
-                        <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
-                                <span class="tags">
-                                  <%= concepts[i].content %>
-                                </span>
-                            </span>
                         <% } %>
                     </div>
                 </div>
-                <div class="col-md-3 col_padding_left_3">
-                    <div class="text-right small_icons">
-                        <span class="popup2">
-                            <a id="plus_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
-                               href="/project/<%= project_id %>/novation/posts/<%= id %>/plus">
-                                <i class="fa fa-trophy font_red"></i>
-                            </a>
-                        </span>
-                        <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
-                          <small class="cc_post_<%= id %>">
-                            <%= count_comments %>
-                          </small>
-                          <i class="fa fa-comment-o"></i>
-                        </span>
-
-
-                        <span class="popup2">
-                          <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
-                            <%= count_likes %>
-                          </small>
-                          <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=false">
-                            <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
-                          </a>
-                        </span>
-
-                         <span class="popup2">
-                           <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
-                             <%= count_dislikes %>
-                           </small>
-                           <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=true">
-                             <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-                           </a>
-                         </span>
-
+            </div>
+            <div class="post-bottom white">
+                <div class="row">
+                    <div class="col-md-1 col_padding_right_3">
+                        <small class="pull-left" style="margin-right: 3px;">
+                            Идеи
+                        </small>
+                    </div>
+                    <div class="col-md-8 col_padding_right_3 themes_cont">
+                        <div id="stripe<%= id %>" class="post-theme">
+                            <% for(var i=0; i<concepts.length; i++) {%>
+                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                                    <span class="tags">
+                                      <%= concepts[i].content %>
+                                    </span>
+                                </span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col_padding_left_3">
+                        <div class="text-right small_icons">
+                            <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
+                              <small class="cc_post_<%= id %>">
+                                <%= count_comments %>
+                              </small>
+                              <i class="fa fa-comment-o"></i>
+                            </span>
+                            <span class="popup2">
+                              <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
+                                <%= count_likes %>
+                              </small>
+                              <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=false">
+                                <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
+                              </a>
+                            </span>
+                             <span class="popup2">
+                               <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
+                                 <%= count_dislikes %>
+                               </small>
+                               <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=true">
+                                 <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+                               </a>
+                             </span>
+                        </div>
                     </div>
                 </div>
             </div>

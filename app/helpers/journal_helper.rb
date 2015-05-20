@@ -67,6 +67,19 @@ module JournalHelper
         'fa-plus font_color_stage4'
       when 'plan_post_save'
         'fa-plus font_color_stage5'
+      # баллы за контент
+      when 'my_add_score_core_aspect_post'
+        'fa-trophy font_color_stage1'
+      when 'my_add_score_discontent_post'
+        'fa-trophy font_color_stage2'
+      when 'my_add_score_concept_post'
+        'fa-trophy font_color_stage3'
+      when 'my_add_score_novation_post'
+        'fa-trophy font_color_stage4'
+      when 'my_add_score_plan_post'
+        'fa-trophy font_color_stage5'
+
+
       # when 'plan_post_save'
       #   'fa fa-plus color-green'
       # when 'plan_post_update'
@@ -185,7 +198,8 @@ module JournalHelper
       when 'my_core_aspect_comment_dislike'
         "не понравился ваш комментарий: '#{j.body}'" + link_to(' к аспекту ', "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
-
+      when 'my_add_score_core_aspect_post'
+        "вы получили #{j.body} баллов за аспект "+ link_to(j.body2, "/project/#{project}/collect_info/posts?jr_post=#{j.first_id}&viewed=true")
 
       # DISCONTENTS
       when 'discontent_post_save'
@@ -220,7 +234,8 @@ module JournalHelper
       when 'my_discontent_comment_dislike'
         "не понравился ваш комментарий: '#{j.body}'" + link_to(' к несовершенству ', "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
-
+      when 'my_add_score_discontent_post'
+        "вы получили #{j.body} баллов за несовершенство "+ link_to(j.body2, "/project/#{project}/discontent/posts?jr_post=#{j.first_id}&viewed=true")
 
       # DISCONTENTS
       # when 'discontent_comment_save'
@@ -297,7 +312,8 @@ module JournalHelper
       when 'my_concept_comment_dislike'
         "не понравился ваш комментарий: '#{j.body}'" + link_to(' к идее ', "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
-
+      when 'my_add_score_concept_post'
+        "вы получили #{j.body} баллов за идею "+ link_to(j.body2, "/project/#{project}/concept/posts?jr_post=#{j.first_id}&viewed=true")
 
 
 
@@ -375,6 +391,9 @@ module JournalHelper
       when 'my_novation_comment_dislike'
         "не понравился ваш комментарий: '#{j.body}'" + link_to(' к пакету ', "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
+      when 'my_add_score_novation_post'
+        "вы получили #{j.body} баллов за пакет "+ link_to(j.body2, "/project/#{project}/novation/posts?jr_post=#{j.first_id}&viewed=true")
+
 
       # PLANS
 
@@ -406,6 +425,8 @@ module JournalHelper
       when 'my_plan_comment_dislike'
         "не понравился ваш комментарий: '#{j.body}'" + link_to(' к проекту ', "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true&jr_comment=#{j.second_id}#comment_#{j.second_id}")
 
+      when 'my_add_score_plan_post'
+        "вы получили #{j.body} баллов за проект "+ link_to(j.body2, "/project/#{project}/plan/posts?jr_post=#{j.first_id}&viewed=true")
 
       # PLANS
       # when 'plan_comment_save'

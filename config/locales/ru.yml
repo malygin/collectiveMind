@@ -141,7 +141,7 @@ ru:
       one: "Идет 1 стадия"
       other: "Идет %{count} стадия"
     idea: "Идея"
-    important: "ВАЖНОЕ"
+    important: "Важно"
     improve:
       concept: "Доработано до нововведения"
       discontent: "Доработано до несовершенства"

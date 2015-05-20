@@ -102,6 +102,8 @@ describe 'Novation ' do
 
     it_behaves_like 'show list novations'
 
+    it_behaves_like 'admin panel post'
+
     it_behaves_like 'sort novations'
 
     it_behaves_like 'discuss novations'
@@ -111,20 +113,21 @@ describe 'Novation ' do
     end
   end
 
-  # context 'moderator sign in ' do
-  #   before do
-  #     sign_in moderator
-  #   end
-  #
-  #
-  # it_behaves_like 'welcome popup', 'novation'
-  #
-  # it_behaves_like 'show list novations'
-  #
-  # it_behaves_like 'sort novations'
-  #
-  # it_behaves_like 'discuss novations'
-  #
-  # it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей'
-  # end
+  context 'moderator sign in ' do
+    before do
+      sign_in moderator
+    end
+
+    it_behaves_like 'admin panel post', true
+
+    # it_behaves_like 'welcome popup', 'novation'
+    #
+    # it_behaves_like 'show list novations'
+    #
+    # it_behaves_like 'sort novations'
+    #
+    # it_behaves_like 'discuss novations'
+    #
+    # it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей'
+  end
 end

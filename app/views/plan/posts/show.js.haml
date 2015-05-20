@@ -12,4 +12,8 @@ ge.loadProject(project);
 setTimeout(function() { ge.gantt.refreshGantt()}, 3000);
 -#ge.gantt.refreshGantt();
 }
+
+$('.with_arrow').click(function () {$(this).find('i.collapse_arrow').toggleClass('fa-rotate-90');});
+$('.with_plus').click(function () { $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus');});
+
 history_change("#{plan_posts_path(@project)}");

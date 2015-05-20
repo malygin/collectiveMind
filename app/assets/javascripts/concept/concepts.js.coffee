@@ -37,10 +37,10 @@ ConceptCollectionView = Backbone.View.extend
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
 
-#    show_comments_hover()
-#    activate_perfect_scrollbar()
-#    post_colored_stripes()
-#    colors_discontents()
+    show_comments_hover()
+    activate_perfect_scrollbar()
+    post_colored_stripes()
+    colors_discontents()
     return this
 
   addOne: (concept)->

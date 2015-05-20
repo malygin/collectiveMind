@@ -449,12 +449,13 @@
                                 проектные предложения (2)</a>
                         </li>
                     </ul>
-                    <div class="divider200"></div>
-                    <button class="btn add-button type3 del">Удалить</button>
-                    <div class="divider10"></div>
-                    <button class="btn add-button type3 dark-green">Сохранить и выйти</button>
-                    <div class="divider10"></div>
-                    <button class="btn add-button type3 dark-green">Опубликовать проект</button>
+                    <div class="bottom_btn">
+                        <button class="btn add-button type3 del">Удалить</button>
+                        <div class="divider10"></div>
+                        <button class="btn add-button type3 dark-green">Сохранить и выйти</button>
+                        <div class="divider10"></div>
+                        <button class="btn add-button type3 dark-green">Опубликовать проект</button>
+                    </div>
                 </div>
                 <div class="col-md-9 col-md-offset-1">
                     <div class="tab-content">
@@ -464,7 +465,7 @@
                                 <a class="cont_heading a_font_reset bold pocket_name open-popup"
                                    data-placement="cabinet5" data-target="1">Выбрать пакет</a>
                             </div>
-                            <div class="content_window white c_w_5">
+                            <div class="content_window white c_w_5 height100">
                                 <div class="cont_heading">
                                     <button class="btn btn_cab_mod type2 btn_toggle btn_reset active">Описание
                                         проектного предложения
@@ -497,7 +498,9 @@
                                             <div role="tabpanel" class="tab-pane active fade in" id="cabinet_5_cont_0">
                                                 <div class="divider35"></div>
                                                 <div class="text-center">
-                                                    <img src="img/cab_5_qsign.png">
+                                                    <a  href="#cabinet_5_cont_1"  role="tab"
+                                                       data-toggle="tab">
+                                                    <img src="img/cab_5_qsign.png"></a>
 
                                                     <div class="divider35"></div>
                                                     <p class="cab5_placeholder">
@@ -551,7 +554,8 @@
                                                 Название пакета с идеями идеями пакета
                                             </a>
                                             <span class="post_btns_cont">
-                                                <button class="btn btn_reset btn_del"><i class="glyphicon glyphicon-pencil"></i>
+                                                <button class="btn btn_reset btn_del"><i
+                                                        class="glyphicon glyphicon-pencil"></i>
                                                 </button>
                                                 <button class="btn btn_reset btn_del"><i
                                                         class="glyphicon glyphicon-trash"></i></button>
@@ -578,7 +582,8 @@
                                                 Название пакета с идеями идеями пакета
                                             </a>
                                             <span class="post_btns_cont">
-                                                <button class="btn btn_reset btn_del"><i class="glyphicon glyphicon-pencil"></i>
+                                                <button class="btn btn_reset btn_del"><i
+                                                        class="glyphicon glyphicon-pencil"></i>
                                                 </button>
                                                 <button class="btn btn_reset btn_del"><i
                                                         class="glyphicon glyphicon-trash"></i></button>
@@ -598,8 +603,8 @@
         <div class="bottom_fix" id="bottom-panel">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
+
+                    <div class="col-md-9 col-md-offset-3">
                         <div class="content_window white">
                             <div class="cont_heading">
                                 <button class="btn btn_cab_mod type2 btn_toggle btn_reset active">Добавление задач в

@@ -373,200 +373,218 @@
           .stage-post-block
             .row
               .col-md-6
-                .post.post_type_3.no_head
-                  .post-header.white
-                  .post-body.ch_action{"data-for" => "post_ch1"}
-                    .media
-                      .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                        %p.poster-name Пятачок
-                        %p.time.text-center 21.12.2014
-                      .media-body.white-gray
-                        .post-text.open-popup{"data-placement" => "4", "data-target" => "1"}
-                          %p
-                            Взаимное недоверие четвероногих и пчёл
-                          .pull-right
-                            %i.fa.fa-angle-right
-                        #post_ch1.post_cont_hover.post_tall.white
-                          .wrapper.ps_cont.half_wheel_speed
-                            .post_cont_inner
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                  #tooltip4_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
-                    .row
-                      .col-md-1.col_padding_right_3
-                        %small.pull-left{:style => "margin-right: 3px;"} Идеи
-                      .col-md-8.col_padding_right_3.themes_cont
-                        #stripe1.post-theme
-                          %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
-                            %span.tags Слишком низкие
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
-                            %span.tags Четвероногим нечем
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
-                            %span.tags Активное противостояние
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "10", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                      .col-md-3.col_padding_left_3
-                        .text-right.small_icons
-                          %span.popup2
-                            %i.fa.fa-trophy.font_red
-                          %span.popup2.comments_icon{"data-for" => "post_ch1"}
-                            %small 5
-                            %i.fa.fa-comment-o
-                          %span.popup2
-                            %small 9
-                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                          %span.popup2
-                            %small 1
-                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                          %span.popup2
-                            %i.fa.fa-exclamation-triangle.font_lighter_grey
+                .full-post
+                  .post-top-header
+                    %a.btn.btn-white.btn-xs{:href => "#"}
+                      %i.fa.fa-trophy.fa-lg
+                    %a.btn.btn-white.btn-xs{"data-id" => "1", "data-type" => "important", :href => "#"}
+                      %b Важно
+                  .post.post_type_3.no_head
+                    %div{"data-important" => "1"}
+                    .post-header.white
+                    .post-body.ch_action{"data-for" => "post_ch1"}
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                          %p.time.text-center 21.12.2014
+                        .media-body.white-gray
+                          .post-text.open-popup{"data-placement" => "4", "data-target" => "1"}
+                            %p
+                              Взаимное недоверие четвероногих и пчёл
+                            .pull-right
+                              %i.fa.fa-angle-right
+                          #post_ch1.post_cont_hover.post_tall.white
+                            .wrapper.ps_cont.half_wheel_speed
+                              .post_cont_inner
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                    #tooltip4_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
+                      .row
+                        .col-md-1.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                        .col-md-8.col_padding_right_3.themes_cont
+                          #stripe1.post-theme
+                            %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                              %span.tags Слишком низкие
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                              %span.tags Четвероногим нечем
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                              %span.tags Активное противостояние
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "10", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                        .col-md-3.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2.comments_icon{"data-for" => "post_ch1"}
+                              %small 5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              %small 9
+                              %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+                            %span.popup2
+                              %small 1
+                              %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                            %span.popup2
+                              %i.fa.fa-exclamation-triangle.font_lighter_grey
               .col-md-6
-                .post.post_type_3.no_head
-                  .post-header.white
-                  .post-body.ch_action{"data-for" => "post_ch2"}
-                    .media
-                      .media-left.text-center.gradient.post-poster
-                        %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
-                        %p.poster-name Кролик
-                        %p.time.text-center 21.12.2014
-                      .media-body.white-gray
-                        .post-text.open-popup{"data-placement" => "4", "data-target" => "1"}
-                          %p Четвероногим нечем заинтересовать пчел
-                          .pull-right
-                            %i.fa.fa-angle-right
-                        #post_ch2.post_cont_hover.post_tall.white
-                          .wrapper.ps_cont.half_wheel_speed
-                            .post_cont_inner
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                              .comment_preview
-                                %span.bold Liza:
-                                По
-                                поводу кнопки "всё". Она не очень интуитивна и красива.
-                              .comment_preview
-                                %span.bold Liza:
-                                Начальная - это та, что грузится со страницей. Но она по дате
-                                сортировки
-                              .comment_preview
-                                %span.bold irivertime:
-                                И
-                                обратная сортировка должна тоже как-то выделяться
-                  .post-bottom.white
-                    .row
-                      .col-md-1.col_padding_right_3
-                        %small.pull-left{:style => "margin-right: 3px;"} Идеи
-                      .col-md-8.col_padding_right_3.themes_cont
-                        #stripe2.post-theme
-                          %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
-                            %span.tags Слишком низкие
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
-                            %span.tags Четвероногим нечем
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
-                            %span.tags Активное противостояние
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "10", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                          %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "imperf"}
-                            %span.tags Рядом с дубом нет
-                      .col-md-3.col_padding_left_3
-                        .text-right.small_icons
-                          %span.popup2.comments_icon{"data-for" => "post_ch2"}
-                            %small 5
-                            %i.fa.fa-comment-o
-                          %span.popup2
-                            %small 9
-                            %i.fa.fa-thumbs-o-up.fa-flip-horizontal
-                          %span.popup2
-                            %small 1
-                            %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-                          %span.popup2
-                            %i.fa.fa-exclamation-triangle.font_lighter_grey
+                .full_post
+                  .post-top-header
+                    %a.btn.btn-white.btn-xs{:href => "#"}
+                      %i.fa.fa-trophy.fa-lg
+                    %a.btn.btn-white.btn-xs{"data-id" => "2", "data-type" => "important", :href => "#"}
+                      %b Важно
+                  .post.post_type_3.no_head
+                    %div{"data-important" => "2"}
+                    .post-header.white
+                    .post-body.ch_action{"data-for" => "post_ch2"}
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Кролик
+                          %p.time.text-center 21.12.2014
+                        .media-body.white-gray
+                          .post-text.open-popup{"data-placement" => "4", "data-target" => "1"}
+                            %p Четвероногим нечем заинтересовать пчел
+                            .pull-right
+                              %i.fa.fa-angle-right
+                          #post_ch2.post_cont_hover.post_tall.white
+                            .wrapper.ps_cont.half_wheel_speed
+                              .post_cont_inner
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                    .post-bottom.white
+                      .row
+                        .col-md-1.col_padding_right_3
+                          %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                        .col-md-8.col_padding_right_3.themes_cont
+                          #stripe2.post-theme
+                            %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                              %span.tags Слишком низкие
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                              %span.tags Четвероногим нечем
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                              %span.tags Активное противостояние
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "8", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "10", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                            %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "imperf"}
+                              %span.tags Рядом с дубом нет
+                        .col-md-3.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2.comments_icon{"data-for" => "post_ch2"}
+                              %small 5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              %small 9
+                              %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+                            %span.popup2
+                              %small 1
+                              %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                            %span.popup2
+                              %i.fa.fa-exclamation-triangle.font_lighter_grey
           %a.open-popup-vote-link{:href => "#vote-4"} Голосовалка
           / Main Block ends
           #popup-4-1.popup-window.detailed_popup.popup-w1030.mfp-hide
@@ -637,29 +655,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                           %li
                             .stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
                             %a.theme_font_color{"data-popover-content" => "#a2", "data-toggle" => "popover", "data-trigger" => "focus", :href => "#", :tabindex => "0"} Взаимное недоверие четвероногих и пчел
@@ -669,29 +694,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                           %li
                             .stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
                             %a.theme_font_color{"data-popover-content" => "#a3", "data-toggle" => "popover", "data-trigger" => "focus", :href => "#", :tabindex => "0"} Взаимное недоверие четвероногих и пчел
@@ -701,29 +733,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                           %li
                             .stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
                             %a.theme_font_color{"data-popover-content" => "#a4", "data-toggle" => "popover", "data-trigger" => "focus", :href => "#", :tabindex => "0"} Взаимное недоверие четвероногих и пчел
@@ -733,29 +772,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                           %li
                             .stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "5", "data-me-type" => "imperf"}
                             %a.theme_font_color{"data-popover-content" => "#a5", "data-toggle" => "popover", "data-trigger" => "focus", :href => "#", :tabindex => "0"} Взаимное недоверие четвероногих и пчел
@@ -765,29 +811,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                           %li
                             .stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "imperf"}
                             %a.theme_font_color{"data-popover-content" => "#a6", "data-toggle" => "popover", "data-trigger" => "focus", :href => "#", :tabindex => "0"} Взаимное недоверие четвероногих и пчел
@@ -797,29 +850,36 @@
                                   %p Лиза Школьник
                                   %p
                                     %b.theme_font_color> Суть идеи:
-                                    заказчик захочет оценить продукты процедуры
+                                    заказчик
+                                    захочет оценить продукты процедуры
                                     по
                                     заданным параметрам, необходимо задать возможность
                                     кастомизации
                                     хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Что будет иначе:
-                                    заказчик захочет оценить продукты
+                                    заказчик
+                                    захочет оценить продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
                                     %b.theme_font_color> Кто будет делать иначе:
-                                    заказчик захочет оценить
+                                    заказчик
+                                    захочет оценить
                                     продукты
                                     процедуры по заданным параметрам, необходимо задать
                                     возможность
                                     кастомизации хотя бы на стадии оценки проектов
                                   %p
-                                    %b.theme_font_color> Чьи интересы будут затронуты:
+                                    %b.theme_font_color>
+                                      Чьи интересы будут
+                                      затронуты:
                                     заказчик захочет оценить
-                                    продукты процедуры по заданным параметрам, необходимо задать
-                                    возможность кастомизации хотя бы на стадии оценки проектов
+                                    продукты процедуры по заданным параметрам, необходимо
+                                    задать
+                                    возможность кастомизации хотя бы на стадии оценки
+                                    проектов
                         .divider5
                       %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
                         Деятельность (5)

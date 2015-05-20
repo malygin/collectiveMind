@@ -188,6 +188,8 @@ describe 'Collect info' do
 
     it_behaves_like 'show list aspects'
 
+    it_behaves_like 'admin panel post'
+
     it_behaves_like 'answers the first questions'
 
     it_behaves_like 'discuss first aspects'
@@ -201,23 +203,25 @@ describe 'Collect info' do
     end
   end
 
-  # context 'moderator sign in ' do
-  #   before do
-  #     sign_in moderator
-  #   end
-  #
-  #   it_behaves_like 'welcome popup', 'collect_info'
-  #
-  #   it_behaves_like 'show list aspects'
-  #
-  #   it_behaves_like 'answers the first questions'
-  #
-  #   it_behaves_like 'discuss first aspects', true
-  #
-  #   it_behaves_like 'answers the second questions'
-  #
-  #   it_behaves_like 'discuss second aspects', true
-  #
-  #   it_behaves_like 'vote popup', 2, 'Голосование по аспектам'
-  # end
+  context 'moderator sign in ' do
+    before do
+      sign_in moderator
+    end
+
+    it_behaves_like 'admin panel post', true
+
+    #   it_behaves_like 'welcome popup', 'collect_info'
+    #
+    #   it_behaves_like 'show list aspects'
+    #
+    #   it_behaves_like 'answers the first questions'
+    #
+    #   it_behaves_like 'discuss first aspects', true
+    #
+    #   it_behaves_like 'answers the second questions'
+    #
+    #   it_behaves_like 'discuss second aspects', true
+    #
+    #   it_behaves_like 'vote popup', 2, 'Голосование по аспектам'
+  end
 end

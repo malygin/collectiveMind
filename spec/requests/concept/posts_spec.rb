@@ -146,6 +146,8 @@ describe 'Concept ' do
 
     it_behaves_like 'show list concepts'
 
+    it_behaves_like 'admin panel post'
+
     it_behaves_like 'filter concepts'
 
     it_behaves_like 'sort concepts'
@@ -157,22 +159,24 @@ describe 'Concept ' do
     end
   end
 
-  # context 'moderator sign in ' do
-  #   before do
-  #     sign_in moderator
-  #   end
-  #
-  # it_behaves_like 'welcome popup', 'concept'
-  #
-  # it_behaves_like 'show list concepts'
-  #
-  # it_behaves_like 'filter concepts'
-  #
-  # it_behaves_like 'sort concepts'
-  #
-  # it_behaves_like 'discuss concepts'
-  #
-  # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
-  # end
+  context 'moderator sign in ' do
+    before do
+      sign_in moderator
+    end
+
+    it_behaves_like 'admin panel post', true
+
+    # it_behaves_like 'welcome popup', 'concept'
+    #
+    # it_behaves_like 'show list concepts'
+    #
+    # it_behaves_like 'filter concepts'
+    #
+    # it_behaves_like 'sort concepts'
+    #
+    # it_behaves_like 'discuss concepts'
+    #
+    # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
+  end
 
 end

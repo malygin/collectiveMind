@@ -329,16 +329,16 @@
                   %a.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_5_1", :role => "tab"}
                     Мои
                     проектные предложения (2)
-              .divider200
               .content_window.white.r_u_sure_vert.del
                 %p.text-center Вы уверены, что хотите удалить пакет?
                 %div
                   %button.btn.btn_reset.font_white Да
                   %button.btn.btn_reset.font_white Нет
-              .divider20
-              %button.btn.add-button.type3.del Удалить
-              .divider10
-              %button.btn.add-button.type3.dark-green Сохранить и выйти
+              .bottom_btn
+                .divider20
+                %button.btn.add-button.type3.del Удалить
+                .divider10
+                %button.btn.add-button.type3.dark-green Сохранить и выйти
             .col-md-9.col-md-offset-1
               .tab-content
                 #cabinet_5_1.tab-pane.active.fade.in{:role => "tabpanel"}
@@ -351,7 +351,7 @@
                           Мои пакеты
                           %small &gt;
                       %textarea#t_textarea1.form-control.transp_ta{:placeholder => "название пакета", :rows => "1", :type => "text"}
-                  .content_window.white.c_w_5
+                  .content_window.white.c_w_5.height_100
                     .cont_heading
                       %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
                         Описание

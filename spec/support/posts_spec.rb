@@ -304,6 +304,61 @@ shared_examples 'likes posts' do |moderator = false|
   end
 end
 
+shared_examples 'admin panel post' do |moderator = false|
+  let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post').gsub('core/','') }
+  let(:stage_model) { @post1.class.name.underscore.pluralize.gsub('/posts', '_posts').gsub('core/aspect','collect_info') }
+  let(:comment_model_name) { @post1.class.name.constantize }
+
+  before do
+    create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect1, question: @question_0_1
+    create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect2, question: @question_0_2
+
+    stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
+
+    visit stage_post_path
+  end
+
+  if moderator
+    it ' score post ', js: true do
+      plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
+
+      expect(page).to have_link("plus_post_#{@post1.id}", href: plus_post_path)
+      expect {
+        find(:css, "a#plus_post_#{@post1.id}").trigger('click')
+        sleep(5)
+        expect(page).to have_css("a.font_red#plus_post_#{@post1.id}")
+      }.to change(Journal, :count).by(1)
+      expect {
+        find(:css, "a#plus_post_#{@post1.id}").trigger('click')
+        sleep(5)
+        expect(page).to have_css("a:not(.font_red)#plus_post_#{@post1.id}")
+      }.to change(Journal, :count).by(-1)
+    end
+
+    it ' approve post ', js: true do
+      discuss_post_path = Rails.application.routes.url_helpers.send("discuss_status_#{post_model}_path", project, @post1, approve_status: true)
+
+      expect(page).to have_link("approve_stat_post_#{@post1.id}", href: discuss_post_path)
+
+      expect {
+        find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
+        sleep(5)
+        expect(page).to have_css("a.font_red#approve_stat_post_#{@post1.id}")
+        expect(page).to have_css("div.important[data-important='#{@post1.id}']")
+      }.to change(Journal, :count).by(2)
+      find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
+      sleep(5)
+      expect(page).to have_css("a:not(.font_red)#approve_stat_post_#{@post1.id}")
+      expect(page).to have_css("div:not(.important)[data-important='#{@post1.id}']")
+    end
+  else
+    it ' not button ' do
+      expect(page).not_to have_link("plus_post_#{@post1.id}")
+      expect(page).not_to have_link("approve_stat_post_#{@post1.id}")
+    end
+  end
+end
+
 shared_examples 'welcome popup' do |stage|
   before do
     @user_check.destroy

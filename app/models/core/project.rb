@@ -161,13 +161,13 @@ class Core::Project < ActiveRecord::Base
 
   def get_free_votes_for(user, stage)
     case stage
-      when 'collect_info'
+      when :collect_info
         self.proc_main_aspects.size - user.voted_aspects.by_project(self.id).size
-      when 'discontent'
+      when :discontent
         self.discontent_for_vote.size - user.voted_discontent_posts.for_project(self.id).size
-      when 'concept'
+      when :concept
         self.concept_ongoing_post.size - user.voted_concept_post.by_project(self.id).size
-      when 'novation'
+      when :novation
         self.novations.size - user.voted_novation_post.by_project(self.id).size
     end
   end

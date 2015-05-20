@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513130915) do
+ActiveRecord::Schema.define(version: 20150519190203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(version: 20150513130915) do
     t.string   "short_name",           limit: 255
     t.text     "detailed_description"
     t.boolean  "approve_status"
+    t.boolean  "useful"
   end
 
   add_index "core_aspect_posts", ["core_aspect_id"], name: "index_core_aspect_posts_on_core_aspect_id", using: :btree

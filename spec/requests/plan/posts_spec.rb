@@ -81,22 +81,25 @@ describe 'Plan ' do
 
     it_behaves_like 'show list plans'
 
+    it_behaves_like 'admin panel post'
+
     it_behaves_like 'discuss plans'
   end
 
-  # context 'moderator sign in ' do
-  #   before do
-  #     sign_in moderator
-  #   end
-  #
-  #
-  # it_behaves_like 'welcome popup', 'plan'
-  #
-  # it_behaves_like 'show list plans'
-  #
-  # it_behaves_like 'sort plans'
-  #
-  # it_behaves_like 'discuss plans'
-  # end
+  context 'moderator sign in ' do
+    before do
+      sign_in moderator
+    end
+
+    it_behaves_like 'admin panel post', true
+
+    # it_behaves_like 'welcome popup', 'plan'
+    #
+    # it_behaves_like 'show list plans'
+    #
+    # it_behaves_like 'sort plans'
+    #
+    # it_behaves_like 'discuss plans'
+  end
 
 end
