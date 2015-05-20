@@ -2,14 +2,20 @@
     <div class="full-post">
         <% if(admin_panel) { %>
         <div class="post-top-header">
-            <a class="btn btn-white btn-xs link_status <%= useful ? 'font_red' : '' %>" id="plus_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/plus"><i class="fa fa-trophy fa-lg"></i>
+            <a class="btn btn-white btn-xs link_status <%= useful ? 'theme_font_color' : '' %>" id="plus_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/plus"><i class="fa fa-trophy fa-lg"></i>
             </a>
-            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'font_red' : '' %>" id="approve_stat_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/discuss_status?approve_status=true"><b>Важно</b>
+            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'theme_font_color' : '' %>" id="approve_stat_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/discuss_status?approve_status=true"><i class="fa fa-bookmark fa-lg"></i>
+            </a>
+            <a class="btn btn-white btn-xs link_status"><i class="fa fa-exclamation-triangle fa-lg"></i>
             </a>
         </div>
         <% } %>
         <div class="post post_type_3 no_head">
-            <div class="<%= approve_status ? 'important' : '' %>" data-important="<%= id %>"></div>
+            <div class="<%= approve_status ? '' : 'hide' %>" data-important="<%= id %>">
+                <div class="important">
+                   <i class="fa fa-bookmark fa-2x theme_font_color"></i>
+                </div>
+            </div>
             <div class="post-header white"></div>
             <div class="post-body ch_action" data-for="post_ch<%= id %>">
                 <div class="media">

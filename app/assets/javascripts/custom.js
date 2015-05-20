@@ -7,13 +7,13 @@ $(document).ready(function () {
     );
     $('.btn-white').click(
         function () {
-            $(this).toggleClass('font_red')
+            $(this).toggleClass('theme_font_color')
         }
     );
     $('[data-type ="important"]').click(
         function () {
             var id = $(this).attr("data-id");
-            $('[data-important=' + id + ']').toggleClass('important')
+            $('[data-important=' + id + ']').toggleClass('hide')
         }
     );
     $(window).scroll(function () {

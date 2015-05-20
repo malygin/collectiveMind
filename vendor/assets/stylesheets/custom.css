@@ -7044,8 +7044,8 @@ a.btn-white{
 .important{
     width: 60px;
     height: 60px;
+    margin-left: 7px;
     position: absolute;
-    background: image-url('important.png') no-repeat;
 }
 
 .bottom_btn{
