@@ -401,29 +401,26 @@ shared_examples 'vote popup' do |status, title, stage|
   end
 
   it 'correct voted', js: true do
-    tab = 1
-    # @todo title popup
+
     expect(page).to have_content title
     expect(page).to have_content @post1.content
     expect(page).to have_content @post2.content
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '2'
     end
-    find(:css, "#post_vote_#{@post1.id} .v_btn_#{1+tab}").trigger('click')
+    find(:css, "#post_vote_#{@post1.id} .v_btn_2").trigger('click')
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '1'
     end
-    within :css, ".poll-2-#{2+tab} span.vote_counter" do
+    within :css, ".poll-2-3 span.vote_counter" do
       expect(page).to have_content '1'
     end
-    within :css, ".poll-2-#{3+tab} span.vote_counter" do
-      expect(page).to have_content '0'
-    end
-    find(:css, "#post_vote_#{@post2.id} .v_btn_#{2+tab}").trigger('click')
+
+    find(:css, "#post_vote_#{@post2.id} .v_btn_3").trigger('click')
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '0'
     end
-    within :css, ".poll-2-#{3+tab} span.vote_counter" do
+    within :css, ".poll-2-4 span.vote_counter" do
       expect(page).to have_content '1'
     end
   end

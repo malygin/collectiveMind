@@ -18,6 +18,6 @@ class AddStageToCoreProject < ActiveRecord::Migration
     remove_column :core_projects, :project_type_id
 
 
-    add_column :core_projects, :stage, :string, default: '0'
+    add_column :core_projects, :stage, :string, default: '1:0'
   end
 end
