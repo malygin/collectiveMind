@@ -52,13 +52,7 @@ module ApplicationHelper
     controller_name == 'users' and action_name == 'index'
   end
 
-  def current_stage_controller
-    # Если это контроллер для кабинета, возвращаем номер текущей стадии
-    if cabinet?
-      return @project.main_stage
-    end
-    1
-  end
+
 
 
 

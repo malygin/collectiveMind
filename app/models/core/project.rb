@@ -126,11 +126,36 @@ class Core::Project < ActiveRecord::Base
     stage[0].to_i
   end
 
-  # return main stage for stage '2:3' it will be 3
+  # return main stage for stage '2:3' it will be 3, if  it '2' return 0
   def sub_stage
-    stage[2].to_i
+    if  stage[2]
+      stage[2].to_i
+    else
+      0
+    end
   end
 
+  # move to next stage if it '1:2' and we haven't '1:3' then go to '2:0', unless go to '1:3
+  def go_to_next_stage
+    if  STAGES[main_stage][:substages] and  STAGES[main_stage][:substages][sub_stage + 1]
+      self.stage= "#{main_stage}:#{sub_stage+1}"
+    else
+      self.stage= "#{main_stage+1}:0"
+    end
+    self.save
+  end
+
+  # move to prev stage if it '7:0' and we haven't '6:1' then go to '6:0', unless go to '6:1'
+  def go_to_prev_stage
+    if  sub_stage > 0
+      self.stage= "#{main_stage}:#{sub_stage-1}"
+    else
+      # if we haven't substages in STAGES  for prev stage, then we set new_sub_stage to 0
+      new_sub_stage = ( STAGES[main_stage-1][:substages] ?  (STAGES[main_stage-1][:substages].size - 1) : 0 )
+      self.stage= "#{main_stage-1}:#{new_sub_stage}"
+    end
+    self.save
+  end
 
   # тип вопроса в зависимости от этапа
   def type_for_questions
@@ -201,23 +226,6 @@ class Core::Project < ActiveRecord::Base
     Core::Project::LIST_STAGES[stage][:status].include? status
   end
 
-  def prev_status
-    # @todo здесь круто войдет https://github.com/pluginaweek/state_machine
-    # займусь позже)
-    if status > 0
-      status - 1
-    else
-      nil
-    end
-  end
-
-  def next_status
-    if status != 20
-      status + 1
-    else
-      nil
-    end
-  end
 
 
 
