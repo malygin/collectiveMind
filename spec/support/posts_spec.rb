@@ -327,12 +327,12 @@ shared_examples 'admin panel post' do |moderator = false|
       expect {
         find(:css, "a#plus_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a.font_red#plus_post_#{@post1.id}")
+        expect(page).to have_css("a.theme_font_color#plus_post_#{@post1.id}")
       }.to change(Journal, :count).by(1)
       expect {
         find(:css, "a#plus_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a:not(.font_red)#plus_post_#{@post1.id}")
+        expect(page).to have_css("a:not(.theme_font_color)#plus_post_#{@post1.id}")
       }.to change(Journal, :count).by(-1)
     end
 
@@ -344,13 +344,13 @@ shared_examples 'admin panel post' do |moderator = false|
       expect {
         find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a.font_red#approve_stat_post_#{@post1.id}")
-        expect(page).to have_css("div.important[data-important='#{@post1.id}']")
+        expect(page).to have_css("a.theme_font_color#approve_stat_post_#{@post1.id}")
+        expect(page).to have_css("div:not(.hide)[data-important='#{@post1.id}']")
       }.to change(Journal, :count).by(2)
       find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
       sleep(5)
-      expect(page).to have_css("a:not(.font_red)#approve_stat_post_#{@post1.id}")
-      expect(page).to have_css("div:not(.important)[data-important='#{@post1.id}']")
+      expect(page).to have_css("a:not(.theme_font_color)#approve_stat_post_#{@post1.id}")
+      expect(page).to have_css("div.hide[data-important='#{@post1.id}']")
     end
   else
     it ' not button ' do

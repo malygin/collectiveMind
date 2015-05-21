@@ -102,3 +102,22 @@
             .container
               .row
                 = render partial: 'application/progress_bar'
+    - if not cabinet? and able_subbar?
+      .divider10
+      .row
+        .col-md-12
+          .border_grey.rounded_3.metro_block
+            %ul.list-unstyled.list-inline
+              - Core::Project::STAGES[@project.main_stage][:substages].each do |num_substage, substage|
+                %li{class: "#{'active theme_font_color' if num_substage == @project.sub_stage} #{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}"}
+                  %i.fa.fa-circle.fa-2x
+                  %a{:href => "#"}
+                    = substage[:name]
+
+              -#- Core::Project::STAGES.each do |num_stage, stage|
+              -#  - if name_controller == stage[:type_stage] and stage[:substages]
+              -#    - stage[:substages].each do |num_substage, substage|
+              -#      %li{class: "#{'active theme_font_color' if num_stage == @project.main_stage and num_substage == @project.sub_stage} #{'last' if num_substage == stage[:substages].length}"}
+              -#        %i.fa.fa-circle.fa-2x
+              -#        %a{:href => "#"}
+              -#          = substage[:name]

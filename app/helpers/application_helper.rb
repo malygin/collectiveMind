@@ -52,7 +52,15 @@ module ApplicationHelper
     controller_name == 'users' and action_name == 'index'
   end
 
+  def able_subbar?
+    name_controller == @project.current_stage_type and Core::Project::STAGES[@project.main_stage][:substages]
+  end
 
+  def number_current_stage
+    Core::Project::STAGES.each do |num_stage, stage|
+      return num_stage if name_controller == stage[:type_stage]
+    end
+  end
 
 
 
