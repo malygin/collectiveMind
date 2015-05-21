@@ -5,7 +5,7 @@ module SessionsHelper
 
   def deny_access
     store_location
-    redirect_to new_user_session_path, notice: "Авторизуйтесь пожалуйста!"
+    redirect_to new_user_session_path, notice: t('devise.auth')
   end
 
   def have_project_access
@@ -17,17 +17,7 @@ module SessionsHelper
     end
   end
 
-  #@todo new permissions
-  ##### user.type_user
-  # 1 - admin (prime moderator) :)
-  # 2 - expert
-  # 3 - jury
-  # 4 - ratio club user
-  # 5 - ratio club watcher
-  # 6 - assistant (admin)
-  # 7 - tech admin and ratio club user :)
-  # 8 - user
-  #####
+
 
   def boss_authenticate
     deny_access unless boss?
