@@ -1,0 +1,1751 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Perfect scrollbar
+    %link{:href => "css/perfect-scrollbar.min.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage4_theme
+    .outer
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li
+              %a.menu_a{:href => "1st-stage.html"} Процедура
+            %li.active
+              %a.menu_a{:href => "5th-stage-cabinet-profile.html"} Кабинет
+            %li.has_dropwindow
+              %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
+                Мои уведомления
+                %span.top-circle 1
+              #dd_2.dropdown_window.dd_435.notifications_drop.text-left
+                .dd_wrapper
+                  .dd_top.thin.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
+                  .dd_bottom.white
+                    .divider10
+                    .container
+                      .row
+                        .col-xs-12
+                          .ps_cont
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage4
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage4
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice.moder{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-exclamation-triangle
+                              %span.dd_n_cell.right
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
+                                %p
+                                  На этой стадии вам предстоит выявить проблемы, связанные
+                                  с ситуацией, описанной в базе знаний, и принять участие
+                                  в обсуждении проблем, выявленных другими участниками. В
+                                  нашей терминологии такие проблемы называются
+                                  несовершенствами.
+                            .dd_nav_divider.font_color_stage4
+                              %span 4
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage2
+                                %i.fa.fa-lg.fa-thumbs-up
+                              %span.dd_n_cell.right.font_color_stage2
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            .dd_nav_divider.font_color_stage2
+                              %span 2
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            .dd_nav_divider.font_color_stage1
+                              %span 1
+                            .divider10
+                    .divider20
+          .navbar-right.text-right.user_block.font_grey
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %span.auth-divider |
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper.white
+                  .dd_top.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom
+                    .divider20
+                    .container
+                      .ps_cont
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_1"}
+                            .row
+                              .col-xs-9
+                                Представляем вам наш экспертный комитет:
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_1.dd_xprt_article.collapse
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Лиза Школьник
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
+                            .row
+                              .col-xs-9
+                                Заголовок 1
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_2.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
+                            .row
+                              .col-xs-9
+                                Заголовок 2
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_3.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
+                            .row
+                              .col-xs-9
+                                Заголовок 3
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_4.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
+                            .row
+                              .col-xs-9
+                                Заголовок 4
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_5.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                    .divider20
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %span.auth-divider |
+            %span.badge.grey 500
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
+                %i.fa.fa-angle-down
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white Решение конфликта, возникшего из-за меда
+      .container
+        .row
+          .col-md-5.col_padding_right_3
+            .border_grey.rounded_3.stages_block
+              %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4 СТАДИЯ: ОБЪЕДИНЕНИЕ ИДЕЙ В ПАКЕТЫ
+          .col-md-7.col_padding_left_3
+            .border_grey.rounded_3.stages_block
+              .media.contact
+                .media-left
+                  %img.media-object.img40.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                .media-body
+                  %h5.media-heading.bold Винни-Пух
+              %i.fa.fa-info-circle.fa-lg.theme_font_color.open_sticker{"data-for" => "#sticker1"}
+              #sticker1.sticker.rounded_3.font_white
+                Тут будет текст, объясняющий, что надо делать на этом экране
+                %i.sticker_close.fa.fa-times.fa-lg{"data-for" => "#sticker1"}
+      / Main Block starts
+      .main-block
+        .container
+          .cab_user.rounded_3.border_grey.light-grey.striped
+            .row
+              .col-md-10
+                %span.cab_username
+                  %img.img50.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                  %h6.white Вася Пупкин
+                %span.cab_userbadge.white.font_grey Главный технический директор в ОАО СМЛ
+                %span.cab_userbadge.white.font_grey Первый раз в процедуре
+              .col-md-2
+                .pull-right
+                  %button.btn.btn_reset.btn_thin_grey
+                    %i.fa.fa-fw.fa-rss
+                    Подписаться
+                  .divider5
+                  %button.btn.btn_reset.btn_thin_grey
+                    %i.fa.fa-fw.fa-envelope
+                    Сообщение
+          .divider15
+          .row
+            .col-md-2
+              .cab_left_panel.rounded_3.border_grey.back_color_stage4_superpale
+                .media
+                  .media-left
+                    .plus20.white.font_color_stage4 +
+                  .media-body
+                    %small.font_color_stage4 Пакет
+                .divider10
+                %button.btn.add-button.type4 Техника 1
+                .divider10
+                %button.btn.add-button.type4 Техника 2
+              .divider10
+              %ul.list-unstyled.cab_menu_left
+                %li.active
+                  %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_rating"}
+                    Рейтинг
+                %li
+                  %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_content"}
+                    Контент
+                %li
+                  %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_profile"}
+                    Профиль
+                %li
+                  %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#cabinet_subscriptions"}
+                    Подписки
+            .col-md-10
+              .tab-content
+                #cabinet_rating.tab-pane.fade.in.active{:role => "tabpanel"}
+                  .rounded_3.border_grey.cabinet_content
+                    %h5 Прогресс по стадиям
+                    .cab_cont_block.rounded_3.border_grey.white
+                      .container
+                        .row
+                          .col-md-7
+                            .rate_o_meter.rom5
+                              %span.rate_o_m_cursor{"data-progress" => "100"}
+                                %img{:src => "img/speedometer_cursor_grey.png"}/
+                              %span.rate_o_m_cursor{"data-progress" => "80"}
+                                %img{:src => "img/speedometer_cursor_red.png"}/
+                            .divider_1_grey
+                            .divider3
+                            %small
+                              %i.fa.fa-square.font_red
+                              Прогресс Васи
+                            %small
+                              %i.fa.fa-square.font_grey
+                              Прогресс других участников
+                          .col-md-5
+                            .cab_pbs
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-thumbs-up.font_color_stage5_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage5_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 50%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-comment.font_color_stage5_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage5_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "20", :role => "progressbar", :style => "width: 100%;"}
+                                %span.cell
+                                  20 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %span.badge.badge_important.back_color_stage5_pale важно
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage5_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "3", :role => "progressbar", :style => "width: 15%;"}
+                                %span.cell
+                                  3 балла
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-file-text.font_color_stage5_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage5_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "6", :role => "progressbar", :style => "width: 30%;"}
+                                %span.cell
+                                  6 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-rss.font_color_stage5_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage5_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "15", :role => "progressbar", :style => "width: 75%;"}
+                                %span.cell
+                                  15 баллов
+                      %span.stage_num_badge.back_color_stage5.font_white.bold.text-center 5
+                    .cab_cont_block.rounded_3.border_grey.white
+                      .container
+                        .row
+                          .col-md-7
+                            .rate_o_meter.rom4
+                              %span.rate_o_m_cursor{"data-progress" => "70"}
+                                %img{:src => "img/speedometer_cursor_grey.png"}/
+                              %span.rate_o_m_cursor{"data-progress" => "60"}
+                                %img{:src => "img/speedometer_cursor_red.png"}/
+                            .divider_1_grey
+                            .divider3
+                            %small
+                              %i.fa.fa-square.font_red
+                              Прогресс Васи
+                            %small
+                              %i.fa.fa-square.font_grey
+                              Прогресс других участников
+                          .col-md-5
+                            .cab_pbs
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-thumbs-up.font_color_stage4_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage4_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 50%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-comment.font_color_stage4_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage4_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "20", :role => "progressbar", :style => "width: 100%;"}
+                                %span.cell
+                                  20 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %span.badge.badge_important.back_color_stage4_pale важно
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage4_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "3", :role => "progressbar", :style => "width: 15%;"}
+                                %span.cell
+                                  3 балла
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-file-text.font_color_stage4_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage4_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "6", :role => "progressbar", :style => "width: 30%;"}
+                                %span.cell
+                                  6 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-rss.font_color_stage4_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage4_pale{"aria-valuemax" => "20", "aria-valuemin" => "0", "aria-valuenow" => "15", :role => "progressbar", :style => "width: 75%;"}
+                                %span.cell
+                                  15 баллов
+                      %span.stage_num_badge.back_color_stage4.font_white.bold.text-center 4
+                    .cab_cont_block.rounded_3.border_grey.white
+                      .container
+                        .row
+                          .col-md-7
+                            .rate_o_meter.rom3
+                              %span.rate_o_m_cursor{"data-progress" => "60"}
+                                %img{:src => "img/speedometer_cursor_grey.png"}/
+                              %span.rate_o_m_cursor{"data-progress" => "40"}
+                                %img{:src => "img/speedometer_cursor_red.png"}/
+                            .divider_1_grey
+                            .divider3
+                            %small
+                              %i.fa.fa-square.font_red
+                              Прогресс Васи
+                            %small
+                              %i.fa.fa-square.font_grey
+                              Прогресс других участников
+                          .col-md-5
+                            .cab_pbs
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-thumbs-up.font_color_stage3_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage3_pale{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-comment.font_color_stage3_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage3_pale{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %span.badge.badge_important.back_color_stage3_pale важно
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage3_pale{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-file-text.font_color_stage3_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage3_pale{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-rss.font_color_stage3_pale
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage3_pale{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                      %span.stage_num_badge.back_color_stage3.font_white.bold.text-center 3
+                    .cab_cont_block.rounded_3.border_grey.white
+                      .container
+                        .row
+                          .col-md-7
+                            .rate_o_meter.rom2
+                              %span.rate_o_m_cursor{"data-progress" => "30"}
+                                %img{:src => "img/speedometer_cursor_grey.png"}/
+                              %span.rate_o_m_cursor{"data-progress" => "15"}
+                                %img{:src => "img/speedometer_cursor_red.png"}/
+                            .divider_1_grey
+                            .divider3
+                            %small
+                              %i.fa.fa-square.font_red
+                              Прогресс Васи
+                            %small
+                              %i.fa.fa-square.font_grey
+                              Прогресс других участников
+                          .col-md-5
+                            .cab_pbs
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-thumbs-up.font_color_stage2
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage2{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-comment.font_color_stage2
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage2{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %span.badge.badge_important.back_color_stage2 важно
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage2{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-file-text.font_color_stage2
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage2{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-rss.font_color_stage2
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage2{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                      %span.stage_num_badge.back_color_stage2.font_white.bold.text-center 2
+                    .cab_cont_block.rounded_3.border_grey.white
+                      .container
+                        .row
+                          .col-md-7
+                            .rate_o_meter.rom1
+                              %span.rate_o_m_cursor{"data-progress" => "10"}
+                                %img{:src => "img/speedometer_cursor_grey.png"}/
+                              %span.rate_o_m_cursor{"data-progress" => "0"}
+                                %img{:src => "img/speedometer_cursor_red.png"}/
+                            .divider_1_grey
+                            .divider3
+                            %small
+                              %i.fa.fa-square.font_red
+                              Прогресс Васи
+                            %small
+                              %i.fa.fa-square.font_grey
+                              Прогресс других участников
+                          .col-md-5
+                            .cab_pbs
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-thumbs-up.font_color_stage1
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage1{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-comment.font_color_stage1
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage1{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %span.badge.badge_important.back_color_stage1 важно
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage1{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-file-text.font_color_stage1
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage1{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                              %span.line
+                                %span.cell.text-right
+                                  %i.fa.fa-rss.font_color_stage1
+                                %span.cell.cell_pr
+                                  .progress
+                                    .progress-bar.back_color_stage1{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%;"}
+                                %span.cell
+                                  10 баллов
+                      %span.stage_num_badge.back_color_stage1.font_white.bold.text-center 1
+                #cabinet_content.tab-pane.fade{:role => "tabpanel"}
+                  %div{:role => "tabpanel"}
+                    %ul.nav.nav-tabs.cab_horiz_tabs{:role => "tablist"}
+                      %li{:role => "presentation"}
+                        %a.cab_tab_color1{"data-toggle" => "tab", :href => "#cab_cont_1", :role => "tab"}
+                          %span.marked 1
+                          СТАДИЯ
+                      %li{:role => "presentation"}
+                        %a.cab_tab_color2{"data-toggle" => "tab", :href => "#cab_cont_2", :role => "tab"}
+                          %span.marked 2
+                          СТАДИЯ
+                      %li{:role => "presentation"}
+                        %a.cab_tab_color3{"data-toggle" => "tab", :href => "#cab_cont_3", :role => "tab"}
+                          %span.marked 3
+                          СТАДИЯ
+                      %li.active{:role => "presentation"}
+                        %a.cab_tab_color4{"data-toggle" => "tab", :href => "#cab_cont_4", :role => "tab"}
+                          %span.marked 4
+                          СТАДИЯ
+                      %li{:role => "presentation"}
+                        %a.cab_tab_color5{"data-toggle" => "tab", :href => "#cab_cont_5", :role => "tab"}
+                          %span.marked 5
+                          СТАДИЯ
+                    .cab_cont_block.rounded_3.border_grey.white.tab-content
+                      #cab_cont_1.tab-pane.fade{:role => "tabpanel"}
+                        .divider10
+                        .container
+                          .row
+                            .col-md-6.exp_col.left
+                              %button.btn.btn_reset.exp_button.pull-right
+                                %img{:src => "img/grey_arrow.png"}/
+                              .divider15
+                              %span.stage-heading Мои аспекты (3)
+                              .post.post_add_type1.cab3_post.add_new
+                                .post-header
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/no-ava.png"}/
+                                      %p.poster-name
+                                    %a.media-body.back_color_stage1_superpale.text-center{:href => "#"}
+                                      .plus25.white.font_color_stage1 +
+                                      %small.font_color_stage1 Добавить аспект
+                                .post-bottom.white
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %p
+                                          %span.badge.badge_type1.grey Обоснование
+                                        %a.a_font_reset{:href => "#"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %p
+                                          %span.badge.badge_type1.grey Обоснование
+                                        %a.a_font_reset{:href => "#"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %p
+                                          %span.badge.badge_type1.grey Обоснование
+                                        %a.a_font_reset{:href => "#"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                            .col-md-6.exp_col.right
+                              %button.btn.btn_reset.exp_button.pull-left
+                                %img{:src => "img/grey_arrow_1.png"}/
+                              .divider15
+                              %span.stage-heading Мои комментарии (10)
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage1 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage1
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage1 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage1
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage1
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage1
+                              .divider_1_grey
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage1 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage1
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage1 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage1
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage1
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage1
+                        .divider20
+                      #cab_cont_2.tab-pane.fade{:role => "tabpanel"}
+                        .divider10
+                        .container
+                          .row
+                            .col-md-6.exp_col.left
+                              %button.btn.btn_reset.exp_button.pull-right
+                                %img{:src => "img/grey_arrow.png"}/
+                              .divider15
+                              %span.stage-heading Мои несовершенства (3)
+                              .post.post_add_type1.cab3_post.add_new
+                                .post-header
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/no-ava.png"}/
+                                      %p.poster-name
+                                    %a.media-body.back_color_stage2_superpale.text-center{:href => "#"}
+                                      .plus25.white.font_color_stage2 +
+                                      %small.font_color_stage2 Добавить несовершенство
+                                .post-bottom.white
+                              .post.post_add_type1
+                                .post-header
+                                .post-body.light-grey
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Вася Пупкин
+                                      .divider10
+                                      %p.time 21.12.2014
+                                    .media-body
+                                      %table.table
+                                        %tbody
+                                          %tr.what
+                                            %td.bold
+                                              Винни-Пух постоянно
+                                              %span.post_btns_cont
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-pencil
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-trash
+                                          %tr.post_text
+                                            %td.col-md-12
+                                              %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
+                                                При выслеживании удачного момента для кражи меда выслеживании
+                                                удачного момента для кражи меда
+                                                %i.fa.fa-angle-right.cab2_post_open.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                              .post.post_add_type1
+                                .post-header
+                                .post-body.light-grey
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Вася Пупкин
+                                      .divider10
+                                      %p.time 21.12.2014
+                                    .media-body
+                                      %table.table
+                                        %tbody
+                                          %tr.what
+                                            %td.bold
+                                              Винни-Пух постоянно
+                                              %span.post_btns_cont
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-pencil
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-trash
+                                          %tr.post_text
+                                            %td.col-md-12
+                                              %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
+                                                При выслеживании удачного момента для кражи меда выслеживании
+                                                удачного момента для кражи меда
+                                                %i.fa.fa-angle-right.cab2_post_open.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                              .post.post_add_type1
+                                .post-header
+                                .post-body.light-grey
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Вася Пупкин
+                                      .divider10
+                                      %p.time 21.12.2014
+                                    .media-body
+                                      %table.table
+                                        %tbody
+                                          %tr.what
+                                            %td.bold
+                                              Винни-Пух постоянно
+                                              %span.post_btns_cont
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-pencil
+                                                %button.btn.btn_reset.btn_del
+                                                  %i.glyphicon.glyphicon-trash
+                                          %tr.post_text
+                                            %td.col-md-12
+                                              %a.a_font_reset{:href => "2nd-stage-cabinet-2.html"}
+                                                При выслеживании удачного момента для кражи меда выслеживании
+                                                удачного момента для кражи меда
+                                                %i.fa.fa-angle-right.cab2_post_open.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                            .col-md-6.exp_col.right
+                              %button.btn.btn_reset.exp_button.pull-left
+                                %img{:src => "img/grey_arrow_1.png"}/
+                              .divider15
+                              %span.stage-heading Мои комментарии (10)
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage2 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage2
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage2 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage2
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage2
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage2
+                              .divider_1_grey
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage2 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage2
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage2 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage2
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage2
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage2
+                        .divider20
+                      #cab_cont_3.tab-pane.fade{:role => "tabpanel"}
+                        .divider10
+                        .container
+                          .row
+                            .col-md-6.exp_col.left
+                              %button.btn.btn_reset.exp_button.pull-right
+                                %img{:src => "img/grey_arrow.png"}/
+                              .divider15
+                              %span.stage-heading Мои идеи (3)
+                              .post.post_add_type1.cab3_post.add_new
+                                .post-header
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/no-ava.png"}/
+                                      %p.poster-name
+                                    %a.media-body.back_color_stage3_superpale.text-center{:href => "#"}
+                                      .plus25.white.font_color_stage3 +
+                                      %small.font_color_stage3 Добавить идею
+                                .post-bottom.white
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %a.a_font_reset{:href => "3rd-stage-cabinet.html"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %a.a_font_reset{:href => "3rd-stage-cabinet.html"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                              .post.post_add_type1.cab3_post
+                                .post-header.color_me{"data-me-action" => "background", "data-me-color" => "1", "data-me-type" => "aspect"}
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2.post-poster
+                                      %img.img-circle.img40{:src => "img/ava-vinnie.jpg"}/
+                                      %p.poster-name Винни-Пух
+                                      %p.poster-name
+                                    .media-body.white
+                                      .post-text
+                                        %h5.bold
+                                          Lorem Ipsum
+                                          %span.post_btns_cont
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-pencil
+                                            %button.btn.btn_reset.btn_del
+                                              %i.glyphicon.glyphicon-trash
+                                        %a.a_font_reset{:href => "3rd-stage-cabinet.html"}
+                                          Имея такую карту, сотрудники будут мотивированы продавать продукцию
+                                          Инвар, фиксируя на ней свой процент от продажи, отразится на имидже
+                                          %i.fa.fa-angle-right.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-12
+                                      %span.tag-stripes.active.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "aspect"}
+                                        %span.tags Взаимоотношения четвероногих
+                            .col-md-6.exp_col.right
+                              %button.btn.btn_reset.exp_button.pull-left
+                                %img{:src => "img/grey_arrow_1.png"}/
+                              .divider15
+                              %span.stage-heading Мои комментарии (10)
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage3 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage3
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage3 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage3
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage3
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage3
+                              .divider_1_grey
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage3 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage3
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage3 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage3
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage3
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage3
+                        .divider20
+                      #cab_cont_4.tab-pane.active.fade.in{:role => "tabpanel"}
+                        .divider10
+                        .container
+                          .row
+                            .col-md-6.exp_col.left
+                              %button.btn.btn_reset.exp_button.pull-right
+                                %img{:src => "img/grey_arrow.png"}/
+                              .divider15
+                              %span.stage-heading Мои пакеты (3)
+                              .post.post_type_3.cab.add_new
+                                .post-header.white
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2
+                                      .cab_folder.back2_pale
+                                        %span.percentage.font_white.bold.text-center ?
+                                    %a.media-body.back_color_stage4_superpale.text-center{:href => "#"}
+                                      .plus25.white.font_color_stage4 +
+                                      %small.font_color_stage4 Добавить пакет
+                                .post-bottom.white
+                              .post.post_type_3.cab
+                                .post-header.white
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2
+                                      .cab_folder.back2
+                                        %span.percentage.font_white.bold.text-center 32%
+                                      %p.time.text-center 21.12.2014
+                                    .media-body.white
+                                      %h6
+                                        Название пакета с идеями идеями пакета
+                                      %span.post_btns_cont
+                                        %a.a_font_reset.btn.btn_reset.btn_del{:href => "4th-stage-cabinet-2.html"}
+                                          %i.glyphicon.glyphicon-pencil
+                                        %button.btn.btn_reset.btn_del
+                                          %i.glyphicon.glyphicon-trash
+                                      .text-right
+                                        %i.fa.fa-angle-right.fa-2x.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-1.col_padding_right_3
+                                      %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                                    .col-md-8.col_padding_right_3.themes_cont
+                                      #stripe1.post-theme
+                                        %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                                          %span.tags Слишком низкие
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                                          %span.tags Четвероногим нечем
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                                          %span.tags Активное противостояние
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                                          %span.tags Рядом с дубом нет
+                              .post.post_type_3.cab
+                                .post-header.white
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2
+                                      .cab_folder.back2
+                                        %span.percentage.font_white.bold.text-center 32%
+                                      %p.time.text-center 21.12.2014
+                                    .media-body.white
+                                      %h6
+                                        Название пакета с идеями идеями пакета
+                                      %span.post_btns_cont
+                                        %a.a_font_reset.btn.btn_reset.btn_del{:href => "4th-stage-cabinet-2.html"}
+                                          %i.glyphicon.glyphicon-pencil
+                                        %button.btn.btn_reset.btn_del
+                                          %i.glyphicon.glyphicon-trash
+                                      .text-right
+                                        %i.fa.fa-angle-right.fa-2x.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-1.col_padding_right_3
+                                      %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                                    .col-md-8.col_padding_right_3.themes_cont
+                                      #stripe1.post-theme
+                                        %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                                          %span.tags Слишком низкие
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                                          %span.tags Четвероногим нечем
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                                          %span.tags Активное противостояние
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                                          %span.tags Рядом с дубом нет
+                              .post.post_type_3.cab
+                                .post-header.white
+                                .post-body
+                                  .media
+                                    .media-left.text-center.gradient2
+                                      .cab_folder.back2
+                                        %span.percentage.font_white.bold.text-center 32%
+                                      %p.time.text-center 21.12.2014
+                                    .media-body.white
+                                      %h6
+                                        Название пакета с идеями идеями пакета
+                                      %span.post_btns_cont
+                                        %a.a_font_reset.btn.btn_reset.btn_del{:href => "4th-stage-cabinet-2.html"}
+                                          %i.glyphicon.glyphicon-pencil
+                                        %button.btn.btn_reset.btn_del
+                                          %i.glyphicon.glyphicon-trash
+                                      .text-right
+                                        %i.fa.fa-angle-right.fa-2x.font_grey
+                                .post-bottom.white
+                                  .row
+                                    .col-md-1.col_padding_right_3
+                                      %small.pull-left{:style => "margin-right: 3px;"} Идеи
+                                    .col-md-8.col_padding_right_3.themes_cont
+                                      #stripe1.post-theme
+                                        %span.tag-stripes.color_me.active{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "imperf"}
+                                          %span.tags Слишком низкие
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "2", "data-me-type" => "imperf"}
+                                          %span.tags Четвероногим нечем
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "3", "data-me-type" => "imperf"}
+                                          %span.tags Активное противостояние
+                                        %span.tag-stripes.color_me{"data-me-action" => "background-color", "data-me-color" => "4", "data-me-type" => "imperf"}
+                                          %span.tags Рядом с дубом нет
+                            .col-md-6.exp_col.right
+                              %button.btn.btn_reset.exp_button.pull-left
+                                %img{:src => "img/grey_arrow_1.png"}/
+                              .divider15
+                              %span.stage-heading Мои комментарии (10)
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage4 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage4
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage4 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage4
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage4
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage4
+                              .divider_1_grey
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage4 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage4
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage4 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage4
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage4
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage4
+                        .divider20
+                      #cab_cont_5.tab-pane.fade{:role => "tabpanel"}
+                        .divider10
+                        .container
+                          .row
+                            .col-md-6.exp_col.left
+                              %button.btn.btn_reset.exp_button.pull-right
+                                %img{:src => "img/grey_arrow.png"}/
+                              .divider15
+                              %span.stage-heading Мои проектные предложения (3)
+                              .media.type_cab.add_new
+                                .divider5.white
+                                .media-left.gradient2
+                                  .cab_folder.back4_pale
+                                    %span.percentage.font_white.bold.text-center ?
+                                %a.media-body.back_color_stage5_superpale.text-center{:href => "#"}
+                                  .plus25.white.font_color_stage5 +
+                                  %small.font_color_stage5 Добавить проектное предложение
+                              .media.type_cab
+                                .divider5.white
+                                .media-left.gradient2
+                                  .cab_folder.back4
+                                    %span.percentage.font_white.bold.text-center 32%
+                                  %p.time.text-center 21.12.2014
+                                .media-body.white
+                                  %a.a_font_reset{:href => "5th-stage-cabinet-2.html"}
+                                    Название пакета с идеями идеями пакета
+                                  %span.post_btns_cont
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-pencil
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-trash
+                                  %i.fa.fa-2x.fa-angle-right.font_grey
+                              .media.type_cab
+                                .divider5.white
+                                .media-left.gradient2
+                                  .cab_folder.back4
+                                    %span.percentage.font_white.bold.text-center 32%
+                                  %p.time.text-center 21.12.2014
+                                .media-body
+                                  %a.a_font_reset{:href => "5th-stage-cabinet-2.html"}
+                                    Название пакета с идеями идеями пакета
+                                  %span.post_btns_cont
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-pencil
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-trash
+                                  %i.fa.fa-2x.fa-angle-right.font_grey
+                              .media.type_cab
+                                .divider5.white
+                                .media-left.gradient2
+                                  .cab_folder.back3
+                                    %span.percentage.font_white.bold.text-center 32%
+                                  %p.time.text-center 21.12.2014
+                                .media-body.white
+                                  %a.a_font_reset{:href => "5th-stage-cabinet-2.html"}
+                                    Название пакета с идеями идеями пакета
+                                  %span.post_btns_cont
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-pencil
+                                    %button.btn.btn_reset.btn_del
+                                      %i.glyphicon.glyphicon-trash
+                                  %i.fa.fa-2x.fa-angle-right.font_grey
+                            .col-md-6.exp_col.right
+                              %button.btn.btn_reset.exp_button.pull-left
+                                %img{:src => "img/grey_arrow_1.png"}/
+                              .divider15
+                              %span.stage-heading Мои комментарии (10)
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage5 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage5
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage5 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage5
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage5
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage5
+                              .divider_1_grey
+                              .media.comment.in_cab
+                                .media-body
+                                  %span.comment_interf
+                                    %span.date_time.font_color_stage5 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.font_color_stage5
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                    %span.badge.badge_important.back_color_stage5 важно
+                                %p.font_grey
+                                  Ничего не правда. Я люблю гулять, а от вашего дуба тень
+                                  большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.font_color_stage5
+                                  %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.font_color_stage5
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.font_color_stage5
+                        .divider20
+                #cabinet_profile.tab-pane.fade{:role => "tabpanel"}
+                #cabinet_subscriptions.tab-pane.fade{:role => "tabpanel"}
+                  .row
+                    .col-md-6
+                      .rounded_3.border_grey.cabinet_content
+                        %h5 Мои подписки
+                        .cab_cont_block.rounded_3.border_grey.white
+                          .divider15
+                          .media.contact
+                            .container
+                              .media-left
+                                %img.media-object.img40.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                          .actions
+                            %button.btn.btn_reset
+                              %i.fa.fa-rss.fa-2x.font_color_stage4
+                            %button.btn.btn_reset
+                              %i.fa.fa-envelope.fa-2x.font_color_stage4
+                          .divider15
+                        .cab_cont_block.rounded_3.border_grey.white
+                          .divider15
+                          .media.contact
+                            .container
+                              .media-left
+                                %img.media-object.img40.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                          .actions
+                            %button.btn.btn_reset
+                              %i.fa.fa-rss.fa-2x.font_lighter_grey
+                            %button.btn.btn_reset
+                              %i.fa.fa-envelope.fa-2x.font_color_stage4
+                          .divider15
+                    .col-md-6
+                      .rounded_3.border_grey.cabinet_content
+                        %h5 Мои подписчики
+                        .cab_cont_block.rounded_3.border_grey.white
+                          .divider15
+                          .media.contact
+                            .container
+                              .media-left
+                                %img.media-object.img40.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                          .actions
+                            %button.btn.btn_reset
+                              %i.fa.fa-envelope.fa-2x.font_color_stage4
+                          .divider15
+                        .cab_cont_block.rounded_3.border_grey.white
+                          .divider15
+                          .media.contact
+                            .container
+                              .media-left
+                                %img.media-object.img40.img-circle.border_grey{:src => "img/ava-vinnie.jpg"}/
+                              .media-body
+                                %h5.media-heading.bold Винни-Пух
+                          .actions
+                            %button.btn.btn_reset
+                              %i.fa.fa-envelope.fa-2x.font_color_stage4
+                          .divider15
+        / Main Block ends
+        #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+          .popup.popup_rounded
+            .row
+              .col-md-12
+                #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                  / Indicators
+                  %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                    %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                      Аспект 1
+                    %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                      Аспект 2
+                    %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                      Аспект 3
+                    %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                      Аспект 4
+                    %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                      Аспект 5
+                    %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                      Аспект 6
+                    %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                      Аспект 7
+                    %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                      Аспект 8
+                    %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                      Аспект 9
+                  / Wrapper for slides
+                  .carousel-inner{:role => "listbox"}
+                    .item.active.color-theme-1
+                      .row
+                        .col-md-12
+                          .container
+                            .row
+                              .col-md-12.col-sm-12
+                                %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                  %li.active{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"}
+                                      Статья
+                                      1
+                                  %li{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                  %li{:role => "presentation"}
+                                    %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                            .row
+                              .col-md-12.col-sm-12
+                                .aspect-main-block
+                                  .tab-content
+                                    #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                      %h6.aspect-main-block-heading
+                                        Ситуация с
+                                        пчелами
+                                      %p.aspect-main-block-text
+                                        Пчелы недовольны тем,
+                                        что на их мед
+                                        постоянно покушаются Винни-Пух и его друзья. Желая
+                                        разрешить
+                                        конфликт мирным способом, они обратились к мудрой
+                                        Сове.
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                                    #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                      %p.aspect-main-block-text
+                                        Пчелы недовольны тем,
+                                        что на их мед
+                                        постоянно покушаются Винни-Пух и его друзья. Желая
+                                        разрешить
+                                        конфликт мирным способом, они обратились к мудрой
+                                        Сове.
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                                    #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                      %img{:src => "img/aspect-pic1.jpg"}/
+                    .item.color-theme-2
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                            %p.aspect-main-block-text
+                              В популярной сказке Винни-Пух и его
+                              друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                              труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                              пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                              момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                              втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                              был отвергнут.
+                              Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                              друзья Пятачок и Кролик.
+                            %img{:src => "img/aspect-pic2.jpg"}/
+                    .item.color-theme-3
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                            %h6.aspect-main-block-heading
+                              Трудности, связанные с
+                              расположением конфликтующих сторон
+                            %p.aspect-main-block-text
+                              Как видно на карте, Винни-Пух с
+                              друзьями живут достаточно близко к Высокому дубу.
+                              Это часто обостряет конфликт, потому что пчелы не могут нормально
+                              собирать мед,
+                              постоянно беспокоясь, что их ограбят.
+                            %img{:src => "img/aspect-pic3.jpg"}/
+                    .item.color-theme-4
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-5
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-6
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-7
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-8
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                    .item.color-theme-9
+                      .row
+                        .col-md-12.col-sm-12
+                          .aspect-main-block
+                  %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                    %i.fa.fa-3x.fa-caret-left
+                  %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                    %i.fa.fa-3x.fa-caret-right
+      / Outer Ends
+      / Javascript files
+      / jQuery
+      %script{:src => "js/jquery.js"}
+      / Bootstrap JS
+      %script{:src => "js/bootstrap.min.js"}
+      / Magnific Popup
+      %script{:src => "js/jquery.magnific-popup.min.js"}
+      / Owl carousel
+      %script{:src => "js/owl.carousel.min.js"}
+      / Respond JS for IE8
+      %script{:src => "js/respond.min.js"}
+      / HTML5 Support for IE
+      %script{:src => "js/html5shiv.js"}
+      / Content hover JS
+      %script{:src => "js/jquery.contenthover.min.js"}
+      / Javascript for this page
+      %script{:src => "js/jqueryrotate.2.1.js"}
+      / Excanvas JS for Knob Support in IE 8
+      %script{:src => "js/excanvas.js"}
+      / jQuery Knob
+      %script{:src => "js/jquery.knob.js"}
+      / Perfect scrollbar
+      %script{:src => "js/perfect-scrollbar.jquery.min.js"}
+      %script{:src => "js/waypoints.min.js"}
+      / Custom JS. Type your JS code in custom.js file
+      %script{:src => "js/custom.js"}

@@ -1,4 +1,39 @@
 /* Your JS codes here */
+
+
+/* cabinet speedometer */
+$(document).ready(function () {
+    $('.rate_o_m_cursor').rotate(-90);
+    $('.rate_o_m_cursor').each(function(){
+        var progr = $(this).attr('data-progress');
+        var angle = count_angle(progr);
+        $(this).rotate({
+            animateTo:angle,
+            duration:1500
+        });
+    });
+
+    function count_angle(perc){
+        return perc * 1.8 - 90;
+    }
+});
+
+
+/* cabinet columns */
+$(document).ready(function () {
+    $('.exp_button').click(function(){
+        var parent_col = $(this).parents('.exp_col');
+        if (parent_col.hasClass('active')){
+            parent_col.toggleClass('active');
+            parent_col.siblings('.exp_col').toggleClass('hidden');
+        } else {
+            parent_col.toggleClass('hidden');
+            parent_col.siblings('.exp_col').toggleClass('active');
+        }
+    });
+});
+
+
 $(document).ready(function () {
     $('.metro_block ul li').hover(
         function () {
@@ -7,13 +42,13 @@ $(document).ready(function () {
     );
     $('.btn-white').click(
         function () {
-            $(this).toggleClass('theme_font_color')
+            $(this).toggleClass('font_red')
         }
     );
     $('[data-type ="important"]').click(
         function () {
             var id = $(this).attr("data-id");
-            $('[data-important=' + id + ']').toggleClass('hide')
+            $('[data-important=' + id + ']').toggleClass('important')
         }
     );
     $(window).scroll(function () {
