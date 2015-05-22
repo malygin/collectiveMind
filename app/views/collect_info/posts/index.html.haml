@@ -1,6 +1,6 @@
 - if current_user.can_vote_for(:collect_info, @project)
   = render partial: 'popup_vote'
--elsif @questions_progress != 100
+-elsif @questions_progress != 100 and @project.stage != '1:2'
   = render partial: 'questions_aspects'
 -else
   = render partial: 'discuss_aspects'

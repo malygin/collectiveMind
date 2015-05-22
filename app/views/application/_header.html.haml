@@ -14,7 +14,7 @@
       - if @project.closed?
         %li{class: "#{'active' if rating?}"}
           = link_to 'Рейтинг', users_path(@project), class: 'menu_a'
-      - if current_user.admin?
+      - if boss?
         - if @project.main_stage >= 0
           %li= link_to '<= ', pr_stage_core_project_path(@project), method: :put,  class: 'menu_a'
         - if @project.main_stage < 7

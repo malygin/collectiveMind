@@ -9,32 +9,13 @@ FactoryGirl.define do
     type_user nil
   end
 
-  factory :prime_admin, parent: :user do
+  factory :moderator, parent: :user do
     type_user 1
   end
 
-  factory :moderator, parent: :user do
-    type_user 6
-  end
-
-  factory :expert, parent: :user do
-    role_stat 2
-  end
-
-  factory :jury, parent: :user do
-    type_user 3
-  end
-
-  factory :club_user, parent: :user do
-    type_user 4
-  end
-
-  factory :club_watcher, parent: :user do
-    type_user 5
-  end
 
   factory :ordinary_user, parent: :user do
-    type_user 8
+    type_user 0
   end
 
   factory :invalid_user, class: 'Users' do

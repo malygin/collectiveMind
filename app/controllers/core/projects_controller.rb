@@ -1,15 +1,11 @@
 class Core::ProjectsController < ApplicationController
-  before_filter :prime_admin_authenticate, only: [:next_stage, :pr_stage, :show, :new, :edit, :create, :update, :destroy, :index,
-                                                  :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
   before_filter :project_by_id
-  before_action :set_core_project, only: [:show, :edit, :update, :pr_stage, :next_stage, :destroy]
-  before_filter :boss_news_authenticate, only: [:news, :users]
   after_filter :last_seen_news, only: [:news]
   layout 'application', only: [:news, :users, :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
 
   def project_by_id
-    unless params[:project].nil?
-      @core_project = Core::Project.find(params[:project])
+    unless params[:id].nil?
+      @core_project = Core::Project.find(params[:id])
     end
   end
 

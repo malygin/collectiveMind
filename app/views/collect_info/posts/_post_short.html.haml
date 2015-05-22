@@ -1,5 +1,5 @@
 .full_post
-  - if boss? or role_expert? or stat_expert?
+  - if boss?
     .post-top-header
       =link_to({controller: post_short.class.name.underscore.pluralize, action: :plus, project: @project.id, id: post_short.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "plus_post_#{post_short.id}") do
         %i.fa.fa-trophy.fa-lg
