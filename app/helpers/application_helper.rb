@@ -58,8 +58,12 @@ module ApplicationHelper
 
   def number_current_stage
     Core::Project::STAGES.each do |num_stage, stage|
-      return num_stage if name_controller == stage[:type_stage]
+      return num_stage if name_controller == stage[:type_stage] or name_controller == :core_aspect_posts
     end
+  end
+
+  def can_edit_content?
+    name_controller == @project.current_stage_type
   end
 
 

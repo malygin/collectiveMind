@@ -7,7 +7,7 @@
   $('#discontent_post_whered').val('')
   $('#discontent_post_whend').val('')
 
-  $("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
-  $("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
+  -#$("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  -#$("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
   $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");

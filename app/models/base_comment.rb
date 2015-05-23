@@ -25,6 +25,8 @@ module BaseComment
 
     scope :type_like, -> { where(useful: 't') }
 
+    scope :by_user, ->(user) { where(user_id: user.id) }
+
     scope :not_check, -> { where(discontent_status: ['f',nil],concept_status: ['f',nil], discuss_status:['f',nil], approve_status: ['f',nil], useful: ['f',nil]) }
 
     scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
@@ -33,6 +35,10 @@ module BaseComment
     scope :after_last_visit, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present?}
 
     validates :content, :user_id, :post_id, presence: true
+
+    def self.stage_comments_for(project)
+      joins(:post).where("#{table_name.gsub('_comments', '_posts')}.project_id = ?", project.id).reorder("#{table_name.gsub('_posts', '_comments')}.created_at DESC")
+    end
 
     def get_class
       self.class.name.deconstantize

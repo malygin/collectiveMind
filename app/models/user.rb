@@ -211,11 +211,19 @@ class User < ActiveRecord::Base
     project.novations_for_vote.where.not(id: vote_novations)
   end
 
-  def content_for_project(project)
-    if project.current_stage_type == :collect_info_posts
+  def content_for_project(stage, project)
+    if stage == :collect_info_posts
       core_aspects.by_project(project)
     else
-      send(project.current_stage_type).for_project(project.id)
+      send(stage).for_project(project.id)
+    end
+  end
+
+  def comment_for_project(stage, project)
+    if stage == :collect_info_posts
+      core_aspects.by_project(project).joins(:comments)
+    else
+      send(stage).for_project(project.id).joins(:comments)
     end
   end
 

@@ -215,5 +215,9 @@ class Core::Project < ActiveRecord::Base
         where("discontent_posts.project_id = ?", self.id)
   end
 
+  def project_access(user)
+    type_access == 0 ? true : (users.include?(user) || user.boss?)
+  end
+
 
 end

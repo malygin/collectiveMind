@@ -92,7 +92,7 @@ DiscontentCollectionView = Backbone.View.extend
       sortAscending: false
 
 # only for discontents url
-if window.location.href.indexOf("discontent/posts") > -1
+if window.location.href.indexOf("discontent/posts") > -1 and window.location.href.indexOf("discontent/posts/") == -1
   dc = new DiscontentCollection
   dc.fetch
     success: (col,res)->

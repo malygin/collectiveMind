@@ -59,7 +59,7 @@ NovationCollectionView = Backbone.View.extend
 
 
 # only for novation url
-if window.location.href.indexOf("novation/posts") > -1
+if window.location.href.indexOf("novation/posts") > -1 and window.location.href.indexOf("novation/posts/") == -1
   dc = new NovationCollection
   dc.fetch
     success: (col,res)->

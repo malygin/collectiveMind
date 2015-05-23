@@ -37,17 +37,17 @@
   %p.font_grey.comment_text{id: "comment_text_#{comment.id}"}
     =comment.content
   .post-interfaces-buttons.text-left
-    =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
-      %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "like", :type => "button"}
-        %span.bold
-          %span(id="lk_comment_#{comment.id}")
-            =comment.users_pro.count
+    %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "like", :type => "button"}
+      %span.bold
+        %span(id="lk_comment_#{comment.id}")
+          =comment.users_pro.count
+        =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
           %i.fa.fa-thumbs-up.theme_font_color
-    =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
-      %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", :type => "button"}
-        %span.bold
-          %span(id="dlk_comment_#{comment.id}")
-            =comment.users_against.count
+    %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", :type => "button"}
+      %span.bold
+        %span(id="dlk_comment_#{comment.id}")
+          =comment.users_against.count
+        =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
           %i.fa.fa-thumbs-down.theme_font_color
     %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}", "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
       %span.bold

@@ -7,7 +7,7 @@ module MarkupHelper
     elsif profile?
       'white_theme'
     else
-      "stage#{@project.main_stage}_theme"
+      action_name == 'user_content' ? "stage#{@project.main_stage}_theme" : "stage#{number_current_stage}_theme"
     end
   end
 

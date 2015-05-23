@@ -1,7 +1,7 @@
 class Concept::PostsController < PostsController
   include MarkupHelper
   include CloudinaryHelper
-  before_action :set_concept_post, only: [:edit, :update]
+  before_action :set_concept_post, only: [:edit, :update, :destroy]
   before_action :set_discontent_posts, only: [:new, :edit]
 
   def voting_model
@@ -120,6 +120,11 @@ class Concept::PostsController < PostsController
         format.js
       end
     end
+  end
+
+  def destroy
+    @concept_post.destroy if current_user?(@concept_post.user)
+    redirect_back_or user_content_concept_posts_path(@project)
   end
 
   def add_dispost

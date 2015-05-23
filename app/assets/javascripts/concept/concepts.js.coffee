@@ -83,7 +83,7 @@ ConceptCollectionView = Backbone.View.extend
 
 
 # only for concept url
-if window.location.href.indexOf("concept/posts") > -1
+if window.location.href.indexOf("concept/posts") > -1 and window.location.href.indexOf("concept/posts/") == -1
   dc = new ConceptCollection
   dc.fetch
     success: (col,res)->

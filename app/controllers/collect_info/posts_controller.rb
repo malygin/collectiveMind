@@ -9,6 +9,10 @@ class CollectInfo::PostsController < PostsController
     Core::Aspect::Post
   end
 
+  def comment_model
+    Core::Aspect::Comment
+  end
+
   def index
     # @aspect = params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.main_aspects.first
     @proc_aspects = @project.proc_main_aspects

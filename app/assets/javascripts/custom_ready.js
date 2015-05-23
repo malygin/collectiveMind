@@ -432,4 +432,15 @@ $(document).ready(function () {
     });
 
 
+    /* cabinet columns */
+    $('.exp_button').click(function(){
+        var parent_col = $(this).parents('.exp_col');
+        if (parent_col.hasClass('active')){
+            parent_col.toggleClass('active');
+            parent_col.siblings('.exp_col').toggleClass('hidden');
+        } else {
+            parent_col.toggleClass('hidden');
+            parent_col.siblings('.exp_col').toggleClass('active');
+        }
+    });
 });
