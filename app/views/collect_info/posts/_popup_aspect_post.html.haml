@@ -59,10 +59,10 @@
                 %br
 
 
-      .container.modal_content.ps_cont
+      .container.modal_content.ps_cont.white-gray
         .row
           .col-md-12
-            .divider20
+            .divider10
             -##myCarousel.carousel.slide{"data-ride" => "carousel"}
             -#  .carousel-inner.chat-messages{:role => "listbox"}
             -#    -if @comments.present?
@@ -72,7 +72,14 @@
             -#    -else
             -#      .item.active
             .chat-messages
-              = render partial:'shared/comment', collection: @comments
+              .separator
+                %hr
+                  .separator_label.text-left
+                    %h4 Обсуждение результатов опроса
+                  .separator_label.pull-right
+                    %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+              #comments.collapse.in
+                = render partial:'shared/comment', collection: @comments
             .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
             -#-if @comments.count > 5

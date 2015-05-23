@@ -23,15 +23,18 @@
                 %i.glyphicon.glyphicon-remove>
                 Удалить
 
-      -#%span.badge.badge_important.theme_back_color важно
-      - if boss?
+        -#- if boss?
         = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-          %span.label_approve.label(class="#{label_approve_stat(comment)}")
+          %span.badge.badge_important.theme_back_color
             = t('show.important')
-      - elsif comment.approve_status
+      -#- elsif comment.approve_status
         %span.label_approve.label.label-success= t('show.important')
       %span{id: "cancel_comment_#{comment.id}"}
-  %p.font_grey.bold.comment_text{id: "comment_text_#{comment.id}"}
+  .divider10
+  %label.label.label-success Согласен
+  -#label.label.label-danger Не согласен
+  %span.font12 Пояснение:
+  %p.font_grey.comment_text{id: "comment_text_#{comment.id}"}
     =comment.content
   .post-interfaces-buttons.text-left
     =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
@@ -48,8 +51,8 @@
           %i.fa.fa-thumbs-down.theme_font_color
     %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}", "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
       %span.bold
-        %i.fa.fa-reply.fa-rotate-180.theme_font_color
-
+        %i.fa.fa-reply.theme_font_color
+.divider10
 %a.answers_collapse.opened{id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
   -if comment.comments.size > 0
     %span
