@@ -91,15 +91,14 @@
                 %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
                   открыть описание проекта
                 .divider10
-                .chat-messages
-                  .separator
-                    %hr
-                      .separator_label.text-left
-                        %h4 Обсуждение результатов опроса
-                      .separator_label.pull-right
-                        %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
-                  #comments.collapse.in
-                    = render partial:'shared/comment', collection: @comments
+                .separator
+                  %hr
+                    .separator_label.text-left
+                      %h4 Обсуждение результатов опроса
+                    .separator_label.pull-right
+                      %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+                .chat-messages#comments.collapse.in
+                  = render partial:'shared/comment', collection: @comments
                 .divider15
                 = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 

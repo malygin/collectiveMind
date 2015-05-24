@@ -23,17 +23,16 @@
                 %i.glyphicon.glyphicon-remove>
                 Удалить
 
-        -#- if boss?
-        = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-          %span.badge.badge_important.theme_back_color
-            = t('show.important')
-      -#- elsif comment.approve_status
-        %span.label_approve.label.label-success= t('show.important')
+        - if boss?
+          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+            %span.badge.badge_important{class: "#{'theme_back_color' if comment.approve_status}"}= t('show.important')
+        - elsif comment.approve_status
+          %span.badge.badge_important.theme_back_color= t('show.important')
       %span{id: "cancel_comment_#{comment.id}"}
-  .divider10
-  %label.label.label-success Согласен
+  -#.divider10
+  -#%label.label.label-success Согласен
   -#label.label.label-danger Не согласен
-  %span.font12 Пояснение:
+  -#%span.font12 Пояснение:
   %p.font_grey.comment_text{id: "comment_text_#{comment.id}"}
     =comment.content
   .post-interfaces-buttons.text-left

@@ -1,6 +1,7 @@
 class Journal < ActiveRecord::Base
   include Util::Renderable
   include Util::Filterable
+  extend ApplicationHelper
   extend MarkupHelper
 
   belongs_to :user

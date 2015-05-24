@@ -109,15 +109,15 @@
             -#          = render partial:'shared/comment', collection: slice
             -#    -else
             -#      .item.active
-            .chat-messages
-              .separator
-                %hr
-                  .separator_label.text-left
-                    %h4 Обсуждение результатов опроса
-                  .separator_label.pull-right
-                    %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
-              #comments.collapse.in
-                = render partial:'shared/comment', collection: @comments
+
+            .separator
+              %hr
+                .separator_label.text-left
+                  %h4 Обсуждение результатов опроса
+                .separator_label.pull-right
+                  %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+            .chat-messages#comments.collapse.in
+              = render partial:'shared/comment', collection: @comments
             .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 

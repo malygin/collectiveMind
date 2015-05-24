@@ -135,11 +135,11 @@
 
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
   #  $('#render_discontent_comments,#popup-innov').on('keyup', 'textarea.comment-textarea', this.activate_button)
-  $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
-  $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
+  #  $('.form-new-comment,.chat-messages').on('click', 'label.comment-problem', this.color_for_problem)
+  #  $('.form-new-comment,.chat-messages').on('click', 'label.comment-idea', this.color_for_idea)
 
-  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
-  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
+  #  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_discuss', this.toggle_discuss)
+  #  $('.chat-messages, .news-list, .show_bar_block').on('click', 'a.link_status span.label_approve', this.toggle_approve)
 
   #  $('body').on('click', '#comment_text_area', this.autosize)
   $('body').on('click', 'form.comment_add textarea', this.autosize)
