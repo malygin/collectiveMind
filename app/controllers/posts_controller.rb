@@ -75,12 +75,8 @@ class PostsController < ProjectsController
 
   def comment_status
     @post = current_model.find(params[:id])
-    #@todo безопасность
-    if params[:comment_stage]
-      @comment = get_comment_for_stage(params[:comment_stage], params[:comment_id].to_i) unless params[:comment_id].nil?
-    end
-    @comment.toggle!(:discontent_status) if params[:discontent]
-    @comment.toggle!(:concept_status) if params[:concept]
+    @comment = comment_model.find(params[:comment_id])
+
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     @comment.toggle!(:approve_status) if params[:approve_status]
     if params[:discuss_status]
