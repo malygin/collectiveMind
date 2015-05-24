@@ -61,8 +61,9 @@
 
       .container.modal_content
         .row
-          .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
-            %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+          .col-md-6.exp_col.left
+            %button.btn.btn_reset.exp_button.pull-right
+              = image_tag 'grey_arrow.png'
             .divider25
             %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle="collapse" href="#cab4-1" aria-expanded="false")
               = t('activerecord.attributes.novation/post.project')
@@ -202,8 +203,9 @@
 
             = render partial: 'shared/content_question', collection: @questions
 
-          .col-md-6.comment_col.popup_expandable_col.ps_cont.white-gray{"data-col" => "6"}
-            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание пакета
+          .col-md-6.exp_col.white-gray.right
+            %button.btn.btn_reset.exp_button.pull-left
+              = image_tag 'grey_arrow_1.png'
             .divider10
             -##myCarousel.carousel.slide{"data-ride" => "carousel"}
             -#  .carousel-inner.chat-messages{:role => "listbox"}
