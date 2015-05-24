@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    unless @project.users.include?(current_user) or prime_admin?
+    unless @project.users.include?(current_user) or boss?
       redirect_to root_url
     end
   end
