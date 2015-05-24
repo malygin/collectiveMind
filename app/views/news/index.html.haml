@@ -2,7 +2,7 @@
   %header
     %h3.text-center
       Обращения к пользователям
-    - if current_user.prime_admin? or current_user.expert?
+    - if current_user.boss?
       = link_to 'Добавить обращение', new_news_path, class: 'btn btn-success'
     %hr/
 

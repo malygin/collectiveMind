@@ -8,7 +8,7 @@
         %br
         =link_to user, user_path(@project ? @project : @core_project, user)
         = render partial: '/shared/user_online', object: user
-      -if prime_admin?
+      -if boss?
         %br
         = user.email
         %br
