@@ -24,7 +24,7 @@
             %p
               %span.badge.badge_type1.grey Обоснование
             -if can_edit_content?
-              = link_to edit_aspect_post_path(@project, post_short), class: 'a_font_reset', id: "edit_aspect_#{post_short.id}" do
+              = link_to edit_aspect_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_aspect_#{post_short.id}" do
                 = post_short.short_desc
                 %i.fa.fa-angle-right.font_grey
             -else

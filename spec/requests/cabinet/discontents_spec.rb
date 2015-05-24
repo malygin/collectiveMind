@@ -115,7 +115,7 @@ describe 'Cabinet Discontents' do
   end
 
   it 'created by current user' do
-    click_link 'open_my_discontent_posts'
+    click_link 'user_content_discontent_posts'
     expect(page).to have_content @discontent.content
     @discontent.post_aspects.each do |aspect|
       expect(page).to have_content aspect.content

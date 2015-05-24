@@ -37,7 +37,7 @@ describe 'Cabinet Plans' do
   it 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_plan_posts_path(@project)
-    click_link "edit_plan_#{@plan.id}"
+    find(:css, "#edit_plan_#{@plan.id}").trigger('click')
     expect {
       fill_in 'plan_post_content', with: new_content
       click_button 'to_save_plan'
@@ -59,7 +59,7 @@ describe 'Cabinet Plans' do
   end
 
   it 'created by current user' do
-    click_link 'open_my_plan_posts'
+    click_link 'user_content_plan_posts'
     expect(page).to have_content @plan.content
   end
 

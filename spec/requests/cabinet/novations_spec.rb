@@ -81,7 +81,7 @@ describe 'Cabinet Novations' do
   end
 
   it 'created by current user' do
-    click_link 'open_my_novation_posts'
+    click_link 'user_content_novation_posts'
     expect(page).to have_content @novation.content
     @novation.novation_concepts.each do |concept|
       expect(page).to have_content concept.title

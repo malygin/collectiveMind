@@ -39,7 +39,7 @@ describe 'Cabinet Aspects' do
 
   it 'edit', js: true do
     new_content = 'new cool content'
-    visit user_content_collect_info_posts_path(@project)
+    visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_core_aspect_post_#{@aspect.id}" do
       expect {
         fill_in 'core_aspect_post_content', with: new_content
@@ -47,7 +47,7 @@ describe 'Cabinet Aspects' do
         expect(page).to have_content t('form.aspect.edit_success')
       }.not_to change(Core::Aspect::Post, :count)
     end
-    visit user_content_collect_info_posts_path(@project)
+    visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_core_aspect_post_#{@aspect.id}" do
       expect(page).to have_field('core_aspect_post_content', text: new_content)
     end
@@ -65,14 +65,14 @@ describe 'Cabinet Aspects' do
   end
 
   it 'created by current user' do
-    click_link 'open_my_collect_info_posts'
+    visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_core_aspect_post_#{@aspect.id}" do
       expect(page).to have_selector('textarea', text: @aspect.content)
     end
   end
 
   it 'publish', js: true do
-    visit user_content_collect_info_posts_path(@project)
+    visit edit_aspect_post_path(@project, @aspect)
     expect {
       click_link "publish_#{@aspect.id}"
       refresh_page

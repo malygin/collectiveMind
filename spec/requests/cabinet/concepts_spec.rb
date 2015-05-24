@@ -57,7 +57,7 @@ describe 'Cabinet Concepts' do
   it 'edit', js: true do
     new_content = 'new cool content'
     visit user_content_concept_posts_path(@project)
-    click_link "edit_concept_#{@concept.id}"
+    find(:css, "#edit_concept_#{@concept.id}").trigger('click')
     within :css, '.checked_items' do
       @concept.concept_disposts.each do |discontent|
         expect(page).to have_content discontent.content
@@ -87,7 +87,7 @@ describe 'Cabinet Concepts' do
   end
 
   it 'created by current user' do
-    click_link 'open_my_concept_posts'
+    click_link 'user_content_concept_posts'
     expect(page).to have_content @concept.title
     @concept.concept_disposts.each do |discontent|
       expect(page).to have_content discontent.content

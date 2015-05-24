@@ -8,7 +8,7 @@
         = Russian::strftime(post_short.created_at,'%d.%m.%Y')
     .media-body.white
       %h6
-        = post_short.name
+        = post_short.content
       - if current_user?(post_short.user) and can_edit_content?
         %span.post_btns_cont
           %button.btn.btn_reset.btn_del
@@ -18,5 +18,5 @@
             = link_to plan_post_path(@project, post_short), method: :delete, data: {confirm: t('confirm.delete_plan')}, id: "destroy_plan_#{post_short.id}", class: 'a_font_reset' do
               %i.glyphicon.glyphicon-trash
         .text-right
-          = link_to edit_plan_post_path(@project, post_short), class: 'a_font_reset', id: "edit_plan_#{post_short.id}" do
+          = link_to edit_plan_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_plan_#{post_short.id}" do
             %i.fa.fa-angle-right.fa-2x.font_grey
