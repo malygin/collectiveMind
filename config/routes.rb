@@ -21,7 +21,7 @@ CollectiveMind::Application.routes.draw do
       get :user_content, on: :collection
       get :vote_result, on: :collection
       get :sort_content, on: :collection
-      get :check_field, on: :collection
+      put :check_field, on: :collection
       get :to_work, on: :collection
 
       member do
@@ -94,6 +94,8 @@ CollectiveMind::Application.routes.draw do
     namespace :aspect, :module => false do
       resources :posts, controller: 'core/aspect/posts' do
         member do
+          put :discuss_status
+
           put :add_comment
           put :update_comment
           put :destroy_comment

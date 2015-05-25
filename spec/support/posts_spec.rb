@@ -377,7 +377,7 @@ shared_examples 'welcome popup' do |stage|
   end
 
   it 'have welcome popup', js: true do
-    user_check_path = Rails.application.routes.url_helpers.send("#{stage}_posts_check_field_path", project, check_field: "#{stage}_intro", status: true)
+    user_check_path = Rails.application.routes.url_helpers.send("check_field_#{stage}_posts_path", project, check_field: "#{stage}_intro", status: true)
 
     expect(page).to have_content 'Цель стадии'
     expect(page).to have_link("#{stage}_intro", href: user_check_path, text: 'Начать работу')
