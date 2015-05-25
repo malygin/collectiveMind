@@ -59,35 +59,30 @@ class Core::Project < ActiveRecord::Base
                       0 => {name: 'Оценка и обсуждение аспектов', active: true, code: :aspects_esimate},
                       1 => {name: 'Изучение БЗ', active: true, code: :aspects_learn},
                       2 => {name: 'Голосование за аспекты', active: true, code: :aspects_voting},
-                      3 => {name: 'Подведение итогов', active: true, code: :aspects_voting}
                   }
             },
             2 => {name: 'Анализ ситуации', type_stage: :discontent_posts, active: true,
                   substages: {
                       0 => {name: 'Поиск несовершенств', active: true, code: :discontents_add},
                       1 => {name: 'Голосование', active: true, code: :discontents_voting},
-                      2 => {name: 'Подведение итогов', active: true, code: :discontents_voting}
                   }
             },
             3 => {name: 'Сбор идей', type_stage: :concept_posts, active: true,
                   substages: {
                       0 => {name: 'Поиск идей', active: true, code: :concepts_add},
                       1 => {name: 'Голосование', active: true, code: :discontents_voting},
-                      2 => {name: 'Подведение итогов', active: true, code: :discontents_voting}
                   }
             },
             4 => {name: 'Объединение идей в пакеты', type_stage: :novation_posts, active: true,
                   substages: {
                       0 => {name: 'Создание пакетов', active: true, code: :novations_add},
                       1 => {name: 'Голосование', active: true, code: :novations_voting},
-                      2 => {name: 'Подведение итогов', active: true, code: :novations_voting}
                   }
             },
             5 => {name: 'Проектное предложение', type_stage: :plan_posts, active: true,
                   substages: {
                       0 => {name: 'Создание проектных предложений', active: true, code: :plans_add},
                       1 => {name: 'Голосование', active: true, code: :plans_voting},
-                      2 => {name: 'Подведение итогов', active: true, code: :plans_voting},
 
                   }
             },

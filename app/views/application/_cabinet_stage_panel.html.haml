@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-md-5.col_padding_right_3
+      .border_grey.rounded_3.stages_block
+        .btn-toolbar{role: 'toolbar'}
+          .btn-group{role: 'group'}
+            = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.main_stage}" do
+              = "#{@project.main_stage} СТАДИЯ:  #{@project.current_stage_name} "
+    .col-md-7.col_padding_left_3
+      .border_grey.rounded_3.stages_block
+        .media.contact
+          .media-left
+            = user_image_tag current_user.avatar, class: 'img-circle img40'
+          .media-body
+            %h5.media-heading.bold=current_user
+
+        = render partial: 'application/cabinet_sticker'

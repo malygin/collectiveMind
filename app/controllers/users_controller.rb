@@ -7,7 +7,7 @@ class UsersController < ProjectsController
   before_filter :have_project_access
 
   def index
-    @users = @project.users_in_project.where(users: {type_user: uniq_proc_users})
+    @users = @project.users_in_project.where(users: {type_user: 0})
     # if @project.type_access == 2
     #   @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
     # else

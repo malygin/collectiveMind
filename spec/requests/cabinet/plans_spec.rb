@@ -51,7 +51,7 @@ describe 'Cabinet Plans' do
     it 'author - ok', js: true do
       visit user_content_plan_posts_path(@project)
       expect {
-        click_link "destroy_plan_#{@plan.id}"
+        execute_script("$('#destroy_plan_#{@plan.id}').click()")
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_plan_posts_path(@project)
       }.to change(Plan::Post, :count).by(-1)

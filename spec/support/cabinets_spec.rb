@@ -32,9 +32,7 @@ shared_examples 'base cabinet' do
     it 'close sticker' do
       expect(page).to have_content t("cabinet.#{@project.current_stage_type.to_s}_sticker")[0..130]
       expect {
-        within :css, '.stages_block' do
-          click_link 'close_sticker'
-        end
+          click_link 'cabinet_close_sticker'
       }.to change(UserCheck, :count).by(1)
       refresh_page
       expect(page).not_to have_content t("cabinet.#{stage_name}_sticker")

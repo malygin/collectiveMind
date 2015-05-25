@@ -106,6 +106,9 @@ describe 'Novation ' do
 
     it_behaves_like 'sort novations'
 
+    # @todo
+    # it_behaves_like 'with content questions'
+
     it_behaves_like 'discuss novations'
 
     context 'vote content', js: true do

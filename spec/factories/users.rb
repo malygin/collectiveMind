@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:nickname) { |n| "Nickname #{n}" }
     password 'pascal2003'
     password_confirmation 'pascal2003'
-    type_user nil
+    type_user 0
   end
 
   factory :moderator, parent: :user do

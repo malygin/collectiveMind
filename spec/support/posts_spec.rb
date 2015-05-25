@@ -322,6 +322,7 @@ shared_examples 'admin panel post' do |moderator = false|
   if moderator
     it ' score post ', js: true do
       plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
+      stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
 
       expect(page).to have_link("plus_post_#{@post1.id}", href: plus_post_path)
       expect {
@@ -329,11 +330,16 @@ shared_examples 'admin panel post' do |moderator = false|
         sleep(5)
         expect(page).to have_css("a.theme_font_color#plus_post_#{@post1.id}")
       }.to change(Journal, :count).by(1)
+      visit  users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: @post1.class::SCORE )
+      visit stage_post_path
       expect {
         find(:css, "a#plus_post_#{@post1.id}").trigger('click')
         sleep(5)
         expect(page).to have_css("a:not(.theme_font_color)#plus_post_#{@post1.id}")
       }.to change(Journal, :count).by(-1)
+      visit  users_path(project)
+      expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE )
     end
 
     it ' approve post ', js: true do
