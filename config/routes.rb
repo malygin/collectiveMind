@@ -19,8 +19,6 @@ CollectiveMind::Application.routes.draw do
 
     resources :posts do
       get :user_content, on: :collection
-      get :vote_result, on: :collection
-      get :sort_content, on: :collection
       put :check_field, on: :collection
 
       member do
@@ -116,10 +114,6 @@ CollectiveMind::Application.routes.draw do
 
     namespace :discontent do
       posts_routes
-      get 'aspect/:aspect/posts/' => 'posts#index'
-      resources :posts do
-          put :next_post_for_vote, on: :member
-      end
     end
 
 
