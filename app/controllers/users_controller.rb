@@ -21,8 +21,6 @@ class UsersController < ProjectsController
   end
 
   def show
-    @awards = Award.all
-
     if @user != current_user
       @journals = Journal.events_for_user_show @project.id, @user.id, 30
     else
