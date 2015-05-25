@@ -22,21 +22,17 @@ CollectiveMind::Application.routes.draw do
       get :vote_result, on: :collection
       get :sort_content, on: :collection
       put :check_field, on: :collection
-      get :to_work, on: :collection
 
       member do
         put :to_archive
         put :plus
         put :discuss_status
-
         put :like
         put :vote
         put :status_post
         put :publish
-
         get :edit_comment
         put :plus_comment
-        put :add_child_comment_form
         put :comment_status
         put :add_comment
         put :update_comment
@@ -95,7 +91,6 @@ CollectiveMind::Application.routes.draw do
       resources :posts, controller: 'core/aspect/posts' do
         member do
           put :discuss_status
-
           put :add_comment
           put :update_comment
           put :destroy_comment
