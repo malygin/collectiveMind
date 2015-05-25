@@ -77,7 +77,7 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def pr_stage
+  def prev_stage
     @core_project.go_to_prev_stage
     respond_to do |format|
       format.js { render 'update_stage' }

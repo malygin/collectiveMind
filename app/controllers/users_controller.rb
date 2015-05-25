@@ -50,7 +50,7 @@ class UsersController < ProjectsController
     redirect_to users_path
   end
 
-  #очистка уведомлений
+  #clean notifications
   def journal_clear
     if @my_journals.size > 0 and current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
