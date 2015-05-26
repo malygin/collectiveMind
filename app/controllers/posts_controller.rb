@@ -254,7 +254,7 @@ class PostsController < ProjectsController
   #todo check if user already voted
   def plus
     @post = current_model.find(params[:id])
-    if current_user.boss? or current_user.role_expert? or current_user.stat_expert?
+    if current_user.boss?
       @post.toggle!(:useful)
       if @post.user
         if @post.useful
@@ -294,7 +294,7 @@ class PostsController < ProjectsController
     @comment = comment_model.find(@id)
     #@against =  params[:against] == 'true'
     #comment.comment_votings.create(user: current_user, comment: comment,  against: @against) unless comment.users.include? current_user
-    if boss? or role_expert?
+    if boss?
       @comment.toggle!(:useful)
       if @comment.useful
         @comment.user.add_score(type: :plus_comment, project: @project, comment: @comment, path: @comment.post.class.name.underscore.pluralize)

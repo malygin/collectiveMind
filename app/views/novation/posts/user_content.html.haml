@@ -21,7 +21,7 @@
                 = link_to novation_post_path(@project, post_short), method: :delete, data: {confirm: t('confirm.delete_novation')}, id: "destroy_novation_#{post_short.id}", class: 'a_font_reset' do
                   %i.glyphicon.glyphicon-trash
             .text-right
-              = link_to edit_novation_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_discontent_#{post_short.id}" do
+              = link_to novation_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_novation_#{post_short.id}" do
                 %i.fa.fa-angle-right.fa-2x.font_grey
     .post-bottom.white
       .row

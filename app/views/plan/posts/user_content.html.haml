@@ -18,5 +18,5 @@
             = link_to plan_post_path(@project, post_short), method: :delete, data: {confirm: t('confirm.delete_plan')}, id: "destroy_plan_#{post_short.id}", class: 'a_font_reset' do
               %i.glyphicon.glyphicon-trash
         .text-right
-          = link_to edit_plan_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_plan_#{post_short.id}" do
+          = link_to plan_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_plan_#{post_short.id}" do
             %i.fa.fa-angle-right.fa-2x.font_grey

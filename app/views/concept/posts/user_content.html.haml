@@ -19,12 +19,9 @@
                   %button.btn.btn_reset.btn_del
                     = link_to concept_post_path(@project, post_short), method: :delete, data: {confirm: t('confirm.delete_concept')}, id: "destroy_concept_#{post_short.id}", class: 'a_font_reset' do
                       %i.glyphicon.glyphicon-trash
-            -if can_edit_content?
-              = link_to edit_concept_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_concept_#{post_short.id}" do
-                = post_short.goal
-                %i.fa.fa-angle-right.font_grey
-            -else
+            = link_to concept_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_concept_#{post_short.id}" do
               = post_short.goal
+              %i.fa.fa-angle-right.font_grey
     .post-bottom.white
       .row
         .col-md-3.col_padding_right_3

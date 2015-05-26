@@ -60,6 +60,7 @@ module ApplicationHelper
     Core::Project::STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage] or name_controller == :core_aspect_posts
     end
+    nil
   end
 
   def can_edit_content?
@@ -154,6 +155,13 @@ module ApplicationHelper
     "/project/#{project.id}/"
   end
 
-
+  def model_for(type, stage)
+    # stage symbol and downcase -> to string and capitalize
+    if type == :post
+      stage == :collect_info_posts ? Core::Aspect::Post : "#{stage.to_s.gsub('_posts','').capitalize}::Post".constantize
+    elsif type == :comment
+      stage == :collect_info_posts ? Core::Aspect::Comment : "#{stage.to_s.gsub('_posts','').capitalize}::Comment".constantize
+    end
+  end
 
 end

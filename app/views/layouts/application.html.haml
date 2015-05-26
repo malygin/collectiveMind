@@ -5,10 +5,15 @@
     .outer
       = render partial: 'application/left_rollover'
       = render partial: 'application/header'
-      = render partial: 'application/stage_panel'
+      - if profile?
+        = render partial: 'application/cabinet_stage_panel'
+      - else
+        = render partial: 'application/stage_panel'
       .main-block
         .container
           = yield
+
+    #render_for_post
     #render_knowbase_posts
     %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
     = javascript_include_tag 'application'

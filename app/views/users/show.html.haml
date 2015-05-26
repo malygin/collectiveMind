@@ -1,38 +1,132 @@
-.col-md-4.col-md-offset-4.text-center
-  .profile
-    .profile_icon.img-circle
-      .divider10
-      - if @user.avatar.present?
-        = cl_image_tag @user.avatar, width: 79, height: 79, crop: :limit
-      - else
-        = image_tag 'user.png'
-      .divider10
+.cab_user.rounded_3.border_grey.light-grey.striped
+  .row
+    .col-md-10
+      %span.cab_username
+        = user_image_tag @user.avatar, class: "img50 img-circle border_grey"
+        %h6.white
+          =@user
+
+.divider15
+.row
+  .col-md-2
+    %ul.list-unstyled.cab_menu_left
+      %li.active
+        %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#user_content"}
+          Контент
       - if current_user?(@user)
-        %a#profile-tab{'aria-controls' => 'profile', 'aria-expanded' => 'true', 'data-toggle' => 'tab', href: '#profile', role: 'tab'}
-          %button.btn.btn-xs.btn-danger Изменить
-    .divider10
-    %h4
-      = @user
-    - if current_user?(@user)
-      #profile.tab-pane.fade{'aria-labelledby' => 'profile-tab', role: 'tabpanel'}
-        %h5 Не состоит ни в одной группе
-        = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
-          = render 'shared/notice_messages', object: f.object
-          .form-group
-            = f.text_field :name, class: 'form-control', placeholder: 'Имя'
-          .form-group
-            = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
-          .form-group
-            = f.text_field :email, class: 'form-control', placeholder: 'Email'
-          .form-group
-            = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
-          .form-group
-            = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
-          .form-group
-            = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-          .form-group
-            .checkbox
-              %label
-                %input{type: 'checkbox'}/
-                Получать автоматические уведомления
-          = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+        %li
+          %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#user_profile"}
+            Профиль
+
+  .col-md-10
+    .tab-content
+      #user_content.tab-pane.fade.in.active{:role => "tabpanel"}
+        %div{:role => "tabpanel"}
+          %ul.nav.nav-tabs.cab_horiz_tabs{:role => "tablist"}
+            - Core::Project::STAGES.each do |num_stage, stage|
+              -if num_stage <= 5
+                %li{class: "#{'active' if @project.main_stage == num_stage}", :role => "presentation"}
+                  %a{id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", "data-toggle" => "tab", :href => "#cab_cont_#{num_stage}", :role => "tab"}
+                    %span.marked=num_stage
+                    СТАДИЯ
+          .tab-content.cab_cont_block.rounded_3.border_grey.white
+            - Core::Project::STAGES.each do |num_stage, stage|
+              -if num_stage <= 5
+                .tab-pane.fade{class: "#{'active in' if @project.main_stage == num_stage}", id: "cab_cont_#{num_stage}", :role => "tabpanel"}
+                  .divider10
+                  .container
+                    .row
+                      .col-md-6.exp_col.left
+                        %button.btn.btn_reset.exp_button.pull-right
+                          = image_tag 'grey_arrow.png'
+                        .divider15
+                        %span.stage-heading
+                          ="#{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})"
+
+                        -# @todo move to users controllers
+                        - @content = model_for(:post, stage[:type_stage]).by_project(@project).by_user(@user)
+                        = render template: "#{stage[:type_stage].to_s.gsub('_posts','/posts')}/user_content"
+
+                      .col-md-6.exp_col.right
+                        %button.btn.btn_reset.exp_button.pull-left
+                          = image_tag 'grey_arrow_1.png'
+                        .divider15
+                        %span.stage-heading
+                          Мои комментарии
+                          ="(#{@user.comment_for_project(stage[:type_stage], @project).count})"
+                        .chat-messages
+                          -# @todo move to users controllers
+                          - @stage_comments = model_for(:comment, stage[:type_stage]).by_user(@user).stage_comments_for(@project)
+                          = render partial:'shared/cabinet_comment', collection: @stage_comments, locals: {num_stage: num_stage}
+                  .divider20
+
+      - if current_user?(@user)
+        #user_profile.tab-pane.fade{:role => "tabpanel"}
+          = @user
+          %h5 Не состоит ни в одной группе
+          = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
+            = render 'shared/notice_messages', object: f.object
+            .form-group
+              = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+            .form-group
+              = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+            .form-group
+              = f.text_field :email, class: 'form-control', placeholder: 'Email'
+            .form-group
+              = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+            .form-group
+              = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
+            .form-group
+              = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+            .form-group
+              .checkbox
+                %label
+                  %input{type: 'checkbox'}/
+                  Получать автоматические уведомления
+            = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+
+
+
+
+
+
+
+
+-#.col-md-4.col-md-offset-4.text-center
+-#  .profile
+-#    .profile_icon.img-circle
+-#      .divider10
+-#      - if @user.avatar.present?
+-#        = cl_image_tag @user.avatar, width: 79, height: 79, crop: :limit
+-#      - else
+-#        = image_tag 'user.png'
+-#      .divider10
+-#      - if current_user?(@user)
+-#        %a#profile-tab{'aria-controls' => 'profile', 'aria-expanded' => 'true', 'data-toggle' => 'tab', href: '#profile', role: 'tab'}
+-#          %button.btn.btn-xs.btn-danger Изменить
+-#    .divider10
+-#    %h4
+-#      = @user
+-#    - if current_user?(@user)
+-#      #profile.tab-pane.fade{'aria-labelledby' => 'profile-tab', role: 'tabpanel'}
+-#        %h5 Не состоит ни в одной группе
+-#        = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
+-#          = render 'shared/notice_messages', object: f.object
+-#          .form-group
+-#            = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+-#          .form-group
+-#            = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+-#          .form-group
+-#            = f.text_field :email, class: 'form-control', placeholder: 'Email'
+-#          .form-group
+-#            = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+-#          .form-group
+-#            = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
+-#          .form-group
+-#            = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+-#          .form-group
+-#            .checkbox
+-#              %label
+-#                %input{type: 'checkbox'}/
+-#                Получать автоматические уведомления
+-#          = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'

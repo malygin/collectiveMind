@@ -26,12 +26,9 @@
                           %i.glyphicon.glyphicon-trash
               %tr.post_text
                 %td.col-md-12
-                  -if can_edit_content?
-                    = link_to edit_discontent_post_path(@project, post_short), class: 'a_font_reset', id: "link_edit_discontent_#{post_short.id}" do
-                      = post_short.what
-                      %i.fa.fa-angle-right.cab2_post_open.font_grey
-                  -else
+                  = link_to discontent_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_discontent_#{post_short.id}" do
                     = post_short.what
+                    %i.fa.fa-angle-right.cab2_post_open.font_grey
     .post-bottom.white
       .row
         .col-md-2.col_padding_right_3
