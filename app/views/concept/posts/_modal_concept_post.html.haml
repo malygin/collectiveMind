@@ -62,8 +62,9 @@
 
       .container.modal_content
         .row
-          .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
-            %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+          .col-md-6.exp_col.left
+            %button.btn.btn_reset.exp_button.pull-right
+              = image_tag 'grey_arrow.png'
             .divider25
             .stripe-qa
               .lined-heading
@@ -98,8 +99,9 @@
                   = t('show.desc')
                 = @post.impact_env
 
-          .col-md-6.comment_col.popup_expandable_col.ps_cont.white-gray
-            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание идеи
+          .col-md-6.exp_col.white-gray.right
+            %button.btn.btn_reset.exp_button.pull-left
+              = image_tag 'grey_arrow_1.png'
             .divider10
             -##myCarousel.carousel.slide{"data-ride" => "carousel"}
             -#  .carousel-inner.chat-messages{:role => "listbox"}

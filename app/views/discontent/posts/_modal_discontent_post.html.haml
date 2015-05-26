@@ -46,8 +46,9 @@
     .modal_body
       .container.modal_content
         .row
-          .col-md-5.com_dashed_border.right.popup_collapsable_col.collapse.in
-            %button.expand_button.remove_col.btn_reset{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+          .col-md-6.exp_col.left
+            %button.btn.btn_reset.exp_button.pull-right
+              = image_tag 'grey_arrow.png'
             .divider20
             .border_light_grey.rounded_3.imperf_left
               .media.comment.main_line
@@ -100,8 +101,9 @@
                       = asp.content
                 .divider10
 
-          .col-md-7.comment_col.popup_expandable_col.ps_cont.white-gray
-            %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "7", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"} открыть описание несовершенства
+          .col-md-6.exp_col.white-gray.right
+            %button.btn.btn_reset.exp_button.pull-left
+              = image_tag 'grey_arrow_1.png'
             .divider10
             -##myCarousel.carousel.slide{"data-ride" => "carousel"}
             -#  .carousel-inner.chat-messages{:role => "listbox"}

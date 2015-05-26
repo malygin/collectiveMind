@@ -69,8 +69,9 @@
         #tab-1.tab-pane.fade.in.active
           .container.modal_content
             .row
-              .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
-                %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+              .col-md-6.exp_col.left
+                %button.btn.btn_reset.exp_button.pull-right
+                  = image_tag 'grey_arrow.png'
                 .divider25
                 - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
                   %a.a_font_reset.collapser_type2.with_plus{class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}"}
@@ -87,9 +88,9 @@
                           =@post.post_novations.first.send(attribute)
                         .divider15
 
-              .col-md-6.comment_col.popup_expandable_col.ps_cont.white-gray
-                %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
-                  открыть описание проекта
+              .col-md-6.exp_col.white-gray.right
+                %button.btn.btn_reset.exp_button.pull-left
+                  = image_tag 'grey_arrow_1.png'
                 .divider10
                 .separator
                   %hr

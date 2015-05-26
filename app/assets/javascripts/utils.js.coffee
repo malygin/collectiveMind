@@ -209,25 +209,14 @@
 
 # сворачивание комментов и скролл
 @comments_expandable_column = ->
-  $('.expand_button').click ->
-    col = $(this).attr('data-col')
-    $('.popup_expandable_col').toggleClass('col-md-' + col).toggleClass('col-md-12').toggleClass 'exp'
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.comment_col .collapse').on 'shown.bs.collapse', ->
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.comment_col .collapse').on 'hidden.bs.collapse', ->
-    $('.popup_expandable_col.ps_cont').perfectScrollbar 'update'
-    return
-  $('.answers_collapse').click ->
-    $(this).toggleClass 'opened'
-    return
-  $('.com_answers').on 'shown.bs.collapse', ->
-    $('.modal_content.ps_cont').perfectScrollbar 'update'
-    return
-  $('.com_answers').on 'hidden.bs.collapse', ->
-    $('.modal_content.ps_cont').perfectScrollbar 'update'
+  $('.exp_button').click ->
+    parent_col = $(this).parents('.exp_col')
+    if parent_col.hasClass('active')
+      parent_col.toggleClass 'active'
+      parent_col.siblings('.exp_col').toggleClass 'hidden'
+    else
+      parent_col.toggleClass 'hidden'
+      parent_col.siblings('.exp_col').toggleClass 'active'
     return
 
 #----------
