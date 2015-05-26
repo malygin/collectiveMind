@@ -1,9 +1,9 @@
 #popup-estimate.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
   - if boss?
     .post-top-header
-      =link_to({controller: @post.class.name.underscore.pluralize, action: :plus, project: @project.id, id: @post.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+      =link_to({controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
         %i.fa.fa-trophy.fa-lg
-      = link_to({controller: @post.class.name.underscore.pluralize, action: :discuss_status, project: @project.id, id: @post.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_stat_post_#{@post.id}") do
+      = link_to({controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_stat_post_#{@post.id}") do
         %i.fa.fa-bookmark.fa-lg
   .popup.popup_rounded.popup_color_theme_stage5
     %div{"data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}"}

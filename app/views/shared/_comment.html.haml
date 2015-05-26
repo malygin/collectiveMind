@@ -24,7 +24,7 @@
                 Удалить
 
         - if boss?
-          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+          = link_to({controller: comment.controller_name_for_action, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
             %span.badge.badge_important{class: "#{'theme_back_color' if comment.approve_status}"}= t('show.important')
         - elsif comment.approve_status
           %span.badge.badge_important.theme_back_color= t('show.important')

@@ -13,25 +13,25 @@ CollectiveMind::Application.routes.draw do
   #   mount Resque::Server.new, at: "/resque"
   # end
 
-  def posts_routes
+  def posts_routes(controller_name=nil)
     get 'autocomplete', to: 'posts#autocomplete'
     put 'vote/:post_id' => 'posts#vote'
 
-    resources :posts do
+    resources :posts, controller: controller_name do
       get :user_content, on: :collection
       put :check_field, on: :collection
 
       member do
         put :to_archive
-        put :plus
-        put :discuss_status
+        put :add_score
+        put :change_status
         put :like
         put :vote
-        put :status_post
         put :publish
+
         get :edit_comment
-        put :plus_comment
-        put :comment_status
+        put :add_score_for_comment
+        put :change_status_for_comment
         put :add_comment
         put :update_comment
         put :destroy_comment
@@ -46,18 +46,6 @@ CollectiveMind::Application.routes.draw do
   get '/project/:id/next_stage', to: 'core/projects#next_stage'
   get '/project/:id/prev_stage', to: 'core/projects#prev_stage'
 
-  # resources :groups do
-  #   put :upload_file
-  #   put :become_member
-  #   put :leave
-  #   put 'invite_user/:user_id', action: 'invite_user'
-  #   put :take_invite
-  #   put :reject_invite
-  #   put :call_moderator
-  # end
-  # resources :group_tasks, only: [:new, :edit, :create, :update, :destroy] do
-  #   put 'assign_user/:user_id', action: 'assign_user'
-  # end
 
 
   scope '/project/:project' do
@@ -86,22 +74,7 @@ CollectiveMind::Application.routes.draw do
     end
 
     namespace :aspect, :module => false do
-      resources :posts, controller: 'core/aspect/posts' do
-        member do
-          put :discuss_status
-          put :add_comment
-          put :update_comment
-          put :destroy_comment
-          put :to_archive
-          put :plus
-          get :edit_comment
-          put :plus_comment
-          put :comment_status
-          put :like
-          put :like_comment
-          put :vote
-        end
-      end
+      posts_routes('core/aspect/posts')
     end
 
     namespace :collect_info do
@@ -111,11 +84,9 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-
     namespace :discontent do
       posts_routes
     end
-
 
     namespace :concept do
       posts_routes
@@ -144,6 +115,19 @@ CollectiveMind::Application.routes.draw do
     #   namespace :essay do
     #     posts_routes
     #   end
+    # end
+
+    # resources :groups do
+    #   put :upload_file
+    #   put :become_member
+    #   put :leave
+    #   put 'invite_user/:user_id', action: 'invite_user'
+    #   put :take_invite
+    #   put :reject_invite
+    #   put :call_moderator
+    # end
+    # resources :group_tasks, only: [:new, :edit, :create, :update, :destroy] do
+    #   put 'assign_user/:user_id', action: 'assign_user'
     # end
 
   end

@@ -1,13 +1,12 @@
 ##
-# Контроллер, который является родительским для всех, которые находятся внутри scope '/project/:project'
-# Гарантирует, что будет доступен объект проекта: @project
-# Гарантирует, что только пользователи, имеющие доступ к проекту, пройдут дальше
+# parent controller for scope '/project/:project'
+# guarantee  @project is available
+# guarantee secure project only for coorect users
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!
   before_action :set_project
   before_filter :check_access_to_project
   before_filter :news_data
-  # базовое логирование, отрабатывает после, чтобы дата была предпоследней
+  # base logging, works after for proper date
   after_action :start_visit
 
   protected
@@ -27,5 +26,17 @@ class ProjectsController < ApplicationController
     unless @project.users.include?(current_user) or boss?
       redirect_to root_url
     end
+  end
+
+  def start_visit
+    # record url without params for easy parsing
+    if current_user and @project and request.method == 'GET'
+      current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
+                                  body: request.original_fullpath.split('?')[0]
+    end
+  end
+
+  def news_data
+    @expert_news = @project.news
   end
 end
