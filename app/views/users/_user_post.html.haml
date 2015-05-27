@@ -9,6 +9,6 @@
             =user.user_project_scores(@project.id).score
         - if user.awards.for_project(@project).any? and (not (user.boss? or user.role_expert?) or @project.uniq_proc?)
           = image_tag('awards/'+user.awards.for_project(@project).last.url+'_25_25.png',
-          title: user.awards.for_project(@project).last.name, style: 'height:25px;width:25px;')
+          title: user.awards.by_project(@project).last.name, style: 'height:25px;width:25px;')
 
 

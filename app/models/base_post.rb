@@ -2,7 +2,7 @@ module BasePost
   extend ActiveSupport::Concern
   include Util::Filterable
 
-  # Статусы поста: черновик, опубликовано, одобрено, в архиве
+  # Statuses of post
   STATUSES = {
       draft: 0,
       published: 1,
@@ -15,6 +15,7 @@ module BasePost
   included do
     belongs_to :user
     belongs_to :project, class_name: 'Core::Project'
+
     has_many :notes
     has_many :comments
 
@@ -27,18 +28,14 @@ module BasePost
     has_many :post_votings_against, -> { joins(:post_votings).where("#{table_name}.against = ?", true) }, class_name: 'PostVoting'
     has_many :users_against, through: :post_votings_against, source: :user
 
-    has_many :admins_pro, -> { where users: {type_user: [1, 6]} }, through: :post_votings_pro, source: :user
-    has_many :admins_vote, -> { where users: {type_user: [1, 6]} }, through: :post_votings, source: :user
-    has_many :admins_against, -> { where users: {type_user: [1, 6]} }, through: :post_votings_against, source: :user
-
-    #@todo оставить только один скоуп
-    scope :for_project, -> (project) { where(project_id: project) }
     scope :by_project, ->(p) { where(project_id: p) }
     scope :by_user, ->(user) { where(user_id: user.id) }
     scope :by_status, ->(status) { where(status: status) }
+
     scope :for_expert, -> { where(status: 1) }
     scope :accepted, -> { where(status: 2) }
     scope :archive, -> { where(status: 3) }
+
     scope :with_votes, -> { includes(:post_votings).where('"discontent_post_votings"."id" > 0') }
     scope :with_concept_votes, -> { includes(:post_votings).where('"concept_post_votings"."id" > 0') }
 
@@ -48,9 +45,7 @@ module BasePost
 
     scope :published, -> { where status: STATUSES[:published] }
 
-    scope :date_stage, ->(project) { where("DATE(#{table_name}.created_at) >= ? AND DATE(#{table_name}.created_at) <= ?", project.date_begin_stage(table_name).to_date, project.date_end_stage(table_name).to_date) if project.date_begin_stage(table_name).present? and project.date_end_stage(table_name).present? }
-
-    # скоуп для отбора постов с последнего захода на страницу
+    # for user's posts which was add from last visit
     scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present? }
     scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts', '_comments')}.created_at >= ?", last_time) if last_time.present? }
 
@@ -120,19 +115,56 @@ module BasePost
 
     def add_comment(params, user, comment_parent, comment_answer, name_of_comment_for_journal)
       content = params[:content]
-
       unless content==''
         if params[:image]
           img, isFile = Util::ImageLoader.load(params)
         end
         comment = self.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil,
                                         user: user, comment_id: comment_parent ? comment_parent.id : nil)
-
         Journal.comment_event(user, self.project, name_of_comment_for_journal, self, comment, comment_answer)
         return comment
       end
     end
 
+    def add_score
+      self.toggle!(:useful)
+      if self.useful
+        self.user.add_score(type: :plus_post, project: self.project, post: self,
+                            type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                            score: self::SCORE, model_score: self.class.table_name.singularize)
+      else
+        self.user.add_score(type: :to_archive_plus_post, project: self.project, post: self,
+                            type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                            score: self::SCORE, model_score: self.class.table_name.singularize)
+      end
+    end
+
+    def self.prepare_to_show(id, project)
+      post = self.where(id: id, project_id: project).first
+      if params[:viewed]
+        Journal.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
+      end
+      if current_model.column_names.include? 'number_views'
+        post.update_column(:number_views, post.number_views.nil? ? 1 : post.number_views+1)
+      end
+      return post
+    end
+
+    def self.create_post(params, project, user)
+      post = self.new(params[self.table_name.singularize])
+      post.project = project
+      post.user = user
+
+      post.stage = params[:stage] unless params[:stage].nil?
+      post.core_aspects << Core::Aspect::Post.find(params[:aspect_id]) unless params[:aspect_id].nil?
+      post.style = params[:style] unless params[:style].nil?
+      post.status = 0 if self.column_names.include? 'status'
+      post.save!
+      user.journals.build(type_event: name_of_model_for_param+"_save", project: project, body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
+      return post
+    end
+
+    # generic method for statuses, for example publish?
     STATUSES.keys.each do |method_name|
       define_method :"#{method_name}?" do
         status == STATUSES[method_name]
@@ -140,3 +172,6 @@ module BasePost
     end
   end
 end
+
+
+

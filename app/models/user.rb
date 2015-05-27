@@ -223,7 +223,7 @@ class User < ActiveRecord::Base
     if stage == :collect_info_posts
       core_aspects.by_project(project).joins(:comments)
     else
-      send(stage).for_project(project.id).joins(:comments)
+      send(stage).by_project(project.id).joins(:comments)
     end
   end
 
