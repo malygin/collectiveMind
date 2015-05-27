@@ -27,14 +27,6 @@
                   = link_to self.send("user_content_#{@project.current_stage_type}_path", @project), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
                     Контент
 
-              -#%ul.list-unstyled.tabs_type_1{role: 'tablist'}
-              -#  - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
-              -#    %li{role: 'presentation', class: ('active' if current_page?(action: 'new', type_mechanic: technique.code))}
-              -#      = link_to t("techniques.#{technique.name}"), self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
-              -#      role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}"
-              -#  %li{role: 'presentation', class: ('active' if action_name == 'user_content')}
-              -#    = link_to "#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})", self.send("user_content_#{@project.current_stage_type}_path"), role: 'button', class: 'a_font_reset text-right', id: "open_my_#{@project.current_stage_type}"
-
               -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
               = yield :cabinet_sidebar
             .col-md-10#cabinet_form

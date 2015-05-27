@@ -37,12 +37,6 @@
                 -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
                   =Russian::strftime(@post.created_at,'%d.%m.%Y')
-                -#- if boss? or role_expert? or stat_expert?
-                -#  = link_to({controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{@post.id}") do
-                -#    %span.label_approve.label(class="#{label_approve_stat(@post)}")
-                -#      = t('show.important')
-                -#- elsif @post.approve_status
-                -#  %span.label.label-success=t('show.important')
     .modal_body
       .container.modal_content
         .row
@@ -105,14 +99,6 @@
             %button.btn.btn_reset.exp_button.pull-left
               = image_tag 'grey_arrow_1.png'
             .divider10
-            -##myCarousel.carousel.slide{"data-ride" => "carousel"}
-            -#  .carousel-inner.chat-messages{:role => "listbox"}
-            -#    -if @comments.present?
-            -#      - @comments.each_slice(5).with_index do |slice, i|
-            -#        .item{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}"}
-            -#          = render partial:'shared/comment', collection: slice
-            -#    -else
-            -#      .item.active
 
             .separator
               %hr
@@ -124,11 +110,5 @@
               = render partial:'shared/comment', collection: @comments
             .divider15
             = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
-            -#-if @comments.count > 5
-            -#  %nav.text-center
-            -#    %ul.pagination
-            -#      - @comments.each_slice(5).with_index do |slice, i|
-            -#        %li
-            -#          %a.myCarousel-target{class: "#{'active' if i + 1 == @comments.count / 5 + (@comments.count % 5 == 0 ? 0 : 1)}", "data-slide-to" => "#{i}", "data-target" => "#myCarousel"}
-            -#            ="#{i+1}"
+
         .divider25
