@@ -38,9 +38,10 @@
                       График реализации проекта
           .col-md-3
             .popup-post-block.pull-right
-              = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
               %span.font_black.text-center
-                = @post.user
+                = link_to @post.user, user_path(@project, @post.user)
       .clearfix
       .tab-content.modal_content
         #tab-1.tab-pane.fade.in.active

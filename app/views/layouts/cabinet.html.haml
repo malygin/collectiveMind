@@ -45,7 +45,7 @@
                                   %span.marked=num_stage
                                   СТАДИЯ
                             - elsif @project.main_stage >= num_stage
-                              %li{:role => "presentation"}
+                              %li{class: "#{'active' if @project.main_stage > 5 and num_stage == 5}", :role => "presentation"}
                                 = link_to send("user_content_#{stage[:type_stage]}_path", @project), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
                                   %span.marked=num_stage
                                   СТАДИЯ

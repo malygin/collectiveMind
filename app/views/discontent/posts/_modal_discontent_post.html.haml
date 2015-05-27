@@ -49,10 +49,11 @@
                 .container
                   .media-left
                     -#= image_tag 'no-ava.png', class: "media-object img50 img-circle"
-                    = user_image_tag @post.user.try(:avatar), class: 'media-object img50 img-circle'
+                    = link_to user_path(@project, @post.user) do
+                      = user_image_tag @post.user.try(:avatar), class: 'media-object img50 img-circle'
                   .media-body
                     %h5.media-heading.bold
-                      = @post.user
+                      = link_to @post.user, user_path(@project, @post.user)
               %table.table
                 %tr
                   %td.col-md-12.left-column.bold

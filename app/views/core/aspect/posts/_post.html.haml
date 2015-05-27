@@ -3,9 +3,10 @@
   .post-body
     .media
       .media-left.text-center.gradient2.post-poster
-        = user_image_tag post.user.try(:avatar), class: 'img-circle img40'
+        = link_to user_path(@project, post.user) do
+          = user_image_tag post.user.try(:avatar), class: 'img-circle img40'
         %p.poster-name
-          = post.user
+          = link_to post.user, user_path(@project, post.user)
         %p.poster-name
       .media-body.white
         .post-text

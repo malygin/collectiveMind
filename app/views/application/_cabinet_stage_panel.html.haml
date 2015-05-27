@@ -10,8 +10,10 @@
       .border_grey.rounded_3.stages_block
         .media.contact
           .media-left
-            = user_image_tag current_user.avatar, class: 'img-circle img40'
+            = link_to user_path(@project, current_user) do
+              = user_image_tag current_user.avatar, class: 'img-circle img40'
           .media-body
-            %h5.media-heading.bold=current_user
+            %h5.media-heading.bold
+              = link_to current_user, user_path(@project, current_user)
 
         = render partial: 'application/cabinet_sticker'

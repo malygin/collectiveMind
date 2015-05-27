@@ -3,7 +3,8 @@
     .col-sm-3
       .rating_user
         .media-left
-          = user_image_tag user.avatar, class: 'media-object img-circle img40 img_bordered'
+          = link_to user_path(@project, user) do
+            = user_image_tag user.avatar, class: 'media-object img-circle img40 img_bordered'
         .media-body
           %h5.media-heading.bold
             =link_to user, user_path(@project, user)

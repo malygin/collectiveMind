@@ -6,9 +6,10 @@
     .post-body
       .media
         .media-left.text-center.gradient2.post-poster
-          = user_image_tag current_user.avatar, class: 'img-circle img40'
+          = link_to user_path(@project, current_user) do
+            = user_image_tag current_user.avatar, class: 'img-circle img40'
           %p.poster-name
-            = current_user
+            = link_to current_user, user_path(@project, current_user)
           %p.poster-name
         .media-body.white
           .post-text

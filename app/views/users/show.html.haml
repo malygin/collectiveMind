@@ -2,20 +2,21 @@
   .row
     .col-md-10
       %span.cab_username
-        = user_image_tag @user.avatar, class: "img50 img-circle border_grey"
+        = link_to user_path(@project, @user) do
+          = user_image_tag @user.avatar, class: "img50 img-circle border_grey"
         %h6.white
-          =@user
+          = link_to @user, user_path(@project, @user)
 
 .divider15
 .row
   .col-md-2
     %ul.list-unstyled.cab_menu_left
       %li.active
-        %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#user_content"}
+        %a.btn.btn_simple_grey.a_font_reset.text-right#show_content{"data-toggle" => "tab", :href => "#user_content"}
           Контент
       - if current_user?(@user)
         %li
-          %a.btn.btn_simple_grey.a_font_reset.text-right{"data-toggle" => "tab", :href => "#user_profile"}
+          %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{"data-toggle" => "tab", :href => "#user_profile"}
             Профиль
 
   .col-md-10
@@ -25,14 +26,14 @@
           %ul.nav.nav-tabs.cab_horiz_tabs{:role => "tablist"}
             - Core::Project::STAGES.each do |num_stage, stage|
               -if num_stage <= 5
-                %li{class: "#{'active' if @project.main_stage == num_stage}", :role => "presentation"}
+                %li{class: "#{'active' if @project.main_stage == num_stage or (@project.main_stage > 5 and num_stage == 5)}", :role => "presentation"}
                   %a{id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", "data-toggle" => "tab", :href => "#cab_cont_#{num_stage}", :role => "tab"}
                     %span.marked=num_stage
                     СТАДИЯ
           .tab-content.cab_cont_block.rounded_3.border_grey.white
             - Core::Project::STAGES.each do |num_stage, stage|
               -if num_stage <= 5
-                .tab-pane.fade{class: "#{'active in' if @project.main_stage == num_stage}", id: "cab_cont_#{num_stage}", :role => "tabpanel"}
+                .tab-pane.fade{class: "#{'active in' if @project.main_stage == num_stage or (@project.main_stage > 5 and num_stage == 5)}", id: "cab_cont_#{num_stage}", :role => "tabpanel"}
                   .divider10
                   .container
                     .row

@@ -193,71 +193,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   #   expect(page).to have_css 'a.previous_page'
   # end
 
-  # context 'mark comment as', js: true do
-  #   deprecated
-  #   if project_status < 7
-  #     it 'discontent' do
-  #       within :css, "a#discontent_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-default'
-  #       end
-  #       find(:css, "a#discontent_comment_#{@comment_1.id} span").trigger('click')
-  #
-  #       within :css, "a#discontent_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-danger'
-  #       end
-  #     end
-  #   end
-  #
-  #   it 'concept' do
-  #     within :css, "a#concept_comment_#{@comment_1.id}" do
-  #       expect(page).to have_css 'span.label-default'
-  #     end
-  #     find(:css, "a#concept_comment_#{@comment_1.id} span").trigger('click')
-  #     # click_link "concept_comment_#{@comment_1.id}"
-  #     within :css, "a#concept_comment_#{@comment_1.id}" do
-  #       expect(page).to have_css 'span.label-warning'
-  #     end
-  #   end
-  #
-  #   not functional now
-  #   if moderator
-  #     it 'discuss' do
-  #       within :css, "a#discuss_stat_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-default'
-  #       end
-  #       find(:css, "a#discuss_stat_comment_#{@comment_1.id} span").trigger('click')
-  #
-  #       # click_link "discuss_stat_comment_#{@comment_1.id}"
-  #       within :css, "a#discuss_stat_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-danger'
-  #       end
-  #     end
-  #
-  #     it 'approve' do
-  #       within :css, "a#approve_stat_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-default'
-  #       end
-  #       find(:css, "a#approve_stat_comment_#{@comment_1.id} span").trigger('click')
-  #
-  #       # click_link "approve_stat_comment_#{@comment_1.id}"
-  #       within :css, "a#approve_stat_comment_#{@comment_1.id}" do
-  #         expect(page).to have_css 'span.label-success'
-  #       end
-  #     end
-  #   else
-  #     it 'show discuss label' do
-  #       @comment_1.update_attributes(discuss_status: true)
-  #       refresh_page
-  #       expect(page).to have_css "span.label-danger#discuss_stat_comment_#{@comment_1.id}"
-  #     end
-  #
-  #     it 'show approve label' do
-  #       @comment_1.update_attributes(approve_status: true)
-  #       refresh_page
-  #       expect(page).to have_css "span.label-success#approve_stat_comment_#{@comment_1.id}"
-  #     end
-  #   end
-  # end
+
 end
 
 shared_examples 'likes posts' do |moderator = false|
@@ -413,3 +349,4 @@ shared_examples 'vote popup' do |status, title, stage|
     end
   end
 end
+

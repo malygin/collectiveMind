@@ -38,6 +38,24 @@ shared_examples 'base cabinet' do
       expect(page).not_to have_content t("cabinet.#{stage_name}_sticker")
     end
   end
+
+  context 'stages navbar' do
+    it 'have stages navbar', js: true do
+      user_content_path = Rails.application.routes.url_helpers.send("user_content_#{@project.current_stage_type.to_s}_path", @project)
+      visit user_content_path
+      expect(page).to have_link("go_to_user_content_#{@project.current_stage_type}", href: user_content_path)
+      Core::Project::STAGES.each do |num_stage, stage|
+        if num_stage <= 5
+          if @project.main_stage >= num_stage
+            user_content_path = Rails.application.routes.url_helpers.send("user_content_#{stage[:type_stage]}_path", @project)
+            expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: user_content_path)
+          else
+            expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: '#')
+          end
+        end
+      end
+    end
+  end
 end
 
 def create_project_and_user_for(stage)

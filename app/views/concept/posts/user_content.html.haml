@@ -4,9 +4,10 @@
     .post-body
       .media
         .media-left.text-center.gradient2.post-poster
-          = user_image_tag post_short.user.avatar, class: 'img-circle img40'
+          = link_to user_path(@project, post_short.user) do
+            = user_image_tag post_short.user.avatar, class: 'img-circle img40'
           %p.poster-name
-            = post_short.user
+            = link_to post_short.user, user_path(@project, post_short.user)
         .media-body.white
           .post-text
             %h5.bold

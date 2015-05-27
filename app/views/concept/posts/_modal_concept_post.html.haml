@@ -45,9 +45,10 @@
           .col-md-6
             .innov-poster-cont
               -#=image_tag 'no-ava.png', class: 'img-circle'
-              = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
               %span.poster-name
-                = @post.user
+                = link_to @post.user, user_path(@project, @post.user)
           .col-md-6.col_padding_right_0
             .innov-tags
               - @post.concept_disposts.each_with_index do |post, index|

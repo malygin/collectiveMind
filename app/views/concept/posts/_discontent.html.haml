@@ -12,12 +12,14 @@
     .description.collapse.rotate_arrow{id: "imperfs3-#{discontent.id}"}
       .media.comment
         .media-left
-          = user_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle' if discontent.user
+          -if discontent.user
+            = link_to user_path(@project, discontent.user) do
+              = user_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle'
         .media-body
           .row
             .col-md-4
               %h6.media-heading.bold
-                = discontent.user
+                = link_to discontent.user, user_path(@project, discontent.user) if discontent.user
               %span.date
                 = Russian::strftime(discontent.created_at,'%d.%m.%Y %k:%M:%S')
             .col-md-4.col-md-offset-4

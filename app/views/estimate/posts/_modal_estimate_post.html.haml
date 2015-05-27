@@ -65,9 +65,10 @@
                       участников
           .col-md-3
             .popup-post-block.pull-right
-              = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
               %span.font_black.text-center
-                = @post.user
+                = link_to @post.user, user_path(@project, @post.user)
 
       .clearfix
       .tab-content.modal_content
@@ -133,10 +134,11 @@
                   .col-sm-3
                     .rating_user
                       .media-left
-                        = user_image_tag user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
+                        = link_to user_path(@project, user) do
+                          = user_image_tag user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
                       .media-body
                         %h5.media-heading.bold
-                          = user
+                          = link_to user, user_path(@project, user)
                   .col-sm-4.no_padding_col.divided
                     .rate_buttons.color_1
                       .progress

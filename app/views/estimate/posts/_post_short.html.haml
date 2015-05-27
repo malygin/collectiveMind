@@ -4,10 +4,11 @@
       .rating_user
         .media-left
           -#= image_tag 'no-ava.png', class: "media-object img-circle img40 img_bordered"
-          = user_image_tag post_short.user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
+          = link_to user_path(@project, post_short.user) do
+            = user_image_tag post_short.user.try(:avatar), class: 'media-object img-circle img40 img_bordered'
         .media-body
           %h5.media-heading.bold
-            = post_short.user
+            = link_to post_short.user, user_path(@project, post_short.user)
           %p.font_color_stage6
             = post_short.name
     .col-sm-4.no_padding_col.divided{id: "progress_type_vote_1_#{post_short.id}"}

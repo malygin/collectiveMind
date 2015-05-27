@@ -2,10 +2,11 @@
   .media-left
     -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
     -#= cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
-    = user_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
+    = link_to user_path(@project, comment.user) do
+      = user_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
   .media-body
     %h5.media-heading.bold{id: "user_name_#{comment.id}"}
-      =comment.user
+      = link_to comment.user, user_path(@project, comment.user)
     %span.comment_interf
       %span.date_time.theme_font_color
         =Russian::strftime(comment.created_at,'%k:%M')
