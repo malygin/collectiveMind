@@ -2,9 +2,9 @@
     <div class="full-post">
         <% if(admin_panel) { %>
         <div class="post-top-header">
-            <a class="btn btn-white btn-xs link_status <%= useful ? 'theme_font_color' : '' %>" id="plus_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/plus"><i class="fa fa-trophy fa-lg"></i>
+            <a class="btn btn-white btn-xs link_status <%= useful ? 'theme_font_color' : '' %>" id="add_score_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/add_score"><i class="fa fa-trophy fa-lg"></i>
             </a>
-            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'theme_font_color' : '' %>" id="approve_stat_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/discuss_status?approve_status=true"><i class="fa fa-bookmark fa-lg"></i>
+            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'theme_font_color' : '' %>" id="approve_status_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/change_status?approve_status=true"><i class="fa fa-bookmark fa-lg"></i>
             </a>
             <!--<a class="btn btn-white btn-xs link_status"><i class="fa fa-exclamation-triangle fa-lg"></i>-->
             <!--</a>-->

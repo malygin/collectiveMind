@@ -4,7 +4,7 @@ module PostComments
   def like_comment
     @comment = comment_model.find(params[:id])
     @against = params[:against]
-    @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.users.include? current_user
+    @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.voting_users.include? current_user
     Journal.like_comment_event(current_user, @project, name_of_comment_for_param, @comment, @against)
     respond_to :js
   end

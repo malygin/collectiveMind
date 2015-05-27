@@ -9,7 +9,7 @@ module BaseComment
     belongs_to :comment, foreign_key: 'comment_id'
 
     has_many :comment_votings
-    has_many :voting_users, through: :comment_votings
+    has_many :voting_users, through: :comment_votings,class_name: 'User', :source => :user
 
     has_many :comment_votings_pro, -> { joins(:comment_votings).where("#{table_name}.against = ?", false) }, class_name: 'CommentVoting'
     has_many :users_pro, through: :comment_votings_pro, source: :user

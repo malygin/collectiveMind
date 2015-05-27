@@ -263,24 +263,6 @@ end
 shared_examples 'likes posts' do |moderator = false|
   let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post') }
 
-  # not functional now
-  # if moderator
-  #   it ' like post', js: true do
-  #     prepare_awards
-  #     # plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
-  #     expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
-  #     find(:css, "a#plus_post_#{@post1.id} span").trigger('click')
-  #     sleep(5)
-  #     expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Забрать баллы')
-  #     sleep(5)
-  #     find(:css, "a#plus_post_#{@post1.id} span").trigger('click')
-  #     expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
-  #   end
-  # else
-  #   it ' not button like' do
-  #     expect(page).not_to have_link("plus_post_#{@post1.id}")
-  #   end
-  # end
 
   it ' user likes post', js: true do
     like_post_path = Rails.application.routes.url_helpers.send("like_#{post_model.gsub('core/','')}_path", project, @post1)
@@ -321,47 +303,47 @@ shared_examples 'admin panel post' do |moderator = false|
 
   if moderator
     it ' score post ', js: true do
-      plus_post_path = Rails.application.routes.url_helpers.send("plus_#{post_model}_path", project, @post1)
+      plus_post_path = Rails.application.routes.url_helpers.send("add_score_#{post_model}_path", project, @post1)
       stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
 
-      expect(page).to have_link("plus_post_#{@post1.id}", href: plus_post_path)
+      expect(page).to have_link("add_score_post_#{@post1.id}", href: plus_post_path)
       expect {
-        find(:css, "a#plus_post_#{@post1.id}").trigger('click')
+        find(:css, "a#add_score_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a.theme_font_color#plus_post_#{@post1.id}")
+        expect(page).to have_css("a.theme_font_color#add_score_post_#{@post1.id}")
       }.to change(Journal, :count).by(1)
       visit  users_path(project)
       expect(page).to have_selector('span.rating_cell', text: @post1.class::SCORE )
       visit stage_post_path
       expect {
-        find(:css, "a#plus_post_#{@post1.id}").trigger('click')
+        find(:css, "a#add_score_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a:not(.theme_font_color)#plus_post_#{@post1.id}")
+        expect(page).to have_css("a:not(.theme_font_color)#add_score_post_#{@post1.id}")
       }.to change(Journal, :count).by(-1)
       visit  users_path(project)
       expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE )
     end
 
     it ' approve post ', js: true do
-      discuss_post_path = Rails.application.routes.url_helpers.send("discuss_status_#{post_model}_path", project, @post1, approve_status: true)
+      discuss_post_path = Rails.application.routes.url_helpers.send("change_status_#{post_model}_path", project, @post1, approve_status: true)
 
-      expect(page).to have_link("approve_stat_post_#{@post1.id}", href: discuss_post_path)
+      expect(page).to have_link("approve_status_post_#{@post1.id}", href: discuss_post_path)
 
       expect {
-        find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
+        find(:css, "a#approve_status_post_#{@post1.id}").trigger('click')
         sleep(5)
-        expect(page).to have_css("a.theme_font_color#approve_stat_post_#{@post1.id}")
+        expect(page).to have_css("a.theme_font_color#approve_status_post_#{@post1.id}")
         expect(page).to have_css("div:not(.hide)[data-important='#{@post1.id}']")
       }.to change(Journal, :count).by(2)
-      find(:css, "a#approve_stat_post_#{@post1.id}").trigger('click')
+      find(:css, "a#approve_status_post_#{@post1.id}").trigger('click')
       sleep(5)
-      expect(page).to have_css("a:not(.theme_font_color)#approve_stat_post_#{@post1.id}")
+      expect(page).to have_css("a:not(.theme_font_color)#approve_status_post_#{@post1.id}")
       # expect(page).to have_css("div.hide[data-important='#{@post1.id}']")
     end
   else
     it ' not button ' do
-      expect(page).not_to have_link("plus_post_#{@post1.id}")
-      expect(page).not_to have_link("approve_stat_post_#{@post1.id}")
+      expect(page).not_to have_link("add_score_post_#{@post1.id}")
+      expect(page).not_to have_link("approve_status_post_#{@post1.id}")
     end
   end
 end
