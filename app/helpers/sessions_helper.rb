@@ -21,7 +21,7 @@ module SessionsHelper
 
 
   def boss?
-    current_user.type_user == 1 and not  current_user.nil?
+    not current_user.nil? and current_user.type_user == 1
   end
 
 

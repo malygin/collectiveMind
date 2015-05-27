@@ -44,7 +44,7 @@ class PostsController < ProjectsController
   end
 
   def show
-    @post = current_model.prepare_to_show(params[:id], @project.id)
+    @post = current_model.prepare_to_show(params[:id], @project.id, params[:viewed])
     @questions = Core::ContentQuestion.where(project_id: @project, post_type: name_of_model_for_param)
     @comments = @post.main_comments
     @comment = comment_model.new
@@ -113,7 +113,8 @@ class PostsController < ProjectsController
   end
 
   def add_score
-    @post = current_model.find(params[:id]).add_score
+    @post = current_model.find(params[:id])
+    @post.add_score
     respond_to :js
   end
 
@@ -244,7 +245,7 @@ class PostsController < ProjectsController
 
   def is_author_or_boss?
     post= current_model.find(params[:id])
-    redirect_to "/project/#{@project.id}" if (current_user != post.user) or not boss?
+    redirect_to "/project/#{@project.id}" if (current_user != post.user) and not boss?
   end
 
 end

@@ -215,7 +215,7 @@ class User < ActiveRecord::Base
     if stage == :collect_info_posts
       core_aspects.by_project(project)
     else
-      send(stage).for_project(project.id)
+      send(stage).by_project(project.id)
     end
   end
 

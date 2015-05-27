@@ -131,20 +131,20 @@ module BasePost
       if self.useful
         self.user.add_score(type: :plus_post, project: self.project, post: self,
                             type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
-                            score: self::SCORE, model_score: self.class.table_name.singularize)
+                            score: self.class::SCORE, model_score: self.class.table_name.singularize)
       else
         self.user.add_score(type: :to_archive_plus_post, project: self.project, post: self,
                             type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
-                            score: self::SCORE, model_score: self.class.table_name.singularize)
+                            score: self.class::SCORE, model_score: self.class.table_name.singularize)
       end
     end
 
-    def self.prepare_to_show(id, project)
+    def self.prepare_to_show(id, project, viewed)
       post = self.where(id: id, project_id: project).first
-      if params[:viewed]
+      if viewed
         Journal.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
       end
-      if current_model.column_names.include? 'number_views'
+      if self.column_names.include? 'number_views'
         post.update_column(:number_views, post.number_views.nil? ? 1 : post.number_views+1)
       end
       return post
