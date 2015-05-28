@@ -1,26 +1,16 @@
-- if @post_aspect.errors.any?
-  $("#notice_messages").html('#{escape_javascript(render partial: 'shared/notice_messages', locals: {object:@post_aspect})}');
-  window.scrollTo(0,0)
+- if @concept_post.valid?
+  $('.notice_messages').hide();
+  $('#create_concept_success').fadeIn(3000).fadeOut('slow');
+  $('#concept_post_title').val('');
+  $('#concept_post_goal').val('')
+  $('#concept_post_content').val('')
+  $('#concept_post_actors').val('')
+  $('#concept_post_impact_env').val('')
+  $.each($('.checked_items .item'), function(key, value) {
+  $(value).find('input.check_push_box').click();
+  });
+
+  -#$("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  -#$("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
 - else
-  $("#notice_messages").html('')
-  $("#form_for_concept").html('#{escape_javascript(render partial: 'form2')}');
-  selectize();
-  -#$('#option_for_wizard_tab').attr("data-tab");
-  $("#third a").tab('show');
-
-  $('#render_success_concept').empty();
-  $("#render_success_concept").html('#{escape_javascript(render partial: 'modal_post_save')}');
-  $('#modal_save_concept').modal('show');
-  history_change("#{edit_concept_post_path(@project, @concept_post)}");
-  -#$('#pa_title').val('');
-  -#$('#pa_name').val('');
-  -#$('#pa_content').val('');
-  -#$('#pa_positive').val('');
-  -#$('#pa_negative').val('');
-  -#$('#pa_control').val('');
-  -#$('#pa_obstacles').val('');
-  -#$('#pa_problems').val('');
-  -#$('#pa_reality').val('');
-  -#$('.main_resources').remove();
-
-$('#send_post_concept').button('reset');
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @concept_post)}");

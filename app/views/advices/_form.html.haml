@@ -1,8 +1,0 @@
-.row
-  .col-md-12
-    /#@todo this can refactor with using polymorfic?
-    = form_for @advice, url: advice_path(@project, @advice), remote: true do |f|
-      = render 'shared/notice_messages', object: f.object
-      = f.text_area :content, class: 'form-control input-transparent comment-textarea', placeholder: 'Ваш совет'
-      .pull-right
-        = f.submit t('form.send'), id: 'send_advice', class: 'btn btn-sm btn-info'

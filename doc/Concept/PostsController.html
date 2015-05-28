@@ -1,0 +1,860 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Concept::PostsController
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!Concept/PostsController.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Concept.html" title="Concept (module)">Concept</a></span></span>
+     &raquo; 
+    <span class="title">PostsController</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Concept::PostsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="../PostsController.html" title="PostsController (class)">PostsController</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActionController::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="../ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../ProjectsController.html" title="ProjectsController (class)">ProjectsController</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="../PostsController.html" title="PostsController (class)">PostsController</a></span></li>
+          
+            <li class="next">Concept::PostsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">CloudinaryHelper, <span class='object_link'><a href="PostsHelper.html" title="Concept::PostsHelper (module)">PostsHelper</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/controllers/concept/posts_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_dispost-instance_method" title="#add_dispost (instance method)">- (Object) <strong>add_dispost</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>def next_vote   disposts = Discontent::Post.where(project_id: @project,
+status: 4).order(:id)   @last_vote =
+current_user.concept_post_votings.by_project_votings(@project).last.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#autocomplete-instance_method" title="#autocomplete (instance method)">- (Object) <strong>autocomplete</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit-instance_method" title="#edit (instance method)">- (Object) <strong>edit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Object) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#voting_model-instance_method" title="#voting_model (instance method)">- (Object) <strong>voting_model</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="PostsHelper.html" title="Concept::PostsHelper (module)">PostsHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="PostsHelper.html#able_concept_posts_for_vote-instance_method" title="Concept::PostsHelper#able_concept_posts_for_vote (method)">#able_concept_posts_for_vote</a></span>, <span class='object_link'><a href="PostsHelper.html#can_vote_for_task%3F-instance_method" title="Concept::PostsHelper#can_vote_for_task? (method)">#can_vote_for_task?</a></span>, <span class='object_link'><a href="PostsHelper.html#class_for_concept_type-instance_method" title="Concept::PostsHelper#class_for_concept_type (method)">#class_for_concept_type</a></span>, <span class='object_link'><a href="PostsHelper.html#class_for_concept_type_field-instance_method" title="Concept::PostsHelper#class_for_concept_type_field (method)">#class_for_concept_type_field</a></span>, <span class='object_link'><a href="PostsHelper.html#complite-instance_method" title="Concept::PostsHelper#complite (method)">#complite</a></span>, <span class='object_link'><a href="PostsHelper.html#get_concept_posts_for_vote%3F-instance_method" title="Concept::PostsHelper#get_concept_posts_for_vote? (method)">#get_concept_posts_for_vote?</a></span>, <span class='object_link'><a href="PostsHelper.html#id_for_concept_type-instance_method" title="Concept::PostsHelper#id_for_concept_type (method)">#id_for_concept_type</a></span>, <span class='object_link'><a href="PostsHelper.html#level_complite-instance_method" title="Concept::PostsHelper#level_complite (method)">#level_complite</a></span>, <span class='object_link'><a href="PostsHelper.html#mean%3F-instance_method" title="Concept::PostsHelper#mean? (method)">#mean?</a></span>, <span class='object_link'><a href="PostsHelper.html#post_discontent_classes-instance_method" title="Concept::PostsHelper#post_discontent_classes (method)">#post_discontent_classes</a></span>, <span class='object_link'><a href="PostsHelper.html#status_for_complite_discontent-instance_method" title="Concept::PostsHelper#status_for_complite_discontent (method)">#status_for_complite_discontent</a></span>, <span class='object_link'><a href="PostsHelper.html#status_for_concept-instance_method" title="Concept::PostsHelper#status_for_concept (method)">#status_for_concept</a></span>, <span class='object_link'><a href="PostsHelper.html#status_for_concept_type-instance_method" title="Concept::PostsHelper#status_for_concept_type (method)">#status_for_concept_type</a></span>, <span class='object_link'><a href="PostsHelper.html#trim_post_content-instance_method" title="Concept::PostsHelper#trim_post_content (method)">#trim_post_content</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../PostsController.html" title="PostsController (class)">PostsController</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../PostsController.html#add_comment-instance_method" title="PostsController#add_comment (method)">#add_comment</a></span>, <span class='object_link'><a href="../PostsController.html#answer_content_question-instance_method" title="PostsController#answer_content_question (method)">#answer_content_question</a></span>, <span class='object_link'><a href="../PostsController.html#check_field-instance_method" title="PostsController#check_field (method)">#check_field</a></span>, <span class='object_link'><a href="../PostsController.html#comment_model-instance_method" title="PostsController#comment_model (method)">#comment_model</a></span>, <span class='object_link'><a href="../PostsController.html#comment_page-instance_method" title="PostsController#comment_page (method)">#comment_page</a></span>, <span class='object_link'><a href="../PostsController.html#comment_status-instance_method" title="PostsController#comment_status (method)">#comment_status</a></span>, <span class='object_link'><a href="../PostsController.html#create_note-instance_method" title="PostsController#create_note (method)">#create_note</a></span>, <span class='object_link'><a href="../PostsController.html#current_model-instance_method" title="PostsController#current_model (method)">#current_model</a></span>, <span class='object_link'><a href="../PostsController.html#destroy-instance_method" title="PostsController#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="../PostsController.html#destroy_comment-instance_method" title="PostsController#destroy_comment (method)">#destroy_comment</a></span>, <span class='object_link'><a href="../PostsController.html#destroy_note-instance_method" title="PostsController#destroy_note (method)">#destroy_note</a></span>, <span class='object_link'><a href="../PostsController.html#discuss_status-instance_method" title="PostsController#discuss_status (method)">#discuss_status</a></span>, <span class='object_link'><a href="../PostsController.html#edit_comment-instance_method" title="PostsController#edit_comment (method)">#edit_comment</a></span>, <span class='object_link'><a href="../PostsController.html#journal_data-instance_method" title="PostsController#journal_data (method)">#journal_data</a></span>, <span class='object_link'><a href="../PostsController.html#last_page-instance_method" title="PostsController#last_page (method)">#last_page</a></span>, <span class='object_link'><a href="../PostsController.html#like-instance_method" title="PostsController#like (method)">#like</a></span>, <span class='object_link'><a href="../PostsController.html#like_comment-instance_method" title="PostsController#like_comment (method)">#like_comment</a></span>, <span class='object_link'><a href="../PostsController.html#name_of_comment_for_param-instance_method" title="PostsController#name_of_comment_for_param (method)">#name_of_comment_for_param</a></span>, <span class='object_link'><a href="../PostsController.html#name_of_model_for_param-instance_method" title="PostsController#name_of_model_for_param (method)">#name_of_model_for_param</a></span>, <span class='object_link'><a href="../PostsController.html#name_of_note_for_param-instance_method" title="PostsController#name_of_note_for_param (method)">#name_of_note_for_param</a></span>, <span class='object_link'><a href="../PostsController.html#new_note-instance_method" title="PostsController#new_note (method)">#new_note</a></span>, <span class='object_link'><a href="../PostsController.html#note_model-instance_method" title="PostsController#note_model (method)">#note_model</a></span>, <span class='object_link'><a href="../PostsController.html#plus-instance_method" title="PostsController#plus (method)">#plus</a></span>, <span class='object_link'><a href="../PostsController.html#plus_comment-instance_method" title="PostsController#plus_comment (method)">#plus_comment</a></span>, <span class='object_link'><a href="../PostsController.html#publish-instance_method" title="PostsController#publish (method)">#publish</a></span>, <span class='object_link'><a href="../PostsController.html#show-instance_method" title="PostsController#show (method)">#show</a></span>, <span class='object_link'><a href="../PostsController.html#status_post-instance_method" title="PostsController#status_post (method)">#status_post</a></span>, <span class='object_link'><a href="../PostsController.html#to_archive-instance_method" title="PostsController#to_archive (method)">#to_archive</a></span>, <span class='object_link'><a href="../PostsController.html#update_comment-instance_method" title="PostsController#update_comment (method)">#update_comment</a></span>, <span class='object_link'><a href="../PostsController.html#user_content-instance_method" title="PostsController#user_content (method)">#user_content</a></span>, <span class='object_link'><a href="../PostsController.html#vote-instance_method" title="PostsController#vote (method)">#vote</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../ApplicationController.html#after_sign_in_path_for-instance_method" title="ApplicationController#after_sign_in_path_for (method)">#after_sign_in_path_for</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../ApplicationHelper.html" title="ApplicationHelper (module)">ApplicationHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../ApplicationHelper.html#analytics%3F-instance_method" title="ApplicationHelper#analytics? (method)">#analytics?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#cabinet%3F-instance_method" title="ApplicationHelper#cabinet? (method)">#cabinet?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#can_vote%3F-instance_method" title="ApplicationHelper#can_vote? (method)">#can_vote?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#class_post_content-instance_method" title="ApplicationHelper#class_post_content (method)">#class_post_content</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#club_toggle_user-instance_method" title="ApplicationHelper#club_toggle_user (method)">#club_toggle_user</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#color_progress_bar-instance_method" title="ApplicationHelper#color_progress_bar (method)">#color_progress_bar</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#color_stage-instance_method" title="ApplicationHelper#color_stage (method)">#color_stage</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#column_for_concept_type-instance_method" title="ApplicationHelper#column_for_concept_type (method)">#column_for_concept_type</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#column_for_type_field-instance_method" title="ApplicationHelper#column_for_type_field (method)">#column_for_type_field</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#comment_stat_color-instance_method" title="ApplicationHelper#comment_stat_color (method)">#comment_stat_color</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#core_methods%3F-instance_method" title="ApplicationHelper#core_methods? (method)">#core_methods?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#count_available_voiting-instance_method" title="ApplicationHelper#count_available_voiting (method)">#count_available_voiting</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#cp-instance_method" title="ApplicationHelper#cp (method)">#cp</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#css_label_status-instance_method" title="ApplicationHelper#css_label_status (method)">#css_label_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_controller_for_navbar%3F-instance_method" title="ApplicationHelper#current_controller_for_navbar? (method)">#current_controller_for_navbar?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage%3F-instance_method" title="ApplicationHelper#current_stage? (method)">#current_stage?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage_controller-instance_method" title="ApplicationHelper#current_stage_controller (method)">#current_stage_controller</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage_for_analytics-instance_method" title="ApplicationHelper#current_stage_for_analytics (method)">#current_stage_for_analytics</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage_popover_status-instance_method" title="ApplicationHelper#current_stage_popover_status (method)">#current_stage_popover_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage_popover_text-instance_method" title="ApplicationHelper#current_stage_popover_text (method)">#current_stage_popover_text</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#current_stage_url-instance_method" title="ApplicationHelper#current_stage_url (method)">#current_stage_url</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#date_stage_for_project-instance_method" title="ApplicationHelper#date_stage_for_project (method)">#date_stage_for_project</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#discontent_style_name-instance_method" title="ApplicationHelper#discontent_style_name (method)">#discontent_style_name</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#display_content-instance_method" title="ApplicationHelper#display_content (method)">#display_content</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#escape_text-instance_method" title="ApplicationHelper#escape_text (method)">#escape_text</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#fast_discussion_able%3F-instance_method" title="ApplicationHelper#fast_discussion_able? (method)">#fast_discussion_able?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#field_for_journal-instance_method" title="ApplicationHelper#field_for_journal (method)">#field_for_journal</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#get_check_field%3F-instance_method" title="ApplicationHelper#get_check_field? (method)">#get_check_field?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#get_comment_for_stage-instance_method" title="ApplicationHelper#get_comment_for_stage (method)">#get_comment_for_stage</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#get_session_to_work%3F-instance_method" title="ApplicationHelper#get_session_to_work? (method)">#get_session_to_work?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#get_stage_for_improve-instance_method" title="ApplicationHelper#get_stage_for_improve (method)">#get_stage_for_improve</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#group_side_name-instance_method" title="ApplicationHelper#group_side_name (method)">#group_side_name</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#grouped_discontent%3F-instance_method" title="ApplicationHelper#grouped_discontent? (method)">#grouped_discontent?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#image_for_stages-instance_method" title="ApplicationHelper#image_for_stages (method)">#image_for_stages</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#improve_comment-instance_method" title="ApplicationHelper#improve_comment (method)">#improve_comment</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#label_approve_stat-instance_method" title="ApplicationHelper#label_approve_stat (method)">#label_approve_stat</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#label_discuss_stat-instance_method" title="ApplicationHelper#label_discuss_stat (method)">#label_discuss_stat</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#label_for_comment_status-instance_method" title="ApplicationHelper#label_for_comment_status (method)">#label_for_comment_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#label_for_last_time_visit_status-instance_method" title="ApplicationHelper#label_for_last_time_visit_status (method)">#label_for_last_time_visit_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#last_page-instance_method" title="ApplicationHelper#last_page (method)">#last_page</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#last_time_visit_aspect-instance_method" title="ApplicationHelper#last_time_visit_aspect (method)">#last_time_visit_aspect</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#last_time_visit_journals-instance_method" title="ApplicationHelper#last_time_visit_journals (method)">#last_time_visit_journals</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#last_time_visit_page-instance_method" title="ApplicationHelper#last_time_visit_page (method)">#last_time_visit_page</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#last_time_visit_post-instance_method" title="ApplicationHelper#last_time_visit_post (method)">#last_time_visit_post</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#link_for_aspects-instance_method" title="ApplicationHelper#link_for_aspects (method)">#link_for_aspects</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#link_for_improve-instance_method" title="ApplicationHelper#link_for_improve (method)">#link_for_improve</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#menu_status-instance_method" title="ApplicationHelper#menu_status (method)">#menu_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#name_controller-instance_method" title="ApplicationHelper#name_controller (method)">#name_controller</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#number_stage-instance_method" title="ApplicationHelper#number_stage (method)">#number_stage</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#page_for_comment-instance_method" title="ApplicationHelper#page_for_comment (method)">#page_for_comment</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#profile%3F-instance_method" title="ApplicationHelper#profile? (method)">#profile?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#rating%3F-instance_method" title="ApplicationHelper#rating? (method)">#rating?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#role_label-instance_method" title="ApplicationHelper#role_label (method)">#role_label</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#rowspan_concept-instance_method" title="ApplicationHelper#rowspan_concept (method)">#rowspan_concept</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#rowspan_concept_show-instance_method" title="ApplicationHelper#rowspan_concept_show (method)">#rowspan_concept_show</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#rowspan_stage-instance_method" title="ApplicationHelper#rowspan_stage (method)">#rowspan_stage</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#rowspan_stage_show-instance_method" title="ApplicationHelper#rowspan_stage_show (method)">#rowspan_stage_show</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#score_for_concept_field-instance_method" title="ApplicationHelper#score_for_concept_field (method)">#score_for_concept_field</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#score_for_plus_post-instance_method" title="ApplicationHelper#score_for_plus_post (method)">#score_for_plus_post</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#score_order-instance_method" title="ApplicationHelper#score_order (method)">#score_order</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#show_flash-instance_method" title="ApplicationHelper#show_flash (method)">#show_flash</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#show_sticker%3F-instance_method" title="ApplicationHelper#show_sticker? (method)">#show_sticker?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#shown_intro-instance_method" title="ApplicationHelper#shown_intro (method)">#shown_intro</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#stage_for_essay-instance_method" title="ApplicationHelper#stage_for_essay (method)">#stage_for_essay</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#stage_for_essay_link-instance_method" title="ApplicationHelper#stage_for_essay_link (method)">#stage_for_essay_link</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#stage_status-instance_method" title="ApplicationHelper#stage_status (method)">#stage_status</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#stage_theme-instance_method" title="ApplicationHelper#stage_theme (method)">#stage_theme</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#stage_vote%3F-instance_method" title="ApplicationHelper#stage_vote? (method)">#stage_vote?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#status_project-instance_method" title="ApplicationHelper#status_project (method)">#status_project</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#trim_content-instance_method" title="ApplicationHelper#trim_content (method)">#trim_content</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#type_project-instance_method" title="ApplicationHelper#type_project (method)">#type_project</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#type_title-instance_method" title="ApplicationHelper#type_title (method)">#type_title</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#unread_expert_news%3F-instance_method" title="ApplicationHelper#unread_expert_news? (method)">#unread_expert_news?</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#user_image_tag-instance_method" title="ApplicationHelper#user_image_tag (method)">#user_image_tag</a></span>, <span class='object_link'><a href="../ApplicationHelper.html#validate_knowbase-instance_method" title="ApplicationHelper#validate_knowbase (method)">#validate_knowbase</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../SessionsHelper.html" title="SessionsHelper (module)">SessionsHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../SessionsHelper.html#admin%3F-instance_method" title="SessionsHelper#admin? (method)">#admin?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#admin_user-instance_method" title="SessionsHelper#admin_user (method)">#admin_user</a></span>, <span class='object_link'><a href="../SessionsHelper.html#boss%3F-instance_method" title="SessionsHelper#boss? (method)">#boss?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#boss_admin_authenticate-instance_method" title="SessionsHelper#boss_admin_authenticate (method)">#boss_admin_authenticate</a></span>, <span class='object_link'><a href="../SessionsHelper.html#boss_authenticate-instance_method" title="SessionsHelper#boss_authenticate (method)">#boss_authenticate</a></span>, <span class='object_link'><a href="../SessionsHelper.html#boss_news_authenticate-instance_method" title="SessionsHelper#boss_news_authenticate (method)">#boss_news_authenticate</a></span>, <span class='object_link'><a href="../SessionsHelper.html#can_union_discontents%3F-instance_method" title="SessionsHelper#can_union_discontents? (method)">#can_union_discontents?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#cluber%3F-instance_method" title="SessionsHelper#cluber? (method)">#cluber?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#current_user%3F-instance_method" title="SessionsHelper#current_user? (method)">#current_user?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#deny_access-instance_method" title="SessionsHelper#deny_access (method)">#deny_access</a></span>, <span class='object_link'><a href="../SessionsHelper.html#expert%3F-instance_method" title="SessionsHelper#expert? (method)">#expert?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#have_project_access-instance_method" title="SessionsHelper#have_project_access (method)">#have_project_access</a></span>, <span class='object_link'><a href="../SessionsHelper.html#journal_enter-instance_method" title="SessionsHelper#journal_enter (method)">#journal_enter</a></span>, <span class='object_link'><a href="../SessionsHelper.html#jury%3F-instance_method" title="SessionsHelper#jury? (method)">#jury?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#limit_projects_for_user-instance_method" title="SessionsHelper#limit_projects_for_user (method)">#limit_projects_for_user</a></span>, <span class='object_link'><a href="../SessionsHelper.html#list_type_projects_for_user-instance_method" title="SessionsHelper#list_type_projects_for_user (method)">#list_type_projects_for_user</a></span>, <span class='object_link'><a href="../SessionsHelper.html#prime_admin%3F-instance_method" title="SessionsHelper#prime_admin? (method)">#prime_admin?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#prime_admin_authenticate-instance_method" title="SessionsHelper#prime_admin_authenticate (method)">#prime_admin_authenticate</a></span>, <span class='object_link'><a href="../SessionsHelper.html#redirect_back_or-instance_method" title="SessionsHelper#redirect_back_or (method)">#redirect_back_or</a></span>, <span class='object_link'><a href="../SessionsHelper.html#role_expert%3F-instance_method" title="SessionsHelper#role_expert? (method)">#role_expert?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#stat_expert%3F-instance_method" title="SessionsHelper#stat_expert? (method)">#stat_expert?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#to_bool-instance_method" title="SessionsHelper#to_bool (method)">#to_bool</a></span>, <span class='object_link'><a href="../SessionsHelper.html#uniq_proc_access%3F-instance_method" title="SessionsHelper#uniq_proc_access? (method)">#uniq_proc_access?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#uniq_proc_users-instance_method" title="SessionsHelper#uniq_proc_users (method)">#uniq_proc_users</a></span>, <span class='object_link'><a href="../SessionsHelper.html#user%3F-instance_method" title="SessionsHelper#user? (method)">#user?</a></span>, <span class='object_link'><a href="../SessionsHelper.html#watcher%3F-instance_method" title="SessionsHelper#watcher? (method)">#watcher?</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_dispost-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_dispost</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>def next_vote</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_disposts'>disposts</span> <span class='op'>=</span> <span class='const'>Discontent</span><span class='op'>::</span><span class='const'>Post</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='ivar'>@project</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+<span class='ivar'>@last_vote</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_votings'>concept_post_votings</span><span class='period'>.</span><span class='id identifier rubyid_by_project_votings'>by_project_votings</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
+
+<span class='kw'>if</span> <span class='ivar'>@last_vote</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>or</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>==</span> <span class='ivar'>@last_vote</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_aspect_id'>concept_post_aspect_id</span> <span class='kw'>or</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:dis_id</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>!=</span> <span class='ivar'>@last_vote</span><span class='period'>.</span><span class='id identifier rubyid_discontent_post_id'>discontent_post_id</span>
+  <span class='id identifier rubyid_count_create'>count_create</span> <span class='op'>=</span> <span class='int'>1</span>
+<span class='kw'>else</span>
+  <span class='id identifier rubyid_count_create'>count_create</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_votings'>concept_post_votings</span><span class='period'>.</span><span class='id identifier rubyid_by_project_votings'>by_project_votings</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>discontent_post_id:</span> <span class='ivar'>@last_vote</span><span class='period'>.</span><span class='id identifier rubyid_discontent_post_id'>discontent_post_id</span><span class='comma'>,</span>
+                                                                                      <span class='label'>concept_post_aspect_id:</span> <span class='ivar'>@last_vote</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_aspect_id'>concept_post_aspect_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>+</span> <span class='int'>1</span>
+<span class='kw'>end</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_can_vote_for'>can_vote_for</span><span class='lparen'>(</span><span class='symbol'>:concept</span><span class='comma'>,</span> <span class='ivar'>@project</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_count_create'>count_create</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='kw'>do</span>
+    <span class='ivar'>@last_now</span> <span class='op'>=</span> <span class='const'>Concept</span><span class='op'>::</span><span class='const'>Voting</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='label'>user_id:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>concept_post_aspect_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>discontent_post_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:dis_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+<span class='ivar'>@discontent_post</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_able_concept_posts_for_vote'>able_concept_posts_for_vote</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='comma'>,</span> <span class='id identifier rubyid_disposts'>disposts</span><span class='comma'>,</span> <span class='ivar'>@last_now</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='ivar'>@discontent_post</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@post_all</span> <span class='op'>=</span> <span class='int'>1</span>
+  <span class='ivar'>@votes</span> <span class='op'>=</span> <span class='int'>0</span>
+<span class='kw'>else</span>
+  <span class='id identifier rubyid_var_for_vote'>var_for_vote</span> <span class='op'>=</span> <span class='ivar'>@discontent_post</span><span class='period'>.</span><span class='id identifier rubyid_concepts_for_vote'>concepts_for_vote</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='comma'>,</span> <span class='ivar'>@last_now</span><span class='rparen'>)</span>
+  <span class='ivar'>@post_all</span> <span class='op'>=</span> <span class='id identifier rubyid_var_for_vote'>var_for_vote</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='ivar'>@concept1</span> <span class='op'>=</span> <span class='id identifier rubyid_var_for_vote'>var_for_vote</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+  <span class='ivar'>@concept2</span> <span class='op'>=</span> <span class='id identifier rubyid_var_for_vote'>var_for_vote</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span>
+  <span class='ivar'>@votes</span> <span class='op'>=</span> <span class='id identifier rubyid_var_for_vote'>var_for_vote</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>end</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_dispost'>add_dispost</span>
+  <span class='ivar'>@dispost</span> <span class='op'>=</span> <span class='const'>Discontent</span><span class='op'>::</span><span class='const'>Post</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:dispost_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@remove_able</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="autocomplete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>autocomplete</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_autocomplete'>autocomplete</span>
+  <span class='comment'>#@todo для универсализации автокомплита, нужно объединить все ресурсные модели
+</span>  <span class='id identifier rubyid_field'>field</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:field</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_answer'>answer</span> <span class='op'>=</span> <span class='const'>Set</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_answer'>answer</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'>Concept</span><span class='op'>::</span><span class='const'>Resource</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>value:</span> <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_answer'>answer</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'>Concept</span><span class='op'>::</span><span class='const'>PostResource</span><span class='period'>.</span><span class='id identifier rubyid_autocomplete'>autocomplete</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:term</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>style:</span> <span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resor_means_name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='int'>1</span> <span class='op'>:</span> <span class='int'>0</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>value:</span> <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_stage_estimate?'>stage_estimate?</span>
+    <span class='id identifier rubyid_answer'>answer</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='const'>Plan</span><span class='op'>::</span><span class='const'>PostResource</span><span class='period'>.</span><span class='id identifier rubyid_autocomplete'>autocomplete</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:term</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>style:</span> <span class='lparen'>(</span><span class='id identifier rubyid_field'>field</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>resor_means_name</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='int'>1</span> <span class='op'>:</span> <span class='int'>0</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>value:</span> <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='id identifier rubyid_answer'>answer</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ha'>ha</span><span class='op'>|</span> <span class='id identifier rubyid_ha'>ha</span><span class='lbracket'>[</span><span class='symbol'>:value</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 69</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
+  <span class='ivar'>@concept_post</span> <span class='op'>=</span> <span class='id identifier rubyid_current_model'>current_model</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='id identifier rubyid_concept_post_params'>concept_post_params</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>user_id:</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>project_id:</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:concept_post_discontents</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:concept_post_discontents</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+      <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_discontents'>concept_post_discontents</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='label'>discontent_post_id:</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#выбор отдельных несовершенств
+</span>  <span class='comment'># unless params[:check_discontent].nil?
+</span>  <span class='comment'>#   params[:check_discontent].each do |com|
+</span>  <span class='comment'>#     @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'># end
+</span>  <span class='comment'># @concept_post.improve_comment = params[:improve_comment] if params[:improve_comment]
+</span>  <span class='comment'># @concept_post.improve_stage = params[:improve_stage] if params[:improve_stage]
+</span>  <span class='comment'># create_concept_resources_on_type(@project, @concept_post)
+</span>
+  <span class='id identifier rubyid_respond_to'>respond_to</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_format'>format</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+      <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_journals'>journals</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='label'>type_event:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>concept_post_save</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>body:</span> <span class='id identifier rubyid_trim_content'>trim_content</span><span class='lparen'>(</span><span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>first_id:</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='ivar'>@project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_save!'>save!</span>
+      <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_js'>js</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_js'>js</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="edit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>edit</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edit'>edit</span>
+  <span class='ivar'>@discontent_posts</span> <span class='op'>=</span> <span class='ivar'>@discontent_posts</span> <span class='op'>-</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_concept_disposts'>concept_disposts</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>action:</span> <span class='symbol'>:new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="index-instance_method">
+  
+    - (<tt>Object</tt>) <strong>index</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
+  <span class='ivar'>@posts</span><span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span> <span class='kw'>and</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>*</span><span class='tstring_end'>&#39;</span></span>
+    <span class='comment'># @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join(&#39;&#39;)).dispost_concepts.created_order
+</span>    <span class='comment'># @posts = @project.concept_ongoing_post.joins(:concept_post_discontents).for_discontents(params[:discontent]).created_order
+</span>    <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='lbracket'>[</span><span class='kw'>nil</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@posts</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_concept_ongoing_post'>concept_ongoing_post</span><span class='period'>.</span><span class='id identifier rubyid_includes'>includes</span><span class='lparen'>(</span><span class='symbol'>:concept_post_discontents</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>concept_post_discontents:</span> <span class='lbrace'>{</span><span class='label'>discontent_post_id:</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:discontent</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_created_order'>created_order</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@posts</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_concept_ongoing_post'>concept_ongoing_post</span><span class='period'>.</span><span class='id identifier rubyid_created_order'>created_order</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_respond_to'>respond_to</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_format'>format</span><span class='op'>|</span>
+
+    <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_html'>html</span> <span class='comment'># show.html.erb
+</span>    <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_json'>json</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_render'>render</span> <span class='label'>json:</span> <span class='ivar'>@posts</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>id:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>index:</span> <span class='id identifier rubyid_index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='comma'>,</span> <span class='label'>title:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='id identifier rubyid_trim_post_content'>trim_post_content</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='int'>100</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                                    <span class='label'>user:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='label'>user_avatar:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:avatar</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_cl_image_path'>cl_image_path</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:avatar</span><span class='rparen'>)</span><span class='rparen'>)</span>  <span class='op'>:</span> <span class='const'>ActionController</span><span class='op'>::</span><span class='const'>Base</span><span class='period'>.</span><span class='id identifier rubyid_helpers'>helpers</span><span class='period'>.</span><span class='id identifier rubyid_asset_path'>asset_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no-ava.png</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='comma'>,</span> <span class='label'>post_date:</span> <span class='const'>Russian</span><span class='op'>::</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%d.%m.%Y</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                                                    <span class='label'>project_id:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='label'>sort_date:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='period'>.</span><span class='id identifier rubyid_to_datetime'>to_datetime</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='comma'>,</span> <span class='label'>sort_comment:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_last_comment'>last_comment</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>?</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_last_comment'>last_comment</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='period'>.</span><span class='id identifier rubyid_to_datetime'>to_datetime</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>:</span> <span class='int'>0</span><span class='comma'>,</span>
+                                                    <span class='label'>discontent_class:</span> <span class='id identifier rubyid_post_discontent_classes'>post_discontent_classes</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span><span class='comma'>,</span>
+                                                    <span class='label'>count_comments:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_comments'>comments</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='comma'>,</span>
+                                                    <span class='label'>count_likes:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_users_pro'>users_pro</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='comma'>,</span>
+                                                    <span class='label'>count_dislikes:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_users_against'>users_against</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='comma'>,</span>
+                                                    <span class='label'>discontents:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_concept_disposts'>concept_disposts</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_dispost'>dispost</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>id:</span> <span class='id identifier rubyid_dispost'>dispost</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='id identifier rubyid_trim_post_content'>trim_post_content</span><span class='lparen'>(</span><span class='id identifier rubyid_dispost'>dispost</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='int'>30</span><span class='rparen'>)</span><span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+                                                    <span class='label'>comments:</span> <span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_comments'>comments</span><span class='period'>.</span><span class='id identifier rubyid_preview'>preview</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_comment'>comment</span><span class='op'>|</span> <span class='lbrace'>{</span><span class='label'>id:</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>date:</span> <span class='const'>Russian</span><span class='op'>::</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_created_at'>created_at</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%k:%M %d.%m.%y</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='label'>content:</span> <span class='id identifier rubyid_trim_post_content'>trim_post_content</span><span class='lparen'>(</span><span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='comma'>,</span> <span class='int'>100</span><span class='rparen'>)</span><span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='rbrace'>}</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
+  <span class='comment'># нововведение без аспекта?
+</span>  <span class='ivar'>@asp</span> <span class='op'>=</span> <span class='const'>Core</span><span class='op'>::</span><span class='const'>Aspect</span><span class='op'>::</span><span class='const'>Post</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:asp</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:asp</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='ivar'>@concept_post</span> <span class='op'>=</span> <span class='id identifier rubyid_current_model'>current_model</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='comment'># @resources = Concept::Resource.where(project_id: @project.id)
+</span>  <span class='comment'># if params[:improve_comment] and params[:improve_stage]
+</span>  <span class='comment'>#   @comment = get_comment_for_stage(params[:improve_stage], params[:improve_comment])
+</span>  <span class='comment'>#   @concept_post.name = @comment.content if @comment
+</span>  <span class='comment'># end
+</span>  <span class='comment'># @remove_able = true
+</span>  <span class='id identifier rubyid_respond_to'>respond_to</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_format'>format</span><span class='op'>|</span>
+    <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_html'>html</span>
+    <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_js'>js</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_update_attributes'>update_attributes</span><span class='lparen'>(</span><span class='id identifier rubyid_concept_post_params'>concept_post_params</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_valid?'>valid?</span> <span class='kw'>and</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:concept_post_discontents</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span>
+    <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_discontents'>concept_post_discontents</span><span class='period'>.</span><span class='id identifier rubyid_destroy_all'>destroy_all</span>
+    <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:concept_post_discontents</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cd'>cd</span><span class='op'>|</span>
+      <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_concept_post_discontents'>concept_post_discontents</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='label'>discontent_post_id:</span> <span class='id identifier rubyid_cd'>cd</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='comment'># unless params[:check_discontent].nil?
+</span>  <span class='comment'>#   @concept_post.concept_post_discontent_checks.destroy_all if @concept_post.valid?
+</span>  <span class='comment'>#   params[:check_discontent].each do |com|
+</span>  <span class='comment'>#     @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'># end
+</span>  <span class='comment'># create_concept_resources_on_type(@project, @concept_post)
+</span>
+  <span class='id identifier rubyid_respond_to'>respond_to</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_format'>format</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+      <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_journals'>journals</span><span class='period'>.</span><span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='label'>type_event:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>concept_post_update</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>body:</span> <span class='id identifier rubyid_trim_content'>trim_content</span><span class='lparen'>(</span><span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>first_id:</span> <span class='ivar'>@concept_post</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>project:</span> <span class='ivar'>@project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_save!'>save!</span>
+      <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_js'>js</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_js'>js</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="voting_model-instance_method">
+  
+    - (<tt>Object</tt>) <strong>voting_model</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concept/posts_controller.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_voting_model'>voting_model</span>
+  <span class='const'>Concept</span><span class='op'>::</span><span class='const'>Post</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed May 13 15:35:14 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.0).
+</div>
+
+  </body>
+</html>

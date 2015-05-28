@@ -4,6 +4,6 @@ FactoryGirl.define do
     sequence(:body) { |n| "Big body for #{n}" }
 
     association :project, factory: :core_project
-    association :user, factory: :expert
+    association :user, factory: :moderator
   end
 end

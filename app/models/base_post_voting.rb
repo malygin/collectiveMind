@@ -1,8 +1,8 @@
 module BasePostVoting
   extend ActiveSupport::Concern
   included do
-    attr_accessible :post, :user, :against
     belongs_to :user
     belongs_to :post
+    validates :user_id, :post_id, presence: true
   end
 end

@@ -3,332 +3,103 @@ require 'spec_helper'
 describe 'Plan ' do
   subject { page }
 
-  let (:user) { create :user }
-  let (:project) { create :core_project, status: 9 }
-  let (:prime_admin) { create :prime_admin }
-  let (:moderator) { create :moderator }
-  let!(:project_user) { create :core_project_user, user: user, core_project: project, ready_to_plan: true }
+  let!(:user) { @user = create :user }
+  let (:user_data) { create :user }
+  let!(:moderator) { @moderator = create :moderator }
+  let (:project) { @project = create :closed_project, stage: '5:0' }
 
   before do
-    @plan1 = create :plan, project: project, user: user
-    @plan_stage1 = create :plan_stage, post_id: @plan1.id
-    @plan_aspect1 = create :plan_aspect, plan_post_id: @plan1.id, post_stage_id: @plan_stage1.id
-    @plan_action1 = create :plan_action, plan_post_aspect_id: @plan_aspect1.id
+    create :core_project_user, user: user, core_project: project
+    create :core_project_user, user: moderator, core_project: project
+
+    @user_check = create :user_check, user: user, project: project, check_field: 'plan_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'plan_intro'
+
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'plan_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'plan_discuss'
+
+    @novation1 = create :novation, user: user, project: project
+
+    @plan1 = create :plan, user: user, project: project, status: 1
+    @plan2 = create :plan, user: user, project: project, status: 1
+
+    create :plan_novation, plan_post: @plan1, novation_post: @novation1
+    create :plan_novation, plan_post: @plan2, novation_post: @novation1
+
+    @post1 = @plan1
+    @post2 = @plan2
+
+    @comment_1 = create :plan_comment, post: @post1, user: user
+    @comment_2 = create :plan_comment, post: @post1, comment: @comment_1
+  end
+
+  shared_examples 'show list plans' do
+    before do
+      visit plan_posts_path(project)
+    end
+
+    it 'have content', js: true do
+      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content @plan1.content
+      expect(page).to have_content @plan2.content
+    end
+
+    it_behaves_like 'likes posts'
+  end
+
+  shared_examples 'discuss plans' do
+    before do
+      visit plan_posts_path(project)
+    end
+
+    it 'have content' do
+      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content @plan1.content
+      expect(page).to have_content @plan2.content
+      expect(page).to have_link 'new_plan_posts'
+    end
+
+    context 'show popup plan ', js: true do
+      before do
+        find(:css, "#show_record_#{@post1.id}").trigger('click')
+      end
+
+      it 'have content' do
+        expect(page).to have_content @post1.name
+      end
+
+      it_behaves_like 'content with comments'
+    end
   end
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit plan_posts_path(project)
     end
 
-    it 'show movie before start', js: true do
-      project_user.update ready_to_plan: false
-      refresh_page
-      expect(page).to have_css 'div#player-container'
-      execute_script("$('#movie_watched').click()")
-      refresh_page
-      expect(page).to have_content @plan1.name
-      expect(page).to have_selector '#add_record'
-    end
+    it_behaves_like 'welcome popup', 'plan'
 
-    context 'plan list' do
-      it ' can see plan' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_selector '#add_record'
-      end
-    end
+    it_behaves_like 'show list plans'
 
-    context 'add_record' do
-      before do
-        click_link 'add_record'
-      end
+    it_behaves_like 'admin panel post'
 
-      it ' add new plan', js: true do
-        fill_in 'name_plan', with: 'plan name'
-        fill_in 'goals', with: 'plan goal'
-        fill_in 'desc_plan', with: 'plan content'
-        click_button 'send_plan_post'
-        expect(page).to have_content 'Добавить этап в проект'
-      end
-
-      it ' add new stage', js: true do
-        fill_in 'name_plan', with: 'plan name'
-        fill_in 'goals', with: 'plan goal'
-        fill_in 'desc_plan', with: 'plan content'
-        click_button 'send_plan_post'
-        expect(page).to have_content 'Добавить этап в проект'
-        find('#btn_new_stage').click
-        expect(page).to have_content 'Добавление этапа в проект'
-        fill_in 'name_stage', with: 'name_stage'
-        fill_in 'desc_stage', with: 'desc_stage'
-        click_button 'send_post'
-        expect(page).to have_content 'name_stage'
-      end
-    end
-
-    context 'show plan' do
-      before do
-        visit plan_post_path(project, @plan1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_content @plan1.goal
-        expect(page).to have_content @plan1.content
-        expect(page).to have_selector 'textarea#comment_text_area'
-      end
-
-      it ' can add comments ', js: true do
-        fill_in 'comment_text_area', with: 'plan comment 1'
-        click_button 'send_comment'
-        expect(page).to have_content 'plan comment 1'
-      end
-
-      it 'can see second tab', js: true do
-        find('li#second a').click
-        expect(page).to have_content @plan_stage1.name
-        expect(page).to have_content @plan_stage1.desc
-        expect(page).to have_content @plan_aspect1.title
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_action1.name
-        expect(page).to have_content @plan_action1.desc
-      end
-
-      it 'can see third tab', js: true do
-        find('li#third a').click
-        expect(page).to have_content @plan_aspect1.title
-        find("#li_concept_#{@plan_aspect1.id} a").click
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_aspect1.content
-        expect(page).to have_content @plan_aspect1.positive
-        expect(page).to have_content @plan_aspect1.negative
-        expect(page).to have_content @plan_aspect1.control
-        expect(page).to have_content @plan_aspect1.obstacles
-        expect(page).to have_content @plan_aspect1.reality
-        expect(page).to have_content @plan_aspect1.problems
-      end
-    end
-
-    context 'edit plan' do
-      before do
-        visit edit_plan_post_path(project, @plan1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_field('name_plan',with: @plan1.name)
-        expect(page).to have_css('textarea#goals',text: @plan1.goal)
-        expect(page).to have_css('textarea#desc_plan',text: @plan1.content)
-      end
-
-      it 'can see edit stage modal', js: true do
-        find("#edit_post_stage_#{@plan_stage1.id}").click
-        expect(page).to have_content 'Добавление этапа в проект'
-        fill_in 'name_stage', with: 'new name_stage'
-        click_button 'send_post'
-        expect(page).to have_content 'new name_stage'
-      end
-
-      it 'can see edit action modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
-        find("#edit_post_action_#{@plan_action1.id}").click
-        expect(page).to have_content 'Добавление мероприятия к нововведению:'
-        fill_in 'name_stage', with: 'new name stage'
-        click_button 'send_post'
-        expect(page).to have_content 'new name stage'
-      end
-
-      it 'can see edit link concept add modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
-        expect(page).to have_content 'Запланировать мероприятие'
-        find('a#btn_new_concept.btn-warning').click
-        expect(page).to have_content 'Добавление нововведений'
-        expect(page).to have_content 'Добавить пустое нововведение'
-      end
-
-      it 'can see edit link action add modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
-        expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Запланировать мероприятие'
-        expect(page).to have_content 'Добавление мероприятия к нововведению:'
-      end
-
-      it 'can see edit link action add modal', js: true do
-        find('li#third a').click
-        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
-        find("#li_concept_#{@plan_aspect1.id} a").click
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_aspect1.content
-        expect(page).to have_content @plan_aspect1.positive
-        expect(page).to have_content @plan_aspect1.negative
-        expect(page).to have_content @plan_aspect1.control
-        expect(page).to have_content @plan_aspect1.obstacles
-        expect(page).to have_content @plan_aspect1.reality
-        expect(page).to have_content @plan_aspect1.problems
-      end
-    end
+    it_behaves_like 'discuss plans'
   end
 
-  context 'moderator sign in' do
+  context 'moderator sign in ' do
     before do
       sign_in moderator
-      visit plan_posts_path(project)
     end
 
-    it 'not see movie' do
-      expect(page).not_to have_css 'div#player-container'
-    end
+    it_behaves_like 'admin panel post', true
 
-    context 'plan list' do
-      it ' can see plan' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_selector '#add_record'
-      end
-    end
-
-    context 'add_record' do
-      before do
-        click_link 'add_record'
-      end
-
-      it ' add new plan', js: true do
-        fill_in 'name_plan', with: 'plan name'
-        fill_in 'goals', with: 'plan goal'
-        fill_in 'desc_plan', with: 'plan content'
-        click_button 'send_plan_post'
-        expect(page).to have_content 'Добавить этап в проект'
-      end
-
-      it ' add new stage', js: true do
-        fill_in 'name_plan', with: 'plan name'
-        fill_in 'goals', with: 'plan goal'
-        fill_in 'desc_plan', with: 'plan content'
-        click_button 'send_plan_post'
-        expect(page).to have_content 'Добавить этап в проект'
-        find('#btn_new_stage').click
-        expect(page).to have_content 'Добавление этапа в проект'
-        fill_in 'name_stage', with: 'name_stage'
-        fill_in 'desc_stage', with: 'desc_stage'
-        click_button 'send_post'
-        expect(page).to have_content 'name_stage'
-      end
-    end
-
-    context 'show plan' do
-      before do
-        visit plan_post_path(project, @plan1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_content @plan1.name
-        expect(page).to have_content @plan1.goal
-        expect(page).to have_content @plan1.content
-        expect(page).to have_selector 'textarea#comment_text_area'
-      end
-
-      it ' can add comments ', js: true do
-        fill_in 'comment_text_area', with: 'plan comment 1'
-        find('input.send-comment').click
-        expect(page).to have_content 'plan comment 1'
-      end
-
-      it 'can see second tab', js: true do
-        find('li#second a').click
-        expect(page).to have_content @plan_stage1.name
-        expect(page).to have_content @plan_stage1.desc
-        expect(page).to have_content @plan_aspect1.title
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_action1.name
-        expect(page).to have_content @plan_action1.desc
-      end
-
-      it 'can see third tab', js: true do
-        find('li#third a').click
-        expect(page).to have_content @plan_aspect1.title
-        find("#li_concept_#{@plan_aspect1.id} a").click
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_aspect1.content
-        expect(page).to have_content @plan_aspect1.positive
-        expect(page).to have_content @plan_aspect1.negative
-        expect(page).to have_content @plan_aspect1.control
-        expect(page).to have_content @plan_aspect1.obstacles
-        expect(page).to have_content @plan_aspect1.reality
-        expect(page).to have_content @plan_aspect1.problems
-      end
-    end
-
-    context 'edit plan' do
-      before do
-        visit edit_plan_post_path(project, @plan1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_field('name_plan',with: @plan1.name)
-        expect(page).to have_css('textarea#goals',text: @plan1.goal)
-        expect(page).to have_css('textarea#desc_plan',text: @plan1.content)
-      end
-
-      it 'can see edit stage modal', js: true do
-        find("#edit_post_stage_#{@plan_stage1.id}").click
-        expect(page).to have_content 'Добавление этапа в проект'
-        fill_in 'name_stage', with: 'new name_stage'
-        click_button 'send_post'
-        expect(page).to have_content 'new name_stage'
-      end
-
-      it 'can see edit action modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content "Этап 1. #{@plan_stage1.name}"
-        find("#edit_post_action_#{@plan_action1.id}").click
-        expect(page).to have_content 'Добавление мероприятия к нововведению:'
-        fill_in 'name_stage', with: 'new name stage'
-        click_button 'send_post'
-        expect(page).to have_content 'new name stage'
-      end
-
-      it 'can see edit link concept add modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
-        expect(page).to have_content 'Запланировать мероприятие'
-        find('a#btn_new_concept.btn-warning').click
-        expect(page).to have_content 'Добавление нововведений'
-        expect(page).to have_content 'Добавить пустое нововведение'
-      end
-
-      it 'can see edit link action add modal', js: true do
-        find('li#second a').click
-        expect(page).to have_content 'Добавить нововведение'
-        expect(page).to have_content 'Запланировать мероприятие'
-        click_link 'Запланировать мероприятие'
-        expect(page).to have_content 'Добавление мероприятия к нововведению:'
-      end
-
-      it 'can see second tab', js: true do
-        find('li#second a').click
-        expect(page).to have_content @plan_stage1.name
-        expect(page).to have_content @plan_stage1.desc
-        expect(page).to have_content @plan_aspect1.title
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_action1.name
-        expect(page).to have_content @plan_action1.desc
-      end
-
-      it 'can see third tab', js: true do
-        find('li#third a').click
-        expect(page).to have_content @plan_aspect1.title
-        find("#li_concept_#{@plan_aspect1.id} a").click
-        expect(page).to have_content @plan_aspect1.name
-        expect(page).to have_content @plan_aspect1.content
-        expect(page).to have_content @plan_aspect1.positive
-        expect(page).to have_content @plan_aspect1.negative
-        expect(page).to have_content @plan_aspect1.control
-        expect(page).to have_content @plan_aspect1.obstacles
-        expect(page).to have_content @plan_aspect1.reality
-        expect(page).to have_content @plan_aspect1.problems
-      end
-    end
+    # it_behaves_like 'welcome popup', 'plan'
+    #
+    # it_behaves_like 'show list plans'
+    #
+    # it_behaves_like 'sort plans'
+    #
+    # it_behaves_like 'discuss plans'
   end
+
 end

@@ -1,0 +1,13 @@
+#inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/*'
+    - 'db/*'
+    - 'app/assets/*'
+    - 'lib/*'
+    - 'config/*'
+    - 'bin/*'
+    - 'script/*'
+

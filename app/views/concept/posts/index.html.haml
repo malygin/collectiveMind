@@ -1,151 +1,40 @@
-- if current_user.not_ready_for_concept?(@project)
-  .col-md-9#info_about_movie
-    .col-md-offset-3
-      .text-align-left
-        Дорогие друзья, вы успешно завершили вторую стадию и высказали ряд ценных и полезных замечаний. Мы обязательно воспользуемся ими для улучшения процедуры.
-        Прежде чем продолжить работу, мы предлагаем вам просмотреть видеоролик, который поможет вам продуктивно действовать на следующей стадии. Обращаем ваше внимание на два разных подхода к разработке нововведений: от несовершенства и от идеи.
-        В ролике описан второй случай, поскольку он более сложный, однако большая часть инструкций применима и в первом случае.
-      #player-container
-      = link_to '', "/project/#{@project.id}/project_users/ready_to_concept", remote: true, id: 'movie_watched', style: 'display: none'
-      .preview.text-align-center
-        .btn.btn-success.btn-lg.btn-block#play_video{'data-stage' => 'play'}
-          Начать просмотр
-      .alert.alert-success#message-after-movie{style: 'display: none'}
-        Спасибо за просмотр, ролик вы можете посмотреть еще раз в разделе помощь
+.stage-info-sort-block
+  .row
+    %br/
+    .col-md-7
+      %span.stage-heading
+        Идеи
+        %span#count_concepts
+          ="(#{@posts.count})"
+    .col-md-5
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        %span#sorter
+          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.concept_ongoing_post.after_last_visit_comments(last_time_visit_page('concept')).size
+            - if new_comments > 0
+              %span.badge-red
+                = new_comments
+          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
+            - new_posts = @project.concept_ongoing_post.after_last_visit_posts(last_time_visit_page('concept')).size
+            - if new_posts > 0
+              %span.badge-red
+                = new_posts
 
-.col-md-6#concept-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
-  %section
-    %header
-      .row
-        %h4
-          =t('show.concept.title_plural')
-          -if @project.status == 7
-            %a.btn.btn-warning.pull-right(href="/project/#{@project.id}/concept/posts/new#{@aspect ? "?asp_id=#{@aspect.id}" : ''}" style="font-weight: normal !important;" id="new_concept")
-              =t('show.concept.add_concept')
-      %hr
-    .body
-      - if @aspect
-        -@aspect.aspect_posts.by_status(4).each do |post|
-          %h4=t('show.concept.solved_problem')
-          -cache post do
-            =render partial:'discontent/posts/post_short2', object: post
+        - if @project.stage == '3:0'
+          = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
+            %button.btn.add-button
+              %span
+                = t('techniques.concept_posts_simple')
 
-          %h4=t('show.concept.proposed_solutions')
-          %br
-          %table.table.table-striped.table-bordered.table-condensed
-            %thead
-              %tr.table-words
-                %th
-                  ="#"
-                %th
-                  =t('show.concept.name')
-                %th
-                  =t('show.concept.status')
-                %th
-                  =t('show.concept.fullness')
-                %th
-                  =t('show.concept.solved')
-            %tbody
-              - post.dispost_concepts.sort_by{|c| c.complite(post).nil? ? 0 : -c.complite(post)}.each_with_index  do |pa, index|
-                - if pa.status == 0
-                  %tr
-                    %td
-                      =index+1
-                    %td
-                      - if pa.post_aspects.first.title!=''
-                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                      -else
-                        =link_to t('show.without_name') , concept_post_path(@project, pa)
+.stage-post-block
+  .row#tab_dispost_concepts
+    -#= render partial: 'post_short', collection: @posts
 
-                      %br
-                      Комментариев
-                      =pa.comments.count
-                      %span.glyphicon.glyphicon-comment
-                      - count = pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
-                      - if(count > 0)
-                        | новых:
-                        %span.badge=pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
 
-                    %td
-                      = status_for_concept_type(pa)
-                      -if (current_user?(pa.user) or  boss? or role_expert?) and pa.fullness_title > 0
-                        %br
-                        %span.label.label-success="#{pa.fullness_title} баллов из 110"
-                      -if pa.discuss_status
-                        %br
-                        %span.label.label-danger=t('show.discuss')
-                      -if pa.approve_status
-                        %br
-                        %span.label.label-success=t('show.important')
-                    %td
-                      %span.h4.color-orange
-                        =status_for_concept(pa.post_aspects.first)
-                    %td
-                      =status_for_complite_discontent(post,pa)
 
-              -if @project.status == 7 or @project.demo?
-                %tr
-                  %td{colspan: 5, style: "font-weight: normal !important;"}
-                    %a.btn.btn-lg.btn-warning.btn-block(href="/project/#{@project.id}/concept/posts/new?dis_id=#{post.id}&asp_id=#{@aspect.id}" style="font-weight: normal !important;" id="new_concept_#{post.id}")
-                      =t('show.concept.add_my_concept')
-          %hr
-      - else
-        %table.table.table-striped.table-bordered.table-condensed
-          %thead
-            %tr.table-words
-              %th
-                ="#"
-              %th
-                =t('show.concept.name')
-              %th
-                =t('show.concept.status')
-              %th
-                =t('show.concept.fullness')
-          %tbody
-            -if @concepts
-              - @concepts.each_with_index  do |pa, index|
-                - if pa.status == 0
-                  %tr
-                    %td
-                      =index+1
-                    %td
-                      - if pa.post_aspects.first.title!=''
-                        =link_to pa.post_aspects.first.title , concept_post_path(@project, pa)
-                      -else
-                        =link_to t('show.without_name') , concept_post_path(@project, pa)
+- if shown_intro('concept_intro') == ''
+  = render partial: 'popup_welcome'
+- if current_user.can_vote_for(:concept, @project)
+  = render partial: 'popup_vote'
 
-                      %br
-                      Комментариев
-                      =pa.comments.count
-                      %span.glyphicon.glyphicon-comment
-                      - count = pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
-                      - if(count > 0)
-                        | новых:
-                        %span.badge=pa.comments.where("created_at >= ?", last_time_visit_post(pa, 'concept')).count
-
-                    %td
-                      = status_for_concept_type(pa)
-                      -if (boss? or role_expert?) and pa.fullness_title > 0
-                        %br
-                        %span.label.label-success="#{pa.fullness_title} баллов из 110"
-                      -if pa.discuss_status
-                        %br
-                        %span.label.label-danger=t('show.discuss')
-                      -if pa.approve_status
-                        %br
-                        %span.label.label-success=t('show.important')
-                    %td
-                      %span.h4.color-orange
-                        =status_for_concept(pa.post_aspects.first)
-
-.col-md-6#concept-comments-main{style:('display: none' if current_user.not_ready_for_concept?(@project))}
-  %section
-    %header
-      %h4
-        =t('show.improve.ideas')
-        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-sm btn-info pull-right'
-      %hr
-    .body
-      .chat-messages
-        -cache @comments_all do
-          = render partial: 'shared/improve_comment',collection: @comments_all

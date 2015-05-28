@@ -1,15 +1,242 @@
+#animate knob progress bar from data-end
+@animateKnobChange = (el)->
+  $(el).each ->
+    cur =$(this);
+    newValue = cur.data('end');
+    $({animatedVal: cur.val()}).animate {animatedVal: newValue},
+      duration: 3000,
+      easing: "swing",
+      step: ->
+        cur.val(Math.ceil(this.animatedVal)).trigger("change")
+
+#open magnific popup open
+@magnificPopupOpen = (el)->
+  $.magnificPopup.open
+    items: {src: el},
+    type: 'inline'
+
+#open magnific popup close
+@magnificPopupClose = (el)->
+  $.magnificPopup.close
+    items: {src: el},
+    type: 'inline'
+
+# get new question in 1st stage
+@getNextQuestion = (question, aspect)->
+  # if we have more questions in aspect
+  if($("#question_"+question).next().length)
+      $("#questionsCarousel_"+aspect).carousel('next')
+      $("#question_count_"+aspect).html(parseInt($("#question_count_"+aspect).html())+1)
+  else
+    # else we try to active next aspect
+    $('#aspect_block_'+aspect).html('<div class="divider20"></div><h4 class="block-with-left-icon pull-left"><i class="left-icon fa fa-2x fa-comments"></i>Вы ответили на все вопросы по данному аспекту.</h4><span class="pull-right question_count"></span><div class="carousel-inner"></div>')
+    $('#li_aspect_'+aspect).addClass('complete')
+    if($(".li_aspect:not(.complete)").length)
+#      $('#li_aspect_'+aspect).removeClass('active')
+#      $('#li_aspect_'+aspect+' .slider-item').removeClass('active');
+#      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('.slider-item').addClass('active');
+      $('.li_aspect').removeClass('active')
+      $('.slider-item').removeClass('active')
+      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
+    else
+      # else we have not more aspects, we just show greetings
+      if($("#popup-greetings-text").length)
+        magnificPopupOpen('#popup-greetings-text')
+      else
+        setTimeout (->
+          window.location.reload(true)
+          return
+        ), 1000
+
+@reload_isotope = ->
+  $('#tab_aspect_posts').isotope('reloadItems').isotope()
+
+@check_discontents= (el)->
+  arr = []
+  $(el).find('input:checked').closest('.checkox_item').each (index, element) ->
+    if $(element).data('discontent') == '*'
+      arr = $(element).data('discontent')
+      return false
+    else
+      arr.push(if $(element).data('discontent').match(/(\d+)/) then $(element).data('discontent').match(/(\d+)/)[1] else $(element).data('discontent'))
+  return arr
+
+# get project id from url like /project/11/discontent/posts
+@getProjectIdByUrl = ()->
+#  url = window.location.href.match(/\d+/g)
+#  return url[url.length-1]
+#  универсализация
+  url = window.location.href.match(/project\/(\d+)/)
+  if url
+    return url[1]
+
+@parse_my_journal_links = ()->
+  #  if window.location.href.indexOf("discontent/posts") > -1
+  #  $('#comment_content_' + link.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
+  link = document.location.toString();
+  if link.match(/project\/(\d+)/)
+    project_id = link.match(/project\/(\d+)/)[1]
+  if link.match(/jr_post=(\d+)/)
+    post_id = link.match(/jr_post=(\d+)/)[1]
+  if link.match(/jr_comment=(\d+)/)
+    comment_id = link.match(/jr_comment=(\d+)/)[1]
+  if link.match(/project\/(\d+)\/(\w+)\/posts/)
+    stage = link.match(/project\/(\d+)\/(\w+)\/posts/)[2]
+    if stage == 'collect_info'
+      stage = 'aspect'
+
+  if project_id and post_id and stage
+    $.ajax
+      url: "/project/#{project_id}/#{stage}/posts/#{post_id}"
+      type: "get"
+      dataType: "script"
+
+
+# чтение отдельной новости эксперта в попапе
+@expert_news = ->
+  this.expert_news_read = ->
+    project_id = $(this).data('project')
+    news_id = $(this).data('id')
+    # проверяем и добавляем класс, чтобы исключить дублирование лога
+    read = $(this).hasClass('read')
+    if project_id and news_id and !read
+      $(this).addClass('read')
+      # убираем статус
+      $(this).find('.status_news').html('')
+      unless($(".expert_news_drop .dd_xprt_notice a:not(.read)").length)
+        $('.drop_opener i').css 'color', '#9e9e9e'
+      $.ajax
+        url: "/project/#{project_id}/news/#{news_id}/read"
+        type: "get"
+        dataType: "script"
+
+  $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
+
+# голосование за пост
+@vote_buttons = ->
+  this.vote_post = ->
+    project_id = $(this).data('project')
+    post_id = $(this).data('id')
+    stage = $(this).data('stage')
+    status = $(this).data('status')
+    if project_id and post_id and stage and status
+      $.ajax
+        url: "/project/#{project_id}/#{stage}/posts/#{post_id}/vote"
+        type: "put"
+        dataType: "script"
+        data:
+          status: status
+
+  this.vote_plan = ->
+    project_id = $(this).data('project')
+    post_id = $(this).data('id')
+    type_vote = $(this).data('type-vote')
+    status = $(this).data('status')
+    if project_id and post_id and type_vote and status
+      $.ajax
+        url: "/project/#{project_id}/plan/posts/#{post_id}/vote"
+        type: "put"
+        dataType: "script"
+        data:
+          type_vote: type_vote
+          status: status
+
+  $('.vote_controls').on('click', '.vote_button', this.vote_post)
+  $('.rate_buttons').on('click', '.btn_plan_vote', this.vote_plan)
+
+
+#show comments panel on post hover
+@show_comments_hover = ->
+  $('.ch_action').unbind().hover ->
+    ch_id = $(this).attr('data-for')
+    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
+    $('#' + ch_id).toggleClass 'active'
+    return
+
+# perfect scrollbar
+@activate_perfect_scrollbar = ->
+  $('.ps_cont.half_wheel_speed').perfectScrollbar wheelSpeed: 0.3
+  $('.ps_cont').perfectScrollbar()
+
+#  post colored stripes
+#  показ цветных полосок -> упростить
+@post_colored_stripes = ->
+  count_themes_width = (cont) ->
+    width = 0
+    $('#' + cont + ' .tag-stripes').each ->
+      width = width + $(this).outerWidth()
+      return
+    width + 100
+
+  $('.post-theme').each ->
+    curId = $(this).attr('id')
+    $(this).width count_themes_width(curId)
+    return
+  $('.post-theme').hover ->
+    curId = $(this).attr('id')
+    $('#' + curId + ' .tag-stripes').hover ->
+      $('#' + curId + ' .tag-stripes').removeClass 'active'
+      $(this).addClass 'active'
+      return
+    return
+  $('.post-theme').mouseover ->
+    $(this).addClass 'shown'
+    $(this).closest('.themes_cont').addClass 'themesShown'
+    return
+  $('.post-theme').mouseleave ->
+    $(this).removeClass 'shown'
+    $(this).closest('.themes_cont').removeClass 'themesShown'
+    return
+  $('.tag-stripes').mouseover ->
+    $(this).closest('.post-theme').width count_themes_width($(this).closest('.post-theme').attr('id'))
+    return
+
+# цвета для несовершенств
+@colors_discontents = ->
+  color_item = (object, action, color) ->
+    object.css action, '#' + color
+    return
+
+  $('.color_me').each ->
+    me = $(this)
+    type = me.attr('data-me-type')
+    if type == 'imperf'
+      color = $colors_imperf_codes[me.attr('data-me-color')]
+    action = me.attr('data-me-action')
+    if action and color
+      color_item me, action, color
+    return
+
+# сворачивание комментов и скролл
+@comments_expandable_column = ->
+  $('.exp_button').click ->
+    parent_col = $(this).parents('.exp_col')
+    if parent_col.hasClass('active')
+      parent_col.toggleClass 'active'
+      parent_col.siblings('.exp_col').toggleClass 'hidden'
+    else
+      parent_col.toggleClass 'hidden'
+      parent_col.siblings('.exp_col').toggleClass 'active'
+    return
+
+#----------
 @search = ->
   this.search_users = ->
     project_id = $('#search_users_project').attr("data-project")
+    code_user = $('#search_users_project').attr("data-code")
     val = this.value
     if project_id and val
       $.ajax
-        url: "/project/#{project_id}/users/search_users"
+        url: "/project/#{project_id}/users/search"
         type: "get"
         data:
           search_users_text: val
+          code: code_user
 
   $('.search_text').on('change', 'input#search_users_text', this.search_users)
+
+
+
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
@@ -36,6 +263,21 @@ $('#tab_posts li#new a').on "click", (e) ->
     $.ajax
       url: "/project/#{project_id}/discontent/posts/unions"
       type: "get"
+
+
+@plan_stage = ->
+  this.select_plans = ->
+    project_id = $(this).data('project')
+    val = this.value
+    if project_id and val
+      $.ajax
+        url: "/project/#{project_id}/estimate/posts/new"
+        type: "get"
+        dataType: "script"
+        data:
+          plan_id: val
+
+  $('#tab-for_content').on('change', '#select_plans', this.select_plans)
 
 @post_form = ->
   this.activate_button = ->
@@ -128,14 +370,14 @@ $('#tab_posts li#new a').on "click", (e) ->
 @reset_child_comment_form = (comment)->
   $('#child_comments_form_' + comment).empty()
 
-# @todo work with comment on life_tape posts
+# @todo work with comment on collect_info posts
 @select_for_aspects_comments = (el, project, post)->
   project_id = project
   comment_id = post
   aspect_id = $(el).val()
   if aspect_id != '' and comment_id != ''
     $.ajax
-      url: "/project/#{project_id}/life_tape/posts/transfer_comment"
+      url: "/project/#{project_id}/collect_info/posts/transfer_comment"
       type: "put"
       data:
         comment_id: comment_id
@@ -163,11 +405,11 @@ $('#tab_posts li#new a').on "click", (e) ->
     text = $(this).find('option:selected').text()
     $(this).find('option:selected').remove()
     func = "'#{val}','#{text}'"
-    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="glyphicon glyphicon-remove text-danger pull-left" onclick="remove_discontent_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-t">' + text + '</span></br></div>')
+    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="fa fa-remove text-danger pull-left" onclick="remove_core_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-xs label-info">' + text + '</span></br></div>')
     $('#aspect_' + val).css('display', 'block').animate({height: 20, opacity: 1}, 500).effect("highlight",
       {color: '#f5cecd'}, 500)
 
-@remove_discontent_aspect = (val, text)->
+@remove_core_aspect = (val, text)->
   $('#aspect_' + val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
   $('#select_for_aspects').append(new Option(text, val))
@@ -242,7 +484,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     return (false)
   if concept_id != ''
     $.ajax
-      url: "/project/#{project_id}/plan/posts/#{post_id}/add_form_for_concept"
+      url: "/project/#{project_id}/plan/posts/#{post_id}/aspects/add_form_for_concept"
       type: "put"
       data:
         concept_id: concept_id
@@ -280,7 +522,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     post_id = parseInt(optsel.attr('post'))
     if project_id and post_id and new_concept != ''
       $.ajax
-        url: "/project/#{project_id}/plan/posts/#{post_id}/get_concept"
+        url: "/project/#{project_id}/plan/posts/#{post_id}/aspects/get_concept"
         type: "get"
         data:
           con_id: new_concept
@@ -348,3 +590,110 @@ $('#tab_posts li#new a').on "click", (e) ->
       data:
         check_field: check_field
         status: status
+
+@start_autocomplete = ->
+  $('.autocomplete').each ->
+    console.log($(this).attr('data-url'))
+    $(this).autocomplete(source: $(this).attr('data-url'))
+    return
+
+@start_vote = ->
+  if $('div[id^=popup-vote]').length > 0
+    $.magnificPopup.open({
+      items: {
+        src: $('div[id^=popup-vote]')
+      },
+      type: 'inline'
+    });
+  return
+
+@add_comment_by_enter = ->
+  if $('input[id^=_comment_content]').length > 0
+    $('input[id^=_comment_content]').keypress = (e)->
+      if (e.which == 10 || e.which == 13)
+        this.parent.submit()
+      return
+
+@start_play = ->
+  $('#player-container').tubeplayer
+    width: $('#play_video').width()
+    height: 450
+    allowFullScreen: 'true'
+    initialVideo: 'YA1S941EdAY'
+    preferredQuality: 'default'
+    showControls: 0
+    modestbranding: false
+    onPlayerEnded: ->
+      $('#player-container').tubeplayer 'destroy'
+      $('#play_video').remove()
+      $('#message-before-movie').remove()
+      delay = 4000
+      $('#message-after-movie').fadeIn('slow').delay(delay - 10).fadeOut('slow')
+      $('#movie_watched').click()
+      $('#concept-main').delay(delay).fadeIn('slow')
+      $('#concept-comments-main').delay(delay).fadeIn('slow')
+      return
+  $('#play_video').on 'click', ->
+    if ($(this).attr('data-stage') == 'play')
+      $('#player-container').tubeplayer 'play'
+      $(this).text('Поставить на паузу')
+      $(this).attr('data-stage', 'pause')
+    else
+      $('#player-container').tubeplayer 'pause'
+      $(this).text('Продолжить просмотр')
+      $(this).attr('data-stage', 'play')
+    return
+
+# временно!!!
+$colors_imperf_codes = [
+  'd3a5c9'
+  'a7b3dd'
+  '87a9f3'
+  '8d9caf'
+  '85dbf2'
+  '91c5d0'
+  '8ad2be'
+  'a6d1a6'
+  'd7d49d'
+  'f3e47d'
+  'f9bf91'
+  'eca3b7'
+  'e67092'
+  '6ea3f1'
+  'a5bdad'
+  '81dad6'
+  '96afb6'
+  'be85ca'
+  'fbcd82'
+  '79889b'
+  'd3e18c'
+  'eea266'
+  'b7e3f0'
+  '7dc7f6'
+  'f7947f'
+  'e2de95'
+  '8fbce5'
+  '7181d9'
+  'b9daa3'
+  'dc7674'
+  '77b7f5'
+  'ff7b67'
+  'e8aa79'
+  'd0596c'
+  'ac87bd'
+  'e89ec3'
+  'feb497'
+  'b67c94'
+  '8790d3'
+  '89b5f4'
+  'b46a6b'
+  'ff8f5f'
+  '88a0ce'
+  'cd97c9'
+  '7391da'
+  'fdaa68'
+  'b45f58'
+  '8fb5e6'
+  'fea1cd'
+  '978ac2'
+]

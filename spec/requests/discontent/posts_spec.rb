@@ -1,23 +1,139 @@
 require 'spec_helper'
 
-describe 'Discontent ' do
+describe 'Discontent' do
   subject { page }
 
-  let (:user) { create :user }
+  let!(:user) { @user = create :user }
   let (:user_data) { create :user }
-  let (:moderator) { create :moderator }
-  let (:project) { create :core_project, status: 3 }
-  let (:project_for_group) { create :core_project, status: 4 }
+  let!(:moderator) { @moderator = create :moderator }
+  let (:project) { @project = create :closed_project, stage: '2:0' }
 
   before do
+    create :core_project_user, user: user, core_project: project
+    create :core_project_user, user: moderator, core_project: project
+
+    @user_check = create :user_check, user: user, project: project, check_field: 'discontent_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_intro'
+
+    @user_check_popover = create :user_check, user: user, project: project, check_field: 'discontent_discuss'
+    @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'discontent_discuss'
+
     @aspect1 = create :aspect, project: project
-    @discontent1 = create :discontent, project: project, user: user, anonym: false
+
+    @discontent1 = create :discontent, project: project, user: user
     create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-    @discontent2 = create :discontent, project: project, user: user, anonym: false
+    @discontent2 = create :discontent, project: project, user: user
     create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
+
     @post1 = @discontent1
+    @post2 = @discontent2
+
     @comment_1 = create :discontent_comment, post: @post1, user: user
     @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
+  end
+
+  shared_examples 'show list discontents' do
+    before do
+      visit discontent_posts_path(project)
+    end
+
+    it 'have content', js: true do
+      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+    end
+
+    it_behaves_like 'likes posts'
+  end
+
+  shared_examples 'filter discontents' do
+    before do
+      #create new aspect
+      @aspect2 = create :aspect, project: project
+      @discontent3 = create :discontent, project: project, user: user
+      create :discontent_post_aspect, post_id: @discontent3.id, aspect_id: @aspect2.id
+
+      visit discontent_posts_path(project)
+    end
+
+    it 'can see all discontents', js: true do
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      expect(page).to have_content @discontent3.content
+    end
+
+    it 'can select first aspect in dropdown', js: true do
+      find(:css, "a.select-aspect").trigger('click')
+      expect(page).to have_content @aspect1.content
+      expect(page).to have_content @aspect2.content
+      find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
+      sleep(5)
+      # @todo select content
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      expect(page).to have_content @discontent3.content
+    end
+
+    it 'can select second aspect in dropdown', js: true do
+      find(:css, "a.select-aspect").trigger('click')
+      expect(page).to have_content @aspect1.content
+      expect(page).to have_content @aspect2.content
+      find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
+      sleep(5)
+      # @todo select content
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      expect(page).to have_content @discontent3.content
+    end
+  end
+
+  shared_examples 'sort discontents' do
+    before do
+      visit discontent_posts_path(project)
+    end
+
+    it 'can sort to comment', js: true do
+      find(:css, "span#sorter span.sort-1").trigger('click')
+      sleep(5)
+      first(:css, "#tab_aspect_posts .discontent-block .what a").click
+      expect(page).to have_content @discontent1.content
+    end
+
+    it 'can sort to date', js: true do
+      find(:css, "span#sorter span.sort-2").trigger('click')
+      sleep(5)
+      first(:css, "#tab_aspect_posts .discontent-block .what a").click
+      expect(page).to have_content @discontent2.content
+    end
+  end
+
+  shared_examples 'discuss discontents' do
+    before do
+      visit discontent_posts_path(project)
+    end
+
+    it 'have content', js: true do
+      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content @discontent1.content
+      expect(page).to have_content @discontent2.content
+      expect(page).to have_link 'new_discontent_posts'
+    end
+
+    context 'show popup aspect ', js: true do
+      before do
+        find(:css, "#show_record_#{@post1.id}").trigger('click')
+      end
+
+      it 'have content', js: true do
+        expect(page).to have_content @post1.content
+        expect(page).to have_content @post1.what
+        expect(page).to have_content @post1.whend
+        expect(page).to have_content @post1.whered
+        expect(page).to have_content @aspect1.content
+      end
+
+      it_behaves_like 'content with comments'
+    end
   end
 
   context 'ordinary user sign in ' do
@@ -25,242 +141,42 @@ describe 'Discontent ' do
       sign_in user
     end
 
-    context 'discontent list' do
-      before do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-      end
+    it_behaves_like 'welcome popup', 'discontent'
 
-      it ' can see all discontents in aspect' do
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent2.content
-        expect(page).to have_selector '#add_record'
-        expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
+    it_behaves_like 'show list discontents'
 
-      it ' add new discontent send', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'dis content'
-        fill_in 'discontent_post_whered', with: 'dis where'
-        fill_in 'discontent_post_whend', with: 'dis when'
-        expect(page).to have_selector 'span', 'aspect 1'
-        click_button 'send_post'
-        expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
-        click_link 'Перейти к списку'
-        expect(page).to have_content 'dis content'
-      end
+    it_behaves_like 'admin panel post'
 
-      it 'user profile works fine after add discontent', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'disсontent content'
-        fill_in 'discontent_post_whered', with: 'disсontent where'
-        fill_in 'discontent_post_whend', with: 'disсontent when'
-        expect(page).to have_selector 'span', 'aspect 1'
-        click_button 'send_post'
-        visit user_path(id: user.id, project: project)
-        click_link 'tab-imperfections'
-        expect(page).to have_content 'disсontent'
-      end
+    it_behaves_like 'filter discontents'
 
-      it 'add anonym discontent and get fine feed' do
-        click_link 'add_record'
+    it_behaves_like 'sort discontents'
 
-        fill_in 'discontent_post_content', with: 'disсontent content'
-        fill_in 'discontent_post_whered', with: 'disсontent where'
-        fill_in 'discontent_post_whend', with: 'disсontent when'
-        find(:css, "#discontent_post_anonym[value='1']").set(true)
+    it_behaves_like 'discuss discontents'
 
-        click_button 'send_post'
-        visit journals_path(project: project)
-        expect(page).to have_content I18n.t('journal.add_anonym_discontent')
-      end
-    end
-
-    context 'show discontents' do
-      before do
-        visit discontent_post_path(project, @discontent1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent1.whend
-        expect(page).to have_content @discontent1.whered
-        expect(page).to have_selector "span", @aspect1.content
-        expect(page).to have_selector 'textarea#comment_text_area'
-        expect(page).not_to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
-
-      it_behaves_like 'content with comments'
-      it_behaves_like 'likes posts'
-    end
-
-    context 'vote discontent ' do
-      before do
-        project.update_attributes(status: 6)
-        prepare_for_vote_discontents(project)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ', js: true do
-        expect(page).to have_content 'Голосование за несовершенства'
-        expect(page).to have_content 'Определение наиболее важных проблем'
-        expect(page).to have_content 'Несовершенство: 1 из 1'
-        expect(page).to have_content @discontent_group1.content
-        click_link "vote_positive_#{@discontent_group1.id}"
-        expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
-        click_link "Перейти к списку несовершенств"
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-      end
+    context 'vote content', js: true do
+      it_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
     end
   end
 
-  context 'moderator sign in' do
+  context 'moderator sign in ' do
     before do
       sign_in moderator
     end
 
-    context 'discontent list' do
-      before do
-        visit discontent_posts_path(project)
-      end
+    it_behaves_like 'admin panel post', true
 
-      it ' can see all discontents in aspect' do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent2.content
-        expect(page).to have_selector '#add_record'
-        expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-      end
-
-      it 'add new discontent send', js: true do
-        click_link 'add_record'
-        fill_in 'discontent_post_content', with: 'dis content'
-        fill_in 'discontent_post_whered', with: 'dis where'
-        fill_in 'discontent_post_whend', with: 'dis when'
-        expect(page).to have_selector "span", 'aspect 1'
-        click_button 'send_post'
-        expect(page).to have_content 'Перейти к списку'
-        expect(page).to have_content 'Добавить еще одно'
-        click_link 'Перейти к списку'
-        expect(page).to have_content 'dis content'
-      end
-    end
-
-    context 'show discontents' do
-      before do
-        visit discontent_post_path(project, @discontent1)
-      end
-
-      it 'can see right form' do
-        expect(page).to have_content @discontent1.content
-        expect(page).to have_content @discontent1.whend
-        expect(page).to have_content @discontent1.whered
-        expect(page).to have_selector "span", 'aspect 1'
-        expect(page).to have_selector 'textarea#comment_text_area'
-      end
-
-      it_behaves_like 'content with comments', true
-      it_behaves_like 'likes posts', true
-
-      context 'like concept' do
-        before do
-          prepare_awards
-        end
-
-        it ' like post and have award', js: true do
-          expect(page).to have_css("a#plus_post_#{@comment_1.id} span", text: 'Выдать баллы')
-
-          # expect(page).to have_link("plus_post_#{@discontent1.id}", text: 'Выдать баллы', href: plus_discontent_post_path(project, @discontent1))
-          find(:css, "a#plus_post_#{@discontent1.id} span").trigger('click')
-
-          sleep 2
-          visit journals_path(project: project)
-          expect(page).to have_selector('i.fa.fa-trophy')
-          visit user_path(project: project, id: user.id)
-          expect(page).to have_content('25')
-        end
-      end
-    end
-
-    context 'note for discontent ' do
-      before do
-        visit discontent_posts_path(project)
-      end
-
-      it 'can add note ', js: true do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        click_link "content_dispost_what_#{@discontent1.id}"
-        expect(page).to have_selector "form#note_for_post_#{@discontent1.id}_1"
-        find("#note_for_post_#{@discontent1.id}_1").find('#edit_post_note_text_area').set "new note for first field discontent post"
-        find("#note_for_post_#{@discontent1.id}_1").find("#send_post_#{@discontent1.id}").click
-        expect(page).to have_content "new note for first field discontent post"
-        page.execute_script %($("ul#note_form_#{@discontent1.id}_1 a").click())
-        # @todo нужно ждать пока отработает анимация скрытия и элемент будет удален
-        sleep(5)
-        expect(page).not_to have_content 'new note for first field discontent post'
-      end
-    end
-
-    context 'group discontent ' do
-      before do
-        project.update_attributes(status: 4)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ' do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        expect(page).to have_content 'Исходные'
-        expect(page).to have_content 'Объединенные'
-        expect(page).to have_content I18n.t('show.improve.problem')
-        expect(page).to have_content 'Группы несовершенств'
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_link('add_record', text: 'Добавить новую группу')
-      end
-
-      it 'add new group ', js: true do
-        visit "/project/#{project.id}/discontent/posts?asp=#{@aspect1.id}"
-        click_link 'add_record'
-        sleep(5)
-        fill_in 'discontent_post_content', with: 'new group content'
-        fill_in 'discontent_post_whered', with: 'new group where'
-        fill_in 'discontent_post_whend', with: 'new group when'
-        click_button 'send_post'
-        expect(page).to have_content 'new group content'
-        expect(page).to have_content 'Разгруппировать'
-        expect(page).to have_content 'Редактировать группу'
-        find("#post_#{@discontent1.id} #select_for_discontents_group").find(:xpath, 'option[2]').select_option
-        expect(page).to have_content 'Добавлено в группу new group content'
-      end
-    end
-
-    context 'vote discontent ' do
-      before do
-        project.update_attributes(status: 6)
-        prepare_for_vote_discontents(project)
-        visit discontent_posts_path(project)
-      end
-
-      it 'have content ', js: true do
-        expect(page).to have_content 'Голосование за несовершенства'
-        expect(page).to have_content 'Определение наиболее важных проблем'
-        expect(page).to have_content 'Несовершенство: 1 из 1'
-        expect(page).to have_content @discontent_group1.content
-        click_link "vote_positive_#{@discontent_group1.id}"
-        expect(page).to have_content 'Спасибо за участие в голосовании!'
-        expect(page).to have_selector 'a', 'Перейти к рефлексии'
-        expect(page).to have_selector 'a', 'Перейти к списку несовершенств'
-        click_link 'Перейти к списку несовершенств'
-        expect(page).to have_content 'Несовершенства'
-        expect(page).to have_content I18n.t('show.improve.problem')
-      end
-    end
+    # it_behaves_like 'welcome popup', 'discontent'
+    #
+    # it_behaves_like 'show list discontents'
+    #
+    # it_behaves_like 'filter discontents'
+    #
+    # it_behaves_like 'sort discontents'
+    #
+    # it_behaves_like 'discuss discontents'
+    #
+    # it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам'
   end
+
+
 end

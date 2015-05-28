@@ -1,0 +1,196 @@
+a:hover {
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+.btn-danger {
+    background: #e61928;
+    border-radius: 3px;
+}
+
+.media {
+    margin: 0px;
+}
+
+.media-left {
+    padding-right: 0px;
+}
+
+.table {
+    margin-bottom: 0px;
+    padding-top: 10px;
+    color: #666666;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.stage-post-block {
+    margin-top: 5px;
+}
+
+.project_win {
+    background: image-url("stripe.png") repeat;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    height: 450px;
+
+}
+
+.radial-gradient {
+    height: 100%;
+    border-radius: 6px;
+    background: radial-gradient(circle, rgba(253, 255, 254, 0.70) 30%, rgba(227, 232, 236, 0.7) 60%);
+    padding-bottom: 40px;
+}
+
+.poster_win {
+    padding-top: 40px;
+}
+
+.poster_win img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.poster_win h5 {
+    margin-top: 20px;
+}
+
+.post-win, .post-accost {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.post-accost {
+    padding-left: 10px;
+}
+
+.post-win h4, .post-accost h4 {
+    line-height: 1.4;
+}
+
+.post-win h5, .post-accost h5 {
+    margin-top: 30px;
+}
+
+.post-win p, .post-accost p {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+.post-win button {
+    margin-top: 30px;
+}
+
+.badge-win {
+    background: image-url('ribbon.png') no-repeat;
+    margin-top: -10px;
+    width: 120px;
+    height: 120px;
+}
+
+.list_win li {
+    color: #a4a4a4;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.list_win li:hover {
+    cursor: pointer;
+    color: #323232;
+}
+
+.list_win .active {
+    color: #323232;
+}
+
+.list_win .active .back_color_stage7 {
+    background: #9ee7f4;
+}
+
+.letters {
+    height: 100%;
+    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom 10px right no-repeat;
+}
+
+.PositionRelative {
+    position: relative;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+}
+
+.colorT1 {
+
+    color: #6184bd;
+}
+
+.colorT2 {
+    color: #72d7ed;
+}
+
+.colorT3 {
+    color: #72ede6;
+}
+
+.colorT4 {
+    color: #72edb8;
+}
+
+.colorT5 {
+    color: #b7eeac;
+}
+
+.colorT6 {
+    color: #8f8eb0;
+}
+
+.colorT7 {
+    color: #fcff9e;
+}
+
+.colorT8 {
+    color: #f662ff;
+}
+
+.colorT9 {
+    color: #3dff00;
+}
+
+a.dropdown-toggle {
+    cursor: pointer;
+    color: #000000;
+}
+
+a.dropdown-toggle i {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.dropdown-menu li i {
+    padding: 10px;
+}
+
+.arrow {
+    position: relative;
+    top: 5px;
+}
+
+.arrow i {
+
+    font-size: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}

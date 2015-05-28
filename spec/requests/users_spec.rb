@@ -2,23 +2,32 @@ require 'spec_helper'
 
 describe 'Users ' do
   subject { page }
-  let (:user) { create :user }
-  let (:moderator) { create :moderator }
-  let (:expert) { create :expert }
-  let (:project) { create :core_project, status: 1, advices_concept: true, advices_discontent: true }
-  let!(:project_user) { create :core_project_user, user: user, core_project: project }
-  let!(:project_user2) { create :core_project_user, user: moderator, core_project: project }
+
+  let!(:user) { @user = create :user }
+  let!(:moderator) { @moderator = create :moderator }
+  let (:project) { @project = create :closed_project, stage: '1:0' }
+
+  before do
+    create :core_project_user, user: user, core_project: project
+    create :core_project_user, user: moderator, core_project: project
+
+    @user_check = create :user_check, user: user, project: project, check_field: 'collect_info_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'collect_info_intro'
+  end
+
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
+      visit collect_info_posts_path(project)
     end
 
-    context 'edit profile' do
+    context 'edit profile', js: true do
       it 'owner - ok' do
         new_name = 'Cool new name'
         new_surname = 'My cool surname'
-        click_link 'user_profile'
+        click_link 'auth_dropdown'
+        click_link 'go_to_profile'
         click_link 'edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
@@ -33,20 +42,54 @@ describe 'Users ' do
           visit user_path(project, moderator)
           expect(page).not_to have_link 'edit_profile'
         end
-
-        it 'not access by direct link' do
-          visit edit_user_path(project, moderator)
-          expect(current_path).to eq root_path
-        end
       end
     end
 
-    it 'no link to user analytic' do
-      visit user_path(project, user)
-      expect(page).not_to have_link 'go_to_user_analytics'
-      visit "/project/#{project.id}/project_users/user_analytics"
-      expect(current_path).to eq root_path
-      expect(page).not_to have_content I18n.t('analytic.graph_visits')
+    context 'stage content', js: true do
+      before do
+        @aspect = create :aspect, project: project, user: user
+        @aspect_comment = create :aspect_comment, post: @aspect, user: user
+
+        @discontent = create :discontent, project: project, user: user
+        @discontent_comment = create :discontent_comment, post: @discontent, user: user
+
+        @concept = create :concept, user: user, project: project
+        @concept_comment = create :concept_comment, post: @concept, user: user
+
+        @novation = create :novation, user: user, project: project
+        @novation_comment = create :novation_comment, post: @novation, user: user
+
+        @plan = create :plan, user: user, project: project
+        @plan_comment = create :plan_comment, post: @plan, user: user
+
+        visit user_path(project, user)
+      end
+
+      it 'have on all stages' do
+        expect(page).to have_content @aspect.content
+        expect(page).to have_content @aspect_comment.content
+        project.update(stage: '2:0')
+        refresh_page
+        expect(page).to have_content @discontent.content
+        expect(page).to have_content @discontent_comment.content
+        project.update(stage: '3:0')
+        refresh_page
+        expect(page).to have_content @concept.title
+        expect(page).to have_content @concept_comment.content
+        project.update(stage: '4:0')
+        refresh_page
+        expect(page).to have_content @novation.title
+        expect(page).to have_content @novation_comment.content
+        project.update(stage: '5:0')
+        refresh_page
+        expect(page).to have_content @plan.content
+        expect(page).to have_content @plan_comment.content
+        project.update(stage: '6:0')
+        refresh_page
+        expect(page).to have_content @plan.content
+        expect(page).to have_content @plan_comment.content
+      end
+
     end
 
     context 'my journal', js: true do
@@ -56,69 +99,23 @@ describe 'Users ' do
       end
 
       it 'have count' do
-        within :css, 'a#messages span.count' do
+        within :css, 'a#clear_my_journals span#my_journals_count' do
           expect(page).to have_content '1'
         end
       end
 
       it 'have content on click' do
-        click_link 'messages'
-        within :css, 'ul#messages-menu' do
+        click_link 'clear_my_journals'
+        within :css, '#dd_2' do
           expect(page).to have_content @personal_journal.body
         end
-      end
-
-      context 'clear' do
-        before do
-          click_link 'messages'
-          click_link 'clear_my_journals'
-        end
-
-        it { expect change(Journal.events_for_my_feed(project, user), :count).by(-1) }
-
-        it 'on page' do
-          expect(page).not_to have_content @personal_journal
-          expect(page).not_to have_link 'clear_my_journals'
-          expect(page).to have_content I18n.t('menu.journal_empty')
-        end
-      end
-    end
-
-    context 'unreaded notifications: show message', js: true do
-      context 'when' do
-        it '1 day - yes' do
-          @personal_journal = create :personal_journal, project: project, user: user, user_informed: user, created_at: 1.day.ago
-          visit "/project/#{project.id}"
-          expect(page).to have_css '#set_notification_message'
-          expect(page).not_to have_content @personal_journal.body
-          find('div.messenger-actions a').click
-          expect(page).to have_content @personal_journal.body
-        end
-
-        it ' < 1 day - no' do
-          @personal_journal = create :personal_journal, project: project, user: user, user_informed: user
-          visit "/project/#{project.id}"
-          expect(page).not_to have_css 'div#set_notification_message'
-          expect(page).not_to have_css 'div.messenger-message-inner'
+        expect change(Journal.events_for_my_feed(project, user), :count).by(-1)
+        sleep(5)
+        within :css, 'a#clear_my_journals span#my_journals_count' do
+          expect(page).to_not have_content '1'
         end
       end
     end
   end
 
-  context 'moderator sign in ' do
-
-  end
-
-  context 'expert sign in' do
-    before do
-      sign_in expert
-    end
-
-    it 'link to user analytic' do
-      visit user_path(project, expert)
-      click_link 'go_to_user_analytics'
-      expect(page).to have_content I18n.t('analytic.graph_visits')
-      expect(page).not_to have_css 'ul#general_stages'
-    end
-  end
 end

@@ -1,0 +1,100 @@
+- content_for :cabinet_sidebar do
+  .divider200
+  -#.content_window.white.r_u_sure_vert.del
+  -#  %p.text-center Вы уверены, что хотите удалить пакет?
+  -#  %div
+  -#    %button.btn.btn_reset.font_white Да
+  -#    %button.btn.btn_reset.font_white Нет
+  .divider20
+  - if @post.persisted?
+    = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: {confirm: t('confirm.delete_plan')}, id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del a_font_reset'
+    .divider10
+  %span#plan_buttons
+    %button.btn.add-button.type3.dark-green#to_save_plan Сохранить и выйти
+    .divider10
+    - unless @post.published?
+      %button.btn.add-button.type3.dark-green#to_publish_plan Опубликовать
+- content_for :special_for_gantt do
+  = render 'gantt_panel'
+
+.divider10
+%div{id: "plan_notices_#{@post.id}"}
+  = render partial: 'shared/create_success', locals: {model_name: 'plan', id: @post.id}
+= form_for @post, url: {project: @project.id, action: @post.persisted? ? 'update' : 'create', id: @post.id}, remote: true do |f|
+  = f.hidden_field :tasks_gant
+  - unless @post.persisted?
+    = f.hidden_field :content
+  = hidden_field_tag 'plan_post[novation_id]'
+  - if @post.persisted?
+    .content_window.c_w_5_top.bottom_panel_stop
+      .cont_heading.bold
+        %span.pocket_name.breadcr
+          = link_to user_content_plan_posts_path(@project), class: 'a_font_reset bold' do
+            Мои проекты
+            %small &gt;
+        = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
+  - else
+    .content_window.bottom_panel_stop
+      %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
+  .content_window.white.c_w_5
+    .cont_heading
+      - if @post.content
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form=@post.content
+      -else
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form Пакет еще не выбран
+    .divider10
+    .row
+      .col-md-4
+        %ul.list-unstyled.tabs_type_2{role: 'tablist'}
+          - @post.post_novations.first.attributes_for_form.each do |link, values|
+            %li{role: 'presentation', class: "#{'active' if link ==:project}" }
+
+              %a.a_font_reset.scroll_tab{'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}"}
+                = t("activerecord.attributes.plan/post_novation.#{link}")
+      .col-md-8
+        .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations
+          - @post.post_novations.first.attributes_for_form.each do |link, attributes|
+            = fields_for @post.post_novations.first do |n|
+              .tab-pane.fade.in{role: 'tabpanel', id: "cabinet_5_cont_#{link}",  class: "#{'active' if link ==:project}"}
+                - attributes.each do |attribute, bool|
+                  - if bool == -1 or bool == true
+                    %h6.bold
+                      = t("activerecord.attributes.plan/post_novation.#{attribute}")
+                    = n.text_area attribute.to_sym, class: 'form-control', rows: 5
+                    .divider15
+    - if @post.published?
+      = image_tag 'published.png', class: 'publish'
+  .divider70
+
+  #popup-cabinet5-1.popup-window.detailed_popup.popup-w1030.mfp-hide
+    .content_window.white
+      .cont_heading
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#select_novation Выбор пакета
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active.hidden#selected_novation
+      .divider15
+      .row
+        .col-md-5
+          %ul.list-unstyled.tabs_type_2.less_margin#ul_novations{role: 'tablist'}
+            - @novations.each do |novation|
+              %li.open_novation{role: 'presentation'}
+                %a.a_font_reset{'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab'}
+                  = novation.title
+        .col-md-7
+          .tab-content#list_novations
+            .divider3
+            - @novations.each do |novation|
+              .tab-pane.fade{role: 'tabpanel', id: "show_novation_#{novation.id}", 'data-id' => novation.id}
+                - novation.attributes_for_form.each do |type_attribute|
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}"}
+                    = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                    %i.fa.fa-plus.font_color_stage4.collapse_plus
+                  .collapse{id: "novation_#{novation.id}_attributes_#{type_attribute.first}"}
+                    .divider5
+                    - type_attribute.second.each do |attribute, bool_attribute|
+                      %h6.bold
+                        = t("activerecord.attributes.novation/post.#{attribute}")
+                      %p.novation_attribute{'data-attribute' => attribute}
+                        = novation.send(attribute)
+                      .divider15
+  = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
+  = f.submit 'Save', class: 'hidden', id: 'save_plan_post_published', name: 'plan_post[published]'

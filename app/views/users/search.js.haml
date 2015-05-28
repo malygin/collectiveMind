@@ -1,0 +1,3 @@
+$("#search_users_#{@code}").fadeOut(500, function() {$("#search_users_#{@code}").html("#{escape_javascript(render partial: 'list_user', collection: @search_users)}").fadeIn();});
+$("#search_users_#{@code}").addClass('active in').show();
+$('#search_count').html('#{@search_users.size}');

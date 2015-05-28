@@ -1,0 +1,107 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    / Description, Keywords and Author
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "Ian", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Magnific Popup
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Owl carousel
+    %link{:href => "css/owl.carousel.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.white_theme
+    .outer
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li
+              %a{:href => "1st-stage.html"} Процедура
+            %li
+              %a{:href => "cabinet-stage1.html"} Кабинет
+            %li
+              %a#popover_news.has_circle.popover_news{"data-content" => "\n                    <div class='popover_cont'>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i1'>\n                        <img src='img/icon-news-1.png'>\n                        <span class='news-tooltip-bottom-text'>добавлено</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i2'>\n                        <img src='img/icon-news-2.png'>\n                        <span class='news-tooltip-bottom-text'>комментария</span>\n                    </a>\n                    <a href='#popup-news' class='news-tooltip-icon news-popup-href' id='tooltip-i3'>\n                        <img src='img/icon-news-3.png'>\n                        <span class='top-circle'>36</span>\n                        <span class='news-tooltip-bottom-text'>пометок</span>\n                    </a>\n                    <a href='#' class='news-tooltip-icon' id='tooltip-i4'>\n                        <img src='img/icon-news-4.png'>\n                        <span class='top-circle'>1</span>\n                        <span class='news-tooltip-bottom-text'>отредактировано</span>\n                    </a>\n                    </div>", "data-html" => "true", "data-placement" => "bottom", "data-toggle" => "popover", :href => "#"}
+                Новости
+                %span.top-circle 36
+          .navbar-right.text-right.user_block.font_grey
+            %a.book_icon{:href => "#"}
+            %span.auth-divider |
+            %a.font_lighter_grey.bold{:href => "#"}
+              %i.fa.fa-exclamation-triangle
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %span.auth-divider |
+            %span.badge.grey 500
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
+                %i.fa.fa-angle-down
+      / Top Bar ends
+      / Main Block starts
+      .cabinet
+        .container
+          .col-md-4.col-md-offset-4.text-center
+            .profile
+              .profile_icon.img-circle
+                .divider10
+                %img{:src => "img/user.png"}/
+                .divider10
+                %a#profile-tab{"aria-controls" => "profile", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#profile", :role => "tab"}
+                  %button.btn.btn-xs.btn-danger Изменить
+              .divider10
+              %h4 Rachel
+              #profile.tab-pane.fade{"aria-labelledby" => "profile-tab", :role => "tabpanel"}
+                %h5 Не состоит ни в одной группе
+                %form.form.form-horizontal
+                  .form-group
+                    %input.form-control{:placeholder => "Имя", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Фамилия", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Email", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Skype", :type => "text"}/
+                  .form-group
+                    %input.form-control{:placeholder => "Телефон", :type => "text"}/
+                  .form-group
+                    .checkbox
+                      %label
+                        %input{:type => "checkbox"}/
+                        Получать автоматические уведомления
+                  %button.btn.btn-danger Сохранить
+      / Main Block ends
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

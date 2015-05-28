@@ -1,12 +1,12 @@
 class Discontent::Voting < ActiveRecord::Base
-  attr_accessible :discontent_post, :user, :against
   belongs_to :user
-  belongs_to :discontent_post
+  belongs_to :discontent_post, class_name: 'Discontent::Post'
+
+  validates :user_id, :discontent_post_id, presence: true
 
   scope :by_positive, -> { where(against: 't') }
   scope :by_negative, -> { where(against: 'f') }
-  scope :not_admins, -> { joins(:user).where("users.type_user NOT IN (?) or users.type_user IS NULL", User::TYPES_USER[:admin]) }
+  scope :not_admins, -> { joins(:user).merge(User.not_admins) }
   scope :uniq_user, -> { select('distinct user_id') }
-
-  scope :by_posts_vote, ->(posts) { where("discontent_votings.discontent_post_id IN (#{posts})") unless posts.empty? }
+  scope :by_status, ->(status) { where(status: status) }
 end

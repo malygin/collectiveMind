@@ -1,0 +1,44 @@
+.stage-info-sort-block
+  .row
+    %br/
+    .col-md-7
+      %span.stage-label Обсуждение аспектов
+    .col-md-5
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        = link_to collect_info_posts_path(@project, sort_rule: 'sort_by_comments') do
+          .sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}"}
+            - new_comments = @project.other_main_aspects.after_last_visit_comments(last_time_visit_page('collect_info')).size
+            - if new_comments > 0
+              %span.badge-red
+                = new_comments
+        = link_to collect_info_posts_path(@project, sort_rule: 'sort_by_date') do
+          #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1.tooltip1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться аспекты."}
+            - new_posts = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
+            - if new_posts > 0
+              %span.badge-red
+                = new_posts
+        - if @project.stage == '1:0'
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
+            %span
+              = t('techniques.aspect_posts_simple')
+.divider10
+.divider_1_grey
+.divider10
+.stage-post-block
+  .row
+    .col-md-6
+      %span.stage-heading
+        Аспекты из базы знаний
+        ="(#{@proc_aspects.size})"
+    .col-md-6
+      %span.stage-heading
+        Аспекты, предложенные участниками
+        ="(#{@project.other_main_aspects.size})"
+  .row
+    .col-md-6.combined_border.right
+      -@proc_aspects.each do |aspect|
+        =render partial: 'post_short', object: aspect
+    .col-md-6.combined_border.left
+      -@other_aspects.each do |aspect|
+        =render partial: 'post_short', object: aspect

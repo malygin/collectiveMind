@@ -1,0 +1,18 @@
+- if @novation.valid?
+  $('.notice_messages').hide();
+  $('#create_novation_success').fadeIn(5000).fadeOut('slow');
+  -#$("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
+  -#$("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
+  $("#novation_post_title").val('');
+  $(".selected_concepts").html('');
+  $.each($('.checked_items .item'), function(index, value) {
+  $(value).find('.check_push_box').click();
+  });
+  - @novation.attributes_for_form.each do |type_attribute|
+    - type_attribute.second.each do |attribute, bool_attribute|
+      $('#novation_post_#{attribute}').val('');
+      - if bool_attribute
+        $('#novation_post_#{attribute}_bool_0').prop('checked', false);
+        $('#novation_post_#{attribute}_bool_1').prop('checked', false);
+- else
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @novation)}");

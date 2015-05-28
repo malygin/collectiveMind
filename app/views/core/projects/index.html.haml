@@ -1,95 +1,32 @@
 - if signed_in?
-  -cache @closed_projects do
-    -if @closed_projects.present?
-      %h4
-        %strong=t('show.project.closed')
-      - @closed_projects.each do |project|
-        .row
-          .col-md-9
-            %h3= project.name
-            %b="(#{status_project(project)})"
-          .col-md-3
-            =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_closed_project_#{project.id}" do
-              =t('link.go_to_project')
-        %br
-      %hr
-  -cache @opened_projects do
-    -if @opened_projects.present?
-
-      %h4
-        %strong=t('show.project.opened')
-      - @opened_projects.each do |project|
-        .row
-          .col-md-9
-            %h3= project.name
-            %b="(#{status_project(project)})"
-          .col-md-3
-            =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_opened_project_#{project.id}" do
-              =t('link.go_to_project')
-        %br
-      %hr
-  -if @demo_projects.present?
-    %h4
-      %strong=t('show.project.demo')
-    - @demo_projects.each do |project|
-      .row
-        .col-md-9
-          %h3= project.name
-          %b="(#{status_project(project)})"
-        .col-md-3
-          =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_demo_project_#{project.id}" do
-            =t('link.go_to_project')
-      %br
-    %hr
-  -if @club_projects.present?
-    %h4
-      %strong=t('show.project.club')
-    - @club_projects.each do |project|
-      .row
-        .col-md-9
-          %h3= project.name
-          %b="(#{status_project(project)})"
-        .col-md-3
-          =link_to "/project/#{project.id}", class:'btn btn-lg btn-danger', id: "go_to_club_project_#{project.id}" do
-            =t('link.go_to_project')
-      %br
-
+  .pull-right
+    = link_to t('show.project.new'), new_core_project_path, class: 'btn btn-lg btn-primary', id: 'new_project'
+  %h2
+    %strong
+      = t('menu.list_projects')
   %br
-%h3
-  %strong О проекте
-%p
-  %strong MASSDECISION
-  &nbsp;— это гуманитарная интернет-технология, применимая в массовых сообществах для выработки фундаментальных решений и подготовки их реализации. Технология создана доктором Олегом Савельзоном из Высшей школы технологии в Иерусалиме.
-%p Научный руководитель и автор технологии MASSDECISION — доктор Олег Савельзон из Высшей школы технологии в Иерусалиме. Занимается вопросами процедурной рациональности более четверти века. Автор нескольких десятков научных статей и ряда книг на тему процедурной рациональности в принятии решений. Консультирует государственные, политические, общественные и коммерческие организации в США, Израиле и России по вопросам принятия стратегических решений (избранные клиенты — американское агентство НАСА, израильская партия Исраэль-ба-Алия, российский Союз профессиональных фармацевтических организаций и многие другие).
-%p Руководитель и движущая сила проекта MASSDECISION — Ральф Вайнтруб, магистр физики, учредитель и президент международного холдинга «Инвар». Давно и успешно использует технологию MASSDECISION для выработки стратегических решений в бизнесе.
-.row.features
-  .col-sm-4
-    %section.feature
-      .row
-        .col-xs-4
-          %p
-            %span.icon.background-danger
-              %i.fa.eicon-flow-tree
-        .col-xs-8
-          %h4 Процедурная рациональность&nbsp;
-          %p Оригинальные авторские модели и техники, которые помогают предотвратить нерациональность процесса выработки решения
-  .col-sm-4
-    %section.feature
-      .row
-        .col-xs-4
-          %p
-            %span.icon.background-warning
-              %i.fa.fa-group
-        .col-xs-8
-          %h4 Деловая игра
-          %p Многие участники получают баллы и призы, а выигрывают все, так как побеждает проект, выбранный большинством в ходе демократичной дискуссии&nbsp;
-  .col-sm-4
-    %section.feature
-      .row
-        .col-xs-4
-          %p
-            %span.icon.background-success
-              %i.fa.eicon-paper-plane
-        .col-xs-8
-          %h4 Осуществление проекта
-          %p Решение вырабатывается его будущими исполнителями, что обеспечивает качественно новый уровень его понимания и повышает мотивацию к исполнению
+  %br
+  %h5
+    - @view_projects.each do |project|
+      .row(style="font-weight:500;")
+        .col-md-4
+          = project.name
+        .col-md-2
+        .col-md-1
+          .badge.badge-primary
+            = project.type_access_name
+        .col-md-2
+          - if current_user.can_edit_project?(project)
+            = link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
+              = t('link.edit')
+              %i.fa.fa-arrow-right
+        .col-md-2
+          - if project.status == 20
+            = link_to "/project/#{project.id}/collect_info/posts", class:'btn btn-sm btn-danger' do
+              = t('link.go_to_project')
+              %i.fa.fa-arrow-right
+          - else
+            = link_to core_project_path(project), class:'btn btn-sm btn-danger' do
+              = t('link.go_to_project')
+              %i.fa.fa-arrow-right
+      %br

@@ -1,0 +1,90 @@
+!!! 5
+%html(lang="en")
+  = render 'application/meta'
+  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
+    .outer
+      = render partial: 'application/header'
+      = render partial: 'application/cabinet_stage_panel'
+      .main-block
+        .container
+          .row
+            .col-md-2
+              .cab_left_panel.rounded_3.border_grey{class: "back_color_stage#{@project.main_stage}_superpale"}
+                .media
+                  .media-left
+                    .plus20.white{class: "font_color_stage#{@project.main_stage}"} +
+                  .media-body
+                    %small{class: "font_color_stage#{@project.main_stage}"} Пакет
+                - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
+                  .divider10
+                  = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
+                  role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}" do
+                    %button.btn.add-button.type4=t("techniques.#{technique.name}")
+
+              .divider10
+              %ul.list-unstyled.cab_menu_left
+                %li{class: "#{'active' if action_name == 'user_content'}"}
+                  = link_to self.send("user_content_#{@project.current_stage_type}_path", @project), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
+                    Контент
+
+              -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
+              = yield :cabinet_sidebar
+            .col-md-10#cabinet_form
+              - if action_name == 'new' or action_name == 'edit'
+                = yield
+              - else
+                .tab-content
+                  #cabinet_content.tab-pane.fade.in.active{:role => "tabpanel"}
+                    %div{:role => "tabpanel"}
+                      %ul.nav.nav-tabs.cab_horiz_tabs{:role => "tablist"}
+                        - Core::Project::STAGES.each do |num_stage, stage|
+                          -if num_stage <= 5
+                            - if name_controller == stage[:type_stage]
+                              %li.active{:role => "presentation"}
+                                = link_to send("user_content_#{stage[:type_stage]}_path", @project), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                  %span.marked=num_stage
+                                  СТАДИЯ
+                            - elsif @project.main_stage >= num_stage
+                              %li{class: "#{'active' if @project.main_stage > 5 and num_stage == 5}", :role => "presentation"}
+                                = link_to send("user_content_#{stage[:type_stage]}_path", @project), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                  %span.marked=num_stage
+                                  СТАДИЯ
+                            - else
+                              %li{:role => "presentation"}
+                                = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                  %span.marked=num_stage
+                                  СТАДИЯ
+                      .tab-content.cab_cont_block.rounded_3.border_grey.white
+                        .tab-pane.fade.active.in{id: "cab_cont_#{number_current_stage}", :role => "tabpanel"}
+                          .divider10
+                          .container
+                            .row
+                              .col-md-6.exp_col.left
+                                %button.btn.btn_reset.exp_button.pull-right
+                                  = image_tag 'grey_arrow.png'
+                                .divider15
+                                %span.stage-heading
+                                  ="#{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})"
+
+                                = yield
+
+                              .col-md-6.exp_col.right
+                                %button.btn.btn_reset.exp_button.pull-left
+                                  = image_tag 'grey_arrow_1.png'
+                                .divider15
+                                %span.stage-heading
+                                  Мои комментарии
+                                  ="(#{current_user.comment_for_project(name_controller, @project).count})"
+                                .chat-messages
+                                  = render partial:'shared/cabinet_comment', collection: @stage_comments
+
+                          .divider20
+
+
+        -# а этот yield только для ганта
+        = yield :special_for_gantt
+
+    #render_for_post
+    #render_knowbase_posts
+    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
+    = javascript_include_tag 'application'

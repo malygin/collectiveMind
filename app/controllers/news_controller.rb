@@ -1,6 +1,8 @@
 class NewsController < ApplicationController
-  before_action :journal_data
-  before_action :set_news, only: [:show, :edit, :update, :destroy]
+  # before_action :journal_data
+  before_action :set_news, only: [:show, :edit, :update, :destroy, :read]
+  before_action :set_project, only: [:read]
+  before_action :set_logger, only: [:read]
 
   # GET /news
   def index
@@ -51,7 +53,15 @@ class NewsController < ApplicationController
     redirect_to news_index_url, notice: 'News was successfully destroyed.'
   end
 
+  def read
+    head :ok
+  end
+
   private
+  def set_project
+    @project = Core::Project.find(params[:project])
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_news
     @news = News.find(params[:id])
@@ -60,5 +70,13 @@ class NewsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def news_params
     params.require(:news).permit(:title, :body)
+  end
+
+  # запись отдельного события для показа статуса новостей
+  def set_logger
+    if current_user and @project and request.method == 'GET'
+      current_user.loggers.create type_event: 'expert_news_read', project_id: @project.id,
+                                  body: request.original_fullpath.split('?')[0], first_id: @news.id
+    end
   end
 end

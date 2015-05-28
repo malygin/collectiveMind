@@ -1,43 +1,58 @@
-= form_for @project,  html: { class: 'new_or_edit' } do |f|
-  -if @project.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@core_project.errors.count, "error")} prohibited this core_project from being saved:"
-      %ul
-        - @project.errors.full_messages.each do |msg|
-          %li= msg
+.col-md-6
+  = form_for @project,  html: { class: 'new_or_edit' } do |f|
+    = render partial: 'shared/notice_messages', locals: {object: @project}
 
-  .form-group
-    = f.label t('form.project.name')
-    = f.text_field :name, class: 'form-control'
-  .form-group
-    = f.label t('form.project.code')
-    = f.text_field :code, class: 'form-control'
-  .form-group
-    = f.label t('form.project.short_desc')
-    = f.text_area :short_desc, class: 'form-control', rows: 5
-  .form-group
-    = f.label t('form.project.desc')
-    = f.text_area :desc, class: 'form-control', rows: 5
-  .form-group
-    = f.label t('form.project.type_access')
-    = f.select :type_access, options_for_select([[t('form.project.opened'), 0],[t('form.project.club'), 1], [t('form.project.closed'), 2], [t('form.project.demo'), 3], [t('form.project.test'), 4], [t('form.project.prepare'), 5]], @project.type_access),{}, {class: "form-control"}
+    .form-group
+      = f.label t('form.project.name')
+      = f.text_field :name, class: 'form-control'
+    .form-group
+      = f.label t('form.project.code')
+      = f.text_field :code, class: 'form-control'
+    .form-group
+      = f.label t('form.project.short_desc')
+      = f.text_area :short_desc, class: 'form-control', rows: 5
+    .form-group
+      = f.label t('form.project.desc')
+      = f.text_area :desc, class: 'form-control', rows: 5
+    .form-group
+      = f.label t('form.project.type_access')
+      = f.select :type_access, options_from_collection_for_select(Core::Project::TYPE_ACCESS, :first, :last, 0), {}, {class: 'form-control'}
+    .form-group
+      = f.label t('form.project.project_type')
+      = f.collection_select :project_type_id, Core::ProjectType.all, :id, :name, {include_blank: true}, {class: 'form-control'}
+    .form-group
+      = f.label 'Дата начала'
+      = f.text_field :date_start, class: 'form-control datepicker'
+    .form-group
+      = f.label 'Дата окончания'
+      = f.text_field :date_end, class: 'form-control datepicker'
+    .form-group
+      = f.label 'Количество этапов'
+      = f.text_field :count_stages, class: 'form-control'
 
-
-  Включить механизм советов для
-  .form-group
-    = f.check_box :advices_discontent
-    = f.label 'Несовершенств'
+    .form-group
+      = f.label t('form.project.color'), class: 'control-label', for: 'color'
+      .input-group
+        = f.text_field :color, class: 'form-control colorpicker', id: 'color', value: @project.color ? @project.color : '#eac85e'
+        %span(id="color-holder" class="input-group-addon" style="background-color: #{@project.color ? @project.color : '#eac85e'};")
+          &nbsp;&nbsp;&nbsp;
     %br
-    = f.check_box :advices_concept
-    = f.label 'Нововведений'
+    %actions.pull-right
+      = f.submit t('form.save'), class: 'btn btn-primary btn-lg', id:'send_project'
 
-  .form-group
-    = f.label t('form.project.color'), class: "control-label", for: "color"
-    .input-group
-      = f.text_field :color, class: 'form-control colorpicker', id: "color", value: @project.color ? @project.color : "#eac85e"
-      %span(id="color-holder" class="input-group-addon" style="background-color: #{@project.color ? @project.color : '#eac85e'};")
-        &nbsp;&nbsp;&nbsp;
-
-  %br
-  %actions.pull-right
-    = f.submit t('form.save'), class: 'btn btn-primary btn-lg', id:'send_project'
+- if @project.persisted?
+  .col-md-6
+    %h3
+      = t('show.user.select_users')
+    %br
+    - Core::ProjectUser::TYPE_USER.each do |code, text|
+      = text
+      %br
+      - @project.project_users.by_type(code).each do |project_user|
+        = render partial: 'users/list_user', locals: {list_user: project_user.user}
+      - unless current_user.moderator_in_project?(@project) && code == 1
+        %br
+        #search_users_project(data-project="#{@project.id}" data-code="#{code}")
+        .search_text
+          = text_field_tag 'search_users_text','', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
+        %div{id: "search_users_#{code}"}

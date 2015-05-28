@@ -1,0 +1,114 @@
+#popup-plan.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
+  - if boss?
+    .post-top-header
+      =link_to({controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+        %i.fa.fa-trophy.fa-lg
+      = link_to({controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_stat_post_#{@post.id}") do
+        %i.fa.fa-bookmark.fa-lg
+  .popup.popup_rounded.popup_color_theme_stage5
+    %div{"data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}"}
+      %div.important.theme_font_color
+        %i.fa.fa-bookmark.fa-2x
+    .modal_title
+      .row
+        .col-md-8
+          %h4.bold.font_dark_grey
+            = @post.name
+        .col-md-4
+          .row
+            .col-md-12
+              .text-right.post_likes
+                %span.bold
+                  %span(class="cc_post_#{@post.id}")
+                    = @post.comments.count
+                  %i.fa.fa-comment.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
+                      = @post.users_pro.count
+                    %i.fa.fa-thumbs-up.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
+                      = @post.users_against.count
+                    %i.fa.fa-thumbs-down.theme_font_color
+                -#- if @post.notes.present?
+                -#  %span
+                -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
+                %small
+                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+                -#- if boss? or role_expert? or stat_expert?
+                -#  = link_to({controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1}, remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{@post.id}") do
+                -#    %span.label_approve.label(class="#{label_approve_stat(@post)}")
+                -#      = t('show.important')
+                -#- elsif @post.approve_status
+                -#  %span.label.label-success=t('show.important')
+    .modal_body
+      .popup-post-info
+        .row.info-block
+          .col-md-9.popup-right-tabs
+            .nav-tabs-one
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#tab-1"}
+                    %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                      Описание
+                      проектного предложения
+                %li
+                  %a{"data-toggle" => "tab", :href => "#tab-2"}
+                    %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                      График реализации проекта
+          .col-md-3
+            .popup-post-block.pull-right
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
+              %span.font_black.text-center
+                = link_to @post.user, user_path(@project, @post.user)
+
+      .clearfix
+      .tab-content.modal_content
+        #tab-1.tab-pane.fade.in.active
+          .container.modal_content
+            .row
+              .col-md-6.exp_col.left
+                %button.btn.btn_reset.exp_button.pull-right
+                  = image_tag 'grey_arrow.png'
+                .divider25
+                - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
+                  %a.a_font_reset.collapser_type2.with_plus{class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}"}
+                    = t("activerecord.attributes.plan/post_novation.#{link}")
+                    %i.fa.font_color_stage5.collapse_plus{class: "#{link == :project ? 'fa-minus' : 'fa-plus'}"}
+
+                  .collapse{id: "cab4-#{link}", class: "#{'in' if link == :project}"}
+                    .divider5
+                    - attributes.each do |attribute, bool|
+                      - if bool == -1 or bool == true
+                        %h5.bold
+                          = t("activerecord.attributes.plan/post_novation.#{attribute}")
+                        %p.text
+                          =@post.post_novations.first.send(attribute)
+                        .divider15
+
+              .col-md-6.exp_col.white-gray.right
+                %button.btn.btn_reset.exp_button.pull-left
+                  = image_tag 'grey_arrow_1.png'
+                .divider10
+                .separator
+                  %hr
+                    .separator_label.text-left
+                      %h4 Обсуждение результатов опроса
+                    .separator_label.pull-right
+                      %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+                .chat-messages#comments.collapse.in
+                  = render partial:'shared/comment', collection: @comments
+                .divider15
+                = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+
+            .divider25
+        #tab-2.tab-pane.fade(style='background: white;')
+          .container.modal_content
+            .row
+              .col-md-12.col-sm-12
+                #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;")
+
+                = render 'shared/gantt_template'

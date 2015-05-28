@@ -1,0 +1,41 @@
+.stage-info-sort-block
+  .row
+    %br/
+    .col-md-7
+      %span.stage-heading
+        Пакеты идей
+        %span#count_novations
+          ="(#{@posts.count})"
+    .col-md-5
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        %span#sorter
+          %span.sort-1.sort_btn.sprite.sprite-1_4.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.novations.after_last_visit_comments(last_time_visit_page('novation')).size
+            - if new_comments > 0
+              %span.badge-red
+                = new_comments
+          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_4.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться нововведения."}
+            - new_posts = @project.novations.after_last_visit_posts(last_time_visit_page('novation')).size
+            - if new_posts > 0
+              %span.badge-red
+                = new_posts
+
+        - if @project.stage == '4:0'
+          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_posts' do
+            %button.btn.add-button
+              %span
+                = t('techniques.novation_posts_simple')
+
+
+.stage-post-block
+  .row#tab_concept_novations
+    -#= render partial: 'post_short', collection: @posts
+
+
+
+
+- if shown_intro('novation_intro') == ''
+  = render partial: 'popup_welcome'
+- if current_user.can_vote_for(:novation, @project)
+  = render partial: 'popup_vote'

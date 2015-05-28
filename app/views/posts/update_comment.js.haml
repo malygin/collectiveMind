@@ -1,4 +1,6 @@
-
-$('#comment_#{@comment.id}').replaceWith("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-$("#redactor_comment_#{@comment.id}").show();
-$('#comment_#{@comment.id}').effect("highlight", {color: '#f5cecd'}, 1000);
+-#$('#comment_#{@comment.id}').replaceWith("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+$('#comment_text_#{@comment.id}').html("#{escape_javascript(@comment.content)}");
+$('#cancel_comment_#{@comment.id} .edit-cancel').fadeOut();
+$("#redactor_comment_#{@comment.id}").fadeIn();
+$("#cancel_comment_#{@comment.id}").html('');
+$('#comment#{@comment.id}').effect("highlight", {color: '#f5cecd'}, 1000);

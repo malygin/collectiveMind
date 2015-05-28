@@ -1,0 +1,21 @@
+#popup-explanation-1.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{class: "#{shown_intro('collect_info_intro')}"}
+  .popup.popup_rounded
+    .modal_badge.back_color_stage1.rounded_2.font_white 1 СТАДИЯ
+    %h2
+      = image_tag 'good-shot1.png', class: "expl-header-img-1"
+      Цель стадии
+    %p.expl-sub-heading
+      Подробное изучение всеми участниками информации, необходимой для дальнейшей работы в процедуре MASSDECISION™
+    %p.expl-notice.rounded-2
+      Вторая стадия процедуры не начнется, пока средний уровень готовности участников не достигнет 80%!
+    %h2
+      = image_tag 'flag1.png', class: "expl-header-img-2"
+      Что делать?
+    %ol
+      %li Ознакомьтесь со всеми аспектами базы знаний.
+      %li Примите участие в их обсуждении.
+      %li Если база знаний кажется вам неполной, предложите собственные аспекты.
+      %li Пройдите короткое тестирование на понимание базы знаний.
+      %li При помощи голосования распределите аспекты по степени важности.
+    = link_to check_field_collect_info_posts_path(@project, check_field: "collect_info_intro", status: true), method: :put, remote: true, id: "collect_info_intro" do
+      %button.btn.red.close_magnific Начать работу

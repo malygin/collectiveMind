@@ -1,0 +1,112 @@
+#popup-innov.popup-window.detailed_popup.popup-w1030.mfp-hide
+  - if boss?
+    .post-top-header
+      =link_to({controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+        %i.fa.fa-trophy.fa-lg
+      = link_to({controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_stat_post_#{@post.id}") do
+        %i.fa.fa-bookmark.fa-lg
+  .popup.popup_rounded.popup_color_theme_stage3
+    %div{"data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}"}
+      %div.important.theme_font_color
+        %i.fa.fa-bookmark.fa-2x
+    .modal_title
+      .row
+        .col-md-8
+          %h4.bold.font_dark_grey
+            = @post.title
+        .col-md-4
+          .row
+            .col-md-12
+              .text-right.post_likes
+                %span.bold
+                  %span(class="cc_post_#{@post.id}")
+                    = @post.comments.count
+                  %i.fa.fa-comment.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
+                      = @post.users_pro.count
+                    %i.fa.fa-thumbs-up.theme_font_color
+                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}") do
+                  %span.bold
+                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
+                      = @post.users_against.count
+                    %i.fa.fa-thumbs-down.theme_font_color
+                -#- if @post.notes.present?
+                -#  %span
+                -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
+                %small
+                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+
+    .modal_body
+      .poster-line.line-grey
+        %span.tags_badge несовершенства
+        .row
+          .col-md-6
+            .innov-poster-cont
+              -#=image_tag 'no-ava.png', class: 'img-circle'
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              %span.poster-name
+                = link_to @post.user, user_path(@project, @post.user)
+          .col-md-6.col_padding_right_0
+            .innov-tags
+              - @post.concept_disposts.each_with_index do |post, index|
+                .innov-tags-tag.popup_tooltip.color_me{class: "tooltip3_tag_#{index + 1}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
+                  = trim_content(post.content, 100)
+
+      .container.modal_content
+        .row
+          .col-md-6.exp_col.left
+            %button.btn.btn_reset.exp_button.pull-right
+              = image_tag 'grey_arrow.png'
+            .divider25
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  Суть идеи
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.goal
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  Что будет иначе?
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.content
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  Кто будет делать иначе?
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.actors
+            .stripe-qa
+              .lined-heading
+                %span.bold-stripe
+                  Чьи интересы будут затронуты?
+              %p
+                %strong
+                  = t('show.desc')
+                = @post.impact_env
+
+          .col-md-6.exp_col.white-gray.right
+            %button.btn.btn_reset.exp_button.pull-left
+              = image_tag 'grey_arrow_1.png'
+            .divider10
+            .separator
+              %hr
+                .separator_label.text-left
+                  %h4 Обсуждение результатов опроса
+                .separator_label.pull-right
+                  %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+            .chat-messages#comments.collapse.in
+              = render partial:'shared/comment', collection: @comments
+            .divider15
+            = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+
+      .divider25

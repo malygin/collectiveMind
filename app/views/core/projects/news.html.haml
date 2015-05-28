@@ -55,23 +55,12 @@
           %input.iCheck{:name => "date_all",:id => "date_all", :type => "checkbox", :checked => (params[:date_all] ? params[:date_all] : nil) ? true : false} Все
 
         %br
-        -#%h4 Тип контента
-        -#.form-group
-        -#  %input{:name => "type_content", :type => "radio", :value => "by_comment", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Комментарии
-        -#  %br
-        -#  %input{:name => "type_content", :type => "radio", :value => "by_content", :checked => params[:by_content] == "by_content" ? 'checked' : nil} Контент
-        -#  %br
-        -#  %input{:name => "type_content", :type => "radio", :value => "by_note", :checked => params[:by_note] == "by_note" ? 'checked' : nil} Замечания
-        -#  %br
-        -#  %input{:name => "type_content", :type => "radio", :value => "content_all", :checked => params[:content_all] == "content_all" ? 'checked' : nil} Все
 
         .control-group
           %label.control-label Тип контента
           .controls.form-group
             %label.radio-filter
               %input.iCheck{:name => "type_content", :type => "radio", :value => "by_comment", :checked => params[:type_content] == "by_comment" ? 'checked' : nil} Комментарии
-            %label.radio-filter
-              %input.iCheck{:name => "type_content", :type => "radio", :value => "by_advice", :checked => params[:type_content] == "by_advice" ? 'checked' : nil} Советы
             %label.radio-filter
               %input.iCheck{:name => "type_content", :id => "by_content", :type => "radio", :value => "by_content", :checked => params[:type_content] == "by_content" ? 'checked' : nil} Контент
             %label.radio-filter
@@ -101,10 +90,6 @@
             %label.radio-filter
               %input.iCheck{:name => "type_status", :type => "radio", :value => "content_all", :checked => params[:type_status] == "content_all" ? 'checked' : nil} Все
 
-        -#%h4 Пользователи
-        -#-if @users_for_news
-        -#  = select_tag 'select_users_for_news', options_from_collection_for_select(@users_for_news, "id", "to_s"),
-        -#  prompt: 'Выберите пользователя', class: "form-control"
 
         %h4 Пользователи
         .control-group
@@ -115,56 +100,6 @@
               class: "chzn-select select-block-level", id: "multiple",
               multiple: "multiple", tabindex: "-1", "data-placeholder" => "Выберите пользователей"
 
-
-        -#%input{:name => "by_user", :type => "checkbox"} Пользователь
-        -#%h4 Статус
-        -#%input{:name => "check_like", :type => "checkbox"} Пролайкано
-        -#%br
-        -#%input{:name => "check_unlike", :type => "checkbox"} Не пролайкано
-        -#%br
-        -#%input{:name => "check_discuss", :type => "checkbox"} Требует обсуждения
-        -#%br
-        -#%input{:name => "check_improve", :type => "checkbox"} Важное
-        -#%br
-        -#%input{:name => "check_problem", :type => "checkbox"} Проблема
-        -#%br
-        -#%input{:name => "check_idea", :type => "checkbox"} Идея
-        -#%br
-        -#%input{:name => "check_improve", :type => "checkbox"} Доработано
-        -#%br
-        -#%input{:name => "check_has_note", :type => "checkbox"} Содержит замечания
-        -#%br
-        -#%input{:name => "check_not_has_note", :type => "checkbox"} Не содержит замечания
-        -#%br
-        -#%input{:name => "check_status_all", :type => "checkbox"} Все
-        -#%h4 Тип контента
-        -#%input{:name => "check_comment", :type => "checkbox"} Комментарии
-        -#%br
-        -#%input{:name => "check_discontent", :type => "checkbox"} Несовершенства
-        -#%br
-        -#%input{:name => "check_concept", :type => "checkbox"} Нововведения
-        -#%br
-        -#%input{:name => "check_plan", :type => "checkbox"} Проекты
-        -#%br
-        -#%input{:name => "check_estimate", :type => "checkbox"} Оценки
-        -#%br
-        -#%input{:name => "check_essay", :type => "checkbox"} Рефлексии
-        -#%br
-        -#%input{:name => "check_award", :type => "checkbox"} Достижения
-        -#%br
-        -#%input{:name => "check_score", :type => "checkbox"} Баллы
-        -#%br
-        -#%input{:name => "check_note", :type => "checkbox"} Замечания
-        -#%br
-        -#%input{:name => "check_type_content_all", :type => "checkbox"} Все
-        -#%h4 Тип события
-        -#%input{:name => "check_add", :type => "checkbox"} Добавление
-        -#%br
-        -#%input{:name => "check_edit", :type => "checkbox"} Редактирование
-        -#-#%br
-        -#-#%input{:name => "check_remove", :type => "checkbox"} Удаление
-        -#%br
-        -#%input{:name => "check_type_event_all", :type => "checkbox"} Все
         %br
         %br
         %actions

@@ -1,433 +1,131 @@
 class Plan::PostsController < PostsController
-
+  include MarkupHelper
+  before_action :set_plan, only: [:edit, :update, :destroy]
+  before_action :set_novations, only: [:new, :edit]
   #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
-
-  def current_model
-    Plan::Post
-  end
-
-  def comment_model
-    Plan::Comment
-  end
-
-  def note_model
-    Plan::Note
-  end
 
   def voting_model
     Plan::Post
   end
 
   def prepare_data
-    @project = Core::Project.find(params[:project])
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
+    @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
     @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
   end
 
   def index
-    @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC').paginate(page: params[:page])
-    post = Plan::Post.where(project_id: @project, status: 0).first
-    @est_stat = post.estimate_status if post
+    @posts = @project.plan_post.where(status: 1).created_order
+    # @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC')
+    # post = Plan::Post.where(project_id: @project, status: 0).first
+    # @est_stat = post.estimate_status if post
+    # @comment = comment_model.new
   end
 
   def new
     @post = current_model.new
+    @post.post_novations.build
   end
 
   def edit
-    @post = Plan::Post.find(params[:id])
+    if @post.post_novations.empty?
+      @post.post_novations.build
+    end
+    render action: :new
   end
 
   def create
-    @project = Core::Project.find(params[:project])
-    @plan_post = Plan::Post.new(params[:plan_post])
-    @plan_post.number_views = 0
-    @plan_post.project = @project
-    @plan_post.user = current_user
-    @plan_post.status = 0
+    @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id)
+    @post.post_novations.new plan_post_novation_params
+    if @post.valid? and  @post.save
+      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
+    end
+
+    @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
+
     respond_to do |format|
-      if @plan_post.save!
-        current_user.journals.build(type_event: 'plan_post_save', body: trim_content(@plan_post.name), first_id: @plan_post.id, project: @project).save!
-        format.html { redirect_to edit_plan_post_path(project: @project, id: @plan_post) }
-        format.js
-      else
-        format.html { render action: 'new' }
-        format.js
-      end
+      format.js
     end
   end
 
   def update
-    @project = Core::Project.find(params[:project])
-    @plan_post = Plan::Post.find(params[:id])
-    @plan_post.update_attributes(params[:plan_post])
-    respond_to do |format|
-      if @plan_post.save
-        current_user.journals.build(:type_event => 'plan_post_update', :body => trim_content(@plan_post.name), :first_id => @plan_post.id, :project => @project).save!
-        format.html { redirect_to plan_post_path(project: @project, id: @plan_post) }
-        format.js
-      end
+    if @post.update_attributes plan_post_params
+      current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
     end
-  end
-
-  def add_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
-
-    @aspects = Discontent::Aspect.where(project_id: @project, status: 0)
-    @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).sort_by { |post| @disposts_all == 0 ? 0 : -((post.final_votings.by_positive.size/@disposts_all.to_f)*100).round }
-    @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
-
-    # @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-    # @concepts_all = @project.discontents.by_status(4).joins(:concept_votings).select('distinct concept_votings.user_id').size
-    # @disposts = Discontent::Post.discontents_for_plan(@project)
-    @new_ideas = Plan::PostAspect.joins("INNER JOIN plan_posts ON plan_posts.id = plan_post_aspects.plan_post_id").where("plan_posts.project_id = ? and plan_posts.id = ?", @project.id, @post.id).where(plan_post_aspects: {concept_post_aspect_id: nil, discontent_aspect_id: nil})
-  end
-
-  def transfer_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_aspect.update_attributes(post_stage_id: @post_stage.id)
-  end
-
-  # @todo methods for stage
-  def new_stage
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new
-  end
-
-  def edit_stage
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-  end
-
-  def create_stage
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.new(params[:plan_post_stage])
-    @post_stage.post = @post
-    @post_stage.status = 0
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'new_stage' }
-      end
+    if params[:plan_post][:published]
+      @post.update status: current_model::STATUSES[:published]
     end
-  end
-
-  def update_stage
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_attributes(params[:plan_post_stage])
-    respond_to do |format|
-      if @post_stage.save!
-        format.js
-      else
-        format.js { render action: 'edit_stage' }
-      end
-    end
-  end
-
-  def destroy_stage
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_stage.update_column(:status, 1) if current_user?(@post.user) or boss?
-  end
-
-  # @todo methods for action
-  def new_action
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.new
-    @view_concept = params[:view_concept]
-  end
-
-  def edit_action
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_action = Plan::PostAction.find(params[:act_id])
-  end
-
-  def create_action
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @view_concept = params[:view_concept]
-    @post_action = Plan::PostAction.new(params[:plan_post_action])
-    @post_action.plan_post_aspect = @post_aspect
-    @post_action.status = 0
-    @post_action.save!
-
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
-      end
-    end
-  end
-
-  def update_action
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) unless params[:stage_id].nil?
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.update_attributes(params[:plan_post_action])
-    @post_action.plan_post_resources.by_type('action_r').destroy_all
-    unless params[:resor_action].nil?
-      params[:resor_action].each_with_index do |r, i|
-        @post_action.plan_post_resources.by_type('action_r').build(:name => r, :desc => params[:res_action][i], :project_id => @project.id, :style => 3).save if r!=''
-      end
+    if @post.post_novations.any?
+      @post.post_novations.first.update_attributes plan_post_novation_params
     end
     respond_to do |format|
-      if @post_action.save!
-        format.js
-      else
-        format.js { render action: 'edit_action' }
-      end
+      format.js
     end
   end
 
-  def destroy_action
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id])
-    @post_aspect = Plan::PostAspect.find(params[:con_id])
-    @post_action = Plan::PostAction.find(params[:act_id])
-    @post_action.destroy if current_user?(@post.user) or boss?
+  def destroy
+    @post.destroy if current_user?(@post.user)
+    redirect_back_or user_content_plan_posts_path(@project)
   end
 
-  def add_form_for_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
-    @save_form = params[:save_form]
-    if @save_form
-      if params[:concept_id]
-        if params[:new_idea]
-          @concept = Plan::PostAspect.find(params[:concept_id])
-          @cond = Plan::PostAspect.new
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.title= @concept.title
-          @cond.name= @concept.name
-          @cond.content = @concept.content
-          @cond.positive = @concept.positive
-          @cond.negative = @concept.negative
-          @cond.control = @concept.control
-          @cond.obstacles = @concept.obstacles
-          @cond.reality = @concept.reality
-          @cond.problems = @concept.problems
-          @cond.save!
+  def vote
+     @post_vote = voting_model.find(params[:id])
+     @post_vote.final_votings.where(user_id: current_user, type_vote: params[:type_vote].to_i).destroy_all
+     @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
 
-          @cond.duplicate_plan_post_resources(@project, @concept)
-        else
-          @concept = Concept::PostAspect.find(params[:concept_id])
-          @cond = Plan::PostAspect.new
-          @cond.plan_post = @post
-          @cond.plan_post_stage = @post_stage
-          @cond.title= @concept.title
-          @cond.name= @concept.name
-          @cond.content = @concept.content
-          @cond.positive = @concept.positive
-          @cond.negative = @concept.negative
-          @cond.obstacles = @concept.obstacles
-          @cond.reality = @concept.reality
-          @cond.problems = @concept.problems
-          @cond.discontent_aspect_id = @concept.discontent_aspect_id
-          @cond.concept_post_aspect = @concept
-          @cond.save!
-
-          @cond.duplicate_concept_post_resources(@project, @concept.concept_post)
-
-          @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-          @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
-        end
-      else
-        @cond = Plan::PostAspect.create(title: 'Новое нововведение')
-        @cond.plan_post = @post
-        @cond.plan_post_stage = @post_stage
-        @cond.save!
-      end
-      @post_stages = @post.post_stages
-    else
-      if params[:new_concept]
-        @post_concept = Plan::PostAspect.new
-      else
-        @post_concept = Concept::PostAspect.find(params[:concept_id])
-      end
-    end
   end
 
-  def edit_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @post_stage = @post_concept.plan_post_stage
-  end
-
-  def update_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:concept_id])
-    @post_concept.update_attributes(params[:plan_post_aspect])
-
-    create_plan_resources_on_type(@project, @post_concept)
-
-    respond_to do |format|
-      if @post_concept.save
-        format.js
-      else
-        format.js { render action: 'edit_concept' }
-      end
-    end
-  end
-
-  def destroy_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @post_actions = @post_concept.plan_post_actions.pluck(:id)
-    if current_user?(@post.user) or boss?
-      @post_concept.destroy
-      @post_concept.plan_post_actions.destroy_all
-    end
-    if params[:fast_remove]
-      @disposts_all = @project.discontents.by_status([2, 4]).joins(:final_votings).where(discontent_votings: {against: 't'}).size
-      @concepts = Concept::Post.where(project_id: @project, status: 0).sort_by { |post| [-post.concept_disposts.where(concept_post_discontents: { complite: [2, 3] }).size, -post.sum_main_disposts(@post, @disposts_all), -post.concept_disposts.where(concept_post_discontents: { complite: [1, nil] }).size, -post.sum_other_disposts(@post, @disposts_all)] }
-    end
-  end
-
-  def get_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_concept = Plan::PostAspect.find(params[:con_id])
-    @view_post_concept = params[:view_post_concept]
-  end
-
-  def update_get_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @post_concept_save = Plan::PostAspect.find(params[:con_id])
-    @post_concept_save.update_attributes(params[:plan_post_aspect])
-
-    create_plan_resources_on_type(@project, @post_concept_save)
-
-    respond_to do |format|
-      if @post_concept_save.save
-        format.js
-      end
-    end
-  end
-
-  def render_table
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @render_type = params[:render_type]
-    @post_stages = @post.post_stages
-  end
-
-  def render_concept_side
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-  end
-
-  def view_concept
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    if params[:new_idea] or params[:right_list]
-      @concept_post = Plan::PostAspect.find(params[:con_id])
-    elsif params[:what_view]
-      @dispost = Discontent::Post.find(params[:post_id]) if params[:post_id]
-      @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
-    elsif params[:what_view_concept]
-      @concept = Concept::Post.find(params[:con_id]) if params[:con_id]
-      @post_stage = Plan::PostStage.find(params[:stage_id]) if params[:stage_id]
-    else
-      @dispost = Discontent::Post.find(params[:post_id])
-      @concept_post = Concept::PostAspect.find(params[:con_id])
-    end
-  end
-
-  def view_concept_table
-    @project = Core::Project.find(params[:project])
-    @post = Plan::Post.find(params[:id])
-    @concept_post = Plan::PostAspect.find(params[:con_id])
-  end
-
-  def change_estimate_status
-    @project = Core::Project.find(params[:project])
-    @est_stat = params[:est_stat]
-    posts = Plan::Post.where(project_id: @project, status: 0)
-    if posts.present? and @est_stat.present?
-      posts.each do |est|
-        est.update_attributes(estimate_status: @est_stat)
-      end
-    end
-  end
-
-  # @todo methods for note
-  def new_note
-    super()
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-  end
-
-  def create_note
-    @project = Core::Project.find(params[:project])
-    @post = current_model.find(params[:id])
-    @type = params[:plan_note][:type_field]
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
-    @post_note.user = current_user
-
-    current_user.journals.build(:type_event => 'my_plan_note', :user_informed => @post.user, :project => @project, :body => trim_content(@post_note.content), :body2 => trim_content(@post.name), :first_id => @post.id, :second_id => @post_aspect_note.id, :personal => true, :viewed => false).save!
-
-    respond_to do |format|
-      if @post_note.save
-        format.js
-      else
-        format.js { render action: "new_note" }
-      end
-    end
-  end
-
-  def destroy_note
-    @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-    super()
-  end
+  # # @todo methods for note
+  # def new_note
+  #   super()
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  # end
+  #
+  # def create_note
+  #   @post = current_model.find(params[:id])
+  #   @type = params[:plan_note][:type_field]
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  #   @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
+  #   @post_note.user = current_user
+  #
+  #   current_user.journals.build(type_event: 'my_plan_note', user_informed: @post.user, project: @project, body: trim_content(@post_note.content), body2: trim_content(@post.name), first_id: @post.id, second_id: @post_aspect_note.id, personal: true, viewed: false).save!
+  #
+  #   respond_to do |format|
+  #     if @post_note.save
+  #       format.js
+  #     else
+  #       format.js { render action: "new_note" }
+  #     end
+  #   end
+  # end
+  #
+  # def destroy_note
+  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
+  #   super()
+  # end
 
   private
-    def create_plan_resources_on_type(project, post)
-      post.plan_post_resources.by_type(['positive_r', 'positive_s', 'negative_r', 'negative_s', 'control_r', 'control_s']).destroy_all
-      unless params[:resor].nil?
-        params[:resor].each do |r|
-          if r[:name]!=''
-            resource = post.plan_post_resources.build(:name => r[:name], :desc => r[:desc], :type_res => r[:type_res], :project_id => project.id, :style => 0)
-            unless r[:means].nil?
-              r[:means].each do |m|
-                if m[:name]!=''
-                  mean = post.plan_post_resources.build(:name => m[:name], :desc => m[:desc], :type_res => m[:type_res], :project_id => project.id, :style => 1)
-                  mean.plan_post_resource = resource
-                end
-              end
-            end
-          end
-        end
-      end
-    end
+  def set_novations
+    @novations = @project.novations
+  end
 
+  def set_plan
+    @post = Plan::Post.find(params[:id])
+  end
+
+  def plan_post_params
+    params.require(:plan_post).permit(:goal, :name, :content, :tasks_gant)
+  end
+
+  def plan_post_novation_params
+    params.require(:plan_post_novation).permit(:id, :title, :plan_post_id, :novation_post_id, :project_change, :project_goal,
+                                               :project_members, :project_results, :project_time, :members_new, :members_who,
+                                               :members_education, :members_motivation, :members_execute, :resource_commands,
+                                               :resource_support, :resource_internal, :resource_external, :resource_financial,
+                                               :resource_competition, :confidence_commands, :confidence_remove_discontent,
+                                               :confidence_negative_results, :members_new_bool, :members_education_bool,
+                                               :members_motivation_bool, :resource_commands_bool, :resource_support_bool,
+                                               :resource_competition_bool, :confidence_commands_bool,
+                                               :confidence_remove_discontent_bool,
+                                               :confidence_negative_results_bool)
+  end
 end

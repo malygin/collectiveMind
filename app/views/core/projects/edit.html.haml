@@ -1,7 +1,58 @@
-%h1=t('form.project.edit')
+%h1
+  = t('form.project.edit')
 
-= render 'form'
+.nav-tabs-one
+  %ul.nav.nav-tabs
+    %li.active
+      %a{'data-toggle' => 'tab', href: '#edit_project'} Редактирование процедуры
+    - if @project.persisted?
+      %li
+        %a{'data-toggle' => 'tab', href: '#edit_aspects'} Аспекты
+      %li
+        %a{'data-toggle' => 'tab', href: '#edit_stages'} Этапы
+      %li
+        %a{'data-toggle' => 'tab', href: '#edit_techniques'} Техники
+  .tab-content
+    #edit_project.tab-pane.fade.active.in
+      = render 'form'
+    - if @project.persisted?
+      #edit_aspects.tab-pane.fade
+        %ul.panel-collapse{id: "aspects_for_#{@project.id}"}
+          = link_to 'Добавить аспект', new_aspect_post_path(@project), remote: true, id: "add_aspect_for_#{@project.id}"
+          %br
+          - @project.aspects.main_aspects.each do |asp1|
+            = render partial: 'aspect', locals: {aspect: asp1}
 
-= link_to t('link.move'), "/project/#{@core_project.id}"
-\|
-= link_to t('link.back'), core_projects_path
+            - if asp1.core_aspects.present?
+              %ul.panel-collapse{id: "aspects_for_aspect_#{asp1.id}"}
+                - asp1.core_aspects.each do |asp2|
+                  = render partial: 'aspect', locals: {aspect: asp2}
+      #edit_stages.tab-pane.fade
+        = render partial: 'edit_stages'
+      #edit_techniques.tab-pane.fade
+        .nav-tabs-three
+          .nav-tabs-three-sidebar
+            %ul.nav
+              - (1..5).each do |stage_num|
+                %li{class:('active' if @project.current_stage?(stage_num))}
+                  %a{'data-toggle' => 'tab', href: "#technique_stage-#{stage_num}"}
+                    = "Этап #{stage_num}"
+          .nav-tabs-three-content
+            .tab-content
+              .text-success#technique_success_update(style='display:none;')
+                = t 'technique_project.success_update'
+              - (1..5).each do |stage_num|
+                .tab-pane.fade{id: "technique_stage-#{stage_num}", class:('active in' if @project.current_stage?(stage_num))}
+                  %h4
+                    = Core::Project::LIST_STAGES[stage_num][:name]
+                  - unless Technique::List.all_in_array[Core::Project::LIST_STAGES[stage_num][:type_stage].to_s].nil?
+                    = form_tag technique_list_projects_path, remote: true do
+                      = hidden_field_tag 'technique_list_project[project_id]', @project.id
+                      - Technique::List.all_in_array[Core::Project::LIST_STAGES[stage_num][:type_stage].to_s].each do |tech|
+                        .form-group
+                          = check_box_tag 'technique_list_project[technique_list_id][]', tech.id
+                          = tech.name
+                      = submit_tag 'Сохранить'
+          .clearfix
+
+#aspect_modal

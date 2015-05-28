@@ -5,7 +5,7 @@ def sign_in user
   visit new_user_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: 'pascal2003'
-  click_button 'Signin'
+  click_button 'sign_in'
 end
 
 def sign_out
@@ -112,7 +112,7 @@ end
 
 def validate_not_have_moderator_links_for_user(project)
   expect(page).not_to have_link('go_to_club_rating', text: 'Клубный рейтинг', href: users_rc_users_path(project))
-  expect(page).not_to have_link('new_aspect', text: '+ Добавить новую тему', href: new_discontent_aspect_path(project))
+  expect(page).not_to have_link('new_aspect', text: '+ Добавить новую тему', href: new_core_aspect_path(project))
 end
 
 def validate_have_prime_admin_links(project)
@@ -122,7 +122,7 @@ def validate_have_prime_admin_links(project)
 end
 
 def validate_have_moderator_links(project)
-  expect(page).to have_link('new_aspect', text: I18n.t('link.new_aspect'), href: new_discontent_aspect_path(project))
+  expect(page).to have_link('new_aspect', text: I18n.t('link.new_aspect'), href: new_core_aspect_path(project))
 end
 
 def validate_default_links_and_sidebar(project, user)

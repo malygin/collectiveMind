@@ -26,26 +26,7 @@
         = link_to t('menu.sign_in'), '/users/sign_in', class: 'btn btn-sm btn-transparent', id: 'sign_in'
       %li
         = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
-  %ul.navbar-buttons.pull-right
-    - if signed_in? and boss?
-      %li
-        =link_to general_rating_path, class:'btn btn-sm btn-primary', id: 'general_rating'  do
-          =t('menu.general_rating')
-          %i.fa.fa-arrow-right
-      %li
-        =link_to general_news_path, class:'btn btn-sm btn-success', id: 'general_news'  do
-          =t('menu.general_news')
-          %i.fa.fa-arrow-right
 
-      - if prime_admin?
-        %li
-          =link_to general_analytics_path, class:'btn btn-sm btn-danger', id: 'general_analytics' do
-            =t('menu.analytics')
-            %i.fa.fa-arrow-right
-        %li
-          =link_to list_projects_path, class:'btn btn-sm btn-info', id: 'list_projects'  do
-            =t('menu.list_projects')
-            %i.fa.fa-arrow-right
 
 
 

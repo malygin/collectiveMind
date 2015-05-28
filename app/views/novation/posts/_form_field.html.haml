@@ -1,0 +1,8 @@
+%a.a_font_reset.collapser_type2.collapsed{'aria-expanded' => 'false', 'data-toggle' => 'collapse', :href => '#cab4-1'} Деятельность (5)
+#cab4-1.collapse
+  .divider5
+  - @novation.attributes_for_form.each do |attribute|
+    %h6.bold
+      = t("activerecord.attributes.novation/post.#{attribute}")
+    = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
+    .divider15

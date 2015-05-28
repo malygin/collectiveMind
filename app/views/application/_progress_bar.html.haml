@@ -1,0 +1,21 @@
+.col-xs-6.col-md-6.col_padding_right_3
+  .row
+    .col-xs-8.col-md-8.col_padding_3
+      .knob_label.text-right.font_grey
+        %small Ваш прогресс на стадии
+    .col-xs-4.col-md-4.col_padding_3
+      .progress-knob
+        .knob-content
+          .knob-item
+            %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "#{@project.status > 0 ? @questions_progress || 0 : 0}", "data-fgcolor" => "#{color_progress_bar}", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+
+.col-xs-6.col-md-6.col_padding_left_3
+  .row
+    .col-xs-8.col-md-8.col_padding_3
+      .knob_label.text-right.font_grey
+        %small Прогресс других участников
+    .col-xs-4.col-md-4.col_padding_3
+      .progress-knob
+        .knob-content
+          .knob-item
+            %input#knob-2.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "#{@project.status > 0 ? @questions_progress_all || 0 : 0}", "data-fgcolor" => "#{color_progress_bar}", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/

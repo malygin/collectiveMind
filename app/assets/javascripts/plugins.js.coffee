@@ -1,3 +1,13 @@
+@first_stage_slider = ->
+  slider = $("#first-stage-slider")
+  project_id = slider.data("project")
+  if project_id
+    $.ajax
+      url: "/project/#{project_id}/collect_info/posts/render_slider"
+      type: "get"
+      dataType: "script"
+
+
 @selectize = ->
   $select = $("#selectize_for_discontents").selectize
     labelField: "show_content"
@@ -38,10 +48,86 @@
   this.icheck_disable = ->
     $('#by_create,#by_update,#event_content_all').iCheck('uncheck').iCheck('disable')
 
-  $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
-  $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
-  $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
+  this.send_filter = ->
+    form = $(this).closest('form')
+    sendButton = form.find('.send_filter')
+    sendButton.click()
 
+  this.load_aspect = (e) ->
+    e.preventDefault()
+    project = $(this).data('project')
+    aspect = $(this).data('aspect')
+    $('#tab_aspect_posts div.discontent-block').fadeOut();
+    $("#tab_aspect_posts div[class~='aspect_#{aspect}']").fadeIn();
+
+#    if project and aspect
+#      $.ajax
+#        url: "/project/#{project}/discontent/posts"
+#        type: "get"
+#        dataType: "script"
+#        data:
+#          asp: aspect
+
+  this.filter_aspects = (e) ->
+    e.preventDefault()
+    project = $(this).data('project')
+    aspect = $(this).data('aspect')
+    color_aspect = $(this).find('.fa-stop').css('color')
+    text_aspect = $(this).text()
+    $('.select-aspect').html('<i class="fa fa-stop" style="color:' + color_aspect + '"></i>' + text_aspect + '<span class="caret"></span>');
+    $('#tab_aspect_posts div.discontent-block').fadeOut();
+    $("#tab_aspect_posts div[class~='aspect_#{aspect}']").fadeIn();
+
+  this.filter_discontents = (e) ->
+    e.preventDefault()
+    project = $(this).data('project')
+    discontent = $(this).data('discontent')
+    $('#tab_concept_posts div.concept-block').fadeOut();
+    $("#tab_concept_posts div[class~='discontent_#{discontent}']").fadeIn();
+
+  this.show_all_aspects = (e) ->
+    e.preventDefault()
+    $('.select-aspect').html('Выберите аспект <span class="caret"></span>');
+#    $('#tab_aspect_posts div.discontent-block').fadeOut();
+    $("#tab_aspect_posts div[class^='aspect_']").fadeIn();
+
+#  $('form.filter_news').on('ifChecked', 'input.iCheck#date_all', this.icheck_date)
+#  $('form.filter_news').on('ifChecked', 'input.iCheck#by_content', this.icheck_enable)
+#  $('form.filter_news').on('ifUnchecked', 'input.iCheck#by_content', this.icheck_disable)
+
+#  $('form.filter_discontents').on('change', 'input:radio', this.send_filter)
+#  $('.tabs-discontents').on('click', "li button[id^='link_aspect_']", this.load_aspect)
+#  $('.index-of-aspects').on('click', "li[id^='button_aspect_']", this.filter_aspects)
+#  $('.index-of-discontents').on('click', "button[id^='button_discontent_']", this.filter_discontents)
+
+#  $('.sort-block').on('click', ".sort-all", this.show_all_aspects)
+
+@sorterable = ->
+  SORTER = {}
+  SORTER.sort = (which, type, dir) ->
+    SORTER.dir = (if (dir is "desc") then -1 else 1)
+    $(which).each ->
+      # Find the list items and sort them
+      sorted = $(this).find("> div").sort((a, b) ->
+        if type == "date"
+          (if parseFloat($(a).attr('data-date')) > parseFloat($(b).attr('data-date')) then SORTER.dir else -SORTER.dir)
+        else if type == "rate"
+          (if parseFloat($(a).attr('data-rate')) > parseFloat($(b).attr('data-rate')) then SORTER.dir else -SORTER.dir)
+        else 0
+      )
+      $(this).append sorted
+
+  this.sorter_discontents = (e) ->
+    e.preventDefault()
+    type = $(this).data('type')
+    data_desc = $(this).attr('data-desc')
+    if data_desc == "1" then desc = "desc" else desc = ""
+    if data_desc == "1" then num = "-1" else num = "1"
+    $(this).attr("data-desc","#{num}")
+    SORTER.sort "#tab_aspect_posts", type, desc
+
+
+#  $('.sort-block').on('click', ".sort-date,.sort-rate", this.sorter_discontents)
 
 #@todo analytics
 @exampleData = ->
@@ -131,42 +217,42 @@ $.fn.extend popoverClosable: (options) ->
     $('.popover').css 'display', 'none'
 
 # @todo wizard for concept_posts
-@activate_wizard= ->
-  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
-    $total = navigation.find("li").length
-    $current = index + 1
-    $percent = ($current / $total) * 100
-    $wizard = $("#wizard")
-    $wizard.find(".progress-bar").css width: $percent + "%"
-    #$('#option_for_wizard_tab').attr("data-tab","#{$current}")
-    go_string = 'Перейти к описанию'
-    go_string2 = 'Перейти к добавлению'
-    names_blocks = ['Идеи','Функционирования','Нежелательных побочных эффектов','Контроля','Целесообразности','Решаемых несовершенств']
-    if $current >= $total
-      $wizard.find(".pager .next").hide()
-      $('#form_save').show()
-    else
-      if $current == 1
-        $wizard.find(".pager .previous").hide()
-        $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
-        $('#form_save').hide()
-      else if $current in [2,3,4,5,6]
-        if $current == 6 then go_string = go_string2
-        $wizard.find(".pager .previous").show()
-        $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
-        $('#form_save').show()
-      else
-        $wizard.find(".pager .previous").show()
-        $wizard.find(".pager .next .btn").html('Далее <i class="fa fa-caret-right"></i>')
-        $('#form_save').show()
-      $wizard.find(".pager .next").show()
-    scrollTo(0,0)
+#@activate_wizard= ->
+#  $("#wizard").bootstrapWizard onTabShow: (tab, navigation, index) ->
+#    $total = navigation.find("li").length
+#    $current = index + 1
+#    $percent = ($current / $total) * 100
+#    $wizard = $("#wizard")
+#    $wizard.find(".progress-bar").css width: $percent + "%"
+#    #$('#option_for_wizard_tab').attr("data-tab","#{$current}")
+#    go_string = 'Перейти к описанию'
+#    go_string2 = 'Перейти к добавлению'
+#    names_blocks = ['Идеи','Функционирования','Нежелательных побочных эффектов','Контроля','Целесообразности','Решаемых несовершенств']
+#    if $current >= $total
+#      $wizard.find(".pager .next").hide()
+#      $('#form_save').show()
+#    else
+#      if $current == 1
+#        $wizard.find(".pager .previous").hide()
+#        $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
+#        $('#form_save').hide()
+#      else if $current in [2,3,4,5,6]
+#        if $current == 6 then go_string = go_string2
+#        $wizard.find(".pager .previous").show()
+#        $wizard.find(".pager .next .btn").html(go_string + " " + names_blocks[$current - 1] + " <i class=\"fa fa-caret-right\"></i>")
+#        $('#form_save').show()
+#      else
+#        $wizard.find(".pager .previous").show()
+#        $wizard.find(".pager .next .btn").html('Далее <i class="fa fa-caret-right"></i>')
+#        $('#form_save').show()
+#      $wizard.find(".pager .next").show()
+#    scrollTo(0,0)
 
 # @todo datepicker for plan posts
 
 @activate_datepicker = ->
-  $date_begin = $("#date_begin")
-  $date_end = $("#date_end")
+  $date_begin = $("#plan_post_stage_date_begin")
+  $date_end = $("#plan_post_stage_date_end")
 
   $date_begin.datepicker("refresh")
   $date_end.datepicker("refresh")

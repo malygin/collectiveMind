@@ -3,7 +3,7 @@
   .media-body
     =link_to post.user, user_path(@project, post.user)
     %br
-    = render partial: 'set_important', locals: {post: post}
+    -#= render partial: 'set_important', locals: {post: post}
     %br
     %p.text-justify
       = simple_format post.content

@@ -1,2 +1,0 @@
-$("#discuss_about_#{@advice.id}_advice").html("#{escape_javascript(render partial: 'advice_comments/form', locals: {advice: @advice})}").fadeIn();
-$('#advice_success_disapproved').fadeIn('slow').delay(1000).fadeOut('slow');

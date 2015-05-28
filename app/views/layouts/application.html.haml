@@ -1,79 +1,19 @@
 !!! 5
 %html(lang="en")
-  %head
-    %meta(charset="utf-8")
-    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
-    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %meta(http-equiv="X-UA-Compatible" content="IE=8")
-    %title
-      = content_for?(:title) ? yield(:title) : 'Massdecision'
-    = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all'
-    /[if lte IE 9]
-      <script src="http://phpbbex.com/oldies/oldies.js" charset="utf-8"></script>
-    -#/[if IE]
-    -#  <style type="text/css">
-    -#  html{filter:alpha(opacity=0); opacity: 0;}
-    -#  </style>
-    -#  <script type="text/javascript">
-    -#  alert('Internet Explorer Error 403! Попробуйте воспользоватся другим браузером! <a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>');
-    -#  </script>
-  -#%link(href="/assets/favicon.ico" rel="shortcut icon")
-
-  %body
-    .logo.hidden-sm.hidden-xs
-      %h4
-        %a{href: @project ? "/project/#{@project.id}" : "/", id: "go_to_logo"}
-          %h3
-            %span.text-danger MASS
-            %strong DECISION
-
-    %nav#sidebar.sidebar.nav-collapse.collapse
-      - if core_methods?(params[:controller],params[:action])
-        = render partial: 'core/projects/left_projects', locals: { current_stage: controller.controller_path }
+  = render 'application/meta'
+  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
+    .outer
+      = render partial: 'application/left_rollover'
+      = render partial: 'application/header'
+      - if profile?
+        = render partial: 'application/cabinet_stage_panel'
       - else
-        = render partial: 'left_side', locals: { current_stage: controller.controller_path }
-      = render partial: 'shared/moderator_chat'
-    .wrap
-      %header.page-header
-        .navbar
-          - if core_methods?(params[:controller],params[:action])
-            =render 'core/projects/top_menu_general'
-          - else
-            =render 'top_menu'
-      .content.container
-        -if current_controller_for_navbar?(controller)
-          %h4
-            = "Тема процедуры: #{@project.name}"
-          - if @project.news.for_last_day.any?
-            .alert.alert-success
-              - @project.news.for_last_day.each do |news|
-                %p
-                  =news.title
-                  = link_to news_path(@project, news), style: 'color: white' do
-                    %b подробнее..
-          %section.widget.widget-tabs
-            %header
-              =render partial: 'application/stages', locals: {current_stage: current_stage_for_navbar(controller, params[:stage])}
-            .body.tab-content
-              = yield
-        - elsif @project and (core_methods?(params[:controller], params[:action], true) || analytics?)
-          %h4
-            = "Тема процедуры: #{@project.name}"
-          %section.widget-tabs
-            %header
-              - if prime_admin?
-                = render partial: 'core/projects/stages_general', locals: {current_stage: current_stage_for_analytics(params[:action])}
-            .body.tab-content
-              = yield
-        - else
+        = render partial: 'application/stage_panel'
+      .main-block
+        .container
           = yield
 
-    /
-      Javascripts
-      \==================================================
-    / Placed at the end of the document so the pages load faster
+    #render_for_post
+    #render_knowbase_posts
+    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
     = javascript_include_tag 'application'
-    -#<!--[if lt IE 8]>
-    -#  <p class="danger"> Для эффективной работы настоятельно рекомендуем вам скачать брузер хром (<a href="https://www.google.ru/chrome/browser/desktop/">ссылка<a/>)</p>
-    -#<![endif]-->

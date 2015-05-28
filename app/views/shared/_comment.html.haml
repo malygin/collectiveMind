@@ -1,96 +1,63 @@
-.chat-message{id: "comment_#{comment.id}"}
-  = render 'users/user_post', user: comment.user
-
-  .chat-message-body.stage_menu1{id: "comment_content_#{comment.id}", class: "#{comment_stat_color(comment)}"}
-    %span.arrow.hidden-xs
-    .sender
+.media.comment{id: "comment#{comment.id}"}
+  .media-left
+    -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
+    -#= cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
+    = link_to user_path(@project, comment.user) do
+      = user_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
+  .media-body
+    %h5.media-heading.bold{id: "user_name_#{comment.id}"}
       = link_to comment.user, user_path(@project, comment.user)
-      = render partial: '/shared/user_online', object: comment.user
-      = role_label(comment.user)
-      = label_for_last_time_visit_status(comment)
-      %span.pull-right
-        = label_for_comment_status(comment,'discontent',t('show.problem'))
-        = label_for_comment_status(comment,'concept',t('show.idea'))
-        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'discontent', title: 'Проблема'}
-        -#=render partial: '/shared/label_for_comment_status', locals: {comment: comment, status: 'concept', title: 'Идея'}
-        - if boss? or role_expert? or stat_expert?
-          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, discuss_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "discuss_stat_comment_#{comment.id}") do
-            %span.label_discuss.label(class="#{label_discuss_stat(comment)}")
-              = t('show.discuss')
-          = link_to({controller: comment.controller_name_for_action, action: :comment_status, id: comment.post.id, comment_id: comment.id, approve_status: 1, comment_stage: get_stage_for_improve(comment.get_class)}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-            %span.label_approve.label(class="#{label_approve_stat(comment)}")
-              = t('show.important')
-        - else
-          - if comment.discuss_status
-            %span.label(class="#{label_discuss_stat(comment)}" id="discuss_stat_comment_#{comment.id}")
-              = t('show.discuss')
-          - if comment.approve_status
-            %span.label(class="#{label_approve_stat(comment)}" id="approve_stat_comment_#{comment.id}")
-              = t('show.important')
-
-    .text
-      %div{id: "comment_text_#{comment.id}"}
-        = comment.content
-        - if comment.image
-          - if comment.isFile
-            = link_to  'скачать приложенный файл' , "http://res.cloudinary.com/hs2pm8fbp/raw/upload/#{comment.image}"
-          - else
-            = link_to "http://res.cloudinary.com/hs2pm8fbp/image/upload/#{comment.image}", class: 'image-popup-vertical-fit' do
-              = cl_image_tag(comment.image, width: 150, height: 150, crop: :fill)
+    %span.comment_interf
+      %span.date_time.theme_font_color
+        =Russian::strftime(comment.created_at,'%k:%M')
       - if current_user?(comment.user) or boss?
-        %div{id: "redactor_comment_#{comment.id}"}
-          %button.edit-comment.btn.btn-info.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}"}
-            = t('link.edit')
-          \|
-          = link_to t('link.remove'), {action: :destroy_comment, id: comment.id}, method: :put, remote: true, confirm: t('confirm.delete_comment'), class: 'btn btn-danger btn-xs', id: "destroy_comment_#{comment.id}"
+        %span.dropdown.edit_comment{id: "redactor_comment_#{comment.id}"}
+          %button.btn_reset{id: "edit_comment#{comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            %i.fa.fa-cog.fa-lg.theme_font_color
+          %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{comment.id}", :role => "menu"}
+            %li
+              %a.edit-comment{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}", href: "#", tabindex: "-1"}
+                %i.glyphicon.glyphicon-pencil>
+                Редактировать
+            %li
+              = link_to({controller: comment.controller_name_for_action, action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
+                %i.glyphicon.glyphicon-remove>
+                Удалить
 
-          - if comment.get_class == 'LifeTape' and boss? and comment.main_comment?
-            \|
-            = select_tag 'select_for_aspects_comments', options_from_collection_for_select(@aspects, 'id', 'content'),
-            prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_aspects_comments(this,#{@project.id},#{comment.id});"
-
-      .pull-right
-        - if comment.main_comment?
-          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
-            = t('show.answer')
-        - else
-          %button.reply-comment.btn.btn-success.btn-xs{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "reply_comment_#{comment.id}" }
-            = t('show.answer')
-
-        |
-        =link_to({:action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, class: "popup-likes", id: "like_comment_#{comment.id}") do
-          %span
-            %span(id="lk_comment_#{comment.id}" style="margin-right:0;")
-              =comment.users_pro.count
-            %i.fa.fa-thumbs-o-up
-        |
-        =link_to({:action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, class: "popup-dislikes", id: "dislike_comment_#{comment.id}") do
-          %span
-            %span(id="dlk_comment_#{comment.id}" style="margin-right:0;")
-              =comment.users_against.count
-            %i.fa.fa-thumbs-o-down
-
-        - if boss? or role_expert?
-          |
-          =link_to({action: :plus_comment, id: comment.id}, remote: true, method: :put, class: "link_status", id: "plus_comment_#{comment.id}") do
-            &nbsp;
-            -if comment.useful
-              %span.label_give_scores.label.label-danger=t('show.revert_score')
-            - else
-              %span.label_give_scores.label.label-success=t('show.add_score')
-      .time.pull-left
-        = time_ago_in_words(comment.created_at)
-      %br
-.row
-  .col-md-11.col-md-offset-1
-    %form.form-new-comment(id = "form_reply_comment_#{comment.id}" accept-charset="UTF-8" action="/project/#{@project.id}/#{comment.post.class.name.underscore.pluralize}/#{comment.post.id}/add_comment?main_comment=#{comment.id}" data-remote="true" enctype="multipart/form-data" method="post" )
-    %br
-    - if comment.main_comment?
-      %div{id: "child_comments_#{comment.id}"}
-        - unless comment.comments.empty?
-          %br
-          - comment.comments.each do |c|
-            = render partial: 'shared/comment', object: c
-
-    %div{id: "child_comments_form_#{comment.id}"}
-%br
+        - if boss?
+          = link_to({controller: comment.controller_name_for_action, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+            %span.badge.badge_important{class: "#{'theme_back_color' if comment.approve_status}"}= t('show.important')
+        - elsif comment.approve_status
+          %span.badge.badge_important.theme_back_color= t('show.important')
+      %span{id: "cancel_comment_#{comment.id}"}
+  -#.divider10
+  -#%label.label.label-success Согласен
+  -#label.label.label-danger Не согласен
+  -#%span.font12 Пояснение:
+  %p.font_grey.comment_text{id: "comment_text_#{comment.id}"}
+    =comment.content
+  .post-interfaces-buttons.text-left
+    %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "like", :type => "button"}
+      %span.bold
+        %span(id="lk_comment_#{comment.id}")
+          =comment.users_pro.count
+        =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{comment.id}") do
+          %i.fa.fa-thumbs-up.theme_font_color
+    %button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", :type => "button"}
+      %span.bold
+        %span(id="dlk_comment_#{comment.id}")
+          =comment.users_against.count
+        =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{comment.id}") do
+          %i.fa.fa-thumbs-down.theme_font_color
+    %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}", "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button"}
+      %span.bold
+        %i.fa.fa-reply.theme_font_color
+.divider10
+%a.answers_collapse.opened{id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
+  -if comment.comments.size > 0
+    %span
+      = t('stages.comments', count: comment.comments.size)
+.com_answers.collapse.in{id: "answers_#{comment.id}"}
+  .answers_subblock.level1
+    - comment.comments.each do |c|
+      = render partial: 'shared/comment', object: c

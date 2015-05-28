@@ -1,25 +1,44 @@
-.media{id: "post_#{post_vote.id}"}
-  .media-body
-    .pull-right
-      =link_to({:controller => post_vote.class.name.underscore.pluralize, :action => :discuss_status, :id => post_vote.id, :discuss_status => 1},  :remote => true, :method => :put,  id: "discuss_stat_post_#{post_vote.id}") do
-        %span.label(class="#{label_discuss_stat(post_vote)}")=t('show.discuss')
-      =link_to({:controller => post_vote.class.name.underscore.pluralize, :action => :discuss_status, :id => post_vote.id, :approve_status => 1},  :remote => true, :method => :put,  id: "approve_stat_post_#{post_vote.id}") do
-        %span.label(class="#{label_approve_stat(post_vote)}")=t('show.important')
+.col-sm-4.vote_item_cont{id: "post_vote_#{post_vote.id}"}
+  .vote_item.themes_cont
+    .heading_cont
+      %h6
+        = post_vote.content
+    .item_expandable_imperf.themes_cont{style: "height:50px;"}
+      %p.bold
+        = t('activerecord.attributes.discontent/post.what')
+      %p
+        = post_vote.what
+      %p.bold
+        = t('activerecord.attributes.discontent/post.whered')
+      %p
+        = post_vote.whered
+      %p.bold
+        = t('activerecord.attributes.discontent/post.whend')
+      %p
+        = post_vote.whend
 
-    =discontent_style_name(post_vote.style)
-    .comment.dis-comment
-      = render partial: '/discontent/posts/post_content', object: post_vote
-    .time
-      = Russian::strftime(post_vote.created_at,'%d %B %k:%M:%S')
-      =improve_comment(post_vote).html_safe if improve_comment(post_vote)
-    .row
-      .col-md-12
-        .pull-right
-          =post_vote.number_views
-          %span.glyphicon.glyphicon-eye-open
-          |
-          = link_to(controller: post_vote.class.name.underscore.pluralize, action: :show, project: @project, id: post_vote.id) do
-            =t('show.commenting')
-            =post_vote.comments.count
-            %span.glyphicon.glyphicon-comment
-
+    .post-theme{id: "stripe#{post_vote.id}"}
+      - post_vote.post_aspects.each_with_index do |aspect, index|
+        %span.tag-stripes{class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};"}
+          %span.tags
+            = aspect.content
+    .divider10
+    .vote_controls.text-center
+      %button.btn.vote_button.v_btn_1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_discontent_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+        - if status == 1
+          %i.fa.fa-home
+        - else
+          %i.fa.fa-exclamation
+      %button.btn.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+        - if status == 2
+          %i.fa.fa-home
+        - else
+          %i.fa.fa-check
+      %button.btn.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+        - if status == 3
+          %i.fa.fa-home
+        - else
+          %i.fa.fa-minus
+      %span.vote_open_detail_imperf.grey
+        %i.fa.fa-angle-right.font_white
+      .divider15

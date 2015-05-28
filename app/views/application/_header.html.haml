@@ -1,19 +1,66 @@
-.logo= link_to image_tag('logo.png', alt: 'Colleсtive mind', class: 'round' ), root_path
-.project_name
-  .child 
-    %span.project_name= @project.name
-.top_buttons
+/ Top bar starts
+%header.navbar.top_bar
+  .container
+    .navbar-header
+      = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand' do
+        = image_tag 'logo1.png'
+    %ul.nav.navbar-nav.main_menu
+      %li{class: "#{'active' unless (cabinet? or rating? or profile?)}"}
+        = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
+      %li{class: "#{'active' if cabinet?}"}
+        = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a'
+      %li.has_dropwindow
+        = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
+      - if @project.closed?
+        %li{class: "#{'active' if rating?}"}
+          = link_to 'Рейтинг', users_path(@project), class: 'menu_a'
+      - if boss?
+        - if @project.main_stage >= 0
+          %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put,  class: 'menu_a'
+        - if @project.main_stage < 7
+          %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, class: 'menu_a'
 
-  - if signed_in?
-    .greybut
-      = link_to image_tag('edit.png'), "/project/#{@project.id}/users/#{current_user.id}/edit"
-      = link_to current_user.name_title, "/project/#{@project.id}/users/#{current_user.id}", class: 'username'
-      = link_to t('menu.sign_out'), destroy_user_session_path, method: :delete,  class: 'username'
-  -else
-    %span.blackbut
-      = image_tag('exit.png')
-      = link_to t('menu.sign_in'), '/signin', class: 'exit'
-
-
-
+    .navbar-right.text-right.user_block.font_grey
+      = link_to '', knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'book_icon tooltip1', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Жмите сюда, чтобы освежить в памяти базу знаний.'
+      %span.auth-divider
+        = '|'
+      %span.has_dropwindow
+        = render partial: 'application/expert_news', locals: {expert_news: @expert_news, project: @project}
+      %span.auth-divider
+        = '|'
+      %span.dropdown
+        %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+          %i.fa.fa-globe.font_lighter_grey
+          %small
+            Русский
+            %i.fa.fa-angle-down
+        %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
+          %li
+            %a{href: '#'} English
+          %li
+            %a{href: '#'} Русский
+      %span.auth-divider
+        = '|'
+      %span.dropdown
+        %span.badge.grey
+          = current_user.score
+        %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+          %small
+            = current_user
+            %i.fa.fa-angle-down
+        %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
+          %li{role: 'presentation'}
+            = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
+          -#%li{role: 'presentation'}
+          -#  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
+          %li{role: 'presentation'}
+            = link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, id: 'sign_out'
+.subhead
+  .container
+    %h4.font_white
+      Тема процедуры:
+      = @project.name
+    %button#tooltip_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
+      %i.fa.fa-lightbulb-o
+      Открыть подсказки
 

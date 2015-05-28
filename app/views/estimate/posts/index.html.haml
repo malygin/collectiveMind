@@ -1,7 +1,21 @@
 .row
-  .col-md-12
-    %section
-      .body
-        = link_to t('menu.help_note'), "/project/#{@project.id}/#{controller.controller_path == 'essay/posts' ? stage_for_essay(params[:stage].to_i) : controller.controller_path}/to_work", class: 'btn btn-info pull-right'
+  .container
+    .col-sm-3.col_padding_left_0.col_padding_right_3
+      .border_grey.col_rate_head
+        Проект
+    .col-sm-4.col_padding_left_3.col_padding_right_3
+      .border_grey.col_rate_head
+        Этот проект важен для проблемы, заданной заказчиком?
+    .col-sm-5.col_padding_right_0.col_padding_left_3
+      .border_grey.col_rate_head
+        Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
+.divider10
+= render partial: 'post_short', collection: @posts
 
-        = render partial: '/plan/posts/post_estimate', collection: @posts
+
+
+#render_estimate_post
+
+- if shown_intro('estimate_intro') == ''
+  = render partial: 'popup_welcome'
+

@@ -1,14 +1,14 @@
 class Concept::Voting < ActiveRecord::Base
-  attr_accessible :concept_post_aspect_id, :user_id, :discontent_post_id
   belongs_to :user
-  belongs_to :concept_post_aspect, class_name: 'Concept::PostAspect'
+  belongs_to :concept_post, class_name: 'Concept::Post'
   belongs_to :discontent_post, class_name: 'Discontent::Post'
 
-  scope :uniq_user, -> { select('distinct concept_votings.user_id') }
-  scope :by_dispost, ->(p) { where(discontent_post_id: p) }
-  scope :by_concept_aspect, ->(p) { where(concept_post_aspect_id: p) }
+  validates :user_id, :concept_post_id, presence: true
+
+  scope :uniq_user, -> { select('distinct user_id') }
+  scope :by_discontent, ->(discontent) { where(discontent_post_id: discontent.id) }
   scope :by_posts_vote, ->(posts) { where("concept_votings.discontent_post_id IN (#{posts})") unless posts.empty? }
-  scope :not_admins, -> { joins(:user).where("users.type_user NOT IN (?) or users.type_user IS NULL", User::TYPES_USER[:admin]) }
+  scope :by_status, ->(status) { where(status: status) }
 
   def self.by_project_votings(project)
     joins(:discontent_post).

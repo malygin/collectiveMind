@@ -1,0 +1,5 @@
+- if @aspect.valid?
+  $('.notice_messages').hide();
+  $('#aspect_notices_#{@aspect.id} #create_aspect_success').fadeIn(5000).fadeOut('slow');
+- else
+  $('#aspect_notices_#{@aspect.id} .notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @aspect)}");

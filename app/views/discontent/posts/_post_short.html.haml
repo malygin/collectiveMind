@@ -1,47 +1,82 @@
-%li{id: "post_#{post_short.id}", class: "#{'expert_comment' if post_short.discuss_status }"}
-  -if post_short.user and not post_short.anonym
-    = render 'users/user_post', user: post_short.user
-    -#= image_tag post_short.user.avatar.url(:thumb), class: 'pull-left'
-  - if post_short.anonym
-    = image_tag '/avatars/thumb/missing.png', class: 'pull-left'
+.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
+                            comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"}}
+  .full_post
+    - if boss? or role_expert? or stat_expert?
+      .post-top-header
+        =link_to({controller: post_short.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: post_short.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "add_score_post_#{post_short.id}") do
+          %i.fa.fa-trophy.fa-lg
+        = link_to({controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}", id: "approve_status_post_#{post_short.id}") do
+          %i.fa.fa-bookmark.fa-lg
+        -#%a.btn.btn-white.btn-xs.link_status
+        -#  %i.fa.fa-exclamation-triangle.fa-lg
+    .post.post_type_2
+      %div{"data-important" => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}"}
+        %div.important.theme_font_color
+          %i.fa.fa-bookmark.fa-2x
+      .post-header.white
+      .post-body.no_post_head.ch_action{"data-for" => "post_ch#{post_short.id}"}
+        .media
+          .media-left.text-center.gradient.post-poster
+            -#= image_tag 'no-ava.png', class: "img-circle img50"
+            = link_to user_path(@project, post_short.user) do
+              = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
+            %p.poster-name
+              = link_to post_short.user, user_path(@project, post_short.user)
+            %p.time
+              = Russian::strftime(post_short.created_at,'%d.%m.%Y')
+          .media-body
+            %table.table
+              %tbody
+                %tr.what
+                  %td.col-md-12.left-column.bold
+                    = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+                      = trim_string(post_short.content, size = 50)
+                      %i.fa.fa-angle-right
+                %tr
+                  %td.col-md-12.left-column
+                    = trim_string(post_short.what, size = 50)
 
-  .news-item-info
-    .name
-      - if post_short.user and not post_short.anonym
-        =link_to post_short.user, user_path(@project, post_short.user)
-        = render partial: '/shared/user_online', object: post_short.user
-      - if post_short.anonym
-        Добавлено анонимно
-      - if boss? or role_expert? or stat_expert?
-        .pull-right
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, discuss_status: 1},  remote: true, method: :put, class: "link_status", id: "discuss_stat_post_#{post_short.id}") do
-            %span.label_discuss.label(class="#{label_discuss_stat(post_short)}")=t('show.discuss')
-          =link_to({controller: post_short.class.name.underscore.pluralize, action: :discuss_status, id: post_short.id, approve_status: 1},  remote: true, method: :put, class: "link_status", id: "approve_stat_post_#{post_short.id}") do
-            %span.label_approve.label(class="#{label_approve_stat(post_short)}")=t('show.important')
-      - else
-        .pull-right
-          -if post_short.discuss_status
-            %span.label.label-danger=t('show.discuss')
-          -if post_short.approve_status
-            %span.label.label-success=t('show.important')
+            .post_cont_hover.white{id: "post_ch#{post_short.id}"}
+              .wrapper.ps_cont.half_wheel_speed
+                .post_cont_inner
+                  -post_short.comments.preview.each do |comment|
+                    .comment_preview
+                      %span.bold.com_date
+                        = Russian::strftime(comment.created_at,'%d.%m.%Y')
+                      %span.bold
+                        ="#{comment.user}:"
+                      =comment.content
 
-    =discontent_style_name(post_short.style)
-    .comment.dis-comment
-      = render partial: '/discontent/posts/post_content', object: post_short
-      = render 'shared/post_edit_bar', post: post_short
-    .time
-      = Russian::strftime(post_short.created_at,'%d %B %k:%M:%S')
-      =improve_comment(post_short).html_safe if improve_comment(post_short)
-    = render '/shared/post_social_bar2', post: post_short
-    - if boss? and (@project.status == 4 or @project.status == 5)
-      %div(style="display:none;" id="add_group_success_#{post_short.id}")
-        .color-green=t('show.discontent.add_group_success')
-      %div.color-red{id: "add_disgroup_#{post_short.id}"}
-        - if post_short.status == 1 and !post_short.discontent_post.nil?
-          =t('show.discontent.added_group')
-          =link_to post_short.discontent_post.content, discontent_post_path(@project, post_short.discontent_post)
-      .discontents_group_select{post: "#{post_short.id}"}
-        -if @accepted_posts
-          = select_tag 'select_for_discontents_group', options_from_collection_for_select(@accepted_posts, "id", "content"),
-          prompt: t('form.discontent.select_aspect_prompt'), onchange: "select_for_discontents_group(this,#{@project.id},#{post_short.id},#{post_short.discontent_post ? post_short.discontent_post.id : 0},'origin');", class: "form-control"
-
+      .post-bottom.white
+        .row
+          -#.col-md-9.col_padding_right_3
+          -#  %span.tag-stripes.active{style: "background-color: #{post_short.aspect.color if post_short.aspect};"}
+          -#    %span.tags
+          -#      = post_short.aspect.content if post_short.aspect
+          .col-md-1.col_padding_right_3
+            %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+          .col-md-8.col_padding_right_3.themes_cont
+            .post-theme{id: "stripe#{post_short.id}"}
+              - post_short.post_aspects.each_with_index do |aspect, index|
+                %span.tag-stripes{class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};"}
+                  %span.tags
+                    = trim_string(aspect.content, size = 30)
+          .col-md-3.col_padding_left_3
+            .text-right.small_icons
+              %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}"}
+                %small(class="cc_post_#{post_short.id}")
+                  = post_short.comments.count
+                %i.fa.fa-comment-o
+              %span.popup2
+                %small(id="lk_post_#{post_short.id}" class="lk_post_#{post_short.id}")
+                  = post_short.users_pro.count
+                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}") do
+                  %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+              %span.popup2
+                %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
+                  = post_short.users_against.count
+                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}") do
+                  %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+              -#-if post_short.notes.present?
+              -#  %span.popup2
+              -#    %i.fa.fa-exclamation-triangle.font_lighter_grey

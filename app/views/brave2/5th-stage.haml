@@ -1,0 +1,1101 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap CSS
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Font awesome CSS
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Custom CSS. Type your CSS code in custom.css file
+    %link{:href => "css/magnific-popup.css", :rel => "stylesheet"}/
+    / Perfect scrollbar
+    %link{:href => "css/perfect-scrollbar.min.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom.css", :rel => "stylesheet"}/
+    %link{:href => "css/custom-post.css", :rel => "stylesheet"}/
+    %link{:href => "css/sprites.css", :rel => "stylesheet"}/
+    %link{:href => "css/colors.css", :rel => "stylesheet"}/
+  %body.stage5_theme
+    .outer
+      / Top bar starts
+      %header.navbar.top_bar
+        .container
+          .navbar-header
+            %a.navbar-brand{:href => "main.html"}
+              %img{:src => "img/logo1.png"}/
+          %ul.nav.navbar-nav.main_menu
+            %li.active
+              %a.menu_a{:href => "1st-stage.html"} Процедура
+            %li
+              %a.menu_a{:href => "5th-stage-cabinet-profile.html"} Кабинет
+            %li.has_dropwindow
+              %a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
+                Мои уведомления
+                %span.top-circle 1
+              #dd_2.dropdown_window.dd_435.notifications_drop.text-left
+                .dd_wrapper
+                  .dd_top.thin.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
+                  .dd_bottom.white
+                    .divider10
+                    .container
+                      .row
+                        .col-xs-12
+                          .ps_cont
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage4
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage4
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice.moder{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-exclamation-triangle
+                              %span.dd_n_cell.right
+                                %span
+                                  22:00 11.03.2015
+                                  = succeed ":" do
+                                    %span.bold Модератор
+                                %p
+                                  На этой стадии вам предстоит выявить проблемы, связанные
+                                  с ситуацией, описанной в базе знаний, и принять участие
+                                  в обсуждении проблем, выявленных другими участниками. В
+                                  нашей терминологии такие проблемы называются
+                                  несовершенствами.
+                            .dd_nav_divider.font_color_stage4
+                              %span 4
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage2
+                                %i.fa.fa-lg.fa-thumbs-up
+                              %span.dd_n_cell.right.font_color_stage2
+                                %span
+                                  19:45 12.03.2015
+                                  %span.bold Liza
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            .dd_nav_divider.font_color_stage2
+                              %span 2
+                            .divider10
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            %a.dd_notice{:href => "#"}
+                              %span.dd_n_cell.left.font_color_stage1
+                                %i.fa.fa-lg.fa-thumbs-down
+                              %span.dd_n_cell.right.font_color_stage1
+                                %span
+                                  20:15 12.03.2015
+                                  %span.bold Рахель
+                                  в теме
+                            .dd_nav_divider.font_color_stage1
+                              %span 1
+                            .divider10
+                    .divider20
+          .navbar-right.text-right.user_block.font_grey
+            %a.book_icon.open-popup-link{:href => "#popup-database"}
+            %span.auth-divider |
+            %span.has_dropwindow
+              %button.btn_reset.font_lighter_grey.bold.drop_opener{"data-dd-opener" => "dd_1"}
+                %i.fa.fa-exclamation-triangle
+              #dd_1.dropdown_window.dd_570.expert_news_drop.text-left
+                .dd_badge
+                  %i.fa.fa-exclamation-triangle
+                  %small Новости от эксперта
+                .dd_wrapper.white
+                  .dd_top.light-grey
+                    %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
+                  .dd_bottom
+                    .divider20
+                    .container
+                      .ps_cont
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_1"}
+                            .row
+                              .col-xs-9
+                                Представляем вам наш экспертный комитет:
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_1.dd_xprt_article.collapse
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Лиза Школьник
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                          .dd_expert
+                            .divider20
+                            .row
+                              .col-xs-3.text-center
+                                %img.img100.img-circle{:src => "http://placehold.it/100x100"}/
+                              .col-xs-9
+                                %h4 Владимир Видро
+                                %p
+                                  Эксперт в электронной коммерции, опыт с 1997 года. Имеет
+                                  обширный опыт в интернет-маркетинге, включая создание и
+                                  продвижение интернет-проектов, любые виды рекламы
+                            .divider20
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_2"}
+                            .row
+                              .col-xs-9
+                                Заголовок 1
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_2.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_3"}
+                            .row
+                              .col-xs-9
+                                Заголовок 2
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_3.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_4"}
+                            .row
+                              .col-xs-9
+                                Заголовок 3
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_4.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                        .dd_xprt_notice
+                          %a.a_font_reset.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_5"}
+                            .row
+                              .col-xs-9
+                                Заголовок 4
+                              .col-xs-3.text-right
+                                %span.dd_n_date 1.12.2015
+                                %i.fa.fa-angle-right.font_grey.bold
+                        #xprt_5.dd_xprt_article.collapse
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                          %p
+                            На этой стадии вам предстоит выявить проблемы, связанные с
+                            ситуацией, описанной в базе знаний, и принять участие
+                            в обсуждении проблем, выявленных другими участниками. В нашей
+                            терминологии такие проблемы называются несовершенствами.
+                            В конце стадии вы проголосуете за те несовершенства, которые, на ваш
+                            взгляд, совершенно необходимо устранить для
+                            исправления текущей ситуации.
+                    .divider20
+            %span.auth-divider |
+            %a.font_grey.bold{:href => "#"}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{:role => "menu"}
+            %span.auth-divider |
+            %span.badge.grey 500
+            %small.font_lighter_grey.bold
+              Лиза Школьник
+              %a{:href => "profile.html"}
+                %i.fa.fa-angle-down
+      / Top Bar ends
+      .subhead
+        .container
+          %h4.font_white Решение конфликта, возникшего из-за меда
+        %button#tooltip_button_1.btn.btn-tooltip{:type => "button", :value => "Show"}
+          %i.fa.fa-lightbulb-o
+          Подсказки
+      .container
+        .row
+          .col-md-8.col_padding_right_3
+            .border_grey.rounded_3.stages_block
+              .btn-toolbar{:role => "toolbar"}
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage1{:href => "1st-stage.html", :role => "button"} 1
+                  %a.btn.back_color_stage2{:href => "2nd-stage.html", :role => "button"} 2
+                  %a.btn.back_color_stage3{:href => "3rd-stage.html", :role => "button"} 3
+                  %a.btn.back_color_stage4{:href => "4th-stage.html", :role => "button"} 4
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage5{:href => "5th-stage.html", :role => "button"}
+                    5 СТАДИЯ: ПРОЕКТНОЕ
+                    ПРЕДЛОЖЕНИЕ
+                .btn-group{:role => "group"}
+                  %a.btn.back_color_stage6.icon_new.i_new_stage{:href => "6th-stage.html", :role => "button"} 6
+                  %a.btn.back_color_stage7{:href => "7th-stage.html", :role => "button"} 7
+          .col-md-4.col_padding_left_3
+            .border_grey.rounded_3.help_icon
+            .border_grey.rounded_3.progress_block
+              .container
+                .row
+                  .col-xs-6.col-md-6.col_padding_right_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Ваш прогресс на стадии
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#80bcc4", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+                  .col-xs-6.col-md-6.col_padding_left_3
+                    .row
+                      .col-xs-8.col-md-8.col_padding_3
+                        .knob_label.text-right.font_grey
+                          %small Прогресс других участников
+                      .col-xs-4.col-md-4.col_padding_3
+                        .progress-knob
+                          .knob-content
+                            .knob-item
+                              %input#knob-1.knob{"data-anglearc" => "360", "data-angleoffset" => "70", "data-bgcolor" => "#f4f4f4", "data-end" => "90", "data-fgcolor" => "#80bcc4", "data-font" => "'Open Sans', sans-serif", "data-thickness" => ".1", :value => "0"}/
+      / Main Block starts
+      .main-block
+        .container
+          .stage-info-sort-block
+            .row
+              %br/
+              .col-md-6
+                %span.stage-heading Проектные предложения (2)
+              .col-md-6
+                .sort-block.pull-right
+                  %span.sort-label Сортировать по новым:
+                  .sort-1.sort_btn.sprite_com.sprite-item5_2_1
+                    %span 25
+                  .sort-2.sort_btn.sprite_doc.sprite-item5_1
+                    %span 2
+                  %a{:href => "5th-stage-cabinet.html"}
+                    %button.btn.add-button
+                      %span> +
+                      Проектное предложение
+          .stage-post-block
+            .row
+              .col-md-6
+                .full_post
+                  .post-top-header
+                    %a.btn.btn-white.btn-xs{:href => "#"}
+                      %i.fa.fa-trophy.fa-lg
+                    %a.btn.btn-white.btn-xs{"data-id" => "1", "data-type" => "important", :href => "#"}
+                      %b Важно
+                  #tooltip5_1.post.post_type_3.no_head.tooltip1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Проект – это план действий по воплощению идей, поданных на прошлой стадии."}
+                    %div{"data-important" => "1"}
+                    .post-header.white
+                    .post-body.ch_action{"data-for" => "post_ch1"}
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                          %p.time.text-center 21.12.2014
+                        .media-body.white-gray
+                          .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
+                            %p Взаимное недоверие четвероногих и пчёл
+                            .pull-right
+                              %i.fa.fa-angle-right
+                          #post_ch1.post_cont_hover.post_tall.white
+                            .wrapper.ps_cont.half_wheel_speed
+                              .post_cont_inner
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по
+                                  дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                    #tooltip4_2.post-bottom.white.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "В цветных квадратиках скрывается перечень несовершенств, связанных с данным нововведением. Нажмите на любой из них, чтобы увидеть полное название нововведения."}
+                      .row
+                        .col-md-3.col-md-offset-9.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2.comments_icon{"data-for" => "post_ch1"}
+                              %small 5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              %small 9
+                              %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+                            %span.popup2
+                              %small 1
+                              %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                            %span.popup2
+                              %i.fa.fa-exclamation-triangle.font_lighter_grey
+              .col-md-6
+                .full_post
+                  .post-top-header
+                    %a.btn.btn-white.btn-xs{:href => "#"}
+                      %i.fa.fa-trophy.fa-lg
+                    %a.btn.btn-white.btn-xs{"data-id" => "2", "data-type" => "important", :href => "#"}
+                      %b Важно
+                  .post.post_type_3.no_head
+                    %div{"data-important" => "2"}
+                    .post-header.white
+                    .post-body.ch_action{"data-for" => "post_ch2"}
+                      .media
+                        .media-left.text-center.gradient.post-poster
+                          %img.img-circle.img40{:src => "img/ava-pyat.jpg"}/
+                          %p.poster-name Пятачок
+                          %p.time.text-center 21.12.2014
+                        .media-body.white-gray
+                          .post-text.open-popup{"data-placement" => "5", "data-target" => "1"}
+                            %p Взаимное недоверие четвероногих и пчёл
+                            .pull-right
+                              %i.fa.fa-angle-right
+                          #post_ch2.post_cont_hover.post_tall.white
+                            .wrapper.ps_cont.half_wheel_speed
+                              .post_cont_inner
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                                .comment_preview
+                                  %span.bold Liza:
+                                  По
+                                  поводу кнопки "всё". Она не очень интуитивна и красива.
+                                .comment_preview
+                                  %span.bold Liza:
+                                  Начальная - это та, что грузится со страницей. Но она по дате
+                                  сортировки
+                                .comment_preview
+                                  %span.bold irivertime:
+                                  И
+                                  обратная сортировка должна тоже как-то выделяться
+                    .post-bottom.white
+                      .row
+                        .col-md-3.col-md-offset-9.col_padding_left_3
+                          .text-right.small_icons
+                            %span.popup2.comments_icon{"data-for" => "post_ch2"}
+                              %small 5
+                              %i.fa.fa-comment-o
+                            %span.popup2
+                              %small 9
+                              %i.fa.fa-thumbs-o-up.fa-flip-horizontal
+                            %span.popup2
+                              %small 1
+                              %i.fa.fa-thumbs-o-down.fa-flip-horizontal
+                            %span.popup2
+                              %i.fa.fa-exclamation-triangle.font_lighter_grey
+      / Main Block ends
+      #popup-5-1.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
+        .popup.popup_rounded.popup_color_theme_stage5
+          .modal_title
+            .row
+              .col-md-8
+                %h4.bold.font_dark_grey
+                  Lorem ipsum
+              .col-md-4
+                .row
+                  .col-md-12
+                    .text-right.post_likes
+                      %span.bold
+                        5
+                        %i.fa.fa-comment.theme_font_color
+                      %span.bold
+                        9
+                        %i.fa.fa-thumbs-up.theme_font_color
+                      %span.bold
+                        1
+                        %i.fa.fa-thumbs-down.theme_font_color
+                      %span
+                        %i.fa.fa-exclamation-triangle.font_lighter_grey
+                      %small 21.12.2014
+          .modal_body
+            .popup-post-info
+              .row.info-block
+                .col-md-9.popup-right-tabs
+                  .nav-tabs-one
+                    %ul.nav.nav-tabs
+                      %li.active
+                        %a{"data-toggle" => "tab", :href => "#tab-1"}
+                          %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
+                            Описание
+                            проектного предложения
+                      %li
+                        %a{"data-toggle" => "tab", :href => "#tab-2"}
+                          %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
+                            График реализации проекта
+                .col-md-3
+                  .popup-post-block.pull-right
+                    %img{:src => "img/ava-rabb.jpg"}/
+                    %span.font_black.text-center Кролик
+            .clearfix
+            .tab-content.modal_content
+              #tab-1.tab-pane.fade.in.active
+                .container.modal_content
+                  .row
+                    .col-md-6.com_dashed_border.right.popup_collapsable_col.collapse.in
+                      %button.expand_button.remove_col.btn_reset{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                      .divider25
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-1"}
+                        Описание проекта
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-1.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-2"}
+                        Организационные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-2.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-3"}
+                        Ресурсные риски
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-3.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                      %a.a_font_reset.collapser_type2.with_plus.collapsed{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-4"}
+                        Риски реализации
+                        %i.fa.fa-plus.font_color_stage5.collapse_plus
+                      #cab4-4.collapse
+                        .divider5
+                        %h5.bold Цели и ожидаемые результаты
+                        %p
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+                          ipsum lorem ipsum lorem ipsum
+                        .divider15
+                        %h5.bold Краткое описание проекта
+                        %p.text
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                          lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                        .divider15
+                    .col-md-6.comment_col.popup_expandable_col
+                      %button.expand_button.add_col.btn_reset.theme_font_color.bold{"data-col" => "6", "data-target" => ".popup_collapsable_col", "data-toggle" => "collapse", :type => "button"}
+                        открыть
+                        описание проекта
+                      .divider15
+                      .modal-comment-body
+                        .ps_cont
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего
+                              дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего
+                              дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #comment1.media.comment
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 15:28
+                                %span.dropdown.edit_comment
+                                  %button#edit_comment1.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                    %i.fa.fa-cog.fa-lg.theme_font_color
+                                  %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-pencil>
+                                        Редактировать
+                                    %li
+                                      %a{:href => "#", :tabindex => "-1"}
+                                        %i.glyphicon.glyphicon-remove>
+                                        Удалить
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего
+                              дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment1", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_1.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %a.answers_collapse.theme_font_color{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers-3-1"}
+                            %span 3 ответа
+                          #answers-3-1.com_answers.collapse
+                            .answers_subblock.level1
+                              #comment2.media.comment.unread
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 17:28
+                                    %span.badge.badge_important.theme_back_color важно
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment2", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment2", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_2", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_2.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              #comment3.media.comment.unread
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 15:28
+                                    %span.dropdown.edit_comment
+                                      %button#edit_comment2.btn_reset{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                                        %i.fa.fa-cog.fa-lg.theme_font_color
+                                      %ul.dropdown-menu{"aria-labelledby" => "edit_comment1", :role => "menu"}
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-pencil>
+                                            Редактировать
+                                        %li
+                                          %a{:href => "#", :tabindex => "-1"}
+                                            %i.glyphicon.glyphicon-remove>
+                                            Удалить
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment3", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment3", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_3", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_3.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                            .answers_subblock.level2
+                              #comment4.media.comment
+                                .media-left
+                                  %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                .media-body
+                                  %h5.media-heading.bold Винни-Пух
+                                  %span.comment_interf
+                                    %span.date_time.theme_font_color 15:28
+                                %p.font_grey.bold
+                                  Ничего не правда. Я люблю гулять, а от
+                                  вашего дуба тень большая.
+                                .post-interfaces-buttons.text-left
+                                  %button.rate_button{"data-for" => "comment4", "data-rate-action" => "like", :type => "button"}
+                                    %span.bold
+                                      9
+                                      %i.fa.fa-thumbs-up.theme_font_color
+                                  %button.rate_button{"data-for" => "comment4", "data-rate-action" => "dislike", :type => "button"}
+                                    %span.bold
+                                      1
+                                      %i.fa.fa-thumbs-down.theme_font_color
+                                  %button.reply_btn.collapsed{"data-target" => "#reply_form_4", "data-toggle" => "collapse", :type => "button"}
+                                    %span.bold
+                                      %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                              %form#reply_form_4.form-group.comment_add.collapse
+                                .input_cont
+                                  %textarea{:placeholder => "Ваш комментарий"}
+                                %button.btn{:type => "button"}
+                                  %span.bold
+                                    %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          #comment5.media.comment.unread
+                            .media-left
+                              %img.media-object.img35.img-circle{:src => "img/ava-vinnie.jpg"}/
+                            .media-body
+                              %h5.media-heading.bold Винни-Пух
+                              %span.comment_interf
+                                %span.date_time.theme_font_color 27.03.2015 15:28
+                                %span.badge.badge_important.theme_back_color важно
+                            %p.font_grey.bold
+                              Ничего не правда. Я люблю гулять, а от вашего
+                              дуба
+                              тень большая.
+                            .post-interfaces-buttons.text-left
+                              %button.rate_button{"data-for" => "comment5", "data-rate-action" => "like", :type => "button"}
+                                %span.bold
+                                  9
+                                  %i.fa.fa-thumbs-up.theme_font_color
+                              %button.rate_button{"data-for" => "comment5", "data-rate-action" => "dislike", :type => "button"}
+                                %span.bold
+                                  1
+                                  %i.fa.fa-thumbs-down.theme_font_color
+                              %button.reply_btn.collapsed{"data-target" => "#reply_form_5", "data-toggle" => "collapse", :type => "button"}
+                                %span.bold
+                                  %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                          %form#reply_form_5.form-group.comment_add.collapse
+                            .input_cont
+                              %textarea{:placeholder => "Ваш комментарий"}
+                            %button.btn{:type => "button"}
+                              %span.bold
+                                %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                      .divider15
+                      %form.form-group.comment_add.main_add
+                        .input_cont
+                          %textarea{:placeholder => "Ваш комментарий"}
+                        %button.btn{:type => "button"}
+                          %span.bold
+                            %i.fa.fa-reply.fa-rotate-180.theme_font_color
+                  .divider25
+              #tab-2.tab-pane.fade
+                .container.timeline-cont
+                  .vertical-timeline
+                    .row
+                      .col-md-12.col-sm-12
+                        / time line col
+                        .v-timeline-col
+                          .entry-top-badge.timeline_bg_1
+                            Формирование списка активный ПС
+                          .row
+                            .col-md-6.col-sm-6.left-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 15 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Инструменты
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                            .col-md-6.col-sm-6.right-col-timeline.timel-line-b1f0c1
+                              .tl_badge_wrapper
+                                %span.tl_circle
+                                .tl_badge
+                                  %span.tl_subhead 14 янв 2015
+                                  %span.tl_header Встреча в аптеках инвара
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                  %span.tl_subhead Ресурсы
+                                  %span.tl_description Описание мероприятия, описание мероприятия, описание мероприятия
+                                .tl_stripes
+                                  %span Арсеньев Иван Иванович
+                                  %span Иванова Зоя Петровна
+                                  %span Шевелидзе Антон Иванович
+      #popup-database.popup-window.popup_database.popup-w770.mfp-hide
+        .popup.popup_rounded
+          .row
+            .col-md-12
+              #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
+                / Indicators
+                %ul.list-unstyled.list-inline.carousel-indicators.text-center
+                  %li.color-theme-1.myCarousel-target.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+                    Аспект 1
+                  %li.color-theme-2.myCarousel-target{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+                    Аспект 2
+                  %li.color-theme-3.myCarousel-target{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+                    Аспект 3
+                  %li.color-theme-4.myCarousel-target{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+                    Аспект 4
+                  %li.color-theme-5.myCarousel-target{"data-slide-to" => "4", "data-target" => "#myCarousel"}
+                    Аспект 5
+                  %li.color-theme-6.myCarousel-target{"data-slide-to" => "5", "data-target" => "#myCarousel"}
+                    Аспект 6
+                  %li.color-theme-7.myCarousel-target{"data-slide-to" => "6", "data-target" => "#myCarousel"}
+                    Аспект 7
+                  %li.color-theme-8.myCarousel-target{"data-slide-to" => "7", "data-target" => "#myCarousel"}
+                    Аспект 8
+                  %li.color-theme-9.myCarousel-target{"data-slide-to" => "8", "data-target" => "#myCarousel"}
+                    Аспект 9
+                / Wrapper for slides
+                .carousel-inner{:role => "listbox"}
+                  .item.active.color-theme-1
+                    .row
+                      .col-md-12
+                        .container
+                          .row
+                            .col-md-12.col-sm-12
+                              %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+                                %li.active{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 1", "data-toggle" => "tab", :href => "#article1-1", :role => "tab"}
+                                    Статья
+                                    1
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 2", "data-toggle" => "tab", :href => "#article1-2", :role => "tab"} Статья 2
+                                %li{:role => "presentation"}
+                                  %a{"aria-controls" => "Статья 3", "data-toggle" => "tab", :href => "#article1-3", :role => "tab"} Статья 3
+                          .row
+                            .col-md-12.col-sm-12
+                              .aspect-main-block
+                                .tab-content
+                                  #article1-1.tab-pane.active.fade.in{:role => "tabpanel"}
+                                    %h6.aspect-main-block-heading
+                                      Ситуация с
+                                      пчелами
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем,
+                                      что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая
+                                      разрешить
+                                      конфликт мирным способом, они обратились к мудрой
+                                      Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-2.tab-pane.fade{:role => "tabpanel"}
+                                    %p.aspect-main-block-text
+                                      Пчелы недовольны тем,
+                                      что на их мед
+                                      постоянно покушаются Винни-Пух и его друзья. Желая
+                                      разрешить
+                                      конфликт мирным способом, они обратились к мудрой
+                                      Сове.
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                                  #article1-3.tab-pane.fade{:role => "tabpanel"}
+                                    %img{:src => "img/aspect-pic1.jpg"}/
+                  .item.color-theme-2
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %p.aspect-main-block-text
+                            В популярной сказке Винни-Пух и его
+                            друзья жаждали меда, но пчелы не давали забрать у себя плоды своего
+                            труда. Чтобы раздобыть мед, Винни с компанией пытался обманом
+                            пробраться в улей на Высоком дубе — не вышло, сутками подкарауливал
+                            момент, когда все пчелы вылетят из улья, — не дождался; пытался
+                            втянуть пчел в переговоры, предлагая грибы и ягоды в обмен на мед, —
+                            был отвергнут.
+                            Всего в истории участвовало трое четвероногих: сам Винни-Пух и его
+                            друзья Пятачок и Кролик.
+                          %img{:src => "img/aspect-pic2.jpg"}/
+                  .item.color-theme-3
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                          %h6.aspect-main-block-heading
+                            Трудности, связанные с
+                            расположением конфликтующих сторон
+                          %p.aspect-main-block-text
+                            Как видно на карте, Винни-Пух с
+                            друзьями живут достаточно близко к Высокому дубу.
+                            Это часто обостряет конфликт, потому что пчелы не могут нормально
+                            собирать мед,
+                            постоянно беспокоясь, что их ограбят.
+                          %img{:src => "img/aspect-pic3.jpg"}/
+                  .item.color-theme-4
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-5
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-6
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-7
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-8
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                  .item.color-theme-9
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block
+                %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-left
+                %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+                  %i.fa.fa-3x.fa-caret-right
+    / Outer Ends
+    / Javascript files
+    / jQuery
+    %script{:src => "js/jquery.js"}
+    / Bootstrap JS
+    %script{:src => "js/bootstrap.min.js"}
+    / Magnific Popup
+    %script{:src => "js/jquery.magnific-popup.min.js"}
+    / Owl carousel
+    %script{:src => "js/owl.carousel.min.js"}
+    / Respond JS for IE8
+    %script{:src => "js/respond.min.js"}
+    / HTML5 Support for IE
+    %script{:src => "js/html5shiv.js"}
+    / Content hover JS
+    %script{:src => "js/jquery.contenthover.min.js"}
+    / Javascript for this page
+    %script{:src => "js/jqueryrotate.2.1.js"}
+    / Excanvas JS for Knob Support in IE 8
+    %script{:src => "js/waypoints.min.js"}
+    %script{:src => "js/excanvas.js"}
+    / jQuery Knob
+    %script{:src => "js/jquery.knob.js"}
+    / Perfect scrollbar
+    %script{:src => "js/perfect-scrollbar.jquery.min.js"}
+    / Custom JS. Type your JS code in custom.js file
+    %script{:src => "js/custom.js"}

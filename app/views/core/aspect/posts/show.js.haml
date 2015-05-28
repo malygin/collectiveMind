@@ -1,0 +1,10 @@
+$('#render_for_post').empty();
+$("#render_for_post").html('#{escape_javascript(render partial: 'collect_info/posts/popup_aspect_post')}');
+magnificPopupOpen('#popup-aspect');
+comments_feed();
+comments_expandable_column();
+history_change("#{collect_info_posts_path(@project)}");
+
+-#show_comments_hover();
+-#activate_perfect_scrollbar();
+

@@ -1,8 +1,5 @@
 %ul.nav.navbar-nav.navbar-right.pull-right
-  -if prime_admin?
-    %li.active
-      =link_to t('menu.analytics'), "/concept_analytics", style:'width:auto; margin-right: 10px;', id: 'go_to_analytics'
-    %li.divider
+
 
   %li.active
     =link_to t('menu.general_rating'), "/general_rating" , style:'width:auto; margin-right: 10px;', id: 'go_to_rating'
@@ -21,9 +18,7 @@
         %hr
         %li{role: 'presentation'}
           =link_to t('menu.main'), "/" , id: 'root_page'
-        - if prime_admin?
-          %li{role: 'presentation'}
-            =link_to t('menu.list_projects'), list_projects_path, id: 'list_projects'
+
 
   %li.hidden-xs.divider
   %li.hidden-xs

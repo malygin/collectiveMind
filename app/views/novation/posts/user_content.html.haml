@@ -1,0 +1,35 @@
+- @content.each do |post_short|
+  .post.post_type_3.cab
+    .post-header.white
+    .post-body
+      .media
+        .media-left.text-center.gradient2
+          .cab_folder{class: (post_short.published? ? 'back1' : 'back2')}
+            %span.percentage.font_white.bold.text-center
+              = "#{post_short.fullness}%"
+          %p.time.text-center
+            = Russian::strftime(post_short.created_at,'%d.%m.%Y')
+        .media-body.white
+          %h6
+            = post_short.title
+          - if current_user?(post_short.user) and can_edit_content?
+            %span.post_btns_cont
+              %button.btn.btn_reset.btn_del
+                = link_to edit_novation_post_path(@project, post_short), id: "edit_novation_#{post_short.id}", class: 'a_font_reset' do
+                  %i.glyphicon.glyphicon-pencil
+              %button.btn.btn_reset.btn_del
+                = link_to novation_post_path(@project, post_short), method: :delete, data: {confirm: t('confirm.delete_novation')}, id: "destroy_novation_#{post_short.id}", class: 'a_font_reset' do
+                  %i.glyphicon.glyphicon-trash
+          .text-right
+            = link_to novation_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_novation_#{post_short.id}" do
+              %i.fa.fa-angle-right.fa-2x.font_grey
+    .post-bottom.white
+      .row
+        .col-md-1.col_padding_right_3
+          %small.pull-left{style: 'margin-right: 3px;'} Идеи
+        .col-md-11.col_padding_right_3.themes_cont
+          .post-theme{id: "stripe#{post_short.id}"}
+            - post_short.novation_concepts.each_with_index do |concept, index|
+              %span.tag-stripes.color_me{class: "#{'active' if index==0}",'data-me-action' => 'background-color', 'data-me-color' => "#{index+1}", 'data-me-type' => 'imperf'}
+                %span.tags
+                  = trim_content(concept.title, 30)

@@ -1,19 +1,18 @@
 class Journal < ActiveRecord::Base
-  include Renderable
-  include Filterable
+  include Util::Renderable
+  include Util::Filterable
   extend ApplicationHelper
+  extend MarkupHelper
 
-  attr_accessible :body, :body2, :type_event, :user, :project, :user_informed, :viewed, :project_id,
-                  :event, :first_id, :second_id, :personal, :anonym, :visible
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
   default_scope { where("type_event != 'visit_save'") }
-  scope :select_users_for_news, -> user { where(:user => user) }
-  scope :type_content, -> type_content { where(:type_event => self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
-  scope :type_event, -> type_event { rewhere(:type_event => self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
-  scope :type_status, -> type_status { where(:type_event => self.select_type_content(type_status)) if type_status.present? and type_status != "content_all" }
+  scope :select_users_for_news, -> user { where(user: user) }
+  scope :type_content, -> type_content { where(type_event: self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
+  scope :type_event, -> type_event { rewhere(type_event: self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
+  scope :type_status, -> type_status { where(type_event: self.select_type_content(type_status)) if type_status.present? and type_status != "content_all" }
   scope :date_begin, -> date_begin { where("DATE(journals.created_at + time '04:00') >= ?", date_begin) if date_begin.present? }
   scope :date_end, -> date_end { where("DATE(journals.created_at + time '04:00') <= ?", date_end) if date_end.present? }
 
@@ -24,11 +23,11 @@ class Journal < ActiveRecord::Base
   scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
   scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', User::TYPES_USER[:admin]) }
 
-  # has_many :user_checks, class_name: 'UserCheck'
-  # scope :user_checks_proc, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer' AND (user_checks.status = 'f' OR user_checks.status IS NULL)") }
   scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: {status: ['f',nil] }) }
 
-  after_save :send_last_news
+  # after_save :send_last_news
+
+  validates :type_event, :project_id, presence: true
 
   @types = []
   @my_types = [11]
@@ -64,6 +63,10 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true).order('created_at DESC')
   end
 
+  def self.events_for_my_feed_viewed(project_id, user_id, lim=10)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true).limit(lim).order('created_at DESC')
+  end
+
   def self.events_for_content(project_id, user_id, first_id)
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id).order('created_at DESC')
   end
@@ -86,15 +89,15 @@ class Journal < ActiveRecord::Base
   end
 
   def self.destroy_comment_journal(project, comment)
-    where(:project_id => project.id, :user_id => comment.user, :second_id => comment.id).destroy_all
+    where(project_id: project.id, user_id: comment.user, second_id: comment.id).destroy_all
   end
 
   def self.destroy_journal_record(project, type_event, user_informed, post, personal)
-    where(:project_id => project.id, :type_event => type_event, :user_informed => user_informed, :first_id => post.id, :personal => personal).destroy_all
+    where(project_id: project.id, type_event: type_event, user_informed: user_informed, first_id: post.id, personal: personal).destroy_all
   end
 
   def self.destroy_journal_award(project, type_event, personal, user, user_informed = nil)
-    where(:project_id => project.id, :type_event => type_event, :user_id => user.id, :user_informed => user_informed, :personal => personal).destroy_all
+    where(project_id: project.id, type_event: type_event, user_id: user.id, user_informed: user_informed, personal: personal).destroy_all
   end
 
   private
@@ -137,8 +140,6 @@ class Journal < ActiveRecord::Base
          "discontent_comment_approve_status","my_discontent_comment_approve_status","concept_comment_discuss_status","my_concept_comment_discuss_status","concept_comment_approve_status","my_concept_comment_approve_status",
          "plan_comment_discuss_status","my_plan_comment_discuss_status","plan_comment_approve_status","my_plan_comment_approve_status","essay_comment_discuss_status","my_essay_comment_discuss_status","essay_comment_approve_status","my_essay_comment_approve_status"
         ]
-      when "by_advice"
-        ["advice_approve","my_advice_approved","my_advice_useful","my_advice_commented"]
       when "by_content"
         ["life_tape_post_save","discontent_post_save","concept_post_save","plan_post_save","essay_post_save"] |
             ["discontent_post_update","concept_post_update","plan_post_update","essay_post_update"]
@@ -167,19 +168,36 @@ class Journal < ActiveRecord::Base
     #@todo новости и информирование авторов
     current_user.journals.build(type_event: name_of_comment_for_param+'_save', project: project,
                                 body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id).save!
+                                first_id: post.id, second_id: comment.id).save!
 
     if post.user!=current_user
       current_user.journals.build(type_event: 'my_'+name_of_comment_for_param, user_informed: post.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
 
     if comment_answer and comment_answer.user!=current_user
       current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
-                                  first_id: (post.instance_of? LifeTape::Post) ? post.discontent_aspects.first.id : post.id, second_id: comment.id,
+                                  first_id: post.id, second_id: comment.id,
+                                  personal: true, viewed: false).save!
+    end
+  end
+
+
+  def self.like_event(current_user, project, name_of_model_for_param, post, against)
+    if post.user!=current_user
+      current_user.journals.build(type_event: 'my_'+name_of_model_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: post.user, project: project,
+                                  body: "#{trim_content(post.content)}", first_id: post.id, personal: true, viewed: false).save!
+    end
+  end
+
+  def self.like_comment_event(current_user, project, name_of_comment_for_param, comment, against)
+    if comment.user!=current_user
+      current_user.journals.build(type_event: 'my_'+name_of_comment_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: comment.user, project: project,
+                                  body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(comment.post)),
+                                  first_id: comment.post.id, second_id: comment.id,
                                   personal: true, viewed: false).save!
     end
   end

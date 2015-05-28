@@ -1,0 +1,113 @@
+<div id="concept_post_<%= id %>" class="<%= discontent_class %> col-md-6 concept-block " data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
+    <div class="full-post">
+        <% if(admin_panel) { %>
+        <div class="post-top-header">
+            <a class="btn btn-white btn-xs link_status <%= useful ? 'theme_font_color' : '' %>" id="add_score_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/add_score"><i class="fa fa-trophy fa-lg"></i>
+            </a>
+            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'theme_font_color' : '' %>" id="approve_status_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/change_status?approve_status=true"><i class="fa fa-bookmark fa-lg"></i>
+            </a>
+            <!--<a class="btn btn-white btn-xs link_status"><i class="fa fa-exclamation-triangle fa-lg"></i>-->
+            <!--</a>-->
+        </div>
+        <% } %>
+        <div class="post post_type_3 merged">
+            <div class="<%= approve_status ? '' : 'hide' %>" data-important="<%= id %>">
+                <div class="important theme_font_color">
+                    <i class="fa fa-bookmark fa-2x"></i>
+                </div>
+            </div>
+            <div class="post-header white"></div>
+            <div class="post-body ch_action" data-for="post_ch<%= id %>">
+                <div class="media">
+                    <div class="media-left text-center gradient post-poster">
+                        <img class="img-circle img40" src="<%= user_avatar %>" >
+                        <p class="poster-name">
+                            <%= user %>
+                        </p>
+                        <p class="time">
+                            <%= post_date %>
+                        </p>
+                    </div>
+                    <div class='media-body white-gray'>
+                        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>">
+                            <h5 class="font_color_stage3 bold">
+                                <%= title %>
+                                <i class="fa fa-angle-right"></i>
+                            </h5>
+                        </a>
+                        <div class="post-text">
+                            <p>
+                                <%= content %>
+                            </p>
+                        </div>
+                        <% if(comments.length > 0) { %>
+                        <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
+                            <div class="wrapper ps_cont half_wheel_speed">
+                                <div class="post_cont_inner">
+                                    <% for(var i=0; i<comments.length; i++) {%>
+                                    <div class="comment_preview">
+                                            <span class="bold com_date">
+                                                <%= comments[i].date %>
+                                            </span>
+                                            <span class="bold">
+                                                <%= comments[i].user %>
+                                            </span>
+                                        <%= comments[i].content %>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="post-bottom white">
+                <div class="row">
+                    <div class="col-md-2 col_padding_right_3">
+                        <small class="pull-left" style="margin-right: 3px;">
+                            Несовершенства
+                        </small>
+                    </div>
+                    <div class="col-md-7 col_padding_right_3 themes_cont">
+                        <div id="stripe<%= id %>" class="post-theme">
+                            <% for(var i=0; i<discontents.length; i++) {%>
+                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                                    <span class="tags">
+                                      <%= discontents[i].content %>
+                                    </span>
+                                </span>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col_padding_left_3">
+                        <div class="text-right small_icons">
+                            <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
+                              <small class="cc_post_<%= id %>">
+                                <%= count_comments %>
+                              </small>
+                              <i class="fa fa-comment-o"></i>
+                            </span>
+                            <span class="popup2">
+                               <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
+                                   <%= count_likes %>
+                               </small>
+                               <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
+                                   <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
+                               </a>
+                            </span>
+                            <span class="popup2">
+                                <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
+                                    <%= count_dislikes %>
+                                </small>
+                                <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
+                                    <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

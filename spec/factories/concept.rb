@@ -1,23 +1,19 @@
 FactoryGirl.define do
   factory :concept, class: 'Concept::Post' do
-    status 0
-
-    after :create do |post|
-      discontent = create :discontent, project: post.project, status: 4
-      create :concept_aspect, discontent_aspect_id: discontent.id, concept_post_id: post.id
-      create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
-    end
-  end
-
-  factory :concept_aspect, class: 'Concept::PostAspect' do
-    sequence(:positive) { |n| "positive #{n}" }
-    sequence(:negative) { |n| "negative #{n}" }
+    association :user
+    association :project, factory: :core_project
     sequence(:title) { |n| "title #{n}" }
-    sequence(:name) { |n| "name #{n}" }
-    sequence(:control) { |n| "control #{n}" }
     sequence(:content) { |n| "content #{n}" }
-    sequence(:reality) { |n| "reality #{n}" }
-    sequence(:problems) { |n| "problems #{n}" }
+    sequence(:goal) { |n| "goal #{n}" }
+    sequence(:actors) { |n| "actors #{n}" }
+    sequence(:impact_env) { |n| "impact_env #{n}" }
+
+    factory :concept_with_discontent do
+      after :create do |post|
+        discontent = create :discontent, project: post.project, status: BasePost::STATUSES[:approved]
+        create :concept_post_discontent, post_id: post.id, discontent_post_id: discontent.id
+      end
+    end
   end
 
   factory :concept_post_discontent, class: 'Concept::PostDiscontent' do
@@ -28,5 +24,11 @@ FactoryGirl.define do
 
     association :user, factory: :ordinary_user
     association :post, factory: :concept
+  end
+
+  factory :concept_voting, class: 'Concept::Voting' do
+    association :user
+    association :discontent_post, factory: :discontent_with_aspects
+    association :concept_post, factory: :concept
   end
 end
