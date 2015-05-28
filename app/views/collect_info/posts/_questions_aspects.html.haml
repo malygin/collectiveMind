@@ -93,11 +93,7 @@
                           %li{class: "#{'active' if i == 0}", role: "presentation"}
                             %a{style: "background-color:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
                               = trim_content(post.title, 30)
-                - else
 
-                  .white-gray
-                    .radial-gradient
-                      .block_BZ
                 .row
                   .col-md-8.col-sm-8.min-col-right-padd
                     .aspect-main-block{style: "border-top-color: #{asp.color};"}
@@ -109,12 +105,16 @@
                                 = post.title
                               %p.aspect-main-block-text
                                 = post.content.html_safe unless post.content.nil?
-                      - else
+                      - elsif asp.knowbase_posts.size > 0
                         - asp.knowbase_posts.each_with_index do |post, i|
                           %h6.aspect-main-block-heading
                             = post.title
                           %p.aspect-main-block-text
-                            = post.content.html_safe unless post.content.nil?
+                            = post.content.html_safe unless post.content.nil
+                      - else
+                        .white-gray
+                          .radial-gradient
+                            .block_BZ
 
                   .col-md-4.col-sm-4.min-col-left-padd
                     .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
