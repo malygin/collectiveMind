@@ -7447,3 +7447,8 @@ a.btn-white{
 .exp_col.right .exp_button:focus {
     box-shadow: none;
 }
+
+.block_BZ{
+    min-height: 400px;
+    background: image-url('BZ.png') bottom center no-repeat;
+}
