@@ -130,4 +130,9 @@ describe 'Cabinet Discontents' do
       expect(page).not_to have_link "publish_#{@discontent.id}"
     }.to change(Discontent::Post.published, :count).by(1)
   end
+
+  it 'go to correct url' do
+    visit  new_concept_post_path(@project)
+    expect(current_path).to eq(new_discontent_post_path(@project))
+  end
 end

@@ -73,7 +73,6 @@ class CollectInfo::PostsController < PostsController
   private
 
   def set_aspects
-    # @todo выбираем только аспекты первого уровня (без вложенности)
     @aspects = @project.main_aspects
   end
 end
