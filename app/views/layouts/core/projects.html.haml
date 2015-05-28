@@ -7,22 +7,61 @@
   %body
     = yield
 - else
-  %body.background.landing
-    .container
-      %header.page-header
-        %a(name='top')
-        = render 'application/header_no_current_project'
-    #about.widget.widget-white.widget-about
-      .container
-        .col-sm-offset-1.col-sm-10
-          = yield
+  %body.landing
+    %header.navbar.top_bar
+      .container.font_grey
+        .navbar-header
+          .navbar-brand
+            %small massdecision@gmail.com
+        .navbar-right.text-right.user_block
+          %span.dropdown
+            %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+              %i.fa.fa-globe.font_lighter_grey
+              %small
+                Русский
+                %i.fa.fa-angle-down
+            %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
+              %li
+                %a{href: '#'} English
+              %li
+                %a{href: '#'} Русский
 
-    %h2.thanks.text-align-center
-      ="#{t('link.contacts')} #{t('link.phone')} +7-937-242-888-1, email: Gorlitskiy@mass-decision.ru"
-    %p.lead.text-align-center
-      %a.back-to-top(href="#top")
-        =t('link.top')
-        %i.fa.fa-angle-up
+    .divider35
+    = render 'application/header_no_current_project'
+    .container
+      = yield
+      .divider20
+      .widget-block.left_gradient
+        .image_1
+      .divider20
+      .widget-block.right_gradient
+        .image_2
+      .divider20
+      .widget-block.left_gradient
+        .image_3
+      %hr
+      %p.font_lighter_grey all rights reserved to MASSDECISION
+      .divider15
+    #popup-3-1.popup-window.detailed_popup.popup-w400.mfp-hide
+      .popup.popup-rounded
+        .divider35
+        .text-center
+          = image_tag 'logo.png', class: 'auth_logo'
+        .divider35
+        %form#auth-form1.form-horizontal.auth-form{:role => "form"}
+          %input{:name => "email", :placeholder => "Email", :type => "email"}/
+          %input{:name => "psswrd", :placeholder => "Пароль", :type => "password"}/
+          %button.btn.btn-lg.btn-block.btn-danger.auth-main{:type => "submit"} Войти
+        .divider25
+        .text-center
+          %ul.list-inline
+            %li{:href => "#"} Забыли пароль?
+            %li
+              = "|"
+            %li{:href => "#"} Зарегистрироваться
+        .divider35
+
+
   /
     Javascripts
     \==================================================

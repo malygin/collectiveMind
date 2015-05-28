@@ -1,31 +1,34 @@
-.navbar
-  .logo.pull-left.hidden-xs
-    %a{href: '/', id: 'go_to_logo'}
-      %h2
-        %strong Mass
-        Decision
-
-  %ul.nav.navbar-nav.pull-right.navbar-menu
-    - if signed_in?
-      -if @core_project
+%header.navbar.bottom-bar
+  .container
+    .navbar-header
+      .navbar-brand
+        %a{href: '/', id: 'go_to_logo'}
+          = image_tag 'logo.png', class: 'auth_logo'
+    %ul.list-inline.navbar-right
+      - if signed_in?
+        -if @core_project
+          %li
+            =link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
+        -elsif @project
+          %li
+            =link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
+        -else
+          %li
+            %p
+              Добро пожаловать, #{current_user.name.to_s} !
         %li
-          =link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
-      -elsif @project
+          %span.auth-divider |
         %li
-          =link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
+          = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
+            =t('menu.sign_out')
       -else
         %li
-          %a(class='btn btn-sm btn-transparent' id='user_profile')
-            = current_user.to_s
-      %li
-        = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
-          =t('menu.sign_out')
-          %i.fa.fa-arrow-right
-    -else
-      %li
-        = link_to t('menu.sign_in'), '/users/sign_in', class: 'btn btn-sm btn-transparent', id: 'sign_in'
-      %li
-        = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
+          = link_to t('menu.sign_in'), '/users/sign_in', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
+        %li
+          %span.auth-divider
+            = "|"
+        %li
+          = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent', id: 'sign_up'
 
 
 
