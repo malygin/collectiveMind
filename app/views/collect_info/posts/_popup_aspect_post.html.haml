@@ -53,12 +53,6 @@
             -# @todo прицепить perfectScrollbar, без сокращения пояснения
             .post-text.ps_cont
               = @post.questions.by_type(0).first.try(:content)
-              %br
-              -@post.user_answers_for_aspect.each do |answer|
-                %span.bold
-                  ="#{answer.user}:"
-                =" #{answer.answer.try(:content)}  #{answer.content}"
-                %br
 
 
       .container.modal_content.ps_cont.white-gray
@@ -68,7 +62,7 @@
             .separator
               %hr
                 .separator_label.text-left
-                  %h4 Обсуждение результатов опроса
+                  %h4 Обсуждение аспекта
                 .separator_label.pull-right
                   %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
             .chat-messages#comments.collapse.in

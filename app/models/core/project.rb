@@ -214,5 +214,14 @@ class Core::Project < ActiveRecord::Base
     type_access == 0 ? true : (users.include?(user) || user.boss?)
   end
 
+  def get_other_aspects_sorted_by(sort_rule)
+    if sort_rule == 'sort_by_comments'
+      self.other_main_aspects.sort_comments
+    elsif sort_rule == 'sort_by_date'
+      self.other_main_aspects.created_order
+    else
+      self.other_main_aspects
+    end
+  end
 
 end
