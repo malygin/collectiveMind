@@ -67,8 +67,8 @@ CollectiveMind::Application.routes.draw do
         post :update_score
         put :journal_clear
         # mail sender
-        get :edit_notice
-        post :create_notice
+        # get :edit_notice
+        # post :create_notice
         get 'add_score/:score' => 'users#add_score'
       end
     end
