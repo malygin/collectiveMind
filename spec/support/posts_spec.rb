@@ -270,7 +270,7 @@ shared_examples 'admin panel post' do |moderator = false|
         sleep(5)
         expect(page).to have_css("a.theme_font_color#approve_status_post_#{@post1.id}")
         expect(page).to have_css("div:not(.hide)[data-important='#{@post1.id}']")
-      }.to change(Journal, :count).by(2)
+      }.to change(Journal, :count).by(1)
       find(:css, "a#approve_status_post_#{@post1.id}").trigger('click')
       sleep(5)
       expect(page).to have_css("a:not(.theme_font_color)#approve_status_post_#{@post1.id}")
