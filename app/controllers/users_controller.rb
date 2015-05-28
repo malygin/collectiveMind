@@ -8,11 +8,7 @@ class UsersController < ProjectsController
 
   def index
     @users = @project.users_in_project.where(users: {type_user: 0})
-    # if @project.type_access == 2
-    #   @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.score }.reverse!.uniq
-    # else
-    #   @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order("core_project_scores.score DESC")
-    # end
+
   end
 
   def new
@@ -54,34 +50,11 @@ class UsersController < ProjectsController
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
       journal_data
     end
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  #рейтинг по категориям
-  def show_top
-    if @project.type_access == 2
-      @users = @project.users_in_project.where(users: {type_user: uniq_proc_users}).sort_by { |c| c.core_project_scores.by_project(@project).first.nil? ? 0 : c.core_project_scores.by_project(@project).first.send(params[:score_name]) }.reverse!.uniq
-    else
-      @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: {type_user: uniq_proc_users}).order(score_order(params[:score_name]))
-    end
-    @score_name = params[:score_name]
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
 
-  def list_users
-    @added_users = User.joins(:core_project_users).where('core_project_users.project_id = ?', @project.id)
-    @users = User.without_added(@added_users.pluck(:id)).paginate(page: params[:page])
-    respond_to do |format|
-      format.html { render layout: 'core/projects' }
-      format.js
-    end
-  end
+
 
   def search
     @code = params[:code]
@@ -98,26 +71,10 @@ class UsersController < ProjectsController
     end
   end
 
-  def add_score
-    if boss?
-      @project = Core::Project.find(params[:project])
-      @user.add_score_by_type(@project, params[:score].to_i, :score_a)
-      @user.journals.build(type_event: 'add_score', project: @project, body: params[:score]).save
-      current_user.journals.build(type_event: 'my_add_score', user_informed: @user, project: @project, body: params[:score], viewed: false).save!
-    end
-    respond_to do |format|
-      format.js
-    end
-  end
 
-  def add_score_essay
-    if boss?
-      @user.journals.build(type_event: 'add_score_essay', project: @project, body: params[:score]).save
-    end
-    render json: @user.score
-  end
 
-  #рассылка новостей
+
+  #mail sender
   def edit_notice
     @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
     @journal_mailer = JournalMailer.new

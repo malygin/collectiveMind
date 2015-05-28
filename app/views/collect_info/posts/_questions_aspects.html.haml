@@ -110,7 +110,7 @@
                           %h6.aspect-main-block-heading
                             = post.title
                           %p.aspect-main-block-text
-                            = post.content.html_safe unless post.content.nil
+                            = post.content.html_safe unless post.content.nil?
                       - else
                         .white-gray
                           .radial-gradient
