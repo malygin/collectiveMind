@@ -153,7 +153,6 @@ class PostsController < ProjectsController
 
 
   private
-  # @todo add test for this
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
     unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
