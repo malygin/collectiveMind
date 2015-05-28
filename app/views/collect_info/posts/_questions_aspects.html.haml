@@ -181,9 +181,13 @@
                               = post.title
                             %p.aspect-main-block-text
                               = post.content.html_safe unless post.content.nil?
-                    - else
+                    - elsif asp.knowbase_posts.size > 0
                       - asp.knowbase_posts.each_with_index do |post, i|
                         %h6.aspect-main-block-heading
                           = post.title
                         %p.aspect-main-block-text
                           = post.content.html_safe unless post.content.nil?
+                    - else
+                      .white-gray
+                        .radial-gradient
+                          .block_BZ

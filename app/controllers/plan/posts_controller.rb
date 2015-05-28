@@ -67,6 +67,12 @@ class Plan::PostsController < PostsController
     redirect_back_or user_content_plan_posts_path(@project)
   end
 
+  def vote
+     @post_vote = voting_model.find(params[:id])
+     @post_vote.final_votings.where(user_id: current_user, type_vote: params[:type_vote].to_i).destroy_all
+     @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
+
+  end
 
   # # @todo methods for note
   # def new_note

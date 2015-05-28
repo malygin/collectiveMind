@@ -123,30 +123,12 @@ class PostsController < ProjectsController
     @against = params[:against]
     @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
     Journal.like_event(current_user, @project, name_of_model_for_param, @post, @against)
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def vote
     @post_vote = voting_model.find(params[:id])
-    saved_vote = @post_vote.final_votings.where(user_id: current_user)
-    if @post_vote.instance_of? Plan::Post
-      saved_vote.where(type_vote: params[:type_vote].to_i).destroy_all
-      @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
-    else
-      if saved_vote.present?
-        vote = saved_vote.first
-        if vote.status != params[:status].to_i
-          saved_vote.destroy_all
-          @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
-        elsif vote.status == params[:status].to_i
-          saved_vote.destroy_all
-        end
-      else
-        @post_vote.final_votings.create(user: current_user, status: params[:status]).save!
-      end
-    end
+    @post_vote.vote(current_user, params[:status])
 
   end
 
@@ -158,7 +140,6 @@ class PostsController < ProjectsController
     head :ok
   end
 
-
   def answer_content_question
     @question = Core::ContentQuestion.find(params[:question_id])
     current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
@@ -166,34 +147,9 @@ class PostsController < ProjectsController
 
   def change_status
     @post = current_model.find(params[:id])
-
-    if params[:discuss_status]
-      @post.toggle!(:discuss_status)
-      if @post.discuss_status
-        type = 'discuss_status'
-      end
-    elsif params[:approve_status]
-      @post.toggle!(:approve_status)
-      if @post.approve_status
-        type = 'approve_status'
-      end
-    end
-    if type
-      current_user.journals.build(type_event: name_of_model_for_param+'_'+type, project: @project,
-                                  body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id).save!
-      if @post.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_model_for_param+'_'+type, user_informed: @post.user, project: @project,
-                                    body: "#{trim_content(field_for_journal(@post))}", first_id: @post.id, personal: true, viewed: false).save!
-      end
-      if @project.closed?
-        Resque.enqueue(PostNotification, current_model.to_s, @project.id, current_user.id, name_of_model_for_param, type, @post.id)
-      end
-    end
-    respond_to do |format|
-      format.js
-    end
+    @post.change_status_by current_user, params
+    respond_to :js
   end
-
 
 
   private

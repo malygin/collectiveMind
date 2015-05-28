@@ -4,12 +4,6 @@ module SessionsHelper
   end
 
 
-
-  def have_project_access
-    @project ||= Core::Project.find(params[:project]) if params[:project]
-    redirect_to :root unless @project.project_access(current_user) or boss?
-  end
-
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to

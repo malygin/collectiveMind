@@ -1,14 +1,10 @@
 class UsersController < ProjectsController
   before_action :set_user
   before_filter :correct_user, only: [:update]
-  before_filter :journal_data, only: [:index, :new, :show, :users_rc, :journal_clear, :edit_notice]
-  before_filter :boss_authenticate, only: [:users_rc]
-  before_filter :prime_admin_authenticate, only: [:destroy, :list_users, :club_toggle, :update_score]
-  before_filter :have_project_access
+  before_filter :journal_data, only: [:index, :new, :show,  :journal_clear, :edit_notice]
 
   def index
     @users = @project.users_in_project.where(users: {type_user: 0})
-
   end
 
   def new
@@ -53,9 +49,6 @@ class UsersController < ProjectsController
     respond_to :js
   end
 
-
-
-
   def search
     @code = params[:code]
     @search_users = User.search params[:search_users_text]
@@ -70,8 +63,6 @@ class UsersController < ProjectsController
       end
     end
   end
-
-
 
 
   #mail sender

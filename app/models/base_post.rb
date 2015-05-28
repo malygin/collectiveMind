@@ -1,6 +1,9 @@
 module BasePost
   extend ActiveSupport::Concern
   include Util::Filterable
+  include ApplicationHelper
+  include MarkupHelper
+
 
   # Statuses of post
   STATUSES = {
@@ -111,6 +114,45 @@ module BasePost
 
     def note_size?(type_field)
       self.post_notes(type_field).size > 0
+    end
+
+    def vote(user, status)
+      saved_vote = self.final_votings.where(user_id: user)
+      if saved_vote.present?
+        vote = saved_vote.first
+        if vote.status != status.to_i
+          saved_vote.destroy_all
+          self.final_votings.create(user: user, status: status).save!
+        elsif vote.status == status.to_i
+          saved_vote.destroy_all
+        end
+      else
+        self.final_votings.create(user: user, status: params[:status]).save!
+      end
+    end
+
+    def change_status_by(user, params)
+      if params[:discuss_status]
+        self.toggle!(:discuss_status)
+        if self.discuss_status
+          type = 'discuss_status'
+        end
+      elsif params[:approve_status]
+        self.toggle!(:approve_status)
+        if self.approve_status
+          type = 'approve_status'
+        end
+      end
+      if type
+
+        if self.user!=user
+          self.user.journals.build(type_event: 'my_'+self.class.table_name.singularize+'_'+type, user_informed: self.user, project: self.project,
+                                      body: "#{trim_content(field_for_journal(self))}", first_id: self.id, personal: true, viewed: false).save!
+        end
+        # if @project.closed?
+        #   Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
+        # end
+      end
     end
 
     def add_comment(params, user, comment_parent, comment_answer, name_of_comment_for_journal)
