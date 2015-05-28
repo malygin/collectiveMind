@@ -6,14 +6,14 @@
   = render partial: 'discuss_aspects'
 
 
-
--#- if shown_intro('collect_info_intro') == ''
--#  = render partial: 'popup_welcome'
+- unless @project.name == 'Диполь'
+  - if shown_intro('collect_info_intro') == ''
+    = render partial: 'popup_welcome'
 - if @project.type_for_questions == 0
   = render partial: 'popup_greetings'
 
-
-#popup-explanation-1.popup-window.popup-explanation.popup-w1030.mfp-hide.welcome_popup{class: "#{'shown_intro' if boss?}"}
-  .popup.popup_rounded
-    .modal_badge.back_color_stage1.rounded_2.font_white МОДАЛКА ДЛЯ СЛАЙДЕРА
+- if @project.name == 'Диполь'
+  #popup-explanation-1.popup-window.popup-explanation.popup-w1030.mfp-hide.welcome_popup{class: "#{'shown_intro' if boss?}"}
+    .popup.popup_rounded
+      .modal_badge.back_color_stage1.rounded_2.font_white МОДАЛКА ДЛЯ СЛАЙДЕРА
 
