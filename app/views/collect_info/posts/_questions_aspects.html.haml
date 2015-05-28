@@ -40,7 +40,6 @@
           .row
             .col-md-12.col-sm-12
               .aspect-main-block{style: "border-top-color:#eac85e;"}
-                %h5.bold Описание проблемной ситуации
                 = @project.introduction.html_safe if @project.introduction
 
         - @proc_aspects.each_with_index do |asp, index|
