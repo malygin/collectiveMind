@@ -120,6 +120,9 @@
                                 .form-group.bottom-buttons
                                   -if @project.type_for_questions == 1
                                     %a.btn.btn-outline.notice-button.notice.close-notice{id:"notice_question_#{question.id}", style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                                  -if @project.type_for_questions == 0
+                                    = submit_tag "Пропустить", name: 'skip', class: "btn answer-button questionsCarousel-target", style: "background-color: #{asp.color};"
+                                    -#%button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Пропустить
                                   %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
             - else
               - if asp.knowbase_posts.size > 1

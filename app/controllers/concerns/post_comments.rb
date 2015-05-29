@@ -22,7 +22,8 @@ module PostComments
   end
 
   def update_comment
-    @comment = comment_model.find(params[:id]).update_attributes(content: params[:content])
+    @comment = comment_model.find(params[:id])
+    @comment.update_attributes(content: params[:content])
     @aspects = Core::Aspect::Post.where(project_id: @project)
     if params[:image]
       img, isFile = Util::ImageLoader.load(params[name_of_comment_for_param])
