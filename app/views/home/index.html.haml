@@ -20,7 +20,8 @@
               .divider3
               %h4
                 %i.fa.fa-users.font_red
-                30 участников
+                =project.users_in_project.count
+                участников
             .col-md-3
               .divider5
               = link_to current_stage_url(project), class:'btn  btn-danger', id: "go_to_closed_project_#{project.id}" do

@@ -21,7 +21,7 @@
                 Русский
                 %i.fa.fa-angle-down
             %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
-              %li
+              %li.disabled
                 %a{href: '#'} English
               %li
                 %a{href: '#'} Русский
@@ -48,18 +48,41 @@
         .text-center
           = image_tag 'logo.png', class: 'auth_logo'
         .divider35
-        %form#auth-form1.form-horizontal.auth-form{:role => "form"}
-          %input{:name => "email", :placeholder => "Email", :type => "email"}/
-          %input{:name => "psswrd", :placeholder => "Пароль", :type => "password"}/
-          %button.btn.btn-lg.btn-block.btn-danger.auth-main{:type => "submit"} Войти
-        .divider25
-        .text-center
-          %ul.list-inline
-            %li{:href => "#"} Забыли пароль?
-            %li
-              = "|"
-            %li{:href => "#"} Зарегистрироваться
+        = form_for(:user,  :html => {:id => 'auth-form1', :class =>'form-horizontal auth-form'}, :url => user_session_path) do |f|
+          -#= devise_error_messages!
+          -#- flash.each do |name, msg|
+          -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
+          = f.email_field :email, placeholder: 'Email'
+          = f.password_field :password, placeholder: 'Пароль'
+          -#.form-group
+          -#  = f.label :remember_me, 'Запомнить меня'
+          -#  = f.check_box :remember_me
+          %button.btn.btn-lg.btn-block.btn-danger.auth-main{id: "sign_in", type: "submit"} Войти
+          .divider25
+          -#.text-center
+          -#  %ul.list-inline
+          -#    %li{:href => "#"} Забыли пароль?
+          -#    %li
+          -#      = "|"
+          -#    %li{:href => "#"} Зарегистрироваться
+    #popup-3-2.popup-window.detailed_popup.popup-w400.mfp-hide
+      .popup.popup-rounded
         .divider35
+        .text-center
+          = image_tag 'logo.png', class: 'auth_logo'
+        .divider35
+        = form_for(:user,  :html => {:id => 'auth-form1', :class =>'form-horizontal auth-form'}, :url => user_registration_path) do |f|
+          -#= devise_error_messages!
+          -#- flash.each do |name, msg|
+          -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
+          = f.email_field :email, placeholder: 'Ваш Email'
+          = f.text_field :name, placeholder: 'Имя'
+          = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
+          = f.password_field :password, placeholder: 'Повторите пароль'
+          %button.btn.btn-lg.btn-block.btn-danger.auth-main{id: "Signin", type: "submit"} Зарегистрироваться
+
+
+
 
 
   /
