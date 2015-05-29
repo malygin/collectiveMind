@@ -127,7 +127,7 @@ module BasePost
           saved_vote.destroy_all
         end
       else
-        self.final_votings.create(user: user, status: params[:status]).save!
+        self.final_votings.create(user: user, status: status).save!
       end
     end
 

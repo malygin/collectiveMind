@@ -43,8 +43,8 @@ CollectiveMind::Application.routes.draw do
   devise_for :users
 
   get '/project/:id', to: 'core/projects#show'
-  get '/project/:id/next_stage', to: 'core/projects#next_stage'
-  get '/project/:id/prev_stage', to: 'core/projects#prev_stage'
+  put '/project/:id/next_stage', to: 'core/projects#next_stage'
+  put '/project/:id/prev_stage', to: 'core/projects#prev_stage'
 
 
 
