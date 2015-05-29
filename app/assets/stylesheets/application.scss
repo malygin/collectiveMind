@@ -21,6 +21,9 @@
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
 
+#error_explanation ul{
+  text-align: left;
+}
 // hide checkbox in answers for 1 stage
 .answer-question input {
   display: none;

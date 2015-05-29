@@ -104,6 +104,13 @@ $ ->
     $(this).datepicker "hide"
     return
 
+  $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
+    $('#error_explanation').html 'Авторизация успешна, грузим список доступных процедур'
+    location.reload()
+
+  $("form#auth-form1").bind "ajax:error", (e, data, status, xhr) ->
+    $('#error_explanation').html data.responseText
+
   # аутосайз полей в кабинете
   $('#cabinet_form textarea').not('.without_autosize').autosize()
 

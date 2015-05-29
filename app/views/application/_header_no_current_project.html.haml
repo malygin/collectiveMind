@@ -23,12 +23,12 @@
             =t('menu.sign_out')
       -else
         %li
-          = link_to t('menu.sign_in'), '/users/sign_in', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
+          = link_to t('menu.sign_in'), '#', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
         %li
           %span.auth-divider
             = "|"
-        %li
-          = link_to t('menu.sign_up'), '/users/sign_up', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_up', data:{target:'2',placement:'3'}
+        %li.disabled
+          = link_to t('menu.sign_up'), '#', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_up', data:{target:'2',placement:'3'}
 
 
 

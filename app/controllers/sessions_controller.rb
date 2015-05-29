@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       journal_enter
       redirect_back_or '/'
     end
+    respond_to :js, :html
   end
 
   def destroy

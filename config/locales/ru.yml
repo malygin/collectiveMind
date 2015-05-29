@@ -1,5 +1,11 @@
 ---
 ru:
+
+  project_users_count:
+    one: "1 участник"
+    other: "%{count} участников"
+    few: "%{count} участника"
+    many: "%{count} участников"
   analytic:
     graph_visits: "График посещений"
   confirm:
