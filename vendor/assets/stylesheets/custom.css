@@ -698,6 +698,7 @@ textarea:focus {
 /* TOP BAR */
 
 .top_bar {
+    background: #f4f4f4;
     margin-bottom: 0;
 }
 
@@ -1137,12 +1138,10 @@ a.active {
     letter-spacing: 3px;
 }
 
-.auth-wrapper .auth-logo {
-    width: 165px;
-    height: 84px;
+.auth_logo{
+    width: 150px;
+    height: 65px;
     display: inline-block;
-    margin-left: -20px;
-    background: image-url('logo.png') center no-repeat;
 }
 
 .auth-form {
@@ -7451,4 +7450,62 @@ a.btn-white{
 .block_BZ{
     min-height: 400px;
     background: image-url('BZ.png') bottom center no-repeat;
+}
+
+/*HOME PAGE*/
+
+.landing{
+    background: white;
+}
+.landing .top_bar{
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.landing .navbar a,.landing .navbar span{
+    color:#EA1B22;
+}
+.bottom-bar .navbar-right{
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+.bottom-bar .navbar-brand{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.widget-block-procedure{
+    padding-top:20px;
+    padding-bottom: 20px;
+    border: 1px solid #e2e2e2;
+}
+.widget-block{
+    background:#e1e8f3 ;
+    border: 1px solid #e2e2e2;
+    height: 170px;
+}
+
+.widget-block.right_gradient{
+    background: linear-gradient(to right, #eff2f7 0%, #eff2f7 36%, #e1e8f3 100%);
+}
+.widget-block.left_gradient{
+    background: linear-gradient(to right, #e1e8f3 0%, #eff2f7 76%, #eff2f7 100%);
+}
+
+.image_1{
+    height: 100%;
+    background: image-url("home_page-1_1.png") center left 70px no-repeat, image-url("home_page-1_2.png") bottom  right no-repeat;
+}
+.image_2{
+    height: 100%;
+    background: image-url("home_page-2_2a.png") top  left no-repeat, image-url("home_page-2_2b.png") bottom  left 120px no-repeat,image-url("home_page-2_1.png") center right 60px no-repeat;
+
+}
+.image_3{
+    height: 100%;
+    background: image-url("home_page-3_1.png") center  left 70px no-repeat, image-url("home_page-3_2.png") top 20px  right 170px no-repeat;
+}
+.popup-w400{
+    width: 400px;
+}
+.popup-w400 .popup{
+    padding: 20px;
 }
