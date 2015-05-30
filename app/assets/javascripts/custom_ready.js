@@ -1,5 +1,23 @@
 $(document).ready(function () {
-
+    $('#present-carousel').carousel({
+        pause: "false",
+        interval:6000
+    });
+    $('#btn_play').click(function () {
+        $('#present-carousel').carousel('cycle');
+        $(this).toggleClass('inactive');
+        $('#btn_pause').toggleClass('inactive');
+    });
+    $('#btn_pause').click(function () {
+        $('#present-carousel').carousel('pause');
+        $(this).toggleClass('inactive');
+        $('#btn_play').toggleClass('inactive');
+    });
+    $('#present-carousel').on('slid.bs.carousel', function () {
+        var act_index = $('#present-carousel .item.active').index();
+        $('#present-carousel-nav li').removeClass('active');
+        $('#present-carousel-nav li[data-slide-to="' + act_index + '"]').addClass('active');
+    });
     /* tooltips for all stages */
     $("#tooltip_button_1").click(function() {
         if ($(this).hasClass('btn-tooltip')) {

@@ -8,7 +8,7 @@
 # Offense count: 1
 # Configuration parameters: AlignWith, SupportedStyles.
 Lint/EndAlignment:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 2
 Lint/RescueException:

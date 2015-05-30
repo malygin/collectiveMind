@@ -20,7 +20,12 @@
 @import "gantt/gantt";
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
-
+.temp_blocker .popup{
+  text-align: left;
+}
+.temp_blocker .btn{
+  padding: 0px;
+}
 #error_explanation ul{
   text-align: left;
 }
