@@ -1,4 +1,4 @@
-%header.navbar.bottom-bar
+%header.navbar.bottom-bar.no_margin
   .container
     .navbar-header
       .navbar-brand
@@ -13,22 +13,19 @@
           %li
             =link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
         -else
-          %li
-            %p
-              Добро пожаловать, #{current_user.name.to_s} !
+          %li.font_grey.no_margin
+            Добро пожаловать, #{current_user.name.to_s} !
         %li
-          %span.auth-divider |
-        %li
-          = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'btn btn-sm btn-transparent' do
+          = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'' do
             =t('menu.sign_out')
       -else
         %li
-          = link_to t('menu.sign_in'), '#', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
+          = link_to t('menu.sign_in'), '#', class: 'open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
         %li
           %span.auth-divider
             = "|"
         %li.disabled
-          = link_to t('menu.sign_up'), '#', class: 'btn btn-sm btn-transparent open-popup', id: 'sign_up', data:{target:'2',placement:'3'}
+          = link_to t('menu.sign_up'), '#', class: 'open-popup', id: 'sign_up', data:{target:'2',placement:'3'}
 
 
 
