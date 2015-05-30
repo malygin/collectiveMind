@@ -753,6 +753,7 @@ textarea:focus {
 /* TOP BAR */
 
 .top_bar {
+    background: #f4f4f4;
     margin-bottom: 0;
 }
 
@@ -1193,12 +1194,10 @@ a.active {
     letter-spacing: 3px;
 }
 
-.auth-wrapper .auth-logo {
-    width: 165px;
-    height: 84px;
+.auth-logo {
+    width: 150px;
+    height: 65px;
     display: inline-block;
-    margin-left: -20px;
-    background: image-url('logo.png') center no-repeat;
 }
 
 .auth-form {
@@ -7215,8 +7214,8 @@ a.btn-white{
 .important{
     width: 60px;
     height: 60px;
+    margin-left: 7px;
     position: absolute;
-    background: image-url('important.png') no-repeat;
 }
 
 .bottom_btn{
@@ -7707,8 +7706,15 @@ li.active > .big_tab:after {
     background: image-url('white-cursor.png') no-repeat;
 }
 
+.block_BZ {
+    min-height: 400px;
+    background: image-url('BZ.png') bottom center no-repeat;
+}
 
-
+/*HOME PAGE*/
+.landing {
+    background: white;
+}
 
 
 /* present styles */
@@ -7873,4 +7879,45 @@ li.active > .big_tab:after {
 }
 .btn_pause {
     background: image-url('pause.png') no-repeat;
+}
+
+.image_1 {
+     height: 100%;
+     background: image-url("home_page-1_1.png") center left 70px no-repeat, image-url("home_page-1_2.png") bottom right no-repeat;
+}
+.image_2 {
+     height: 100%;
+     background: image-url("home_page-2_2a.png") top left no-repeat, image-url("home_page-2_2b.png") bottom left 120px no-repeat, image-url("home_page-2_1.png") center right 60px no-repeat;
+ }
+
+.image_3 {
+    height: 100%;
+    background: image-url("home_page-3_1.png") center left 70px no-repeat, image-url("home_page-3_2.png") top 20px right 170px no-repeat;
+}
+
+.widget-block.left_gradient {
+     background: linear-gradient(to right, #e1e8f3 0%, #eff2f7 76%, #eff2f7 100%);
+}
+
+.widget-block.right_gradient {
+    background: linear-gradient(to right, #eff2f7 0%, #eff2f7 36%, #e1e8f3 100%);
+}
+
+.widget-block {
+     background: #e1e8f3;
+     border: 1px solid #e2e2e2;
+     height: 170px;
+}
+
+.widget-block-procedure {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #e2e2e2;
+}
+
+.popup-w400{
+     width: 400px;
+}
+.popup-w400 .popup{
+    padding: 20px;
 }
