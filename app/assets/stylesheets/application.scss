@@ -20,6 +20,23 @@
 @import "gantt/gantt";
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
+
+
+.popup_present .popup .modal_badge{
+  position: absolute;
+  top: -5px;
+  left: 30px;
+  padding: 5px 30px;
+}
+//.popup_present .popup {
+//  background: #fff;
+//  text-align: center;
+//  padding: 41px 94px 56px;
+//  position: relative;
+//}
+
+
+
 .temp_blocker .popup{
   text-align: left;
 }

@@ -101,6 +101,21 @@ $(document).ready(function () {
         }
     };
 
+    if ($('.popup_present').length){
+        if (!$('.popup_present').hasClass('shown_intro')){
+            $.magnificPopup.open({
+                items: {src: '.popup_present'},
+                type: 'inline',
+                //absolute prohibition on closing
+                closeOnContentClick: false,
+                closeOnBgClick: false,
+                closeBtnInside: false,
+                showCloseBtn: false,
+                enableEscapeKey: false
+            });
+        }
+    };
+
 
     /* show hint for question on 1st stage  */
     $('.notice-button').click(function(){
