@@ -1180,7 +1180,7 @@
                     НЕСОВЕРШЕНСТВ,
                     %br/
                     ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ
-    #vote-2.popup-window.popup-vote.popup-w1030.mfp-hide
+    #vote-2.popup-window.popup-vote.popup-w915.mfp-hide
       .popup.popup_rounded
         .modal_title
           .row
@@ -1188,8 +1188,11 @@
               %h4.bold.font_dark_grey
                 Голосование по несовершенствам
         .vote_progress_cont.progress
-          .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
-        .modal_body
+          .vote_progress.back_color_stage2.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar", :style => "width: 35%;"}
+        .modal_body.lighter-grey
+          .divider15
+          %h5.text-center.no_margin Распределите несовершенства по папкам
+          .divider5
           .container.vote_folders_cont.folders_4.no_padding_col
             %ul.nav.vote_nav.row{:role => "tablist"}
               %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
@@ -1206,113 +1209,211 @@
                 %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
                   .vote_folder_inn.poll-2-3
                     %span.vote_counter
-                    %h5 Важно
+                    %h5 Нравится
               %li.col-md-3.no_padding_col{:role => "presentation"}
                 %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
                   .vote_folder_inn.poll-2-4
                     %span.vote_counter
-                    %h5 Неважно
-          .divider25
-          .container
-            .row
-              .divider25
-              .tab-content
-                #vote_tab1.tab-pane.all_vote.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
-                  .container.padding30
-                    .row
-                      .col-sm-4.vote_item_cont
-                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "0", "data-me-type" => "imperf"}
-                          .heading_cont
-                            %h6 Нечем дышать
-                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "5", "data-me-type" => "aspect"}
-                            Аспект: Слишком низкие
-                            потолки в офисах
-                          .divider10
-                          .vote_controls.text-center
-                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                              %i.fa.fa-exclamation
-                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                              %i.fa.fa-check
-                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                              %i.fa.fa-minus
+                    %h5 Не нравится
+            .divider5
+          .container.white.border_top_grey
+            .divider10
+            .tab-content
+              #vote_tab1.tab-pane.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
+                .container
+                  .row
+                    .col-sm-6
+                      %h5 Несовершенства
+                      .divider_1_grey.margin_right_25
+                      .cab_cont_h450
+                        %ul.list-unstyled.ps_cont{:role => "tablist"}
                           .divider15
-                      .col-sm-4.vote_item_cont
-                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "1", "data-me-type" => "imperf"}
-                          .heading_cont
-                            %h6 Нечем дышать
-                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "3", "data-me-type" => "aspect"}
-                            Аспект: Слишком низкие
-                            потолки в офисах
+                          %li.active{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp1", :role => "tab"}
+                              Несовершенство 1
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp2", :role => "tab"}
+                              Несовершенство 2 название пакета название пакета название пакета название пакета название пакета название пакета название пакета
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp3", :role => "tab"}
+                              Несовершенство 3
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp4", :role => "tab"}
+                              Несовершенство 4
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp5", :role => "tab"}
+                              Несовершенство 5
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp6", :role => "tab"}
+                              Несовершенство 6
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp7", :role => "tab"}
+                              Несовершенство 7
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
+                          %li{:role => "presentation"}
+                            %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{"data-toggle" => "tab", :href => "#imp8", :role => "tab"}
+                              Несовершенство 8
+                              .vote_controls.text-center
+                                %button.btn.b_vote.v_btn_1{"data-icon-class" => "fa-exclamation", :role => "button"}
+                                %button.btn.b_vote.v_btn_2{"data-icon-class" => "fa-check", :role => "button"}
+                                %button.btn.b_vote.v_btn_3{"data-icon-class" => "fa-minus", :role => "button"}
                           .divider10
-                          .vote_controls.text-center
-                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                              %i.fa.fa-exclamation
-                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                              %i.fa.fa-check
-                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                              %i.fa.fa-minus
-                          .divider15
-                      .col-sm-4.vote_item_cont
-                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "2", "data-me-type" => "imperf"}
-                          .heading_cont
-                            %h6 Нечем дышать
-                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "6", "data-me-type" => "aspect"}
-                            Аспект: Слишком низкие
-                            потолки в офисах
-                          .divider10
-                          .vote_controls.text-center
-                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                              %i.fa.fa-exclamation
-                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                              %i.fa.fa-check
-                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                              %i.fa.fa-minus
-                          .divider15
-                      .col-sm-4.vote_item_cont
-                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "3", "data-me-type" => "imperf"}
-                          .heading_cont
-                            %h6 Нечем дышать
-                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "8", "data-me-type" => "aspect"}
-                            Аспект: Слишком низкие
-                            потолки в офисах
-                          .divider10
-                          .vote_controls.text-center
-                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                              %i.fa.fa-exclamation
-                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                              %i.fa.fa-check
-                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                              %i.fa.fa-minus
-                          .divider15
-                      .col-sm-4.vote_item_cont
-                        .vote_item.color_me{"data-me-action" => "border-top-color", "data-me-color" => "4", "data-me-type" => "imperf"}
-                          .heading_cont
-                            %h6 Нечем дышать
-                          .vote_tag.color_me{"data-me-action" => "background", "data-me-color" => "10", "data-me-type" => "aspect"}
-                            Аспект: Слишком низкие
-                            потолки в офисах
-                          .divider10
-                          .vote_controls.text-center
-                            %button.btn.vote_button.v_btn_1{"data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-                              %i.fa.fa-exclamation
-                            %button.btn.vote_button.v_btn_2{"data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                              %i.fa.fa-check
-                            %button.btn.vote_button.v_btn_3{"data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                              %i.fa.fa-minus
-                          .divider15
-                  .divider50
-                #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
-                  .container.padding30
-                    .row
-                    .divider50
-                #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
-                  .container.padding30
-                    .row
-                    .divider50
-                #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
-                  .container.padding30
-                    .row
-                    .divider50
+                    .col-sm-6.tab-content
+                      %h5 Описание
+                      .divider_1_grey.margin_right_25
+                      #imp1.tab-pane.active.fade.in{:role => "tabpanel"}
+                        .cab_cont_h450
+                          .ps_cont
+                            .divider15
+                            .border_light_grey.rounded_3.imperf_left
+                              .media.comment.main_line
+                                .container
+                                  .media-left
+                                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                              %table.table
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    На каком этапе деятельности (бизнес-процесса) это происходит?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    после окончания процедуры
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    В чем причина такого положения?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                            .divider10
+                            %h5 Аспекты
+                            .divider5
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                      #imp2.tab-pane.fade{:role => "tabpanel"}
+                        .cab_cont_h450
+                          .ps_cont
+                            .divider15
+                            .border_light_grey.rounded_3.imperf_left
+                              .media.comment.main_line
+                                .container
+                                  .media-left
+                                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                              %table.table
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    На каком этапе деятельности (бизнес-процесса) это происходит?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    после окончания процедуры
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    В чем причина такого положения?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                            .divider10
+                            %h5 Аспекты
+                            .divider5
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                      #imp3.tab-pane.fade{:role => "tabpanel"}
+                        .cab_cont_h450
+                          .ps_cont
+                            .divider15
+                            .border_light_grey.rounded_3.imperf_left
+                              .media.comment.main_line
+                                .container
+                                  .media-left
+                                    %img.media-object.img50.img-circle{:src => "img/ava-vinnie.jpg"}/
+                                  .media-body
+                                    %h5.media-heading.bold Винни-Пух
+                              %table.table
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    На каком этапе деятельности (бизнес-процесса) это происходит?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    после окончания процедуры
+                                %tr
+                                  %td.col-md-12.left-column.bold
+                                    В чем причина такого положения?
+                                %tr
+                                  %td.col-md-12.left-column
+                                    нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                            .divider10
+                            %h5 Аспекты
+                            .divider5
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "1", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "6", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "7", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "9", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "11", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+                            %span.tag-stripes.margin_bot_5.active.color_me{"data-me-action" => "background-color", "data-me-color" => "12", "data-me-type" => "aspect"}
+                              %span.tags Взаимоотношения четвероногих
+              #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
+                .container.vote_itemslist_cont
+                  .row
+              #vote_tab3.tab-pane{"data-vote-poll-role" => "not_important", :role => "tabpanel"}
+                .container.vote_itemslist_cont
+                  .row
+              #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+                .container.vote_itemslist_cont
+                  .row
               .divider35
     #popup-explanation-2nd.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup
       .popup.popup_rounded

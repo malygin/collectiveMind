@@ -967,7 +967,7 @@
     </div>
     <!-- Main Block ends -->
 
-    <div id="vote-1" class="popup-window popup-vote popup-w1030 mfp-hide">
+    <div id="vote-1" class="popup-window popup-vote popup-w915 mfp-hide">
         <div class="popup popup_rounded">
             <div class="modal_title">
                 <div class="row">
@@ -979,10 +979,13 @@
                 </div>
             </div>
             <div class="vote_progress_cont progress">
-                <div class="vote_progress light-green progress-bar" role="progressbar" aria-valuemin="0"
+                <div class="vote_progress back_color_stage1 progress-bar" role="progressbar" aria-valuemin="0"
                      aria-valuemax="100"></div>
             </div>
-            <div class="modal_body">
+            <div class="modal_body lighter-grey">
+                <div class="divider15"></div>
+                <h5 class="text-center no_margin">Распределите аспекты по папкам</h5>
+                <div class="divider5"></div>
                 <div class="container vote_folders_cont folders_4 no_padding_col">
                     <ul class="nav vote_nav row" role="tablist">
                         <li role="presentation" class="col-md-3 no_padding_col folder_all active">
@@ -1008,7 +1011,7 @@
                                data-vote-folder-role="not_important">
                                 <div class="vote_folder_inn poll-2-3">
                                     <span class="vote_counter"></span>
-                                    <h5>Важно</h5>
+                                    <h5>Нравится</h5>
                                 </div>
                             </a>
                         </li>
@@ -1017,22 +1020,22 @@
                                data-vote-folder-role="unnecessary">
                                 <div class="vote_folder_inn poll-2-4">
                                     <span class="vote_counter"></span>
-                                    <h5>Неважно</h5>
+                                    <h5>Не нравится</h5>
                                 </div>
                             </a>
                         </li>
                     </ul>
+                    <div class="divider5"></div>
                 </div>
-                <div class="divider25"></div>
-                <div class="container">
+                <div class="container white border_top_grey">
                     <div class="row">
                         <div class="divider25"></div>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane all_vote active" id="vote_tab1"
                                  data-vote-poll-role="all">
-                                <div class="container padding30">
+                                <div class="container vote_itemslist_cont">
                                     <div class="row">
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='0'>
                                                 <div class="heading_cont">
@@ -1040,20 +1043,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='1'>
                                                 <div class="heading_cont">
@@ -1061,20 +1064,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='2'>
                                                 <div class="heading_cont">
@@ -1082,20 +1085,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='3'>
                                                 <div class="heading_cont">
@@ -1103,20 +1106,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='4'>
                                                 <div class="heading_cont">
@@ -1124,20 +1127,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='5'>
                                                 <div class="heading_cont">
@@ -1145,20 +1148,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='6'>
                                                 <div class="heading_cont">
@@ -1166,20 +1169,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='7'>
                                                 <div class="heading_cont">
@@ -1187,20 +1190,20 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 vote_item_cont">
+                                        <div class="col-sm-6 vote_item_cont">
                                             <div class="vote_item color_me" data-me-type="aspect"
                                                  data-me-action='border-top-color' data-me-color='8'>
                                                 <div class="heading_cont">
@@ -1208,15 +1211,15 @@
                                                 </div>
                                                 <div class="divider10"></div>
                                                 <div class="vote_controls text-center">
-                                                    <button class="btn vote_button v_btn_1" role="button"
-                                                            data-vote-role="important" data-icon-class="fa-exclamation">
-                                                        <i class="fa fa-exclamation"></i></button>
-                                                    <button class="btn vote_button v_btn_2" role="button"
-                                                            data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                            class="fa fa-check"></i></button>
-                                                    <button class="btn vote_button v_btn_3" role="button"
-                                                            data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                            class="fa fa-minus"></i></button>
+                                                    <button class="btn vote_button v_btn_1" role="button" data-vote-role="important" data-icon-class="fa-exclamation">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_2" role="button" data-vote-role="not_important" data-icon-class="fa-check">
+
+                                                    </button>
+                                                    <button class="btn vote_button v_btn_3" role="button" data-vote-role="unnecessary" data-icon-class="fa-minus">
+
+                                                    </button>
                                                 </div>
                                                 <div class="divider15"></div>
                                             </div>
@@ -1225,19 +1228,19 @@
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="vote_tab2" data-vote-poll-role="important">
-                                <div class="container padding30">
+                                <div class="container vote_itemslist_cont">
                                     <div class="row">
                                     </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="vote_tab3" data-vote-poll-role="not_important">
-                                <div class="container padding30">
+                                <div class="container vote_itemslist_cont">
                                     <div class="row">
                                     </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="vote_tab4" data-vote-poll-role="unnecessary">
-                                <div class="container padding30">
+                                <div class="container vote_itemslist_cont">
                                     <div class="row">
                                     </div>
                                 </div>

@@ -1464,7 +1464,7 @@
     </div>
 </div>
 
-<div id="vote-2" class="popup-window popup-vote popup-w1030 mfp-hide">
+<div id="vote-2" class="popup-window popup-vote popup-w915 mfp-hide">
     <div class="popup popup_rounded">
         <div class="modal_title">
             <div class="row">
@@ -1476,10 +1476,13 @@
             </div>
         </div>
         <div class="vote_progress_cont progress">
-            <div class="vote_progress light-green progress-bar" role="progressbar" aria-valuemin="0"
-                 aria-valuemax="100"></div>
+            <div class="vote_progress back_color_stage2 progress-bar" role="progressbar" aria-valuemin="0"
+                 aria-valuemax="100" style="width: 35%;"></div>
         </div>
-        <div class="modal_body">
+        <div class="modal_body lighter-grey">
+            <div class="divider15"></div>
+            <h5 class="text-center no_margin">Распределите несовершенства по папкам</h5>
+            <div class="divider5"></div>
             <div class="container vote_folders_cont folders_4 no_padding_col">
                 <ul class="nav vote_nav row" role="tablist">
                     <li role="presentation" class="col-md-3 no_padding_col folder_all active">
@@ -1505,7 +1508,7 @@
                            data-vote-folder-role="not_important">
                             <div class="vote_folder_inn poll-2-3">
                                 <span class="vote_counter"></span>
-                                <h5>Важно</h5>
+                                <h5>Нравится</h5>
                             </div>
                         </a>
                     </li>
@@ -1514,168 +1517,366 @@
                            data-vote-folder-role="unnecessary">
                             <div class="vote_folder_inn poll-2-4">
                                 <span class="vote_counter"></span>
-                                <h5>Неважно</h5>
+                                <h5>Не нравится</h5>
                             </div>
                         </a>
                     </li>
                 </ul>
+                <div class="divider5"></div>
             </div>
-            <div class="divider25"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="divider25"></div>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane all_vote active" id="vote_tab1" data-vote-poll-role="all">
-                            <div class="container padding30">
-                                <div class="row">
-                                    <div class="col-sm-4 vote_item_cont">
-                                        <div class="vote_item color_me" data-me-type="imperf"
-                                             data-me-action='border-top-color' data-me-color='0'>
-                                            <div class="heading_cont">
-                                                <h6>Нечем дышать</h6>
-                                            </div>
-                                            <div class="vote_tag color_me" data-me-type="aspect"
-                                                 data-me-action='background' data-me-color='5'>Аспект: Слишком низкие
-                                                потолки в офисах
-                                            </div>
-                                            <div class="divider10"></div>
-                                            <div class="vote_controls text-center">
-                                                <button class="btn vote_button v_btn_1" role="button"
-                                                        data-vote-role="important" data-icon-class="fa-exclamation"><i
-                                                        class="fa fa-exclamation"></i></button>
-                                                <button class="btn vote_button v_btn_2" role="button"
-                                                        data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn vote_button v_btn_3" role="button"
-                                                        data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                        class="fa fa-minus"></i></button>
-                                            </div>
+            <div class="container white border_top_grey">
+                <div class="divider10"></div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="vote_tab1"
+                         data-vote-poll-role="all">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h5>Несовершенства</h5>
+                                    <div class="divider_1_grey margin_right_25"></div>
+                                    <div class="cab_cont_h450">
+                                        <ul class="list-unstyled ps_cont" role="tablist">
                                             <div class="divider15"></div>
+                                            <li role="presentation" class="active">
+                                                <a href="#imp1" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 1
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp2" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 2 название пакета название пакета название пакета название пакета название пакета название пакета название пакета
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp3" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 3
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp4" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 4
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp5" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 5
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp6" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 6
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp7" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 7
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#imp8" class="big_tab a_font_reset rounded_3 border_grey lighter-grey" role="tab" data-toggle="tab">
+                                                    Несовершенство 8
+                                                    <div class="vote_controls text-center">
+                                                        <button class="btn b_vote v_btn_1" role="button" data-icon-class="fa-exclamation">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_2" role="button" data-icon-class="fa-check">
+
+                                                        </button>
+                                                        <button class="btn b_vote v_btn_3" role="button" data-icon-class="fa-minus">
+
+                                                        </button>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <div class="divider10"></div>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 tab-content">
+                                    <h5>Описание</h5>
+                                    <div class="divider_1_grey margin_right_25"></div>
+                                    <div role="tabpanel" class="tab-pane active fade in" id="imp1">
+                                        <div class="cab_cont_h450">
+                                            <div class="ps_cont">
+                                                <div class="divider15"></div>
+                                                <div class="border_light_grey rounded_3 imperf_left">
+                                                    <div class="media comment main_line">
+                                                        <div class="container">
+                                                            <div class="media-left">
+                                                                <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                На каком этапе деятельности (бизнес-процесса) это происходит?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                после окончания процедуры
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                В чем причина такого положения?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="divider10"></div>
+                                                <h5>Аспекты</h5>
+                                                <div class="divider5"></div>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="1">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="6">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="7">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="9">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="11">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="12">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 vote_item_cont">
-                                        <div class="vote_item color_me" data-me-type="imperf"
-                                             data-me-action='border-top-color' data-me-color='1'>
-                                            <div class="heading_cont">
-                                                <h6>Нечем дышать</h6>
+                                    <div role="tabpanel" class="tab-pane fade" id="imp2">
+                                        <div class="cab_cont_h450">
+                                            <div class="ps_cont">
+                                                <div class="divider15"></div>
+                                                <div class="border_light_grey rounded_3 imperf_left">
+                                                    <div class="media comment main_line">
+                                                        <div class="container">
+                                                            <div class="media-left">
+                                                                <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                На каком этапе деятельности (бизнес-процесса) это происходит?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                после окончания процедуры
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                В чем причина такого положения?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="divider10"></div>
+                                                <h5>Аспекты</h5>
+                                                <div class="divider5"></div>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="1">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="6">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="7">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="9">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="11">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="12">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
                                             </div>
-                                            <div class="vote_tag color_me" data-me-type="aspect"
-                                                 data-me-action='background' data-me-color='3'>Аспект: Слишком низкие
-                                                потолки в офисах
-                                            </div>
-                                            <div class="divider10"></div>
-                                            <div class="vote_controls text-center">
-                                                <button class="btn vote_button v_btn_1" role="button"
-                                                        data-vote-role="important" data-icon-class="fa-exclamation"><i
-                                                        class="fa fa-exclamation"></i></button>
-                                                <button class="btn vote_button v_btn_2" role="button"
-                                                        data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn vote_button v_btn_3" role="button"
-                                                        data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                        class="fa fa-minus"></i></button>
-                                            </div>
-                                            <div class="divider15"></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 vote_item_cont">
-                                        <div class="vote_item color_me" data-me-type="imperf"
-                                             data-me-action='border-top-color' data-me-color='2'>
-                                            <div class="heading_cont">
-                                                <h6>Нечем дышать</h6>
+                                    <div role="tabpanel" class="tab-pane fade" id="imp3">
+                                        <div class="cab_cont_h450">
+                                            <div class="ps_cont">
+                                                <div class="divider15"></div>
+                                                <div class="border_light_grey rounded_3 imperf_left">
+                                                    <div class="media comment main_line">
+                                                        <div class="container">
+                                                            <div class="media-left">
+                                                                <img class="media-object img50 img-circle" src="img/ava-vinnie.jpg">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h5 class="media-heading bold">Винни-Пух</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                На каком этапе деятельности (бизнес-процесса) это происходит?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                после окончания процедуры
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column bold">
+                                                                В чем причина такого положения?
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-12 left-column">
+                                                                нет сопровождающих процедуру дополнительных продуктов, позволяющих использовать (одноразовый) опыт использования бренда МД
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="divider10"></div>
+                                                <h5>Аспекты</h5>
+                                                <div class="divider5"></div>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="1">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="6">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="7">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="9">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="11">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
+                                                <span class="tag-stripes margin_bot_5 active color_me" data-me-type="aspect" data-me-action="background-color" data-me-color="12">
+                                                    <span class="tags">Взаимоотношения четвероногих</span>
+                                                </span>
                                             </div>
-                                            <div class="vote_tag color_me" data-me-type="aspect"
-                                                 data-me-action='background' data-me-color='6'>Аспект: Слишком низкие
-                                                потолки в офисах
-                                            </div>
-                                            <div class="divider10"></div>
-                                            <div class="vote_controls text-center">
-                                                <button class="btn vote_button v_btn_1" role="button"
-                                                        data-vote-role="important" data-icon-class="fa-exclamation"><i
-                                                        class="fa fa-exclamation"></i></button>
-                                                <button class="btn vote_button v_btn_2" role="button"
-                                                        data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn vote_button v_btn_3" role="button"
-                                                        data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                        class="fa fa-minus"></i></button>
-                                            </div>
-                                            <div class="divider15"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 vote_item_cont">
-                                        <div class="vote_item color_me" data-me-type="imperf"
-                                             data-me-action='border-top-color' data-me-color='3'>
-                                            <div class="heading_cont">
-                                                <h6>Нечем дышать</h6>
-                                            </div>
-                                            <div class="vote_tag color_me" data-me-type="aspect"
-                                                 data-me-action='background' data-me-color='8'>Аспект: Слишком низкие
-                                                потолки в офисах
-                                            </div>
-                                            <div class="divider10"></div>
-                                            <div class="vote_controls text-center">
-                                                <button class="btn vote_button v_btn_1" role="button"
-                                                        data-vote-role="important" data-icon-class="fa-exclamation"><i
-                                                        class="fa fa-exclamation"></i></button>
-                                                <button class="btn vote_button v_btn_2" role="button"
-                                                        data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn vote_button v_btn_3" role="button"
-                                                        data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                        class="fa fa-minus"></i></button>
-                                            </div>
-                                            <div class="divider15"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 vote_item_cont">
-                                        <div class="vote_item color_me" data-me-type="imperf"
-                                             data-me-action='border-top-color' data-me-color='4'>
-                                            <div class="heading_cont">
-                                                <h6>Нечем дышать</h6>
-                                            </div>
-                                            <div class="vote_tag color_me" data-me-type="aspect"
-                                                 data-me-action='background' data-me-color='10'>Аспект: Слишком низкие
-                                                потолки в офисах
-                                            </div>
-                                            <div class="divider10"></div>
-                                            <div class="vote_controls text-center">
-                                                <button class="btn vote_button v_btn_1" role="button"
-                                                        data-vote-role="important" data-icon-class="fa-exclamation"><i
-                                                        class="fa fa-exclamation"></i></button>
-                                                <button class="btn vote_button v_btn_2" role="button"
-                                                        data-vote-role="not_important" data-icon-class="fa-check"><i
-                                                        class="fa fa-check"></i></button>
-                                                <button class="btn vote_button v_btn_3" role="button"
-                                                        data-vote-role="unnecessary" data-icon-class="fa-minus"><i
-                                                        class="fa fa-minus"></i></button>
-                                            </div>
-                                            <div class="divider15"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="divider50"></div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="vote_tab2" data-vote-poll-role="important">
-                            <div class="container padding30">
-                                <div class="row">
-                                </div>
-                                <div class="divider50"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="vote_tab2" data-vote-poll-role="important">
+                        <div class="container vote_itemslist_cont">
+                            <div class="row">
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="vote_tab3" data-vote-poll-role="not_important">
-                            <div class="container padding30">
-                                <div class="row">
-                                </div>
-                                <div class="divider50"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="vote_tab3" data-vote-poll-role="not_important">
+                        <div class="container vote_itemslist_cont">
+                            <div class="row">
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="vote_tab4" data-vote-poll-role="unnecessary">
-                            <div class="container padding30">
-                                <div class="row">
-                                </div>
-                                <div class="divider50"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="vote_tab4" data-vote-poll-role="unnecessary">
+                        <div class="container vote_itemslist_cont">
+                            <div class="row">
                             </div>
                         </div>
                     </div>

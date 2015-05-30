@@ -1,6 +1,37 @@
 /* Your JS codes here */
 
 
+/* choose avatar */
+$(function () {
+    $('#choose_ava > li').click(function(){
+        $('#choose_ava > li.active').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+
+/* pres carousel */
+$(function () {
+    $('#present-carousel').carousel({
+        pause: "false",
+        interval:6000
+    });
+    $('#btn_play').click(function () {
+        $('#present-carousel').carousel('cycle');
+        $(this).toggleClass('inactive');
+        $('#btn_pause').toggleClass('inactive');
+    });
+    $('#btn_pause').click(function () {
+        $('#present-carousel').carousel('pause');
+        $(this).toggleClass('inactive');
+        $('#btn_play').toggleClass('inactive');
+    });
+    $('#present-carousel').on('slid.bs.carousel', function () {
+        var act_index = $('#present-carousel .item.active').index();
+        $('#present-carousel-nav li').removeClass('active');
+        $('#present-carousel-nav li[data-slide-to="' + act_index + '"]').addClass('active');
+    })
+});
+
 /* cabinet speedometer */
 $(document).ready(function () {
     $('.rate_o_m_cursor').rotate(-90);
