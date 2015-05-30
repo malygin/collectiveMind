@@ -106,6 +106,10 @@
     background-color: #e3f2f6 !important;
 }
 
+.red_pale {
+    background-color: #ea6169 !important;
+}
+
 .dark-blue {
     background-color: #6184bd !important;
 }
@@ -226,6 +230,10 @@
 
 .font_dark_blue {
     color: #6184bd !important;
+}
+
+.font_red_pale {
+    color: #ea6169 !important;
 }
 
 .font_dark_blue2 {

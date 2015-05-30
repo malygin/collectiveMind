@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   enable_extension "plpgsql"
 
   create_table "awards", force: :cascade do |t|
-    t.string  "name",     limit: 255
-    t.string  "url",      limit: 255
+    t.string  "name"
+    t.string  "url"
     t.text    "desc"
     t.integer "position"
   end
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.boolean  "correct"
   end
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "collect_info_questions", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "status"
     t.text     "hint"
@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "collect_info_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "aspect_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
   end
 
@@ -87,13 +87,13 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "concept_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
   add_index "concept_comment_votings", ["comment_id", "user_id"], name: "index_concept_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_voitings_on_created_at_and_comment_id", using: :btree
+  add_index "concept_comment_votings", ["created_at", "comment_id"], name: "index_concept_comment_votings_on_created_at_and_comment_id", using: :btree
   add_index "concept_comment_votings", ["user_id"], name: "index_concept_comment_votings_on_user_id", using: :btree
 
   create_table "concept_comments", force: :cascade do |t|
@@ -101,15 +101,15 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "useful"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "censored",                      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "approve_status"
-    t.string   "image",             limit: 255
+    t.string   "image"
     t.boolean  "isFile"
   end
 
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "concept_notes", ["post_id"], name: "index_concept_notes_on_post_id", using: :btree
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "concept_post_discontents", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "discontent_post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "complite"
     t.integer  "status"
   end
@@ -144,14 +144,14 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "concept_post_discontents", ["post_id"], name: "index_concept_post_discontents_on_post_id", using: :btree
 
   create_table "concept_post_resources", force: :cascade do |t|
-    t.string   "name",                     limit: 255
+    t.string   "name"
     t.text     "desc"
     t.integer  "post_id"
     t.integer  "resource_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
-    t.string   "type_res",                 limit: 255
+    t.string   "type_res"
     t.integer  "concept_post_resource_id"
     t.integer  "style"
   end
@@ -163,21 +163,20 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_voitings_on_post_id_and_user_id", using: :btree
   add_index "concept_post_votings", ["post_id", "user_id"], name: "index_concept_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "concept_post_votings", ["post_id"], name: "index_concept_post_voitings_on_post_id", using: :btree
-  add_index "concept_post_votings", ["user_id"], name: "index_concept_post_voitings_on_user_id", using: :btree
+  add_index "concept_post_votings", ["post_id"], name: "index_concept_post_votings_on_post_id", using: :btree
+  add_index "concept_post_votings", ["user_id"], name: "index_concept_post_votings_on_user_id", using: :btree
 
   create_table "concept_posts", force: :cascade do |t|
     t.text     "goal"
     t.integer  "user_id"
     t.integer  "number_views",   default: 0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status",         default: 0
     t.integer  "project_id"
     t.text     "content"
@@ -197,7 +196,7 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "concept_posts", ["user_id"], name: "index_concept_posts_on_user_id", using: :btree
 
   create_table "concept_resources", force: :cascade do |t|
-    t.string  "name",       limit: 255
+    t.string  "name"
     t.text    "desc"
     t.integer "project_id"
   end
@@ -207,8 +206,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "concept_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "concept_post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "discontent_post_id"
     t.integer  "status"
   end
@@ -266,14 +265,14 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",                           default: 0
+    t.integer  "status",               default: 0
     t.integer  "core_aspect_id"
-    t.string   "color",                limit: 255
-    t.string   "short_name",           limit: 255
+    t.string   "color"
+    t.string   "short_name"
     t.text     "detailed_description"
     t.boolean  "approve_status"
     t.boolean  "useful"
@@ -317,29 +316,29 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "core_essay_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
   end
 
   add_index "core_essay_comment_votings", ["comment_id", "user_id"], name: "index_core_essay_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "core_essay_comment_votings", ["comment_id"], name: "index_essay_comment_voitings_on_comment_id", using: :btree
+  add_index "core_essay_comment_votings", ["comment_id"], name: "index_core_essay_comment_votings_on_comment_id", using: :btree
   add_index "core_essay_comment_votings", ["user_id"], name: "index_core_essay_comment_votings_on_user_id", using: :btree
 
   create_table "core_essay_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "censored",                      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.string   "image",             limit: 255
+    t.string   "image"
     t.boolean  "isFile"
   end
 
@@ -350,13 +349,13 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "core_essay_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
   end
 
   add_index "core_essay_post_votings", ["post_id", "user_id"], name: "index_core_essay_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "core_essay_post_votings", ["post_id"], name: "index_essay_post_voitings_on_post_id", using: :btree
+  add_index "core_essay_post_votings", ["post_id"], name: "index_core_essay_post_votings_on_post_id", using: :btree
   add_index "core_essay_post_votings", ["user_id"], name: "index_core_essay_post_votings_on_user_id", using: :btree
 
   create_table "core_essay_posts", force: :cascade do |t|
@@ -365,8 +364,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "content"
     t.integer  "status"
     t.integer  "stage"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views",   default: 0
     t.boolean  "censored",       default: false
     t.text     "negative"
@@ -385,18 +384,18 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "stage"
     t.boolean  "mini"
     t.integer  "style"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "title",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "core_knowbase_posts", force: :cascade do |t|
     t.text     "content"
     t.integer  "project_id"
     t.integer  "stage"
-    t.string   "title",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "aspect_id"
   end
 
@@ -410,8 +409,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "score_a",    default: 0
     t.integer  "score_g",    default: 0
     t.integer  "score_o",    default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "core_project_scores", ["project_id"], name: "index_core_project_scores_on_project_id", using: :btree
@@ -437,12 +436,11 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "core_project_users", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "ready_to_concept",         default: false
     t.boolean  "owner",                    default: false
     t.integer  "type_user"
-    t.boolean  "ready_to_concept",         default: false
-    t.boolean  "ready_to_plan",            default: false
     t.integer  "collect_info_posts_score", default: 0
     t.integer  "discontent_posts_score",   default: 0
     t.integer  "concept_posts_score",      default: 0
@@ -450,6 +448,7 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "plan_posts_score",         default: 0
     t.integer  "estimate_posts_score",     default: 0
     t.integer  "score",                    default: 0
+    t.boolean  "ready_to_plan",            default: false
   end
 
   add_index "core_project_users", ["project_id", "user_id"], name: "index_core_project_users_on_project_id_and_user_id", using: :btree
@@ -461,13 +460,13 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status",                      default: 1
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "url_logo",        limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "url_logo"
     t.integer  "type_access"
     t.integer  "position",                    default: 0
-    t.string   "color",           limit: 255
-    t.string   "code",            limit: 255
+    t.string   "color"
+    t.string   "code"
     t.integer  "moderator_id"
     t.date     "date_start"
     t.date     "date_end"
@@ -483,8 +482,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "clicks",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "core_user_award_clicks", ["project_id"], name: "index_core_user_award_clicks_on_project_id", using: :btree
@@ -493,8 +492,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "core_user_awards", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "award_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "position"
   end
@@ -507,29 +506,29 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "discontent_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
   add_index "discontent_comment_votings", ["comment_id", "user_id"], name: "index_discontent_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_voitings_on_comment_id", using: :btree
+  add_index "discontent_comment_votings", ["comment_id"], name: "index_discontent_comment_votings_on_comment_id", using: :btree
   add_index "discontent_comment_votings", ["user_id"], name: "index_discontent_comment_votings_on_user_id", using: :btree
 
   create_table "discontent_comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "censored",                      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.string   "image",             limit: 255
+    t.string   "image"
     t.boolean  "isFile"
   end
 
@@ -542,8 +541,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "discontent_notes", ["post_id"], name: "index_discontent_notes_on_post_id", using: :btree
@@ -552,8 +551,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "discontent_post_aspects", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "aspect_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "discontent_post_aspects", ["aspect_id", "post_id"], name: "index_discontent_post_aspects_on_aspect_id_and_post_id", using: :btree
@@ -563,25 +562,24 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "discontent_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
-  add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_voitings_on_post_id_and_user_id", using: :btree
   add_index "discontent_post_votings", ["post_id", "user_id"], name: "index_discontent_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_voitings_on_post_id", using: :btree
-  add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_voitings_on_user_id", using: :btree
+  add_index "discontent_post_votings", ["post_id"], name: "index_discontent_post_votings_on_post_id", using: :btree
+  add_index "discontent_post_votings", ["user_id"], name: "index_discontent_post_votings_on_user_id", using: :btree
 
   create_table "discontent_post_whens", force: :cascade do |t|
-    t.string  "content",    limit: 255
+    t.string  "content"
     t.integer "project_id"
   end
 
   add_index "discontent_post_whens", ["project_id"], name: "index_discontent_post_whens_on_project_id", using: :btree
 
   create_table "discontent_post_wheres", force: :cascade do |t|
-    t.string  "content",    limit: 255
+    t.string  "content"
     t.integer "project_id"
   end
 
@@ -593,12 +591,11 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "whered"
     t.integer  "user_id"
     t.integer  "status",             default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "number_views",       default: 0
     t.integer  "project_id"
     t.integer  "replace_id"
-    t.integer  "original_id"
     t.integer  "style"
     t.boolean  "censored",           default: false
     t.integer  "discontent_post_id"
@@ -623,8 +620,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "discontent_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "discontent_post_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against"
     t.integer  "status"
   end
@@ -636,29 +633,29 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "estimate_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
   add_index "estimate_comment_votings", ["comment_id", "user_id"], name: "index_estimate_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_voitings_on_comment_id", using: :btree
+  add_index "estimate_comment_votings", ["comment_id"], name: "index_estimate_comment_votings_on_comment_id", using: :btree
   add_index "estimate_comment_votings", ["user_id"], name: "index_estimate_comment_votings_on_user_id", using: :btree
 
   create_table "estimate_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "censored",                      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.string   "image",             limit: 255
+    t.string   "image"
     t.boolean  "isFile"
   end
 
@@ -685,8 +682,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.float    "on2"
     t.float    "on3"
     t.text     "on"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "imp"
     t.float    "op4"
     t.float    "ozf4"
@@ -709,8 +706,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "user_id"
     t.integer  "post_id"
     t.boolean  "against"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "estimate_post_votings", ["post_id", "user_id"], name: "index_estimate_post_votings_on_post_id_and_user_id", using: :btree
@@ -742,8 +739,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "nepr3"
     t.integer  "nepr4"
     t.text     "nepr"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.integer  "project_id"
     t.integer  "imp"
@@ -768,8 +765,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "estimate_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "estimate_post_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
   end
 
@@ -798,12 +795,12 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "group_task_users", ["user_id"], name: "index_group_task_users_on_user_id", using: :btree
 
   create_table "group_tasks", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.text     "description"
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                  default: 10
+    t.integer  "status",      default: 10
   end
 
   add_index "group_tasks", ["group_id"], name: "index_group_tasks_on_group_id", using: :btree
@@ -822,8 +819,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -852,14 +849,14 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "journal_loggers", ["user_informed"], name: "index_journal_loggers_on_user_informed", using: :btree
 
   create_table "journal_mailers", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.text     "content"
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "status"
     t.boolean  "sent"
-    t.boolean  "viewed",                 default: false
-    t.boolean  "visible",                default: true
+    t.boolean  "viewed",     default: false
+    t.boolean  "visible",    default: true
     t.integer  "receiver"
     t.integer  "group_id"
     t.datetime "created_at"
@@ -871,27 +868,27 @@ ActiveRecord::Schema.define(version: 20150529223637) do
 
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "type_event",    limit: 255
-    t.string   "body",          limit: 255
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.string   "type_event"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "user_informed"
     t.boolean  "viewed"
     t.integer  "event"
     t.integer  "first_id"
     t.integer  "second_id"
-    t.boolean  "personal",                  default: false
-    t.string   "body2",         limit: 255
-    t.boolean  "visible",                   default: true
-    t.boolean  "anonym",                    default: false
+    t.boolean  "personal",      default: false
+    t.string   "body2"
+    t.boolean  "visible",       default: true
+    t.boolean  "anonym",        default: false
   end
 
   add_index "journals", ["created_at"], name: "index_journals_on_created_at", using: :btree
   add_index "journals", ["project_id", "type_event", "user_informed", "viewed"], name: "pr_te_ui_viewd", using: :btree
   add_index "journals", ["project_id", "type_event"], name: "index_journals_on_project_id_and_type_event", using: :btree
   add_index "journals", ["project_id"], name: "index_journals_on_project_id", using: :btree
-  add_index "journals", ["type_event"], name: "index_journals_on_type", using: :btree
+  add_index "journals", ["type_event"], name: "index_journals_on_type_event", using: :btree
   add_index "journals", ["user_id"], name: "index_journals_on_user_id", using: :btree
 
   create_table "moderator_messages", force: :cascade do |t|
@@ -911,9 +908,6 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "news", ["project_id"], name: "index_news_on_project_id", using: :btree
-  add_index "news", ["user_id"], name: "index_news_on_user_id", using: :btree
 
   create_table "novation_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -991,7 +985,6 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.text     "content"
-    t.boolean  "approve_status"
     t.text     "project_change"
     t.text     "project_goal"
     t.text     "project_members"
@@ -1011,6 +1004,7 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "confidence_commands"
     t.text     "confidence_remove_discontent"
     t.text     "confidence_negative_results"
+    t.boolean  "approve_status"
     t.boolean  "project_change_bool"
     t.boolean  "project_goal_bool"
     t.boolean  "project_members_bool"
@@ -1052,29 +1046,29 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "plan_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
   add_index "plan_comment_votings", ["comment_id", "user_id"], name: "index_plan_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_voitings_on_comment_id", using: :btree
+  add_index "plan_comment_votings", ["comment_id"], name: "index_plan_comment_votings_on_comment_id", using: :btree
   add_index "plan_comment_votings", ["user_id"], name: "index_plan_comment_votings_on_user_id", using: :btree
 
   create_table "plan_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.boolean  "censored",                      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "censored",          default: false
     t.integer  "comment_id"
     t.boolean  "discontent_status"
     t.boolean  "concept_status"
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.string   "image",             limit: 255
+    t.string   "image"
     t.boolean  "isFile"
   end
 
@@ -1087,8 +1081,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "post_id"
     t.integer  "user_id"
     t.integer  "type_field"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "plan_notes", ["post_id"], name: "index_plan_notes_on_post_id", using: :btree
@@ -1102,11 +1096,11 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "control"
     t.text     "problems"
     t.text     "reality"
+    t.integer  "first_stage"
     t.text     "name"
     t.text     "content"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "first_stage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "concept_post_id"
     t.text     "positive_r"
     t.text     "negative_r"
@@ -1171,13 +1165,13 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "plan_post_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "against",    default: true
   end
 
   add_index "plan_post_votings", ["post_id", "user_id"], name: "index_plan_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "plan_post_votings", ["post_id"], name: "index_plan_post_voitings_on_post_id", using: :btree
+  add_index "plan_post_votings", ["post_id"], name: "index_plan_post_votings_on_post_id", using: :btree
   add_index "plan_post_votings", ["user_id"], name: "index_plan_post_votings_on_user_id", using: :btree
 
   create_table "plan_posts", force: :cascade do |t|
@@ -1185,18 +1179,18 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "goal"
     t.text     "first_step"
     t.text     "other_steps"
-    t.integer  "status",                        default: 0
-    t.integer  "number_views",                  default: 0
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer  "status",            default: 0
+    t.integer  "number_views",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "project_id"
     t.text     "content"
-    t.integer  "step",                          default: 1
-    t.boolean  "censored",                      default: false
+    t.integer  "step",              default: 1
+    t.boolean  "censored",          default: false
     t.text     "plan_first"
     t.text     "plan_other"
     t.text     "plan_control"
-    t.string   "name",              limit: 255
+    t.string   "name"
     t.integer  "estimate_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
@@ -1212,8 +1206,8 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "plan_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "plan_post_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status"
     t.integer  "type_vote"
   end
@@ -1223,14 +1217,14 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "plan_votings", ["user_id"], name: "index_plan_votings_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version",     limit: 255
+    t.string   "version"
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
@@ -1284,12 +1278,12 @@ ActiveRecord::Schema.define(version: 20150529223637) do
 
   create_table "user_checks", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "check_field", limit: 255
+    t.string   "check_field"
     t.boolean  "status"
     t.integer  "project_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "value",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "value"
   end
 
   add_index "user_checks", ["user_id"], name: "index_user_checks_on_user_id", using: :btree
@@ -1305,46 +1299,45 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 255
-    t.string   "surname",                limit: 255
-    t.string   "email",                  limit: 255
-    t.string   "group",                  limit: 255
-    t.string   "string",                 limit: 255
-    t.string   "faculty",                limit: 255
+    t.string   "name"
+    t.string   "surname"
+    t.string   "email"
+    t.string   "group"
+    t.string   "string"
+    t.string   "faculty"
     t.date     "dateRegistration"
     t.date     "dateActivation"
     t.date     "dateLastEnter"
-    t.string   "vkid",                   limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "encrypted_password",     limit: 255
-    t.string   "login",                  limit: 255
-    t.string   "salt",                   limit: 255
-    t.integer  "score",                              default: 0
-    t.string   "nickname",               limit: 255
-    t.boolean  "anonym",                             default: false
-    t.integer  "score_a",                            default: 0
-    t.integer  "score_g",                            default: 0
-    t.integer  "score_o",                            default: 0
-    t.string   "reset_password_token",   limit: 255
+    t.string   "vkid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "encrypted_password"
+    t.string   "login"
+    t.string   "salt"
+    t.integer  "score",                  default: 0
+    t.string   "nickname"
+    t.boolean  "anonym",                 default: false
+    t.integer  "score_a",                default: 0
+    t.integer  "score_g",                default: 0
+    t.integer  "score_o",                default: 0
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.string   "confirmation_token",     limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
+    t.string   "unconfirmed_email"
     t.datetime "last_seen"
     t.integer  "type_user"
     t.integer  "role_stat"
     t.datetime "last_seen_news"
-    t.boolean  "chat_open",                          default: false
+    t.boolean  "chat_open",              default: false
     t.datetime "last_seen_chat_at"
-    t.string   "locale",                 limit: 255
     t.string   "skype"
     t.string   "phone"
     t.string   "avatar"
