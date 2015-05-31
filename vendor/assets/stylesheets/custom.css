@@ -505,7 +505,12 @@ textarea:focus {
 #tooltip4_1 + .tooltip {
     left: 220px !important;
 }
-
+.sm + .tooltip > .tooltip-inner{
+    width: 90px;
+}
+.big + .tooltip > .tooltip-inner{
+    width: 200px;
+}
 /* popup styles */
 .mfp-bg {
     z-index: 1099 !important;
@@ -7880,7 +7885,7 @@ li.active > .big_tab:after {
 }
 .image_2 {
      height: 100%;
-     background: image-url("home_page-2_2a.png") top left no-repeat, image-url("home_page-2_2b.png") bottom left 120px no-repeat, image-url("home_page-2_1.png") center right 90px no-repeat;
+     background: image-url("home_page-2_2.png") left no-repeat, image-url("home_page-2_1.png") center right 90px no-repeat;
  }
 
 .image_3 {
@@ -7893,7 +7898,7 @@ li.active > .big_tab:after {
 }
 
 .widget-block.right_gradient {
-    background: linear-gradient(to right, #eff2f7 0%, #eff2f7 36%, #e1e8f3 100%);
+    background: linear-gradient(to right, #eff2f7 0%, #dce3ef 86%, #dce3ef 100%);
 }
 
 .widget-block {

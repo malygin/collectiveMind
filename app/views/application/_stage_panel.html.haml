@@ -33,7 +33,8 @@
         .border_grey.rounded_3.metro_block
           %ul.list-unstyled.list-inline
             - Core::Project::STAGES[@project.main_stage][:substages].each do |num_substage, substage|
-              %li{class: "#{'active theme_font_color' if num_substage == @project.sub_stage} #{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}"}
+              %li{class: "#{'active theme_font_color' if num_substage == @project.sub_stage} #{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
+              'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'Стадия недоступна' if num_substage != @project.sub_stage }"}
                 %i.fa.fa-circle.fa-2x
                 %a{:href => "#"}
                   = substage[:name]

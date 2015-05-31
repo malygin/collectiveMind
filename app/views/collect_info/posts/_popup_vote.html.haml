@@ -16,19 +16,19 @@
                 %span.vote_counter
                   =current_user.unvote_aspects_for_vote(@project).count
                 %h5.font_color_stage1 Общий список
-          %li.col-md-3.no_padding_col{:role => "presentation"}
+          %li.col-md-3.no_padding_col.big{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список необходимых"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
               .vote_folder_inn.poll-2-2
                 %span.vote_counter
                   =current_user.aspect_votings.by_status(1).count
                 %h5 Необходимо
-          %li.col-md-3.no_padding_col{:role => "presentation"}
+          %li.col-md-3.no_padding_col.big{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список важных"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-3
                 %span.vote_counter
                   =current_user.aspect_votings.by_status(2).count
                 %h5 Важно
-          %li.col-md-3.no_padding_col{:role => "presentation"}
+          %li.col-md-3.no_padding_col.big{:role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список неважных"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
               .vote_folder_inn.poll-2-4
                 %span.vote_counter
