@@ -55,7 +55,7 @@
         =link_to({:controller => post_short.class.name.underscore.pluralize,
           :action => :like, :project => @project, :id => post_short.id, :against => true},
           :remote => true, :method => :put, id: "dislike_post_#{post_short.id}",
-           'data-placement' => 'bottom','data-toggle' => 'tooltip', 'data-original-title'=> 'Не нравится') do
+           'data-placement' => 'bottom','data-toggle' => 'tooltip', 'data-original-title'=> 'Не нравится',class:'sm') do
           %i.fa.fa-thumbs-o-down.fa-flip-horizontal
       -#-if post_short.status == 1 and post_short.comments.count > 0
       -#  %span.popup2

@@ -7,13 +7,13 @@
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         = link_to collect_info_posts_path(@project, sort_rule: 'sort_by_comments') do
-          .sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}"}
+          #tooltip2_2.sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
             - new_comments = @project.other_main_aspects.after_last_visit_comments(last_time_visit_page('collect_info')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
         = link_to collect_info_posts_path(@project, sort_rule: 'sort_by_date') do
-          #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1.tooltip1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться аспекты."}
+          #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1.tooltip1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться аспекты."}
             - new_posts = @project.other_main_aspects.after_last_visit_posts(last_time_visit_page('collect_info')).size
             - if new_posts > 0
               %span.badge-red

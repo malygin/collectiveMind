@@ -1,4 +1,4 @@
-= link_to "/project/#{project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener menu_a', id: 'clear_my_journals', "data-dd-opener" => "dd_2" do
+= link_to "/project/#{project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener menu_a', id: 'clear_my_journals', "data-dd-opener" => "dd_2",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Следите за теми,кому понравились ваши комментарии' do
   -#%a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
   Мои уведомления
   - if my_journals.size > 0 and @my_journals_count > 0

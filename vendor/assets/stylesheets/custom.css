@@ -505,7 +505,12 @@ textarea:focus {
 #tooltip4_1 + .tooltip {
     left: 220px !important;
 }
-
+.sm + .tooltip > .tooltip-inner{
+    width: 90px;
+}
+.big + .tooltip > .tooltip-inner{
+    width: 200px;
+}
 /* popup styles */
 .mfp-bg {
     z-index: 1099 !important;

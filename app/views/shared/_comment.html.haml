@@ -52,7 +52,7 @@
          id: "dislike_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Не нравится') do
           %i.fa.fa-thumbs-down.theme_font_color
     %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}",
-     "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Ответить'}
+     "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Перейти в обсуждение'}
       %span.bold
         %i.fa.fa-reply.theme_font_color
 .divider10
