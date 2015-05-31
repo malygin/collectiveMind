@@ -6,9 +6,9 @@
   = render partial: 'discuss_aspects'
 
 
-
-- if shown_intro('collect_info_intro') == ''
-  = render partial: 'popup_welcome'
+- if @project.id != 25
+  - if shown_intro('collect_info_intro') == ''
+    = render partial: 'popup_welcome'
 - if @project.type_for_questions == 0
   = render partial: 'popup_greetings'
 

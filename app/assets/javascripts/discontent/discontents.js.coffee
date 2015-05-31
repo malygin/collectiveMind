@@ -39,16 +39,6 @@ DiscontentCollectionView = Backbone.View.extend
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
 
-    #    reload_isotope()
-    #    this.reloadIsotope
-    #    $('#tab_aspect_posts').isotope('reloadItems').isotope()
-    #    this.$container.isotope('updateSortData').isotope();
-    #    this.$container.isotope().isotope('layout');
-    #    this.$container.isotope('reloadItems')
-    #    this.$container.isotope( 'updateSortData', this.collection )
-    #    $('#tab_aspect_posts').isotope().isotope('reloadItems')
-
-
     show_comments_hover()
     activate_perfect_scrollbar()
     colors_discontents()
@@ -67,13 +57,7 @@ DiscontentCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
 
   loadByAspect: (evt)->
-    #    return false
-    #    evt.preventDefault();
-    #    evt.stopPropagation()
-    #    evt.stopImmediatePropagation()
-    #    filterValue = $(this).data('aspect')
-    #    $('#tab_aspect_posts').isotope
-    #      filter: filterValue
+
     dc.fetch
       # data: $.param({aspect: $(this).data('aspect')})
       data: $.param({aspect: $(this).find('input:checked').parent().data('aspect')})
