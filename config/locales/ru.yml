@@ -207,6 +207,7 @@ ru:
   stages:
     comments:
       few: "%{count} ответа"
+      many: "%{count} ответов"
       one: 1 ответ
       other: "%{count} ответов"
     concept: "Дизайн будущего"
