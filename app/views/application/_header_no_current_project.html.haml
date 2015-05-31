@@ -4,7 +4,7 @@
       .navbar-brand
         %a{href: '/', id: 'go_to_logo'}
           = image_tag 'logo.png', class: 'auth_logo'
-    %ul.list-inline.navbar-right
+    %ul.list-inline.navbar-right.font12
       - if signed_in?
         -if @core_project
           %li
