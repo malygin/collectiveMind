@@ -15,7 +15,7 @@ class Core::Aspect::PostsController < PostsController
   end
 
   def create
-    @aspect = @project.aspects.create core_aspect_params.merge(user: current_user)
+    @aspect = @project.aspects.create core_aspect_params.merge(user: current_user, status: 1)
     respond_to do |format|
       format.js
     end

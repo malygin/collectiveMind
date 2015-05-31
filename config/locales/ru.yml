@@ -79,6 +79,12 @@ ru:
     discontent_posts: "Мои несовершенства"
     novation_posts: "Мои пакеты"
     plan_posts: "Мои проектные предложения"
+  my_add:
+    collect_info_posts: Аспект
+    discontent_posts: Несовершенство
+    concept_posts: Идея
+    novation_posts: Пакет
+    plan_posts: Проектное предложение
   news:
     body: "Полный текст"
     title: "Анонс"

@@ -13,11 +13,13 @@ class UsersController < ProjectsController
   end
 
   def show
-    if @user != current_user
-      @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    else
-      @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    end
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content) if @user == current_user
+
+    # if @user != current_user
+    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
+    # else
+    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
+    # end
   end
 
   def update
@@ -94,6 +96,6 @@ class UsersController < ProjectsController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email)
+    params.require(:user).permit(:name, :surname, :email, :skype, :phone)
   end
 end
