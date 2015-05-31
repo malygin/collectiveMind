@@ -19,7 +19,7 @@
               %span.badge-red
                 = new_posts
         - if @project.stage == '1:0'
-          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
             %span
               = t('techniques.aspect_posts_simple')
 .divider10
@@ -28,7 +28,7 @@
 .stage-post-block
   .row
     .col-md-6
-      %span.stage-heading
+      %span.stage-heading.tooltip1.big{ 'data-toggle'=>"tooltip",'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их"}
         Аспекты из базы знаний
         ="(#{@proc_aspects.size})"
     .col-md-6

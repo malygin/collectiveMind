@@ -7,7 +7,7 @@
         = "(#{@proc_aspects.size})"
     .col-md-5
       .sort-block.pull-right
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button" do
+        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button tooltip1 big",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
           %span
             = t('techniques.aspect_posts_simple')
 

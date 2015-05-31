@@ -19,7 +19,8 @@ $(document).ready(function () {
         $('#present-carousel-nav li[data-slide-to="' + act_index + '"]').addClass('active');
     });
     /* tooltips for all stages */
-    $("#tooltip_button_1").click(function() {
+
+    $("#popover_button_1").click(function() {
         if ($(this).hasClass('btn-tooltip')) {
             $(this).html($(this).find('i')).append('Закрыть подсказки');
         }

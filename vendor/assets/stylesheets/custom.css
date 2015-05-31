@@ -508,6 +508,9 @@ textarea:focus {
 .sm + .tooltip > .tooltip-inner{
     width: 90px;
 }
+.middle + .tooltip > .tooltip-inner{
+    width: 130px;
+}
 .big + .tooltip > .tooltip-inner{
     width: 200px;
 }
