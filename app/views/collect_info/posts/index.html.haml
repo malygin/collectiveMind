@@ -7,210 +7,209 @@
 
 
 
-- if @project.id != 25
-  - if shown_intro('collect_info_intro') == ''
-    = render partial: 'popup_welcome'
+- if shown_intro('collect_info_intro') == ''
+  = render partial: 'popup_welcome'
 - if @project.type_for_questions == 0
   = render partial: 'popup_greetings'
 
-
-- if @project.id == 25
-  #present.popup-window.popup_present.mfp-hide.welcome_popup
-    .popup.transparent
-      .container
-        .row
-          .col-md-12
-
-            .divider15
-            #present-carousel.carousel.slide.present_carousel{"data-ride" => "carousel"}
-              .present_nav
-                %a.big_arrow{"data-slide" => "prev", :href => "#present-carousel", :role => "button"}
-                %a.big_arrow{"data-slide" => "next", :href => "#present-carousel", :role => "button"}
-              .carousel-inner{:role => "listbox"}
-                .item.gradient3.active
-                  .border_grey.slide_1
-                    .divider20
-                    .row
-                      .col-md-7
-                        %small.clock.font_grey Начало процедуры в понедельник 1 июня в 12-30
-                        %h3.font_red_pale.bold Что получат участники в результате проведения процедуры MASSDECISION™
-                        .divider30
-                        %p.font15
-                          Одно или несколько проектных предложений по организации системы продаж коротких курсов или отдельных компонентов такой системы, включая предварительный план преобразований, необходимых для ее создания.
-                .item.gradient3
-                  .border_grey.slide_2
-                    .divider20
-                    .row
-                      .col-md-7
-                        %h3.font_red_pale.bold Что такое MASSDECISION™?
-                        .divider30
-                        %p.font20
-                          Интернет-технология выработки коллективных
-                          %br/
-                          и индивидуальных решений на основе алгоритма рационального мышления.
-                .item.gradient3
-                  .border_grey.slide_3
-                    .divider20
-                    .row
-                      .col-md-7
-                        %h3.font_red_pale.bold Какие задачи позволяет решить MASSDECISION™?
-                        .divider30
-                        %ul.check_ul.fa-ul.font15
-                          Технология позволяет:
-                          %li
-                            %i.fa-li.fa.fa-check.font_red.font18>
-                            учитывать знания, опыт и разнообразие позиций многих людей, одновременно сохраняя рациональность и высокое качество мышления;
-                          %li
-                            %i.fa-li.fa.fa-check.font_red.font18>
-                            вовлекать будущих исполнителей уже на этапе подготовки решения;
-                          %li
-                            %i.fa-li.fa.fa-check.font_red.font18>
-                            выявлять инициативных и наиболее подготовленных сотрудников.
-                .item.gradient3
-                  .border_grey.slide_4_1
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage1.font_white.img-circle 1
-                        %p.text-center.font15
-                          Сбор информации
-                          %br/
-                          по теме процедуры
-                .item.gradient3
-                  .border_grey.slide_4_2
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage2.font_white.img-circle 2
-                        %p.text-center.font15
-                          Анализ ситуации и выявление
-                          %br/
-                          связанных с ней проблем
-                .item.gradient3
-                  .border_grey.slide_4_3
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage3.font_white.img-circle 3
-                        %p.text-center.font15
-                          Разработка идей по устранению
-                          %br/
-                          конкретных проблем
-                .item.gradient3
-                  .border_grey.slide_4_4
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage4.font_white.img-circle 4
-                        %p.text-center.font15
-                          Объединение этих идей в пакеты
-                          %br/
-                          для комплексного решения ситуации
-                .item.gradient3
-                  .border_grey.slide_4_5
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage5.font_white.img-circle 5
-                        %p.text-center.font15
-                          Выработка проектных предложений
-                          %br/
-                          на основе пакетов идей
-                .item.gradient3
-                  .border_grey.slide_4_6
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage6.font_white.img-circle 6
-                        %p.text-center.font15
-                          Оценка проектных предложений
-                .item.gradient3
-                  .border_grey.slide_4_7
-                    .divider20
-                    .row
-                      .col-md-4
-                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
-                        .divider5
-                        %h5.font_red.bold Процедура состоит из семи стадий.
-                        .divider85
-                        .big_round_label.back_color_stage7.font_white.img-circle 7
-                        %p.text-center.font15
-                          Выбор одного или нескольких
-                          %br/
-                          проектов для дальнейшей реализации
-                .item.gradient3
-                  .border_grey.slide_11
-                    .divider20
-                    .row
-                      .col-md-8
-                        %h3.font_red_pale.bold Сколько времени нужно уделять процедуре MASSDECISION™?
-                        .divider30
-                        %p.font15
-                          Каждый участник выбирает вид деятельности и уровень вовлеченности в процедуру
-                          %br/
-                          в зависимости от своих возможностей и интересов.
-                          %br/
-                          Вся работа осуществляется на этом портале в удобное для участников время,
-                          %br/
-                          но переход от стадии к стадии происходит организованно, в заранее оговоренные дни.
-                          %br/
-                          Предположительная длительность процедуры — 2-3 недели.
-            .row
-              .col-md-2
-              .col-md-8
-                %ul#present-carousel-nav.red_indicators.list-unstyled.list-inline.text-center.rate_buttons
-                  %li.active{"data-slide-to" => "0", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 1
-                  %li{"data-slide-to" => "1", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 2
-                  %li{"data-slide-to" => "2", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 3
-                  %li{"data-slide-to" => "3", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 4
-                  %li{"data-slide-to" => "4", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 5
-                  %li{"data-slide-to" => "5", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 6
-                  %li{"data-slide-to" => "6", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 7
-                  %li{"data-slide-to" => "7", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 8
-                  %li{"data-slide-to" => "8", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 9
-                  %li{"data-slide-to" => "9", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 10
-                  %li{"data-slide-to" => "10", "data-target" => "#present-carousel"}
-                    %button.btn.btn_reset.red.font_white.bold 11
-              .col-md-2
-                .divider15
-                %button#btn_play.btn.btn_reset.btn_play.pull-right.inactive
-                %button#btn_pause.btn.btn_reset.btn_pause.pull-right
-
-
+-#
+-#- if @project.id == 25
+-#  #present.popup-window.popup_present.mfp-hide.welcome_popup
+-#    .popup.transparent
+-#      .container
+-#        .row
+-#          .col-md-12
+-#
+-#            .divider15
+-#            #present-carousel.carousel.slide.present_carousel{"data-ride" => "carousel"}
+-#              .present_nav
+-#                %a.big_arrow{"data-slide" => "prev", :href => "#present-carousel", :role => "button"}
+-#                %a.big_arrow{"data-slide" => "next", :href => "#present-carousel", :role => "button"}
+-#              .carousel-inner{:role => "listbox"}
+-#                .item.gradient3.active
+-#                  .border_grey.slide_1
+-#                    .divider20
+-#                    .row
+-#                      .col-md-7
+-#                        %small.clock.font_grey Начало процедуры в понедельник 1 июня в 12-30
+-#                        %h3.font_red_pale.bold Что получат участники в результате проведения процедуры MASSDECISION™
+-#                        .divider30
+-#                        %p.font15
+-#                          Одно или несколько проектных предложений по организации системы продаж коротких курсов или отдельных компонентов такой системы, включая предварительный план преобразований, необходимых для ее создания.
+-#                .item.gradient3
+-#                  .border_grey.slide_2
+-#                    .divider20
+-#                    .row
+-#                      .col-md-7
+-#                        %h3.font_red_pale.bold Что такое MASSDECISION™?
+-#                        .divider30
+-#                        %p.font20
+-#                          Интернет-технология выработки коллективных
+-#                          %br/
+-#                          и индивидуальных решений на основе алгоритма рационального мышления.
+-#                .item.gradient3
+-#                  .border_grey.slide_3
+-#                    .divider20
+-#                    .row
+-#                      .col-md-7
+-#                        %h3.font_red_pale.bold Какие задачи позволяет решить MASSDECISION™?
+-#                        .divider30
+-#                        %ul.check_ul.fa-ul.font15
+-#                          Технология позволяет:
+-#                          %li
+-#                            %i.fa-li.fa.fa-check.font_red.font18>
+-#                            учитывать знания, опыт и разнообразие позиций многих людей, одновременно сохраняя рациональность и высокое качество мышления;
+-#                          %li
+-#                            %i.fa-li.fa.fa-check.font_red.font18>
+-#                            вовлекать будущих исполнителей уже на этапе подготовки решения;
+-#                          %li
+-#                            %i.fa-li.fa.fa-check.font_red.font18>
+-#                            выявлять инициативных и наиболее подготовленных сотрудников.
+-#                .item.gradient3
+-#                  .border_grey.slide_4_1
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage1.font_white.img-circle 1
+-#                        %p.text-center.font15
+-#                          Сбор информации
+-#                          %br/
+-#                          по теме процедуры
+-#                .item.gradient3
+-#                  .border_grey.slide_4_2
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage2.font_white.img-circle 2
+-#                        %p.text-center.font15
+-#                          Анализ ситуации и выявление
+-#                          %br/
+-#                          связанных с ней проблем
+-#                .item.gradient3
+-#                  .border_grey.slide_4_3
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage3.font_white.img-circle 3
+-#                        %p.text-center.font15
+-#                          Разработка идей по устранению
+-#                          %br/
+-#                          конкретных проблем
+-#                .item.gradient3
+-#                  .border_grey.slide_4_4
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage4.font_white.img-circle 4
+-#                        %p.text-center.font15
+-#                          Объединение этих идей в пакеты
+-#                          %br/
+-#                          для комплексного решения ситуации
+-#                .item.gradient3
+-#                  .border_grey.slide_4_5
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage5.font_white.img-circle 5
+-#                        %p.text-center.font15
+-#                          Выработка проектных предложений
+-#                          %br/
+-#                          на основе пакетов идей
+-#                .item.gradient3
+-#                  .border_grey.slide_4_6
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage6.font_white.img-circle 6
+-#                        %p.text-center.font15
+-#                          Оценка проектных предложений
+-#                .item.gradient3
+-#                  .border_grey.slide_4_7
+-#                    .divider20
+-#                    .row
+-#                      .col-md-4
+-#                        %h3.font_red_pale.bold Как построена процедура MASSDECISION™?
+-#                        .divider5
+-#                        %h5.font_red.bold Процедура состоит из семи стадий.
+-#                        .divider85
+-#                        .big_round_label.back_color_stage7.font_white.img-circle 7
+-#                        %p.text-center.font15
+-#                          Выбор одного или нескольких
+-#                          %br/
+-#                          проектов для дальнейшей реализации
+-#                .item.gradient3
+-#                  .border_grey.slide_11
+-#                    .divider20
+-#                    .row
+-#                      .col-md-8
+-#                        %h3.font_red_pale.bold Сколько времени нужно уделять процедуре MASSDECISION™?
+-#                        .divider30
+-#                        %p.font15
+-#                          Каждый участник выбирает вид деятельности и уровень вовлеченности в процедуру
+-#                          %br/
+-#                          в зависимости от своих возможностей и интересов.
+-#                          %br/
+-#                          Вся работа осуществляется на этом портале в удобное для участников время,
+-#                          %br/
+-#                          но переход от стадии к стадии происходит организованно, в заранее оговоренные дни.
+-#                          %br/
+-#                          Предположительная длительность процедуры — 2-3 недели.
+-#            .row
+-#              .col-md-2
+-#              .col-md-8
+-#                %ul#present-carousel-nav.red_indicators.list-unstyled.list-inline.text-center.rate_buttons
+-#                  %li.active{"data-slide-to" => "0", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 1
+-#                  %li{"data-slide-to" => "1", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 2
+-#                  %li{"data-slide-to" => "2", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 3
+-#                  %li{"data-slide-to" => "3", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 4
+-#                  %li{"data-slide-to" => "4", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 5
+-#                  %li{"data-slide-to" => "5", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 6
+-#                  %li{"data-slide-to" => "6", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 7
+-#                  %li{"data-slide-to" => "7", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 8
+-#                  %li{"data-slide-to" => "8", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 9
+-#                  %li{"data-slide-to" => "9", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 10
+-#                  %li{"data-slide-to" => "10", "data-target" => "#present-carousel"}
+-#                    %button.btn.btn_reset.red.font_white.bold 11
+-#              .col-md-2
+-#                .divider15
+-#                %button#btn_play.btn.btn_reset.btn_play.pull-right.inactive
+-#                %button#btn_pause.btn.btn_reset.btn_pause.pull-right
+-#
+-#
 
 
 -#- if @project.id == 25
