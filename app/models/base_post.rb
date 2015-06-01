@@ -83,7 +83,7 @@ module BasePost
       self.comments.where(comment_id: nil)
     end
 
-    def get_class
+    def class_name
       self.class.name.deconstantize
     end
 

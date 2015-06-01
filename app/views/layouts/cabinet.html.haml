@@ -10,12 +10,12 @@
           .row
             .col-md-2
               .cab_left_panel.rounded_3.border_grey{class: "back_color_stage#{@project.main_stage}_superpale"}
-                .media
-                  .media-left
-                    .plus20.white{class: "font_color_stage#{@project.main_stage}"} +
-                  .media-body
-                    %small{class: "font_color_stage#{@project.main_stage}"}
-                      = t("my_add.#{@project.current_stage_type}")
+                -#.media
+                -#  .media-left
+                -#    .plus20.white{class: "font_color_stage#{@project.main_stage}"} +
+                -#  .media-body
+                -#    %small{class: "font_color_stage#{@project.main_stage}"}
+                -#      = t("my_add.#{@project.current_stage_type}")
                 - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
                   .divider10
                   = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
@@ -85,8 +85,6 @@
                           .divider20
 
                 #user_profile.tab-pane.fade{:role => "tabpanel"}
-                  = current_user
-                  %h5 Не состоит ни в одной группе
                   = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user}, class: 'form form-horizontal' do |f|
                     = render 'shared/notice_messages', object: f.object
                     .form-group
@@ -101,11 +99,11 @@
                       = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
                     .form-group
                       = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-                    .form-group
-                      .checkbox
-                        %label
-                          %input{type: 'checkbox'}/
-                          Получать автоматические уведомления
+                    -#.form-group
+                    -#  .checkbox
+                    -#    %label
+                    -#      %input{type: 'checkbox'}/
+                    -#      Получать автоматические уведомления
                     = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
 
         -# а этот yield только для ганта

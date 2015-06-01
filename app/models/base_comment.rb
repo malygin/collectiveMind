@@ -26,7 +26,7 @@ module BaseComment
 
     validates :content, :user_id, :post_id, presence: true
 
-    def get_class
+    def class_name
       self.class.name.deconstantize
     end
 

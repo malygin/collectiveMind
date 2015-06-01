@@ -66,7 +66,7 @@ class Concept::PostsController < PostsController
   def create
     @concept_post = current_model.new concept_post_params.merge(user_id: current_user.id, project_id: @project.id)
     unless params[:concept_post_discontents].nil?
-      params[:concept_post_discontents].each do |id, value|
+      params[:concept_post_discontents].each do |id, _|
         @concept_post.concept_post_discontents.build(discontent_post_id: id, status: 0)
       end
     end

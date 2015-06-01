@@ -4,5 +4,5 @@
   =f.text_area :content, class: 'form-control', style: 'height: 40px;', placeholder: t('form.comment_promt'), id:'edit_post_note_text_area'
   .pull-right
     %button.btn.btn-danger.btn-xs(type="button" onclick="reset_post_note_form(#{@post_aspect_note ? @post_aspect_note.id : @post.id},#{@type}); return false;")=t('form.cancel')
-    =f.submit t('form.send'), id: "send_post_#{@post.get_class == "Discontent" ? @post.id : @type}", class: 'btn btn-xs btn-success'
+    =f.submit t('form.send'), id: "send_post_#{@post.class_name == "Discontent" ? @post.id : @type}", class: 'btn btn-xs btn-success'
 

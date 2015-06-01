@@ -7,7 +7,7 @@
       = render partial: 'application/header'
       - if profile?
         = render partial: 'application/cabinet_stage_panel'
-      - else
+      - elsif not rating?
         = render partial: 'application/stage_panel'
       .main-block
         .container

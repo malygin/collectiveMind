@@ -51,7 +51,7 @@ class GroupActionsController < WebsocketRails::BaseController
         users.uniq.each do |user|
           WebsocketRails.users[user.id].send_message(:user_start_edit, {model: model, user: current_user}.to_json, channel: :group_chat)
         end
-      rescue Exception => e
+      rescue  => e
         Rails.logger.info "#{Time.now} exception in groups_action_controller - #{e}"
       end
     end
