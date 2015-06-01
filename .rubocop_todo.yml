@@ -12,17 +12,17 @@ Lint/EndAlignment:
 
 # Offense count: 2
 Lint/RescueException:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 5
 # Cop supports --auto-correct.
 Lint/UnusedBlockArgument:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 4
 # Cop supports --auto-correct.
 Lint/UnusedMethodArgument:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 77
 Metrics/AbcSize:
@@ -62,7 +62,7 @@ Metrics/PerceivedComplexity:
 
 # Offense count: 4
 Style/AccessorMethodName:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 13
 # Cop supports --auto-correct.

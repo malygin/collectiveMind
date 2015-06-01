@@ -4,12 +4,23 @@
       .col-md-12
         #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
           %ul.list-unstyled.list-inline.carousel-indicators.text-center
+            %li.myCarousel-target.active{style: "border-top-color:#eac85e;", "data-slide-to" => "0", "data-target" => "#myCarousel"}
+              Введение в процедуру
             - @aspects.each_with_index do |asp, index|
-              %li.myCarousel-target{class: "#{'active' if index == 0}", style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index}", "data-target" => "#myCarousel"}
+              %li.myCarousel-target{style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index+1}", "data-target" => "#myCarousel"}
                 = asp.content
           .carousel-inner{:role => "listbox"}
+            .item.active
+              .row
+                .col-md-12
+                  .container
+                    .row
+                      .col-md-12.col-sm-12
+                        .aspect-main-block{style: "border-top-color:#eac85e;"}
+                          = @project.introduction.html_safe if @project.introduction
+
             - @aspects.each_with_index do |asp, index|
-              .item{class: "#{'active' if index == 0}"}
+              .item
                 .row
                   .col-md-12
                     .container

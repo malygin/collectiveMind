@@ -3,7 +3,7 @@
 def mailer(users)
   events = Journal.events_for_user_mailer(1.day.ago.utc, users)
   g = events.group_by { |e| [e.user_informed, e.project_id] }
-  feed_journals = g.collect { |k, v| [v.first.user_informed.id, v.first.project, v.size] }
+  feed_journals = g.collect { |_, v| [v.first.user_informed.id, v.first.project, v.size] }
 
   h = {}
   feed_journals.each do |arr|

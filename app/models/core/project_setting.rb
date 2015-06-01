@@ -5,7 +5,7 @@ class Core::ProjectSetting < ActiveRecord::Base
   private
   def set_stage_dates
     stage_dates = {}
-    Core::Project::LIST_STAGES.each do |stage, data|
+    Core::Project::LIST_STAGES.each do |_stage, data|
       data[:status].each do |status|
         stage_dates[status] = {
             expected: {

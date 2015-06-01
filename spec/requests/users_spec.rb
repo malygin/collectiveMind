@@ -4,6 +4,7 @@ describe 'Users ' do
   subject { page }
 
   let!(:user) { @user = create :user }
+  let!(:user_content) { create :user }
   let!(:moderator) { @moderator = create :moderator }
   let (:project) { @project = create :closed_project, stage: '1:0' }
 
@@ -32,7 +33,8 @@ describe 'Users ' do
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         click_button 'update_profile'
-        expect(current_path).to eq user_path(project.id, user.id)
+        # expect(current_path).to eq user_path(project.id, user.id)
+        expect(current_path).to eq polymorphic_path(project.current_stage_type, project: project, action: :user_content)
         expect(page).to have_content new_name
         expect(page).to have_content new_surname
       end
@@ -47,22 +49,22 @@ describe 'Users ' do
 
     context 'stage content', js: true do
       before do
-        @aspect = create :aspect, project: project, user: user
-        @aspect_comment = create :aspect_comment, post: @aspect, user: user
+        @aspect = create :aspect, project: project, user: user_content
+        @aspect_comment = create :aspect_comment, post: @aspect, user: user_content
 
-        @discontent = create :discontent, project: project, user: user
-        @discontent_comment = create :discontent_comment, post: @discontent, user: user
+        @discontent = create :discontent, project: project, user: user_content
+        @discontent_comment = create :discontent_comment, post: @discontent, user: user_content
 
-        @concept = create :concept, user: user, project: project
-        @concept_comment = create :concept_comment, post: @concept, user: user
+        @concept = create :concept, user: user_content, project: project
+        @concept_comment = create :concept_comment, post: @concept, user: user_content
 
-        @novation = create :novation, user: user, project: project
-        @novation_comment = create :novation_comment, post: @novation, user: user
+        @novation = create :novation, user: user_content, project: project
+        @novation_comment = create :novation_comment, post: @novation, user: user_content
 
-        @plan = create :plan, user: user, project: project
-        @plan_comment = create :plan_comment, post: @plan, user: user
+        @plan = create :plan, user: user_content, project: project
+        @plan_comment = create :plan_comment, post: @plan, user: user_content
 
-        visit user_path(project, user)
+        visit user_path(project, user_content)
       end
 
       it 'have on all stages' do

@@ -37,7 +37,7 @@ class JournalLogger < ActiveRecord::Base
   end
 
   # older methods
-  def self.events_for_user_feed(project_id, lim = 5)
+  def self.events_for_user_feed(project_id)
     JournalLogger.where(' project_id = ? AND personal = ? ', project_id, false)
   end
 
@@ -45,7 +45,7 @@ class JournalLogger < ActiveRecord::Base
     JournalLogger.where(' project_id = ? AND personal =? ', project_id, false).where("user_id= (?)", user_id).limit(lim)
   end
 
-  def self.events_for_my_feed(project_id, user_id, lim=10)
+  def self.events_for_my_feed(project_id, user_id)
     JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true)
   end
 

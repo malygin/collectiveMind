@@ -224,4 +224,14 @@ class Core::Project < ActiveRecord::Base
     end
   end
 
+  def get_main_aspects_sorted_by(sort_rule)
+    if sort_rule == 'sort_by_comments'
+      self.proc_main_aspects.sort_comments
+    elsif sort_rule == 'sort_by_date'
+      self.proc_main_aspects.created_order
+    else
+      self.proc_main_aspects
+    end
+  end
+
 end

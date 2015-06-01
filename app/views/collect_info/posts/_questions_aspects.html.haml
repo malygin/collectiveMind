@@ -115,7 +115,7 @@
                                         = answer.content
                                       %i.fa.fa-check{style: "color:#{asp.color};"}
                                 -if @project.type_for_questions == 0
-                                  = text_area_tag 'content', nil, rows: 2, placeholder: 'Ваше пояснение', class: "form-control"
+                                  = text_area_tag 'content', nil, rows: 6, placeholder: 'Ваш ответ', class: "form-control"
                                 .clearfix
                                 .form-group.bottom-buttons
                                   -if @project.type_for_questions == 1
