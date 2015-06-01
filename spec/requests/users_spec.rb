@@ -39,6 +39,25 @@ describe 'Users ' do
         expect(page).to have_content new_surname
       end
 
+      it 'owner - change password' do
+        new_name = 'Cool new name'
+        new_surname = 'My cool surname'
+        click_link 'auth_dropdown'
+        click_link 'go_to_profile'
+        click_link 'edit_profile'
+        fill_in 'user_name', with: new_name
+        fill_in 'user_surname', with: new_surname
+        fill_in 'user_password', with: 'new password'
+        fill_in 'user_password_confirmation', with: 'new password'
+        click_button 'update_profile'
+        expect(current_path).to eq root_path
+        click_link 'sign_in'
+        fill_in 'user_email', with: user.email
+        fill_in 'user_password', with: 'new password'
+        click_button 'sign_in'
+        expect(page).to have_content new_name
+      end
+
       context 'other user' do
         it 'not show link' do
           visit user_path(project, moderator)

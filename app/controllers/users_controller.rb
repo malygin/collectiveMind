@@ -25,6 +25,8 @@ class UsersController < ProjectsController
   def update
     # params[:user].delete(:password) if params[:user][:password].blank?
     to_update = user_params
+    to_update.delete(:password) if to_update[:password].blank?
+    to_update.delete(:password_confirmation) if to_update[:password].blank?
     if params[:user][:avatar].present?
       img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
       to_update.merge!(avatar: img['public_id'])
@@ -96,6 +98,6 @@ class UsersController < ProjectsController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :skype, :phone)
+    params.require(:user).permit(:name, :surname, :email, :skype, :phone, :password, :password_confirmation)
   end
 end

@@ -64,7 +64,7 @@
       - if current_user?(@user)
         #user_profile.tab-pane.fade{:role => "tabpanel"}
           = @user
-          %h5 Не состоит ни в одной группе
+          -#%h5 Не состоит ни в одной группе
           = form_for @user, url: {action: :update, type: @project.id}, class: 'form form-horizontal' do |f|
             = render 'shared/notice_messages', object: f.object
             .form-group
@@ -74,14 +74,23 @@
             .form-group
               = f.text_field :email, class: 'form-control', placeholder: 'Email'
             .form-group
+              = f.password_field :password, class: 'form-control', placeholder: 'Пароль'
+            .form-group
+              = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
+            .form-group
               = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
             .form-group
               = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
             .form-group
               = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-            .form-group
-              .checkbox
-                %label
-                  %input{type: 'checkbox'}/
-                  Получать автоматические уведомления
+
+
+
+
+
+            -#.form-group
+            -#  .checkbox
+            -#    %label
+            -#      %input{type: 'checkbox'}/
+            -#      Получать автоматические уведомления
             = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
