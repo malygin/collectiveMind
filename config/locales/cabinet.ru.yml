@@ -205,5 +205,6 @@ ru:
     select_topic: "Выберите аспект записи"
     send: "Отправить"
     user:
+      update_success: "Профиль успешно обновлен"
       update: "Сохранить"
     user_content: "Сохранить"

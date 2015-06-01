@@ -1,0 +1,6 @@
+- if @user.valid?
+  $('.notice_messages').hide();
+  $('#update_user_success').fadeIn(3000).fadeOut('slow');
+- else
+  $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @user)}");
+  $('.notice_messages').show();

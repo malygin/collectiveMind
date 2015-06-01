@@ -103,17 +103,17 @@ module ApplicationHelper
 
   # @todo refac
   def current_stage_popover_status
-    if name_controller == :collect_info_posts and @project.status == 0 and @questions_progress != 100
+    if name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress != 100
       'collect_info_questions_0'
-    elsif name_controller == :collect_info_posts and @project.status == 0 and @questions_progress == 100
+    elsif name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress == 100
       'collect_info_discuss_0'
-    elsif name_controller == :collect_info_posts and @project.status == 1 and @questions_progress != 100
+    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress != 100
       'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts and @project.status == 1 and @questions_progress == 100
+    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress == 100
       'collect_info_discuss_1'
-    elsif name_controller == :collect_info_posts and @project.status > 1 and @questions_progress != 100
+    elsif name_controller == :collect_info_posts and (@project.main_stage > 1 or @project.stage == '1:2') and @questions_progress != 100
       'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts and @project.status > 1 and @questions_progress == 100
+    elsif name_controller == :collect_info_posts and (@project.main_stage > 1 or @project.stage == '1:2') and @questions_progress == 100
       'collect_info_discuss_1'
     elsif name_controller == :discontent_posts
       'discontent_discuss'
@@ -132,11 +132,11 @@ module ApplicationHelper
 
   # @todo refac
   def current_stage_popover_text
-    if name_controller == :collect_info_posts and @project.status == 0 and @questions_progress != 100
+    if name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress != 100
       'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' +
           'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' +
           'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
-    elsif name_controller == :collect_info_posts and @project.status == 1 and @questions_progress != 100
+    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress != 100
       'Еще раз прочитайте базу знаний и ответьте на несколько несложных вопросов на ее понимание.'
     elsif name_controller == :collect_info_posts and @questions_progress == 100
       'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' +

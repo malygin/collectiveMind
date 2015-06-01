@@ -31,11 +31,20 @@ class UsersController < ProjectsController
       img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
       to_update.merge!(avatar: img['public_id'])
     end
-
     if @user.update_attributes(to_update)
       flash[:success] = 'Профиль обновлен'
     end
-    redirect_to user_path(@project, @user)
+    # redirect_to user_path(@project, @user)
+    # respond_to do |format|
+    #   if @user.update_attributes(to_update)
+    #     format.html { redirect_to user_path(@project, @user) }
+    #     format.js
+    #   end
+    # end
+    respond_to do |format|
+      format.html { redirect_to user_path(@project, @user) }
+      format.js
+    end
   end
 
   def destroy

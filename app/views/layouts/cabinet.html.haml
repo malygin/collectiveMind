@@ -85,8 +85,12 @@
                           .divider20
 
                 #user_profile.tab-pane.fade{:role => "tabpanel"}
-                  = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user}, class: 'form form-horizontal' do |f|
-                    = render 'shared/notice_messages', object: f.object
+                  = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user}, remote: true, method: :put, class: 'form form-horizontal' do |f|
+                    .cab_notice.white(style='display:none;' id="update_user_success")
+                      %span.success
+                        = t("form.user.update_success")
+                    .notice_messages
+                      = render 'shared/notice_messages', object: f.object
                     .form-group
                       = f.text_field :name, class: 'form-control', placeholder: 'Имя'
                     .form-group
@@ -94,7 +98,7 @@
                     .form-group
                       = f.text_field :email, class: 'form-control', placeholder: 'Email'
                     .form-group
-                      = f.password_field :password, class: 'form-control', placeholder: 'Пароль'
+                      = f.password_field :password, class: 'form-control', placeholder: 'Новый пароль'
                     .form-group
                       = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
                     .form-group
