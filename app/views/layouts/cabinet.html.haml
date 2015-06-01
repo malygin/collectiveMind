@@ -54,7 +54,7 @@
                                   %span.marked=num_stage
                                   СТАДИЯ
                             - else
-                              %li{:role => "presentation"}
+                              %li.disabled{:role => "presentation"}
                                 = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
                                   %span.marked=num_stage
                                   СТАДИЯ
