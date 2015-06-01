@@ -15,7 +15,7 @@
         %li{class: "#{'active' if rating?}"}
           = link_to 'Рейтинг', users_path(@project), class: 'menu_a', 'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Посмотреть рейтинг участников'
       - if boss?
-        - if @project.main_stage >= 0
+        - unless @project.main_stage == 1 and @project.sub_stage == 0
           %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put,  class: 'menu_a'
         - if @project.main_stage < 7
           %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, class: 'menu_a'
