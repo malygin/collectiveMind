@@ -34,28 +34,47 @@ describe 'Users ' do
         fill_in 'user_surname', with: new_surname
         click_button 'update_profile'
         # expect(current_path).to eq user_path(project.id, user.id)
-        expect(current_path).to eq polymorphic_path(project.current_stage_type, project: project, action: :user_content)
-        expect(page).to have_content new_name
-        expect(page).to have_content new_surname
+        # expect(current_path).to eq polymorphic_path(project.current_stage_type, project: project, action: :user_content)
+        expect(page).to have_content t("form.user.update_success")
       end
 
-      it 'owner - change password' do
+      it 'owner - success change password' do
         new_name = 'Cool new name'
         new_surname = 'My cool surname'
+        new_password = 'new password'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
         click_link 'edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
-        fill_in 'user_password', with: 'new password'
-        fill_in 'user_password_confirmation', with: 'new password'
+        fill_in 'user_password', with: new_password
+        fill_in 'user_password_confirmation', with: new_password
         click_button 'update_profile'
+        expect(page).to have_content t("form.user.update_success")
+        refresh_page
         expect(current_path).to eq root_path
         click_link 'sign_in'
         fill_in 'user_email', with: user.email
         fill_in 'user_password', with: 'new password'
         click_button 'sign_in'
         expect(page).to have_content new_name
+      end
+
+      it 'owner - fail change password' do
+        new_name = 'Cool new name'
+        new_surname = 'My cool surname'
+        new_password = 'new password'
+        wrong_password = 'wrong password'
+        click_link 'auth_dropdown'
+        click_link 'go_to_profile'
+        click_link 'edit_profile'
+        fill_in 'user_name', with: new_name
+        fill_in 'user_surname', with: new_surname
+        fill_in 'user_password', with: new_password
+        fill_in 'user_password_confirmation', with: wrong_password
+        click_button 'update_profile'
+        expect(page).to_not have_content t("form.user.update_success")
+        expect(page).to have_content t('errors.messages.not_saved', count: 1)
       end
 
       context 'other user' do
