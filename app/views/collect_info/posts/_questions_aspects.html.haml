@@ -136,8 +136,8 @@
 
               .row
                 .col-md-12.col-sm-12
-                  .aspect-main-block{style: "border-top-color: #{asp.color};"}
-                    - if asp.knowbase_posts.size > 1
+                  - if asp.knowbase_posts.size > 1
+                    .aspect-main-block{style: "border-top-color: #{asp.color};"}
                       .tab-content
                         - asp.knowbase_posts.each_with_index do |post, i|
                           .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
@@ -145,13 +145,14 @@
                               = post.title
                             %p.aspect-main-block-text
                               = post.content.html_safe unless post.content.nil?
-                    - elsif asp.knowbase_posts.size > 0
+                  - elsif asp.knowbase_posts.size > 0
+                    .aspect-main-block{style: "border-top-color: #{asp.color};"}
                       - asp.knowbase_posts.each_with_index do |post, i|
                         %h6.aspect-main-block-heading
                           = post.title
                         %p.aspect-main-block-text
                           = post.content.html_safe unless post.content.nil?
-                    - else
-                      .white-gray
-                        .radial-gradient
-                          .block_BZ
+                  - else
+                    .white-gray
+                      .radial-gradient
+                        .block_BZ

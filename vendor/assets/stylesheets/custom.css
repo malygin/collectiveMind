@@ -7984,3 +7984,33 @@ h4 i img{
 .open .dropdown-toggle.btn-arrow:after {
     border-left-color: #d9534f;
 }
+
+.vote {
+    background-image: image-url('vote_btn.png');
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.vote-vote1 {
+    width: 24px;
+    height: 22px;
+    background-position: -5px -5px;
+}
+
+.vote-vote2 {
+    width: 24px;
+    height: 22px;
+    background-position: -5px -37px;
+}
+
+.vote-vote3 {
+    width: 24px;
+    height: 22px;
+    background-position: -39px -5px;
+}
+
+.vote-vote4 {
+    width: 24px;
+    height: 22px;
+    background-position: -39px -37px;
+}

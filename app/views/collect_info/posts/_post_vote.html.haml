@@ -5,13 +5,13 @@
         = post_vote.content
     .divider10
     .vote_controls.text-center
-      %button.btn.vote_button.v_btn_1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_collect_info_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button",
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_collect_info_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button",
       "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Отнести к необходимым"}
-
-      %button.btn.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_collect_info_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button",
+        %i.vote.vote-vote1
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_collect_info_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button",
       "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Отнести к важным"}
-
-      %button.btn.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_collect_info_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button",
+        %i.vote.vote-vote2
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_collect_info_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button",
       "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Отнести к неважным"}
-
+        %i.vote.vote-vote3
     .divider15
