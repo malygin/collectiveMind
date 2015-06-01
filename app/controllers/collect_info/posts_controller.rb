@@ -14,7 +14,8 @@ class CollectInfo::PostsController < PostsController
   end
 
   def index
-    @proc_aspects = @project.proc_main_aspects
+    # @proc_aspects = @project.proc_main_aspects
+    @proc_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
     @questions_progress, @questions_progress_all  = collect_info_answers_count(@project)
     respond_to :html
