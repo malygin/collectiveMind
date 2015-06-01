@@ -193,6 +193,7 @@
 
 # цвета для несовершенств
 @colors_discontents = ->
+  console.log 1
   color_item = (object, action, color) ->
     object.css action, '#' + color
     return
@@ -202,6 +203,8 @@
     type = me.attr('data-me-type')
     if type == 'imperf'
       color = $colors_imperf_codes[me.attr('data-me-color')]
+    if (type == 'aspect')
+       color = $colors_aspect_codes[me.attr('data-me-color')];
     action = me.attr('data-me-action')
     if action and color
       color_item me, action, color
@@ -645,6 +648,21 @@ $('#tab_posts li#new a').on "click", (e) ->
     return
 
 # временно!!!
+$colors_aspect_codes = [
+  'cfa7cc',
+  'a4b1db',
+  '88a2c3',
+  '8a99ae',
+  '8abdea',
+  '8fc8d3',
+  'a3bead',
+  'a5cba2',
+  'b9dd9d',
+  'd7d69e',
+  'e9dd93',
+  'e7b288',
+  'd59d9e'
+]
 $colors_imperf_codes = [
   'd3a5c9'
   'a7b3dd'

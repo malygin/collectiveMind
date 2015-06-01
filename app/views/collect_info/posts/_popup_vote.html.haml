@@ -1,4 +1,4 @@
-#vote-1.popup-window.popup-vote.popup-w1030.mfp-hide
+#vote-1.popup-window.popup-vote.popup-w915.mfp-hide
   .popup.popup_rounded
     .modal_title
       .row
@@ -7,7 +7,10 @@
             Голосование по аспектам
     .vote_progress_cont.progress
       .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
-    .modal_body
+    .modal_body.lighter-grey
+      .divider15
+      %h5.text-center.no-margin Распределите аспекты по папкам
+      .divider5
       .container.vote_folders_cont.folders_4.no_padding_col
         %ul.nav.vote_nav.row{:role => "tablist"}
           %li.col-md-3.no_padding_col.folder_all.active{:role => "presentation"}
@@ -34,8 +37,7 @@
                 %span.vote_counter
                   =current_user.aspect_votings.by_status(3).count
                 %h5 Неважно
-      .divider25
-      .container
+      .container.white.border_top_grey
         .row
           .divider25
           .tab-content
