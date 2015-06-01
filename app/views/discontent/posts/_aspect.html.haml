@@ -1,0 +1,17 @@
+%li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}, style: "padding-left: #{level*10}px;"}
+  %input{:id => "ex2_2_#{aspect.id+1}",:name => "ex2_2", :type => "radio", :value => "#{aspect.id+1}"}/
+  %label.checkox_item{:for => "ex2_2_#{aspect.id+1}"}
+    %span
+      %span.color_counter.color_me{style: "background-color: #{aspect.color};"}
+        %span
+          = aspect.aspect_posts.by_status_for_discontent(@project).count
+    %span.text_label
+      = aspect.content
+    - new_posts = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
+    - if new_posts > 0
+      %span.cb_doc
+        = new_posts
+    - new_comments = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
+    - if new_comments > 0
+      %span.cb_com
+        = new_comments

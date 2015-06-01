@@ -73,5 +73,18 @@ module MarkupHelper
     end
   end
 
+  # # возвращает массив пар значений [аспект, уровень вложенности] последовательно начиная с переданного (корневого) аспекта
+  # def return_subaspects(main_aspect)
+  #   @subaspects = []
+  #   return_subaspect(main_aspect)
+  # end
+  #
+  # # метод для возврата вложенного аспекта
+  # def return_subaspect(post, level = 0)
+  #   @subaspects.push([post, level])
+  #   post.core_aspects.each {|asp| return_subaspect(asp, level+1) }
+  #   return
+  # end
+
 
 end

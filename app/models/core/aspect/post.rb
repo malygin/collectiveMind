@@ -2,6 +2,8 @@ class Core::Aspect::Post < ActiveRecord::Base
   include BasePost
   SCORE = 20
 
+  cattr_accessor :array_subaspects
+
   belongs_to :core_aspect, class_name: 'Core::Aspect::Post', foreign_key: 'core_aspect_id'
 
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect', foreign_key: :aspect_id
@@ -84,5 +86,20 @@ class Core::Aspect::Post < ActiveRecord::Base
     count_all = project.discontents.by_status(status).count
     count_aspect = self.aspect_posts.by_status(status).count
     count_all == 0 ? 0 : ((count_aspect.to_f / count_all.to_f) * 100).round
+  end
+
+
+  # возвращает массив пар значений [аспект, уровень вложенности] последовательно начиная с переданного (корневого) аспекта
+  def subaspects
+    @@array_subaspects = []
+    self.return_subaspect
+    @@array_subaspects
+  end
+
+  # метод для возврата вложенного аспекта
+  def return_subaspect(level = 0)
+    @@array_subaspects.push([self, level])
+    self.core_aspects.each { |asp| asp.return_subaspect(level+1) }
+    return
   end
 end
