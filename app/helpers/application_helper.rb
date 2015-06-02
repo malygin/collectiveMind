@@ -175,8 +175,8 @@ module ApplicationHelper
 
     # общее количество ответов пользователей закрытой процедуры
     if project.closed?
-      users_count = @project.users_in_project.uniq.count
-      count_answered_all = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: {project_id: project, type_stage: project.type_for_questions} ).count
+      users_count = project.users_in_project.uniq.count
+      count_answered_all = CollectInfo::UserAnswers.select('"collect_info_user_answers"."question_id"').joins(:question).where(collect_info_questions: {project_id: project, type_stage: project.type_for_questions} ).count
       questions_progress_all = count_all*users_count == 0 ? 0 : (count_answered_all.to_f/(count_all*users_count).to_f) * 100
     end
     return questions_progress, questions_progress_all
