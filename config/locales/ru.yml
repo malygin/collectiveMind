@@ -54,6 +54,7 @@ ru:
     help_stage: "Помощь по стадии"
     journal_count:
       few: "и еще %{count} похожих"
+      many: "и еще %{count} похожих"
       one: "и еще 1 похожих"
       other: "и еще %{count} похожих"
     journal_empty: "Уведомлений нет"

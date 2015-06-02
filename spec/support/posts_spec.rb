@@ -332,15 +332,15 @@ shared_examples 'vote popup' do |status, title, stage|
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '2'
     end
-    find(:css, "#post_vote_#{@post1.id} .v_btn_2").trigger('click')
+    find(:css, "#post_vote_#{@post1.id} .vote-vote1").trigger('click')
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '1'
     end
-    within :css, ".poll-2-3 span.vote_counter" do
+    within :css, ".poll-2-2 span.vote_counter" do
       expect(page).to have_content '1'
     end
 
-    find(:css, "#post_vote_#{@post2.id} .v_btn_3").trigger('click')
+    find(:css, "#post_vote_#{@post2.id} .vote-vote3").trigger('click')
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '0'
     end
