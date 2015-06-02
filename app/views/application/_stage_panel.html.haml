@@ -6,14 +6,14 @@
           - Core::Project::STAGES.each do |num_stage, stage|
             .btn-group{role: 'group'}
               - if name_controller == stage[:type_stage]
-                = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage}" do
+                = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (открыта)<br />' +"#{stage[:description]}" do
                   ="#{num_stage} СТАДИЯ: "
                   = stage[:name]
               - elsif @project.main_stage >= num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{num_stage}"+' '+'стадия завершена' do
+                = link_to send("#{stage[:type_stage]}_path", @project), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (завершена)<br />' +"#{stage[:description]}" do
                   = num_stage
               - else
-                = link_to '#', id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{num_stage}"+' '+'стадия недоступна' do
+                = link_to '#', id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (недоступна) <br />'+"#{stage[:description]}" do
                   = num_stage
 
     .col-md-4.col_padding_left_3
