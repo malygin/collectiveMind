@@ -56,8 +56,8 @@ class Core::Project < ActiveRecord::Base
   STAGES = {
     1 => {name: 'Введение в процедуру', type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
       substages: {
-        0 => {name: 'Оценка и обсуждение аспектов', active: true, code: :aspects_esimate},
-        1 => {name: 'Изучение БЗ', active: true, code: :aspects_learn},
+        0 => {name: 'Изучение БЗ', active: true, code: :aspects_esimate},
+        1 => {name: 'Оценка и обсуждение аспектов', active: true, code: :aspects_learn},
         2 => {name: 'Голосование за аспекты', active: true, code: :aspects_voting},
       }
     },
