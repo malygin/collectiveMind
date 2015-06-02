@@ -336,9 +336,9 @@ shared_examples 'vote popup' do |status, title, stage|
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '1'
     end
-    within :css, ".poll-2-2 span.vote_counter" do
-      expect(page).to have_content '1'
-    end
+    # within :css, ".poll-2-2 span.vote_counter" do
+    #   expect(page).to have_content '1'
+    # end
 
     find(:css, "#post_vote_#{@post2.id} .vote-vote3").trigger('click')
     within :css, ".poll-2-1 span.vote_counter" do

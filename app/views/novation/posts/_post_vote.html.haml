@@ -14,9 +14,9 @@
 
     .divider15
     .vote_controls.text-center
-      %button.btn.vote_button.v_b_text.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_novation_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-check", "data-vote-role" => "vote_yes", :role => "button"}
+      %button.btn.vote_button.v_b_text.vote-vote1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_novation_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-check", "data-vote-role" => "vote_yes", :role => "button"}
         Да
-      %button.btn.vote_button.v_b_text.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_novation_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-minus", "data-vote-role" => "vote_no", :role => "button"}
+      %button.btn.vote_button.v_b_text.vote-vote3{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_novation_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-minus", "data-vote-role" => "vote_no", :role => "button"}
         Нет
       %span.vote_open_detail.grey
         %i.fa.fa-angle-right.font_white

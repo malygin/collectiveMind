@@ -25,20 +25,11 @@
     .divider10
     .vote_controls.text-center
       %button.btn.vote_button.v_btn_1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_discontent_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
-        - if status == 1
-          %i.fa.fa-home
-        - else
-          %i.fa.fa-exclamation
+        %i.vote.vote-vote1
       %button.btn.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-        - if status == 2
-          %i.fa.fa-home
-        - else
-          %i.fa.fa-check
+        %i.vote.vote-vote2
       %button.btn.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-        - if status == 3
-          %i.fa.fa-home
-        - else
-          %i.fa.fa-minus
+        %i.vote.vote-vote3
       %span.vote_open_detail_imperf.grey
         %i.fa.fa-angle-right.font_white
       .divider15
