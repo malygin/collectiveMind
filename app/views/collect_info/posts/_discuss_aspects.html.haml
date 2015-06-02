@@ -19,8 +19,8 @@
               %span.badge-red
                 = new_posts
         - if @project.stage == '1:0' or @project.stage == '1:1'
-          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
-            %span
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
+            %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
               = t('techniques.aspect_posts_simple')
 .divider10
 .divider_1_grey

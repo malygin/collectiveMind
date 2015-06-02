@@ -7248,7 +7248,7 @@ a.btn-white{
 .separator_label{
     padding-left: 10px;
     padding-right: 8px;
-    background: #F8F8F8;
+    background: #FFFFFF;
     display: inline-block;
     margin: 0 auto;
     position: relative;
@@ -8013,4 +8013,8 @@ h4 i img{
     width: 24px;
     height: 22px;
     background-position: -39px -37px;
+}
+.link_status{
+    margin-left: 2px;
+    margin-right: 2px;
 }

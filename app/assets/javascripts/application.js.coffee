@@ -9,6 +9,7 @@
 #= require jquery.tube.min
 
 #= require bootstrap/bootstrap.min
+#= require bootstrap/bootstrap-hover-dropdown.min
 #= require bootstrap-colorpicker
 #= require datepicker/bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable

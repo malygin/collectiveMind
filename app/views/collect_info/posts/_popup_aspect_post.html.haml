@@ -58,7 +58,7 @@
               = @post.questions.by_type(0).first.try(:content)
 
 
-      .container.modal_content.ps_cont.white-gray
+      .container.modal_content.ps_cont
         .row
           .col-md-12
             .divider10
@@ -67,7 +67,8 @@
                 .separator_label.text-left
                   %h4 Обсуждение аспекта
                 .separator_label.pull-right
-                  %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+                  %a{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
+                    %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments
             .divider15

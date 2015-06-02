@@ -223,6 +223,15 @@
     return
 
 #----------
+# сворачивание комментов
+@comments_collapse_column = ->
+  $('#comments').on 'shown.bs.collapse', ->
+    $('.comments_action').text 'свернуть'
+    return
+  $('#comments').on 'hidden.bs.collapse', ->
+    $('.comments_action').text 'развернуть'
+    return
+
 @search = ->
   this.search_users = ->
     project_id = $('#search_users_project').attr("data-project")
