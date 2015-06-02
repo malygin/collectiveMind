@@ -13,8 +13,7 @@ class UsersController < ProjectsController
   end
 
   def show
-    redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content) if @user == current_user
-
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content, edit_profile: true) if @user == current_user
     # if @user != current_user
     #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
     # else

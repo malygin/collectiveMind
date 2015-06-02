@@ -29,7 +29,7 @@ describe 'Users ' do
         new_surname = 'My cool surname'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         click_button 'update_profile'
@@ -44,7 +44,7 @@ describe 'Users ' do
         new_password = 'new password'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         fill_in 'user_password', with: new_password
@@ -67,7 +67,7 @@ describe 'Users ' do
         wrong_password = 'wrong password'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         fill_in 'user_password', with: new_password
