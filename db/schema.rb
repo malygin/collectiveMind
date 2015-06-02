@@ -441,6 +441,7 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.boolean  "ready_to_concept",         default: false
     t.boolean  "owner",                    default: false
     t.integer  "type_user"
+    t.boolean  "ready_to_plan",            default: false
     t.integer  "collect_info_posts_score", default: 0
     t.integer  "discontent_posts_score",   default: 0
     t.integer  "concept_posts_score",      default: 0
@@ -448,7 +449,6 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "plan_posts_score",         default: 0
     t.integer  "estimate_posts_score",     default: 0
     t.integer  "score",                    default: 0
-    t.boolean  "ready_to_plan",            default: false
   end
 
   add_index "core_project_users", ["project_id", "user_id"], name: "index_core_project_users_on_project_id_and_user_id", using: :btree
