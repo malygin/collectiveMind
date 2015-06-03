@@ -277,6 +277,9 @@ GEM
       term-ansicolor
       terminal-table
     ice_nine (0.11.1)
+    jbuilder (2.2.16)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -607,6 +610,7 @@ DEPENDENCIES
   historyjs-rails
   html2haml
   i18n-tasks
+  jbuilder
   jquery-rails
   jquery-ui-sass-rails
   json

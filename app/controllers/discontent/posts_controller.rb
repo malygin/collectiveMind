@@ -24,8 +24,9 @@ class Discontent::PostsController < PostsController
     @posts= nil
     if params[:aspect] && params[:aspect] != '*' && params[:aspect] != '#'
       # @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.by_status_for_discontent(@project).created_order
-      aspects = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).subaspects.map { |asp, _| asp.id }
-      @posts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: aspects}).by_status_for_discontent(@project).created_order
+      aspect = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join(''))
+      subaspects = aspect.core_aspects.map { |asp, _| asp.id }
+      @posts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: [aspect.id]+subaspects}).by_status_for_discontent(@project).created_order
     elsif params[:aspect] == '#'
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).created_order
     else
@@ -34,16 +35,7 @@ class Discontent::PostsController < PostsController
     respond_to do |format|
 
       format.html # show.html.erb
-      format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, content:item.content, what: trim_content(item.what, 100), approve_status: item.approve_status, useful: item.useful, admin_panel: boss?,
-                                                                             user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar))  : ActionController::Base.helpers.asset_path('no-ava.png') , post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
-                                                                             project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
-                                                                             aspect_class: post_aspect_classes(item),
-                                                                             count_comments: item.comments.count,
-                                                                             count_likes: item.users_pro.count,
-                                                                             count_dislikes: item.users_against.count,
-                                                                             aspects: item.post_aspects.map { |aspect| {id: aspect.id, color: aspect.color, content: aspect.content} },
-                                                                             comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_content(comment.content, 50)} }} } }
-
+      format.json
     end
   end
 
