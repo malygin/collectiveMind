@@ -31,7 +31,7 @@
                     %span.c1-item-inner{style: "border-top-color: #eac85e;"}
                       Введение в процедуру
             - @proc_aspects.each_with_index do |aspect, index|
-              %li.li_aspect.noLink{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
+              %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
                 .slider-item
                   .c1-item
                     %a{id: "aspect_#{aspect.id}", "data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}"}
@@ -46,7 +46,7 @@
                 = @project.introduction.html_safe if @project.introduction
                 .row
                   .col-md-8
-                    %button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
+                    -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
         - @proc_aspects.each_with_index do |asp, index|
           .tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}"}
             -if asp.missed_questions(current_user, @project.type_for_questions).size > 0
