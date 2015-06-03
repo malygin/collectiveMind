@@ -23,14 +23,14 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    unless @project.users.include?(current_user) or boss?
+    unless @project.users.include?(current_user) || boss?
       redirect_to root_url
     end
   end
 
   def start_visit
     # record url without params for easy parsing
-    if current_user and @project and request.method == 'GET'
+    if current_user && @project && request.method == 'GET'
       current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
                                   body: request.original_fullpath.split('?')[0]
     end

@@ -77,7 +77,7 @@ class Discontent::PostGroup
         union_posts_aspects = union_posts_aspects | p.post_aspects.pluck(:id) if p.post_aspects.present?
       end
     end
-    if aspects_for_ungroup.present? and union_posts_aspects.present?
+    if aspects_for_ungroup.present? && union_posts_aspects.present?
       aspects_for_ungroup.each do |asp|
         unless union_posts_aspects.include? asp
           self.discontent_post_group_aspects.by_aspect(asp).destroy_all

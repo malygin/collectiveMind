@@ -34,7 +34,7 @@ module PostComments
 
   def destroy_comment
     @comment = comment_model.find(params[:id])
-    if @comment.user == current_user or boss?
+    if @comment.user == current_user || boss?
       @comment.destroy
       Journal.destroy_comment_journal(@project, @comment)
     end

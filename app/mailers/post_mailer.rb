@@ -20,7 +20,7 @@ class PostMailer < ActionMailer::Base
   def moderator_mailer(user, mail)
     @user = User.find(user)
     @mail = JournalMailer.find(mail)
-    title = (@mail and @mail.title.present?) ? @mail.title : 'Massdecision '
+    title = (@mail && @mail.title.present?) ? @mail.title : 'Massdecision '
     mail(to: @user.email, from: "massdecision@gmail.com", subject: title)
   end
 

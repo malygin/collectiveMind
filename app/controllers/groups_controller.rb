@@ -95,7 +95,7 @@ class GroupsController < ApplicationController
   def upload_file
     if %w(image/jpeg image/png).include? params[:file].content_type
       file = Cloudinary::Uploader.upload(params[:file], folder: GroupChatMessage::GROUP_FOLDER, crop: :limit, width: 800,
-                                         eager: [{crop: :fill, width: 150, height: 150}])
+                                                        eager: [{crop: :fill, width: 150, height: 150}])
     else
       file = Cloudinary::Uploader.upload(params[:file], folder: GroupChatMessage::GROUP_FOLDER, resource_type: :raw)
     end

@@ -32,7 +32,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_status_for_discontent, ->(project) {
     if project.status == 4
       where(status: [0, 1])
-    elsif project.status == 5 or project.status == 6
+    elsif project.status == 5 || project.status == 6
       where(status: [2, 4])
     elsif project.status > 6
       where(status: [0, 1, 2, 4]) # вывод всех
@@ -74,7 +74,7 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def display_content
-    discontent_posts.first.content if status == 4 and !discontent_posts.empty?
+    discontent_posts.first.content if status == 4 && !discontent_posts.empty?
   end
 
   def note_size?(type_fd)

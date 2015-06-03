@@ -41,8 +41,10 @@
             %span.cb_com
               = new_comments
       - @aspects.each_with_index do |aspect, index|
-        - aspect.subaspects.each do |asp, level|
-          = render partial: 'aspect', object: asp, locals: {level: level}
+        = render partial: 'aspect', object: aspect, locals: {level: 0}
+
+        - aspect.core_aspects.each do |asp|
+          = render partial: 'aspect', object: asp, locals: {level: 1}
 
 
         -#%li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}}

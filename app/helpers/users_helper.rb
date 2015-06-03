@@ -1,7 +1,7 @@
 module UsersHelper
 
 
-  def set_class_for_top(number)
+  def class_for_top(number)
     if number <= 3
       'top3'
     elsif 3 < number && number <= 10

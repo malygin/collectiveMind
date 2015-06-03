@@ -25,7 +25,7 @@ class Core::ProjectUsersController < ProjectsController
   end
 
   def user_analytics
-    redirect_to(root_path) unless prime_admin? or role_expert?
+    redirect_to(root_path) unless prime_admin? || role_expert?
     @count_people = @project.count_people.to_json
     @average_time = @project.average_time.to_json
     @count_pages = @project.count_pages

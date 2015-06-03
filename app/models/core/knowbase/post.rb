@@ -6,7 +6,7 @@ class Core::Knowbase::Post < ActiveRecord::Base
   scope :stage_knowbase_order, ->(project) { where(project_id: project).order(:stage) }
   scope :stage_knowbase_post, ->(project, id) { where(project_id: project, id: id) }
 
-  def self.set_knowbase_posts_sort(sortable)
+  def self.knowbase_posts_sort(sortable)
     sortable.each { |k, v| self.find(k.to_i).update_attributes!(stage: v.to_i) }
   end
 

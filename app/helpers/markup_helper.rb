@@ -4,7 +4,7 @@ module MarkupHelper
   def stage_theme
     if rating?
       'grey_theme'
-    elsif action_name == 'user_content' or controller_name == 'users'
+    elsif action_name == 'user_content' || controller_name == 'users'
       "stage#{@project.main_stage}_theme"
     else
       "stage#{number_current_stage}_theme"
@@ -12,7 +12,7 @@ module MarkupHelper
   end
 
   def trim_content(content, size = 100)
-    if !content.nil? and content.length > size
+    if !content.nil? && content.length > size
       return content[0..size] + ' ...'
     end
     content

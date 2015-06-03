@@ -20,8 +20,15 @@
 
           %ul.dropdown-menu#list_aspects
             - @aspects.each do |aspect|
-              - aspect.subaspects.each do |asp, level|
-                %li{style: "padding-left: #{level*10}px;"}
+              %li
+                = check_box_tag 'discontent_post_aspects[]', aspect.id, @post.post_aspects.include?(aspect), id: "discontent_post_aspects_#{aspect.id}"
+                %label{for: "discontent_post_aspects_#{aspect.id}"}
+                  %span
+                    %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                  %span.text_label
+                    = aspect.content
+              - aspect.core_aspects.each do |asp|
+                %li{style: "padding-left: 10px;"}
                   = check_box_tag 'discontent_post_aspects[]', asp.id, @post.post_aspects.include?(asp), id: "discontent_post_aspects_#{asp.id}"
                   %label{for: "discontent_post_aspects_#{asp.id}"}
                     %span

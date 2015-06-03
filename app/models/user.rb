@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   validates :name, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX},
-            uniqueness: {case_sensitive: false}
+                    uniqueness: {case_sensitive: false}
 
 
   pg_search_scope :search,
@@ -123,13 +123,13 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if stage == :collect_info and project.stage == '1:2' and project.get_free_votes_for(self, stage) > 0
+    if stage == :collect_info && project.stage == '1:2' && project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :discontent and project.stage == '2:1' and project.get_free_votes_for(self, stage) > 0
+    elsif stage == :discontent && project.stage == '2:1' && project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :concept and project.stage == '3:1' and project.get_free_votes_for(self, stage) > 0
+    elsif stage == :concept && project.stage == '3:1' && project.get_free_votes_for(self, stage) > 0
       return true
-    elsif stage == :novation and project.stage == '4:1' and project.get_free_votes_for(self, stage) > 0
+    elsif stage == :novation && project.stage == '4:1' && project.get_free_votes_for(self, stage) > 0
       return true
     end
     false

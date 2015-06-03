@@ -23,7 +23,7 @@ module ApplicationHelper
 
   # @todo for journal helper
   def field_for_journal(post)
-    if post.instance_of? Concept::Post or post.instance_of? Novation::Post
+    if post.instance_of?(Concept::Post) || post.instance_of?(Novation::Post)
       post.title
     elsif post.instance_of? Plan::Post
       post.name
@@ -41,24 +41,24 @@ module ApplicationHelper
   # т.е. если мы на странице project_user или создаем контент
   # или просматриваем свой созданный контент
   def cabinet?
-    name_controller == :core_project_users or action_name == 'new' or action_name == 'user_content' or action_name == 'edit'
+    name_controller == :core_project_users || action_name == 'new' || action_name == 'user_content' || action_name == 'edit'
   end
 
   def profile?
-    controller_name == 'users' and action_name == 'show'
+    controller_name == 'users' && action_name == 'show'
   end
 
   def rating?
-    controller_name == 'users' and action_name == 'index'
+    controller_name == 'users' && action_name == 'index'
   end
 
   def able_subbar?
-    name_controller == @project.current_stage_type and Core::Project::STAGES[@project.main_stage][:substages]
+    name_controller == @project.current_stage_type && Core::Project::STAGES[@project.main_stage][:substages]
   end
 
   def number_current_stage
     Core::Project::STAGES.each do |num_stage, stage|
-      return num_stage if name_controller == stage[:type_stage] or name_controller == :core_aspect_posts
+      return num_stage if name_controller == stage[:type_stage] || name_controller == :core_aspect_posts
     end
     nil
   end
@@ -103,17 +103,17 @@ module ApplicationHelper
 
   # @todo refac
   def current_stage_popover_status
-    if name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress != 100
+    if name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress != 100
       'collect_info_questions_0'
-    elsif name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress == 100
+    elsif name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress == 100
       'collect_info_discuss_0'
-    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress != 100
+    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress != 100
       'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress == 100
+    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress == 100
       'collect_info_discuss_1'
-    elsif name_controller == :collect_info_posts and (@project.main_stage > 1 or @project.stage == '1:2') and @questions_progress != 100
+    elsif name_controller == :collect_info_posts && (@project.main_stage > 1 || @project.stage == '1:2') && @questions_progress != 100
       'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts and (@project.main_stage > 1 or @project.stage == '1:2') and @questions_progress == 100
+    elsif name_controller == :collect_info_posts && (@project.main_stage > 1 || @project.stage == '1:2') && @questions_progress == 100
       'collect_info_discuss_1'
     elsif name_controller == :discontent_posts
       'discontent_discuss'
@@ -132,13 +132,14 @@ module ApplicationHelper
 
   # @todo refac
   def current_stage_popover_text
-    if name_controller == :collect_info_posts and @project.stage == '1:0' and @questions_progress != 100
+    if name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress != 100
       'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' +
           'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' +
           'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
-    elsif name_controller == :collect_info_posts and @project.stage == '1:1' and @questions_progress != 100
-      'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ</span> для базы знаний. Ответив на вопросы или выбрав возможность «Пропустить вопрос», вы сможете перейти к обсуждению прочитанного с остальными участниками.'
-    elsif name_controller == :collect_info_posts and @questions_progress == 100
+    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress != 100
+      'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ</span> для базы знаний.'+
+       'Ответив на вопросы или выбрав возможность «Пропустить вопрос», вы сможете перейти к обсуждению прочитанного с остальными участниками.'
+    elsif name_controller == :collect_info_posts && @questions_progress == 100
       'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' +
           'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' +
           'Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'

@@ -70,7 +70,7 @@ module DiscontentGroup
     def union_group
       @post = Discontent::Post.find(params[:id])
       @post_group = Discontent::PostGroup.find(params[:group_id])
-      if @post and @post_group
+      if @post && @post_group
         @post.update_attributes(status: 1, discontent_post_id: @post_group.id)
         @post_group.update_union_post_aspects(@post.post_aspects)
       end
@@ -99,7 +99,7 @@ module DiscontentGroup
     def remove_union
       @post_group = Discontent::PostGroup.find(params[:id])
       @post = Discontent::Post.find(params[:post_id])
-      if @post_group.one_last_post? and boss?
+      if @post_group.one_last_post? && boss?
         @post.update_attributes(status: 0, discontent_post_id: nil)
         @post_group.update_column(:status, 3)
         redirect_to action: 'index'
@@ -115,7 +115,7 @@ module DiscontentGroup
     #перевод группы в обязательные и обратно
     def set_required
       @post_group = Discontent::PostGroup.find(params[:id])
-      if boss? or role_expert?
+      if boss? || role_expert?
         if @post_group.status == 2
           @post_group.update_attributes(status: 4)
         elsif @post_group.status == 4

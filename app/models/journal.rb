@@ -10,9 +10,9 @@ class Journal < ActiveRecord::Base
 
   default_scope { where("type_event != 'visit_save'") }
   scope :select_users_for_news, -> user { where(user: user) }
-  scope :type_content, -> type_content { where(type_event: self.select_type_content(type_content)) if type_content.present? and type_content != "content_all" }
-  scope :type_event, -> type_event { rewhere(type_event: self.select_type_content(type_event)) if type_event.present? and type_event != "content_all" }
-  scope :type_status, -> type_status { where(type_event: self.select_type_content(type_status)) if type_status.present? and type_status != "content_all" }
+  scope :type_content, -> type_content { where(type_event: self.select_type_content(type_content)) if type_content.present? && type_content != "content_all" }
+  scope :type_event, -> type_event { rewhere(type_event: self.select_type_content(type_event)) if type_event.present? && type_event != "content_all" }
+  scope :type_status, -> type_status { where(type_event: self.select_type_content(type_status)) if type_status.present? && type_status != "content_all" }
   scope :date_begin, -> date_begin { where("DATE(journals.created_at + time '04:00') >= ?", date_begin) if date_begin.present? }
   scope :date_end, -> date_end { where("DATE(journals.created_at + time '04:00') <= ?", date_end) if date_end.present? }
 
@@ -105,7 +105,7 @@ class Journal < ActiveRecord::Base
   def send_last_news
     return if ENV['RAILS_ENV'] == 'test'
     Fiber.new do
-      if type_event.start_with? 'my_' and   user_informed
+      if type_event.start_with?('my_') &&   user_informed
         WebsocketRails.users[user_informed.id].send_message(
             :latest, render_anywhere('application/messages_menu', {current_user: user_informed, project: project,
                                                                    my_journals: user_informed.my_journals(project)}),
@@ -177,7 +177,7 @@ class Journal < ActiveRecord::Base
                                   personal: true, viewed: false).save!
     end
 
-    if comment_answer and comment_answer.user!=current_user
+    if comment_answer && comment_answer.user!=current_user
       current_user.journals.build(type_event: 'reply_'+name_of_comment_for_param, user_informed: comment_answer.user, project: project,
                                   body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
                                   first_id: post.id, second_id: comment.id,

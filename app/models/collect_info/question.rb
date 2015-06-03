@@ -24,7 +24,7 @@ class CollectInfo::Question < ActiveRecord::Base
       if self.type_comment == 0
         aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i)) if content.present?
       # иначе проверяем наличие ответов (пояснение не обязательно)
-      elsif project.type_for_questions == 1 and answers
+      elsif project.type_for_questions == 1 && answers
         # если вопросы с правильными ответами (второй подэтап), то проверка правильности ответов
         wrong = self.uncorrect_answers?(answers)
       end
@@ -39,7 +39,7 @@ class CollectInfo::Question < ActiveRecord::Base
   def uncorrect_answers?(answers)
     correct_answers = self.answers.by_correct.pluck("collect_info_answers.id")
     answers = answers.collect { |a| a.to_i }
-    (answers - correct_answers).present? or (correct_answers - answers).present?
+    (answers - correct_answers).present? || (correct_answers - answers).present?
   end
 
 

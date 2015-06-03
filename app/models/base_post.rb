@@ -147,7 +147,7 @@ module BasePost
 
         if self.user!=user
           self.user.journals.build(type_event: 'my_'+self.class.table_name.singularize+'_'+type, user_informed: self.user, project: self.project,
-                                      body: "#{trim_content(field_for_journal(self))}", first_id: self.id, personal: true, viewed: false).save!
+                                   body: "#{trim_content(field_for_journal(self))}", first_id: self.id, personal: true, viewed: false).save!
         end
         # if @project.closed?
         #   Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
@@ -162,7 +162,7 @@ module BasePost
           img, isFile = Util::ImageLoader.load(params)
         end
         comment = self.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil,
-                                        user: user, comment_id: comment_parent ? comment_parent.id : nil)
+                                       user: user, comment_id: comment_parent ? comment_parent.id : nil)
         Journal.comment_event(user, self.project, name_of_comment_for_journal, self, comment, comment_answer)
         return comment
       end

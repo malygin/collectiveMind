@@ -54,7 +54,7 @@ class UsersController < ProjectsController
 
   #clean notifications
   def journal_clear
-    if @my_journals.size > 0 and current_user?(@user)
+    if @my_journals.size > 0 && current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
       journal_data
     end

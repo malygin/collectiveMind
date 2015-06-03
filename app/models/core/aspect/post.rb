@@ -2,7 +2,6 @@ class Core::Aspect::Post < ActiveRecord::Base
   include BasePost
   SCORE = 20
 
-  cattr_accessor :array_subaspects
 
   belongs_to :core_aspect, class_name: 'Core::Aspect::Post', foreign_key: 'core_aspect_id'
 
@@ -89,17 +88,4 @@ class Core::Aspect::Post < ActiveRecord::Base
   end
 
 
-  # возвращает массив пар значений [аспект, уровень вложенности] последовательно начиная с переданного (корневого) аспекта
-  def subaspects
-    @@array_subaspects = []
-    self.return_subaspect
-    @@array_subaspects
-  end
-
-  # метод для возврата вложенного аспекта
-  def return_subaspect(level = 0)
-    @@array_subaspects.push([self, level])
-    self.core_aspects.each { |asp| asp.return_subaspect(level+1) }
-    return
-  end
 end

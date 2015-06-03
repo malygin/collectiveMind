@@ -20,7 +20,7 @@ class Concept::PostsController < PostsController
 
   def index
     @posts= nil
-    if params[:discontent] and params[:discontent] != '*'
+    if params[:discontent] && params[:discontent] != '*'
       # @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join('')).dispost_concepts.created_order
       # @posts = @project.concept_ongoing_post.joins(:concept_post_discontents).for_discontents(params[:discontent]).created_order
       if params[:discontent].include?('#')
@@ -35,14 +35,14 @@ class Concept::PostsController < PostsController
 
       format.html # show.html.erb
       format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, title: item.title, content: trim_content(item.content, 100), approve_status: item.approve_status, useful: item.useful, admin_panel: boss?,
-                                                      user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar))  : ActionController::Base.helpers.asset_path('no-ava.png') , post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
-                                                      project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
-                                                      discontent_class: post_discontent_classes(item),
-                                                      count_comments: item.comments.count,
-                                                      count_likes: item.users_pro.count,
-                                                      count_dislikes: item.users_against.count,
-                                                      discontents: item.concept_disposts.map { |dispost| {id: dispost.id, content: trim_content(dispost.content, 30)} },
-                                                      comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_content(comment.content, 100)} }} } }
+                                                                             user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar))  : ActionController::Base.helpers.asset_path('no-ava.png') , post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
+                                                                             project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
+                                                                             discontent_class: post_discontent_classes(item),
+                                                                             count_comments: item.comments.count,
+                                                                             count_likes: item.users_pro.count,
+                                                                             count_dislikes: item.users_against.count,
+                                                                             discontents: item.concept_disposts.map { |dispost| {id: dispost.id, content: trim_content(dispost.content, 30)} },
+                                                                             comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_content(comment.content, 100)} }} } }
 
     end
   end
@@ -98,7 +98,7 @@ class Concept::PostsController < PostsController
 
   def update
     @concept_post.update_attributes(concept_post_params)
-    if @concept_post.valid? and params[:concept_post_discontents].present?
+    if @concept_post.valid? && params[:concept_post_discontents].present?
       @concept_post.concept_post_discontents.destroy_all
       params[:concept_post_discontents].each do |cd|
         @concept_post.concept_post_discontents.build(discontent_post_id: cd[0])

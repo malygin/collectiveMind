@@ -133,7 +133,7 @@ class PostsController < ProjectsController
   end
 
   def check_field
-    if params[:check_field] and params[:check_field]!='' and params[:status]
+    if params[:check_field] && params[:check_field]!='' && params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end
@@ -156,7 +156,7 @@ class PostsController < ProjectsController
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
     unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
-      unless @project.current_stage_type == :collect_info_posts and params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
+      unless @project.current_stage_type == :collect_info_posts && params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
         unless action_name == 'user_content'
           redirect_to url_for(params.merge(controller: '/'+@project.current_stage_type.to_s.sub('_', '/')))
         end
@@ -166,7 +166,7 @@ class PostsController < ProjectsController
 
   def check_type_mechanics
     # check if we use possible mechanic or use default
-    if params[:type_mechanic].present? and correct_mechanic?
+    if params[:type_mechanic].present? && correct_mechanic?
       @mechanic_type = params[:type_mechanic]
     else
       @mechanic_type = 'simple'
@@ -200,7 +200,7 @@ class PostsController < ProjectsController
 
   def is_author_or_boss?
     post= current_model.find(params[:id])
-    redirect_to "/project/#{@project.id}" if (current_user != post.user) and not boss?
+    redirect_to "/project/#{@project.id}" if (current_user != post.user) && (not boss?)
   end
 
 end

@@ -55,7 +55,7 @@ class Core::Project < ActiveRecord::Base
 
   STAGES = {
     1 => {name: 'Введение в процедуру',description: 'Знакомство с описанием ситуации и ее различных аспектов' ,type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
-      substages: {
+          substages: {
         0 => {name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate},
         1 => {name: 'Расширенная БЗ', active: true, code: :aspects_learn},
         2 => {name: 'Голосование за аспекты', active: true, code: :aspects_voting},
@@ -131,7 +131,7 @@ class Core::Project < ActiveRecord::Base
 
   # move to next stage if it '1:2' and we haven't '1:3' then go to '2:0', unless go to '1:3
   def go_to_next_stage
-    if  STAGES[main_stage][:substages] and  STAGES[main_stage][:substages][sub_stage + 1]
+    if  STAGES[main_stage][:substages] &&  STAGES[main_stage][:substages][sub_stage + 1]
       self.stage= "#{main_stage}:#{sub_stage+1}"
     else
       self.stage= "#{main_stage+1}:0"

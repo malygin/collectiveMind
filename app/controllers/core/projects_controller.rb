@@ -187,7 +187,7 @@ class Core::ProjectsController < ApplicationController
 
   private
   def last_seen_news
-    current_user.update_attributes(last_seen_news: Time.zone.now.utc) if current_user and boss?
+    current_user.update_attributes(last_seen_news: Time.zone.now.utc) if current_user && boss?
   end
 
   def set_core_project

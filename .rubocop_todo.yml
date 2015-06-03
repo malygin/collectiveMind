@@ -68,13 +68,13 @@ Style/AccessorMethodName:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.
 Style/AlignHash:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 90
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/AndOr:
-  Enabled: false
+  Enabled: true
 
 # Offense count: 69
 Style/AsciiComments:

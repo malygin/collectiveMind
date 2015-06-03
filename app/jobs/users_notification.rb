@@ -11,7 +11,7 @@ class CommentNotification
     comment = get_comment_for_stage(comment_stage, comment_id)
 
     project.users_in_project.each do |user|
-      if user != current_user and user != comment.user
+      if user != current_user && user != comment.user
         current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, user_informed: user, project: project,
                                     body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
                                     first_id: post.id, second_id: comment.id,
@@ -30,7 +30,7 @@ class PostNotification
     post = current_model.constantize.find(post_id)
 
     project.users_in_project.each do |user|
-      if user != current_user and user != post.user
+      if user != current_user && user != post.user
         current_user.journals.build(type_event: name_of_model_for_param+'_'+type, user_informed: user, project: project,
                                     body: "#{trim_content(field_for_journal(post))}", first_id: post.id, personal: true, viewed: false, visible: false).save!
       end

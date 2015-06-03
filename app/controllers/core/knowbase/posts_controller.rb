@@ -61,7 +61,7 @@ class Core::Knowbase::PostsController < PostsController
   end
 
   def sortable_save
-    current_model.set_knowbase_posts_sort(params[:sortable])
+    current_model.knowbase_posts_sort(params[:sortable])
     respond_to do |format|
       format.js
     end
