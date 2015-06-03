@@ -1342,6 +1342,7 @@ a.active {
     margin-left: 0;
     font-size: 13px;
     text-align: right;
+    white-space:normal;
 }
 
 .add-button:hover, .add-button:focus {
@@ -4585,7 +4586,7 @@ ul.vote_nav > li > a {
 .dropdown_window {
     position: absolute;
     visibility: hidden;
-    z-index: 150;
+    z-index: 1001;
 }
 
 .dropdown_window.active {

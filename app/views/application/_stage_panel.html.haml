@@ -20,7 +20,7 @@
       -#%a.open_welcome_popup{href: "#popup-explanation-#{current_stage_controller}"}
       -#  #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
       %a(style="cursor:pointer;")
-        #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{class: "#{shown_intro(current_stage_popover_status)}", 'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}", 'data-text' => "#{current_stage_popover_text}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Читайте инструкции по работе на этом этапе стадии'}
+        #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover.iconate{class: "#{shown_intro(current_stage_popover_status)}", 'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}", 'data-text' => "#{current_stage_popover_text}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Читайте инструкции по работе на этом этапе стадии'}
 
       .border_grey.rounded_3.progress_block
         .container

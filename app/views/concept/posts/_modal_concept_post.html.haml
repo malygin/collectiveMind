@@ -94,7 +94,7 @@
                   = t('show.desc')
                 = @post.impact_env
 
-          .col-md-6.exp_col.white-gray.right
+          .col-md-6.exp_col.right
             %button.btn.btn_reset.exp_button.pull-left
               = image_tag 'grey_arrow_1.png'
             .divider10
@@ -103,7 +103,8 @@
                 .separator_label.text-left
                   %h4 Обсуждение результатов опроса
                 .separator_label.pull-right
-                  %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"} свернуть
+                  %a{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
+                    %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments
             .divider15

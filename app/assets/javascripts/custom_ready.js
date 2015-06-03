@@ -38,9 +38,9 @@ $(document).ready(function () {
     });
     $(".popover-info").popover({
         html: true,
-        template:'<div class="popover"><i class="fa fa-times cl_btn font_white" onclick="$(\'.popover-info\').popover(\'hide\');"></i></a><div class="popover-content"></div></div>',
+        template:'<div class="popover"><i class="fa fa-times cl_btn font_white" onclick="$(this).closest(\'div.popover\').prev().popover(\'hide\');"></i></a><div class="popover-content"></div></div>'
     });
-    $('#popover_intro').popover('show');
+    $('.popover-info').popover('show');
     $("[data-toggle=tooltip]").tooltip();
 
 

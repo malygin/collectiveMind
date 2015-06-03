@@ -5,7 +5,7 @@
       = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Вернуться на главную страницу' do
         = image_tag 'logo1.png'
     %ul.nav.navbar-nav.main_menu
-      %li{class: "#{'active' unless (cabinet? or rating? or profile?)}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'вернуться в процедуру' if (cabinet? or rating? or profile?)}"}
+      %li{class: "#{'active' unless (cabinet? or rating? or profile?)}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'Вернуться в процедуру' if (cabinet? or rating? or profile?)}"}
         = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
       %li{class: "#{'active' if cabinet?}"}
         = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
