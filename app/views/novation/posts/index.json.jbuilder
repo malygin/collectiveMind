@@ -1,7 +1,7 @@
 json.array! @posts do |item|
   json.id  item.id
-  json.content item.content
-  json.what trim_content(item.what, 100)
+  json.title item.title.present? ? item.title : 'Пакет без названия'
+  json.content trim_content(item.project_change, 200)
   json.approve_status item.approve_status
   json.useful item.useful
   json.admin_panel boss?
@@ -11,14 +11,13 @@ json.array! @posts do |item|
   json.project_id item.project_id
   json.sort_date item.created_at.to_datetime.to_f
   json.sort_comment item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0
-  json.aspect_class post_aspect_classes(item)
+  json.concept_class post_concept_classes(item)
   json.count_comments item.comments.count
   json.count_likes item.users_pro.count
   json.count_dislikes item.users_against.count
-  json.aspects item.post_aspects do  |aspect|
-    json.id aspect.id
-    json.color aspect.color
-    json.content aspect.content
+  json.concepts item.novation_concepts do  |concept|
+    json.id concept.id
+    json.content trim_content(concept.content, 30)
   end
   json.comments item.comments.preview do |comment|
     json.id  comment.id
