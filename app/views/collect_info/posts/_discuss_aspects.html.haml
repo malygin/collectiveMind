@@ -28,7 +28,7 @@
 .stage-post-block
   .row
     .col-md-6
-      %span.stage-heading.tooltip1.big{ 'data-toggle'=>"tooltip",'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их"}
+      %span.stage-heading
         Аспекты из базы знаний
         ="(#{@project.proc_main_aspects.size})"
     .col-md-6
@@ -36,7 +36,7 @@
         Аспекты, предложенные участниками
         ="(#{@project.other_main_aspects.size})"
   .row
-    .col-md-6.combined_border.right
+    .col-md-6.combined_border.right.tooltip1.big{ 'data-toggle'=>"tooltip",'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их"}
       -@proc_aspects.each do |aspect|
         =render partial: 'post_short', object: aspect
     .col-md-6.combined_border.left

@@ -25,7 +25,7 @@
 
           .col-md-3.col-sm-3.text-center
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow  btn-danger', id: "go_to_closed_project_#{project.id}" do
+            = link_to current_stage_url(project), class:'btn btn-arrow-red  btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10
   -#- cache @opened_projects do
@@ -52,6 +52,6 @@
               =I18n.t("project_users_count",count: project.users_in_project.count )
           .col-md-3.col-sm-3.text-center
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow btn-danger', id: "go_to_opened_project_#{project.id}" do
+            = link_to current_stage_url(project), class:'btn btn-arrow-red btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10

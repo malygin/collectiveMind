@@ -13,6 +13,9 @@
 
 .ui-4.first-stage
   .container
+    .row
+      .col-md-2.popover-info#popover_intro{'data-placement' => 'top','data-content'=>'Прежде всего прочитайте статью методолога'}
+      .col-md-10.popover-info#popover_aspect{'data-placement' => 'top','data-content'=>'Ответьте на вопросы по аспектам, чтобы перейти к общему обсуждению в новом экране'}
     .block-content
       .slider-wrapper
         %a.slider-left.slider-nav
@@ -28,7 +31,7 @@
                     %span.c1-item-inner{style: "border-top-color: #eac85e;"}
                       Введение в процедуру
             - @proc_aspects.each_with_index do |aspect, index|
-              %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
+              %li.li_aspect.noLink{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
                 .slider-item
                   .c1-item
                     %a{id: "aspect_#{aspect.id}", "data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}"}
@@ -41,6 +44,9 @@
             .col-md-12.col-sm-12
               .aspect-main-block{style: "border-top-color:#eac85e;"}
                 = @project.introduction.html_safe if @project.introduction
+                .row
+                  .col-md-8
+                    %button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
         - @proc_aspects.each_with_index do |asp, index|
           .tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}"}
             -if asp.missed_questions(current_user, @project.type_for_questions).size > 0
@@ -61,16 +67,18 @@
                         .tab-content
                           - asp.knowbase_posts.each_with_index do |post, i|
                             .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
-                              %h6.aspect-main-block-heading
-                                = post.title
-                              %p.aspect-main-block-text
-                                = post.content.html_safe unless post.content.nil?
+                              .row
+                                %h6.aspect-main-block-heading
+                                  = post.title
+                                %p.aspect-main-block-text
+                                  = post.content.html_safe unless post.content.nil?
                       - elsif asp.knowbase_posts.size > 0
                         - asp.knowbase_posts.each_with_index do |post, i|
-                          %h6.aspect-main-block-heading
-                            = post.title
-                          %p.aspect-main-block-text
-                            = post.content.html_safe unless post.content.nil?
+                          .row
+                            %h6.aspect-main-block-heading
+                              = post.title
+                            %p.aspect-main-block-text
+                              = post.content.html_safe unless post.content.nil?
                       - else
                         .white-gray
                           .radial-gradient
@@ -140,17 +148,21 @@
                       .tab-content
                         - asp.knowbase_posts.each_with_index do |post, i|
                           .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                            .row
+                              .col-md-8
+                                %h6.aspect-main-block-heading
+                                  = post.title
+                                %p.aspect-main-block-text
+                                  = post.content.html_safe unless post.content.nil?
+                  - elsif asp.knowbase_posts.size > 0
+                    .aspect-main-block{style: "border-top-color: #{asp.color};"}
+                      .row
+                        .col-md-8
+                          - asp.knowbase_posts.each_with_index do |post, i|
                             %h6.aspect-main-block-heading
                               = post.title
                             %p.aspect-main-block-text
                               = post.content.html_safe unless post.content.nil?
-                  - elsif asp.knowbase_posts.size > 0
-                    .aspect-main-block{style: "border-top-color: #{asp.color};"}
-                      - asp.knowbase_posts.each_with_index do |post, i|
-                        %h6.aspect-main-block-heading
-                          = post.title
-                        %p.aspect-main-block-text
-                          = post.content.html_safe unless post.content.nil?
                   - else
                     .white-gray
                       .radial-gradient
