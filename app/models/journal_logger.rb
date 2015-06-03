@@ -1,13 +1,9 @@
 class JournalLogger < ActiveRecord::Base
-  # include Util::Renderable
-  # include Util::Filterable
-  # extend ApplicationHelper
 
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
-  # default_scope { where("type_event != 'visit_save'") }
   default_scope {  order 'created_at DESC' }
   scope :select_users_for_news, -> user { where(user: user) }
   scope :type_event, -> type_event { where(type_event: type_event) if type_event.present? }
@@ -19,7 +15,7 @@ class JournalLogger < ActiveRecord::Base
   scope :created_order, -> { order("journal_loggers.created_at DESC") }
   scope :active_proc, -> { where("core_projects.status < ?", 20) }
   scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
-  scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', User::TYPES_USER[:admin]) }
+  scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', [1]) }
 
   validates :body, :type_event, :project_id, presence: true
 
