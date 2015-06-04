@@ -4,13 +4,12 @@ module BasePost
   include ApplicationHelper
   include MarkupHelper
 
-
   # Statuses of post
   STATUSES = {
-      draft: 0,
-      published: 1,
-      approved: 2,
-      archived: 3
+    draft: 0,
+    published: 1,
+    approved: 2,
+    archived: 3
   }.freeze
 
   SCORE = 10
@@ -53,18 +52,18 @@ module BasePost
     scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts', '_comments')}.created_at >= ?", last_time) if last_time.present? }
 
     validates :user_id, :project_id, presence: true
-    validates :status, inclusion: {in: STATUSES.values}
+    validates :status, inclusion: { in: STATUSES.values }
 
     # вывод постов по дате последних комментов
     def self.sort_comments
-      select("#{table_name}.*, max(#{table_name.gsub('_posts', '_comments')}.created_at) as last_date").
-          joins("LEFT OUTER JOIN #{table_name.gsub('_posts', '_comments')} ON #{table_name.gsub('_posts', '_comments')}.post_id = #{table_name}.id").
-          group("#{table_name}.id").
-          reorder("max(#{table_name.gsub('_posts', '_comments')}.created_at) DESC NULLS LAST")
+      select("#{table_name}.*, max(#{table_name.gsub('_posts', '_comments')}.created_at) as last_date")
+        .joins("LEFT OUTER JOIN #{table_name.gsub('_posts', '_comments')} ON #{table_name.gsub('_posts', '_comments')}.post_id = #{table_name}.id")
+        .group("#{table_name}.id")
+        .reorder("max(#{table_name.gsub('_posts', '_comments')}.created_at) DESC NULLS LAST")
     end
 
     def last_comment
-      self.comments.reorder(created_at: :desc).first
+      comments.reorder(created_at: :desc).first
     end
 
     def show_content
@@ -72,7 +71,7 @@ module BasePost
     end
 
     def self.order_by_param(order)
-      if order =='popular'
+      if order == 'popular'
         popular_posts
       else
         created_order
@@ -80,7 +79,7 @@ module BasePost
     end
 
     def main_comments
-      self.comments.where(comment_id: nil)
+      comments.where(comment_id: nil)
     end
 
     def class_name
@@ -109,101 +108,90 @@ module BasePost
     end
 
     def post_notes(type_field)
-      self.notes.by_type(type_field)
+      notes.by_type(type_field)
     end
 
     def note_size?(type_field)
-      self.post_notes(type_field).size > 0
+      post_notes(type_field).size > 0
     end
 
     def vote(user, status)
-      saved_vote = self.final_votings.where(user_id: user)
+      saved_vote = final_votings.where(user_id: user)
       if saved_vote.present?
         vote = saved_vote.first
         if vote.status != status.to_i
           saved_vote.destroy_all
-          self.final_votings.create(user: user, status: status).save!
+          final_votings.create(user: user, status: status).save!
         elsif vote.status == status.to_i
           saved_vote.destroy_all
         end
       else
-        self.final_votings.create(user: user, status: status).save!
+        final_votings.create(user: user, status: status).save!
       end
     end
 
     def change_status_by(user, params)
       if params[:discuss_status]
         self.toggle!(:discuss_status)
-        if self.discuss_status
-          type = 'discuss_status'
-        end
+        type = 'discuss_status' if discuss_status
       elsif params[:approve_status]
         self.toggle!(:approve_status)
-        if self.approve_status
-          type = 'approve_status'
-        end
+        type = 'approve_status' if approve_status
       end
-      if type
-
-        if self.user!=user
-          self.user.journals.build(type_event: 'my_'+self.class.table_name.singularize+'_'+type, user_informed: self.user, project: self.project,
-                                   body: "#{trim_content(field_for_journal(self))}", first_id: self.id, personal: true, viewed: false).save!
-        end
-        # if @project.closed?
-        #   Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
-        # end
-      end
+      return unless type && self.user != user
+      self.user.journals.build(type_event: 'my_' + self.class.table_name.singularize + '_' + type, user_informed: self.user, project: project,
+                               body: "#{trim_content(field_for_journal(self))}", first_id: id, personal: true, viewed: false).save!
+      # if @project.closed?
+      #   # Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
+      # end
     end
 
     def add_comment(params, user, comment_parent, comment_answer, name_of_comment_for_journal)
       content = params[:content]
-      unless content==''
-        if params[:image]
-          img, isFile = Util::ImageLoader.load(params)
-        end
-        comment = self.comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? isFile : nil,
-                                       user: user, comment_id: comment_parent ? comment_parent.id : nil)
-        Journal.comment_event(user, self.project, name_of_comment_for_journal, self, comment, comment_answer)
-        return comment
-      end
+      return false if content == ''
+      img, is_file = Util::ImageLoader.load(params)  if params[:image]
+      comment = comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? is_file : nil,
+                                user: user, comment_id: comment_parent ? comment_parent.id : nil)
+      Journal.comment_event(user, project, name_of_comment_for_journal, self, comment, comment_answer)
+      comment
     end
 
     def add_score
       self.toggle!(:useful)
-      if self.useful
-        self.user.add_score(type: :plus_post, project: self.project, post: self,
-                            type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
-                            score: self.class::SCORE, model_score: self.class.table_name.singularize)
+      if useful
+        user.add_score(type: :plus_post, project: project, post: self,
+                       type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                       score: self.class::SCORE, model_score: self.class.table_name.singularize)
       else
-        self.user.add_score(type: :to_archive_plus_post, project: self.project, post: self,
-                            type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
-                            score: self.class::SCORE, model_score: self.class.table_name.singularize)
+        user.add_score(type: :to_archive_plus_post, project: project, post: self,
+                       type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                       score: self.class::SCORE, model_score: self.class.table_name.singularize)
       end
     end
 
     def self.prepare_to_show(id, project, viewed)
-      post = self.where(id: id, project_id: project).first
+      post = where(id: id, project_id: project).first
       if viewed
         Journal.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
       end
-      if self.column_names.include? 'number_views'
-        post.update_column(:number_views, post.number_views.nil? ? 1 : post.number_views+1)
+      if column_names.include? 'number_views'
+        post.update_column(:number_views, post.number_views.nil? ? 1 : post.number_views + 1)
       end
-      return post
+      post
     end
 
     def self.create_post(params, project, user)
-      post = self.new(params[self.table_name.singularize])
+      post = new(params[table_name.singularize])
       post.project = project
       post.user = user
 
       post.stage = params[:stage] unless params[:stage].nil?
       post.core_aspects << Core::Aspect::Post.find(params[:aspect_id]) unless params[:aspect_id].nil?
       post.style = params[:style] unless params[:style].nil?
-      post.status = 0 if self.column_names.include? 'status'
+      post.status = 0 if column_names.include? 'status'
       post.save!
-      user.journals.build(type_event: name_of_model_for_param+"_save", project: project, body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
-      return post
+      user.journals.build(type_event: name_of_model_for_param + '_save', project: project, body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
+      post
     end
 
     # generic method for statuses, for example publish?
@@ -214,6 +202,3 @@ module BasePost
     end
   end
 end
-
-
-

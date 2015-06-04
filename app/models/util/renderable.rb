@@ -2,6 +2,7 @@ module Util::Renderable
   extend ActiveSupport::Concern
 
   private
+
   def render_anywhere(partial, locals = {})
     action_view = ActionView::Base.new(Rails.configuration.paths['app/views'])
     action_view.class_eval do

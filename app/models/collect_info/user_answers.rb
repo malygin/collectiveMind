@@ -7,6 +7,6 @@ class CollectInfo::UserAnswers < ActiveRecord::Base
 
   validates :question_id, :aspect_id, :project_id, :user_id, presence: true
 
-  scope :by_project, ->(project) { where(collect_info_user_answers: {project_id: project.id}) }
-  scope :by_user, ->(user) { where(collect_info_user_answers: {user_id: user.id}) }
+  scope :by_project, ->(project) { where(collect_info_user_answers: { project_id: project.id }) }
+  scope :by_user, ->(user) { where(collect_info_user_answers: { user_id: user.id }) }
 end

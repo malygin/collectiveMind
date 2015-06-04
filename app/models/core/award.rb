@@ -1,7 +1,7 @@
 class Award < ActiveRecord::Base
   has_many :user_awards
   has_many :users, through: :user_awards
-  scope :for_project, lambda { |project| where('core_user_awards.project_id' => project) }
+  scope :for_project, ->(project) { where('core_user_awards.project_id' => project) }
 
   validates :name, :url, presence: true
 

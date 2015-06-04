@@ -6,13 +6,13 @@ class GroupsChatController < WebsocketRails::BaseController
   end
 
   def user_connected
-    send_message :user_info, {user: 'current_user.firstname'}
+    send_message :user_info, user: 'current_user.firstname'
   end
 
   def incoming_message
     group_message = current_user.group_chat_messages.create content: message[:text], group_id: @group.id
     # @todo удалить отправку в очередь после окончания тестирования
-    #Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message.id)
+    # Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message.id)
     @group.users.each do |user|
       WebsocketRails.users[user.id].send_message(:groups_new_message, group_message.to_json, channel: :group_chat)
     end
@@ -26,7 +26,7 @@ class GroupsChatController < WebsocketRails::BaseController
 
   def load_history
     WebsocketRails.users[current_user.id].send_message(:groups_receive_history,
-                                                       @group.chat_messages.recent.collect { |message| message.to_json },
+                                                       @group.chat_messages.recent.collect(&:to_json),
                                                        channel: :group_chat)
   end
 
@@ -43,6 +43,7 @@ class GroupsChatController < WebsocketRails::BaseController
   end
 
   private
+
   def user_looked_at_chat
     current_user.group_users.by_group(@group).update_attributes! last_seen_chat_at: Time.now
   end

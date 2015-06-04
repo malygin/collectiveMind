@@ -29,15 +29,15 @@ class GroupTasksController < ApplicationController
 
   def assign_user
     @user = User.find(params[:user_id])
-    unless @group_task.users.include?(@user)
-      current_user.journals.create(type_event: 'my_assigned_task', user_informed: @user, project: @project,
-                                   body: "Вам добавили задачу #{@group_task.name} в комнате вашей группы",
-                                   first_id: @group_task.group_id, personal: true, viewed: false)
-      @group_task.group_task_users.create user_id: @user.id
-    end
+    return false if @group_task.users.include?(@user)
+    current_user.journals.create(type_event: 'my_assigned_task', user_informed: @user, project: @project,
+                                 body: "Вам добавили задачу #{@group_task.name} в комнате вашей группы",
+                                 first_id: @group_task.group_id, personal: true, viewed: false)
+    @group_task.group_task_users.create user_id: @user.id
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_group_task
     @group_task = GroupTask.find(params[:id] || params[:group_task_id])

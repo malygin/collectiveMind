@@ -58,6 +58,7 @@ class NewsController < ApplicationController
   end
 
   private
+
   def set_project
     @project = Core::Project.find(params[:project])
   end
@@ -74,9 +75,8 @@ class NewsController < ApplicationController
 
   # запись отдельного события для показа статуса новостей
   def set_logger
-    if current_user && @project && request.method == 'GET'
-      current_user.loggers.create type_event: 'expert_news_read', project_id: @project.id,
-                                  body: request.original_fullpath.split('?')[0], first_id: @news.id
-    end
+    return  unless current_user && @project && request.method == 'GET'
+    current_user.loggers.create type_event: 'expert_news_read', project_id: @project.id,
+                                body: request.original_fullpath.split('?')[0], first_id: @news.id
   end
 end

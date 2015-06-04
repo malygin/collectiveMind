@@ -35,6 +35,7 @@ class Core::Aspect::PostsController < PostsController
   end
 
   private
+
   def set_aspect
     @aspect = Core::Aspect::Post.find(params[:id])
   end

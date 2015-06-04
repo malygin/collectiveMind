@@ -1,4 +1,4 @@
--if content_question.has_no_answer_for_post_and_user?(@post.id, current_user)
+-if content_question.no_answer_for_post_and_user?(@post.id, current_user)
   #question_content.q_pop_block.light-grey.rounded_2
     .divider15
     %p

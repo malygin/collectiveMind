@@ -1,5 +1,4 @@
 class CompletionProc::PostsController < PostsController
-
   def voting_model
     Plan::Post
   end
@@ -20,5 +19,4 @@ class CompletionProc::PostsController < PostsController
       format.js
     end
   end
-
 end

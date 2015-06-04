@@ -10,30 +10,29 @@ class Discontent::PostsController < PostsController
     Discontent::Post
   end
 
-  #@todo Discontent::PostWhen в ресурсы? или просто искать по ним?
+  # @todo Discontent::PostWhen в ресурсы? или просто искать по ним?
   def autocomplete
     field = params[:field]
     if current_model.column_names.include? field
-      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| {value: post.send(field)} }
+      render json: current_model.send("autocomplete_#{field}", params[:term]).map { |post| { value: post.send(field) } }
     else
       render json: []
     end
   end
 
   def index
-    @posts= nil
+    @posts = nil
     if params[:aspect] && params[:aspect] != '*' && params[:aspect] != '#'
       # @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.by_status_for_discontent(@project).created_order
       aspect = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join(''))
       subaspects = aspect.core_aspects.map { |asp, _| asp.id }
-      @posts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: {aspect_id: [aspect.id]+subaspects}).by_status_for_discontent(@project).created_order
+      @posts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects }).by_status_for_discontent(@project).created_order
     elsif params[:aspect] == '#'
       @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).created_order
     else
       @posts = @project.discontents.by_status_for_discontent(@project).created_order
     end
     respond_to do |format|
-
       format.html # show.html.erb
       format.json
     end

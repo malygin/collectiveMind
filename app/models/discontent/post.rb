@@ -9,10 +9,10 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
   has_many :post_aspects, through: :discontent_post_aspects, source: :core_aspect, class_name: 'Core::Aspect::Post'
 
-  #галочки для выбранных несовершенств группы в нововведении
-  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} },
+  # галочки для выбранных несовершенств группы в нововведении
+  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: { status: [1] } },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
-  has_many :concept_post_discontents, -> { where concept_post_discontents: {status: [0, nil]} },
+  has_many :concept_post_discontents, -> { where concept_post_discontents: { status: [0, nil] } },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'
 
@@ -29,7 +29,7 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_negative, ->(p) { where(style: 1, status: p) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
 
-  scope :by_status_for_discontent, ->(project) {
+  scope :by_status_for_discontent, lambda { |project|
     if project.status == 4
       where(status: [0, 1])
     elsif project.status == 5 || project.status == 6
@@ -44,15 +44,15 @@ class Discontent::Post < ActiveRecord::Base
   pg_search_scope :autocomplete_whend,
                   against: [:whend],
                   using: {
-                      tsearch: {prefix: true}
+                    tsearch: { prefix: true }
                   }
   pg_search_scope :autocomplete_whered,
                   against: [:whered],
                   using: {
-                      tsearch: {prefix: true}
+                    tsearch: { prefix: true }
                   }
 
-  #привязка аспектов к несовершенству
+  # привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
     discontent_post_aspects.destroy_all
     aspects_new.each do |asp|
@@ -61,16 +61,12 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def voted(user)
-    self.voted_users.where(id: user)
+    voted_users.where(id: user)
   end
 
   def show_content
-    unless self.content.nil?
-      '<b> что: </b>' + self.content +
-          (self.whered.present? ? '<br/> <b> где: </b> ' + self.whered : '') +
-          (self.whend.present? ? '<br/> <b> когда: </b>' + self.whend : '') +
-          '<br/>'
-    end
+    return nil if  content.nil?
+    '<b> что: </b>' + content + (whered.present? ? '<br/> <b> где: </b> ' + whered : '') + (whend.present? ? '<br/> <b> когда: </b>' + whend : '') + '<br/>'
   end
 
   def display_content
@@ -78,7 +74,6 @@ class Discontent::Post < ActiveRecord::Base
   end
 
   def note_size?(type_fd)
-    self.post_notes(type_fd).size > 0
+    post_notes(type_fd).size > 0
   end
-
 end

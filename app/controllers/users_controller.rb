@@ -4,7 +4,7 @@ class UsersController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :show,  :journal_clear, :edit_notice]
 
   def index
-    @users = @project.users_in_project.where(users: {type_user: 0})
+    @users = @project.users_in_project.where(users: { type_user: 0 })
   end
 
   def new
@@ -30,9 +30,7 @@ class UsersController < ProjectsController
       img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
       to_update.merge!(avatar: img['public_id'])
     end
-    if @user.update_attributes(to_update)
-      flash[:success] = 'Профиль обновлен'
-    end
+    flash[:success] = 'Профиль обновлен' if @user.update_attributes(to_update)
     # redirect_to user_path(@project, @user)
     # respond_to do |format|
     #   if @user.update_attributes(to_update)
@@ -52,7 +50,7 @@ class UsersController < ProjectsController
     redirect_to users_path
   end
 
-  #clean notifications
+  # clean notifications
   def journal_clear
     if @my_journals.size > 0 && current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
@@ -76,8 +74,7 @@ class UsersController < ProjectsController
     end
   end
 
-
-  #mail sender
+  # mail sender
   def edit_notice
     @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
     @journal_mailer = JournalMailer.new
@@ -90,13 +87,12 @@ class UsersController < ProjectsController
     @post.project = @project
     @post.status = 0
     respond_to do |format|
-      if @post.save!
-        format.js
-      end
+      format.js if @post.save!
     end
   end
 
   private
+
   def set_user
     @user = User.find(params[:id]) if params[:id]
   end

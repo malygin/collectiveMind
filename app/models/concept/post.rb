@@ -8,11 +8,11 @@ class Concept::Post < ActiveRecord::Base
   has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
 
-  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: {status: [1]} }, class_name: 'Concept::PostDiscontent'
+  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: { status: [1] } }, class_name: 'Concept::PostDiscontent'
 
   validates :title, presence: true
 
-  scope :for_discontents, ->(discontents) { where(concept_post_discontents: {discontent_post_id: discontents}) }
+  scope :for_discontents, ->(discontents) { where(concept_post_discontents: { discontent_post_id: discontents }) }
 
   # def self.scope_vote_top(post)
   #   joins(:concept_post_discontents).
@@ -25,14 +25,12 @@ class Concept::Post < ActiveRecord::Base
   # end
 
   def note_size?(type_fd)
-    self.post_notes(type_fd).size > 0
+    post_notes(type_fd).size > 0
   end
 
   def update_statuses
     statuses = []
-    if content.present?
-      statuses << 'content'
-    end
+    statuses << 'content' if content.present?
     statuses
   end
 end

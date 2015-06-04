@@ -7,6 +7,6 @@ class Discontent::PostAspect < ActiveRecord::Base
   scope :by_aspect, ->(p) { where(aspect_id: p) }
 
   def to_s
-    self.core_aspect.content
+    core_aspect.content
   end
 end

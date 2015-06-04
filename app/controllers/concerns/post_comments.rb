@@ -26,8 +26,8 @@ module PostComments
     @comment.update_attributes(content: params[:content])
     @aspects = Core::Aspect::Post.where(project_id: @project)
     if params[:image]
-      img, isFile = Util::ImageLoader.load(params[name_of_comment_for_param])
-      @comment.update_attributes(image: img ? img['public_id'] : nil, isFile: img ? isFile : nil)
+      img, is_file = Util::ImageLoader.load(params[name_of_comment_for_param])
+      @comment.update_attributes(image: img ? img['public_id'] : nil, isFile: img ? is_file : nil)
     end
     respond_to :js
   end
@@ -41,7 +41,6 @@ module PostComments
     respond_to :js
   end
 
-
   def add_comment
     @aspects = Core::Aspect::Post.where(project_id: @project)
     if params[:comment]
@@ -54,7 +53,6 @@ module PostComments
     respond_to :js
   end
 
-
   def change_status_for_comment
     @post = current_model.find(params[:id])
     @comment = comment_model.find(params[:comment_id])
@@ -62,21 +60,17 @@ module PostComments
     @comment.toggle!(:discuss_status) if params[:discuss_status]
     @comment.toggle!(:approve_status) if params[:approve_status]
     if params[:discuss_status]
-      if @comment.discuss_status
-        type = 'discuss_status'
-      end
+      type = 'discuss_status' if @comment.discuss_status
     elsif params[:approve_status]
-      if @comment.approve_status
-        type = 'approve_status'
-      end
+      type = 'approve_status' if @comment.approve_status
     end
     if type
-      current_user.journals.build(type_event: name_of_comment_for_param+'_'+type, project: @project,
+      current_user.journals.build(type_event: name_of_comment_for_param + '_' + type, project: @project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                   first_id: @post.id, second_id: @comment.id).save!
 
-      if @comment.user!=current_user
-        current_user.journals.build(type_event: 'my_'+name_of_comment_for_param+'_'+type, user_informed: @comment.user, project: @project,
+      if @comment.user != current_user
+        current_user.journals.build(type_event: 'my_' + name_of_comment_for_param + '_' + type, user_informed: @comment.user, project: @project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                     first_id: @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!

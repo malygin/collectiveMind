@@ -19,51 +19,47 @@ class GroupActionsController < WebsocketRails::BaseController
     end
     if editable[message[:model_name]].present?
       JSON.parse(editable[message[:model_name]]).each do |current_model|
-        if current_model['model_id'] == message[:model_id]
-          unless current_model['user_id'] == current_user.id
-            WebsocketRails.users[current_user.id].send_message(:already_editing, {model_name: message[:model_name], model_id: message[:model_id]}, channel: 'group.actions')
-            no_edits = false
-            break
-          end
-        end
+        next unless current_model['model_id'] == message[:model_id] && !(current_model['user_id'] == current_user.id)
+        WebsocketRails.users[current_user.id].send_message(:already_editing, { model_name: message[:model_name], model_id: message[:model_id] }, channel: 'group.actions')
+        no_edits = false
+        break
       end
     end
 
     # Если никто не редактирует запись, то начинаем это делать)
     # И сообщаем всем об этом событии
-    if no_edits
-      if editable[message[:model_name]].present?
-        editing_array = JSON.parse(editable[message[:model_name]])
-      else
-        editing_array = Array.new
-      end
-      editing_array << {model_id: message[:model_id], user_id: current_user.id}
-      redis.hset redis_key, message[:model_name], editing_array.to_json
+    return unless no_edits
 
-      begin
-        model = message[:model_name].classify.constantize.find(message[:model_id].to_i)
-        users = []
-        current_user.groups.each do |group|
-          group.users.each do |user|
-            users << user
-          end
+    if editable[message[:model_name]].present?
+      editing_array = JSON.parse(editable[message[:model_name]])
+    else
+      editing_array = []
+    end
+    editing_array << { model_id: message[:model_id], user_id: current_user.id }
+    redis.hset redis_key, message[:model_name], editing_array.to_json
+
+    begin
+      model = message[:model_name].classify.constantize.find(message[:model_id].to_i)
+      users = []
+      current_user.groups.each do |group|
+        group.users.each do |user|
+          users << user
         end
-        users.uniq.each do |user|
-          WebsocketRails.users[user.id].send_message(:user_start_edit, {model: model, user: current_user}.to_json, channel: :group_chat)
-        end
-      rescue  => e
-        Rails.logger.info "#{Time.now} exception in groups_action_controller - #{e}"
       end
+      users.uniq.each do |user|
+        WebsocketRails.users[user.id].send_message(:user_start_edit, { model: model, user: current_user }.to_json, channel: :group_chat)
+      end
+    rescue  => e
+      Rails.logger.info "#{Time.now} exception in groups_action_controller - #{e}"
     end
   end
 
   def stop_edit
-    if editable[message[:model_name]].present?
-      editing_models = JSON.parse(editable[message[:model_name]])
-      editing_models.delete Hash['model_id', message[:model_id], 'user_id', current_user.id]
-      redis.hset(redis_key, message[:model_name], editing_models.to_json)
-      #@todo рассылать сообщения об этом
-    end
+    return unless editable[message[:model_name]].present?
+    editing_models = JSON.parse(editable[message[:model_name]])
+    editing_models.delete Hash['model_id', message[:model_id], 'user_id', current_user.id]
+    redis.hset(redis_key, message[:model_name], editing_models.to_json)
+    # @todo рассылать сообщения об этом
   end
 
   def client_disconnected
@@ -81,6 +77,7 @@ class GroupActionsController < WebsocketRails::BaseController
   end
 
   private
+
   def redis
     @redis ||= Redis.new(WebsocketRails.config.redis_options)
   end

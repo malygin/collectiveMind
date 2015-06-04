@@ -45,33 +45,29 @@ class User < ActiveRecord::Base
   has_many :user_answers, class_name: 'CollectInfo::UserAnswers'
   has_many :news, class_name: 'News'
   has_many :loggers, class_name: 'JournalLogger'
-  has_many :core_content_user_answers, :class_name => 'Core::ContentUserAnswer'
+  has_many :core_content_user_answers, class_name: 'Core::ContentUserAnswer'
   default_scope { order('id DESC') }
   # scope :check_field, ->(p, c) { joins(:user_checks).where(user_checks: {project: p.id, status: 't', check_field: c}) }
   scope :without_added, ->(users) { where.not(id: users) unless users.empty? }
 
-  validates :name, length: {maximum: 50}
+  validates :name, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: {with: VALID_EMAIL_REGEX},
-                    uniqueness: {case_sensitive: false}
-
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
 
   pg_search_scope :search,
                   against: [:name, :surname, :email],
                   using: {
-                      tsearch: {prefix: true}
+                    tsearch: { prefix: true }
                   }
 
-
   def valid_password?(password)
-    begin
-      super(password)
-    rescue BCrypt::Errors::InvalidHash
-      return false unless password == encrypted_password
-      logger.info "User #{email} is using the old password hashing method, updating attribute."
-      self.password = password
-      true
-    end
+    super(password)
+  rescue BCrypt::Errors::InvalidHash
+    return unless password == encrypted_password
+    logger.info "User #{email} is using the old password hashing method, updating attribute."
+    self.password = password
+    true
   end
 
   def last_event(project)
@@ -79,19 +75,19 @@ class User < ActiveRecord::Base
   end
 
   def user_project_scores(project)
-    self.core_project_scores.where('core_project_scores.project_id = ?', project).first
+    core_project_scores.where('core_project_scores.project_id = ?', project).first
   end
 
   def to_s
-    if self.anonym
-      self.nickname
+    if anonym
+      nickname
     else
-      "#{self.name} #{self.surname}"
+      "#{name} #{surname}"
     end
   end
 
   def role_name
-    if self.type_user == 1
+    if type_user == 1
       'модератор'
     else
       ''
@@ -102,21 +98,21 @@ class User < ActiveRecord::Base
     type_user == 1
   end
 
-  def add_score(h={})
+  def add_score(h = {})
     case h[:type]
       when :plus_post
-        self.add_score_by_type(h[:project], h[:score], h[:type_score])
-        self.journals.build(type_event: 'my_add_score_'+h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
+        add_score_by_type(h[:project], h[:score], h[:type_score])
+        journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
 
       when :to_archive_plus_post
-        self.add_score_by_type(h[:project], -h[:score], h[:type_score])
-        Journal.destroy_journal_record(h[:project], 'my_add_score_'+h[:model_score], self, h[:post], true)
+        add_score_by_type(h[:project], -h[:score], h[:type_score])
+        Journal.destroy_journal_record(h[:project], 'my_add_score_' + h[:model_score], self, h[:post], true)
 
     end
   end
 
   def add_score_by_type(project, score, type = :collect_info_posts_score)
-    ps = self.core_project_users.by_project(project).first_or_create
+    ps = core_project_users.by_project(project).first_or_create
     ps.update_attributes!(score: score + (ps.score || 0), type => (ps.read_attribute(type) || 0) + score)
     # Award.reward(user: self, old_score: ps.score-score, project: project, score: ps.score, type: 'max')
     # self.user_project_scores(project).update_attributes!(score: score+self.score, type => self.read_attribute(type)+score)
@@ -155,7 +151,6 @@ class User < ActiveRecord::Base
     project.project_users.by_type(1).include? self
   end
 
-
   def group_include_user?(user)
     groups.each do |group|
       return true if group.users.include?(user)
@@ -169,45 +164,45 @@ class User < ActiveRecord::Base
 
   # аспекты для голосования (необходимые, важные, неважные)
   def aspects_for_vote(project, status)
-    self.voted_aspects.by_project(project.id).where(collect_info_votings: {status: status})
+    voted_aspects.by_project(project.id).where(collect_info_votings: { status: status })
   end
 
   # аспекты за которые пользователь еще не проголосовал
   def unvote_aspects_for_vote(project)
-    vote_aspects = project.proc_main_aspects.joins(:final_votings).where(collect_info_votings: {user_id: self.id}).pluck('core_aspect_posts.id')
+    vote_aspects = project.proc_main_aspects.joins(:final_votings).where(collect_info_votings: { user_id: id }).pluck('core_aspect_posts.id')
     project.proc_main_aspects.where.not(id: vote_aspects)
   end
 
   # несовершенства для голосования (необходимые, важные, неважные)
   def discontents_for_vote(project, status)
-    self.voted_discontent_posts.by_project(project.id).where(discontent_votings: {status: status})
+    voted_discontent_posts.by_project(project.id).where(discontent_votings: { status: status })
   end
 
   # несовершенства за которые пользователь еще не проголосовал
   def unvote_discontents_for_vote(project)
-    vote_discontents = project.discontent_for_vote.joins(:final_votings).where(discontent_votings: {user_id: self.id}).pluck('discontent_posts.id')
+    vote_discontents = project.discontent_for_vote.joins(:final_votings).where(discontent_votings: { user_id: id }).pluck('discontent_posts.id')
     project.discontent_for_vote.where.not(id: vote_discontents)
   end
 
   # идеи для голосования (да, нет)
   def concepts_for_vote(project, status)
-    self.voted_concept_post.by_project(project.id).where(concept_votings: {status: status})
+    voted_concept_post.by_project(project.id).where(concept_votings: { status: status })
   end
 
   # идеи за которые пользователь еще не проголосовал
   def unvote_concepts_for_vote(project)
-    vote_concepts = project.concept_ongoing_post.joins(:final_votings).where(concept_votings: {user_id: self.id}).pluck('concept_posts.id')
+    vote_concepts = project.concept_ongoing_post.joins(:final_votings).where(concept_votings: { user_id: id }).pluck('concept_posts.id')
     project.concept_ongoing_post.where.not(id: vote_concepts)
   end
 
   # пакеты для голосования (да, нет)
   def novations_for_vote(project, status)
-    self.voted_novation_post.by_project(project.id).where(novation_votings: {status: status})
+    voted_novation_post.by_project(project.id).where(novation_votings: { status: status })
   end
 
   # пакеты за которые пользователь еще не проголосовал
   def unvote_novations_for_vote(project)
-    vote_novations = project.novations_for_vote.joins(:final_votings).where(novation_votings: {user_id: self.id}).pluck('novation_posts.id')
+    vote_novations = project.novations_for_vote.joins(:final_votings).where(novation_votings: { user_id: id }).pluck('novation_posts.id')
     project.novations_for_vote.where.not(id: vote_novations)
   end
 
@@ -228,6 +223,6 @@ class User < ActiveRecord::Base
   end
 
   def plan_vote_status(post, type)
-    self.plan_post_votings.by_post(post).by_type(type).first.try(:status) || 0
+    plan_post_votings.by_post(post).by_type(type).first.try(:status) || 0
   end
 end

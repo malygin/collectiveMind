@@ -2,7 +2,7 @@ class Plan::PostsController < PostsController
   include MarkupHelper
   before_action :set_plan, only: [:edit, :update, :destroy]
   before_action :set_novations, only: [:new, :edit]
-  #autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
+  # autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
   def voting_model
     Plan::Post
@@ -10,7 +10,7 @@ class Plan::PostsController < PostsController
 
   def prepare_data
     @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
-    @vote_all = Plan::Voting.where(plan_votings: {plan_post_id: @project.plan_post.pluck(:id)}).uniq_user.count if @project.status == 11
+    @vote_all = Plan::Voting.where(plan_votings: { plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
   end
 
   def index
@@ -27,16 +27,14 @@ class Plan::PostsController < PostsController
   end
 
   def edit
-    if @post.post_novations.empty?
-      @post.post_novations.build
-    end
+    @post.post_novations.build if @post.post_novations.empty?
     render action: :new
   end
 
   def create
     @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id)
     @post.post_novations.new plan_post_novation_params
-    if @post.valid? &&  @post.save
+    if @post.valid? && @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
     end
 
@@ -68,10 +66,9 @@ class Plan::PostsController < PostsController
   end
 
   def vote
-     @post_vote = voting_model.find(params[:id])
-     @post_vote.final_votings.where(user_id: current_user, type_vote: params[:type_vote].to_i).destroy_all
-     @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
-
+    @post_vote = voting_model.find(params[:id])
+    @post_vote.final_votings.where(user_id: current_user, type_vote: params[:type_vote].to_i).destroy_all
+    @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
   end
 
   # # @todo methods for note
@@ -104,6 +101,7 @@ class Plan::PostsController < PostsController
   # end
 
   private
+
   def set_novations
     @novations = @project.novations
   end

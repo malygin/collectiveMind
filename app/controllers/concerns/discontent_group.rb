@@ -7,9 +7,8 @@ module DiscontentGroup
     before_action :set_accepted_posts, only: [:create_group, :union_group, :update_group]
   end
 
-  #методы REST group
+  # методы REST group
   module ClassMethods
-
     def new_group
       @asp = Core::Aspect::Post.find(params[:asp]) if params[:asp]
       @post_group = Discontent::PostGroup.new
@@ -34,11 +33,7 @@ module DiscontentGroup
           @post_group.discontent_post_group_aspects.build(aspect_id: asp.to_i)
         end
       end
-      if @post_group.save
-        respond_to do |format|
-          format.js
-        end
-      end
+      respond_to :js
     end
 
     def update_group
@@ -64,9 +59,7 @@ module DiscontentGroup
       redirect_to action: 'index'
     end
 
-
-
-    #добавление в группу
+    # добавление в группу
     def union_group
       @post = Discontent::Post.find(params[:id])
       @post_group = Discontent::PostGroup.find(params[:group_id])
@@ -79,7 +72,7 @@ module DiscontentGroup
       end
     end
 
-    #объединение в группу
+    # объединение в группу
     def union_discontent
       @post = Discontent::Post.find(params[:id])
       @post_group = @project.discontent_groups.create(style: @post.style, content: params[:union_post_descr], whered: @post.whered, whend: @post.whend)
@@ -95,7 +88,7 @@ module DiscontentGroup
       redirect_to discontent_post_path(@project, @post_group)
     end
 
-    #удаление из группы
+    # удаление из группы
     def remove_union
       @post_group = Discontent::PostGroup.find(params[:id])
       @post = Discontent::Post.find(params[:post_id])
@@ -112,26 +105,24 @@ module DiscontentGroup
       end
     end
 
-    #перевод группы в обязательные и обратно
+    # перевод группы в обязательные и обратно
     def set_required
       @post_group = Discontent::PostGroup.find(params[:id])
-      if boss? || role_expert?
-        if @post_group.status == 2
-          @post_group.update_attributes(status: 4)
-        elsif @post_group.status == 4
-          @post_group.update_attributes(status: 2)
-        end
+      return  unless boss? || role_expert?
+      if @post_group.status == 2
+        @post_group.update_attributes(status: 4)
+      elsif @post_group.status == 4
+        @post_group.update_attributes(status: 2)
       end
     end
 
-    #создание группы из несовершенства
+    # создание группы из несовершенства
     def set_grouped
       @post = Discontent::Post.find(params[:id])
       @post_group = @project.discontent_groups.create(style: @post.style, content: @post.content, whered: @post.whered, whend: @post.whend)
       @post.update_attributes(status: 1, discontent_post_id: @post_group.id)
       @post_group.update_union_post_aspects(@post.post_aspects)
     end
-
   end
 
   def set_aspects

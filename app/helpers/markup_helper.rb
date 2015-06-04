@@ -1,5 +1,4 @@
 module MarkupHelper
-
   # @todo bad markup in body not css for different stage
   def stage_theme
     if rating?
@@ -12,22 +11,20 @@ module MarkupHelper
   end
 
   def trim_content(content, size = 100)
-    if !content.nil? && content.length > size
-      return content[0..size] + ' ...'
-    end
+    return content[0..size] + ' ...' if !content.nil? && content.length > size
     content
   end
 
   def post_concept_classes(post)
-    post.novation_concepts.map {|c| "concept_#{c.id}" }.join(' ')
+    post.novation_concepts.map { |c| "concept_#{c.id}" }.join(' ')
   end
 
   def post_aspect_classes(post)
-    post.post_aspects.map {|c| "aspect_#{c.id}" }.join(' ')
+    post.post_aspects.map { |c| "aspect_#{c.id}" }.join(' ')
   end
 
   def post_discontent_classes(post)
-    post.concept_disposts.map {|c| "discontent_#{c.id}" }.join(' ')
+    post.concept_disposts.map { |c| "discontent_#{c.id}" }.join(' ')
   end
 
   def user_image_tag(source, options = {})
@@ -39,9 +36,8 @@ module MarkupHelper
   end
 
   def escape_text(t)
-    t.gsub("\n", "\\n").gsub("\r", "\\r").gsub("\t", "\\t").gsub("'", "\\'")
+    t.gsub("\n", '\\n').gsub("\r", '\\r').gsub("\t", '\\t').gsub("'", "\\'")
   end
-
 
   def label_approve_stat(comment)
     case comment.approve_status
@@ -57,19 +53,19 @@ module MarkupHelper
   def color_progress_bar
     case name_controller
       when :collect_info_posts
-        "#649ac3"
+        '#649ac3'
       when :discontent_posts
-        "#486795"
+        '#486795'
       when :concept_posts
-        "#bd8cb8"
+        '#bd8cb8'
       when :novation_posts
-        "#7373aa"
+        '#7373aa'
       when :plan_posts
-        "#80bcc4"
+        '#80bcc4'
       when :estimate_posts
-        "#80bcc4"
+        '#80bcc4'
       else
-        "#649ac3"
+        '#649ac3'
     end
   end
 
@@ -85,6 +81,4 @@ module MarkupHelper
   #   post.core_aspects.each {|asp| return_subaspect(asp, level+1) }
   #   return
   # end
-
-
 end

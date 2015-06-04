@@ -9,17 +9,17 @@ class Concept::PostsController < PostsController
   end
 
   def autocomplete
-    #@todo для универсализации автокомплита, нужно объединить все ресурсные модели
+    # @todo для универсализации автокомплита, нужно объединить все ресурсные модели
     field = params[:field]
     answer = Set.new
-    answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| {value: d.name} })
-    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| {value: d.name} })
+    answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| { value: d.name } })
+    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| { value: d.name } })
 
     render json: answer.sort_by { |ha| ha[:value].downcase }
   end
 
   def index
-    @posts= nil
+    @posts = nil
     if params[:discontent] && params[:discontent] != '*'
       # @posts = Discontent::Post.find(params[:discontent].scan(/\d/).join('')).dispost_concepts.created_order
       # @posts = @project.concept_ongoing_post.joins(:concept_post_discontents).for_discontents(params[:discontent]).created_order
@@ -27,12 +27,11 @@ class Concept::PostsController < PostsController
         params[:discontent].delete('#')
         params[:discontent] += [nil]
       end
-      @posts = @project.concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: {discontent_post_id: params[:discontent]}).created_order
+      @posts = @project.concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
     else
       @posts = @project.concept_ongoing_post.created_order
     end
     respond_to do |format|
-
       format.html # show.html.erb
       format.json
     end
@@ -62,7 +61,7 @@ class Concept::PostsController < PostsController
       end
     end
 
-    #выбор отдельных несовершенств
+    # выбор отдельных несовершенств
     # unless params[:check_discontent].nil?
     #   params[:check_discontent].each do |com|
     #     @concept_post.concept_post_discontent_checks.build(discontent_post_id: com[0], status: 1)
@@ -83,7 +82,7 @@ class Concept::PostsController < PostsController
   end
 
   def edit
-    @discontent_posts = @discontent_posts - @concept_post.concept_disposts
+    @discontent_posts -= @concept_post.concept_disposts
     render action: :new
   end
 
@@ -124,6 +123,7 @@ class Concept::PostsController < PostsController
   end
 
   private
+
   def set_discontent_posts
     @discontent_posts = Discontent::Post.by_project(@project)
   end
@@ -135,11 +135,10 @@ class Concept::PostsController < PostsController
   def prepare_data
     @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    if @project.status == 8
-      @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
-    end
+    # if @project.status == 8
+    #   @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
+    # end
   end
-
 
   def concept_post_params
     params.require(:concept_post).permit(:goal, :user_id, :number_views, :status, :content, :censored, :discuss_status,

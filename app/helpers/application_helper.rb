@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   # @todo for refac
   def get_stage_for_improve(c)
     case c
@@ -19,7 +18,6 @@ module ApplicationHelper
         7
     end
   end
-
 
   # @todo for journal helper
   def field_for_journal(post)
@@ -67,10 +65,8 @@ module ApplicationHelper
     name_controller == @project.current_stage_type
   end
 
-
-
   # необходимость показа приветсвенной модалки или поповера
-  #@todo почему бы не возвращать boolean?
+  # @todo почему бы не возвращать boolean?
   def shown_intro(check_field)
     current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
   end
@@ -83,11 +79,11 @@ module ApplicationHelper
   # последняя дата захода на страницу
   def last_time_visit_page(stage, type_event = 'visit_save', post = nil)
     if post
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where("body = ?", "/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where('body = ?', "/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
     else
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where("body = ?", "/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
+      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where('body = ?', "/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
     end
-    notice ? notice.created_at : "2000-01-01 00:00:00"
+    notice ? notice.created_at : '2000-01-01 00:00:00'
   end
 
   # # дата прочтения новости эксперта
@@ -133,15 +129,15 @@ module ApplicationHelper
   # @todo refac
   def current_stage_popover_text
     if name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress != 100
-      'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' +
-          'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' +
+      'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' \
+          'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' \
           'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
     elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress != 100
-      'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ</span> для базы знаний.'+
+      'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ</span> для базы знаний.'\
        'Ответив на вопросы или выбрав возможность «Пропустить вопрос», вы сможете перейти к обсуждению прочитанного с остальными участниками.'
     elsif name_controller == :collect_info_posts && @questions_progress == 100
-      'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' +
-          'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' +
+      'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' \
+          'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' \
           'Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'
     elsif name_controller == :discontent_posts
       'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
@@ -159,9 +155,9 @@ module ApplicationHelper
   def model_for(type, stage)
     # stage symbol and downcase -> to string and capitalize
     if type == :post
-      stage == :collect_info_posts ? Core::Aspect::Post : "#{stage.to_s.gsub('_posts','').capitalize}::Post".constantize
+      stage == :collect_info_posts ? Core::Aspect::Post : "#{stage.to_s.gsub('_posts', '').capitalize}::Post".constantize
     elsif type == :comment
-      stage == :collect_info_posts ? Core::Aspect::Comment : "#{stage.to_s.gsub('_posts','').capitalize}::Comment".constantize
+      stage == :collect_info_posts ? Core::Aspect::Comment : "#{stage.to_s.gsub('_posts', '').capitalize}::Comment".constantize
     end
   end
 
@@ -170,17 +166,16 @@ module ApplicationHelper
     # число вопросов по процедуре
     count_all = CollectInfo::Question.by_type(project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => project).count
     # число вопросов на которые пользователь ответил
-    count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: {project_id: project, type_stage: project.type_for_questions} ).where(collect_info_user_answers: {user_id: current_user}).count
+    count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: { project_id: project, type_stage: project.type_for_questions }).where(collect_info_user_answers: { user_id: current_user }).count
     # прогресс для данного пользователя
-    questions_progress = count_all == 0 ? 0 : (count_answered.to_f/count_all.to_f) * 100
+    questions_progress = count_all == 0 ? 0 : (count_answered.to_f / count_all.to_f) * 100
 
     # общее количество ответов пользователей закрытой процедуры
     if project.closed?
       users_count = project.users_in_project.uniq.count
-      count_answered_all = CollectInfo::UserAnswers.select('"collect_info_user_answers"."question_id"').joins(:question).where(collect_info_questions: {project_id: project, type_stage: project.type_for_questions} ).count
-      questions_progress_all = count_all*users_count == 0 ? 0 : (count_answered_all.to_f/(count_all*users_count).to_f) * 100
+      count_answered_all = CollectInfo::UserAnswers.select('"collect_info_user_answers"."question_id"').joins(:question).where(collect_info_questions: { project_id: project, type_stage: project.type_for_questions }).count
+      questions_progress_all = count_all * users_count == 0 ? 0 : (count_answered_all.to_f / (count_all * users_count).to_f) * 100
     end
-    return questions_progress, questions_progress_all
+    [questions_progress, questions_progress_all]
   end
-
 end

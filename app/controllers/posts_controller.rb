@@ -6,9 +6,8 @@ class PostsController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :edit, :show,  :about, :user_content]
   before_filter :check_type_mechanics, only: [:new, :edit, :user_content]
   before_filter :check_stage_for_cabinet, only: [:new, :edit, :user_content]
-  before_filter :is_author_or_boss?, only: [:edit, :destroy, :to_archive, :publish]
-  before_filter :is_boss?, only: [:add_score, :change_status]
-
+  before_filter :author_or_boss?, only: [:edit, :destroy, :to_archive, :publish]
+  before_filter :boss?, only: [:add_score, :change_status]
 
   def current_model
     "#{self.class.name.deconstantize}::Post".constantize
@@ -37,7 +36,6 @@ class PostsController < ProjectsController
     Discontent::Post
   end
 
-
   def index
     @posts = current_model.where(project_id: @project).paginate(page: params[:page])
     respond_to :html
@@ -49,7 +47,7 @@ class PostsController < ProjectsController
     @comments = @post.main_comments
     @comment = comment_model.new
     respond_to do |format|
-      format.html { redirect_to url_for(controller: @post.class.to_s == "Core::Aspect::Post" ? '/collect_info/posts' : @post.class.to_s.tableize, action: :index, jr_post: @post.id) }
+      format.html { redirect_to url_for(controller: @post.class.to_s == 'Core::Aspect::Post' ? '/collect_info/posts' : @post.class.to_s.tableize, action: :index, jr_post: @post.id) }
       format.json { render json: @post }
       format.js
     end
@@ -76,7 +74,7 @@ class PostsController < ProjectsController
         format.html { redirect_to action: 'show', project: @project, id: @post.id }
         format.js
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
       end
     end
   end
@@ -129,11 +127,10 @@ class PostsController < ProjectsController
   def vote
     @post_vote = voting_model.find(params[:id])
     @post_vote.vote(current_user, params[:status])
-
   end
 
   def check_field
-    if params[:check_field] && params[:check_field]!='' && params[:status]
+    if params[:check_field] && params[:check_field] != '' && params[:status]
       current_user.user_checks.where(project_id: @project.id, check_field: params[:check_field]).destroy_all
       current_user.user_checks.create(project_id: @project.id, check_field: params[:check_field], status: params[:status]).save!
     end
@@ -151,17 +148,13 @@ class PostsController < ProjectsController
     respond_to :js
   end
 
-
   private
+
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
-    unless @project.current_stage_type == params[:controller].sub('/', '_').to_sym
-      unless @project.current_stage_type == :collect_info_posts && params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
-        unless action_name == 'user_content'
-          redirect_to url_for(params.merge(controller: '/'+@project.current_stage_type.to_s.sub('_', '/')))
-        end
-      end
-    end
+    return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym ||
+              action_name == 'user_content' || @project.current_stage_type == :collect_info_posts && params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
+    redirect_to url_for(params.merge(controller: '/' + @project.current_stage_type.to_s.sub('_', '/')))
   end
 
   def check_type_mechanics
@@ -180,7 +173,7 @@ class PostsController < ProjectsController
   def journal_data
     if params[:viewed]
       post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
-      post_id = if current_model.to_s == 'CollectInfo::Post' then
+      post_id = if current_model.to_s == 'CollectInfo::Post'
                   params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.aspects.order(:id).first
                 else
                   post
@@ -194,13 +187,12 @@ class PostsController < ProjectsController
     super()
   end
 
-  def is_boss?
-      redirect_to "/project/#{@project.id}"  if not boss?
+  def boss?
+    redirect_to "/project/#{@project.id}"  unless boss?
   end
 
-  def is_author_or_boss?
-    post= current_model.find(params[:id])
-    redirect_to "/project/#{@project.id}" if (current_user != post.user) && (not boss?)
+  def author_or_boss?
+    post = current_model.find(params[:id])
+    redirect_to "/project/#{@project.id}" if (current_user != post.user) && (!boss?)
   end
-
 end

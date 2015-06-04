@@ -3,19 +3,20 @@ class Core::ProjectSetting < ActiveRecord::Base
   # before_create :set_stage_dates
 
   private
+
   def set_stage_dates
     stage_dates = {}
     Core::Project::LIST_STAGES.each do |_stage, data|
       data[:status].each do |status|
         stage_dates[status] = {
-            expected: {
-                start: Date.today,
-                end: Date.today + 7.day
-            },
-            real: {
-                start: '',
-                end: ''
-            },
+          expected: {
+            start: Date.today,
+            end: Date.today + 7.day
+          },
+          real: {
+            start: '',
+            end: ''
+          }
         }
       end
     end

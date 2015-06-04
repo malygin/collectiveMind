@@ -4,14 +4,14 @@ class ModeratorMessage < ActiveRecord::Base
   scope :recent, -> { last(15) }
 
   def self.history(to)
-    where(id: (to - 15)..to).reverse.collect { |message| message.to_json }
+    where(id: (to - 15)..to).reverse.collect(&:to_json)
   end
 
   def to_json
-    {user: "#{user.name} #{user.surname}",
-     avatar: user.avatar(:thumb),
-     text: message,
-     id: id,
-     time: created_at}
+    { user: "#{user.name} #{user.surname}",
+      avatar: user.avatar(:thumb),
+      text: message,
+      id: id,
+      time: created_at }
   end
 end

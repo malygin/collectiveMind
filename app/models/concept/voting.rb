@@ -11,7 +11,7 @@ class Concept::Voting < ActiveRecord::Base
   scope :by_status, ->(status) { where(status: status) }
 
   def self.by_project_votings(project)
-    joins(:discontent_post).
-        where('"discontent_posts"."project_id" = ?', project.id)
+    joins(:discontent_post)
+      .where('"discontent_posts"."project_id" = ?', project.id)
   end
 end

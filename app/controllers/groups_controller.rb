@@ -95,14 +95,14 @@ class GroupsController < ApplicationController
   def upload_file
     if %w(image/jpeg image/png).include? params[:file].content_type
       file = Cloudinary::Uploader.upload(params[:file], folder: GroupChatMessage::GROUP_FOLDER, crop: :limit, width: 800,
-                                                        eager: [{crop: :fill, width: 150, height: 150}])
+                                                        eager: [{ crop: :fill, width: 150, height: 150 }])
     else
       file = Cloudinary::Uploader.upload(params[:file], folder: GroupChatMessage::GROUP_FOLDER, resource_type: :raw)
     end
-    group_message = current_user.group_chat_messages.create content: render_to_string('shared/download_file', layout: false, locals: {file: file}),
+    group_message = current_user.group_chat_messages.create content: render_to_string('shared/download_file', layout: false, locals: { file: file }),
                                                             group_id: @group.id
     unless ENV['RAILS_ENV'] == 'test'
-      #Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message)
+      # Resque.enqueue(WebsocketNotification, @group.users.collect(&:id), :groups_new_message, :group_chat, group_message)
       @group.users.each do |user|
         WebsocketRails.users[user.id].send_message(:groups_new_message, group_message.to_json, channel: :group_chat)
       end
@@ -111,11 +111,13 @@ class GroupsController < ApplicationController
   end
 
   private
+
   def check_owner
     redirect_back_or project_path(@project) unless current_user? @group.owner
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_group
     @group = Group.find params[:id] || params[:group_id]

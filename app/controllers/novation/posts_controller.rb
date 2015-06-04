@@ -9,10 +9,9 @@ class Novation::PostsController < PostsController
   end
 
   def index
-    @posts= nil
+    @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
     respond_to do |format|
-
       format.html # show.html.erb
       format.json
     end
@@ -53,13 +52,11 @@ class Novation::PostsController < PostsController
       @novation.update status: current_model::STATUSES[:published]
     end
 
-    if params[:novation_post_concept]
-      @novation.novation_post_concepts.destroy_all
-      params[:novation_post_concept].each do |asp|
-        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
-      end
+    return unless params[:novation_post_concept]
+    @novation.novation_post_concepts.destroy_all
+    params[:novation_post_concept].each do |asp|
+      @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
     end
-
   end
 
   def destroy
@@ -68,6 +65,7 @@ class Novation::PostsController < PostsController
   end
 
   private
+
   def set_novation_post
     @novation = current_model.find(params[:id])
   end

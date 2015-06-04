@@ -1,26 +1,22 @@
 module UsersHelper
-
-
   def class_for_top(number)
     if number <= 3
       'top3'
     elsif 3 < number && number <= 10
       'top10'
-    else
-      nil
     end
   end
 
   def score_order(score_name)
     case score_name
       when 'score_g'
-        "core_project_scores.score_g DESC"
+        'core_project_scores.score_g DESC'
       when 'score_a'
-        "core_project_scores.score_a DESC"
+        'core_project_scores.score_a DESC'
       when 'score_o'
-        "core_project_scores.score_o DESC"
+        'core_project_scores.score_o DESC'
       else
-        "core_project_scores.score DESC"
+        'core_project_scores.score DESC'
     end
   end
 
@@ -37,5 +33,4 @@ module UsersHelper
       'Выставление оценок'
     end
   end
-
 end

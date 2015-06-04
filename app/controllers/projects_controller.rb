@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   after_action :start_visit
 
   protected
+
   def set_project
     @project = Core::Project.find(params[:project])
   end
@@ -17,23 +18,20 @@ class ProjectsController < ApplicationController
   def journal_data
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
-    if @my_journals_count == 0
-      @my_journals = current_user.my_journals_viewed @project
-    end
+    return unless @my_journals_count == 0
+    @my_journals = current_user.my_journals_viewed @project
   end
 
   def check_access_to_project
-    unless @project.users.include?(current_user) || boss?
-      redirect_to root_url
-    end
+    return if  @project.users.include?(current_user) || boss?
+    redirect_to root_url
   end
 
   def start_visit
     # record url without params for easy parsing
-    if current_user && @project && request.method == 'GET'
-      current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
-                                  body: request.original_fullpath.split('?')[0]
-    end
+    return unless current_user && @project && request.method == 'GET'
+    current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
+                                body: request.original_fullpath.split('?')[0]
   end
 
   def news_data

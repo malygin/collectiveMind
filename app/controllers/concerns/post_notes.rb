@@ -13,7 +13,7 @@ module PostNotes
     @post_note = @post.notes.build(params[name_of_note_for_param])
     @post_note.user = current_user
 
-    current_user.journals.build(type_event: 'my_'+name_of_note_for_param, user_informed: @post.user, project: @project, body: trim_content(@post_note.content), first_id: @post.id, personal: true, viewed: false).save!
+    current_user.journals.build(type_event: 'my_' + name_of_note_for_param, user_informed: @post.user, project: @project, body: trim_content(@post_note.content), first_id: @post.id, personal: true, viewed: false).save!
 
     @post.update_attributes(column_for_type_field(name_of_note_for_param, @type.to_i) => 'f')
     if @type && @post.instance_of?(Concept::Post) && @post.send(column_for_type_field(name_of_note_for_param, @type.to_i)) == true
@@ -24,7 +24,7 @@ module PostNotes
       if @post_note.save
         format.js
       else
-        format.js { render action: "new_note" }
+        format.js { render action: 'new_note' }
       end
     end
   end

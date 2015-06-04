@@ -54,7 +54,7 @@ gem 'resque_mailer'
 gem 'resque-scheduler'
 gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
-gem 'rails-backbone', :github => 'codebrew/backbone-rails', :branch => 'master'
+gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
 
 group :development, :test do
   gem 'quiet_assets'
@@ -64,7 +64,6 @@ group :development, :test do
   gem 'bullet'
   gem 'i18n-tasks'
   gem 'spring', '1.3.6'
-
 end
 
 group :development do

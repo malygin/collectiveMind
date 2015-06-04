@@ -1,11 +1,9 @@
 class Estimate::PostsController < PostsController
-
   def voting_model
     Plan::Post
   end
 
   def prepare_data
-
   end
 
   def index
