@@ -3,6 +3,8 @@ $("#render_for_post").html('#{escape_javascript(render partial: 'modal_disconten
 magnificPopupOpen('#popup-imperf');
 comments_feed();
 comments_expandable_column();
+console.log(window.location.hash)
+$('html, body').animate({scrollTop: $(window.location.hash).offset().top}, 1000);
 history_change("#{discontent_posts_path(@project)}");
 comments_collapse_column();
 
