@@ -7,7 +7,7 @@ class Technique::List < ActiveRecord::Base
     "#{stage}_#{code}"
   end
 
-  def by_stage(stage)
+  def self.by_stage(stage)
     stage = :aspect_posts if stage == :collect_info_posts
     where stage: stage
   end

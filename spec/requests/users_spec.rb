@@ -51,7 +51,8 @@ describe 'Users ' do
         fill_in 'user_password_confirmation', with: new_password
         click_button 'update_profile'
         expect(page).to have_content t("form.user.update_success")
-        refresh_page
+        click_link 'auth_dropdown'
+        click_link 'sign_out'
         expect(current_path).to eq root_path
         click_link 'sign_in'
         fill_in 'user_email', with: user.email

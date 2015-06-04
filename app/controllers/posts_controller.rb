@@ -188,11 +188,11 @@ class PostsController < ProjectsController
   end
 
   def boss?
-    redirect_to "/project/#{@project.id}"  unless boss?
+    redirect_to "/project/#{@project.id}"  unless current_user.boss?
   end
 
   def author_or_boss?
     post = current_model.find(params[:id])
-    redirect_to "/project/#{@project.id}" if (current_user != post.user) && (!boss?)
+    redirect_to "/project/#{@project.id}" if (current_user != post.user) && (!current_user.boss?)
   end
 end
