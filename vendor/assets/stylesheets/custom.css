@@ -1343,6 +1343,8 @@ a.active {
     font-size: 13px;
     text-align: right;
     white-space:normal;
+    line-height: 1.2;
+    padding: 8px;
 }
 
 .add-button:hover, .add-button:focus {
@@ -4586,7 +4588,7 @@ ul.vote_nav > li > a {
 .dropdown_window {
     position: absolute;
     visibility: hidden;
-    z-index: 1001;
+    z-index: 3000;
 }
 
 .dropdown_window.active {
@@ -5136,7 +5138,7 @@ ul.vote_nav > li > a {
 
 .dropdown-toggle span {
     display: inline-block;
-    padding: 0 3px;
+    padding: 0 20px 0 0;
 }
 
 .dropdown-menu {
