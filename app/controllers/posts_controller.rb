@@ -46,7 +46,7 @@ class PostsController < ProjectsController
     @questions = Core::ContentQuestion.where(project_id: @project, post_type: name_of_model_for_param)
     @comments = @post.main_comments
     @comment = comment_model.new
-    @last_time_visit= params[:last_time_visit]
+    @last_time_visit = params[:last_time_visit]
     respond_to do |format|
       format.html { redirect_to url_for(controller: @post.class.to_s == 'Core::Aspect::Post' ? '/collect_info/posts' : @post.class.to_s.tableize, action: :index, jr_post: @post.id) }
       format.json { render json: @post }
@@ -189,7 +189,7 @@ class PostsController < ProjectsController
   end
 
   def boss?
-    redirect_to "/project/#{@project.id}"  unless current_user.boss?
+    redirect_to "/project/#{@project.id}"  unless  current_user && current_user.boss?
   end
 
   def author_or_boss?

@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   include ApplicationHelper
   include MarkupHelper
   include PgSearch
