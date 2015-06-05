@@ -1,4 +1,4 @@
-.media.comment{id: "comment#{comment.id}"}
+.media.comment{id: "comment#{comment.id}", class: "#{'new_comment' if @last_time_visit && (comment.created_at > @last_time_visit)}"}
   .media-left
     -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
     -#= cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'

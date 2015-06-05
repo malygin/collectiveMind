@@ -19,7 +19,7 @@
           %p.poster-name
             = link_to post_short.user, user_path(@project, post_short.user)
         .media-body.white
-          = link_to({controller: 'core/aspect/posts', action: :show, project: @project.id, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+          = link_to({controller: 'core/aspect/posts', action: :show, project: @project.id, id: post_short.id, last_time_visit: last_time_visit_page('collect_info')}, remote: true, id: "show_record_#{post_short.id}") do
             .post-text
               =post_short.content
               %i.fa.fa-angle-right
