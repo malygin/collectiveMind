@@ -11,10 +11,8 @@ class Novation::PostsController < PostsController
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json
-    end
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:novation, @project)
+    respond_to :html, :json
   end
 
   def new

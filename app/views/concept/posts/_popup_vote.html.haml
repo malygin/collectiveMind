@@ -14,19 +14,19 @@
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
               .vote_folder_inn.poll-2-1
                 %span.vote_counter
-                  =current_user.unvote_concepts_for_vote(@project).count
+                  =@user_voter.unvote_concepts_for_vote(@project).count
                 %h5.font_color_stage3 Общий список
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
               .vote_folder_inn.poll-2-3
                 %span.vote_counter
-                  =current_user.voted_concept_post.by_status(1).count
+                  =@user_voter.voted_concept_post.by_status(1).count
                 %h5 Да
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-4
                 %span.vote_counter
-                  =current_user.voted_concept_post.by_status(2).count
+                  =@user_voter.voted_concept_post.by_status(2).count
                 %h5 Нет
       %h4.bold.text-center Нравится ли вам идея?
       .divider25
@@ -37,19 +37,19 @@
             #vote_tab1.tab-pane.all_vote.active{:role => "tabpanel"}
               .container.padding30
                 .row
-                  - current_user.unvote_concepts_for_vote(@project).each do |post|
+                  - @user_voter.unvote_concepts_for_vote(@project).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 0}
                 .divider50
             #vote_tab2.tab-pane{"data-vote-poll-role" => "vote_yes", :role => "tabpanel"}
               .container.padding30
                 .row
-                  - current_user.concepts_for_vote(@project, 1).each do |post|
+                  - @user_voter.concepts_for_vote(@project, 1).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 1}
                 .divider50
             #vote_tab3.tab-pane{"data-vote-poll-role" => "vote_no", :role => "tabpanel"}
               .container.padding30
                 .row
-                  - current_user.concepts_for_vote(@project, 2).each do |post|
+                  - @user_voter.concepts_for_vote(@project, 2).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 2}
                 .divider50
           .divider35

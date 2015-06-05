@@ -1,10 +1,10 @@
-- if current_user.can_vote_for(:collect_info, @project)
+- if @user_voter
   = render partial: 'popup_vote'
+
 -if @questions_progress != 100 and (@project.stage == '1:0' or  @project.stage == '1:1')
   = render partial: 'questions_aspects'
 -else
   = render partial: 'discuss_aspects'
-
 
 
 - if shown_intro('collect_info_intro') == ''

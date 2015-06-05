@@ -32,10 +32,9 @@ class Discontent::PostsController < PostsController
     else
       @posts = @project.discontents.by_status_for_discontent(@project).created_order
     end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json
-    end
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
+
+    respond_to :html, :json
   end
 
   def new

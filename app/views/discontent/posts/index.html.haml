@@ -1,3 +1,9 @@
+- if shown_intro('discontent_intro') == ''
+  = render partial: 'popup_welcome'
+
+- if @user_voter
+  = render partial: 'popup_vote'
+
 .stage-info-sort-block
   #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
     %span Фильтр аспектов:
@@ -100,7 +106,4 @@
 
 
 
-- if shown_intro('discontent_intro') == ''
-  = render partial: 'popup_welcome'
-- if current_user.can_vote_for(:discontent, @project)
-  = render partial: 'popup_vote'
+

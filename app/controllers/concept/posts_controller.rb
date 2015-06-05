@@ -31,10 +31,9 @@ class Concept::PostsController < PostsController
     else
       @posts = @project.concept_ongoing_post.created_order
     end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json
-    end
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:concept, @project)
+
+    respond_to :html, :json
   end
 
   def new

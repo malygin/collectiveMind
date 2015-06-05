@@ -1,24 +1,4 @@
 module ApplicationHelper
-  # @todo for refac
-  def get_stage_for_improve(c)
-    case c
-      when 'Core::Aspect'
-        1
-      when 'Discontent'
-        2
-      when 'Concept'
-        3
-      when 'Novation'
-        4
-      when 'Plan'
-        5
-      when 'Estimate'
-        6
-      when 'Essay'
-        7
-    end
-  end
-
   # @todo for journal helper
   def field_for_journal(post)
     if post.instance_of?(Concept::Post) || post.instance_of?(Novation::Post)

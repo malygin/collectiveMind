@@ -17,7 +17,8 @@ class CollectInfo::PostsController < PostsController
     # @proc_aspects = @project.proc_main_aspects
     @proc_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
-    @questions_progress, @questions_progress_all  = collect_info_answers_count(@project)
+    @questions_progress, @questions_progress_all = collect_info_answers_count(@project)
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:collect_info, @project)
     respond_to :html
   end
 

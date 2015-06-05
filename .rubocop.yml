@@ -1,5 +1,12 @@
-#inherit_from: .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
 Style/AsciiComments:
+  Enabled: false
+Style/CaseIndentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+#  think about documentation
+Style/Documentation:
   Enabled: false
 
 AllCops:

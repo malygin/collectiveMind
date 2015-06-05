@@ -84,25 +84,6 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def news
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_journal
-    @core_project = @core_projects.first
-
-    if @project
-      if @project.project_access(current_user)
-        @journals_feed_all = Journal.filter(filtering_params(params)).events_for_project(@project.id).where(journals: { visible: true }).paginate(page: params[:page])
-      end
-    elsif prime_admin?
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all_prime.where(journals: { visible: true }).paginate(page: params[:page])
-    else
-      closed_projects = current_user.projects.where(core_projects: { type_access: 2 }).active_proc.pluck('core_projects.id')
-      @journals_feed_all = Journal.filter(filtering_params(params)).events_for_all(list_type_projects_for_user, closed_projects == [] ? [-1] : closed_projects).where(journals: { visible: true }).paginate(page: params[:page])
-    end
-    @j_count = { today: 0, yesterday: 0, older: 0 }
-    @users_for_news = User.where('name != ? OR surname != ?', '', '').order(:id)
-  end
-
   def users
     @project = Core::Project.find(params[:project]) if params[:project]
     @core_projects = current_user.current_projects_for_user
@@ -116,72 +97,6 @@ class Core::ProjectsController < ApplicationController
     else
       @users = User.where(type_user: uniq_proc_users).order('score DESC').paginate(page: params[:page])
     end
-  end
-
-  def general_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def lifetape_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def discontent_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def concept_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def plan_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def estimate_analytics
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-  end
-
-  def graf_data
-    @project = Core::Project.find(params[:project]) if params[:project]
-    hash_base = [{ x: (Date.parse('2000-01-01').to_datetime.to_f * 1000).to_i, y: 0 }, { x: (Date.parse('2000-01-02').to_datetime.to_f * 1000).to_i, y: 0 }, { x: (Date.parse('2000-01-03').to_datetime.to_f * 1000).to_i, y: 0 },
-                 { x: (Date.parse('2000-01-04').to_datetime.to_f * 1000).to_i, y: 0 }, { x: (Date.parse('2000-01-05').to_datetime.to_f * 1000).to_i, y: 0 }]
-
-    if params[:data_stage] == 'concept_analytics'
-      data_content = @project.concept_ongoing_post.date_stage(@project).order('concept_posts.created_at').pluck('concept_posts.id', 'date(concept_posts.created_at)')
-      data_comment = @project.concept_comments.date_stage(@project).reorder('concept_comments.created_at').pluck('concept_comments.id', 'date(concept_comments.created_at)')
-      data_content = data_content.map { |d| d[1] }.group_by { |i| i }.map { |k, v| { x: (k.to_datetime.to_f * 1000).to_i, y: v.count } }
-      data_comment = data_comment.map { |d| d[1] }.group_by { |i| i }.map { |k, v| { x: (k.to_datetime.to_f * 1000).to_i, y: v.count } }
-      data_content = hash_base | data_content if data_content.size < 5
-      data_comment = hash_base | data_comment if data_comment.size < 5
-      data = [{ key: 'Нововведения', values: data_content }, { key: 'Комментарии', values: data_comment }]
-    elsif params[:data_stage] == 'discontent_analytics'
-      data_content = @project.discontents.by_status(@project.status > 4 ? 1 : 0).date_stage(@project).order('discontent_posts.created_at').pluck('discontent_posts.id', 'date(discontent_posts.created_at)')
-      data_comment = @project.discontent_comments.date_stage(@project).reorder('discontent_comments.created_at').pluck('discontent_comments.id', 'date(discontent_comments.created_at)')
-      data_content = data_content.map { |d| d[1] }.group_by { |i| i }.map { |k, v| { x: (k.to_datetime.to_f * 1000).to_i, y: v.count } }
-      data_comment = data_comment.map { |d| d[1] }.group_by { |i| i }.map { |k, v| { x: (k.to_datetime.to_f * 1000).to_i, y: v.count } }
-      data_content = hash_base | data_content if data_content.size < 5
-      data_comment = hash_base | data_comment if data_comment.size < 5
-      data = [{ key: 'Несовершенства', values: data_content }, { key: 'Комментарии', values: data_comment }]
-    elsif params[:data_stage] == 'lifetape_analytics'
-      data_comment = @project.lifetape_comments.date_stage(@project).reorder('life_tape_comments.created_at').pluck('life_tape_comments.id', 'date(life_tape_comments.created_at)')
-      data_comment = data_comment.map { |d| d[1] }.group_by { |i| i }.map { |k, v| { x: (k.to_datetime.to_f * 1000).to_i, y: v.count } }
-      data_comment = hash_base | data_comment if data_comment.size < 5
-      data = [{ key: 'Комментарии', values: data_comment }]
-    end
-    render json: data
   end
 
   private
