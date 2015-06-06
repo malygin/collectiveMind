@@ -5,10 +5,10 @@
 
     = form_for @concept_post, url: {project: @project.id, action: @concept_post.persisted? ? 'update' : 'create'}, remote: true do |f|
       .content_window.white
-        %a.theme_font_color.with_arrow.collapsed.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs1"}
+        %a.theme_font_color.with_arrow.collapser_type1#open_fields{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs1"}
           %span.enter_lenght.bold Создать идею
           %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-        #imperfs1.collapse.rotate_arrow
+        #imperfs1.collapse.in.rotate_arrow
           .divider_1_grey
           .divider25
           %p
@@ -47,12 +47,12 @@
               = render partial: 'discontent', collection: @concept_post.concept_disposts
           .divider15
     .content_window.white
-      %a.theme_font_color.with_arrow.collapsed.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs2'}
+      %a.theme_font_color.with_arrow.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs2'}
         %span.enter_lenght.bold
           Привязать идею к несовершенству
           %span.unch_lenght
         %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-      #imperfs2.collapse.check_push_cont.rotate_arrow
+      #imperfs2.collapse.in.check_push_cont.rotate_arrow
         -#= render partial: 'discontent', collection: @discontent_posts
         .divider_1_grey
         %h6 Выберите несовершенства, которые устраняются вашей идеей
