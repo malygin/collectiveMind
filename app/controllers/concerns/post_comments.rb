@@ -11,8 +11,7 @@ module PostComments
 
   def add_score_for_comment
     @comment = comment_model.find(params[:id])
-    @comment.add_score if boss?
-    @main_comment = @comment.comment.id unless @comment.comment.nil?
+    @comment.add_score
     respond_to :js
   end
 

@@ -210,6 +210,7 @@ describe 'Collect info' do
 
     it_behaves_like 'admin panel post', true
 
+
     #   it_behaves_like 'welcome popup', 'collect_info'
     #
     #   it_behaves_like 'show list aspects'

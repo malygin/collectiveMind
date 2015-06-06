@@ -7,7 +7,7 @@ class PostsController < ProjectsController
   before_filter :check_type_mechanics, only: [:new, :edit, :user_content]
   before_filter :check_stage_for_cabinet, only: [:new, :edit, :user_content]
   before_filter :author_or_boss?, only: [:edit, :destroy, :to_archive, :publish]
-  before_filter :boss?, only: [:add_score, :change_status]
+  before_filter :boss?, only: [:add_score, :change_status, :add_score_for_comment]
 
   def current_model
     "#{self.class.name.deconstantize}::Post".constantize

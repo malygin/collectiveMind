@@ -260,6 +260,21 @@ shared_examples 'admin panel post' do |moderator = false|
       expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE )
     end
 
+    it ' score comment ', js: true do
+      stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
+
+      click_link "show_record_#{@post1.id}"
+      click_link "add_score_for_comment_#{@comment_1.id}"
+      visit  users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: 5 )
+      visit stage_post_path
+      click_link "show_record_#{@post1.id}"
+      click_link "add_score_for_comment_#{@comment_1.id}"
+      visit  users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: 0 )
+
+    end
+
     it ' approve post ', js: true do
       discuss_post_path = Rails.application.routes.url_helpers.send("change_status_#{post_model}_path", project, @post1, approve_status: true)
 

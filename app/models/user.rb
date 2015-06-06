@@ -62,6 +62,11 @@ class User < ActiveRecord::Base
 
   def add_score(h = {})
     case h[:type]
+      when :plus_comment
+        add_score_by_type(h[:project], 5, h[:type_score])
+        # journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
+      when :to_archive_plus_comment
+        add_score_by_type(h[:project], -5, h[:type_score])
       when :plus_post
         add_score_by_type(h[:project], h[:score], h[:type_score])
         journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!

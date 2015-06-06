@@ -44,7 +44,7 @@
         = '|'
       %span.dropdown
         %span.badge.grey.middle{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг'}
-          = current_user.score
+          = current_user.project_user_for(@project).try(:score)
         %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown','data-hover'=>'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
           %small
             = current_user
