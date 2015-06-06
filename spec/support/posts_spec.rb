@@ -262,14 +262,13 @@ shared_examples 'admin panel post' do |moderator = false|
 
     it ' score comment ', js: true do
       stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
-
-      click_link "show_record_#{@post1.id}"
-      click_link "add_score_for_comment_#{@comment_1.id}"
+      find(:css, "#show_record_#{@post1.id}").trigger('click')
+      find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
       visit  users_path(project)
       expect(page).to have_selector('span.rating_cell', text: 5 )
       visit stage_post_path
-      click_link "show_record_#{@post1.id}"
-      click_link "add_score_for_comment_#{@comment_1.id}"
+      find(:css, "#show_record_#{@post1.id}").trigger('click')
+      find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
       visit  users_path(project)
       expect(page).to have_selector('span.rating_cell', text: 0 )
 
