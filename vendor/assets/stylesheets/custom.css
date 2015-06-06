@@ -8170,3 +8170,35 @@ h5.media-heading > a:hover{
     background-position: -5px -62px;
 }
 
+.btn.arrow_left{
+    left: 20px;
+}
+
+.arrow_left:after, .arrow_left:before {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+}
+.arrow_left:after{
+    border-width: 17px;
+    margin-top: -17px;
+}
+.arrow_left:before{
+    border-width: 17px;
+    margin-top: -17px;
+}
+.arrow_left:active{
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.btn.arrow_left{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    -webkit-border-top-left-radius:0 !important;
+    -webkit-border-bottom-left-radius: 0 !important;
+}
