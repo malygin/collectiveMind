@@ -4038,7 +4038,6 @@ a.myCarousel-target {
 
 .modal_title h4 {
     margin: 0;
-    line-height: 1.6;
 }
 
 .modal_body {
@@ -8151,3 +8150,23 @@ h5.media-heading > a:hover{
 .font_light_grey{
     color:#C2C2C2;
 }
+
+.results {
+    background-image: image-url('results.png');
+    background-repeat: no-repeat;
+    display: block;
+    margin-top: -7px;
+}
+
+.results_red {
+    width: 113px;
+    height: 47px;
+    background-position: -5px -5px;
+}
+
+.results_blue {
+    width: 113px;
+    height: 46px;
+    background-position: -5px -62px;
+}
+
