@@ -18,8 +18,8 @@ class Core::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Core::Project.find(params[:id])
-    redirect_to polymorphic_path(@project.current_stage_type, project: @project)
+    @project = ProjectDecorator.new Core::Project.find(params[:id])
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project.id)
   end
 
   def new

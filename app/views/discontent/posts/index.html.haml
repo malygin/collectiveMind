@@ -22,11 +22,11 @@
             %span.vert_stripe.back2
             %span.vert_stripe.back3
           %span.text_label Все аспекты
-          - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
+          - new_posts = @project.discontents_for_discussion.after_last_visit_posts(last_time_visit_page('discontent')).size
           - if new_posts > 0
             %span.cb_doc
               = new_posts
-          - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
+          - new_comments = @project.discontents_for_discussion.after_last_visit_comments(last_time_visit_page('discontent')).size
           - if new_comments > 0
             %span.cb_com
               = new_comments
@@ -38,11 +38,11 @@
             %span.vert_stripe.back0
             %span.vert_stripe.back0
           %span.text_label Без аспекта
-          - new_posts = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
+          - new_posts = @project.discontents_for_discussion.after_last_visit_posts(last_time_visit_page('discontent')).size
           - if new_posts > 0
             %span.cb_doc
               = new_posts
-          - new_comments = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).count(' DISTINCT "discontent_comments"."id" ')
+          - new_comments = @project.discontents_for_discussion.after_last_visit_comments(last_time_visit_page('discontent')).count(' DISTINCT "discontent_comments"."id" ')
           - if new_comments > 0
             %span.cb_com
               = new_comments
@@ -51,25 +51,6 @@
 
         - aspect.core_aspects.each do |asp|
           = render partial: 'aspect', object: asp, locals: {level: 1}
-
-
-        -#%li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}}
-        -#  %input{:id => "ex2_2_#{index+2}",:name => "ex2_2", :type => "radio", :value => "#{index+2}"}/
-        -#  %label.checkox_item{:for => "ex2_2_#{index+2}"}
-        -#    %span
-        -#      %span.color_counter.color_me{style: "background-color: #{aspect.color};"}
-        -#        %span
-        -#          = aspect.aspect_posts.by_status_for_discontent(@project).count
-        -#    %span.text_label
-        -#      = aspect.content
-        -#    - new_posts = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
-        -#    - if new_posts > 0
-        -#      %span.cb_doc
-        -#        = new_posts
-        -#    - new_comments = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
-        -#    - if new_comments > 0
-        -#      %span.cb_com
-        -#        = new_comments
 
 .stage-info-sort-block
   .row
@@ -84,12 +65,12 @@
         %span.sort-label Сортировать по новым:
         %span#sorter
           %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
+            - new_comments = @project.discontents_for_discussion.after_last_visit_comments(last_time_visit_page('discontent')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
           %span#tooltip2_2.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
-            - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
+            - new_posts = @project.discontents_for_discussion.after_last_visit_posts(last_time_visit_page('discontent')).size
             - if new_posts > 0
               %span.badge-red
                 = new_posts

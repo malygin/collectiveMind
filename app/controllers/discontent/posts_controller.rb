@@ -26,11 +26,11 @@ class Discontent::PostsController < PostsController
       # @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.by_status_for_discontent(@project).created_order
       aspect = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join(''))
       subaspects = aspect.core_aspects.map { |asp, _| asp.id }
-      @posts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects }).by_status_for_discontent(@project).created_order
+      @posts = @project.discontents.by_aspect([aspect.id] + subaspects).created_order
     elsif params[:aspect] == '#'
-      @posts = @project.discontents_without_aspect.by_status_for_discontent(@project).created_order
+      @posts = @project.discontents_for_discussion.without_aspects.created_order
     else
-      @posts = @project.discontents.by_status_for_discontent(@project).created_order
+      @posts = @project.discontents_for_discussion.created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
 
@@ -89,7 +89,7 @@ class Discontent::PostsController < PostsController
 
   def set_aspects
     # @todo выбираем только аспекты первого уровня (без вложенности) и только основные (прошедшие голосование)
-    @aspects = @project.proc_main_aspects
+    @aspects = @project.main_aspects
   end
 
   def discontent_post_params

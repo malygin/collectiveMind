@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   protected
 
   def set_project
-    @project = Core::Project.find(params[:project])
+    @project = ProjectDecorator.new Core::Project.find(params[:project])
   end
 
   def journal_data

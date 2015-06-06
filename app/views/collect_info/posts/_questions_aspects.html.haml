@@ -4,7 +4,7 @@
     .col-md-7
       %span.stage-heading
         Аспекты
-        = "(#{@proc_aspects.size})"
+        = "(#{@main_aspects.size})"
     .col-md-5
       .sort-block.pull-right
         = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button tooltip1 big",'data-placement' => 'bottom','data-toggle' => 'tooltip','data-trigger'=>'manual', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
@@ -30,7 +30,7 @@
                   %a{id: "tab_intro", "data-toggle" => "tab", :href => "#tab_aspect_0"}
                     %span.c1-item-inner{style: "border-top-color: #eac85e;"}
                       Введение в процедуру
-            - @proc_aspects.each_with_index do |aspect, index|
+            - @main_aspects.each_with_index do |aspect, index|
               %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
                 .slider-item
                   .c1-item
@@ -47,7 +47,7 @@
                 .row
                   .col-md-8
                     -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
-        - @proc_aspects.each_with_index do |asp, index|
+        - @main_aspects.each_with_index do |asp, index|
           .tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}"}
             -if asp.missed_questions(current_user, @project.type_for_questions).size > 0
               .container

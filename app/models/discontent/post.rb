@@ -28,18 +28,8 @@ class Discontent::Post < ActiveRecord::Base
   scope :by_positive, ->(p) { where(style: 0, status: p) }
   scope :by_negative, ->(p) { where(style: 1, status: p) }
   scope :for_union, ->(project) { where('discontent_posts.status = 0 and discontent_posts.project_id = ? ', project) }
-
-  scope :by_status_for_discontent, lambda { |project|
-    if project.status == 4
-      where(status: [0, 1])
-    elsif project.status == 5 || project.status == 6
-      where(status: [2, 4])
-    elsif project.status > 6
-      where(status: [0, 1, 2, 4]) # вывод всех
-    else
-      where(status: 0)
-    end
-  }
+  scope :without_aspects,-> {includes(:discontent_post_aspects).where(discontent_post_aspects: { post_id: nil })}
+  scope :by_aspects,->(aspects) {joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: aspects })}
 
   pg_search_scope :autocomplete_whend,
                   against: [:whend],
