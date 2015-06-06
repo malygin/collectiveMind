@@ -14,7 +14,8 @@
   $.magnificPopup.open
     items: {src: el},
     type: 'inline',
-    fixedContentPos: false
+    fixedContentPos: false,
+    fixedBgPos:true
 
 #open magnific popup close
 @magnificPopupClose = (el)->

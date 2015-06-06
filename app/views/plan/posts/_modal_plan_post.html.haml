@@ -98,7 +98,7 @@
                     .separator_label.text-left
                       %h4 Обсуждение результатов опроса
                     .separator_label.pull-right
-                      %a{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
+                      %a.theme_font_color{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
                         %span.comments_action свернуть
                 .chat-messages#comments.collapse.in
                   = render partial:'shared/comment', collection: @comments
