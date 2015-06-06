@@ -3,6 +3,7 @@ class Concept::PostsController < PostsController
   include CloudinaryHelper
   before_action :set_concept_post, only: [:edit, :update, :destroy]
   before_action :set_discontent_posts, only: [:new, :edit]
+  before_action :set_aspect_posts, only: [:new, :edit]
 
   def voting_model
     Concept::Post
@@ -116,15 +117,21 @@ class Concept::PostsController < PostsController
     redirect_back_or user_content_concept_posts_path(@project)
   end
 
-  def add_dispost
-    @dispost = Discontent::Post.find(params[:dispost_id])
-    @remove_able = true
+  def add_disposts
+    return @disposts = current_user.discontent_posts if params[:aspect] == '*'
+    aspect = Core::Aspect::Post.find(params[:aspect])
+    subaspects = aspect.core_aspects.map { |asp, _| asp.id }
+    @disposts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects })
   end
 
   private
 
   def set_discontent_posts
     @discontent_posts = Discontent::Post.by_project(@project)
+  end
+
+  def set_aspect_posts
+    @aspects = @project.proc_main_aspects
   end
 
   def set_concept_post

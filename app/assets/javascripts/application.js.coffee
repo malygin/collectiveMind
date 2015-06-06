@@ -93,6 +93,8 @@ $ ->
 
   parse_my_journal_links()
 
+  check_and_push()
+
 
   $('.carousel').carousel
     interval: 4000,
@@ -288,5 +290,46 @@ $ ->
     $('.item_expandable').not($(this).parents()).removeClass 'opened'
     $(this).parents('.item_expandable').toggleClass 'opened'
     return
+
+# выбор несовершенств и идей в кабинете
+@check_and_push = ->
+  ch_its = $('.item', '.checked_items').length
+  unch_its = $('.item', '.unchecked_items').length
+  $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  $('.check_push_box').click ->
+    item = $(this).closest('.item').detach()
+    item_id = $(item).attr('data-id')
+    $('#discontents').find('.item[data-id=' + item_id + ']').remove()
+    $('#ideas').find('.item[data-id=' + item_id + ']').remove()
+    $('.checked_items').find('.item[data-id=' + item_id + ']').remove()
+    if $(this).is(':checked')
+      $('.checked_items').append item
+      ch_its++
+      unch_its--
+      $('.hideable_checks').show()
+      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+
+      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
+
+      if $('#for_hidden_fields').length > 0
+        $('#for_hidden_fields').append '<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>'
+        $('.selected_concepts').append '<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>'
+    else
+      $('.unchecked_items').append item
+      ch_its--
+      unch_its++
+      if ch_its == 0
+        $('.hideable_checks').hide()
+      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+
+      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
+
+      if $('#for_hidden_fields').length > 0
+        $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove()
+        $('.selected_concepts').find('p#selected_concept_' + item_id).remove()
+    return
+
 
 # @todo ниже ничего не добавлять!!! здесь только функции! для начальной инициализации блок выше!

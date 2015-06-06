@@ -3,6 +3,9 @@
 # guarantee  @project is available
 # guarantee secure project only for coorect users
 class ProjectsController < ApplicationController
+  include SessionsHelper
+  include ApplicationHelper
+  include MarkupHelper
   before_action :set_project
   before_filter :check_access_to_project
   before_filter :news_data
@@ -23,7 +26,7 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    return if  @project.users.include?(current_user) || boss?
+    return if @project.users.include?(current_user) || (current_user && current_user.boss?)
     redirect_to root_url
   end
 

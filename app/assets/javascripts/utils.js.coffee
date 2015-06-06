@@ -249,7 +249,16 @@
 
   $('.search_text').on('change', 'input#search_users_text', this.search_users)
 
-
+$('.add_disposts').on "click", (e) ->
+  project_id = $(this).data('project')
+  aspect_id = $(this).data('aspect')
+  if project_id and aspect_id
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/add_disposts"
+      type: "put"
+      dataType: "script"
+      data:
+        aspect: aspect_id
 
 
 # @todo обновление таблицы и списка
