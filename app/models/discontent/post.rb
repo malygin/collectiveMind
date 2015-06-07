@@ -20,7 +20,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :voted_users, through: :final_votings, source: :user
   # has_many :concept_votings, foreign_key: 'discontent_post_id', class_name: 'Concept::Voting'
 
-  validates :content, :whend, :whered, presence: true
+  validates :content,  presence: true
 
   default_scope { order :id }
   scope :by_project_and_not_anonym, ->(p) { where(project_id: p, anonym: false) }
