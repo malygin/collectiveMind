@@ -52,6 +52,12 @@ class Discontent::Post < ActiveRecord::Base
                     tsearch: { prefix: true }
                   }
 
+  pg_search_scope :search_discontent,
+                  against: [:content, :what, :whered, :whend],
+                  using: {
+                      tsearch: {prefix: true}
+                  }
+
   # привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
     discontent_post_aspects.destroy_all

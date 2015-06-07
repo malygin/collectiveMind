@@ -260,6 +260,16 @@ $('.add_disposts').on "click", (e) ->
       data:
         aspect: aspect_id
 
+$('#search_discontent').on "change", (e) ->
+  project_id = $(this).data('project')
+  val = this.value
+  if project_id and val
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/search_disposts"
+      type: "put"
+      dataType: "script"
+      data:
+        search_text: val
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->

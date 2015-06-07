@@ -89,14 +89,9 @@ CollectiveMind::Application.routes.draw do
     end
 
     put 'concept/posts/add_disposts', to: 'concept/posts#add_disposts'
+    put 'concept/posts/search_disposts', to: 'concept/posts#search_disposts'
     namespace :concept do
       posts_routes
-      # resources :posts do
-      #   collection do
-      #     put 'add_disposts' => 'posts#add_disposts'
-      #     # put :add_disposts, on: :collection
-      #   end
-      # end
     end
 
     namespace :novation do

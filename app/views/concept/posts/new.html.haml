@@ -60,7 +60,7 @@
           .col-md-5.cab_cont_h450
             .ps_cont
               .divider15
-              = text_field_tag 'search_discontent', nil, placeholder: 'Свободный поиск', class: 'form-control'
+              = text_field_tag 'search_discontent', nil, placeholder: 'Свободный поиск', class: 'form-control', 'data-project' => @project.id
               -#%textarea.form-control{:placeholder => "Свободный поиск", :rows => "1", :type => "text"}
               .divider15
               %ul.list-unstyled.subaspect

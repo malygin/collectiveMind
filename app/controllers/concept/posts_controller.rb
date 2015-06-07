@@ -124,6 +124,10 @@ class Concept::PostsController < PostsController
     @disposts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects })
   end
 
+  def search_disposts
+    @disposts = @project.discontents.search_discontent params[:search_text]
+  end
+
   private
 
   def set_discontent_posts
