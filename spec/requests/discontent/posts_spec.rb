@@ -119,7 +119,7 @@ describe 'Discontent' do
       expect(page).to have_link 'new_discontent_posts'
     end
 
-    context 'show popup aspect ', js: true do
+    context 'show popup discontent ', js: true do
       before do
         find(:css, "#show_record_#{@post1.id}").trigger('click')
       end
@@ -127,8 +127,8 @@ describe 'Discontent' do
       it 'have content', js: true do
         expect(page).to have_content @post1.content
         expect(page).to have_content @post1.what
-        expect(page).to have_content @post1.whend
-        expect(page).to have_content @post1.whered
+        # expect(page).to have_content @post1.whend
+        # expect(page).to have_content @post1.whered
         expect(page).to have_content @aspect1.content
       end
 

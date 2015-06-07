@@ -40,7 +40,7 @@ describe 'Cabinet Discontents' do
         fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
-        fill_in 'discontent_post_whend', with: 'because'
+        # fill_in 'discontent_post_whend', with: 'because'
         execute_script("$('#send_post').click()")
       end
 
@@ -74,7 +74,7 @@ describe 'Cabinet Discontents' do
         fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
-        fill_in 'discontent_post_whend', with: 'because'
+        # fill_in 'discontent_post_whend', with: 'because'
         click_button 'send_post'
         expect(page).to have_content t('form.discontent.new_success')
       }.to change(Discontent::Post, :count).by(1)
