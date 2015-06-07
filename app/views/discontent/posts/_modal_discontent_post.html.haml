@@ -67,12 +67,12 @@
                 %tr
                   %td.col-md-12.left-column
                     = @post.whered
-                %tr
-                  %td.col-md-12.left-column.bold
-                    = t('activerecord.attributes.discontent/post.whend')
-                %tr
-                  %td.col-md-12.left-column
-                    = @post.whend
+                -#%tr
+                -#  %td.col-md-12.left-column.bold
+                -#    = t('activerecord.attributes.discontent/post.whend')
+                -#%tr
+                -#  %td.col-md-12.left-column
+                -#    = @post.whend
               -if @post.notes.present?
                 .divider10
                 .index_block

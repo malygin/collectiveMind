@@ -21,19 +21,25 @@
               .vote_folder_inn.poll-2-2
                 %span.vote_counter
                   =@user_voter.voted_discontent_posts.by_status(1).count
-                %h5 Необходимо
+                %h5 Важно и срочно
           %li.col-md-3.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-3
                 %span.vote_counter
                   =@user_voter.voted_discontent_posts.by_status(2).count
-                %h5 Важно
+                %h5 Важно, но менее срочно
           %li.col-md-3.no_padding_col{:role => "presentation"}
-            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab4", :role => "tab"}
+            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "necessary", :href => "#vote_tab4", :role => "tab"}
               .vote_folder_inn.poll-2-4
                 %span.vote_counter
                   =@user_voter.voted_discontent_posts.by_status(3).count
-                %h5 Неважно
+                %h5 Срочно, но не очень важно
+          %li.col-md-3.no_padding_col{:role => "presentation"}
+            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab5", :role => "tab"}
+              .vote_folder_inn.poll-2-5
+                %span.vote_counter
+                  =@user_voter.voted_discontent_posts.by_status(4).count
+                %h5 Не важно и не срочно
       .divider25
       .container
         .row
@@ -57,10 +63,16 @@
                   - @user_voter.discontents_for_vote(@project, 2).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 2}
                 .divider50
-            #vote_tab4.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+            #vote_tab4.tab-pane{"data-vote-poll-role" => "necessary", :role => "tabpanel"}
               .container.padding30
                 .row
                   - @user_voter.discontents_for_vote(@project, 3).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 3}
+                .divider50
+            #vote_tab5.tab-pane{"data-vote-poll-role" => "unnecessary", :role => "tabpanel"}
+              .container.padding30
+                .row
+                  - @user_voter.discontents_for_vote(@project, 4).each do |post|
+                    = render partial: 'post_vote', object: post, locals: {status: 4}
                 .divider50
           .divider35

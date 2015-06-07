@@ -33,7 +33,7 @@
                             <tbody>
                             <tr class="what">
                                 <td class="col-md-12 left-column bold">
-                                    <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/discontent/posts/<%= id %>">
+                                    <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/discontent/posts/<%= id %>?last_time_visit=<%=last_time_visit%>>)">
                                         <%= content %>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-3 col_padding_left_3">
                         <div class="text-right small_icons">
-                            <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
+                            <span class="popup2 comments_icon <%= active_comments ? 'active' : '' %>" data-for="post_ch<%= id %>">
                               <small class="cc_post_<%= id %>">
                                 <%= count_comments %>
                               </small>

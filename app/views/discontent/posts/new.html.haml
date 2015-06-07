@@ -48,10 +48,10 @@
         %p
           = t('activerecord.attributes.discontent/post.whered')
         = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
-        .divider15
-        %p
-          = t('activerecord.attributes.discontent/post.whend')
-        = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
+        -#.divider15
+        -#%p
+        -#  = t('activerecord.attributes.discontent/post.whend')
+        -#= f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
         .divider25
         .row
           .col-md-12.text-right
@@ -72,22 +72,22 @@
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.content')
         %p
-          Нет понятного потребителю описания, что за продукт у нас есть, зачем и кому он нужен
+          В базе данных есть только выпускники и нет потенциальных клиентов
         .divider15
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.what')
         %p
-          При определении целевой аудитории и проведении переговоров
+          Не  организован систематический поиск новых контактов из доступных источников
         .divider15
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.whered')
         %p
-          От понимания анализа практического применения МД в тестовых процедурах
-        .divider15
-        %p.font_dark_grey
-          = t('activerecord.attributes.discontent/post.whend')
-        %p
-          Дистрибьюторов и Продавцов
+          Менеджеры по продажам вынуждены тратить основное время не на взаимодействие с потенциальными клиентами (продажу), а на поиск источников информации и её обработку
+        -#.divider15
+        -#%p.font_dark_grey
+        -#  = t('activerecord.attributes.discontent/post.whend')
+        -#%p
+        -#  Дистрибьюторов и Продавцов
         .divider20
         .divider15
 

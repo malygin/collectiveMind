@@ -13,7 +13,7 @@
         %span.vert_stripe.back2
         %span.vert_stripe.back3
       %span.text_label Все аспекты
-    %ul.dropdown-menu.index-of-aspects#filter
+    %ul.dropdown-menu.index-of-aspects#filter{data: {visit: last_time_visit_page('discontent')}}
       %li{data: {aspect: "*"}}
         %input#ex2_2_0{:name => "ex2_2", :type => "radio", :value => "0"}/
         %label.checkox_item{:for => "ex2_2_0"}

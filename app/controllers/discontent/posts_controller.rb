@@ -33,7 +33,7 @@ class Discontent::PostsController < PostsController
       @posts = @project.discontents.by_status_for_discontent(@project).created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
-
+    @last_time_visit = params[:last_time_visit]
     respond_to :html, :json
   end
 

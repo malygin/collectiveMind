@@ -60,7 +60,7 @@ DiscontentCollectionView = Backbone.View.extend
 
     dc.fetch
       # data: $.param({aspect: $(this).data('aspect')})
-      data: $.param({aspect: $(this).find('input:checked').parent().data('aspect')})
+      data: $.param({aspect: $(this).find('input:checked').parent().data('aspect'), last_time_visit: $('#filter').data('visit')})
       success: (col,res)->
         $('#count_discontents').html('(' + dc.length + ')')
         $('#tab_aspect_posts').isotope('updateSortData').isotope()
@@ -79,6 +79,7 @@ DiscontentCollectionView = Backbone.View.extend
 if window.location.href.indexOf("discontent/posts") > -1 and window.location.href.indexOf("discontent/posts/") == -1
   dc = new DiscontentCollection
   dc.fetch
+    data: $.param({last_time_visit: $('#filter').data('visit')})
     success: (col,res)->
       dv = new DiscontentCollectionView({collection: dc})
       dv.render()
