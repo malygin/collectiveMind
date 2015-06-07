@@ -2,7 +2,7 @@
   .media-body
     %span.comment_interf
       %span.date_time{class: "font_color_stage#{number_current_stage || num_stage}"}
-        =Russian::strftime(cabinet_comment.created_at,'%k:%M')
+        =Russian::strftime(cabinet_comment.created_at,'%k:%M %d.%m.%Y')
       - if current_user?(cabinet_comment.user) and can_edit_content?
         %span.dropdown.edit_comment{id: "redactor_comment_#{cabinet_comment.id}"}
           %button.btn_reset{id: "edit_comment#{cabinet_comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
