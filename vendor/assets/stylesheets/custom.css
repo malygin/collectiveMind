@@ -8078,11 +8078,9 @@ h4 i img{
 }
 .aspect-section{
     background: #f9f9f9;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 .aspect-main-block .row {
-    padding: 0px 25px 20px;
+    padding: 20px 25px;
 }
 
 .noLink {
@@ -8201,4 +8199,15 @@ h5.media-heading > a:hover{
     border-bottom-left-radius: 0 !important;
     -webkit-border-top-left-radius:0 !important;
     -webkit-border-bottom-left-radius: 0 !important;
+}
+.lilac_border{
+    border-top-color:#d0a9cd;
+}
+.lilac_back{
+    background: #d0a9cd;
+    color:white;
+}
+
+.font_color_d_blue{
+    color: #3776a5;
 }
