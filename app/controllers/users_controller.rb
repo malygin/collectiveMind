@@ -4,7 +4,7 @@ class UsersController < ProjectsController
   before_filter :journal_data, only: [:index, :new, :show,  :journal_clear, :edit_notice]
 
   def index
-    @users = @project.users_in_project.where(users: { type_user: 0 })
+    @users = @project.users_in_project.where(users: { type_user: 0 }).order('core_project_users.score desc')
   end
 
   def new
