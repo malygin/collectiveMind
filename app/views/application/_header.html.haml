@@ -32,19 +32,19 @@
         = render partial: 'application/expert_news', locals: {expert_news: @expert_news, project: @project}
       %span.auth-divider
         = '|'
-      %span.dropdown
-        %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
-          %i.fa.fa-globe.font_lighter_grey
-          %small
-            Русский
-            %i.fa.fa-angle-down
-        %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
-          %li
-            %a{href: '#'} English
-          %li
-            %a{href: '#'} Русский
-      %span.auth-divider
-        = '|'
+      -#%span.dropdown
+      -#  %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+      -#    %i.fa.fa-globe.font_lighter_grey
+      -#    %small
+      -#      Русский
+      -#      %i.fa.fa-angle-down
+      -#  %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
+      -#    %li
+      -#      %a{href: '#'} English
+      -#    %li
+      -#      %a{href: '#'} Русский
+      -#%span.auth-divider
+      -#  = '|'
       %span.dropdown
         %span.badge.grey.middle{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг'}
           = current_user.project_user_for(@project).try(:score)
