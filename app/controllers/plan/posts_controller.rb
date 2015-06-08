@@ -15,6 +15,7 @@ class Plan::PostsController < PostsController
 
   def index
     @posts = @project.plan_post.where(status: 1).created_order
+    @project_result = ProjectDecorator.new @project unless @project.stage == '5:0'
     # @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC')
     # post = Plan::Post.where(project_id: @project, status: 0).first
     # @est_stat = post.estimate_status if post

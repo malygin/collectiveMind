@@ -2,7 +2,8 @@
   = render partial: 'popup_welcome'
 - if @user_voter
   = render partial: 'popup_vote'
-
+- if @project_result
+  = render partial: 'popup_results'
 .stage-info-sort-block
   .row
     %br/
@@ -12,6 +13,16 @@
         %span#count_novations
           ="(#{@posts.count})"
     .col-md-5
+      .pull-right
+        - if @project.stage == '4:0'
+          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_posts' do
+            %button.btn.add-button
+              %span
+                = t('techniques.novation_posts_simple')
+        - else
+          = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
+            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}"}
+
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
@@ -25,12 +36,6 @@
             - if new_posts > 0
               %span.badge-red
                 = new_posts
-
-        - if @project.stage == '4:0'
-          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_posts' do
-            %button.btn.add-button
-              %span
-                = t('techniques.novation_posts_simple')
 
 
 .stage-post-block

@@ -23,6 +23,8 @@ class Core::Project < ActiveRecord::Base
   has_many :concept_for_admin_post, -> { where status: 1 }, class_name: 'Concept::Post'
 
   has_many :novations, class_name: 'Novation::Post'
+  has_many :novation_ongoing_post, -> { where status: 0 }, class_name: 'Novation::Post'
+  has_many :novation_published_post, -> { where status: 1 }, class_name: 'Novation::Post'
   has_many :novations_for_vote, -> { where status: [1, 2] }, class_name: 'Novation::Post'
 
   has_many :plan_post, class_name: 'Plan::Post'

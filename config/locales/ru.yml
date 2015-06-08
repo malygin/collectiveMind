@@ -86,6 +86,18 @@ ru:
     concept_posts: Идея
     novation_posts: Пакет
     plan_posts: Проектное предложение
+  my_result:
+    collect_info_posts: аспекты
+    discontent_posts: несовершенства
+    concept_posts: идеи
+    novation_posts: пакеты идей
+    plan_posts: проектные предложения
+  my_result_add:
+    collect_info_posts: АСПЕКТОВ
+    discontent_posts: НЕСОВЕРШЕНСТВ
+    concept_posts: ИДЕЙ
+    novation_posts: ПАКЕТОВ ИДЕЙ
+    plan_posts: ПРОЕКТНЫХ ПРЕДЛОЖЕНИЙ
   news:
     body: "Полный текст"
     title: "Анонс"

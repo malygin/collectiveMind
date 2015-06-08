@@ -149,6 +149,10 @@ class PostsController < ProjectsController
     respond_to :js
   end
 
+  def show_results
+    current_user.user_checks.where(project_id: @project.id, check_field: 'results_' + self.class.to_s.gsub('::', '_').gsub('Controller', '').underscore, status: true).first_or_create
+  end
+
   private
 
   def check_stage_for_cabinet

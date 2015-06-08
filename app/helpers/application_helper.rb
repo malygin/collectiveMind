@@ -51,6 +51,10 @@ module ApplicationHelper
     current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
   end
 
+  def show_results?(check_field)
+    current_user.user_checks.check_field(@project, check_field).present?
+  end
+
   # Показывать ли стикер в кабинете?
   def show_sticker?(check_field)
     current_user.user_checks.check_field(@project, check_field).present?

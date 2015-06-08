@@ -4,6 +4,9 @@
 - if @user_voter
   = render partial: 'popup_vote'
 
+- if @project_result
+  = render partial: 'popup_results'
+
 .stage-info-sort-block
   #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
     %span Фильтр аспектов:
@@ -80,6 +83,16 @@
         %span#count_discontents
           ="(#{@posts.count})"
     .col-md-5
+      .pull-right
+        - if @project.stage=='2:0'
+          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
+            %button.btn.add-button
+              %span
+                = t('techniques.discontent_posts_simple')
+        - else
+          = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
+            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}"}
+
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
@@ -93,12 +106,6 @@
             - if new_posts > 0
               %span.badge-red
                 = new_posts
-
-        - if @project.stage=='2:0'
-          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
-            %button.btn.add-button
-              %span
-                = t('techniques.discontent_posts_simple')
 
 .stage-post-block
   .row#tab_aspect_posts

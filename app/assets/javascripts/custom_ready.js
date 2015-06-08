@@ -478,6 +478,15 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
+    /* popup digest btn */
+    $(".btn_dia").click(function () {
+        if ($(this).text() == 'Подробнее')
+            $(this).html($(this).find('i')).append('Свернуть');
+        else $(this).html($(this).find('i')).append('Подробнее');
+        $('.dia_icon').toggleClass('active');
+        $('.dia_legend').toggleClass('active');
+    });
+
 
     /* cabinet columns */
     //$('.exp_button').click(function(){

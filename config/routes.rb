@@ -20,6 +20,7 @@ CollectiveMind::Application.routes.draw do
     resources :posts, controller: controller_name do
       get :user_content, on: :collection
       put :check_field, on: :collection
+      get :show_results, on: :collection
 
       member do
         put :to_archive

@@ -10,8 +10,8 @@
             %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
               = t('techniques.aspect_posts_simple')
         - else
-          -#%a{'href'=>'#'}
-          -#  .results.results_red
+          = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
+            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}"}
             //если прочитали то  .results.results_blue
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
