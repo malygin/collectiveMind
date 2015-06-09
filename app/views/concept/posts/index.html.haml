@@ -21,17 +21,17 @@
                 = t('techniques.concept_posts_simple')
         - else
           = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
-            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}"}
+            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'},'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
             - new_comments = @project.concept_ongoing_post.after_last_visit_comments(last_time_visit_page('concept')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
-          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
+          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым идеям"}
             - new_posts = @project.concept_ongoing_post.after_last_visit_posts(last_time_visit_page('concept')).size
             - if new_posts > 0
               %span.badge-red
