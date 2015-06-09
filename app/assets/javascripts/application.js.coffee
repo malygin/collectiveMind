@@ -95,6 +95,9 @@ $ ->
 
   check_and_push()
 
+  $('.with_arrow').click ->
+    $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
+    return
 
   $('.carousel').carousel
     interval: 4000,
