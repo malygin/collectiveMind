@@ -24,18 +24,12 @@
           %i.fa.fa-caret-right.font_lighter_grey
         .slider-outer
           %ul.slider-inner.list-unstyled#first-stage-slider{data: {project: @project.id} }
-            -#%li.active
-            -#  .slider-item
-            -#    .c1-item
-            -#      %a{id: "tab_intro", "data-toggle" => "tab", :href => "#tab_aspect_0"}
-            -#        %span.c1-item-inner{style: "border-top-color: #eac85e;"}
-            -#          Введение в процедуру
             %li.active
               .slider-item
                 .c1-item
                   %a{id: "tab_intro", "data-toggle" => "tab", :href => "#tab_aspect_0"}
-                    %span.c1-item-inner.lilac_border
-                      Организация работы по продажам коротких курсов
+                    %span.c1-item-inner{style: "border-top-color: #eac85e;"}
+                      Введение в процедуру
             - @proc_aspects.each_with_index do |aspect, index|
               %li.li_aspect{id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}"}
                 .slider-item
@@ -44,15 +38,15 @@
                       %span.c1-item-inner{style: "border-top-color: #{aspect.color};"}
                         =aspect.content
 
-
-        -#.tab-pane.main-pane.active.fade.in{id: "tab_aspect_0"}
-        -#  .row
-        -#    .col-md-12.col-sm-12
-        -#      .aspect-main-block{style: "border-top-color:#eac85e;"}
-        -#        = @project.introduction.html_safe if @project.introduction
-        -#        .row
-        -#          .col-md-8
-                    -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
+      .tab-content
+        .tab-pane.main-pane.active.fade.in{id: "tab_aspect_0"}
+          .row
+            .col-md-12.col-sm-12
+              .aspect-main-block{style: "border-top-color:#eac85e;"}
+                = @project.introduction.html_safe if @project.introduction
+                .row
+                  .col-md-8
+        -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
         - @proc_aspects.each_with_index do |asp, index|
           .tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}"}
             -if asp.missed_questions(current_user, @project.type_for_questions).size > 0
