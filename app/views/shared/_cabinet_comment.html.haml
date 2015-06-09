@@ -20,7 +20,7 @@
         %span.badge.badge_important{class: "back_color_stage#{number_current_stage || num_stage}"}= t('show.important')
       %span{id: "cancel_comment_#{cabinet_comment.id}"}
 
-  %a.font_grey.comment_text{id: "comment_text_#{cabinet_comment.id}", href:"/project/#{@project.id}/#{cabinet_comment.post.class.name.underscore.pluralize}?jr_post=#{cabinet_comment.post.id}&jr_comment=#{cabinet_comment.id}#comment#{cabinet_comment.id}"}
+  %a.font_grey.comment_text{id: "comment_text_#{cabinet_comment.id}", href:"/project/#{@project.id}/#{cabinet_comment.post.class_name_for_url}?jr_post=#{cabinet_comment.post.id}&jr_comment=#{cabinet_comment.id}#comment#{cabinet_comment.id}"}
     = cabinet_comment.content
   .post-interfaces-buttons.text-left
     %button.rate_button{"data-for" => "comment#{cabinet_comment.id}", "data-rate-action" => "like", :type => "button"}

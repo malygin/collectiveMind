@@ -30,29 +30,31 @@
       .dia_block
         .row
           .col-md-4
-          .col-md-4
-            - @project_result.sort_user_score(name_controller.to_s+'_score').each_with_index do |user, index|
-              .dia_cell
-                %span.num_cell
-                  = index+1
-                %span
-                  = link_to user_path(@project, user) do
-                    = user_image_tag user.try(:avatar), class: 'img35 img-circle'
-                %span
-                  %p
-                    = link_to user, user_path(@project, user)
-                  %span.dia_icon
-                    = user.content_for_project(name_controller, @project_result).count
-                    %i.fa.fa-file-text
-                  %span.dia_icon
-                    = user.comment_for_project(name_controller, @project_result).count
-                    %i.fa.fa-comment
-                  %span.dia_icon
-                    = user.like_content_for(name_controller, @project_result).count + user.like_comment_for(name_controller, @project_result).count
-                    %i.fa.fa-thumbs-up
-                  %span.dia_icon
-                    = user.approve_content_for(name_controller, @project_result).count + user.approve_comment_for(name_controller, @project_result).count
-                    %i.fa.fa-star
+          .col-md-8
+            .row
+              - @project_result.sort_user_score(name_controller.to_s+'_score').each_with_index do |user, index|
+                .col-md-6
+                  .dia_cell
+                    %span.num_cell
+                      = index+1
+                    %span
+                      = link_to user_path(@project, user) do
+                        = user_image_tag user.try(:avatar), class: 'img35 img-circle'
+                    %span
+                      %p
+                        = link_to user, user_path(@project, user)
+                      %span.dia_icon
+                        = user.content_for_project(name_controller, @project_result).count
+                        %i.fa.fa-file-text
+                      %span.dia_icon
+                        = user.comment_for_project(name_controller, @project_result).count
+                        %i.fa.fa-comment
+                      %span.dia_icon
+                        = user.like_content_for(name_controller, @project_result).count + user.like_comment_for(name_controller, @project_result).count
+                        %i.fa.fa-thumbs-up
+                      %span.dia_icon
+                        = user.approve_content_for(name_controller, @project_result).count + user.approve_comment_for(name_controller, @project_result).count
+                        %i.fa.fa-star
 
 
       .row.modal_subhead

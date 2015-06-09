@@ -86,6 +86,14 @@ module BasePost
       self.class.name.deconstantize
     end
 
+    def class_name_for_url
+      cn = self.class.name.underscore.pluralize
+      if cn == 'core/aspect/posts'
+        return 'collect_info/posts'
+      end
+      cn
+    end
+
     def current_class?(stage)
       case stage
         when :collect_info, 'collect_info'
