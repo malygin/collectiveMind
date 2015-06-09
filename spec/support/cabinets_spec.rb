@@ -37,6 +37,11 @@ shared_examples 'base cabinet' do
       refresh_page
       expect(page).not_to have_content t("cabinet.#{stage_name}_sticker")
     end
+
+    xit 'have correct user content with correct link' do
+
+    end
+
   end
 
   context 'stages navbar' do

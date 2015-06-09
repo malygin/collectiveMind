@@ -156,6 +156,14 @@ describe 'Discontent' do
     context 'vote content', js: true do
       it_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
     end
+    it 'can see stage result for previous stage ', js: true do
+      visit collect_info_posts_path(project)
+      click_link 'collect_info_intro'
+      click_link 'show_results'
+      expect(page).to have_content 'Результаты стадии 1'
+
+
+    end
   end
 
   context 'moderator sign in ' do
