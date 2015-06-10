@@ -55,7 +55,7 @@ class Discontent::Post < ActiveRecord::Base
   pg_search_scope :search_discontent,
                   against: [:content, :what, :whered, :whend],
                   using: {
-                      tsearch: {prefix: true}
+                    tsearch: { prefix: true }
                   }
 
   # привязка аспектов к несовершенству

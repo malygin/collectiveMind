@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
 
   def comment_for_project(stage, project)
     if stage == :collect_info_posts
-      core_aspect_comments.joins(:post).where("core_aspect_posts.project_id = ?", project)
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project)
     else
       send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project)
     end
@@ -148,17 +148,17 @@ class User < ActiveRecord::Base
 
   def like_content_for(stage, project)
     if stage == :collect_info_posts
-      voting_core_aspect_posts.joins(:post).where("core_aspect_posts.project_id = ?", project)
+      voting_core_aspect_posts.joins(:post).where('core_aspect_posts.project_id = ?', project)
     else
-      send('voting_'+stage.to_s).joins(:post).where("#{stage}.project_id = ?", project)
+      send('voting_' + stage.to_s).joins(:post).where("#{stage}.project_id = ?", project)
     end
   end
 
   def like_comment_for(stage, project)
     if stage == :collect_info_posts
-      voting_core_aspect_comments.joins(:comment).joins("INNER JOIN core_aspect_posts ON core_aspect_posts.id = core_aspect_comments.post_id").where("core_aspect_posts.project_id = ?", project)
+      voting_core_aspect_comments.joins(:comment).joins('INNER JOIN core_aspect_posts ON core_aspect_posts.id = core_aspect_comments.post_id').where('core_aspect_posts.project_id = ?', project)
     else
-      send('voting_'+stage.to_s.gsub('_posts', '_comments')).joins(:comment).joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
+      send('voting_' + stage.to_s.gsub('_posts', '_comments')).joins(:comment).joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
     end
   end
 
@@ -172,7 +172,7 @@ class User < ActiveRecord::Base
 
   def approve_comment_for(stage, project)
     if stage == :collect_info_posts
-      core_aspect_comments.joins(:post).where("core_aspect_posts.project_id = ?", project).where(approve_status: true)
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project).where(approve_status: true)
     else
       send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).where(approve_status: true)
     end
@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
 
   def likes_comments_for(stage, project)
     if stage == :collect_info_posts
-      core_aspect_comments.joins(:post).where("core_aspect_posts.project_id = ?", project).joins(:comment_votings)
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project).joins(:comment_votings)
     else
       send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).joins(:comment_votings)
     end

@@ -88,9 +88,7 @@ module BasePost
 
     def class_name_for_url
       cn = self.class.name.underscore.pluralize
-      if cn == 'core/aspect/posts'
-        return 'collect_info/posts'
-      end
+      return 'collect_info/posts' if cn == 'core/aspect/posts'
       cn
     end
 
