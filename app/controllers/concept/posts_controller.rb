@@ -27,9 +27,9 @@ class Concept::PostsController < PostsController
         params[:discontent].delete('#')
         params[:discontent] += [nil]
       end
-      @posts = @project.concept_for_vote.includes(:concept_post_discontents).where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
+      @posts = @project.concepts_for_vote.includes(:concept_post_discontents).where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
     else
-      @posts = @project.concept_for_vote.created_order
+      @posts = @project.concepts_for_vote.created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:concept, @project)
 
@@ -72,7 +72,7 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save
-        current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
+        current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project.project).save!
         format.js
       else
         format.js
@@ -103,7 +103,7 @@ class Concept::PostsController < PostsController
 
     respond_to do |format|
       if @concept_post.save
-        current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project).save!
+        current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project.project).save!
         format.js
       else
         format.js

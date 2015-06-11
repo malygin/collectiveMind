@@ -9,13 +9,13 @@ class Core::Project < ActiveRecord::Base
   has_many :other_aspects, -> { where(core_aspect_id: nil, status: 1) }, class_name: 'Core::Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
-  has_many :discontents_for_discussion, -> { where status: [0,1] }, class_name: 'Discontent::Post'
-  has_many :discontents_for_vote, -> { where status: [0,1] }, class_name: 'Discontent::Post'
+  has_many :discontents_for_discussion, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
+  has_many :discontents_for_vote, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
   has_many :discontents_approved, -> { where status: 2 }, class_name: 'Discontent::Post'
 
   has_many :concepts, class_name: 'Concept::Post'
-  has_many :concepts_for_discussion, -> { where status: [0,1] }, class_name: 'Concept::Post'
-  has_many :concepts_for_vote, -> { where status: [0,1] }, class_name: 'Concept::Post'
+  has_many :concepts_for_discussion, -> { where status: [0, 1] }, class_name: 'Concept::Post'
+  has_many :concepts_for_vote, -> { where status: [0, 1] }, class_name: 'Concept::Post'
 
   has_many :novations, class_name: 'Novation::Post'
   has_many :novations_for_discussion, -> { where status: 1 }, class_name: 'Novation::Post'
@@ -114,5 +114,4 @@ class Core::Project < ActiveRecord::Base
   def stages
     STAGES
   end
-
 end

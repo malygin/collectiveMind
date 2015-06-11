@@ -16,8 +16,8 @@ describe 'Completion proc ' do
 
     @novation1 = create :novation, user: user, project: project
 
-    @plan1 = create :plan, user: user, project: project, completion_status: true
-    @plan2 = create :plan, user: user, project: project, completion_status: true
+    @plan1 = create :plan, user: user, project: project, status: 2
+    @plan2 = create :plan, user: user, project: project, status: 2
 
     create :plan_novation, plan_post: @plan1, novation_post: @novation1
     create :plan_novation, plan_post: @plan2, novation_post: @novation1

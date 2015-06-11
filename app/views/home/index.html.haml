@@ -21,7 +21,7 @@
             %h4
               %i
                 = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users_in_project.count )
+              =I18n.t("project_users_count",count: project.users.count )
 
           .col-md-3.col-sm-3.text-center
             .divider5
@@ -49,7 +49,7 @@
             %h4
               %i
                 = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users_in_project.count )
+              =I18n.t("project_users_count",count: project.users.count )
           .col-md-3.col-sm-3.text-center
             .divider5
             = link_to current_stage_url(project), class:'btn btn-arrow-red btn-danger', id: "go_to_opened_project_#{project.id}" do

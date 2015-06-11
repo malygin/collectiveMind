@@ -58,7 +58,7 @@ class Discontent::PostsController < PostsController
       end
     end
     if @post.save
-      current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project)
+      current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project.project)
     end
     respond_to do |format|
       format.js
@@ -69,7 +69,7 @@ class Discontent::PostsController < PostsController
     if params[:discontent_post_aspects]
       @post.update_attributes(discontent_post_params)
       @post.update_post_aspects(params[:discontent_post_aspects])
-      current_user.journals.create!(type_event: "#{name_of_model_for_param}_update", anonym: @post.anonym, project: @project, body: trim_content(@post.content), first_id: @post.id)
+      current_user.journals.create!(type_event: "#{name_of_model_for_param}_update", anonym: @post.anonym, project: @project.project, body: trim_content(@post.content), first_id: @post.id)
     end
     respond_to do |format|
       format.js

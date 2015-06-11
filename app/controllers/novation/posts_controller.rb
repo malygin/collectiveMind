@@ -26,7 +26,7 @@ class Novation::PostsController < PostsController
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
     if @novation.save
-      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project).save!
+      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project.project).save!
     end
     @novation.fullness = @novation.update_fullness
     if params[:novation_post][:published]
@@ -77,7 +77,7 @@ class Novation::PostsController < PostsController
     # end
     # @concepts.flatten!.uniq!
     @discontents = @project.discontents
-    @concepts = @project.concept_ongoing_post
+    @concepts = @project.concepts_for_discussion
   end
 
   def novation_params

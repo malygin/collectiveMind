@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Cabinet Concepts' do
   subject { page }
-  let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
+  let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
     create_project_and_user_for '3:0'

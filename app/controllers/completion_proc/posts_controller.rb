@@ -8,7 +8,7 @@ class CompletionProc::PostsController < PostsController
   end
 
   def index
-    @posts = @project.completion_plan_posts
+    @posts = @project.plans_approved
   end
 
   def show

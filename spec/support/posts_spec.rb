@@ -317,8 +317,8 @@ shared_examples 'vote popup' do |status, title, stage|
   before do
     project.update_attributes(stage: status)
     if status == '2:1'
-      @post1.update_attributes(status: 2)
-      @post2.update_attributes(status: 2)
+      # @post1.update_attributes(status: 2)
+      # @post2.update_attributes(status: 2)
     end
     stage_path = Rails.application.routes.url_helpers.send("#{stage}_posts_path", project)
     visit stage_path
@@ -344,9 +344,9 @@ shared_examples 'vote popup' do |status, title, stage|
     within :css, ".poll-2-1 span.vote_counter" do
       expect(page).to have_content '0'
     end
-    within :css, ".poll-2-4 span.vote_counter" do
-      expect(page).to have_content '1'
-    end
+    # within :css, ".poll-2-4 span.vote_counter" do
+    #   expect(page).to have_content '1'
+    # end
   end
 end
 

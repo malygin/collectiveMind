@@ -1,10 +1,10 @@
 shared_examples 'base cabinet' do
   # такая штука нужна потому что стадия называется collect_info, а контроллер нужен - aspect
-  let(:stage_name) { @project.current_stage_type.to_s == 'collect_info_posts' ? 'aspect_posts' : @project.current_stage_type.to_s }
+  let(:stage_name) { @current_stage_type == 'collect_info_posts' ? 'aspect_posts' : @current_stage_type }
 
   context 'from procedure to cabinet' do
     before do
-      visit Rails.application.routes.url_helpers.send("#{@project.current_stage_type.to_s}_path", @project)
+      visit Rails.application.routes.url_helpers.send("#{@current_stage_type}_path", @project)
     end
 
     it 'correct link from header' do
@@ -30,7 +30,7 @@ shared_examples 'base cabinet' do
     end
 
     it 'close sticker' do
-      expect(page).to have_content t("cabinet.#{@project.current_stage_type.to_s}_sticker")[0..130]
+      expect(page).to have_content t("cabinet.#{@current_stage_type}_sticker")[0..130]
       expect {
           click_link 'cabinet_close_sticker'
       }.to change(UserCheck, :count).by(1)
@@ -41,12 +41,12 @@ shared_examples 'base cabinet' do
 
   context 'stages navbar' do
     it 'have stages navbar', js: true do
-      user_content_path = Rails.application.routes.url_helpers.send("user_content_#{@project.current_stage_type.to_s}_path", @project)
+      user_content_path = Rails.application.routes.url_helpers.send("user_content_#{@current_stage_type}_path", @project)
       visit user_content_path
-      expect(page).to have_link("go_to_user_content_#{@project.current_stage_type}", href: user_content_path)
+      expect(page).to have_link("go_to_user_content_#{@current_stage_type}", href: user_content_path)
       Core::Project::STAGES.each do |num_stage, stage|
         if num_stage <= 5
-          if @project.main_stage >= num_stage
+          if @main_stage >= num_stage
             user_content_path = Rails.application.routes.url_helpers.send("user_content_#{stage[:type_stage]}_path", @project)
             expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: user_content_path)
           else
@@ -60,6 +60,10 @@ end
 
 def create_project_and_user_for(stage)
   @project = create :core_project, stage: stage
+  pd = ProjectDecorator.new(@project)
+  @current_stage_type_for_cabinet_url = pd.current_stage_type_for_cabinet_url
+  @current_stage_type = pd.current_stage_type.to_s
+  @main_stage = pd.main_stage
   core_project_user = create :core_project_user, core_project: @project
   @user = core_project_user.user
 end

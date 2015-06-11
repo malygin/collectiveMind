@@ -14,7 +14,7 @@ class Plan::PostsController < PostsController
   end
 
   def index
-    @posts = @project.plan_post.where(status: 1).created_order
+    @posts = @project.plans.where(status: 1).created_order
     # @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC')
     # post = Plan::Post.where(project_id: @project, status: 0).first
     # @est_stat = post.estimate_status if post
@@ -32,10 +32,10 @@ class Plan::PostsController < PostsController
   end
 
   def create
-    @post = @project.plan_post.new plan_post_params.merge(user_id: current_user.id)
+    @post = @project.plans.new plan_post_params.merge(user_id: current_user.id)
     @post.post_novations.new plan_post_novation_params
     if @post.valid? && @post.save
-      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project)
+      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project.project)
     end
 
     @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
@@ -47,7 +47,7 @@ class Plan::PostsController < PostsController
 
   def update
     if @post.update_attributes plan_post_params
-      current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project).save!
+      current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project.project).save!
     end
     if params[:plan_post][:published]
       @post.update status: current_model::STATUSES[:published]

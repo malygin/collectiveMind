@@ -19,7 +19,7 @@
               %span.badge-red
                 = new_posts
         - if @project.stage == '1:0' or @project.stage == '1:1'
-          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
+          = link_to new_aspect_post_path(@project.id, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
             %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
               = t('techniques.aspect_posts_simple')
 .divider10
@@ -30,11 +30,11 @@
     .col-md-6
       %span.stage-heading
         Аспекты из базы знаний
-        ="(#{@project.proc_main_aspects.size})"
+        ="(#{@project.main_aspects.size})"
     .col-md-6
       %span.stage-heading
         Аспекты, предложенные участниками
-        ="(#{@project.other_main_aspects.size})"
+        ="(#{@project.other_aspects.size})"
   .row
     .col-md-6.combined_border.right.tooltip1.big{ 'data-toggle'=>"tooltip",'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их"}
       -@main_aspects.each do |aspect|

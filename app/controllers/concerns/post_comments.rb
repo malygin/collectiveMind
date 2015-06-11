@@ -5,7 +5,7 @@ module PostComments
     @comment = comment_model.find(params[:id])
     @against = params[:against]
     @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.voting_users.include? current_user
-    Journal.like_comment_event(current_user, @project, name_of_comment_for_param, @comment, @against)
+    Journal.like_comment_event(current_user, @project.project, name_of_comment_for_param, @comment, @against)
     respond_to :js
   end
 
@@ -65,12 +65,12 @@ module PostComments
       type = 'approve_status' if @comment.approve_status
     end
     if type
-      current_user.journals.build(type_event: name_of_comment_for_param + '_' + type, project: @project,
+      current_user.journals.build(type_event: name_of_comment_for_param + '_' + type, project: @project.project,
                                   body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                   first_id: @post.id, second_id: @comment.id).save!
 
       if @comment.user != current_user
-        current_user.journals.build(type_event: 'my_' + name_of_comment_for_param + '_' + type, user_informed: @comment.user, project: @project,
+        current_user.journals.build(type_event: 'my_' + name_of_comment_for_param + '_' + type, user_informed: @comment.user, project: @project.project,
                                     body: "#{trim_content(@comment.content)}", body2: trim_content(field_for_journal(@post)),
                                     first_id: @post.id, second_id: @comment.id,
                                     personal: true, viewed: false).save!

@@ -11,12 +11,12 @@
         %span.sort-label Сортировать по новым:
         %span#sorter
           %span.sort-1.sort_btn.sprite.sprite-1_5.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.plan_published_post.after_last_visit_comments(last_time_visit_page('plan')).size
+            - new_comments = @project.plans_approved.after_last_visit_comments(last_time_visit_page('plan')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
           %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения."}
-            - new_posts = @project.plan_published_post.after_last_visit_posts(last_time_visit_page('plan')).size
+            - new_posts = @project.plans_approved.after_last_visit_posts(last_time_visit_page('plan')).size
             - if new_posts > 0
               %span.badge-red
                 = new_posts

@@ -1,6 +1,6 @@
 class Core::Knowbase::PostsController < PostsController
   def index
-    @aspects = @project.proc_main_aspects
+    @aspects = @project.main_aspects
 
     # @stages = current_model.stage_knowbase_order(@project.id)
     # @post = current_model.min_stage_knowbase_post(@project.id).first

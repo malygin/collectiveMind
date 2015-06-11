@@ -22,8 +22,8 @@ class UserDecorator
 
   # несовершенства за которые пользователь еще не проголосовал
   def unvote_discontents_for_vote(project)
-    vote_discontents = project.discontent_for_vote.joins(:final_votings).where(discontent_votings: { user_id: user.id }).pluck('discontent_posts.id')
-    project.discontent_for_vote.where.not(id: vote_discontents)
+    vote_discontents = project.discontents_for_vote.joins(:final_votings).where(discontent_votings: { user_id: user.id }).pluck('discontent_posts.id')
+    project.discontents_for_vote.where.not(id: vote_discontents)
   end
 
   # идеи для голосования (да, нет)
@@ -33,8 +33,8 @@ class UserDecorator
 
   # идеи за которые пользователь еще не проголосовал
   def unvote_concepts_for_vote(project)
-    vote_concepts = project.concept_for_votet.joins(:final_votings).where(concept_votings: { user_id: user.id }).pluck('concept_posts.id')
-    project.concept_ongoing_post.where.not(id: vote_concepts)
+    vote_concepts = project.concepts_for_vote.joins(:final_votings).where(concept_votings: { user_id: user.id }).pluck('concept_posts.id')
+    project.concepts_for_discussion.where.not(id: vote_concepts)
   end
 
   # пакеты для голосования (да, нет)

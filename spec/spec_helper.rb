@@ -10,7 +10,6 @@ Spork.prefork do
   require 'capybara-screenshot/rspec'
   require 'capybara/webkit/matchers'
   require 'websocket_rails/spec_helpers'
-
   require 'simplecov'
   SimpleCov.start
   Capybara.javascript_driver = :webkit

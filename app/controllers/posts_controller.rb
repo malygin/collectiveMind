@@ -121,7 +121,7 @@ class PostsController < ProjectsController
     @post = current_model.find(params[:id])
     @against = params[:against]
     @vote = @post.post_votings.create(user: current_user, post: @post, against: @against) unless @post.users.include? current_user
-    Journal.like_event(current_user, @project, name_of_model_for_param, @post, @against)
+    Journal.like_event(current_user, @project.project, name_of_model_for_param, @post, @against)
     respond_to :js
   end
 

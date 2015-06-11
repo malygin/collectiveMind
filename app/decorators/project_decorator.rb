@@ -5,8 +5,6 @@ class ProjectDecorator
     @project = project
   end
 
-
-
   def current_stage_type
     stages[main_stage][:type_stage]
   end
@@ -42,24 +40,21 @@ class ProjectDecorator
   end
 
   def type_access_name
-    Сore::Project::TYPE_ACCESS[type_access]
+    Core::Project::TYPE_ACCESS[type_access]
   end
-
 
   def concepts_without_aspect
     concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: { post_id: nil })
   end
-
-
 
   def get_free_votes_for(user, stage)
     case stage
       when :collect_info
         main_aspects.size - user.voted_aspects.by_project(id).size
       when :discontent
-        discontent_for_vote.size - user.voted_discontent_posts.by_project(id).size
+        discontents_for_vote.size - user.voted_discontent_posts.by_project(id).size
       when :concept
-        concept_for_vote.size - user.voted_concept_post.by_project(id).size
+        concepts_for_vote.size - user.voted_concept_post.by_project(id).size
       when :novation
         novations.size - user.voted_novation_post.by_project(id).size
     end
@@ -109,6 +104,10 @@ class ProjectDecorator
       self.stage = "#{main_stage - 1}:#{new_sub_stage}"
     end
     save
+  end
+
+  def to_s
+    project.id.to_s
   end
 
   def method_missing(method_name, *args, &block)

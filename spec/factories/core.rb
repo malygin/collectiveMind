@@ -13,7 +13,8 @@ FactoryGirl.define do
     end
 
     after(:create) do |project|
-      stage_name = project.current_stage_type.to_s == 'collect_info_posts' ? 'aspect_posts' : project.current_stage_type.to_s
+      stage_name = ProjectDecorator.new(project).current_stage_type.to_s
+      stage_name = stage_name == 'collect_info_posts' ? 'aspect_posts' : stage_name
       technique_1 = Technique::List.create stage: stage_name, code: 'simple'
       project.techniques << technique_1
     end
