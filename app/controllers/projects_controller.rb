@@ -5,7 +5,9 @@
 class ProjectsController < ApplicationController
   before_action :set_project
   before_filter :check_access_to_project
-  before_filter :news_data
+  before_filter :news_data, only: [:index, :new, :edit, :show, :user_content]
+  before_filter :journal_data, only: [:index, :new, :edit, :show, :user_content]
+
   # base logging, works after for proper date
   after_action :start_visit
 
@@ -16,6 +18,20 @@ class ProjectsController < ApplicationController
   end
 
   def journal_data
+    if params[:viewed]
+      post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
+      post_id = if current_model.to_s == 'CollectInfo::Post'
+                  params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.aspects.order(:id).first
+                else
+                  post
+                end
+      if params[:req_comment]
+        Journal.events_for_comment(@project, current_user, post_id.id, params[:req_comment].to_i).update_all(viewed: true) if post_id
+      else
+        Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
+      end
+    end
+
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
     return unless @my_journals_count == 0

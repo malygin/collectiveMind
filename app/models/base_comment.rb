@@ -1,6 +1,8 @@
 module BaseComment
   extend ActiveSupport::Concern
   include Util::Filterable
+  include MarkupHelper
+
   included do
     belongs_to :user
     belongs_to :post
@@ -25,25 +27,29 @@ module BaseComment
 
     validates :content, :user_id, :post_id, presence: true
 
-    def class_name
-      self.class.name.deconstantize
-    end
-
     def main_comment?
       comment_id.nil?
     end
 
-    def controller_name_for_action
+    def class_name
+      self.class.table_name.singularize
+    end
+
+    def post_controller_path
       post.class.name.underscore.pluralize
     end
 
     def add_score
       self.toggle!(:useful)
       if @comment.useful
-        user.add_score(type: :plus_comment, project: post.project, comment: self, path: post.class.name.underscore.pluralize)
+        user.add_score(type: :plus_comment, project: post.project, comment: self, path: post_controller_path)
       else
-        user.add_score(type: :to_archive_plus_comment, project: post.project, comment: self, path: post.class.name.underscore.pluralize)
+        user.add_score(type: :to_archive_plus_comment, project: post.project, comment: self, path: post_controller_path)
       end
+    end
+
+    def field_for_journal
+      trim_content(content)
     end
   end
 end

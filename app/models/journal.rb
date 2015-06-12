@@ -83,40 +83,40 @@ class Journal < ActiveRecord::Base
     %w(reply_life_tape_comment reply_discontent_comment reply_concept_comment reply_plan_comment reply_essay_comment)
   end
 
-  def self.comment_event(current_user, project, name_of_comment_for_param, post, comment, comment_answer)
+  def self.comment_event(h = {})
     # @todo новости и информирование авторов
-    current_user.journals.build(type_event: name_of_comment_for_param + '_save', project: project,
-                                body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                first_id: post.id, second_id: comment.id).save!
+    h[:user].journals.build(type_event: h[:comment].class_name + '_save', project: h[:project],
+                            body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
+                            first_id: h[:post].id, second_id: h[:comment].id).save!
 
-    if post.user != current_user
-      current_user.journals.build(type_event: 'my_' + name_of_comment_for_param, user_informed: post.user, project: project,
-                                  body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
-                                  first_id: post.id, second_id: comment.id,
-                                  personal: true, viewed: false).save!
+    if h[:post].user != h[:post]
+      h[:user].journals.build(type_event: 'my_' + h[:comment].class_name, user_informed: h[:post].user, project: h[:project],
+                              body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
+                              first_id: h[:post].id, second_id: h[:comment].id,
+                              personal: true, viewed: false).save!
     end
 
-    if comment_answer && comment_answer.user != current_user
-      current_user.journals.build(type_event: 'reply_' + name_of_comment_for_param, user_informed: comment_answer.user, project: project,
-                                  body: "#{trim_content(comment.content)}", body2: trim_content(comment_answer.content),
-                                  first_id: post.id, second_id: comment.id,
-                                  personal: true, viewed: false).save!
-    end
-  end
-
-  def self.like_event(current_user, project, name_of_model_for_param, post, against)
-    if post.user != current_user
-      current_user.journals.build(type_event: 'my_' + name_of_model_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: post.user, project: project,
-                                  body: "#{trim_content(post.content)}", first_id: post.id, personal: true, viewed: false).save!
+    if h[:answer] && h[:answer].user != h[:user]
+      h[:user].journals.build(type_event: 'reply_' + h[:comment].class_name, user_informed: h[:answer].user, project: h[:project],
+                              body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
+                              first_id: h[:post].id, second_id: h[:comment].id,
+                              personal: true, viewed: false).save!
     end
   end
 
-  def self.like_comment_event(current_user, project, name_of_comment_for_param, comment, against)
-    if comment.user != current_user
-      current_user.journals.build(type_event: 'my_' + name_of_comment_for_param + (against == 'false' ? '_like' : '_dislike'), user_informed: comment.user, project: project,
-                                  body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(comment.post)),
-                                  first_id: comment.post.id, second_id: comment.id,
-                                  personal: true, viewed: false).save!
+  def self.like_event(h = {})
+    if h[:post].user != h[:user]
+      h[:user].journals.build(type_event: 'my_' + h[:post].class_name + (h[:against] == 'false' ? '_like' : '_dislike'), user_informed: h[:post].user, project: h[:project],
+                              body: h[:post].field_for_journal, first_id: h[:post].id, personal: true, viewed: false).save!
+    end
+  end
+
+  def self.like_comment_event(h = {})
+    if h[:comment].user != h[:user]
+      h[:user].journals.build(type_event: 'my_' + h[:comment].class_name + (h[:against] == 'false' ? '_like' : '_dislike'), user_informed: h[:comment].user, project: h[:project],
+                              body: h[:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
+                              first_id: h[:comment].post.id, second_id: h[:comment].id,
+                              personal: true, viewed: false).save!
     end
   end
 end

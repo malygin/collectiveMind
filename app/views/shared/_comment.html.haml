@@ -22,12 +22,12 @@
                 %i.glyphicon.glyphicon-pencil>
                 Редактировать
             %li
-              = link_to({controller: comment.controller_name_for_action, action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
+              = link_to({controller: comment.post_controller_path, action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
                 %i.glyphicon.glyphicon-remove>
                 Удалить
 
         - if boss?
-          = link_to({controller: comment.controller_name_for_action, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
+          = link_to({controller: comment.post_controller_path, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
             %span.badge.badge_important{class: "#{'theme_back_color' if comment.approve_status}"}= t('show.important')
         - elsif comment.approve_status
           %span.badge.badge_important.theme_back_color= t('show.important')
@@ -42,14 +42,14 @@
     %span.bold
       %span(id="lk_comment_#{comment.id}")
         =comment.users_pro.count
-      =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put,
+      =link_to({controller: comment.post_controller_path, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put,
            id: "like_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Нравится') do
         %i.fa.fa-thumbs-up.theme_font_color
 
     %span.bold
       %span(id="dlk_comment_#{comment.id}")
         =comment.users_against.count
-      =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put,
+      =link_to({controller: comment.post_controller_path, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put,
        id: "dislike_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Не нравится') do
         %i.fa.fa-thumbs-down.theme_font_color
 

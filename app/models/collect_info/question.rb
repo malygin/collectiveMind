@@ -16,21 +16,21 @@ class CollectInfo::Question < ActiveRecord::Base
   validates :content, :project_id, presence: true
   default_scope { order :id }
 
-  def answer_from_type(project, aspect, user, answers, content, skip)
+  def answer_from_type(user, answers, content, skip, type_for_questions)
     # если вопрос пропущен, то просто создаем пустой ответ
     unless skip
       # если опрос, то создаем коммент к аспекту и связываем коммент и ответ (если вопрос с ответами)
       if type_comment == 0
-        aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i)) if content.present?
+        core_aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i)) if content.present?
       # иначе проверяем наличие ответов (пояснение не обязательно)
-      elsif project.type_for_questions == 1 && answers
+      elsif type_for_questions == 1 && answers
         # если вопросы с правильными ответами (второй подэтап), то проверка правильности ответов
         wrong = self.uncorrect_answers?(answers)
       end
     end
     # если нет неправильных ответов и ответ не записан
     unless wrong
-      user.user_answers.where(project_id: project.id, question_id: id, aspect_id: aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
+      user.user_answers.where(project_id: project.id, question_id: id, aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
     end
     wrong
   end

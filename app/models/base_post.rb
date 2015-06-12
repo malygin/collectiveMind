@@ -83,7 +83,11 @@ module BasePost
     end
 
     def class_name
-      self.class.name.deconstantize
+      self.class.table_name.singularize
+    end
+
+    def stage_name
+      self.class.name.deconstantize.underscore
     end
 
     def current_class?(stage)
@@ -101,18 +105,6 @@ module BasePost
         else
           false
       end
-    end
-
-    def stage_name
-      self.class.name.deconstantize.underscore
-    end
-
-    def post_notes(type_field)
-      notes.by_type(type_field)
-    end
-
-    def note_size?(type_field)
-      post_notes(type_field).size > 0
     end
 
     def vote(user, status)
@@ -139,20 +131,20 @@ module BasePost
         type = 'approve_status' if approve_status
       end
       return unless type && self.user != user
-      self.user.journals.build(type_event: 'my_' + self.class.table_name.singularize + '_' + type, user_informed: self.user, project: project,
-                               body: "#{trim_content(field_for_journal(self))}", first_id: id, personal: true, viewed: false).save!
+      self.user.journals.build(type_event: 'my_' + class_name + '_' + type, user_informed: self.user, project: project,
+                               body: field_for_journal, first_id: id, personal: true, viewed: false).save!
       # if @project.closed?
       #   # Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
       # end
     end
 
-    def add_comment(params, user, comment_parent, comment_answer, name_of_comment_for_journal)
+    def add_comment(params, user, comment_parent, comment_answer)
       content = params[:content]
       return false if content == ''
       img, is_file = Util::ImageLoader.load(params)  if params[:image]
       comment = comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? is_file : nil,
                                 user: user, comment_id: comment_parent ? comment_parent.id : nil)
-      Journal.comment_event(user, project, name_of_comment_for_journal, self, comment, comment_answer)
+      Journal.comment_event(user: user, project: project, post: self, comment: comment, answer: comment_answer)
       comment
     end
 
@@ -192,6 +184,16 @@ module BasePost
       post.save!
       user.journals.build(type_event: name_of_model_for_param + '_save', project: project, body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
       post
+    end
+
+    def field_for_journal
+      if self.instance_of?(Concept::Post) || self.instance_of?(Novation::Post)
+        title
+      elsif self.instance_of? Plan::Post
+        name
+      else
+        content
+      end
     end
 
     # generic method for statuses, for example publish?

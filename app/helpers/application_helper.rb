@@ -1,15 +1,4 @@
 module ApplicationHelper
-  # @todo for journal helper
-  def field_for_journal(post)
-    if post.instance_of?(Concept::Post) || post.instance_of?(Novation::Post)
-      post.title
-    elsif post.instance_of? Plan::Post
-      post.name
-    else
-      post.content
-    end
-  end
-
   def name_controller
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end

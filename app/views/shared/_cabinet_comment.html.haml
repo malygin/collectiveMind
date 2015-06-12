@@ -13,7 +13,7 @@
                 %i.glyphicon.glyphicon-pencil>
                 Редактировать
             %li
-              = link_to({controller: cabinet_comment.controller_name_for_action, action: :destroy_comment, id: cabinet_comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{cabinet_comment.id}", tabindex: "-1") do
+              = link_to({controller: cabinet_comment.post_controller_path, action: :destroy_comment, id: cabinet_comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{cabinet_comment.id}", tabindex: "-1") do
                 %i.glyphicon.glyphicon-remove>
                 Удалить
       - if cabinet_comment.approve_status
@@ -27,13 +27,13 @@
       %span.bold
         %span(id="lk_comment_#{cabinet_comment.id}")
           =cabinet_comment.users_pro.count
-        =link_to({controller: cabinet_comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => cabinet_comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{cabinet_comment.id}") do
+        =link_to({controller: cabinet_comment.post_controller_path, :action => :like_comment, :project => @project, :id => cabinet_comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{cabinet_comment.id}") do
           %i.fa.fa-thumbs-up{class: "font_color_stage#{number_current_stage || num_stage}"}
     %button.rate_button{"data-for" => "comment#{cabinet_comment.id}", "data-rate-action" => "dislike", :type => "button"}
       %span.bold
         %span(id="dlk_comment_#{cabinet_comment.id}")
           =cabinet_comment.users_against.count
-        =link_to({controller: cabinet_comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => cabinet_comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{cabinet_comment.id}") do
+        =link_to({controller: cabinet_comment.post_controller_path, :action => :like_comment, :project => @project,  :id => cabinet_comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{cabinet_comment.id}") do
           %i.fa.fa-thumbs-down{class: "font_color_stage#{number_current_stage || num_stage}"}
     -#%button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
     -#  %span.bold
