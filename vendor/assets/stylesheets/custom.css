@@ -2727,7 +2727,7 @@ p .add-button + .add-button {
 
 .popup-window {
     margin: 0px auto 30px;
-    padding-top: 40px;
+    margin-top: 40px;
     position: relative;
 }
 
@@ -4109,23 +4109,26 @@ a.myCarousel-target {
 }
 
 /* popup database */
-.base_carousel .carousel-inner {
-    padding: 0 25px;
+.base_carousel .header{
+    padding: 10px;
+}
+.base_carousel .carousel-inner .item{
+    height: 600px;
 }
 
 .base_carousel .aspect-main-block {
     box-shadow: none;
-    min-height: 600px;
+    border-radius: 0;
 }
 
 .base_carousel .carousel-indicators {
-    width: 100%;
     position: static;
-    top: 0;
-    left: 0;
     margin-left: 0;
-    margin-top: 25px;
-    margin-bottom: 30px;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: block;
+    min-width: 700px;
 }
 
 .base_carousel .carousel-indicators li {
@@ -4138,10 +4141,11 @@ a.myCarousel-target {
     border: 0;
     border-top: 2px solid transparent;
     font-size: 12px;
-    margin: 0 3px;
     margin-bottom: 5px;
-    opacity: 0.7;
-    padding: 3px 6px;
+    background: white;
+    padding: 8px 14px;
+    margin-top: 7px;
+    margin-left: 7px;
 }
 
 .carousel-indicators li.color-theme-1 {
@@ -4181,14 +4185,15 @@ a.myCarousel-target {
 }
 
 .base_carousel .carousel-indicators li.active {
-    opacity: 1;
+    font-weight: 700;
+    color: #000000;
 }
 
-.myCarousel-control {
+.myCarousel-control  {
     position: absolute;
     top: 50%;
     margin-top: -21px;
-    color: #9e9e9e;
+    color: #eac85e;
 }
 
 .myCarousel-control:focus {
@@ -4200,11 +4205,11 @@ a.myCarousel-target {
 }
 
 .myCarousel-control.left {
-    left: 10px;
+    left: -40px;
 }
 
 .myCarousel-control.right {
-    right: 10px;
+    right: -40px;
 }
 
 /* vote styles */
@@ -4994,19 +4999,19 @@ ul.vote_nav > li > a {
 .post.post_type_3.merged .media-body h5 i{
     right:0;
 }
-.stage2_theme .fa-angle-right {
+.stage2_theme .icon-right {
     color: #6588c2;
 }
 
-.stage3_theme .fa-angle-right {
+.stage3_theme .icon-right {
     color: #bc8bb7;
 }
 
-.stage4_theme .fa-angle-right {
+.stage4_theme .icon-right {
     color: #8e8bc7;
 }
 
-.stage5_theme .fa-angle-right {
+.stage5_theme .icon-right {
     color: #559499;
 }
 

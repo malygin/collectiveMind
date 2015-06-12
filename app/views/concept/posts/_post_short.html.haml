@@ -28,7 +28,7 @@
             = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
               %h5.bold.font_color_stage3
                 = trim_content(post_short.title)
-                %i.fa.fa-angle-right
+                %i.fa.fa-angle-right.icon-right
             .post-text
               %p
                 = trim_content(post_short.content)

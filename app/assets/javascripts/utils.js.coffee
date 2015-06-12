@@ -677,6 +677,16 @@ $('#tab_posts li#new a').on "click", (e) ->
       $(this).attr('data-stage', 'play')
     return
 
+
+#цвет модального окна базы знаний
+
+@color_modal_knowbase =->
+  $('#myCarousel').on 'slid.bs.carousel', ->
+    bgcolor = $('.myCarousel-target.active').attr('data-color');
+    $('#myCarousel .header').css({background: bgcolor});
+    $('.myCarousel-control').css({color: bgcolor});
+    return
+
 # временно!!!
 $colors_aspect_codes = [
   'cfa7cc',

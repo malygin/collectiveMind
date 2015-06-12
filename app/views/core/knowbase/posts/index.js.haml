@@ -2,3 +2,5 @@ $('#render_knowbase_posts').empty();
 $("#render_knowbase_posts").html('#{escape_javascript(render partial: 'modal_knowbase_posts')}');
 magnificPopupOpen('#popup-database');
 $("[data-toggle=tooltip]").tooltip();
+color_modal_knowbase();
+$('.carousel-inner .item').perfectScrollbar();

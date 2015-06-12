@@ -31,7 +31,7 @@
                   %td.col-md-12.left-column.bold
                     = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
                       = trim_string(post_short.content, size = 50)
-                      %i.fa.fa-angle-right
+                      %i.fa.fa-angle-right.icon-right
                 %tr
                   %td.col-md-12.left-column
                     = trim_string(post_short.what, size = 50)

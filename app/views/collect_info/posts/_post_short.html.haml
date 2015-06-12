@@ -22,7 +22,7 @@
           = link_to({controller: 'core/aspect/posts', action: :show, project: @project.id, id: post_short.id, last_time_visit: last_time_visit_page('collect_info')}, remote: true, id: "show_record_#{post_short.id}") do
             .post-text
               =post_short.content
-              %i.fa.fa-angle-right
+              %i.fa.fa-angle-right.icon-right
           - if post_short.comments.count > 0
             .post_comments_cont
               .post_cont_hover.white{id: "post_ch#{post_short.id}"}
