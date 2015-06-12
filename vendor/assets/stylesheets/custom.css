@@ -8199,17 +8199,26 @@ h5.media-heading > a:hover{
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
 }
-.btn.arrow_left{
+.btn.arrow_left {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
-    -webkit-border-top-left-radius:0 !important;
+    -webkit-border-top-left-radius: 0 !important;
     -webkit-border-bottom-left-radius: 0 !important;
 }
-.lilac_border{
-    border-top-color:#d0a9cd;
-}
-.lilac_back{
+.aspect_1{
     background: #d0a9cd;
+    color:white;
+}
+.aspect_2{
+    background: #a4b1db;;
+    color:white;
+}
+.aspect_3{
+    background: #88a2c3;;
+    color:white;
+}
+.aspect_4,.aspect_5{
+    background: #9d9d9d;
     color:white;
 }
 
