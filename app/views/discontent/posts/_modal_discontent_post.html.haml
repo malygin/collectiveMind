@@ -41,7 +41,7 @@
       .container.modal_content
         .row
           .col-md-6.exp_col.left
-            %button.btn.btn_reset.exp_button.pull-right
+            %button.btn.btn_reset.exp_button.pull-right{'data-toggle'=>"tooltip",'data-placement'=>"left","data-new"=>"Развернуть историю комментариев", title: "Свернуть несовершенство"}
               = image_tag 'grey_arrow.png'
             .divider20
             .border_light_grey.rounded_3.imperf_left
@@ -97,7 +97,7 @@
                 .divider10
 
           .col-md-6.exp_col.right
-            %button.btn.btn_reset.exp_button.pull-left
+            %button.btn.btn_reset.exp_button.pull-left{'data-toggle'=>"tooltip",'data-placement'=>"right","data-new"=>"Развернуть несовершенство", title: "Свернуть историю комментариев"}
               = image_tag 'grey_arrow_1.png'
             .divider10
 

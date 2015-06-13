@@ -219,9 +219,16 @@
     if parent_col.hasClass('active')
       parent_col.toggleClass 'active'
       parent_col.siblings('.exp_col').toggleClass 'hidden'
+      new_title = $(this).attr('data-new')
+      old_title = $(this).attr('data-original-title')
+      $(this).attr('data-original-title',new_title).attr('data-new',old_title)
+
     else
       parent_col.toggleClass 'hidden'
       parent_col.siblings('.exp_col').toggleClass 'active'
+      new_title = $('.exp_col.active').find('.exp_button').attr('data-new')
+      old_title = $('.exp_col.active').find('.exp_button').attr('data-original-title')
+      $('.exp_col.active').find('.exp_button').attr('data-original-title',new_title).attr('data-new',old_title)
     return
 
 #----------
