@@ -54,33 +54,9 @@ module PostComments
   end
 
   def change_status_for_comment
-    @post = current_model.find(params[:id])
     @comment = comment_model.find(params[:comment_id])
-
-    @comment.toggle!(:discuss_status) if params[:discuss_status]
-    @comment.toggle!(:approve_status) if params[:approve_status]
-    if params[:discuss_status]
-      type = 'discuss_status' if @comment.discuss_status
-    elsif params[:approve_status]
-      type = 'approve_status' if @comment.approve_status
-    end
-    if type
-      current_user.journals.build(type_event: comment.class_name + '_' + type, project: @project.project,
-                                  body: @comment.field_for_journal, body2: @post.field_for_journal,
-                                  first_id: @post.id, second_id: @comment.id).save!
-
-      if @comment.user != current_user
-        current_user.journals.build(type_event: 'my_' + comment.class_name + '_' + type, user_informed: @comment.user, project: @project.project,
-                                    body: @comment.field_for_journal, body2: @post.field_for_journal,
-                                    first_id: @post.id, second_id: @comment.id,
-                                    personal: true, viewed: false).save!
-      end
-      if @project.closed?
-        # Resque.enqueue(CommentNotification, current_model.to_s, @project.id, current_user.id, name_of_comment_for_param, type, @post.id, @comment.id, params[:comment_stage])
-      end
-    end
-    respond_to do |format|
-      format.js
-    end
+    type = @comment.change_status(params[:discuss_status], params[:approve_status])
+    Journal.change_comment_status_event(user: current_user, comment: @comment, project: @project.project, type: type) if type
+    respond_to :js
   end
 end

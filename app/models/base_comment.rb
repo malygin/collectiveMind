@@ -48,6 +48,17 @@ module BaseComment
       end
     end
 
+    def change_status(discuss, approve)
+      if discuss
+        self.toggle!(:discuss_status)
+        return  'discuss_status' if discuss_status
+      end
+      return unless approve
+
+      self.toggle!(:approve_status)
+      return  'approve_status' if approve_status
+    end
+
     def field_for_journal
       trim_content(content)
     end
