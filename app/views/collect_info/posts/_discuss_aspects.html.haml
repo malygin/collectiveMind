@@ -12,7 +12,6 @@
         - else
           = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
             .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
-            //если прочитали то  .results.results_blue
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         = link_to collect_info_posts_path(@project, sort_rule: 'sort_by_comments') do
