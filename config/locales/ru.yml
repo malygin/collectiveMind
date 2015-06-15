@@ -3,7 +3,7 @@ ru:
   discontent:
     one: "1 несовершенство"
     other: "%{count} несовершнств"
-    few:  "%{count} несовершенста"
+    few:  "%{count} несовершенства"
     many: "%{count} несовершнств"
   project_users_count:
     one: "1 участник"
