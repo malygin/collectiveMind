@@ -1,83 +1,35 @@
 module JournalHelper
   def journal_icon(j)
-    case j.type_event
-      # статус Важно
-      when 'core_aspect_post_approve_status', 'my_core_aspect_post_approve_status', 'core_aspect_comment_approve_status', 'my_core_aspect_comment_approve_status'
-        'fa-exclamation font_color_stage1'
-      when 'discontent_post_approve_status', 'my_discontent_post_approve_status', 'discontent_comment_approve_status', 'my_discontent_comment_approve_status'
-        'fa-exclamation font_color_stage2'
-      when 'concept_post_approve_status', 'my_concept_post_approve_status', 'concept_comment_approve_status', 'my_concept_comment_approve_status'
-        'fa-exclamation font_color_stage3'
-      when 'novation_post_approve_status', 'my_novation_post_approve_status', 'novation_comment_approve_status', 'my_novation_comment_approve_status'
-        'fa-exclamation font_color_stage4'
-      when 'plan_post_approve_status', 'my_plan_post_approve_status', 'plan_comment_approve_status', 'my_plan_comment_approve_status'
-        'fa-exclamation font_color_stage5'
-      # лайки
-      when 'my_core_aspect_post_like', 'my_core_aspect_comment_like'
-        'fa-thumbs-up font_color_stage1'
-      when 'my_discontent_post_like', 'my_discontent_comment_like'
-        'fa-thumbs-up font_color_stage2'
-      when 'my_concept_post_like', 'my_concept_comment_like'
-        'fa-thumbs-up font_color_stage3'
-      when 'my_novation_post_like', 'my_novation_comment_like'
-        'fa-thumbs-up font_color_stage4'
-      when 'my_plan_post_like', 'my_plan_comment_like'
-        'fa-thumbs-up font_color_stage5'
-      #  дислайки
-      when 'my_core_aspect_post_dislike', 'my_core_aspect_comment_dislike'
-        'fa-thumbs-down font_color_stage1'
-      when 'my_discontent_post_dislike', 'my_discontent_comment_dislike'
-        'fa-thumbs-down font_color_stage2'
-      when 'my_concept_post_dislike', 'my_concept_comment_dislike'
-        'fa-thumbs-down font_color_stage3'
-      when 'my_novation_post_dislike', 'my_novation_comment_dislike'
-        'fa-thumbs-down font_color_stage4'
-      when 'my_plan_post_dislike', 'my_plan_comment_dislike'
-        'fa-thumbs-down font_color_stage5'
-      # комменты
-      when 'core_aspect_comment_save', 'my_core_aspect_comment'
-        'fa-comment font_color_stage1'
-      when 'discontent_comment_save', 'my_discontent_comment'
-        'fa-comment font_color_stage2'
-      when 'concept_comment_save', 'my_concept_comment'
-        'fa-comment font_color_stage3'
-      when 'novation_comment_save', 'my_novation_comment'
-        'fa-comment font_color_stage4'
-      when 'plan_comment_save', 'my_plan_comment'
-        'fa-comment font_color_stage5'
-      # ответы на комменты
-      when 'reply_core_aspect_comment'
-        'fa-reply font_color_stage1'
-      when 'reply_discontent_comment'
-        'fa-reply font_color_stage2'
-      when 'reply_concept_comment'
-        'fa-reply font_color_stage3'
-      when 'reply_novation_comment'
-        'fa-reply font_color_stage4'
-      when 'reply_plan_comment'
-        'fa-reply font_color_stage5'
-      # добавление постов
-      when 'core_aspect_post_save'
-        'fa-plus font_color_stage1'
-      when 'discontent_post_save'
-        'fa-plus font_color_stage2'
-      when 'concept_post_save'
-        'fa-plus font_color_stage3'
-      when 'novation_post_save'
-        'fa-plus font_color_stage4'
-      when 'plan_post_save'
-        'fa-plus font_color_stage5'
-      # баллы за контент
-      when 'my_add_score_core_aspect_post'
-        'fa-trophy font_color_stage1'
-      when 'my_add_score_discontent_post'
-        'fa-trophy font_color_stage2'
-      when 'my_add_score_concept_post'
-        'fa-trophy font_color_stage3'
-      when 'my_add_score_novation_post'
-        'fa-trophy font_color_stage4'
-      when 'my_add_score_plan_post'
-        'fa-trophy font_color_stage5'
+    case j
+      when /_approve_status/
+        'fa-exclamation'
+      when /_comment_dislike/
+        'fa-thumbs-down'
+      when /_comment_like/
+        'fa-thumbs-up'
+      when /reply_/
+        'fa-reply'
+      when /_post_save/
+        'fa-plus'
+      when /my_add_score_/
+        'fa-trophy'
+      when /_comment/
+        'fa-comment'
+    end
+  end
+
+  def journal_color(j)
+    case j
+    when  /core_aspect/
+      'font_color_stage1'
+    when /discontent/
+      'font_color_stage2'
+    when /novation/
+      'font_color_stage3'
+    when /concept/
+      'font_color_stage4'
+    when /plan/
+      'font_color_stage5'
     end
   end
 

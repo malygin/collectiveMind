@@ -144,7 +144,7 @@ module BasePost
       img, is_file = Util::ImageLoader.load(params)  if params[:image]
       comment = comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? is_file : nil,
                                 user: user, comment_id: comment_parent ? comment_parent.id : nil)
-      Journal.comment_event(user: user, project: project, post: self, comment: comment, answer: comment_answer)
+      JournalEventSaver.comment_event(user: user, project: project, post: self, comment: comment, answer: comment_answer)
       comment
     end
 
@@ -164,7 +164,7 @@ module BasePost
     def self.prepare_to_show(id, project, viewed)
       post = where(id: id, project_id: project).first
       if viewed
-        Journal.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
+        JournalEventSaver.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
       end
       if column_names.include? 'number_views'
         post.update_column(:number_views, post.number_views.nil? ? 1 : post.number_views + 1)

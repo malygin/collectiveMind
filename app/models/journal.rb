@@ -1,8 +1,8 @@
 class Journal < ActiveRecord::Base
   include Util::Renderable
   include Util::Filterable
-  extend ApplicationHelper
-  extend MarkupHelper
+  # extend ApplicationHelper
+  # extend MarkupHelper
 
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
@@ -24,31 +24,13 @@ class Journal < ActiveRecord::Base
 
   validates :type_event, :project_id, presence: true
 
-  # new methods
-  def self.events_for_all(list_type, closed_projects)
-    Journal.joins(:project).active_proc.where('core_projects.type_access IN (?) OR core_projects.id IN (?)', list_type, closed_projects).events_ignore(events_ignore_list).created_order
-  end
-
-  def self.events_for_all_prime
-    Journal.joins(:project).active_proc.events_ignore(events_ignore_list).created_order
-  end
-
-  def self.events_for_project(project_id)
-    Journal.joins(:project).where('project_id = ?', project_id).active_proc.events_ignore(events_ignore_list).created_order
+  def self.events_ignore_list
+    %w(reply_life_tape_comment reply_discontent_comment reply_concept_comment reply_plan_comment reply_essay_comment)
   end
 
   # scheduler_mailer
   def self.events_for_user_mailer(date, users)
     Journal.auto_feed_mailer.where('viewed = ? AND personal = ?', false, true).where(user_informed: users).where('journals.created_at >= ?', date).order('journals.created_at DESC')
-  end
-
-  # older methods
-  def self.events_for_user_feed(project_id)
-    Journal.where(' project_id = ? AND personal = ? ', project_id, false).order('created_at DESC')
-  end
-
-  def self.events_for_user_show(project_id, user_id, lim = 5)
-    Journal.where(' project_id = ? AND personal =? ', project_id, false).where('user_id= (?)', user_id).limit(lim).order('created_at DESC')
   end
 
   def self.events_for_my_feed(project_id, user_id)
@@ -59,77 +41,11 @@ class Journal < ActiveRecord::Base
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true).limit(lim).order('created_at DESC')
   end
 
-  def self.events_for_content(project_id, user_id, first_id)
-    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id).order('created_at DESC')
-  end
-
-  def self.events_for_comment(project_id, user_id, first_id, second_id)
-    Journal.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?', project_id, user_id, false, true, first_id, second_id).order('created_at DESC')
-  end
-
-  def self.last_event_for(user, project_id)
-    Journal.where(' project_id = ? AND personal = ? ', project_id, false).where('user_id= (?)', user.id).order('created_at DESC').first
-  end
-
   def self.destroy_comment_journal(project, comment)
     where(project_id: project.id, user_id: comment.user, second_id: comment.id).destroy_all
   end
 
   def self.destroy_journal_record(project, type_event, user_informed, post, personal)
     where(project_id: project.id, type_event: type_event, user_informed: user_informed, first_id: post.id, personal: personal).destroy_all
-  end
-
-  def self.events_ignore_list
-    %w(reply_life_tape_comment reply_discontent_comment reply_concept_comment reply_plan_comment reply_essay_comment)
-  end
-
-  def self.comment_event(h = {})
-    # @todo новости и информирование авторов
-    h[:user].journals.build(type_event: h[:comment].class_name + '_save', project: h[:project],
-                            body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
-                            first_id: h[:post].id, second_id: h[:comment].id).save!
-
-    if h[:post].user != h[:post]
-      h[:user].journals.build(type_event: 'my_' + h[:comment].class_name, user_informed: h[:post].user, project: h[:project],
-                              body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
-                              first_id: h[:post].id, second_id: h[:comment].id,
-                              personal: true, viewed: false).save!
-    end
-
-    if h[:answer] && h[:answer].user != h[:user]
-      h[:user].journals.build(type_event: 'reply_' + h[:comment].class_name, user_informed: h[:answer].user, project: h[:project],
-                              body: h[:comment].field_for_journal, body2: h[:post].field_for_journal,
-                              first_id: h[:post].id, second_id: h[:comment].id,
-                              personal: true, viewed: false).save!
-    end
-  end
-
-  def self.like_event(h = {})
-    if h[:post].user != h[:user]
-      h[:user].journals.build(type_event: 'my_' + h[:post].class_name + (h[:against] == 'false' ? '_like' : '_dislike'), user_informed: h[:post].user, project: h[:project],
-                              body: h[:post].field_for_journal, first_id: h[:post].id, personal: true, viewed: false).save!
-    end
-  end
-
-  def self.like_comment_event(h = {})
-    if h[:comment].user != h[:user]
-      h[:user].journals.build(type_event: 'my_' + h[:comment].class_name + (h[:against] == 'false' ? '_like' : '_dislike'), user_informed: h[:comment].user, project: h[:project],
-                              body: h[:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
-                              first_id: h[:comment].post.id, second_id: h[:comment].id,
-                              personal: true, viewed: false).save!
-    end
-  end
-
-  def self.change_comment_status_event(h = {})
-    h[:user].journals.build(type_event: h[:comment].class_name + '_' + h[:type], project: h[:project],
-                            body: h[:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
-                            first_id: h[:comment].post.id, second_id: h[:comment].id).save!
-
-    if h[:comment].user != h[:user]
-      h[:user].journals.build(type_event: 'my_' + [:comment].class_name + '_' + type, user_informed: [:comment].user, project: h[:project],
-                              body: [:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
-                              first_id: h[:comment].post.id, second_id: h[:comment].id,
-                              personal: true, viewed: false).save!
-    end
   end
 end

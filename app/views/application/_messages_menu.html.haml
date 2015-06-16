@@ -1,9 +1,9 @@
-= link_to "/project/#{project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener menu_a', id: 'clear_my_journals', "data-dd-opener" => "dd_2",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Следите за тем, кому понравились ваши комментарии' do
+= link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener menu_a', id: 'clear_my_journals', "data-dd-opener" => "dd_2",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Следите за тем, кому понравились ваши комментарии' do
   -#%a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
   Мои уведомления
-  - if my_journals.size > 0 and @my_journals_count > 0
+  - if @my_journals_count > 0
     %span.top-circle#my_journals_count
-      = my_journals.size
+      = @my_journals_count
 #dd_2.dropdown_window.dd_435.notifications_drop.text-left
   .dd_wrapper
     .dd_top.thin.light-grey
@@ -14,11 +14,11 @@
         .row
           .col-xs-12
             .ps_cont
-              - unless my_journals.empty?
-                - my_journals.each do |journal, k|
+              - unless @my_journals.empty?
+                - @my_journals.each do |journal, k|
                   %span.dd_notice.moder{:href => "#"}
                     %span.dd_n_cell.left
-                      %i.fa.fa-lg(class="#{journal_icon(journal)}")
+                      %i.fa.fa-lg(class="#{journal_icon(journal.type_event)} #{journal_color(journal.type_event)}")
                     %span.dd_n_cell.right
                       = Russian::strftime(journal.created_at,'%k:%M %d.%m.%Y')
                       %span.bold
@@ -26,7 +26,7 @@
                       %p
                         - if k > 1
                           = t('menu.journal_count', count: k-1)
-                        = journal_parser(journal, project.id).html_safe
+                        = journal_parser(journal, @project.id).html_safe
               - else
                 %a
                   = t('menu.journal_empty')

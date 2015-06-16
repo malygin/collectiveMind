@@ -18,20 +18,6 @@ class ProjectsController < ApplicationController
   end
 
   def journal_data
-    if params[:viewed]
-      post = current_model.where(id: params[:id], project_id: @project.id).first if params[:id]
-      post_id = if current_model.to_s == 'CollectInfo::Post'
-                  params[:asp] ? Core::Aspect::Post.find(params[:asp]) : @project.aspects.order(:id).first
-                else
-                  post
-                end
-      if params[:req_comment]
-        Journal.events_for_comment(@project, current_user, post_id.id, params[:req_comment].to_i).update_all(viewed: true) if post_id
-      else
-        Journal.events_for_content(@project, current_user, post_id.id).update_all(viewed: true) if post_id
-      end
-    end
-
     @my_journals = current_user.my_journals @project
     @my_journals_count = @my_journals.size
     return unless @my_journals_count == 0

@@ -10,7 +10,7 @@
       %li{class: "#{'active' if cabinet?}"}
         = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
       %li.has_dropwindow
-        = render partial: 'application/messages_menu', locals: {my_journals: @my_journals, project: @project}
+        = render partial: 'application/messages_menu'
       - if @project.closed?
         %li{class: "#{'active' if rating?}"}
           = link_to 'Рейтинг', users_path(@project), class: 'menu_a', 'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Посмотреть рейтинг участников'
