@@ -334,6 +334,9 @@
 .font_grey {
     color: #787878 !important;
 }
+.font_grey2{
+    color: #919191;
+}
 
 .font_lighter_grey {
     color: #9e9e9e !important;
@@ -348,7 +351,7 @@
 }
 
 .font_red {
-    color: #e71d2b !important;
+    color: #e9212f !important;
 }
 
 .font_red_pale {
@@ -401,6 +404,10 @@
 
 .font_violet {
     color: #bfb0db;
+}
+
+.font_green{
+    color: #4daf5b;
 }
 
 

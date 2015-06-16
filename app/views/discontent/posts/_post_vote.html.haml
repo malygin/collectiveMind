@@ -24,13 +24,13 @@
             = aspect.content
     .divider10
     .vote_controls.text-center
-      %button.btn.vote_button.v_btn_1{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_discontent_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 1, stage: vote_discontent_post_path(@project, post_vote.id, status: 1).split('/')[3]}, class: "#{'voted' if status == 1}", "data-icon-class" => "fa-exclamation", "data-vote-role" => "important", :role => "button"}
         %i.vote.vote-vote1
-      %button.btn.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
         %i.vote.vote-vote2
-      %button.btn.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "necessary", :role => "button"}
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "necessary", :role => "button"}
         %i.vote.vote-vote3
-      %button.btn.vote_button.v_btn_4{data: {project: @project.id, id: post_vote.id, status: 4, stage: vote_discontent_post_path(@project, post_vote.id, status: 4).split('/')[3]}, class: "#{'voted' if status == 4}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
+      %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 4, stage: vote_discontent_post_path(@project, post_vote.id, status: 4).split('/')[3]}, class: "#{'voted' if status == 4}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
         %i.vote.vote-vote4
       %span.vote_open_detail_imperf.grey
         %i.fa.fa-angle-right.font_white

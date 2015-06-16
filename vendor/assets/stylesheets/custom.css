@@ -4242,6 +4242,7 @@ h4.tall_modal_title {
 .vote_nav {
     position: relative;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 ul.vote_nav > li > a {
@@ -4252,26 +4253,6 @@ ul.vote_nav > li > a {
     background: none;
 }
 
-/*.folder_all {
-    position: absolute !important;
-    top: 40px;
-    left: -230px;
-}
-.folder_all.active {
-    display: none;
-}
-.folder_all .vote_folder {
-    display: inline-block;
-}
-.folder_all .vote_folder, .folder_all .vote_folder:focus {
-    color: #474747;
-}
-.folder_all .vote_folder:hover {
-    color: #aaa;
-}
-.folder_all .fa {
-    margin-right: 13px;
-}*/
 .vote_folders_cont {
     margin: 0 auto;
 }
@@ -4285,7 +4266,7 @@ ul.vote_nav > li > a {
 }
 
 .vote_folders_cont.folders_4 {
-    width: 464px;
+    width: 800px;
 }
 
 .vote_folder {
@@ -4435,8 +4416,6 @@ ul.vote_nav > li > a {
 
 .vote_button,
 .b_vote {
-    width: 28px;
-    height: 24px;
     margin: 0 2px;
     padding: 0;
 }
@@ -4451,22 +4430,22 @@ ul.vote_nav > li > a {
     opacity: 0.95;
 }
 
-.stage1_theme .vote_button.voted,
+
 .stage1_theme .b_vote.voted {
     background-image: image-url('vote/vote_all_1.png');
 }
 
-.stage2_theme .vote_button.voted,
+
 .stage2_theme .b_vote.voted {
     background-image: image-url('vote/vote_all_2.png');
 }
 
-.stage3_theme .vote_button.voted,
+
 .stage3_theme .b_vote.voted {
     background-image: image-url('vote/vote_all_3.png');
 }
 
-.stage4_theme .vote_button.voted,
+
 .stage4_theme .b_vote.voted {
     background-image: image-url('vote/vote_all_4.png');
 }
@@ -8038,35 +8017,62 @@ h4 i img{
 }
 
 
-.vote {
-    background-image: image-url('vote_btn.png');
+.stage1_theme .vote {
+    background-image: image-url('vote_btn_1.png');
     background-repeat: no-repeat;
     display: block;
 }
 
-.vote-vote1 {
+.stage1_theme .vote-vote1 {
     width: 24px;
     height: 22px;
     background-position: -5px -5px;
 }
 
-.vote-vote2 {
+.stage1_theme .vote-vote2 {
     width: 24px;
     height: 22px;
     background-position: -5px -37px;
 }
 
-.vote-vote3 {
+.stage1_theme .vote-vote3 {
     width: 24px;
     height: 22px;
     background-position: -39px -5px;
 }
 
-.vote-vote4 {
+.stage1_theme .vote-vote4 {
     width: 24px;
     height: 22px;
     background-position: -39px -37px;
 }
+
+.stage2_theme .vote {
+    width: 27px;
+    height: 30px;
+    background-image: image-url('vote_btn_2.png');
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.stage2_theme .vote-vote1 {
+
+    background-position: -5px -5px;
+}
+
+.stage2_theme .vote-vote2 {
+    background-position: -42px -5px;
+}
+
+.stage2_theme .vote-vote3 {
+    background-position: -79px -5px;
+}
+
+.stage2_theme .vote-vote4 {
+    margin-top: 9px;
+    background-position: -115px -5px;
+}
+
 .link_status{
     margin-left: 2px;
     margin-right: 2px;
@@ -8225,3 +8231,56 @@ h5.media-heading > a:hover{
 .font_color_d_blue{
     color: #3776a5;
 }
+/*new vote buttons*/
+.vote-folder {
+    background-image: url(vote_folder_big.png);
+    background-repeat: no-repeat;
+    display: block;
+    padding: 20px;
+    margin-bottom: 10px;
+    padding-top: 25px;
+}
+
+.vote-folder_1 {
+    width: 62px;
+    height: 53px;
+    background-position: -5px -5px;
+    margin-left: 55px;
+}
+
+.vote-folder_2 {
+    width: 63px;
+    height: 53px;
+    margin-left: 34px;
+    background-position: -77px -5px;
+}
+
+.vote-folder_3 {
+    width: 61px;
+    height: 53px;
+    margin-left: 41px;
+    background-position: -150px -5px;
+}
+
+.vote-folder_4 {
+    width: 61px;
+    height: 53px;
+    margin-left: 56px;
+    background-position: -221px -4px;
+}
+.stage2_theme .vote_nav li{
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+.stage1_theme .vote_nav li:hover,.stage1_theme .vote_nav .active,.vote_button.voted{
+    filter: brightness(120%);
+    -webkit-filter: brightness(120%);
+    -moz-filter: brightness(120%);
+}
+.stage1_theme .vote_nav .active{
+    padding-top:9px;
+    padding-bottom: 9px;
+    border: 1px #b9b9b9 solid;
+    border-radius:5px ;
+}
+
