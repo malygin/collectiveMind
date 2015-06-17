@@ -13,7 +13,7 @@ class Core::Project < ActiveRecord::Base
   has_many :discontent_accepted_post, -> { where status: 2 }, class_name: 'Discontent::Post'
   has_many :discontent_for_admin_post, -> { where status: 1 }, class_name: 'Discontent::Post'
   has_many :discontent_grouped_post, -> { where status: 4 }, class_name: 'Discontent::Post'
-  has_many :discontent_for_vote, -> { where status: [2, 4] }, class_name: 'Discontent::Post'
+  has_many :discontent_for_vote, -> { where status: 0 }, class_name: 'Discontent::Post'
 
   has_many :discontent_groups, -> { where status: 2 }, class_name: 'Discontent::PostGroup'
 
