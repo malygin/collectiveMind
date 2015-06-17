@@ -94,7 +94,11 @@ class PostsController < ProjectsController
   end
 
   def user_content
-    @content = current_model.by_project(@project).by_user(current_user)
+    if boss?
+      @content = current_model.by_project(@project)
+    else
+      @content = current_model.by_project(@project).by_user(current_user)
+    end
     @stage_comments = comment_model.by_user(current_user).stage_comments_for(@project)
   end
 
