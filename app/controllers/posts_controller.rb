@@ -94,7 +94,7 @@ class PostsController < ProjectsController
   end
 
   def user_content
-    if boss?
+    if current_user.boss?
       @content = current_model.by_project(@project)
     else
       @content = current_model.by_project(@project).by_user(current_user)

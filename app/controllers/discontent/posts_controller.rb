@@ -67,11 +67,10 @@ class Discontent::PostsController < PostsController
   end
 
   def update
-    if params[:discontent_post_aspects]
+    # if params[:discontent_post_aspects]
       @post.update_attributes(discontent_post_params)
-      @post.update_post_aspects(params[:discontent_post_aspects])
-      current_user.journals.create!(type_event: "#{name_of_model_for_param}_update", anonym: @post.anonym, project: @project, body: trim_content(@post.content), first_id: @post.id)
-    end
+      @post.update_post_aspects(params[:discontent_post_aspects])  if params[:discontent_post_aspects]
+      # current_user.journals.create!(type_event: "#{name_of_model_for_param}_update", anonym: @post.anonym, project: @project, body: trim_content(@post.content), first_id: @post.id)
     respond_to do |format|
       format.js
     end
