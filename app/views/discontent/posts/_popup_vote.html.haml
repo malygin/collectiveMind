@@ -16,7 +16,7 @@
                 %span.vote_counter
                   =@user_voter.unvote_discontents_for_vote(@project).count
                 %h5.font_color_stage2 Общий список
-          %li.col-md-2.no_padding_col.active{:role => "presentation"}
+          %li.col-md-2.no_padding_col{:role => "presentation"}
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
               .vote-folder.vote-folder_1
                 %span.font_white.bold
@@ -61,13 +61,13 @@
         .row
           .divider25
           .tab-content
-            #vote_tab1.tab-pane.all_vote{"data-vote-poll-role" => "all", :role => "tabpanel"}
+            #vote_tab1.tab-pane.all_vote.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
               .container.padding30
                 .row
                   - @user_voter.unvote_discontents_for_vote(@project).each do |post|
                     = render partial: 'post_vote', object: post, locals: {status: 0}
               .divider50
-            #vote_tab2.tab-pane.active{"data-vote-poll-role" => "important", :role => "tabpanel"}
+            #vote_tab2.tab-pane{"data-vote-poll-role" => "important", :role => "tabpanel"}
               .container.padding30
                 .row
                   - @user_voter.discontents_for_vote(@project, 1).each do |post|
