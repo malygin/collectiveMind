@@ -66,54 +66,12 @@ module ApplicationHelper
     @project.news.count - count_news_log > 0
   end
 
-  # @todo refac
+  # for collect_info it collect_info_posts_sub_1_quesction_true and etc, for others just like discontent_posts
   def current_stage_popover_status
-    if name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress != 100
-      'collect_info_questions_0'
-    elsif name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress == 100
-      'collect_info_discuss_0'
-    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress != 100
-      'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress == 100
-      'collect_info_discuss_1'
-    elsif name_controller == :collect_info_posts && (@project.main_stage > 1 || @project.stage == '1:2') && @questions_progress != 100
-      'collect_info_questions_1'
-    elsif name_controller == :collect_info_posts && (@project.main_stage > 1 || @project.stage == '1:2') && @questions_progress == 100
-      'collect_info_discuss_1'
-    elsif name_controller == :discontent_posts
-      'discontent_discuss'
-    elsif name_controller == :concept_posts
-      'concept_discuss'
-    elsif name_controller == :novation_posts
-      'novation_discuss'
-    elsif name_controller == :plan_posts
-      'plan_discuss'
-    elsif name_controller == :estimate_posts
-      'estimate_discuss'
-    elsif name_controller == :completion_proc_posts
-      'completion_proc_discuss'
-    end
-  end
-
-  # @todo refac
-  def current_stage_popover_text
-    if name_controller == :collect_info_posts && @project.stage == '1:0' && @questions_progress != 100
-      'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>' \
-          'Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>' \
-          'Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
-    elsif name_controller == :collect_info_posts && @project.stage == '1:1' && @questions_progress != 100
-      'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red bold"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ ДЛЯ БАЗЫ ЗНАНИЙ.</span>'\
-       'Ответив на вопросы или выбрав возможность «Пропустить вопрос», вы сможете перейти к обсуждению прочитанного с остальными участниками.'
-    elsif name_controller == :collect_info_posts && @questions_progress == 100
-      'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>' \
-          'Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>' \
-          'Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'
-    elsif name_controller == :discontent_posts
-      'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
-    elsif name_controller == :concept_posts
-      'Идеи, предложенные на этой стадии, в дальнейшем будут объединяться в пакеты.'
+    if name_controller == :collect_info_posts
+      name_controller.to_s + "_stage_popover_sub_#{@project.main_stage}_question_#{@questions_progress == 100}"
     else
-      'Здесь могла быть подсказка, но пока ее нет!'
+      name_controller.to_s + '_stage_popover'
     end
   end
 
