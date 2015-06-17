@@ -4268,7 +4268,9 @@ ul.vote_nav > li > a {
 .vote_folders_cont.folders_4 {
     width: 800px;
 }
-
+.vote_folders_cont.folders_5 {
+    width: 1000px;
+}
 .vote_folder {
     width: 126px;
 }
