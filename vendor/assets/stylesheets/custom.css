@@ -8235,7 +8235,7 @@ h5.media-heading > a:hover{
 }
 /*new vote buttons*/
 .vote-folder {
-    background-image: url(vote_folder_big.png);
+    background-image: image-url('vote_folder_big.png');
     background-repeat: no-repeat;
     display: block;
     padding: 20px;
