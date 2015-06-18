@@ -4269,7 +4269,7 @@ ul.vote_nav > li > a {
     width: 800px;
 }
 .vote_folders_cont.folders_5 {
-    width: 1000px;
+    width: 900px;
 }
 .vote_folder {
     width: 126px;
@@ -4286,7 +4286,7 @@ ul.vote_nav > li > a {
 }
 
 .vote_folders_cont li.active .vote_folder_inn {
-    border-color: #cfcfcf;
+
     background: image-url('icon-vote-sprite2.png') no-repeat no-repeat;
 }
 
@@ -4339,15 +4339,15 @@ ul.vote_nav > li > a {
 }
 
 .vote_counter {
-    position: absolute;
-    display: block;
-    text-align: center;
-    top: 32px;
-    left: 35px;
-    width: 35px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
+    /*position: absolute;*/
+    /*display: block;*/
+    /*text-align: center;*/
+    /*top: 32px;*/
+    /*left: 35px;*/
+    /*width: 35px;*/
+    /*color: #fff;*/
+    /*font-size: 12px;*/
+    /*font-weight: bold;*/
 }
 
 .vote_itemslist_cont {
@@ -8247,42 +8247,62 @@ h5.media-heading > a:hover{
     width: 62px;
     height: 53px;
     background-position: -5px -5px;
-    margin-left: 55px;
+    margin-left: 25px;
 }
 
 .vote-folder_2 {
     width: 63px;
     height: 53px;
-    margin-left: 34px;
+    margin-left: 24px;
     background-position: -77px -5px;
 }
 
 .vote-folder_3 {
     width: 61px;
     height: 53px;
-    margin-left: 41px;
+    margin-left: 31px;
     background-position: -150px -5px;
 }
 
 .vote-folder_4 {
     width: 61px;
     height: 53px;
-    margin-left: 56px;
+    margin-left: 36px;
     background-position: -221px -4px;
+}
+.vote-folder_5 {
+    width: 61px;
+    height: 53px;
+    margin-left:15px;
+    background-position: -292px -4px;
+}
+.stage2_theme .vote_nav{
+    margin-left:40px;
+    border-bottom:0;
 }
 .stage2_theme .vote_nav li{
     padding-top:10px;
     padding-bottom: 10px;
 }
-.stage1_theme .vote_nav li:hover,.stage1_theme .vote_nav .active,.vote_button.voted{
+.stage2_theme .vote_nav li:hover,.stage2_theme .vote_nav >  li.active,.vote_button.voted{
     filter: brightness(120%);
     -webkit-filter: brightness(120%);
     -moz-filter: brightness(120%);
 }
-.stage1_theme .vote_nav .active{
+.stage2_theme .vote_nav > li.active{
     padding-top:9px;
     padding-bottom: 9px;
     border: 1px #b9b9b9 solid;
     border-radius:5px ;
 }
-
+.stage2_theme .vote_nav.nav-tabs > li.active > a, .stage2_theme .vote_nav.nav-tabs > li.active > a:focus, .stage2_theme .vote_nav.nav-tabs > li.active > a:hover{
+    background-color:none;
+    color:none;
+    border:0;
+}
+.stage2_theme .vote_nav.nav-tabs > li{
+    margin-left:10px;
+    margin-right:10px;
+    padding-left:5px;
+    padding-right:5px;
+}

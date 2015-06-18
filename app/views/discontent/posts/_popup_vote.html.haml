@@ -9,54 +9,54 @@
       .vote_progress.light-green.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
     .modal_body
       .vote_folders_cont.folders_5.no_padding_col.text-center
-        %ul.nav.vote_nav.row{:role => "tablist"}
-          %li.col-md-2.no_padding_col.folder_all.active{:role => "presentation"}
-            %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
-              .vote_folder_inn.poll-2-1
-                %span.vote_counter
+        %ul.nav.vote_nav.nav-tabs{:role => "tablist"}
+          %li.active{:role => "presentation"}
+            %a{"data-toggle" => "tab", "data-vote-folder-role" => "all", :href => "#vote_tab1", :role => "tab"}
+              .vote-folder.vote-folder_5
+                %span.vote_counter.font_white.bold
                   =@user_voter.unvote_discontents_for_vote(@project).count
-                %h5.font_color_stage2 Общий список
-          %li.col-md-2.no_padding_col{:role => "presentation"}
+              %b.font12.font_color_stage2
+                Общий список
+          %li{:role => "presentation"}
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
               .vote-folder.vote-folder_1
-                %span.font_white.bold
+                %span.vote_counter.font_white.bold
                   =@user_voter.voted_discontent_posts.by_status(1).count
               %b.font12
                 %span.font_red Важные
                 %span.font_grey2
                   = '|'
                 %span.font_green Срочные
-          %li.col-md-3{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
+          %li{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
               .vote-folder.vote-folder_2
-                %span.font_white.bold
+                %span.vote_counter.font_white.bold
                   =@user_voter.voted_discontent_posts.by_status(2).count
               %b.font12
                 %span.font_red Важные
                 %span.font_grey2
                   = '|'
                 %span.font_grey2 Менее срочные
-          %li.col-md-3{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
+          %li{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "necessary", :href => "#vote_tab4", :role => "tab"}
               .vote-folder.vote-folder_3
-                %span.font_white.bold
+                %span.vote_counter.font_white.bold
                   =@user_voter.voted_discontent_posts.by_status(3).count
               %b.font12
                 %span.font_green Срочные
                 %span.font_grey2
                   = '|'
                 %span.font_grey2 Менее важные
-          %li.col-md-2{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
+          %li{:role => "presentation","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Перейти в список"}
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab5", :role => "tab"}
               .vote-folder.vote-folder_4
-                %span.font_white.bold
+                %span.vote_counter.font_white.bold
                   =@user_voter.voted_discontent_posts.by_status(4).count
               %b.font12.font_grey2
                 %span Неважные
                 %span
                   = '|'
                 %span Несрочные
-      .divider25
       .container
         .row
           .divider25
