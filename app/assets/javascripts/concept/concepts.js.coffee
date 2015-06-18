@@ -25,8 +25,8 @@ ConceptCollectionView = Backbone.View.extend
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
-    #    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
-    $('#filter').on('change', this.loadByDiscontent)
+    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
+#    $('#filter').on('change', this.loadByDiscontent)
     $('#sorter').on('click', 'span', this.sortByDiscontent)
   render: ()->
     this.collection.forEach(this.addOne, this)
@@ -55,10 +55,10 @@ ConceptCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
 
   loadByDiscontent: (evt)->
-    #    evt.preventDefault();
-    #    filterValue = $(this).data('discontent')
-    #    $('#tab_dispost_concepts').isotope
-    #      filter: filterValue
+    evt.preventDefault();
+    filterValue = $(this).data('discontent')
+    $('#tab_dispost_concepts').isotope
+      filter: filterValue
 
     dc.fetch
       # data: $.param({discontent: $(this).data('discontent')})
@@ -86,6 +86,7 @@ ConceptCollectionView = Backbone.View.extend
 if window.location.href.indexOf("concept/posts") > -1 and window.location.href.indexOf("concept/posts/") == -1
   dc = new ConceptCollection
   dc.fetch
+    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new ConceptCollectionView({collection: dc})
       dv.render()

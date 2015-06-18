@@ -33,6 +33,8 @@ class Concept::PostsController < PostsController
       @posts = @project.concept_ongoing_post.created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:concept, @project)
+    @last_time_visit = params[:last_time_visit]
+
     @project_result = ProjectDecorator.new @project unless @project.stage == '3:0'
     respond_to :html, :json
   end

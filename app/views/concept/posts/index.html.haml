@@ -25,7 +25,7 @@
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter
+        %span#sorter{data: {visit: last_time_visit_page('concept')}}
           %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'},'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
             - new_comments = @project.concept_ongoing_post.after_last_visit_comments(last_time_visit_page('concept')).size
             - if new_comments > 0
