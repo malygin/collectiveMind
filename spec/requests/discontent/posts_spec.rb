@@ -153,8 +153,8 @@ describe 'Discontent' do
 
     it_behaves_like 'discuss discontents'
 
-    context 'vote content', js: true do
-      xit_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
+    context 'vote content', js: true, skip: true do
+      it_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
     end
     it 'can see stage result for previous stage ', js: true do
       visit collect_info_posts_path(project)
