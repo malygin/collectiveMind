@@ -122,7 +122,7 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  it 'publish', js: true do
+  xit 'publish', js: true do
     visit edit_discontent_post_path(@project, @discontent)
     expect {
       click_link "publish_#{@discontent.id}"

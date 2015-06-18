@@ -248,13 +248,14 @@ $ ->
     role = $(this).attr('data-vote-poll-role')
     len = count_vote_items($(this))
     folder_len[role] = len
-    $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text len
+    $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text len
     return
   pb = $('.vote_progress')
   all_len = folder_len['overall'] = count_vote_items('.all_vote')
   pb_stretch pb, all_len, folder_len['overall']
   $('.vote_button').click ->
     role = $(this).attr('data-vote-role')
+    console.log role
     if !$(this).hasClass('voted')
       if $(this).siblings().hasClass('voted')
         prev_role = $(this).siblings('.voted').attr('data-vote-role')
@@ -265,22 +266,23 @@ $ ->
       $(this).addClass 'voted'
       $('.fa', this).removeClass($(this).attr('data-icon-class')).addClass vote_icon_all
       vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text ++folder_len[role]
+      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text ++folder_len[role]
+
       if prev_role
-        $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text --folder_len[prev_role]
+        $('[data-vote-folder-role = "' + prev_role + '"] > .vote-folder > .vote_counter').text --folder_len[prev_role]
       else
         all_len--
-        $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text all_len
+        $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
         pb_stretch pb, all_len, folder_len['overall']
       $('[data-vote-poll-role = "' + role + '"] .container>.row').append vote_item
     else
       $(this).removeClass 'voted'
       $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
       vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text --folder_len[role]
+      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text --folder_len[role]
       $('.all_vote>.container>.row').append vote_item
       all_len++
-      $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text all_len
+      $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
       pb_stretch pb, all_len, folder_len['overall']
     item_e = $(this).parents('.item_expandable')
     if item_e.hasClass('opened')

@@ -21,7 +21,7 @@
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "important", :href => "#vote_tab2", :role => "tab"}
               .vote-folder.vote-folder_1
                 %span.vote_counter.font_white.bold
-                  =@user_voter.voted_discontent_posts.by_status(1).count
+                  =@user_voter.discontents_for_vote(@project, 1).count
               %b.font12
                 %span.font_red Важные
                 %span.font_grey2
@@ -31,7 +31,7 @@
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "not_important", :href => "#vote_tab3", :role => "tab"}
               .vote-folder.vote-folder_2
                 %span.vote_counter.font_white.bold
-                  =@user_voter.voted_discontent_posts.by_status(2).count
+                  =@user_voter.discontents_for_vote(@project, 2).count
               %b.font12
                 %span.font_red Важные
                 %span.font_grey2
@@ -41,7 +41,7 @@
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "necessary", :href => "#vote_tab4", :role => "tab"}
               .vote-folder.vote-folder_3
                 %span.vote_counter.font_white.bold
-                  =@user_voter.voted_discontent_posts.by_status(3).count
+                  =@user_voter.discontents_for_vote(@project, 3).count
               %b.font12
                 %span.font_green Срочные
                 %span.font_grey2
@@ -51,7 +51,7 @@
             %a{"data-toggle" => "tab", "data-vote-folder-role" => "unnecessary", :href => "#vote_tab5", :role => "tab"}
               .vote-folder.vote-folder_4
                 %span.vote_counter.font_white.bold
-                  =@user_voter.voted_discontent_posts.by_status(4).count
+                  =@user_voter.discontents_for_vote(@project, 4).count
               %b.font12.font_grey2
                 %span Неважные
                 %span
