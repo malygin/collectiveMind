@@ -1,8 +1,8 @@
 -if name_controller == :concept_posts
   #slide-panel.slide-outer{style: "margin-left:-400px", "data-position" => "left"}
-    %span#opener.slide-opener.i_new_stage.rounded_2{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Если здесь горит красная надпись NEW, значит, где-то за пределами экрана появились новые идеи или комментарии."}
+    %span#opener.slide-opener.i_new_stage.rounded_2.tooltip1{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны."}
       = image_tag 'text-slider-opener.png'
-    #tooltip_slide_panel.slide-inner.slide_stage3.white.tooltip1{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны."}
+    #tooltip_slide_panel.slide-inner.slide_stage3.white
       .ps_cont#filter
         .divider15
         .checkox_item{data: {discontent: "*"}}

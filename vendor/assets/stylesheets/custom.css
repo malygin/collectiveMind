@@ -5913,7 +5913,7 @@ ul.vote_nav > li > a {
 .collapser_type2 {
     display: block;
     position: relative;
-    padding: 9px 9px;
+    padding: 9px 30px 9px 9px;
     font-size: 12px;
     margin-bottom: 10px;
     border-radius: 2px;
