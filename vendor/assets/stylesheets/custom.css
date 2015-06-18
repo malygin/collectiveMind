@@ -7116,7 +7116,7 @@ i.fa.sticker_close {
 }
 
 .popover{
-    z-index: 2000;
+    z-index: 1000;
 }
 .list_stripes .popover{
     min-width: 500px;
@@ -8305,4 +8305,8 @@ h5.media-heading > a:hover{
     margin-right:10px;
     padding-left:5px;
     padding-right:5px;
+}
+
+.cab_cont_block .post-bottom{
+    padding-bottom: 0;
 }
