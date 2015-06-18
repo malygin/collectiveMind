@@ -2,9 +2,9 @@ ru:
   activerecord:
     attributes:
       concept/post:
-        actors: "Кто будет делать иначе?"
+        actors: "Кто будет действовать иначе после реализации идеи?"
         content: "Что будет иначе?"
-        goal: "Суть идеи"
+        goal: "Суть идеи, что и как будет изменено?"
         impact_env: "Чьи интересы будут затронуты?"
         title: "Название идеи"
       core/aspect/post:

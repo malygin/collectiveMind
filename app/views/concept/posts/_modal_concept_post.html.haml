@@ -63,36 +63,22 @@
             .divider25
             .stripe-qa
               .lined-heading
-                %span.bold-stripe
-                  Суть идеи
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.goal
+                %span.bold-stripe= t('activerecord.attributes.concept/post.goal')
+              %p= @post.goal
+            -#.stripe-qa
+            -#  .lined-heading
+            -#    %span.bold-stripe
+            -#      Что будет иначе?
+            -#  %p
+            -#    = @post.content
             .stripe-qa
               .lined-heading
-                %span.bold-stripe
-                  Что будет иначе?
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.content
+                %span.bold-stripe= t('activerecord.attributes.concept/post.actors')
+              %p= @post.actors
             .stripe-qa
               .lined-heading
-                %span.bold-stripe
-                  Кто будет делать иначе?
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.actors
-            .stripe-qa
-              .lined-heading
-                %span.bold-stripe
-                  Чьи интересы будут затронуты?
-              %p
-                %strong
-                  = t('show.desc')
-                = @post.impact_env
+                %span.bold-stripe= t('activerecord.attributes.concept/post.impact_env')
+              %p= @post.impact_env
 
           .col-md-6.exp_col.right
             %button.btn.btn_reset.exp_button.pull-left
