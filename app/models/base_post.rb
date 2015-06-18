@@ -123,15 +123,9 @@ module BasePost
     end
 
     def change_status_by(user, params)
-      if params[:discuss_status]
-        self.toggle!(:discuss_status)
-        type = 'discuss_status' if discuss_status
-      elsif params[:approve_status]
-        self.toggle!(:approve_status)
-        type = 'approve_status' if approve_status
-      end
-      return unless type && self.user != user
-      self.user.journals.build(type_event: 'my_' + class_name + '_' + type, user_informed: self.user, project: project,
+      self.toggle!(params[:status])
+      return unless self[params[:status].to_sym] && self.user != user
+      self.user.journals.build(type_event: 'my_' + class_name + '_' + params[:status], user_informed: self.user, project: project,
                                body: field_for_journal, first_id: id, personal: true, viewed: false).save!
       # if @project.closed?
       #   # Resque.enqueue(PostNotification, self.to_s, @project.id, self.user.id, name_of_model_for_param, type, self.id)
