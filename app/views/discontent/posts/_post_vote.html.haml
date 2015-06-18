@@ -4,18 +4,9 @@
       %h6
         = post_vote.content
     .item_expandable_imperf.themes_cont{style: "height:50px;"}
-      %p.bold
-        = t('activerecord.attributes.discontent/post.what')
       %p
         = post_vote.what
-      %p.bold
-        = t('activerecord.attributes.discontent/post.whered')
-      %p
-        = post_vote.whered
-      %p.bold
-        = t('activerecord.attributes.discontent/post.whend')
-      %p
-        = post_vote.whend
+
 
     .post-theme{id: "stripe#{post_vote.id}"}
       - post_vote.post_aspects.each_with_index do |aspect, index|
