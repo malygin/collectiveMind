@@ -95,16 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def can_vote_for(stage, project)
-    if stage == :collect_info && project.stage == '1:2' && project.get_free_votes_for(self, stage) > 0
-      return true
-    elsif stage == :discontent && project.stage == '2:1' && project.get_free_votes_for(self, stage) > 0
-      return true
-    elsif stage == :concept && project.stage == '3:1' && project.get_free_votes_for(self, stage) > 0
-      return true
-    elsif stage == :novation && project.stage == '4:1' && project.get_free_votes_for(self, stage) > 0
-      return true
-    end
-    false
+    %w(1:2 2:1 3:1 4:1).include?(project.stage) && project.get_free_votes_for(self, stage) > 0
   end
 
   def content_for_project(stage, project)

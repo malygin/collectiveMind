@@ -1,5 +1,36 @@
 ---
 ru:
+
+  core_aspect_save_post: 'добавил(a) аспект '
+  core_aspect_post_approve_status:  'выделил(а) как важный аспект  '
+  my_core_aspect_post_approve_status: 'выделил(а) как важный ваш аспект  '
+  my_core_aspect_post_like: 'понравился ваш аспект '
+  my_core_aspect_post_dislike: 'не понравился ваш аспект '
+  my_add_score_core_aspect_post: "вы получили %{body} баллов за аспект "
+
+  core_aspect_comment_save: "добавил(а) комментарий: '%{body} ...' к аспекту: "
+  my_core_aspect_comment:  "добавил(а) комментарий: '%{body} ...' к вашему аспекту "
+  reply_core_aspect_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
+  core_aspect_comment_approve_status:  "выделил(а) как важный комментарий: '%{body}...' к аспекту "
+  my_core_aspect_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body}' к аспекту "
+  my_core_aspect_comment_dislike: "не понравился ваш комментарий: '%{body}' к аспекту "
+  my_core_aspect_comment_like: "понравился ваш комментарий: '%{body}' к аспекту "
+
+  discontent_post_save: 'добавил(a) несовершенство '
+
+  discontent_postt_comment_save: "добавил(а) комментарий: '%{body} ...' к несовершенству: "
+  my_discontent_comment:  'добавил(а) комментарий: "%{body} ..." к вашему несовершенству '
+  reply_discontent_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
+  discontent_comment_approve_status:  "выделил(а) как важный комментарий: '%{body}...' к аспекту "
+  my_discontent_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body}' к аспекту "
+  my_discontent_comment_dislike: "не понравился ваш комментарий: '%{body}' к аспекту "
+  my_discontent_comment_like: "понравился ваш комментарий: '%{body}' к аспекту "
+
+
+  concept_post_save: 'добавил(a) идею '
+  novation_post_save: 'добавил(a) пакет '
+  plan_post_save: 'добавил(a) проектное предложение '
+
   discontent_posts_stage_popover: 'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
   project_users_count:
     one: "1 участник"
