@@ -42,6 +42,12 @@ class Discontent::Post < ActiveRecord::Base
                     tsearch: { prefix: true }
                   }
 
+  def by_aspect_and_subaspects(aspect_id)
+    aspect = Core::Aspect::Post.find(aspect_id.scan(/\d/).join(''))
+    subaspects = aspect.core_aspects.map { |asp, _| asp.id }
+    @project.discontents.by_aspect([aspect.id] + subaspects).created_order
+  end
+
   # привязка аспектов к несовершенству
   def update_post_aspects(aspects_new)
     discontent_post_aspects.destroy_all

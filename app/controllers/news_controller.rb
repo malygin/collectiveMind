@@ -26,12 +26,7 @@ class NewsController < ApplicationController
   def create
     @news = @project.news.create(news_params)
     @news.user = current_user
-
     if @news.save
-      @project.users.each do |user|
-        current_user.journals.create!(type_event: 'my_new_expert_news', user_informed: user, project: @project,
-                                      body: trim_content(@news.title), first_id: @news.id, personal: true, viewed: false)
-      end
       redirect_to news_path(@project, @news), notice: 'News was successfully created.'
     else
       render :new

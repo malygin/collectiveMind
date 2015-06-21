@@ -9,6 +9,9 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  Max: 8
+
 AllCops:
   Exclude:
     - 'vendor/**/*'

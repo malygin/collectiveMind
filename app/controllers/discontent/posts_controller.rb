@@ -21,19 +21,14 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    @posts = nil
     if params[:aspect] && params[:aspect] != '*' && params[:aspect] != '#'
-      # @posts = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join('')).aspect_posts.by_status_for_discontent(@project).created_order
-      aspect = Core::Aspect::Post.find(params[:aspect].scan(/\d/).join(''))
-      subaspects = aspect.core_aspects.map { |asp, _| asp.id }
-      @posts = @project.discontents.by_aspect([aspect.id] + subaspects).created_order
+      @posts = @project.discontents.by_aspect_and_subaspects(params[:aspect]).created_order
     elsif params[:aspect] == '#'
       @posts = @project.discontents_for_discussion.without_aspects.created_order
     else
       @posts = @project.discontents_for_discussion.created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
-
     respond_to :html, :json
   end
 
@@ -53,16 +48,12 @@ class Discontent::PostsController < PostsController
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     if params[:discontent_post_aspects]
-      params[:discontent_post_aspects].each do |asp|
-        @post.discontent_post_aspects.build(aspect_id: asp.to_i)
-      end
+      params[:discontent_post_aspects].each { |asp|  @post.discontent_post_aspects.build(aspect_id: asp.to_i) }
     end
     if @post.save
       current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content), first_id: @post.id, project: @project.project)
     end
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def update

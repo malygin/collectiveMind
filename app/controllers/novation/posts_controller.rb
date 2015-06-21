@@ -28,24 +28,15 @@ class Novation::PostsController < PostsController
     if @novation.save
       current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project.project).save!
     end
-    @novation.fullness = @novation.update_fullness
-    if params[:novation_post][:published]
-      @novation.update status: current_model::STATUSES[:published]
-    end
-
+    @novation.update(status: current_model::STATUSES[:published])   if params[:novation_post][:published]
     if params[:novation_post_concept]
-      params[:novation_post_concept].each do |asp|
-        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
-      end
+      params[:novation_post_concept].each { |asp| @novation.novation_post_concepts.create(concept_post_id: asp.to_i) }
     end
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def update
     @novation.update_attributes novation_params
-    @novation.update_fullness
     if params[:novation_post][:published]
       @novation.update status: current_model::STATUSES[:published]
     end

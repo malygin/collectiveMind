@@ -84,21 +84,6 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def users
-    @project = Core::Project.find(params[:project]) if params[:project]
-    @core_projects = current_user.current_projects_for_user
-    @core_project = @core_projects.first
-    if @project
-      if @project.type_access == 2
-        @users = @project.users_in_project.includes(:core_project_scores).where(users: { type_user: uniq_proc_users }).order('core_project_scores.score DESC NULLS LAST').paginate(page: params[:page])
-      else
-        @users = User.joins(:core_project_scores).where('core_project_scores.project_id = ? AND core_project_scores.score > 0', @project.id).where(users: { type_user: uniq_proc_users }).order('core_project_scores.score DESC').paginate(page: params[:page])
-      end
-    else
-      @users = User.where(type_user: uniq_proc_users).order('score DESC').paginate(page: params[:page])
-    end
-  end
-
   private
 
   def last_seen_news

@@ -1,4 +1,5 @@
 module JournalHelper
+  # rubocop:disable Metrics/MethodLength
   def journal_icon(j)
     case j
       when /_approve_status/

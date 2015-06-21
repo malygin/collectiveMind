@@ -11,9 +11,7 @@ def mailer(users)
     h[arr[0]] << [arr[1], arr[2]]
   end
 
-  h.each do |k, v|
-    PostMailer.feed_mailer(k, v).deliver
-  end
+  h.each { |k, v| PostMailer.feed_mailer(k, v).deliver }
 end
 
 class FeedModeratorMailer

@@ -90,36 +90,14 @@ module BasePost
       self.class.name.deconstantize.underscore
     end
 
-    def current_class?(stage)
-      case stage
-        when :collect_info, 'collect_info'
-          self.instance_of? CollectInfo::Post
-        when :discontent, 'discontent'
-          self.instance_of? Discontent::Post
-        when :concept, 'concept'
-          self.instance_of? Concept::Post
-        when :plan, 'plan'
-          self.instance_of? Plan::Post
-        when :estimate, 'estimate'
-          self.instance_of? Estimate::Post
-        else
-          false
-      end
-    end
-
     def vote(user, status)
       saved_vote = final_votings.where(user_id: user)
       if saved_vote.present?
-        vote = saved_vote.first
-        if vote.status != status.to_i
-          saved_vote.destroy_all
-          final_votings.create(user: user, status: status).save!
-        elsif vote.status == status.to_i
-          saved_vote.destroy_all
-        end
-      else
-        final_votings.create(user: user, status: status).save!
+        vote_status = saved_vote.first.status
+        saved_vote.destroy_all
+        return if  vote_status == status.to_i
       end
+      final_votings.create(user: user, status: status).save!
     end
 
     def change_status_by(user, params)

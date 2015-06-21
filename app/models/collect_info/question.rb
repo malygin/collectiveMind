@@ -18,24 +18,21 @@ class CollectInfo::Question < ActiveRecord::Base
 
   def answer_from_type(user, answers, content, skip, type_for_questions)
     # если вопрос пропущен, то просто создаем пустой ответ
-    unless skip
-      # если опрос, то создаем коммент к аспекту и связываем коммент и ответ (если вопрос с ответами)
-      if type_comment == 0
-        core_aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i)) if content.present?
-      # иначе проверяем наличие ответов (пояснение не обязательно)
-      elsif type_for_questions == 1 && answers
-        # если вопросы с правильными ответами (второй подэтап), то проверка правильности ответов
-        wrong = self.uncorrect_answers?(answers)
-      end
-    end
-    # если нет неправильных ответов и ответ не записан
-    unless wrong
+    return true if skip
+    if  content.present? && type_for_questions == 0
+      core_aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i))
+      return true
+    elsif self.uncorrect_answers?(answers) & type_for_questions == 1
       user.user_answers.where(project_id: project.id, question_id: id, aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
+      return true
     end
-    wrong
+    false
   end
 
+  private
+
   def uncorrect_answers?(answers)
+    return false unless answers
     correct_answers = self.answers.by_correct.pluck('collect_info_answers.id')
     answers = answers.collect(&:to_i)
     (answers - correct_answers).present? || (correct_answers - answers).present?

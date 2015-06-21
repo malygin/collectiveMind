@@ -5,24 +5,14 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 74
-Metrics/AbcSize:
-  Max: 393
 
 
-
-# Offense count: 14
-Metrics/CyclomaticComplexity:
-  Max: 67
 
 # Offense count: 696
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:
   Max: 286
 
-# Offense count: 41
-# Configuration parameters: CountComments.
-Metrics/MethodLength:
-  Max: 138
+
 
 

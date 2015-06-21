@@ -49,15 +49,11 @@ class Plan::PostsController < PostsController
     if @post.update_attributes plan_post_params
       current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project.project).save!
     end
-    if params[:plan_post][:published]
-      @post.update status: current_model::STATUSES[:published]
-    end
+    @post.update(status: current_model::STATUSES[:published])  if params[:plan_post][:published]
     if @post.post_novations.any?
       @post.post_novations.first.update_attributes plan_post_novation_params
     end
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def destroy

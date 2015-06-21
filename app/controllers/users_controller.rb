@@ -38,10 +38,7 @@ class UsersController < ProjectsController
     #     format.js
     #   end
     # end
-    respond_to do |format|
-      format.html { redirect_to user_path(@project, @user) }
-      format.js
-    end
+    respond_to :js
   end
 
   def destroy
