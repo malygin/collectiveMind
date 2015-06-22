@@ -5953,7 +5953,7 @@ ul.vote_nav > li > a {
     padding-bottom: 15px;
 }
 
-.check_push_cont > div {
+.check_push_cont > div, .unchecked_items  > div {
     border-top: 1px solid #d0d0d0;
 }
 
@@ -5961,7 +5961,7 @@ ul.vote_nav > li > a {
     padding: 14px 0 8px;
 }
 
-.check_push_cont .item:last-child {
+.check_push_cont .item:last-child{
     border-bottom: 1px solid #d2d2d2;
 }
 
