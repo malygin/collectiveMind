@@ -91,7 +91,7 @@
                               <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
                                 <%= count_likes %>
                               </small>
-                              <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=false">
+                              <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Нравится" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=false">
                                 <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
                               </a>
                             </span>
@@ -99,7 +99,7 @@
                                <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
                                  <%= count_dislikes %>
                                </small>
-                               <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=true">
+                               <a id="dislike_post_<%= id %>"  class="sm" data-remote="true" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Не нравится" data-method="put" href="/project/<%= project_id %>/novation/posts/<%= id %>/like?against=true">
                                  <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
                                </a>
                              </span>
