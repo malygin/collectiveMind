@@ -29,17 +29,25 @@
                         </p>
                     </div>
                     <div class='media-body white-gray'>
-                        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>?last_time_visit=<%= last_time_visit %>>)">
-                            <h5 class="font_color_stage3 bold">
-                                <%= title %>
-                                <i class="fa fa-angle-right icon-right"></i>
-                            </h5>
-                        </a>
-                        <div class="post-text">
-                            <p>
-                                <%= content %>
-                            </p>
-                        </div>
+                        <table class="table">
+                            <tr class="what">
+                                <td class="col-md-12 left-column">
+                                    <a id="show_record_<%= id %>" class="font_color_stage3 bold" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>?last_time_visit=<%= last_time_visit %>>)">
+
+                                            <%= title %>
+                                            <i class="fa fa-angle-right icon-right"></i>
+
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-12 left-column">
+
+                                   <%= content %>
+
+                                </td>
+                            </tr>
+                        </table>
                         <% if(comments.length > 0) { %>
                         <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
                             <div class="wrapper ps_cont half_wheel_speed">

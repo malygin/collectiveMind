@@ -5664,7 +5664,7 @@ ul.vote_nav > li > a {
     color: #4e4e4e;
 }
 
-.post .what, .pink .what {
+.pink .what {
     border-bottom: 2px solid #f8cdcd;
 }
 
@@ -8311,6 +8311,6 @@ h5.media-heading > a:hover{
     padding-bottom: 0;
 }
 
-.stage3_theme .stage-post-block .post-text{
-    min-height:80px;
+.post_type_3 .post-body .media-body table{
+    height:135px;
 }
