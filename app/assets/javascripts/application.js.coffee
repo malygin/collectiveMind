@@ -301,6 +301,31 @@ $ ->
   ch_its = $('.item', '.checked_items').length
   unch_its = $('.item', '.unchecked_items').length
   $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  $('#check0').click ->
+    if  $("#check0").is(":checked")
+      $("#unchecked_discontent_posts input:checkbox").prop('checked', true);
+      $.each $('#unchecked_discontent_posts .item'), ->
+        item = $(this).closest('.item').detach()
+        item_id = $(item).attr('data-id')
+        $('#discontents').find('.item[data-id=' + item_id + ']').remove()
+        $('.checked_items').append item
+        ch_its++
+        unch_its--
+        $('.hideable_checks').show()
+        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+    else
+      $("input:checkbox").prop('checked', false)
+      $.each $('.checked_items .item'), ->
+        item = $(this).closest('.item').detach()
+        item_id = $(item).attr('data-id')
+        $('.unchecked_items').append item
+        ch_its--
+        unch_its++
+        if ch_its == 0
+          $('.hideable_checks').hide()
+        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
   $('.check_push_box').click ->
     item = $(this).closest('.item').detach()
     item_id = $(item).attr('data-id')
