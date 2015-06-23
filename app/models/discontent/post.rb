@@ -62,7 +62,8 @@ class Discontent::Post < ActiveRecord::Base
 
   def show_content
     return nil if  content.nil?
-    '<b> что: </b>' + content + (whered.present? ? '<br/> <b> где: </b> ' + whered : '') + (whend.present? ? '<br/> <b> когда: </b>' + whend : '') + '<br/>'
+    '<b> что: </b>' + content + (whered.present? ? '<br/> <b> где: </b> ' + whered : '') +
+      (whend.present? ? '<br/> <b> когда: </b>' + whend : '') + '<br/>'
   end
 
   def display_content

@@ -23,7 +23,8 @@ class CollectInfo::Question < ActiveRecord::Base
       core_aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i))
       return true
     elsif self.uncorrect_answers?(answers) & type_for_questions == 1
-      user.user_answers.where(project_id: project.id, question_id: id, aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
+      user.user_answers.where(project_id: project.id, question_id: id,
+                              aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
       return true
     end
     false

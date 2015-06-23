@@ -12,6 +12,9 @@ Style/Documentation:
 Metrics/CyclomaticComplexity:
   Max: 8
 
+Metrics/AbcSize:
+  Max: 70
+
 AllCops:
   Exclude:
     - 'vendor/**/*'

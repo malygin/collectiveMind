@@ -13,8 +13,6 @@ class Core::Aspect::Post < ActiveRecord::Base
   has_many :collect_info_user_answers, class_name: 'CollectInfo::UserAnswers', foreign_key: 'aspect_id'
   has_many :questions, -> { where status: 0 }, class_name: 'CollectInfo::Question', foreign_key: 'aspect_id'
 
-  # has_many :missed_questions, -> { where(status: 0).includes(:user_answers).where(collect_info_user_answers: {question_id: nil}) }, class_name: 'CollectInfo::Question'
-
   validates :content, presence: true
 
   default_scope { order :id }
@@ -35,7 +33,8 @@ class Core::Aspect::Post < ActiveRecord::Base
 
   # выборка всех вопросов к аспекту на которые пользователь еще не ответил
   def missed_questions(user, type_questions)
-    questions_answered = questions.by_type(type_questions).joins(:user_answers).where(collect_info_user_answers: { user_id: user.id }).pluck('collect_info_questions.id')
+    questions_answered = questions.by_type(type_questions).joins(:user_answers)
+                         .where(collect_info_user_answers: { user_id: user.id }).pluck('collect_info_questions.id')
     questions.by_type(type_questions).where.not(id: questions_answered)
   end
 

@@ -20,7 +20,11 @@ class Journal < ActiveRecord::Base
   scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
   scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', [1]) }
 
-  scope :auto_feed_mailer, -> { joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'").where(user_checks: { status: ['f', nil] }) }
+  scope :auto_feed_mailer, lambda {
+    joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND
+             journals.project_id = user_checks.project_id AND user_checks.check_field = 'auto_feed_mailer'")
+      .where(user_checks: { status: ['f', nil] })
+  }
 
   validates :type_event, :project_id, presence: true
 
@@ -30,15 +34,18 @@ class Journal < ActiveRecord::Base
 
   # scheduler_mailer
   def self.events_for_user_mailer(date, users)
-    Journal.auto_feed_mailer.where('viewed = ? AND personal = ?', false, true).where(user_informed: users).where('journals.created_at >= ?', date).order('journals.created_at DESC')
+    Journal.auto_feed_mailer.where('viewed = ? AND personal = ?', false, true).where(user_informed: users)
+      .where('journals.created_at >= ?', date).order('journals.created_at DESC')
   end
 
   def self.events_for_my_feed(project_id, user_id)
-    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true).order('created_at DESC')
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true)
+      .order('created_at DESC')
   end
 
   def self.events_for_my_feed_viewed(project_id, user_id, lim = 10)
-    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true).limit(lim).order('created_at DESC')
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true)
+      .limit(lim).order('created_at DESC')
   end
 
   def self.destroy_comment_journal(project, comment)

@@ -5,13 +5,15 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 74
+
 
 
 
 # Offense count: 696
 # Configuration parameters: AllowURI, URISchemes.
 Metrics/LineLength:
-  Max: 286
+  Max: 150
 
 
 

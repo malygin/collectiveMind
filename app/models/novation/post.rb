@@ -11,15 +11,16 @@ class Novation::Post < ActiveRecord::Base
   has_many :core_content_questions, -> { where post_type: 'novation' }, class_name: 'Core::ContentQuestion'
 
   validates :title, presence: true
+  ATTRIBUTES_WITH_BOOL = %w(members_new members_education members_motivation resource_commands resource_support resource_competition
+                            confidence_commands confidence_remove_discontent confidence_negative_results)
 
   def attributes_for_form
     result = {}
-    attributes_with_bool = %w(members_new members_education members_motivation resource_commands resource_support resource_competition confidence_commands confidence_remove_discontent confidence_negative_results)
     used_attributes.each do |attribute|
       attribute_parts = attribute.split('_')
       unless attribute_parts.last == 'bool'
         result[attribute_parts[0]] ||= []
-        result[attribute_parts[0]] << [attribute, attributes_with_bool.include?(attribute)]
+        result[attribute_parts[0]] << [attribute, ATTRIBUTES_WITH_BOOL.include?(attribute)]
       end
     end
 

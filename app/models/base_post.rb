@@ -49,7 +49,10 @@ module BasePost
 
     # for user's posts which was add from last visit
     scope :after_last_visit_posts, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present? }
-    scope :after_last_visit_comments, ->(last_time) { joins(:comments).where("#{table_name.gsub('_posts', '_comments')}.created_at >= ?", last_time) if last_time.present? }
+    scope :after_last_visit_comments, lambda { |last_time|
+      joins(:comments)
+        .where("#{table_name.gsub('_posts', '_comments')}.created_at >= ?", last_time) if last_time.present?
+    }
 
     validates :user_id, :project_id, presence: true
     validates :status, inclusion: { in: STATUSES.values }
@@ -154,7 +157,8 @@ module BasePost
       post.style = params[:style] unless params[:style].nil?
       post.status = 0 if column_names.include? 'status'
       post.save!
-      user.journals.build(type_event: name_of_model_for_param + '_save', project: project, body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
+      user.journals.build(type_event: name_of_model_for_param + '_save', project: project,
+                          body: post.content == '' ? t('link.more') : trim_content(post.content), first_id: post.id).save!
       post
     end
 

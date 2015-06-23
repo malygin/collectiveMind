@@ -46,7 +46,8 @@ class Core::Project < ActiveRecord::Base
   default_scope { order('id DESC') }
 
   STAGES = {
-    1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов', type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
+    1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов',
+           type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
            substages: {
              0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate },
              1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn },
@@ -71,7 +72,8 @@ class Core::Project < ActiveRecord::Base
              1 => { name: 'Голосование', active: true, code: :novations_voting }
            }
     },
-    5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей', type_stage: :plan_posts, active: true,
+    5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей',
+           type_stage: :plan_posts, active: true,
            substages: {
              0 => { name: 'Создание проектных предложений', active: true, code: :plans_add },
              1 => { name: 'Голосование', active: true, code: :plans_voting }

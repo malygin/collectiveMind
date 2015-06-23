@@ -45,11 +45,13 @@ class JournalLogger < ActiveRecord::Base
   end
 
   def self.events_for_content(project_id, user_id, first_id)
-    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id, false, true, first_id)
+    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id,
+                        false, true, first_id)
   end
 
   def self.events_for_comment(project_id, user_id, first_id, second_id)
-    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?', project_id, user_id, false, true, first_id, second_id)
+    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?',
+                        project_id, user_id, false, true, first_id, second_id)
   end
 
   def self.last_event_for(user, project_id)
