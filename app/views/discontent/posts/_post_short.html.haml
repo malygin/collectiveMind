@@ -40,7 +40,7 @@
               .wrapper.ps_cont.half_wheel_speed
                 .post_cont_inner
                   -post_short.comments.preview.each do |comment|
-                    .comment_preview
+                    .comment_preview{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{comment.content}"}
                       %span.bold.com_date
                         = Russian::strftime(comment.created_at,'%d.%m.%Y')
                       %span.bold

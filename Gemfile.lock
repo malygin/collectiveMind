@@ -112,7 +112,7 @@ GEM
     capybara-screenshot (1.0.9)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.5.0)
+    capybara-webkit (1.5.2)
       capybara (>= 2.3.0, < 2.5.0)
       json
     celluloid (0.16.0)
@@ -657,4 +657,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.10.3
+   1.10.4
