@@ -204,7 +204,7 @@
     me = $(this)
     type = me.attr('data-me-type')
     if type == 'imperf'
-      color = $colors_imperf_codes[me.attr('data-me-color')]
+      color = $colors_imperf_codes[me.attr('data-me-color') % 49]
     if (type == 'aspect')
        color = $colors_aspect_codes[me.attr('data-me-color')];
     action = me.attr('data-me-action')
