@@ -47,11 +47,9 @@ module ApplicationHelper
 
   # последняя дата захода на страницу
   def last_time_visit_page(stage, type_event = 'visit_save', post = nil)
-    if post
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where('body = ?', "/project/#{@project.id}/#{stage}/posts/#{post.id}").order(created_at: :desc).first
-    else
-      notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id).where('body = ?', "/project/#{@project.id}/#{stage}/posts").order(created_at: :desc).first
-    end
+    post_id = "/#{post.id}"  if post
+    notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id)
+             .where('body = ?', "/project/#{@project.id}/#{stage}/posts" + post_id).order(created_at: :desc).first
     notice ? notice.created_at : '2000-01-01 00:00:00'
   end
 
@@ -62,7 +60,8 @@ module ApplicationHelper
 
   # возвращаем true, если есть непрочитанные новости эксперта
   def unread_expert_news?
-    count_news_log = current_user.loggers.select(' DISTINCT "journal_loggers"."first_id" ').where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id).count
+    count_news_log = current_user.loggers.select(' DISTINCT "journal_loggers"."first_id" ')
+                     .where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id).count
     @project.news.count - count_news_log > 0
   end
 
@@ -93,14 +92,15 @@ module ApplicationHelper
     # число вопросов по процедуре
     count_all = CollectInfo::Question.by_type(project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => project).count
     # число вопросов на которые пользователь ответил
-    count_answered = CollectInfo::UserAnswers.select(' DISTINCT "collect_info_user_answers"."question_id" ').joins(:question).where(collect_info_questions: { project_id: project, type_stage: project.type_for_questions }).where(collect_info_user_answers: { user_id: current_user }).count
+    count_answered = CollectInfo::UserAnswers.answered_questions.count
     # прогресс для данного пользователя
     questions_progress = count_all == 0 ? 0 : (count_answered.to_f / count_all.to_f) * 100
 
     # общее количество ответов пользователей закрытой процедуры
     if project.closed?
       users_count = project.users.count
-      count_answered_all = CollectInfo::UserAnswers.select('"collect_info_user_answers"."question_id"').joins(:question).where(collect_info_questions: { project_id: project, type_stage: project.type_for_questions }).count
+      count_answered_all = CollectInfo::UserAnswers.select('"collect_info_user_answers"."question_id"').joins(:question)
+                           .where(collect_info_questions: { project_id: project, type_stage: project.type_for_questions }).count
       questions_progress_all = count_all * users_count == 0 ? 0 : (count_answered_all.to_f / (count_all * users_count).to_f) * 100
     end
     [questions_progress, questions_progress_all]

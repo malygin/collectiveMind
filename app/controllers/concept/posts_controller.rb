@@ -13,14 +13,16 @@ class Concept::PostsController < PostsController
     field = params[:field]
     answer = Set.new
     answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| { value: d.name } })
-    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project], style: (field == 'resor_means_name' ? 1 : 0)).map { |d| { value: d.name } })
+    answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project],
+                                                                         style: (field == 'resor_means_name' ? 1 : 0)).map { |d| { value: d.name } })
 
     render json: answer.sort_by { |ha| ha[:value].downcase }
   end
 
   def index
     if params[:discontent] && params[:discontent] != '*'
-      @posts = @project.concepts_for_vote.includes(:concept_post_discontents).where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
+      @posts = @project.concepts_for_vote.includes(:concept_post_discontents)
+               .where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
     else
       @posts = @project.concepts_for_vote.created_order
     end
@@ -43,7 +45,8 @@ class Concept::PostsController < PostsController
       end
     end
     @concept_post.save
-    current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project.project).save!
+    current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id,
+                                project: @project.project).save!
     respond_to :js
   end
 
@@ -61,7 +64,8 @@ class Concept::PostsController < PostsController
       end
     end
     @concept_post.save
-    current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id, project: @project.project).save!
+    current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id,
+                                project: @project.project).save!
     respond_to :js
   end
 

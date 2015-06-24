@@ -38,10 +38,7 @@ class PostsController < ProjectsController
     @comments = @post.main_comments
     @comment = comment_model.new
     @last_time_visit = params[:last_time_visit]
-    respond_to do |format|
-      format.html { redirect_to url_for(controller: @post.class.to_s == 'Core::Aspect::Post' ? '/collect_info/posts' : @post.class.to_s.tableize, action: :index, jr_post: @post.id) }
-      format.js
-    end
+    respond_to :js
   end
 
   def autocomplete
@@ -86,7 +83,8 @@ class PostsController < ProjectsController
 
   def answer_content_question
     @question = Core::ContentQuestion.find(params[:question_id])
-    current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id, content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
+    current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id,
+                                                  content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
   end
 
   def change_status

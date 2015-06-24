@@ -58,7 +58,8 @@ module JournalHelper
       when /_post/
         t(j.type_event) + link_to("#{j.body}..", "/project/#{project}/#{path_from_journal_event(j.type_event)}?jr_post=#{j.first_id}&viewed=true")
       when /_comment/
-        t(j.type_event, body: j.body) + link_to("#{j.body2}... ", "/project/#{project}/#{path_from_journal_event(j.type_event)}?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
+        t(j.type_event, body: j.body) +
+          link_to("#{j.body2}... ", "/project/#{project}/#{path_from_journal_event(j.type_event)}?jr_post=#{j.first_id}&jr_comment=#{j.second_id}#comment_#{j.second_id}")
       else
         'что то другое'
     end

@@ -26,7 +26,8 @@ class Novation::PostsController < PostsController
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
     if @novation.save
-      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project.project).save!
+      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id,
+                                  project: @project.project).save!
     end
     @novation.update(status: current_model::STATUSES[:published])   if params[:novation_post][:published]
     if params[:novation_post_concept]

@@ -67,35 +67,6 @@ class Plan::PostsController < PostsController
     @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
   end
 
-  # # @todo methods for note
-  # def new_note
-  #   super()
-  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-  # end
-  #
-  # def create_note
-  #   @post = current_model.find(params[:id])
-  #   @type = params[:plan_note][:type_field]
-  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-  #   @post_note = @post_aspect_note.plan_notes.build(params[name_of_note_for_param])
-  #   @post_note.user = current_user
-  #
-  #   current_user.journals.build(type_event: 'my_plan_note', user_informed: @post.user, project: @project, body: trim_content(@post_note.content), body2: trim_content(@post.name), first_id: @post.id, second_id: @post_aspect_note.id, personal: true, viewed: false).save!
-  #
-  #   respond_to do |format|
-  #     if @post_note.save
-  #       format.js
-  #     else
-  #       format.js { render action: "new_note" }
-  #     end
-  #   end
-  # end
-  #
-  # def destroy_note
-  #   @post_aspect_note = Plan::PostAspect.find(params[:con_id])
-  #   super()
-  # end
-
   private
 
   def set_novations

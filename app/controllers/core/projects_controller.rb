@@ -1,7 +1,8 @@
 class Core::ProjectsController < ApplicationController
   before_filter :project_by_id
   after_filter :last_seen_news, only: [:news]
-  layout 'application', only: [:news, :users, :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics, :estimate_analytics]
+  layout 'application', only: [:news, :users, :general_analytics, :lifetape_analytics, :discontent_analytics, :concept_analytics, :plan_analytics,
+                               :estimate_analytics]
 
   def project_by_id
     return false if params[:id].nil?
