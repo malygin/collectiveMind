@@ -49,7 +49,7 @@
         .row
           .col-md-2.col_padding_right_3
             %small.pull-left{:style => "margin-right: 3px;"} Несовершенства
-          .col-md-7.col_padding_right_3.themes_cont
+          .col-md-7.col_padding_right_3.themes_cont.marginL10
             .post-theme{id: "stripe#{post_short.id}"}
               - post_short.concept_disposts.each_with_index do |dispost, index|
                 %span.tag-stripes.color_me{class: "#{'active' if index == 0}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
