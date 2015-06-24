@@ -1,6 +1,5 @@
 class Discontent::PostsController < PostsController
   include MarkupHelper
-  include DiscontentGroup
   include CloudinaryHelper
 
   before_action :set_aspects, only: [:index, :new, :edit]

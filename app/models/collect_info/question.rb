@@ -19,23 +19,20 @@ class CollectInfo::Question < ActiveRecord::Base
   def answer_from_type(user, answers, content, skip, type_for_questions)
     # если вопрос пропущен, то просто создаем пустой ответ
     return true if skip
+    return false if type_for_questions == 1 && !uncorrect_answers?(answers)
     if  content.present? && type_for_questions == 0
       core_aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i))
-      return true
-    elsif self.uncorrect_answers?(answers) & type_for_questions == 1
-      user.user_answers.where(project_id: project.id, question_id: id,
-                              aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
-      return true
     end
-    false
-  end
+    user.user_answers.where(project_id: project.id, question_id: id,
+                              aspect_id: core_aspect.id).first_or_create(answer_id: skip ? nil : answers.try(:first).try(:to_i), content: content)
+    return true
 
-  private
+  end
 
   def uncorrect_answers?(answers)
     return false unless answers
     correct_answers = self.answers.by_correct.pluck('collect_info_answers.id')
     answers = answers.collect(&:to_i)
-    (answers - correct_answers).present? || (correct_answers - answers).present?
+    correct_answers == answers
   end
 end

@@ -47,7 +47,7 @@ module ApplicationHelper
 
   # последняя дата захода на страницу
   def last_time_visit_page(stage, type_event = 'visit_save', post = nil)
-    post_id = "/#{post.id}"  if post
+    post_id = post ? "/#{post.id}" : ''
     notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id)
              .where('body = ?', "/project/#{@project.id}/#{stage}/posts" + post_id).order(created_at: :desc).first
     notice ? notice.created_at : '2000-01-01 00:00:00'
@@ -92,7 +92,7 @@ module ApplicationHelper
     # число вопросов по процедуре
     count_all = CollectInfo::Question.by_type(project.type_for_questions).joins(:core_aspect).where('core_aspect_posts.project_id' => project).count
     # число вопросов на которые пользователь ответил
-    count_answered = CollectInfo::UserAnswers.answered_questions.count
+    count_answered = CollectInfo::UserAnswers.answered_questions(project, current_user).count
     # прогресс для данного пользователя
     questions_progress = count_all == 0 ? 0 : (count_answered.to_f / count_all.to_f) * 100
 

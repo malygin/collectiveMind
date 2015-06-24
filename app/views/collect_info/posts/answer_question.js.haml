@@ -1,5 +1,5 @@
 -#$('[id^=answer_]').removeClass('btn-white btn-red btn-blue').addClass('btn-white');
--if @wrong
+-unless @right_answer
   $('#wrong_question_#{@question.id}').removeClass('close-notice');
   $('#notice_question_#{@question.id}').removeClass('close-notice');
 -else

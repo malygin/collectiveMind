@@ -25,7 +25,7 @@ class CollectInfo::PostsController < PostsController
   def answer_question
     @aspect = Core::Aspect::Post.find(params[:id])
     @question = CollectInfo::Question.find(params[:question_id])
-    @wrong = @question.answer_from_type(current_user, params[:answers], params[:content], params[:skip], @project.type_for_questions)
+    @right_answer = @question.answer_from_type(current_user, params[:answers], params[:content], params[:skip], @project.type_for_questions)
     @questions_progress, @questions_progress_all  = collect_info_answers_count(@project)
   end
 

@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   end
 
   def check_access_to_project
-    return if  @project.users.include?(current_user) || boss?
+    return if current_user && (@project.users.include?(current_user) || boss?)
     redirect_to root_url
   end
 
