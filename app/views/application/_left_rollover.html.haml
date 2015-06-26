@@ -30,7 +30,7 @@
                   %label{:for => "check#{index+2}"}
                     %i.fa.fa-check
               %span
-                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "#{index}", "data-me-type" => "imperf"}
+                %span.color_counter.color_me{"data-me-action" => "background-color", "data-me-color" => "#{post.id}", "data-me-type" => "imperf"}
                   = post.dispost_concepts.count
               %span.text_label
                 %label{:for => "check#{index+2}"}
