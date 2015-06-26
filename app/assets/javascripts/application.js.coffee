@@ -97,6 +97,10 @@ $ ->
 
   $('.with_arrow').click ->
     $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
+    if $(this).find('i.collapse_arrow').hasClass('fa-rotate-90')
+      $(this).find('i.collapse_arrow').attr('title', 'Свернуть')
+    else
+      $(this).find('i.collapse_arrow').attr('title', 'Развернуть')
     return
 
   $('.carousel').carousel

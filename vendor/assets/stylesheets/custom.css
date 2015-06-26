@@ -514,6 +514,9 @@ textarea:focus {
 .big + .tooltip > .tooltip-inner{
     width: 200px;
 }
+.bigger + .tooltip > .tooltip-inner{
+    width: 350px;
+}
 /* popup styles */
 .mfp-bg {
     z-index: 1099 !important;
