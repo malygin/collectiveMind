@@ -314,7 +314,7 @@ $(document).ready(function () {
         var role = $(this).attr('data-vote-poll-role');
         var len = count_vote_items($(this));
         folder_len[role] = len;
-        $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text(len);
+        $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(len);
     });
     var pb = $('.vote_progress');
     var all_len = folder_len['overall'] = count_vote_items('.all_vote');
@@ -342,23 +342,30 @@ $(document).ready(function () {
             $(this).addClass('voted');
             $('.fa', this).removeClass($(this).attr("data-icon-class")).addClass(vote_icon_all);
             var vote_item = $(this).parents('.vote_item_cont').detach();
-            $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text(++folder_len[role]);
+            var desc_item = $('#desript_'+$(this).data('id')).detach();
+            console.log(desc_item);
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
             if (prev_role) {
-                $('[data-vote-folder-role = "' + prev_role + '"] > .vote-folder > .vote_counter').text(--folder_len[prev_role]);
+                $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
             } else {
                 all_len--;
-                $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text(all_len);
+                $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
                 pb_stretch(pb, all_len, folder_len['overall']);
             }
-            $('[data-vote-poll-role = "' + role + '"] .container>.row').append(vote_item);
+            $('[data-vote-poll-role = "' + role + '"] ul').append(vote_item);
+            $('[data-vote-poll-role = "' + role + '"] .tab-content').append(desc_item);
         } else {
             $(this).removeClass('voted');
             $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
             var vote_item = $(this).parents('.vote_item_cont').detach();
-            $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text(--folder_len[role]);
-            $('.all_vote>.container>.row').append(vote_item);
+            var desc_item = $('#desript_'+$(this).data('id')).detach();
+            $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
+            $('[data-vote-poll-role = "all"] ul').append(vote_item);
+            $('[data-vote-poll-role = "all"] .tab-content').append(desc_item);
             all_len++;
-            $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text(all_len);
+
+
+            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
             pb_stretch(pb, all_len, folder_len['overall']);
         }
         var item_e = $(this).parents('.item_expandable');

@@ -23,19 +23,19 @@
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
               .vote_folder_inn.poll-2-3{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Перейти в список "нравится" '}
                 %span.vote_counter
-                  =@user_voter.voted_concept_post.by_status(1).count
+                  =@user_voter.concepts_for_vote(@project, 1).count
                 %h5 Нравится
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-4{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Перейти в список "не нравится" '}
                 %span.vote_counter
-                  =@user_voter.voted_concept_post.by_status(2).count
+                  =@user_voter.concepts_for_vote(@project, 2).count
                 %h5 Не нравится
         .divider5
       .container.white.border_top_grey
         .divider10
         .tab-content
-          #vote_tab1.tab-pane.active{:role => "tabpanel"}
+          #vote_tab1.tab-pane.active{"data-vote-poll-role" => "all", :role => "tabpanel"}
             .container
               .row
                 .col-md-6
@@ -66,7 +66,7 @@
                 .col-md-6.tab-content
                   %h5 Описание
                   .divider_1_grey.margin_right_25
-                  - @user_voter.unvote_concepts_for_vote(@project).each do |post|
+                  - @user_voter.concepts_for_vote(@project, 1).each do |post|
                     = render partial: 'post_vote_descript', locals: {post: post}
           #vote_tab3.tab-pane{"data-vote-poll-role" => "vote_no", :role => "tabpanel"}
             .container
@@ -82,6 +82,6 @@
                 .col-md-6.tab-content
                   %h5 Описание
                   .divider_1_grey.margin_right_25
-                  - @user_voter.unvote_concepts_for_vote(@project).each do |post|
+                  - @user_voter.concepts_for_vote(@project, 2).each do |post|
                     = render partial: 'post_vote_descript', locals: {post: post}
           .divider35
