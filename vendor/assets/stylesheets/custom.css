@@ -4293,6 +4293,12 @@ ul.vote_nav > li > a {
     background: image-url('icon-vote-sprite2.png') no-repeat no-repeat;
 }
 
+.stage3_theme .vote_folders_cont li.active .vote_folder_inn {
+
+    border-color: #CFCFCF;
+}
+
+
 .stage1_theme .poll-2-1, .stage1_theme .vote_folders_cont li.active .poll-2-1 {
     background-position: 0 0;
 }
@@ -4341,16 +4347,16 @@ ul.vote_nav > li > a {
     color: #919191;
 }
 
-.vote_counter {
-    /*position: absolute;*/
-    /*display: block;*/
-    /*text-align: center;*/
-    /*top: 32px;*/
-    /*left: 35px;*/
-    /*width: 35px;*/
-    /*color: #fff;*/
-    /*font-size: 12px;*/
-    /*font-weight: bold;*/
+.stage3_theme .vote_counter {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 32px;
+    left: 35px;
+    width: 35px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .vote_itemslist_cont {
@@ -4419,8 +4425,7 @@ ul.vote_nav > li > a {
     position: relative;
 }
 
-.vote_button,
-.b_vote {
+.vote_button, .b_vote {
     margin: 0 2px;
     padding: 0;
 }
@@ -4467,10 +4472,14 @@ ul.vote_nav > li > a {
 }
 
 .v_btn_2 {
+    width: 28px;
+    height: 24px;
     background-image: image-url('vote/vote_green.png');
 }
 
 .v_btn_3 {
+    width: 28px;
+    height: 24px;
     background-image: image-url('vote/vote_grey.png');
 }
 
