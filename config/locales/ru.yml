@@ -1,5 +1,10 @@
 ---
 ru:
+  dispost_concepts:
+    one: "предложена 1 идея"
+    other: "предложено %{count} идей"
+    few: "предложено %{count} идеи"
+    many: "предложено %{count} идей"
   discontent:
     one: "1 несовершенство"
     other: "%{count} несовершнств"

@@ -25,6 +25,6 @@ json.array! @posts do |item|
     json.id comment.id
     json.date Russian.strftime(comment.created_at, '%k:%M %d.%m.%y')
     json.user comment.user.to_s
-    json.content comment.content
+    json.content CGI.escapeHTML(comment.content)
   end
 end
