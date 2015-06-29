@@ -15,6 +15,24 @@ class User < ActiveRecord::Base
   has_many :novation_posts, class_name: 'Novation::Post'
   has_many :plan_posts, class_name: 'Plan::Post'
 
+  has_many :core_aspect_comments, class_name: 'Core::Aspect::Comment'
+  has_many :discontent_comments, class_name: 'Discontent::Comment'
+  has_many :concept_comments, class_name: 'Concept::Comment'
+  has_many :novation_comments, class_name: 'Novation::Comment'
+  has_many :plan_comments, class_name: 'Plan::Comment'
+
+  has_many :voting_core_aspect_posts, class_name: 'Core::Aspect::PostVoting'
+  has_many :voting_discontent_posts, class_name: 'Discontent::PostVoting'
+  has_many :voting_concept_posts, class_name: 'Concept::PostVoting'
+  has_many :voting_novation_posts, class_name: 'Novation::PostVoting'
+  has_many :voting_plan_posts, class_name: 'Plan::PostVoting'
+
+  has_many :voting_core_aspect_comments, class_name: 'Core::Aspect::CommentVoting'
+  has_many :voting_discontent_comments, class_name: 'Discontent::CommentVoting'
+  has_many :voting_concept_comments, class_name: 'Concept::CommentVoting'
+  has_many :voting_novation_comments, class_name: 'Novation::CommentVoting'
+  has_many :voting_plan_comments, class_name: 'Plan::CommentVoting'
+
   has_many :aspect_votings, class_name: 'CollectInfo::Voting'
   has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Core::Aspect::Post'
 
@@ -62,6 +80,11 @@ class User < ActiveRecord::Base
 
   def add_score(h = {})
     case h[:type]
+      when :plus_comment
+        add_score_by_type(h[:project], 5, h[:type_score])
+        # journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
+      when :to_archive_plus_comment
+        add_score_by_type(h[:project], -5, h[:type_score])
       when :plus_post
         add_score_by_type(h[:project], h[:score], h[:type_score])
         journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score],
@@ -109,9 +132,57 @@ class User < ActiveRecord::Base
 
   def comment_for_project(stage, project)
     if stage == :collect_info_posts
-      core_aspects.by_project(project).joins(:comments)
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project)
     else
-      send(stage).by_project(project.id).joins(:comments)
+      send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project)
+    end
+  end
+
+  def like_content_for(stage, project)
+    if stage == :collect_info_posts
+      voting_core_aspect_posts.joins(:post).where('core_aspect_posts.project_id = ?', project)
+    else
+      send('voting_' + stage.to_s).joins(:post).where("#{stage}.project_id = ?", project)
+    end
+  end
+
+  def like_comment_for(stage, project)
+    if stage == :collect_info_posts
+      voting_core_aspect_comments.joins(:comment).joins('INNER JOIN core_aspect_posts ON core_aspect_posts.id = core_aspect_comments.post_id').where('core_aspect_posts.project_id = ?', project)
+    else
+      send('voting_' + stage.to_s.gsub('_posts', '_comments')).joins(:comment).joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
+    end
+  end
+
+  def approve_content_for(stage, project)
+    if stage == :collect_info_posts
+      core_aspects.by_project(project).where(approve_status: true)
+    else
+      send(stage).by_project(project.id).where(approve_status: true)
+    end
+  end
+
+  def approve_comment_for(stage, project)
+    if stage == :collect_info_posts
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project).where(approve_status: true)
+    else
+      send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).where(approve_status: true)
+    end
+  end
+
+  def likes_posts_for(stage, project)
+    if stage == :collect_info_posts
+      core_aspects.by_project(project).joins(:post_votings)
+    else
+      send(stage).by_project(project.id).joins(:post_votings)
+    end
+  end
+
+  def likes_comments_for(stage, project)
+    if stage == :collect_info_posts
+      core_aspect_comments.joins(:post).where('core_aspect_posts.project_id = ?', project).joins(:comment_votings)
+    else
+      send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).joins(:comment_votings)
     end
   end
 end

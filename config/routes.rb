@@ -20,6 +20,7 @@ CollectiveMind::Application.routes.draw do
     resources :posts, controller: controller_name do
       get :user_content, on: :collection
       put :check_field, on: :collection
+      get :show_results, on: :collection
 
       member do
         put :to_archive
@@ -88,6 +89,8 @@ CollectiveMind::Application.routes.draw do
       posts_routes
     end
 
+    put 'concept/posts/add_disposts', to: 'concept/posts#add_disposts'
+    put 'concept/posts/search_disposts', to: 'concept/posts#search_disposts'
     namespace :concept do
       posts_routes
     end

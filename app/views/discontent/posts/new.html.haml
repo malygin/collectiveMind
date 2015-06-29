@@ -4,6 +4,39 @@
 - content_for :discontent_form do
   = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
     .col-md-12
+      .row
+        .col-md-12
+          %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_technique{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#techniq'}
+            Помощь по формулированию несовершенств
+            %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
+          #techniq.collapse
+            .container
+              .row.cabinet_popup_links
+                .col-md-6.no_padding_col
+                  .cab_pop_l.l_col1
+                    %span
+                      Подумайте о том, что не достаточно хорошо
+                      %br/
+                      %small
+                .col-md-6.no_padding_col
+                  .cab_pop_l.l_col2
+                    %span
+                      Подумайте о том, что хорошо, но можно существенно улучшить
+                      %br/
+                      %small
+                .col-md-6.no_padding_col
+                  .cab_pop_l.l_col3
+                    %span
+                      Подумайте о том, что мешает работе
+                      %br/
+                      %small
+                .col-md-6.no_padding_col
+                  .cab_pop_l.l_col4
+                    %span
+                      Подумайте о том,  чего не хватает
+                      %br/
+                      %small
+            .divider10
       .divider10
       .content_window.white
         .divider25
@@ -48,46 +81,46 @@
         %p
           = t('activerecord.attributes.discontent/post.whered')
         = f.text_area :whered, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whered')
-        .divider15
-        %p
-          = t('activerecord.attributes.discontent/post.whend')
-        = f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
+        -#.divider15
+        -#%p
+        -#  = t('activerecord.attributes.discontent/post.whend')
+        -#= f.text_area :whend, rows: 2, class: 'autocomplete form-control', 'data-url' => discontent_autocomplete_path(@project, field: 'whend')
         .divider25
         .row
           .col-md-12.text-right
             - if @post.persisted?
               = link_to 'Удалить', discontent_post_path(@project, @post), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{@post.id}", class: 'btn add-button del type2'
             = f.submit t("form.#{action_name}"), class: 'btn add-button type2', id: 'send_post'
-            - if @post.persisted? and !@post.published?
-              = link_to 'Опубликовать', publish_discontent_post_path(@project, @post), remote: true, method: :put, id: "publish_#{@post.id}", class: 'btn add-button type2'
+            -#- if @post.persisted? and !@post.published?
+            -#  = link_to 'Опубликовать', publish_discontent_post_path(@project, @post), remote: true, method: :put, id: "publish_#{@post.id}", class: 'btn add-button type2'
       .row
         .col-md-12
           - if @mechanic_type == 'simple'
             %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_example_discontent{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
               Пример несовершенства
               %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-      .divider25
+      .divider20
       #imperfs1.content_window.white.collapse.font_lighter_grey
         .divider15
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.content')
         %p
-          Нет понятного потребителю описания, что за продукт у нас есть, зачем и кому он нужен
+          В базе данных есть только выпускники и нет потенциальных клиентов
         .divider15
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.what')
         %p
-          При определении целевой аудитории и проведении переговоров
+          Не  организован систематический поиск новых контактов из доступных источников
         .divider15
         %p.font_dark_grey
           = t('activerecord.attributes.discontent/post.whered')
         %p
-          От понимания анализа практического применения МД в тестовых процедурах
-        .divider15
-        %p.font_dark_grey
-          = t('activerecord.attributes.discontent/post.whend')
-        %p
-          Дистрибьюторов и Продавцов
+          Менеджеры по продажам вынуждены тратить основное время не на взаимодействие с потенциальными клиентами (продажу), а на поиск источников информации и её обработку
+        -#.divider15
+        -#%p.font_dark_grey
+        -#  = t('activerecord.attributes.discontent/post.whend')
+        -#%p
+        -#  Дистрибьюторов и Продавцов
         .divider20
         .divider15
 

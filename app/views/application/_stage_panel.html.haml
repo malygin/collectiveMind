@@ -48,13 +48,13 @@
                     = substage[:name]
               - elsif @project.sub_stage > num_substage
                 %li{class: "#{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
-                'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + 'завершено'}
+                'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + '(завершено)'}
                   %i.fa.fa-circle.fa-2x
                   %a{:href => "#"}
                     = substage[:name]
               - else
                 %li{class: "#{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
-                  'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + 'недоступно'}
+                  'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + '(недоступно)'}
                   %i.fa.fa-circle.fa-2x
                   %a{:href => "#"}
                     = substage[:name]

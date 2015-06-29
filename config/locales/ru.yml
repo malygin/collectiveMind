@@ -32,6 +32,16 @@ ru:
   plan_post_save: 'добавил(a) проектное предложение '
 
   discontent_posts_stage_popover: 'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
+  dispost_concepts:
+    one: "предложена 1 идея"
+    other: "предложено %{count} идей"
+    few: "предложено %{count} идеи"
+    many: "предложено %{count} идей"
+  discontent:
+    one: "1 несовершенство"
+    other: "%{count} несовершнств"
+    few:  "%{count} несовершенства"
+    many: "%{count} несовершнств"
   project_users_count:
     one: "1 участник"
     other: "%{count} участников"
@@ -117,6 +127,24 @@ ru:
     concept_posts: Идея
     novation_posts: Пакет
     plan_posts: Проектное предложение
+  my_result:
+    collect_info_posts: аспекты
+    discontent_posts: несовершенства
+    concept_posts: идеи
+    novation_posts: пакеты идей
+    plan_posts: проектные предложения
+  my_result_add:
+    collect_info_posts: АСПЕКТОВ
+    discontent_posts: НЕСОВЕРШЕНСТВ
+    concept_posts: ИДЕЙ
+    novation_posts: ПАКЕТОВ ИДЕЙ
+    plan_posts: ПРОЕКТНЫХ ПРЕДЛОЖЕНИЙ
+  my_list:
+    collect_info_posts: аспектов
+    discontent_posts: несовершенств
+    concept_posts: идей
+    novation_posts: пакетов идей
+    plan_posts: проектных предложений
   news:
     body: "Полный текст"
     title: "Анонс"

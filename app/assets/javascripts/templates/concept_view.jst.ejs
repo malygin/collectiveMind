@@ -29,23 +29,31 @@
                         </p>
                     </div>
                     <div class='media-body white-gray'>
-                        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>">
-                            <h5 class="font_color_stage3 bold">
-                                <%= title %>
-                                <i class="fa fa-angle-right"></i>
-                            </h5>
-                        </a>
-                        <div class="post-text">
-                            <p>
-                                <%= content %>
-                            </p>
-                        </div>
+                        <table class="table">
+                            <tr class="what">
+                                <td class="col-md-12 left-column">
+                                    <a id="show_record_<%= id %>" class="font_color_stage3 bold" data-remote="true" href="/project/<%= project_id %>/concept/posts/<%= id %>?last_time_visit=<%= last_time_visit %>>)">
+
+                                            <%= title %>
+                                            <i class="fa fa-angle-right icon-right"></i>
+
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-12 left-column">
+
+                                   <%= content %>
+
+                                </td>
+                            </tr>
+                        </table>
                         <% if(comments.length > 0) { %>
                         <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
                             <div class="wrapper ps_cont half_wheel_speed">
                                 <div class="post_cont_inner">
                                     <% for(var i=0; i<comments.length; i++) {%>
-                                    <div class="comment_preview">
+                                    <div class="comment_preview" data-placement="bottom" data-toggle="tooltip" title="<%= comments[i].content %>">
                                             <span class="bold com_date">
                                                 <%= comments[i].date %>
                                             </span>
@@ -70,9 +78,9 @@
                         </small>
                     </div>
                     <div class="col-md-7 col_padding_right_3 themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
+                        <div id="stripe<%= id %>" class="post-theme marginL10">
                             <% for(var i=0; i<discontents.length; i++) {%>
-                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= discontents[i].id %>" data-me-type="imperf" data-placement="top" data-toggle="tooltip" title="<%= discontents[i].content %>">
                                     <span class="tags">
                                       <%= discontents[i].content %>
                                     </span>
@@ -82,7 +90,7 @@
                     </div>
                     <div class="col-md-3 col_padding_left_3">
                         <div class="text-right small_icons">
-                            <span class="popup2 comments_icon" data-for="post_ch<%= id %>">
+                            <span class="popup2 comments_icon <%= active_comments ? 'active' : '' %>" data-for="post_ch<%= id %>">
                               <small class="cc_post_<%= id %>">
                                 <%= count_comments %>
                               </small>
@@ -92,7 +100,7 @@
                                <small id="lk_post_<%= id %>"  class="lk_post_<%= id %>">
                                    <%= count_likes %>
                                </small>
-                               <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
+                               <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Нравится" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=false">
                                    <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
                                </a>
                             </span>
@@ -100,7 +108,7 @@
                                 <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
                                     <%= count_dislikes %>
                                 </small>
-                                <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
+                                <a id="dislike_post_<%= id %>" class="sm" data-remote="true" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Не нравится" data-method="put" href="/project/<%= project_id %>/concept/posts/<%= id %>/like?against=true">
                                     <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
                                 </a>
                             </span>

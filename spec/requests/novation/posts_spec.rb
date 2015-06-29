@@ -111,7 +111,7 @@ describe 'Novation ' do
 
     it_behaves_like 'discuss novations'
 
-    context 'vote content', js: true do
+    context 'vote content', js: true, skip: true do
       it_behaves_like 'vote popup', '4:1', 'Голосование по пакетам идей', 'novation'
     end
   end

@@ -22,12 +22,12 @@
                   %span(class="cc_post_#{@post.id}")
                     =@post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false}, :remote => true, :method => :put, id: "like_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project, :id => @post.id, :against => false}, :remote => true, :method => :put, id: "like_post_#{@post.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %span.bold
                     %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
                       =@post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project,  :id => @post.id, :against => true}, :remote => true, :method => :put, id: "dislike_post_#{@post.id}") do
+                =link_to({:controller => @post.class.name.underscore.pluralize, :action => :like, :project => @project,  :id => @post.id, :against => true}, :remote => true, :method => :put, id: "dislike_post_#{@post.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %span.bold
                     %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
                       =@post.users_against.count
@@ -41,7 +41,7 @@
       .container.modal_content
         .row
           .col-md-6.exp_col.left
-            %button.btn.btn_reset.exp_button.pull-right
+            %button.btn.btn_reset.exp_button.pull-right{'data-toggle'=>"tooltip",'data-placement'=>"left","data-new"=>"Развернуть историю комментариев", title: "Свернуть несовершенство"}
               = image_tag 'grey_arrow.png'
             .divider20
             .border_light_grey.rounded_3.imperf_left
@@ -67,12 +67,12 @@
                 %tr
                   %td.col-md-12.left-column
                     = @post.whered
-                %tr
-                  %td.col-md-12.left-column.bold
-                    = t('activerecord.attributes.discontent/post.whend')
-                %tr
-                  %td.col-md-12.left-column
-                    = @post.whend
+                -#%tr
+                -#  %td.col-md-12.left-column.bold
+                -#    = t('activerecord.attributes.discontent/post.whend')
+                -#%tr
+                -#  %td.col-md-12.left-column
+                -#    = @post.whend
               -if @post.notes.present?
                 .divider10
                 .index_block
@@ -97,17 +97,17 @@
                 .divider10
 
           .col-md-6.exp_col.right
-            %button.btn.btn_reset.exp_button.pull-left
+            %button.btn.btn_reset.exp_button.pull-left{'data-toggle'=>"tooltip",'data-placement'=>"right","data-new"=>"Развернуть несовершенство", title: "Свернуть историю комментариев"}
               = image_tag 'grey_arrow_1.png'
             .divider10
 
-            .separator
-              %hr
-                .separator_label.text-left
-                  %h4 Обсуждение результатов опроса
-                .separator_label.pull-right
-                  %a{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
-                    %span.comments_action свернуть
+            -#.separator
+            -#  %hr
+            -#    .separator_label.text-left
+            -#      %h4 Обсуждение результатов опроса
+            -#    .separator_label.pull-right
+            -#      %a.theme_font_color{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
+            -#        %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments
             .divider15

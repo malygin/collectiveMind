@@ -28,6 +28,8 @@ class Discontent::PostsController < PostsController
       @posts = @project.discontents_for_discussion.created_order
     end
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
+    @last_time_visit = params[:last_time_visit]
+    @project_result = ProjectDecorator.new @project unless @project.stage == '2:0'
     respond_to :html, :json
   end
 

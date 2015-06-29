@@ -24,7 +24,7 @@ describe 'Cabinet Concepts' do
       before do
         fill_in 'concept_post_title', with: 'title for concept'
         fill_in 'concept_post_goal', with: 'goal in concept'
-        fill_in 'concept_post_content', with: 'content concept'
+        # fill_in 'concept_post_content', with: 'content concept'
         fill_in 'concept_post_actors', with: 'actors'
         fill_in 'concept_post_impact_env', with: 'impact environment'
         # find(:xpath, "//a[@id='open_discontents']").click

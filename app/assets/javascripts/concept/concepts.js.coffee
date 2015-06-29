@@ -25,8 +25,8 @@ ConceptCollectionView = Backbone.View.extend
   initialize: ()->
     this.collection.bind('add', this.renderNew, this);
     this.collection.bind('remove', this.removeOld, this);
-    #    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
-    $('#filter').on('change', this.loadByDiscontent)
+    $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
+#    $('#filter').on('change', this.loadByDiscontent)
     $('#sorter').on('click', 'span', this.sortByDiscontent)
   render: ()->
     this.collection.forEach(this.addOne, this)
@@ -55,23 +55,25 @@ ConceptCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
 
   loadByDiscontent: (evt)->
-    #    evt.preventDefault();
-    #    filterValue = $(this).data('discontent')
-    #    $('#tab_dispost_concepts').isotope
-    #      filter: filterValue
+    evt.preventDefault();
+    filterValue = $(this).data('discontent')
+    $('#tab_dispost_concepts').isotope
+      filter: filterValue
 
-    dc.fetch
-      # data: $.param({discontent: $(this).data('discontent')})
-      # data: $.param({discontent: $(this).find('input:checked').closest('.checkox_item').data('discontent')})
-      data: $.param({discontent: check_discontents(this)})
-
-      success: (col,res)->
-        $('#count_concepts').html('(' + dc.length + ')')
-        $('#tab_dispost_concepts').isotope('updateSortData').isotope()
-        show_comments_hover()
-        activate_perfect_scrollbar()
-        colors_discontents()
-        post_colored_stripes()
+#    dc.fetch
+#      # data: $.param({discontent: $(this).data('discontent')})
+#      # data: $.param({discontent: $(this).find('input:checked').closest('.checkox_item').data('discontent')})
+#      data: $.param({discontent: check_discontents(this)})
+#      data: $.param({last_time_visit: $('#sorter').data('visit')})
+#
+#
+#      success: (col,res)->
+#        $('#count_concepts').html('(' + dc.length + ')')
+#        $('#tab_dispost_concepts').isotope('updateSortData').isotope()
+#        show_comments_hover()
+#        activate_perfect_scrollbar()
+#        colors_discontents()
+#        post_colored_stripes()
 
   sortByDiscontent: ()->
     #    evt.preventDefault();
@@ -86,6 +88,7 @@ ConceptCollectionView = Backbone.View.extend
 if window.location.href.indexOf("concept/posts") > -1 and window.location.href.indexOf("concept/posts/") == -1
   dc = new ConceptCollection
   dc.fetch
+    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new ConceptCollectionView({collection: dc})
       dv.render()

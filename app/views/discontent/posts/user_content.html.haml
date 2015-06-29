@@ -17,7 +17,7 @@
               %tr.what
                 %td.bold
                   = post_short.content
-                  - if current_user?(post_short.user) and can_edit_content?
+                  - if boss?  or (current_user?(post_short.user) and can_edit_content?)
                     %span.post_btns_cont
                       %button.btn.btn_reset.btn_del
                         = link_to edit_discontent_post_path(@project, post_short), id: "edit_discontent_#{post_short.id}", class: 'a_font_reset' do

@@ -342,23 +342,30 @@ $(document).ready(function () {
             $(this).addClass('voted');
             $('.fa', this).removeClass($(this).attr("data-icon-class")).addClass(vote_icon_all);
             var vote_item = $(this).parents('.vote_item_cont').detach();
+            var desc_item = $('#desript_'+$(this).data('id')).detach();
+            console.log(desc_item);
             $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
             if (prev_role) {
                 $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
             } else {
                 all_len--;
-                $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
+                $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
                 pb_stretch(pb, all_len, folder_len['overall']);
             }
-            $('[data-vote-poll-role = "' + role + '"] .container>.row').append(vote_item);
+            $('[data-vote-poll-role = "' + role + '"] ul').append(vote_item);
+            $('[data-vote-poll-role = "' + role + '"] .tab-content').append(desc_item);
         } else {
             $(this).removeClass('voted');
             $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
             var vote_item = $(this).parents('.vote_item_cont').detach();
+            var desc_item = $('#desript_'+$(this).data('id')).detach();
             $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
-            $('.all_vote>.container>.row').append(vote_item);
+            $('[data-vote-poll-role = "all"] ul').append(vote_item);
+            $('[data-vote-poll-role = "all"] .tab-content').append(desc_item);
             all_len++;
-            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text(all_len);
+
+
+            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
             pb_stretch(pb, all_len, folder_len['overall']);
         }
         var item_e = $(this).parents('.item_expandable');
@@ -414,43 +421,44 @@ $(document).ready(function () {
 
 
     /* cabinet 3rd stage check-and-push */
-    var ch_its = $('.item', '.checked_items').length;
-    var unch_its = $('.item', '.unchecked_items').length;
-    $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-
-    $('.check_push_box').click(function () {
-        var item = $(this).closest('.item').detach();
-        var item_id = $(item).attr('data-id');
-        $('#discontents').find('.item[data-id=' + item_id + ']').remove();
-        $('#ideas').find('.item[data-id=' + item_id + ']').remove();
-        $('.checked_items').find('.item[data-id=' + item_id + ']').remove();
-        if ($(this).is(':checked')) {
-            $('.checked_items').append(item);
-            ch_its++;
-            unch_its--;
-            $('.hideable_checks').show();
-            $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
-            $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-            /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
-            if ($('#for_hidden_fields').length > 0) {
-                $('#for_hidden_fields').append('<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>');
-                $('.selected_concepts').append('<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>');
-            }
-        } else {
-            $('.unchecked_items').append(item);
-            ch_its--;
-            unch_its++;
-            if (ch_its == 0) {
-                $('.hideable_checks').hide();
-            }
-            $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-            /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
-            if ($('#for_hidden_fields').length > 0) {
-                $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove();
-                $('.selected_concepts').find('p#selected_concept_' + item_id).remove();
-            }
-        }
-    });
+    //var ch_its = $('.item', '.checked_items').length;
+    //var unch_its = $('.item', '.unchecked_items').length;
+    //$('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+    //
+    //$('.check_push_box').click(function () {
+    //    var item = $(this).closest('.item').detach();
+    //    var item_id = $(item).attr('data-id');
+    //    $('#discontents').find('.item[data-id=' + item_id + ']').remove();
+    //    $('#ideas').find('.item[data-id=' + item_id + ']').remove();
+    //    $('.checked_items').find('.item[data-id=' + item_id + ']').remove();
+    //    if ($(this).is(':checked')) {
+    //        $('.checked_items').append(item);
+    //        ch_its++;
+    //        unch_its--;
+    //        $('.hideable_checks').show();
+    //        $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
+    //        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+    //        /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
+    //        if ($('#for_hidden_fields').length > 0) {
+    //            $('#for_hidden_fields').append('<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>');
+    //            $('.selected_concepts').append('<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>');
+    //        }
+    //    } else {
+    //        $('.unchecked_items').append(item);
+    //        ch_its--;
+    //        unch_its++;
+    //        if (ch_its == 0) {
+    //            $('.hideable_checks').hide();
+    //        }
+    //        $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
+    //        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
+    //        /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
+    //        if ($('#for_hidden_fields').length > 0) {
+    //            $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove();
+    //            $('.selected_concepts').find('p#selected_concept_' + item_id).remove();
+    //        }
+    //    }
+    //});
 
 
     // Открытие "Добавления задач" в кабинете проектов
@@ -475,6 +483,15 @@ $(document).ready(function () {
             scrollTop: 0
         }, 'slow');
         e.preventDefault();
+    });
+
+    /* popup digest btn */
+    $(".btn_dia").click(function () {
+        if ($(this).text() == 'Подробнее')
+            $(this).html($(this).find('i')).append('Свернуть');
+        else $(this).html($(this).find('i')).append('Подробнее');
+        $('.dia_icon').toggleClass('active');
+        $('.dia_legend').toggleClass('active');
     });
 
 

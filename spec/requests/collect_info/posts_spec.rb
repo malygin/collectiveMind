@@ -198,7 +198,7 @@ describe 'Collect info' do
 
     it_behaves_like 'discuss second aspects'
 
-    context 'vote content', js: true do
+    context 'vote content', js: true, skip: true do
       it_behaves_like 'vote popup', '1:2', 'Голосование по аспектам', 'collect_info'
     end
   end
@@ -209,6 +209,7 @@ describe 'Collect info' do
     end
 
     it_behaves_like 'admin panel post', true
+
 
     #   it_behaves_like 'welcome popup', 'collect_info'
     #

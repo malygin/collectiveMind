@@ -1,6 +1,9 @@
 - if @user_voter
   = render partial: 'popup_vote'
 
+- if @project_result
+  = render partial: 'popup_results'
+
 -if @questions_progress != 100 and (@project.stage == '1:0' or  @project.stage == '1:1')
   = render partial: 'questions_aspects'
 -else

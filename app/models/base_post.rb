@@ -89,6 +89,29 @@ module BasePost
       self.class.table_name.singularize
     end
 
+    def class_name_for_url
+      cn = self.class.name.underscore.pluralize
+      return 'collect_info/posts' if cn == 'core/aspect/posts'
+      cn
+    end
+
+    def current_class?(stage)
+      case stage
+        when :collect_info, 'collect_info'
+          self.instance_of? CollectInfo::Post
+        when :discontent, 'discontent'
+          self.instance_of? Discontent::Post
+        when :concept, 'concept'
+          self.instance_of? Concept::Post
+        when :plan, 'plan'
+          self.instance_of? Plan::Post
+        when :estimate, 'estimate'
+          self.instance_of? Estimate::Post
+        else
+          false
+      end
+    end
+
     def stage_name
       self.class.name.deconstantize.underscore
     end

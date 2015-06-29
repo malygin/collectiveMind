@@ -15,7 +15,7 @@
     items: {src: el},
     type: 'inline',
     fixedContentPos: false,
-    fixedBgPos: true
+    fixedBgPos:true
 
 #open magnific popup close
 @magnificPopupClose = (el)->
@@ -204,7 +204,7 @@
     me = $(this)
     type = me.attr('data-me-type')
     if type == 'imperf'
-      color = $colors_imperf_codes[me.attr('data-me-color')]
+      color = $colors_imperf_codes[me.attr('data-me-color') % 49]
     if (type == 'aspect')
        color = $colors_aspect_codes[me.attr('data-me-color')];
     action = me.attr('data-me-action')
@@ -219,9 +219,16 @@
     if parent_col.hasClass('active')
       parent_col.toggleClass 'active'
       parent_col.siblings('.exp_col').toggleClass 'hidden'
+      new_title = $(this).attr('data-new')
+      old_title = $(this).attr('data-original-title')
+      $(this).attr('data-original-title',new_title).attr('data-new',old_title)
+
     else
       parent_col.toggleClass 'hidden'
       parent_col.siblings('.exp_col').toggleClass 'active'
+      new_title = $('.exp_col.active').find('.exp_button').attr('data-new')
+      old_title = $('.exp_col.active').find('.exp_button').attr('data-original-title')
+      $('.exp_col.active').find('.exp_button').attr('data-original-title',new_title).attr('data-new',old_title)
     return
 
 #----------
@@ -249,8 +256,27 @@
 
   $('.search_text').on('change', 'input#search_users_text', this.search_users)
 
+$('.add_disposts').on "click", (e) ->
+  project_id = $(this).data('project')
+  aspect_id = $(this).data('aspect')
+  if project_id and aspect_id
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/add_disposts"
+      type: "put"
+      dataType: "script"
+      data:
+        aspect: aspect_id
 
-
+$('#search_discontent').on "change", (e) ->
+  project_id = $(this).data('project')
+  val = this.value
+  if project_id and val
+    $.ajax
+      url: "/project/#{project_id}/concept/posts/search_disposts"
+      type: "put"
+      dataType: "script"
+      data:
+        search_text: val
 
 # @todo обновление таблицы и списка
 $('#PlanTabs li#second a').on "click", (e) ->
@@ -656,6 +682,16 @@ $('#tab_posts li#new a').on "click", (e) ->
       $('#player-container').tubeplayer 'pause'
       $(this).text('Продолжить просмотр')
       $(this).attr('data-stage', 'play')
+    return
+
+
+#цвет модального окна базы знаний
+
+@color_modal_knowbase =->
+  $('#myCarousel').on 'slid.bs.carousel', ->
+    bgcolor = $('.myCarousel-target.active').attr('data-color');
+    $('#myCarousel .header').css({background: bgcolor});
+    $('.myCarousel-control').css({color: bgcolor});
     return
 
 # временно!!!

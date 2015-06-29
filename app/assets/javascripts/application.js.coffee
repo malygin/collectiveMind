@@ -93,6 +93,15 @@ $ ->
 
   parse_my_journal_links()
 
+  check_and_push()
+
+  $('.with_arrow').click ->
+    $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
+    if $(this).find('i.collapse_arrow').hasClass('fa-rotate-90')
+      $(this).find('i.collapse_arrow').attr('title', 'Свернуть')
+    else
+      $(this).find('i.collapse_arrow').attr('title', 'Развернуть')
+    return
 
   $('.carousel').carousel
     interval: 4000,
@@ -243,13 +252,14 @@ $ ->
     role = $(this).attr('data-vote-poll-role')
     len = count_vote_items($(this))
     folder_len[role] = len
-    $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text len
+    $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text len
     return
   pb = $('.vote_progress')
   all_len = folder_len['overall'] = count_vote_items('.all_vote')
   pb_stretch pb, all_len, folder_len['overall']
   $('.vote_button').click ->
     role = $(this).attr('data-vote-role')
+    console.log role
     if !$(this).hasClass('voted')
       if $(this).siblings().hasClass('voted')
         prev_role = $(this).siblings('.voted').attr('data-vote-role')
@@ -260,22 +270,23 @@ $ ->
       $(this).addClass 'voted'
       $('.fa', this).removeClass($(this).attr('data-icon-class')).addClass vote_icon_all
       vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text ++folder_len[role]
+      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text ++folder_len[role]
+
       if prev_role
-        $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text --folder_len[prev_role]
+        $('[data-vote-folder-role = "' + prev_role + '"] > .vote-folder > .vote_counter').text --folder_len[prev_role]
       else
         all_len--
-        $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text all_len
+        $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
         pb_stretch pb, all_len, folder_len['overall']
       $('[data-vote-poll-role = "' + role + '"] .container>.row').append vote_item
     else
       $(this).removeClass 'voted'
       $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
       vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text --folder_len[role]
+      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text --folder_len[role]
       $('.all_vote>.container>.row').append vote_item
       all_len++
-      $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text all_len
+      $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
       pb_stretch pb, all_len, folder_len['overall']
     item_e = $(this).parents('.item_expandable')
     if item_e.hasClass('opened')
@@ -288,5 +299,71 @@ $ ->
     $('.item_expandable').not($(this).parents()).removeClass 'opened'
     $(this).parents('.item_expandable').toggleClass 'opened'
     return
+
+# выбор несовершенств и идей в кабинете
+@check_and_push = ->
+  ch_its = $('.item', '.checked_items').length
+  unch_its = $('.item', '.unchecked_items').length
+  $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  $('#check0').click ->
+    if  $("#check0").is(":checked")
+      $("#unchecked_discontent_posts input:checkbox").prop('checked', true);
+      $.each $('#unchecked_discontent_posts .item'), ->
+        item = $(this).closest('.item').detach()
+        item_id = $(item).attr('data-id')
+        $('#discontents').find('.item[data-id=' + item_id + ']').remove()
+        $('.checked_items').append item
+        ch_its++
+        unch_its--
+        $('.hideable_checks').show()
+        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+    else
+      $("input:checkbox").prop('checked', false)
+      $.each $('.checked_items .item'), ->
+        item = $(this).closest('.item').detach()
+        item_id = $(item).attr('data-id')
+        $('.unchecked_items').append item
+        ch_its--
+        unch_its++
+        if ch_its == 0
+          $('.hideable_checks').hide()
+        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  $('.check_push_box').click ->
+    item = $(this).closest('.item').detach()
+    item_id = $(item).attr('data-id')
+    $('#discontents').find('.item[data-id=' + item_id + ']').remove()
+    $('#ideas').find('.item[data-id=' + item_id + ']').remove()
+    $('.checked_items').find('.item[data-id=' + item_id + ']').remove()
+    if $(this).is(':checked')
+      $('.checked_items').append item
+      ch_its++
+      unch_its--
+      $('.hideable_checks').show()
+      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+
+      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
+
+      if $('#for_hidden_fields').length > 0
+        $('#for_hidden_fields').append '<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>'
+        $('.selected_concepts').append '<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>'
+    else
+      $('.unchecked_items').append item
+      ch_its--
+      unch_its++
+      if ch_its == 0
+        $('.hideable_checks').hide()
+      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
+      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+
+      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
+
+      if $('#for_hidden_fields').length > 0
+        $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove()
+        $('.selected_concepts').find('p#selected_concept_' + item_id).remove()
+    return
+
 
 # @todo ниже ничего не добавлять!!! здесь только функции! для начальной инициализации блок выше!

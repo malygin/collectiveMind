@@ -14,7 +14,7 @@
         %div.important.theme_font_color
           %i.fa.fa-bookmark.fa-2x
       .post-header.white
-      .post-body.ch_action{"data-for" => "post_ch#{post_short.id}"}
+      .post-body.no_post_head.ch_action{"data-for" => "post_ch#{post_short.id}"}
         .media
           .media-left.text-center.gradient.post-poster
             -#= image_tag 'no-ava.png', class: "img-circle img50"
@@ -25,31 +25,34 @@
             %p.time
               = Russian::strftime(post_short.created_at,'%d.%m.%Y')
           .media-body.white-gray
-            = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
-              %h5.bold.font_color_stage3
-                = trim_content(post_short.title)
-                %i.fa.fa-angle-right
-            .post-text
-              %p
-                = trim_content(post_short.content)
+            %table.table
+              %tbody
+                %tr.what
+                  %td.col-md-12.left-column
+                    = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}", class:"font_color_stage3 bold" ) do
+                      = trim_content(post_short.title)
+                      %i.fa.fa-angle-right.icon-right
+                %tr
+                  %td.col-md-12.left-column
+                    = trim_content(post_short.content)
             .post_cont_hover.post_tall.white{id: "post_ch#{post_short.id}"}
               .wrapper.ps_cont.half_wheel_speed
                 .post_cont_inner
                   -post_short.comments.preview.each do |comment|
-                    .comment_preview
+                    .comment_preview{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{comment.content}"}
                       %span.bold.com_date
                         = Russian::strftime(comment.created_at,'%k:%M %d.%m.%y')
                       %span.bold
                         ="#{comment.user}:"
-                      =comment.content
+                      = comment.content
       .post-bottom.white
         .row
           .col-md-2.col_padding_right_3
             %small.pull-left{:style => "margin-right: 3px;"} Несовершенства
-          .col-md-7.col_padding_right_3.themes_cont
+          .col-md-7.col_padding_right_3.themes_cont.marginL10
             .post-theme{id: "stripe#{post_short.id}"}
               - post_short.concept_disposts.each_with_index do |dispost, index|
-                %span.tag-stripes.color_me{class: "#{'active' if index == 0}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
+                %span.tag-stripes.color_me{class: "#{'active' if index == 0}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf", "data-placement" => "top", "data-toggle" => "tooltip", :title => "#{dispost.content}"}
                   %span.tags
                     = trim_content(dispost.content, 30)
           .col-md-3.col_padding_left_3
@@ -61,12 +64,12 @@
               %span.popup2
                 %small(id="lk_post_#{post_short.id}" class="lk_post_#{post_short.id}")
                   = post_short.users_pro.count
-                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}") do
+                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %i.fa.fa-thumbs-o-up.fa-flip-horizontal
               %span.popup2
                 %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
                   = post_short.users_against.count
-                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}") do
+                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %i.fa.fa-thumbs-o-down.fa-flip-horizontal
                     %i.fa.fa-thumbs-o-down.fa-flip-horizontal
               -#-if post_short.notes.present?
