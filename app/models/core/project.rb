@@ -5,8 +5,8 @@ class Core::Project < ActiveRecord::Base
   accepts_nested_attributes_for :settings
 
   has_many :aspects, class_name: 'Aspect::Post'
-  has_many :main_aspects, -> { where(core_aspect_id: nil, status: 0) }, class_name: 'Aspect::Post'
-  has_many :other_aspects, -> { where(core_aspect_id: nil, status: 1) }, class_name: 'Aspect::Post'
+  has_many :main_aspects, -> { where(aspect_id: nil, status: 0) }, class_name: 'Aspect::Post'
+  has_many :other_aspects, -> { where(aspect_id: nil, status: 1) }, class_name: 'Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontents_for_discussion, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
