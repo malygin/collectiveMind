@@ -53,9 +53,7 @@ module PostCabinet
 
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
-    return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym ||
-              action_name == 'user_content' || @project.current_stage_type == :collect_info_posts &&
-                                               params[:controller].sub('/', '_').to_sym == :'core_aspect/posts'
+    return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym || action_name == 'user_content'
     redirect_to url_for(params.merge(controller: '/' + @project.current_stage_type.to_s.sub('_', '/')))
   end
 
@@ -69,6 +67,6 @@ module PostCabinet
   end
 
   def correct_mechanic?
-    Technique::List.by_stage(current_model.to_s.sub('Core::', '').sub('::', '_').underscore.pluralize).where(code: params[:type_mechanic]).any?
+    Technique::List.by_stage(current_model.to_s.sub('::', '_').underscore.pluralize).where(code: params[:type_mechanic]).any?
   end
 end

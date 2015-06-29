@@ -1,0 +1,3 @@
+-#закроем попап, если за все аспекты уже проголосовали
+- unless current_user.can_vote_for(:aspect, @project)
+  magnificPopupClose('.popup-vote')

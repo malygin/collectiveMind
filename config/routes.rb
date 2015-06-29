@@ -51,7 +51,7 @@ CollectiveMind::Application.routes.draw do
   scope '/project/:project' do
 
     resources :news do
-        get :read, on: :member
+      get :read, on: :member
     end
 
     namespace :knowbase, :module => false do
@@ -73,14 +73,10 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    namespace :aspect, :module => false do
-      posts_routes('core/aspect/posts')
-    end
-
-    namespace :collect_info do
+    namespace :aspect do
       posts_routes
       resources :posts do
-          put :answer_question, on: :member
+        put :answer_question, on: :member
       end
     end
 

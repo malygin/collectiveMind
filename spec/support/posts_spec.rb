@@ -44,11 +44,11 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
   let(:comment_model_name) { @comment_2.class.name.constantize }
   let(:comment_post_model) { @comment_2.class.name.underscore.gsub('/comment', '_post') }
-  let(:text_comment) { attributes_for(comment_model.gsub('core/','').to_sym)[:content] }
+  let(:text_comment) { attributes_for(comment_model.to_sym)[:content] }
 
 
   it ' user likes comment', js: true do
-    like_comment_path = Rails.application.routes.url_helpers.send("like_comment_#{comment_post_model.gsub('core/','')}_path", project, @comment_1)
+    like_comment_path = Rails.application.routes.url_helpers.send("like_comment_#{comment_post_model}_path", project, @comment_1)
 
     expect(page).to have_link("like_comment_#{@comment_1.id}", href: like_comment_path + '?against=false')
     expect(page).to have_link("dislike_comment_#{@comment_1.id}", href: like_comment_path + '?against=true')
@@ -201,7 +201,7 @@ shared_examples 'likes posts' do |moderator = false|
 
 
   it ' user likes post', js: true do
-    like_post_path = Rails.application.routes.url_helpers.send("like_#{post_model.gsub('core/','')}_path", project, @post1)
+    like_post_path = Rails.application.routes.url_helpers.send("like_#{post_model}_path", project, @post1)
 
     expect(page).to have_link("like_post_#{@post1.id}", href: like_post_path + '?against=false')
     expect(page).to have_link("dislike_post_#{@post1.id}", href: like_post_path + '?against=true')
@@ -223,14 +223,14 @@ shared_examples 'likes posts' do |moderator = false|
 end
 
 shared_examples 'admin panel post' do |moderator = false|
-  let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post').gsub('core/','') }
-  let(:stage_model) { @post1.class.name.underscore.pluralize.gsub('/posts', '_posts').gsub('core/aspect','collect_info') }
+  let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post') }
+  let(:stage_model) { @post1.class.name.underscore.pluralize.gsub('/posts', '_posts') }
   let(:comment_model_name) { @post1.class.name.constantize }
 
   before do
-    if stage_model == 'collect_info_posts'
-      create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect1, question: @question_0_1
-      create :collect_info_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect2, question: @question_0_2
+    if stage_model == 'aspect_posts'
+      create :aspect_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect1, question: @question_0_1
+      create :aspect_user_answer, user: moderator ? @moderator : @user, project: project, aspect: @aspect2, question: @question_0_2
     end
     stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
 

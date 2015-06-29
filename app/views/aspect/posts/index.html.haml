@@ -1,0 +1,15 @@
+- if @user_voter
+  = render partial: 'popup_vote'
+
+-if @questions_progress != 100 and (@project.stage == '1:0' or  @project.stage == '1:1')
+  = render partial: 'questions_aspects'
+-else
+  = render partial: 'discuss_aspects'
+
+
+- if shown_intro('aspect_intro') == ''
+  = render partial: 'popup_welcome'
+- if @project.type_for_questions == 0
+  = render partial: 'popup_greetings'
+
+

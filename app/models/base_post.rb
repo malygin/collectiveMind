@@ -127,11 +127,11 @@ module BasePost
       self.toggle!(:useful)
       if useful
         user.add_score(type: :plus_post, project: project, post: self,
-                       type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                       type_score: "#{self.class.table_name}_score",
                        score: self.class::SCORE, model_score: self.class.table_name.singularize)
       else
         user.add_score(type: :to_archive_plus_post, project: project, post: self,
-                       type_score: "#{self.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : self.class.table_name}_score",
+                       type_score: "#{self.class.table_name}_score",
                        score: self.class::SCORE, model_score: self.class.table_name.singularize)
       end
     end
@@ -153,7 +153,7 @@ module BasePost
       post.user = user
 
       post.stage = params[:stage] unless params[:stage].nil?
-      post.core_aspects << Core::Aspect::Post.find(params[:aspect_id]) unless params[:aspect_id].nil?
+      post.aspects << Aspect::Post.find(params[:aspect_id]) unless params[:aspect_id].nil?
       post.style = params[:style] unless params[:style].nil?
       post.status = 0 if column_names.include? 'status'
       post.save!

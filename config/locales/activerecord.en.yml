@@ -7,7 +7,7 @@ en:
         goal: "Суть идеи"
         impact_env: "Чьи интересы будут затронуты?"
         title: "Название идеи"
-      core/aspect/post:
+      aspect/post:
         content: "Название аспекта"
         short_desc: "Обоснование аспекта"
       discontent/post:

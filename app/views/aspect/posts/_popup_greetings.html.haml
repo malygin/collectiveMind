@@ -1,0 +1,16 @@
+#popup-greetings-text.popup-window.popup-w710.mfp-hide.stage1_theme
+  .popup.popup_rounded.popup_medal
+    .medal-block.gold-medal
+    .row
+      .col-md-8.col-md-offset-3
+        %p.font_mid_grey.bold
+          Спасибо за ваши ответы!
+        .divider50
+        %p.font_mid_grey.bold
+          Теперь вы можете ознакомиться с ответами других участников и предложить аспект, если посчитаете нужным.
+        .divider50
+        %p
+          = link_to aspect_posts_path(@project), class: "btn add-button" do
+            %span
+              %i.fa.fa-comment-o
+            Просмотреть аспекты

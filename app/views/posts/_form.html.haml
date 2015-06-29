@@ -2,7 +2,6 @@
   = f.text_area :content, class: 'post',  onkeyup: "activate_button(this);" , style: 'width: 100%; height: 300px;'
   %br
   %br
-  23123123
   .input-group
-    =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.core_aspects.first.id), promt: t('form.select_topic'), class: 'form-control', style: 'width: 300px;'
+    =select_tag 'aspect_id', options_from_collection_for_select(@aspects, 'id', 'content', @post.aspects.first.id), promt: t('form.select_topic'), class: 'form-control', style: 'width: 300px;'
     = f.submit t('form.save'),  class:'btn btn-success btn-sm', id:'send_post'

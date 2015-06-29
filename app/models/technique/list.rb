@@ -8,7 +8,6 @@ class Technique::List < ActiveRecord::Base
   end
 
   def self.by_stage(stage)
-    stage = :aspect_posts if stage == :collect_info_posts
     where stage: stage
   end
 

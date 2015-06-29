@@ -8,7 +8,7 @@ class Core::Knowbase::PostsController < PostsController
   end
 
   def new
-    @aspects = Core::Aspect::Post.where(project_id: @project)
+    @aspects = Aspect::Post.where(project_id: @project)
     @stages = current_model.stage_knowbase_order(@project.id)
     @post = current_model.new
     respond_to do |format|
@@ -41,7 +41,7 @@ class Core::Knowbase::PostsController < PostsController
   end
 
   def edit
-    @aspects = Core::Aspect::Post.where(project_id: @project)
+    @aspects = Aspect::Post.where(project_id: @project)
     @post = current_model.find(params[:id])
   end
 

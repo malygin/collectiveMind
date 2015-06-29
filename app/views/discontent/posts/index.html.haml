@@ -49,7 +49,7 @@
       - @aspects.each_with_index do |aspect, index|
         = render partial: 'aspect', object: aspect, locals: {level: 0}
 
-        - aspect.core_aspects.each do |asp|
+        - aspect.aspects.each do |asp|
           = render partial: 'aspect', object: asp, locals: {level: 1}
 
 .stage-info-sort-block

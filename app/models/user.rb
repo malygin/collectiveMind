@@ -10,13 +10,13 @@ class User < ActiveRecord::Base
   has_many :loggers, class_name: 'JournalLogger'
 
   has_many :discontent_posts, class_name: 'Discontent::Post'
-  has_many :core_aspects, class_name: 'Core::Aspect::Post'
+  has_many :aspect_posts, class_name: 'Aspect::Post'
   has_many :concept_posts, class_name: 'Concept::Post'
   has_many :novation_posts, class_name: 'Novation::Post'
   has_many :plan_posts, class_name: 'Plan::Post'
 
-  has_many :aspect_votings, class_name: 'CollectInfo::Voting'
-  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Core::Aspect::Post'
+  has_many :aspect_votings, class_name: 'Aspect::Voting'
+  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Aspect::Post'
 
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :core_project_users, source: :core_project, class_name: 'Core::Project'
 
   has_many :user_checks, class_name: 'UserCheck'
-  has_many :user_answers, class_name: 'CollectInfo::UserAnswers'
+  has_many :user_answers, class_name: 'Aspect::UserAnswer'
   has_many :news, class_name: 'News'
   has_many :core_content_user_answers, class_name: 'Core::ContentUserAnswer'
   # scope :check_field, ->(p, c) { joins(:user_checks).where(user_checks: {project: p.id, status: 't', check_field: c}) }
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_score_by_type(project, score, type = :collect_info_posts_score)
+  def add_score_by_type(project, score, type = :aspect_posts_score)
     ps = core_project_users.by_project(project).first_or_create
     ps.update_attributes!(score: score + (ps.score || 0), type => (ps.read_attribute(type) || 0) + score)
   end
@@ -100,18 +100,10 @@ class User < ActiveRecord::Base
   end
 
   def content_for_project(stage, project)
-    if stage == :collect_info_posts
-      core_aspects.by_project(project)
-    else
-      send(stage).by_project(project.id)
-    end
+    send(stage).by_project(project.id)
   end
 
   def comment_for_project(stage, project)
-    if stage == :collect_info_posts
-      core_aspects.by_project(project).joins(:comments)
-    else
-      send(stage).by_project(project.id).joins(:comments)
-    end
+    send(stage).by_project(project.id).joins(:comments)
   end
 end

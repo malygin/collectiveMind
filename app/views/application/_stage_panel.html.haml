@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-8.col_padding_right_3
-      .border_grey.rounded_3.stages_block{class: "#{'tooltip1' if name_controller == :collect_info_posts}" }
+      .border_grey.rounded_3.stages_block{class: "#{'tooltip1' if name_controller == :aspect_posts}" }
         .btn-toolbar{role: 'toolbar'}
           - Core::Project::STAGES.each do |num_stage, stage|
             .btn-group{role: 'group'}

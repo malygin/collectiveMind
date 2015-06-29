@@ -23,9 +23,9 @@
           - @project.aspects.main_aspects.each do |asp1|
             = render partial: 'aspect', locals: {aspect: asp1}
 
-            - if asp1.core_aspects.present?
+            - if asp1.aspects.present?
               %ul.panel-collapse{id: "aspects_for_aspect_#{asp1.id}"}
-                - asp1.core_aspects.each do |asp2|
+                - asp1.aspects.each do |asp2|
                   = render partial: 'aspect', locals: {aspect: asp2}
       #edit_stages.tab-pane.fade
         = render partial: 'edit_stages'

@@ -21,7 +21,7 @@ module JournalHelper
 
   def journal_color(j)
     case j
-    when  /core_aspect/
+    when  /aspect/
       'font_color_stage1'
     when /discontent/
       'font_color_stage2'
@@ -36,7 +36,7 @@ module JournalHelper
 
   def path_from_journal_event(type_event)
     case type_event
-    when /core_aspec/
+    when /aspect/
       'collect_info/posts'
     when /discontent_post/
       'discontent/posts'
