@@ -42,7 +42,7 @@ describe 'Cabinet Aspects' do
     visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_aspect_post_#{@aspect.id}" do
       expect {
-        fill_in 'core_aspect_post_content', with: new_content
+        fill_in 'aspect_post_content', with: new_content
         click_button 'send_post_aspect'
         expect(page).to have_content t('form.aspect.edit_success')
       }.not_to change(Aspect::Post, :count)
