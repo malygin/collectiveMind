@@ -17,8 +17,8 @@ describe 'Knowbase ' do
     @aspect1 = create :aspect, project: project
     @aspect2 = create :aspect, project: project
 
-    @knowbase_post1 = create :core_knowbase_post, project: project, core_aspect: @aspect1
-    @knowbase_post2 = create :core_knowbase_post, project: project, core_aspect: @aspect2
+    @knowbase_post1 = create :core_knowbase_post, project: project, aspect: @aspect1
+    @knowbase_post2 = create :core_knowbase_post, project: project, aspect: @aspect2
   end
 
   shared_examples 'show list knowbase posts' do
