@@ -44,10 +44,12 @@ module BaseComment
 
     def add_score
       self.toggle!(:useful)
-      if @comment.useful
-        user.add_score(type: :plus_comment, project: post.project, comment: self, path: post_controller_path)
+      if self.useful
+        user.add_score(type: :plus_comment, project: post.project, comment: self, path: post_controller_path,
+                       type_score: "#{post.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : post.class.table_name}_score")
       else
-        user.add_score(type: :to_archive_plus_comment, project: post.project, comment: self, path: post_controller_path)
+        user.add_score(type: :to_archive_plus_comment, project: post.project, comment: self, path: post_controller_path,
+                       type_score: "#{post.class.table_name == 'core_aspect_posts' ? 'collect_info_posts' : post.class.table_name}_score")
       end
     end
 

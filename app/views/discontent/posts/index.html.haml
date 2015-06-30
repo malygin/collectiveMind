@@ -6,10 +6,8 @@
 
 - if @project_result
   = render partial: 'popup_results'
-
 .stage-info-sort-block
-  .btn-group{"data-placement" => "bottom", "data-toggle" => "tooltip",
-    :title=> "#{@project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size > 0 ? 'Перейти к выбору аспектов [доступны обновления]' : 'Перейти к выбору аспектов'}"}
+  #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
     %span Фильтр аспектов:
     %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"}
       %span
@@ -65,34 +63,28 @@
         %span#count_discontents
           ="(#{@posts.count})"
     .col-md-5
-      .pull-right
-        - if @project.stage=='2:0'
-          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
-            %button.btn.add-button{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить несовершенство"}
-              %span#tooltip2_2.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией"}
-                = t('techniques.discontent_posts_simple')
-        - else
-          -#= link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
-          -#  .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
-
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'},"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым комментариям"}
-            - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
+          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+            - new_comments = @project.discontents_for_discussion.after_last_visit_comments(last_time_visit_page('discontent')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
-          %span.sort-2.sort_btn.sprite.sprite-2_2.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым несовершенствам"}
-            - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
+          %span#tooltip2_2.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
+            - new_posts = @project.discontents_for_discussion.after_last_visit_posts(last_time_visit_page('discontent')).size
             - if new_posts > 0
               %span.badge-red
                 = new_posts
 
-.stage-post-block#tooltip2_2.tooltip1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи"}
+        - if @project.stage=='2:0'
+          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
+            %button.btn.add-button
+              %span
+                = t('techniques.discontent_posts_simple')
+
+.stage-post-block
   .row#tab_aspect_posts
     -#= render partial: 'post_short', collection: @posts
-
-
 
 

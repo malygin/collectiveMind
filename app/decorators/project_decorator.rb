@@ -112,13 +112,13 @@ class ProjectDecorator
 
   # выборка пользователей по баллам за стадию
   def sort_user_score(type_score = 'collect_info_posts_score')
-    project.users_in_project.reorder("core_project_users.#{type_score} DESC NULLS LAST").limit(10)
+    project.users.reorder("core_project_users.#{type_score} DESC NULLS LAST").limit(10)
   end
 
   # выборка пользователей по баллам за стадию
   def sort_user_like(stage = :collect_info_posts)
     # stage = :core_aspect_posts if stage == :collect_info_posts
-    project.users_in_project.sort_by { |user| -(user.likes_posts_for(stage, project).count + user.likes_comments_for(stage, project).count) }.first(3)
+    project.users.sort_by { |user| -(user.likes_posts_for(stage, project).count + user.likes_comments_for(stage, project).count) }.first(3)
   end
 
   def results_all(stage = :collect_info_posts)
@@ -137,15 +137,15 @@ class ProjectDecorator
 
   def results_for_next(stage = :collect_info_posts)
     if stage == :collect_info_posts
-      proc_aspects
+      main_aspects
     elsif stage == :discontent_posts
-      discontent_ongoing_post
+      discontents_for_discussion
     elsif stage == :concept_posts
-      concept_ongoing_post
+      concepts_for_discussion
     elsif stage == :novation_posts
-      novation_published_post
+      novations_for_discussion
     elsif stage == :plan_posts
-      plan_published_post
+      plans_for_discussion
     end
   end
 

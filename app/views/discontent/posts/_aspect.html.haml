@@ -1,6 +1,6 @@
 %li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}, style: "padding-left: #{level*10}px;"}
   %input{:id => "ex2_2_#{aspect.id+1}",:name => "ex2_2", :type => "radio", :value => "#{aspect.id+1}"}/
-  %label.checkox_item{:for => "ex2_2_#{aspect.id+1}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "#{aspect.aspect_posts.by_status_for_discontent(@project).count > 0 ? 'В этом аспекте ' +t('discontent', count: aspect.aspect_posts.by_status_for_discontent(@project).count) : 'В этом аспекте еще нет несовершенств'}"}
+  %label.checkox_item{:for => "ex2_2_#{aspect.id+1}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "#{aspect.aspect_posts.count > 0 ? 'В этом аспекте ' +t('discontent', count: aspect.aspect_posts.count) : 'В этом аспекте еще нет несовершенств'}"}
     %span
       %span.color_counter.color_me{style: "background-color: #{aspect.color};"}
         %span

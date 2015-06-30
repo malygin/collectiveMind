@@ -14,7 +14,7 @@
           %span.text_label
             %label{:for => "check0"} Выбрать все
         .slide_table_wrap
-          - @project.discontents_approved.each_with_index do |post, index|
+          - @project.discontents_for_discussion.each_with_index do |post, index|
             .checkox_item{data: {discontent: ".discontent_#{post.id}"}}
               %span
                 %span.cb_input
