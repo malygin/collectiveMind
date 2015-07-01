@@ -85,35 +85,57 @@
                           .divider20
 
                 #user_profile.tab-pane.fade{class: "#{'in active' if params[:edit_profile]}", :role => "tabpanel"}
-                  = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user},multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
-                    .cab_notice.white(style='display:none;' id="update_user_success")
-                      %span.success
-                        = t("form.user.update_success")
-                    .notice_messages
-                      = render 'shared/notice_messages', object: f.object
-                    .form-group
-                      = f.text_field :name, class: 'form-control', placeholder: 'Имя'
-                    .form-group
-                      = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
-                    .form-group
-                      = f.text_field :email, class: 'form-control', placeholder: 'Email'
-                    .form-group
-                      = f.password_field :password, class: 'form-control', placeholder: 'Новый пароль'
-                    .form-group
-                      = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
-                    .form-group
-                      = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
-                    .form-group
-                      = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
-                    .form-group
-                      = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-                    -#.form-group
-                    -#  .checkbox
-                    -#    %label
-                    -#      %input{type: 'checkbox'}/
-                    -#      Получать автоматические уведомления
-                    = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+                  .col-md-6.col-md-offset-3.text-center
+                    .profile
+                      .profile_icon.img-circle
+                        .divider10
+                        = image_tag 'user.png'
+                        .divider10
+                        %a.btn.btn-xs.btn-danger.open-popup{"data-placement"=>"1","data-target"=>"1"} Изменить
+                      .divider10
+                      = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user},multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
+                        .cab_notice.white(style='display:none;' id="update_user_success")
+                          %span.success
+                            = t("form.user.update_success")
+                        .notice_messages
+                          = render 'shared/notice_messages', object: f.object
+                        .form-group
+                          = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+                        .form-group
+                          = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+                        .form-group
+                          = f.text_field :email, class: 'form-control', placeholder: 'Email'
+                        .form-group
+                          = f.password_field :password, class: 'form-control', placeholder: 'Новый пароль'
+                        .form-group
+                          = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
+                        .form-group
+                          = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+                        .form-group
+                          = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
 
+                        -#.form-group
+                        -#  .checkbox
+                        -#    %label
+                        -#      %input{type: 'checkbox'}/
+                        -#      Получать автоматические уведомления
+                        = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+                        #popup-1-1.popup-window.detailed_popup.mfp-hide.popup-w415
+                          .popup.popup_rounded
+                            .modal-body.text-center.padding60
+                              .form-group
+                                = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+                              .divider20
+                              %p Или выбрать из коллекции:
+                              .divider30
+                              .row
+                                - (1..9).each do |i|
+                                  .col-md-4
+                                    .avatar_icon.img-circle
+                                      = image_tag 'avatars/'+"#{i}"+'.png'
+                                    .divider10
+                              .divider20
+                              %button.btn.btn-danger Сохранить
         -# а этот yield только для ганта
         = yield :special_for_gantt
 

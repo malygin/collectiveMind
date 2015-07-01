@@ -95,6 +95,11 @@ $ ->
 
   check_and_push()
 
+
+  $('.avatar_icon').click ->
+    $('.avatar_icon').removeClass 'active'
+    $(this).addClass 'active'
+
   $('.with_arrow').click ->
     $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
     if $(this).find('i.collapse_arrow').hasClass('fa-rotate-90')
