@@ -14,7 +14,7 @@
           ="(#{@posts.count})"
     .col-md-5
       .pull-right
-        - if @project.stage == '4:0'
+        - if @project.stage == '4:0' or @project.status == 100
           = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_posts' do
             %button.btn.add-button
               %span

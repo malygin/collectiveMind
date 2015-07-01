@@ -14,7 +14,7 @@
           ="(#{@posts.count})"
     .col-md-5
       .pull-right
-        - if @project.stage == '3:0'
+        - if @project.stage == '3:0' or @project.status == 100
           = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
             %button.btn.add-button{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить идею"}
               %span.tooltip1.middle{data: {name: 'sort', desc: 0, type: 'comment'},'data-placement' => 'bottom','data-toggle' => 'tooltip','data-trigger'=>'manual', title:'Добавляйте новые идеи, связанные с текущей проблемной ситуацией'}

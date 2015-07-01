@@ -5,7 +5,7 @@
       %span.stage-label Обсуждение аспектов
     .col-md-5
       .pull-right
-        - if @project.stage == '1:0' or @project.stage == '1:1'
+        - if @project.stage == '1:0' or @project.stage == '1:1' or @project.status == 100
           = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
             %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
               = t('techniques.aspect_posts_simple')
