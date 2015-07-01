@@ -281,3 +281,24 @@
     border-left: 1px solid #bed2b6;
     border-top: 1px solid #bed2b6;
 }
+
+/* type 2 */
+.post.post_type_2 {
+    height: 166px;
+}
+
+.post.post_type_2 .media-left, .post.post_type_2 .media-body {
+    height: 130px;
+}
+
+.post_type_2 .post_cont_hover {
+    top: 130px;
+}
+
+.post_type_2 .post_cont_hover.active {
+    top: 48px;
+}
+
+.post_type_2 .post_cont_hover .wrapper {
+    height: 69px;
+}

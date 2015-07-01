@@ -681,3 +681,81 @@
     margin-bottom: 1px;
 }
 
+/* type 1 */
+.post.post_type_1 {
+    height: 150px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.post.post_type_1.not_tall {
+    height: 92px;
+}
+
+.post_type_1.placeholder {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.post_type_1.placeholder .media-body {
+    overflow: visible;
+}
+
+.post_type_1 .post-poster {
+    width: 22%;
+}
+
+.post_type_1 .media-left, .post_type_1 .media-body {
+    height: 115px;
+}
+
+.post.post_type_1.not_tall .media-left, .post.post_type_1.not_tall .media-body {
+    height: 90px;
+}
+
+.post_type_1 .post-text {
+    min-height: 60px;
+    padding-right: 135px;
+    position: relative;
+}
+
+.post_type_1 .post-text .fa-angle-right {
+    position: absolute;
+    top: 50%;
+    right: 19px;
+    margin-top: -18px;
+    font-size: 36px;
+    color: #707070;
+}
+
+.post_type_1 .post-bottom {
+    border-top: 1px solid #d9d9d9;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    height: 20px;
+    background: #fff;
+}
+
+.post_type_1 .small_icons {
+    padding-right: 10px;
+}
+
+.post_comments_cont {
+    height: 50px;
+}
+
+.post_type_1 .post_cont_hover {
+    top: 130px;
+    border-top: 1px solid #d9d9d9;
+}
+
+.post_type_1 .post_cont_hover.active {
+    top: 50px;
+}
+
+.post_type_1 .post_cont_hover .wrapper {
+    height: 50px;
+}
+
