@@ -1,0 +1,53 @@
+.stage7_theme .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 7px;
+    border-bottom-color: #558590;
+}
+
+.stage7_theme .subhead {
+    background: #80becc; /* Old browsers */
+    background: -moz-linear-gradient(top, #78b4c3 0%, #8dccd9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #78b4c3), color-stop(100%, #8dccd9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #78b4c3 0%, #8dccd9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #78b4c3 0%, #8dccd9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #78b4c3 0%, #8dccd9 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #78b4c3 0%, #8dccd9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#78b4c3', endColorstr='#8dccd9', GradientType=0); /* IE6-9 */
+}
+.stages_block .btn.back_color_stage7:hover {
+    background: #97e0ef;
+}
+
+.stage7_theme .dd_badge {
+    background: #86c3cf;
+}
+
+.stage7_theme .dd_nav_divider span {
+    color: #80b2d6;
+}
+
+.stage7_theme .dd_nav_divider:after {
+    border-color: #6386bf;
+}
+
+
+.font_color_stage7.dd_nav_divider:after {
+    border-color: #86c3cf;
+}
+
+.stage7_theme .btn_cab_mod.active {
+    background: #7fb8c3;
+    color: #fff;
+}
+
+.list_win .active .back_color_stage7 {
+    background: #9ee7f4;
+}
+
+.back_color_stage7 {
+    background-color: #8cccd8;
+}
+
+.font_color_stage7 {
+    color: #86c3cf !important;
+}
