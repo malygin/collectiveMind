@@ -63,6 +63,16 @@
         %span#count_discontents
           ="(#{@posts.count})"
     .col-md-5
+      .pull-right
+        - if @project.stage=='2:0' or @project.status == 100
+          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
+            %button.btn.add-button{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить несовершенство"}
+              %span#tooltip2_2.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией"}
+                = t('techniques.discontent_posts_simple')
+        - else
+          -#= link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
+          -#  .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
+
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter

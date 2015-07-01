@@ -1168,6 +1168,9 @@ textarea:focus {
     .container.padding30 {
         padding: 0 30px;
     }
+    .padding60{
+        padding: 40px 60px;
+    }
 }
 
 /* MAIN PAGE */
@@ -4364,7 +4367,7 @@ ul.vote_nav > li > a {
 }
 
 .vote_item_cont {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
 .vote_item {
@@ -8327,6 +8330,16 @@ h5.media-heading > a:hover{
     height:135px;
 }
 
-.marginL10{
+.marginL10 {
     margin-left: 10px;
+}
+.avatar_icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    border: 2px solid #c7c7c7;
+    cursor: pointer;
+}
+.avatar_icon.active{
+    border: 2px solid #e61928;
 }

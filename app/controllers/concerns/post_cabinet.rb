@@ -53,7 +53,7 @@ module PostCabinet
 
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
-    return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym || action_name == 'user_content'
+    return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym || action_name == 'user_content' || @project.status == 100
     redirect_to url_for(params.merge(controller: '/' + @project.current_stage_type.to_s.sub('_', '/')))
   end
 
