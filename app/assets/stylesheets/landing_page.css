@@ -1,0 +1,125 @@
+/*HOME PAGE*/
+.landing {
+    background: white;
+}
+
+
+/* present styles */
+.landing .top_bar {
+    border-bottom: 1px solid #e2e2e2;
+    background: #f4f4f4;
+    margin-bottom: 0;
+}
+.landing .navbar a, .landing .navbar span {
+    color: #EA1B22;
+}
+.bottom-bar .navbar-right {
+    padding-top: 30px;
+    margin-right: 0;
+}
+.bottom-bar .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.auth_logo {
+    width: 120px;
+    height: 57px;
+    display: inline-block;
+}
+
+/* MAIN PAGE */
+.auth-wrapper {
+    background: #ffffff;
+    color: #797979;
+}
+
+.auth-wrapper a {
+    color: #797979;;
+}
+
+a.active {
+    color: #000000;
+}
+
+.auth-wrapper .main-auth-heading {
+    color: #e71d2b;
+    width: 80px;
+    position: relative;
+    margin: 0 auto;
+    font-weight: 700;
+}
+
+#main-auth-heading-word1 {
+    letter-spacing: 1.1px;
+}
+
+#main-auth-heading-word2 {
+    letter-spacing: 0.8px;
+}
+
+#main-auth-heading-word3 {
+    letter-spacing: 1.4px;
+}
+
+#main-auth-heading-word4 {
+    letter-spacing: 3px;
+}
+
+.auth-form {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.auth-form input {
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    background: #f7f7f7;
+    padding: 0 13px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+}
+
+.auth-form input + input {
+    margin-top: 14px;
+}
+
+.auth-form .btn.auth-main {
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+}
+
+.auth-bottom-links-main {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+}
+
+.auth-form input::-webkit-input-placeholder {
+    color: #797979;
+}
+
+.auth-form input:-moz-placeholder {
+    color: #797979;
+}
+
+.auth-bottom-wrapper {
+    height: 560px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #f3f2f2;
+    color: #797979;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.auth-bottom-wrapper a {
+    font-size: 14px;
+    color: #797979;
+}
+
+.auth-bottom-wrapper li.active a {
+    color: #d73743;
+}
