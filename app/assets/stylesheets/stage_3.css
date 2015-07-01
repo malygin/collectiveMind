@@ -1,0 +1,195 @@
+.slide-inner.slide_stage3 {
+    width: 400px;
+    max-height: 565px;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.slide-inner.slide_stage3 > .ps_cont {
+    max-height: 565px;
+}
+.stage3_theme .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 6px;
+}
+
+.stage3_theme .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 7px;
+    border-bottom-color: #7a5276;
+}
+
+.stage3_theme .add-button {
+    background: #bd8cb8;
+}
+
+.stage3_theme .subhead {
+    background: #976692; /* Old browsers */
+    background: -moz-linear-gradient(top, #976692 0%, #c090bb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #976692), color-stop(100%, #c090bb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #976692 0%, #c090bb 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #976692 0%, #c090bb 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #976692 0%, #c090bb 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #976692 0%, #c090bb 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#976692', endColorstr='#c090bb', GradientType=0); /* IE6-9 */
+}
+.stages_block .btn.back_color_stage3:hover {
+    background: #d69fd1;
+}
+
+.stage3_theme .help_icon {
+    background: image-url('icon-help-sprite.png') no-repeat 0 -106px;
+}
+.stage3_theme .popup2 i {
+    color: #c292bd;
+}
+
+.popup_color_theme_stage3 .expand_button:before {
+    border-right-color: #bd8cb8;
+}
+
+.popup_color_theme_stage3 .expand_button.add_col:before {
+    border-left-color: #bd8cb8;
+}
+
+.popup_color_theme_stage3 .media.comment.unread {
+    background: #fbf9fa;
+}
+
+.stage3_theme .theme_back_color {
+    background: #bd8cb8;
+}
+
+.stage3_theme .theme_font_color {
+    color: #bd8cb8;
+}
+
+.stage3_theme button:hover .theme_font_color {
+    opacity: 0.8;
+}
+
+.stage3_theme button:active .theme_font_color {
+    color: #bd7fb7;
+}
+
+.popup_color_theme_stage3 .lined-heading {
+    background: #ebdcea;
+}
+
+.stage3_theme .vote_folders_cont li.active .vote_folder_inn {
+
+    border-color: #CFCFCF;
+}
+
+.stage3_theme .poll-2-1, .stage3_theme .vote_folders_cont li.active .poll-2-1 {
+    background-position: -222px 0;
+}
+
+.stage3_theme .vote_counter {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 32px;
+    left: 35px;
+    width: 35px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stage3_theme .b_vote.voted {
+    background-image: image-url('vote/vote_all_3.png');
+}
+
+
+.stage3_theme .dd_badge {
+    background: #c292bd;
+}
+
+.stage3_theme .dd_nav_divider span {
+    color: #c292bd;
+}
+
+.stage3_theme .dd_nav_divider:after {
+    border-color: #c292bd;
+}
+
+.font_color_stage3.dd_nav_divider:after {
+    border-color: #c292bd;
+}
+.stage3_theme .icon-right {
+    color: #bc8bb7;
+}
+
+.stage3_theme .cb_doc:not(:empty) {
+    background: image-url('slider/doc_3.png') no-repeat center right;
+    background-size: 14px auto;
+}
+
+.stage3_theme .cb_com:not(:empty) {
+    background: image-url('slider/com_3.png') no-repeat center right;
+    background-size: 18px auto;
+}
+
+.stage3_theme .tabs_type_1 > li > a {
+    background: #c292bd;
+}
+
+.stage3_theme .tabs_type_1 > li.active > a:before {
+    border-left-color: #c292bd;
+}
+
+.plus20.font_color_stage3, .plus25.font_color_stage3 {
+    border-color: #c292bd;
+}
+li.active .right_cursor.back_color_stage3_superpale:before {
+    border-left-color: #e9dae8;
+}
+
+.popup_color_theme_stage3 .new_comment{
+    background: rgba(194, 146, 189, 0.23);
+}
+
+.popup_color_theme_stage3 .answers_subblock{
+    border-color: #c292bd;
+}
+
+.back_color_stage3 {
+    background-color: #c292bd;
+}
+
+
+.arrow_left.back_color_stage3:after,
+.arrow_left.back_color_stage3{
+    border-color: rgba(136, 183, 213, 0);
+    border-right-color: #c292bd;
+}
+.arrow_left.back_color_stage3:hover,
+.arrow_left.back_color_stage3:focus,
+.arrow_left.back_color_stage3:active {
+    outline: none;
+    background: #d69fd1;
+}
+.arrow_left.back_color_stage3:hover:after,
+.arrow_left.back_color_stage3:focus:after,
+.arrow_left.back_color_stage3:active:after{
+    border-right-color: #d69fd1;
+}
+
+
+
+.back_color_stage3_pale {
+    background-color: #bd8eb9;
+}
+
+.back_color_stage3_superpale {
+    background-color: #e9dae8;
+}
+
+.font_color_stage3 {
+    color: #c292bd !important;
+}
+
+.font_color_stage3_pale {
+    color: #bd8eb9 !important;
+}
