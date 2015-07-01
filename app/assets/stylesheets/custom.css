@@ -643,17 +643,6 @@ textarea:focus {
 }
 
 
-.stage6_theme .main_menu li.active a:after {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 6px;
-}
-
-.stage6_theme .main_menu li.active a:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 7px;
-    border-bottom-color: #5c878c;
-}
-
 .stage7_theme .main_menu li.active a:before {
     border-color: rgba(211, 211, 211, 0);
     border-width: 7px;
@@ -785,17 +774,6 @@ textarea:focus {
 /* HEADER BOTTOM */
 
 
-.stage6_theme .subhead {
-    background: #80bcc4; /* Old browsers */
-    background: -moz-linear-gradient(top, #80bcc4 0%, #a7ced5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #80bcc4), color-stop(100%, #a7ced5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #80bcc4 0%, #a7ced5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #80bcc4 0%, #a7ced5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #80bcc4 0%, #a7ced5 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #80bcc4 0%, #a7ced5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80bcc4', endColorstr='#a7ced5', GradientType=0); /* IE6-9 */
-}
-
 .stage7_theme .subhead {
     background: #80becc; /* Old browsers */
     background: -moz-linear-gradient(top, #78b4c3 0%, #8dccd9 100%); /* FF3.6+ */
@@ -895,11 +873,6 @@ textarea:focus {
 }
 
 
-
-.stages_block .btn.back_color_stage6:hover {
-    background: #8ad1cb;
-}
-
 .stages_block .btn.back_color_stage7:hover {
     background: #97e0ef;
 }
@@ -917,11 +890,6 @@ textarea:focus {
     background: image-url('icon-help-sprite.png') no-repeat -48px 0;
 }
 
-
-
-.stage6_theme .help_icon {
-    background: image-url('icon-help-sprite.png') no-repeat 0 -265px;
-}
 
 .progress_block {
     box-sizing: border-box;
@@ -2121,22 +2089,6 @@ p .add-button + .add-button {
 
 /* popup color themes */
 
-.stage6_theme .theme_back_color {
-    background: #7ab7b2;
-}
-
-
-.stage6_theme .theme_font_color {
-    color: #7bb6b2;
-}
-
-.stage6_theme button:hover .theme_font_color {
-    opacity: 0.8;
-}
-
-.stage6_theme button:active .theme_font_color {
-    color: #72adab;
-}
 
 .post-interfaces-buttons {
     margin-top: 10px;
@@ -4266,11 +4218,6 @@ ul.vote_nav > li > a {
     z-index: 151;
 }
 
-
-.stage6_theme .dd_badge {
-    background: #84b9bd;
-}
-
 .stage7_theme .dd_badge {
     background: #86c3cf;
 }
@@ -4342,15 +4289,6 @@ ul.vote_nav > li > a {
     border-top: 1px solid transparent;
 }
 
-
-.stage6_theme .dd_nav_divider span {
-    color: #86c3cf;
-}
-
-.stage6_theme .dd_nav_divider:after {
-    border-color: #86c3cf;
-}
-
 .stage7_theme .dd_nav_divider span {
     color: #80b2d6;
 }
@@ -4359,10 +4297,6 @@ ul.vote_nav > li > a {
     border-color: #6386bf;
 }
 
-
-.font_color_stage6.dd_nav_divider:after {
-    border-color: #84b9bd;
-}
 
 .font_color_stage7.dd_nav_divider:after {
     border-color: #86c3cf;
@@ -5693,10 +5627,6 @@ i.fa.sticker_close {
 }
 
 
-.stage6_theme .collapser_type2 {
-    background: #c6e0de;
-}
-
 .cont_heading {
     margin-left: -20px;
     margin-right: -20px;
@@ -5893,10 +5823,6 @@ i.fa.sticker_close {
     color: #fff;
 }
 
-.stage6_theme .btn_cab_mod.active {
-    background: #87c5c0;
-    color: #fff;
-}
 
 .mod_col_top i.fa {
     position: absolute;
@@ -7741,27 +7667,6 @@ a.dropdown-toggle i {
 /* colors for stages */
 
 
-.back_color_stage6 {
-    background-color: #84b9bd;
-}
-
-
-.arrow_left.back_color_stage6:after,
-.arrow_left.back_color_stage6{
-    border-color: rgba(136, 183, 213, 0);
-    border-right-color: #84b9bd;
-}
-.arrow_left.back_color_stage6:hover,
-.arrow_left.back_color_stage6:focus,
-.arrow_left.back_color_stage6:active {
-    outline: none;
-    background: #8ad1cb;
-}
-.arrow_left.back_color_stage6:hover:after,
-.arrow_left.back_color_stage6:focus:after,
-.arrow_left.back_color_stage6:active:after{
-    border-right-color: #8ad1cb;
-}
 
 .back_color_stage7 {
     background-color: #8cccd8;
@@ -7871,10 +7776,6 @@ a.dropdown-toggle i {
 /* fonts */
 /* font colors for stages */
 
-
-.font_color_stage6 {
-    color: #84b9bd !important;
-}
 
 .font_color_stage7 {
     color: #86c3cf !important;
