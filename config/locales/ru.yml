@@ -128,19 +128,19 @@ ru:
     novation_posts: Пакет
     plan_posts: Проектное предложение
   my_result:
-    collect_info_posts: аспекты
+    aspect_posts: аспекты
     discontent_posts: несовершенства
     concept_posts: идеи
     novation_posts: пакеты идей
     plan_posts: проектные предложения
   my_result_add:
-    collect_info_posts: АСПЕКТОВ
+    aspect_posts: АСПЕКТОВ
     discontent_posts: НЕСОВЕРШЕНСТВ
     concept_posts: ИДЕЙ
     novation_posts: ПАКЕТОВ ИДЕЙ
     plan_posts: ПРОЕКТНЫХ ПРЕДЛОЖЕНИЙ
   my_list:
-    collect_info_posts: аспектов
+    aspect_posts: аспектов
     discontent_posts: несовершенств
     concept_posts: идей
     novation_posts: пакетов идей

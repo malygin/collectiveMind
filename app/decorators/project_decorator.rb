@@ -111,18 +111,17 @@ class ProjectDecorator
   end
 
   # выборка пользователей по баллам за стадию
-  def sort_user_score(type_score = 'collect_info_posts_score')
+  def sort_user_score(type_score = 'aspect_posts_score')
     project.users.reorder("core_project_users.#{type_score} DESC NULLS LAST").limit(10)
   end
 
-  # выборка пользователей по баллам за стадию
-  def sort_user_like(stage = :collect_info_posts)
-    # stage = :core_aspect_posts if stage == :collect_info_posts
+  # выборка пользователей по лайкам за стадию
+  def sort_user_like(stage = :aspect_posts)
     project.users.sort_by { |user| -(user.likes_posts_for(stage, project).count + user.likes_comments_for(stage, project).count) }.first(3)
   end
 
-  def results_all(stage = :collect_info_posts)
-    if stage == :collect_info_posts
+  def results_all(stage = :aspect_posts)
+    if stage == :aspect_posts
       aspects
     elsif stage == :discontent_posts
       discontents
@@ -135,8 +134,8 @@ class ProjectDecorator
     end
   end
 
-  def results_for_next(stage = :collect_info_posts)
-    if stage == :collect_info_posts
+  def results_for_next(stage = :aspect_posts)
+    if stage == :aspect_posts
       main_aspects
     elsif stage == :discontent_posts
       discontents_for_discussion

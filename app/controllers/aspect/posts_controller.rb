@@ -12,7 +12,6 @@ class Aspect::PostsController < PostsController
   end
 
   def index
-    # @proc_aspects = @project.proc_main_aspects
     @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
     @questions_progress, @questions_progress_all = aspect_answers_count(@project)

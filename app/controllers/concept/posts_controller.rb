@@ -80,7 +80,7 @@ class Concept::PostsController < PostsController
 
   def add_disposts
     return @disposts = current_user.discontent_posts.by_project(@project) if params[:aspect] == '*'
-    aspect = Core::Aspect::Post.find(params[:aspect])
+    aspect = Aspect::Post.find(params[:aspect])
     subaspects = aspect.core_aspects.map { |asp, _| asp.id }
     @disposts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects })
   end
