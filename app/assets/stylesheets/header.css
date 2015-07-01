@@ -147,6 +147,10 @@
     border: none;
 }
 
+.stages_block .btn-toolbar {
+    position: relative;
+}
+
 
 .help_icon {
     float: left;
