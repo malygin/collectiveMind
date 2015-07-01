@@ -12,7 +12,7 @@
     .col-sm-9
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage1
-          = user.project_user_for(@project).try(:collect_info_posts_score) || '−'
+          = user.project_user_for(@project).try(:aspect_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage2
           =user.project_user_for(@project).try(:discontent_posts_score) || '−'

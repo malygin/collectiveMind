@@ -36,7 +36,7 @@ class Concept::PostsController < PostsController
 
   def new
     # нововведение без аспекта?
-    @asp = Core::Aspect::Post.find(params[:asp]) unless params[:asp].nil?
+    @asp = Aspect::Post.find(params[:asp]) unless params[:asp].nil?
     @concept_post = current_model.new
     respond_to :html, :js
   end
@@ -104,7 +104,7 @@ class Concept::PostsController < PostsController
   end
 
   def prepare_data
-    @aspects = Core::Aspect::Post.where(project_id: @project, status: 0)
+    @aspects = Aspect::Post.where(project_id: @project, status: 0)
     @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
     # if @project.status == 8
     #   @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count

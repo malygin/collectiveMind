@@ -30,7 +30,7 @@ FactoryGirl.define do
   end
 
   factory :discontent_post_aspect, class: 'Discontent::PostAspect' do
-    association :core_aspect, factory: :aspect
+    association :aspect, factory: :aspect
     association :post, factory: :discontent
   end
 

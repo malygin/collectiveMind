@@ -1,6 +1,6 @@
 shared_examples 'base cabinet' do
-  # такая штука нужна потому что стадия называется collect_info, а контроллер нужен - aspect
-  let(:stage_name) { @current_stage_type == 'collect_info_posts' ? 'aspect_posts' : @current_stage_type }
+  # такая штука нужна потому что стадия называется aspect, а контроллер нужен - aspect
+  let(:stage_name) { @current_stage_type }
 
   context 'from procedure to cabinet' do
     before do

@@ -3,7 +3,7 @@
   project_id = slider.data("project")
   if project_id
     $.ajax
-      url: "/project/#{project_id}/collect_info/posts/render_slider"
+      url: "/project/#{project_id}/aspect/posts/render_slider"
       type: "get"
       dataType: "script"
 

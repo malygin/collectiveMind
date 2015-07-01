@@ -6,7 +6,7 @@
     path = $(this).data('path')
   #    stage = path.split('/')[0]
     stage = path.replace('/posts', '').replace('/', '_')
-    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path.replace('core/', '') + '/' + id + '/update_comment" data-remote="true" id="form_edit_comment_' + id + '" method="post"/>')
+    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path + '/' + id + '/update_comment" data-remote="true" id="form_edit_comment_' + id + '" method="post"/>')
     form.append('<input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">')
     form.append('<div class="input_cont"><textarea name="content" placeholder="Ваш комментарий" >' + $.trim($('#comment_text_' + id).html()) + '</textarea></div>')
     form.append('<button class="btn send-comment" type="submit"><span class="bold"><i class="fa fa-reply theme_font_color"></i></span></button>')
@@ -52,7 +52,7 @@
     comment = $(this).data('comment')
     #  stage = path.split('/')[0]
     stage = path.replace('/posts', '').replace('/', '_')
-    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path.replace('core/', '') + '/' + id + '/add_comment?comment=' + comment + '" data-remote="true" id="reply_form_' + comment + '" method="post"/>')
+    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path + '/' + id + '/add_comment?comment=' + comment + '" data-remote="true" id="reply_form_' + comment + '" method="post"/>')
     form.append('<input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">')
     form.append('<div class="input_cont"><textarea name="' + stage + '_comment[content]" placeholder="Ваш комментарий" ></textarea></div>')
     form.append('<button class="btn send-comment" type="submit"><span class="bold"><i class="fa fa-reply theme_font_color"></i></span></button>')

@@ -14,7 +14,6 @@ FactoryGirl.define do
 
     after(:create) do |project|
       stage_name = ProjectDecorator.new(project).current_stage_type.to_s
-      stage_name = stage_name == 'collect_info_posts' ? 'aspect_posts' : stage_name
       technique_1 = Technique::List.create stage: stage_name, code: 'simple'
       project.techniques << technique_1
     end
@@ -23,12 +22,6 @@ FactoryGirl.define do
   factory :core_project_user, class: 'Core::ProjectUser' do
     association :user
     association :core_project
-  end
-
-  factory :aspect, class: 'Core::Aspect::Post' do
-    sequence(:content) { |n| "aspect #{n}" }
-    association :user
-    association :project, factory: :core_project
   end
 
   factory :core_help_post, class: 'Core::Help::Post' do
@@ -43,13 +36,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "title for knowbase #{n}" }
     sequence(:content) { |n| "content for knowbase #{n}" }
 
-    association :core_aspect, factory: :aspect
+    association :aspect, factory: :aspect
   end
 
-  factory :aspect_comment, class: 'Core::Aspect::Comment' do
-    sequence(:content) { |n| "aspect comment #{n}" }
-
-    association :user, factory: :ordinary_user
-    association :post, factory: :aspect
-  end
 end

@@ -68,7 +68,7 @@ en:
     user_analytic: User analytic
     vote_result: "Результаты голосования"
   my:
-    collect_info_posts: "Мои аспекты"
+    aspect_posts: "Мои аспекты"
     concept_posts: "Мои идеи"
     discontent_posts: "Мои несовершенства"
     novation_posts: "Мои пакеты"

@@ -23,10 +23,6 @@ class PostsController < ProjectsController
     comment_model.table_name.singularize
   end
 
-  def voting_model
-    Discontent::Post
-  end
-
   def index
     @posts = current_model.where(project_id: @project).paginate(page: params[:page])
     respond_to :html

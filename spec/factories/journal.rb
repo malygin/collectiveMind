@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :journal, class: 'Journal' do
-    type_event 'core_aspect_comment_save'
+    type_event 'aspect_comment_save'
     sequence(:body) { |n| "body #{n}" }
     sequence(:body2) { |n| "body2 #{n}" }
     viewed false

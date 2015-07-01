@@ -84,8 +84,6 @@
     comment_id = link.match(/jr_comment=(\d+)/)[1]
   if link.match(/project\/(\d+)\/(\w+)\/posts/)
     stage = link.match(/project\/(\d+)\/(\w+)\/posts/)[2]
-    if stage == 'collect_info'
-      stage = 'aspect'
 
   if project_id and post_id and stage
     $.ajax
@@ -410,19 +408,6 @@ $('#tab_posts li#new a').on "click", (e) ->
 @reset_child_comment_form = (comment)->
   $('#child_comments_form_' + comment).empty()
 
-# @todo work with comment on collect_info posts
-@select_for_aspects_comments = (el, project, post)->
-  project_id = project
-  comment_id = post
-  aspect_id = $(el).val()
-  if aspect_id != '' and comment_id != ''
-    $.ajax
-      url: "/project/#{project_id}/collect_info/posts/transfer_comment"
-      type: "put"
-      data:
-        comment_id: comment_id
-        aspect_id: aspect_id
-
 # @todo work with notes form
 @reset_post_note_form = (post, type)->
   $('#note_for_post_' + post + '_' + type).remove();
@@ -445,11 +430,11 @@ $('#tab_posts li#new a').on "click", (e) ->
     text = $(this).find('option:selected').text()
     $(this).find('option:selected').remove()
     func = "'#{val}','#{text}'"
-    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="fa fa-remove text-danger pull-left" onclick="remove_core_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-xs label-info">' + text + '</span></br></div>')
+    $('#add_post_aspects').append('<div id="aspect_' + val + '" style="display:none;height:0;"><input type="hidden" name="discontent_post_aspects[]" value="' + val + '"/><span class="fa fa-remove text-danger pull-left" onclick="remove_aspect(' + func + ');" style="cursor:pointer;text-decoration:none;font-size:15px;"></span><span id="' + val + '" class="span_aspect label label-xs label-info">' + text + '</span></br></div>')
     $('#aspect_' + val).css('display', 'block').animate({height: 20, opacity: 1}, 500).effect("highlight",
       {color: '#f5cecd'}, 500)
 
-@remove_core_aspect = (val, text)->
+@remove_aspect = (val, text)->
   $('#aspect_' + val).animate({height: 0, opacity: 0.000}, 1000, ->
     $(this).remove())
   $('#select_for_aspects').append(new Option(text, val))

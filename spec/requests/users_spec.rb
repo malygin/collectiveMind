@@ -12,15 +12,15 @@ describe 'Users ' do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'collect_info_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'collect_info_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'aspect_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'aspect_intro'
   end
 
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit collect_info_posts_path(project)
+      visit aspect_posts_path(project)
     end
 
     context 'edit profile', js: true do

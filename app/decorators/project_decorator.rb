@@ -49,7 +49,7 @@ class ProjectDecorator
 
   def get_free_votes_for(user, stage)
     case stage
-      when :collect_info
+      when :aspect
         main_aspects.size - user.voted_aspects.by_project(id).size
       when :discontent
         discontents_for_vote.size - user.voted_discontent_posts.by_project(id).size

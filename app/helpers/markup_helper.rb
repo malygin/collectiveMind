@@ -53,7 +53,7 @@ module MarkupHelper
   # rubocop:disable Metrics/MethodLength
   def color_progress_bar
     case name_controller
-      when :collect_info_posts
+      when :aspect_posts
         '#649ac3'
       when :discontent_posts
         '#486795'

@@ -4,9 +4,9 @@ class Core::Project < ActiveRecord::Base
   has_one :settings, class_name: 'Core::ProjectSetting', dependent: :destroy
   accepts_nested_attributes_for :settings
 
-  has_many :aspects, class_name: 'Core::Aspect::Post'
-  has_many :main_aspects, -> { where(core_aspect_id: nil, status: 0) }, class_name: 'Core::Aspect::Post'
-  has_many :other_aspects, -> { where(core_aspect_id: nil, status: 1) }, class_name: 'Core::Aspect::Post'
+  has_many :aspects, class_name: 'Aspect::Post'
+  has_many :main_aspects, -> { where(aspect_id: nil, status: 0) }, class_name: 'Aspect::Post'
+  has_many :other_aspects, -> { where(aspect_id: nil, status: 1) }, class_name: 'Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontents_for_discussion, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
@@ -47,7 +47,7 @@ class Core::Project < ActiveRecord::Base
 
   STAGES = {
     1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов',
-           type_stage: :collect_info_posts, cabinet_url: :aspect_posts,  active: true,
+           type_stage: :aspect_posts,  active: true,
            substages: {
              0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate },
              1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn },
@@ -95,9 +95,9 @@ class Core::Project < ActiveRecord::Base
   validates :name, presence: true
 
   def set_position_for_aspects
-    aspect = Core::Aspect::Post.where(project_id: self, status: 0).first
+    aspect = Aspect::Post.where(project_id: self, status: 0).first
     return if aspect.position
-    aspects = Core::Aspect::Post.scope_vote_top(id, '0')
+    aspects = Aspect::Post.scope_vote_top(id, '0')
     aspects.each do |asp|
       asp.update_attributes(position: asp.voted_users.size)
     end

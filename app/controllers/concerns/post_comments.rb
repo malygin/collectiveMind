@@ -23,7 +23,7 @@ module PostComments
   def update_comment
     @comment = comment_model.find(params[:id])
     @comment.update_attributes(content: params[:content])
-    @aspects = Core::Aspect::Post.where(project_id: @project)
+    @aspects = Aspect::Post.where(project_id: @project)
     if params[:image]
       img, is_file = Util::ImageLoader.load(params[name_of_comment_for_param])
       @comment.update_attributes(image: img ? img['public_id'] : nil, isFile: img ? is_file : nil)
@@ -41,7 +41,7 @@ module PostComments
   end
 
   def add_comment
-    @aspects = Core::Aspect::Post.where(project_id: @project)
+    @aspects = Aspect::Post.where(project_id: @project)
     if params[:comment]
       @comment_answer = comment_model.find(params[:comment])
       @comment_parent = @comment_answer.comment ? @comment_answer.comment : @comment_answer
