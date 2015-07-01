@@ -1,0 +1,128 @@
+.single-progress-block .user-ratings-block {
+    float: left;
+    max-height: 29px;
+}
+.single-progress-block .progress-ratings {
+    float: left;
+    margin-left: 29px;
+}
+
+.single-progress-block .progress-ratings .label {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 3px 11px;
+}
+
+.panel-heading .panel-title .accordion-rating {
+    padding-right: 23px;
+}
+
+.rating_user .media-body .media-heading {
+    width: 100%;
+    font-weight: bold !important;
+    float: none;
+}
+
+.rating_user .media-body p {
+    width: 100%;
+    padding-left: 15px;
+    font-weight: normal;
+}
+
+.rating_a {
+    display: block;
+    padding: 21px 0;
+}
+
+/* rating page */
+.col_custom {
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 1px;
+}
+
+.divided {
+    border-left: 1px solid #d7d7d7;
+}
+
+.col_type1 {
+    width: 12%;
+}
+
+.col_type2 {
+    width: 16%;
+}
+
+.rating_line {
+    padding: 7px 0;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
+    margin-bottom: 12px;
+}
+
+.rating_user {
+    padding: 2.5px 14px;
+}
+
+.rating_line .media-body {
+    vertical-align: middle;
+}
+
+.rating_line .media-heading {
+    display: inline-block;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 3px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.rating_cell {
+    display: inline-block;
+    width: 100%;
+    padding: 13px 0;
+    line-height: 19px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+.rate_o_meter {
+    position: relative;
+    width: 159px;
+    height: 93px;
+    margin: 15px 0 15px 80px;
+}
+.rate_o_meter .rate_o_m_cursor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    bottom: 15px;
+    right: 50%;
+    margin-right: -1px;
+}
+.rate_o_meter .rate_o_m_cursor img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -4px;
+}
+.rom5 {
+    background: image-url('scale5.png') no-repeat;
+}
+.rom4 {
+    background: image-url('scale4.png') no-repeat;
+}
+.rom3 {
+    background: image-url('scale3.png') no-repeat;
+}
+.rom2 {
+    background: image-url('scale2.png') no-repeat;
+}
+.rom1 {
+    background: image-url('scale1.png') no-repeat;
+}
