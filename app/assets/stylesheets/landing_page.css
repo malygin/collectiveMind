@@ -123,3 +123,37 @@ a.active {
 .auth-bottom-wrapper li.active a {
     color: #d73743;
 }
+
+.image_1 {
+    height: 100%;
+    background: image-url("home_page-1_1.png") center left 70px no-repeat, image-url("home_page-1_2.png") bottom right no-repeat;
+}
+.image_2 {
+    height: 100%;
+    background: image-url("home_page-2_2.png") left no-repeat, image-url("home_page-2_1.png") center right 90px no-repeat;
+}
+
+.image_3 {
+    height: 100%;
+    background: image-url("home_page-3_1.png") center left 130px no-repeat, image-url("home_page-3_2.png") top 20px right 170px no-repeat;
+}
+
+.widget-block.left_gradient {
+    background: linear-gradient(to right, #e1e8f3 0%, #eff2f7 76%, #eff2f7 100%);
+}
+
+.widget-block.right_gradient {
+    background: linear-gradient(to right, #eff2f7 0%, #dce3ef 86%, #dce3ef 100%);
+}
+
+.widget-block {
+    background: #e1e8f3;
+    border: 1px solid #e2e2e2;
+    height: 170px;
+}
+
+.widget-block-procedure {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #e2e2e2;
+}
