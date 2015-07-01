@@ -1,0 +1,175 @@
+.stage5_theme .main_menu li.active a:after {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 6px;
+}
+
+.stage5_theme .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 7px;
+    border-bottom-color: #42777f;
+}
+
+.stage5_theme .add-button {
+    background: #659ca8;
+}
+.stage5_theme .subhead {
+    background: #80bcc4; /* Old browsers */
+    background: -moz-linear-gradient(top, #4f8490 0%, #779ca2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4f8490), color-stop(100%, #779ca2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #4f8490 0%, #779ca2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #4f8490 0%, #779ca2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #4f8490 0%, #779ca2 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #4f8490 0%, #779ca2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f8490', endColorstr='#779ca2', GradientType=0); /* IE6-9 */
+}
+
+.stages_block .btn.back_color_stage5:hover {
+    background: #68b0bc;
+}
+
+.stage5_theme .help_icon {
+    background: image-url('icon-help-sprite.png') no-repeat 0 -212px;
+}
+
+.stage5_theme .popup2 i {
+    color: #559499;
+}
+
+.popup_color_theme_stage5 .expand_button:before {
+    border-right-color: #559499;
+}
+
+.popup_color_theme_stage5 .expand_button.add_col:before {
+    border-left-color: #559499;
+}
+
+.stage5_theme .theme_back_color {
+    background: #559499;
+}
+
+.stage5_theme .theme_font_color, .stage7_theme .theme_font_color {
+    color: #559499;
+}
+
+.stage5_theme button:hover .theme_font_color {
+    opacity: 0.8;
+}
+
+.stage5_theme button:active .theme_font_color {
+    color: #559499;
+}
+
+.popup_color_theme_stage5 .lined-heading {
+    background: #b3e5e9;
+}
+
+.stage5_theme .dd_badge {
+    background: #559499;
+}
+
+.stage5_theme .dd_nav_divider span {
+    color: #84b9bd;
+}
+
+.stage5_theme .dd_nav_divider:after {
+    border-color: #84b9bd;
+}
+
+.font_color_stage5.dd_nav_divider:after {
+    border-color: #559499;
+}
+
+.stage5_theme .icon-right {
+    color: #559499;
+}
+
+.stage5_theme .tabs_type_1 > li > a {
+    background: #559499;
+}
+
+.stage5_theme .tabs_type_2 > li > a {
+    background: #cee1e5;
+}
+
+.stage5_theme .tabs_type_2 > li.active > a {
+    background: #92c1cb;
+    color: #fff;
+}
+
+.stage5_theme .tabs_type_1 > li.active > a:before {
+    border-left-color: #559499;
+}
+
+.stage5_theme .tabs_type_2 > li.active > a:before {
+    border-left-color: #92c1cb;
+}
+
+.stage5_theme .cont_heading, .stage5_theme .collapser_type2, .stage7_theme .collapser_type2, .stage5_theme .mod_col_top, .stage7_theme .mod_col_top, .stage5_theme .btn_cab_mod, .stage7_theme .btn_cab_mod {
+    background: #cee1e5;
+}
+
+.stage5_theme .btn_cab_mod, .stage5_theme .btn_cab_mod:focus {
+    border: 1px solid #7fb8c3;
+}
+
+.stage5_theme .pocket_name {
+    color: #42808b;
+    padding-left: 60px;
+    background-image: image-url('icon-cab-folder-5_small.png');
+    background-repeat: no-repeat;
+    background-position: 20px center;
+}
+
+.plus20.font_color_stage5, .plus25.font_color_stage5 {
+    border-color: #559499;
+}
+
+.popup_color_theme_stage5 .new_comment{
+    background: rgba(85, 148, 153, 0.26);
+}
+
+.popup_color_theme_stage5 .answers_subblock{
+    border-color: #559499;
+}
+
+.back_color_stage5 {
+    background-color: #559499;
+}
+
+.arrow_left.back_color_stage5:after,
+.arrow_left.back_color_stage5{
+    border-color: rgba(136, 183, 213, 0);
+    border-right-color: #559499;
+}
+.arrow_left.back_color_stage5:hover,
+.arrow_left.back_color_stage5:focus,
+.arrow_left.back_color_stage5:active {
+    outline: none;
+    background: #68b0bc;
+}
+.arrow_left.back_color_stage5:hover:after,
+.arrow_left.back_color_stage5:focus:after,
+.arrow_left.back_color_stage5:active:after{
+    border-right-color: #68b0bc;
+}
+
+.back_color_stage5_pale {
+    background-color: #7fb7c3;
+}
+
+.back_color_stage5_superpale {
+    background-color: #e2edef;
+}
+
+.font_color_stage5 {
+    color: #559499 !important;
+}
+
+.font_color_stage5_pale {
+    color: #7fb7c3 !important;
+}
+
+.stage5_theme .btn_cab_mod.active{
+    background: #7fb8c3;
+    color: #fff;
+}
