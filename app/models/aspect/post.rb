@@ -2,7 +2,7 @@ class Aspect::Post < ActiveRecord::Base
   include BasePost
   SCORE = 20
 
-  belongs_to :core_aspect, class_name: 'Aspect::Post', foreign_key: 'aspect_id'
+  belongs_to :aspect, class_name: 'Aspect::Post', foreign_key: 'aspect_id'
 
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect', foreign_key: :aspect_id
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post', foreign_key: :aspect_id
@@ -21,7 +21,7 @@ class Aspect::Post < ActiveRecord::Base
   scope :negative_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 1) }
   scope :accepted_posts, -> { joins(:discontent_posts).where('discontent_posts.style = ?', 4) }
 
-  scope :minus_view, ->(aspects) { where.not(core_aspect_posts: { id: aspects }) }
+  scope :minus_view, ->(aspects) { where.not(aspect_posts: { id: aspects }) }
   scope :main_aspects, -> { where(aspect_posts: { aspect_id: nil }) }
   scope :vote_top, lambda { |revers|
     if revers == '0'

@@ -49,7 +49,7 @@ class Core::Knowbase::PostsController < PostsController
     @post = current_model.find(params[:id])
     @post.update_attributes(params[:knowbase_post])
     current_user.journals.build(type_event: 'knowbase_edit',  project: @project,
-                                first_id: @post.core_aspect.id, body: @post.core_aspect.content,
+                                first_id: @post.aspect.id, body: @post.aspect.content,
                                 personal: false).save!
     respond_to do |format|
       format.js

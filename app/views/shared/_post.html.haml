@@ -1,7 +1,7 @@
 .media{id: "post_#{post.id}"}
   = render 'users/user_post', user: post.user
   .media-body
-    = render partial: 'discontent/aspects/aspect', collection: post.core_aspects
+    = render partial: 'discontent/aspects/aspect', collection: post.aspects
 
     %br
     %p.text-justify

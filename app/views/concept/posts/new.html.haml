@@ -76,7 +76,7 @@
                   %i.fa.fa-angle-right.fa-lg.collapse_arrow.font_white
                 .collapse.rotate_arrow{id: "aspect#{aspect.id}"}
                   %ul.list-unstyled.subaspect
-                    - aspect.core_aspects.each do |asp|
+                    - aspect.aspects.each do |asp|
                       %li{:role => "presentation"}
                         %a.a_font_reset.btn.btn_reset.collapser_type3.add_disposts{data: {project: @project.id, aspect: asp.id}, style: "border-color: #{aspect.color};", "data-toggle" => "tab", :href => "#", :role => "tab"}
                           = asp.content
