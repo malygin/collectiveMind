@@ -106,17 +106,6 @@
     background: #c292bd;
 }
 
-.stage3_theme .dd_nav_divider span {
-    color: #c292bd;
-}
-
-.stage3_theme .dd_nav_divider:after {
-    border-color: #c292bd;
-}
-
-.font_color_stage3.dd_nav_divider:after {
-    border-color: #c292bd;
-}
 .stage3_theme .icon-right {
     color: #bc8bb7;
 }
@@ -192,4 +181,18 @@ li.active .right_cursor.back_color_stage3_superpale:before {
 
 .font_color_stage3_pale {
     color: #bd8eb9 !important;
+}
+/* striped question-answer block */
+.stripe-qa {
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.stripe-qa .lined-heading {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.stripe-qa p {
+    padding: 0 5px;
 }

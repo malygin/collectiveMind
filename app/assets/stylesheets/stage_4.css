@@ -72,17 +72,6 @@
     background: #8e8bc7;
 }
 
-.stage4_theme .dd_nav_divider span {
-    color: #559499;
-}
-
-.stage4_theme .dd_nav_divider:after {
-    border-color: #559499;
-}
-
-.font_color_stage4.dd_nav_divider:after {
-    border-color: #8e8bc7;
-}
 
 .stage4_theme .icon-right {
     color: #8e8bc7;

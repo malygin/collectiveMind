@@ -216,3 +216,7 @@
 .metro_block ul li.last{
     background-image: none;
 }
+
+.has_dropwindow {
+    position: relative;
+}

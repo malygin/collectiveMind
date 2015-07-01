@@ -1,19 +1,3 @@
-.single-progress-block .user-ratings-block {
-    float: left;
-    max-height: 29px;
-}
-.single-progress-block .progress-ratings {
-    float: left;
-    margin-left: 29px;
-}
-
-.single-progress-block .progress-ratings .label {
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 12px;
-    padding: 3px 11px;
-}
-
 .panel-heading .panel-title .accordion-rating {
     padding-right: 23px;
 }

@@ -1,0 +1,118 @@
+/* cabinet */
+.cabinet {
+    margin-top: 45px;
+}
+
+.cabinet-left-col {
+    padding-right: 28px;
+    padding-bottom: 21px;
+    border-right: 2px solid #ececec;
+}
+
+.cabinet-right-col {
+    padding-left: 28px;
+    padding-bottom: 21px;
+    margin-left: -2px;
+    border-left: 2px solid #ececec;
+}
+
+.cabinet-left-col .stage-label {
+    background: #bcbcbc;
+    display: block;
+    width: 250px;
+    height: 45px;
+    border-radius: 3px;
+    line-height: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    padding: 15px;
+}
+
+.cabinet-tab-heading h5 {
+    font-weight: bold;
+    color: #666666;
+}
+
+.cabinet-tabs-subblock-2ndlev-li a {
+    color: #666666;
+}
+
+.cabinet {
+    color: #666666;
+}
+
+.cabinet a {
+    color: #636363;
+}
+
+.cabinet-tabs-subblock li {
+    padding: 5px;
+}
+
+.cabinet-tabs-subblock li a {
+    font-size: 15px;
+}
+
+.cabinet-tabs-subblock li a i {
+    color: #bbbbbb;
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.cabinet-tabs .cabinet-tabs-subblock > li.active > a, .cabinet-tabs .cabinet-tabs-subblock > li.active > a .fa {
+    color: #ea1625;
+}
+
+.cabinet-aspect-form-checkb input[type="radio"] {
+    position: absolute;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.cabinet-aspect-form-checkb input[type="radio"][value="yes"] {
+    width: 23px;
+}
+
+.cabinet-aspect-form-checkb input[type="radio"][value="no"] {
+    width: 29px;
+}
+
+.cabinet-aspect-form-checkb-filler.filler-yes:after {
+    color: #a8a8a8;
+    content: "Да";
+}
+
+.cabinet-aspect-form-checkb-filler.filler-no:after {
+    color: #a8a8a8;
+    content: "Нет";
+}
+
+.cabinet-aspect-form label {
+    font-weight: normal;
+}
+
+.cabinet-aspect-form a i {
+    font-size: 20px;
+    padding-right: 12px;
+    color: #bcbcbc;
+
+}
+
+.cabinet-aspect-form .col-md-3 label {
+    padding-top: 5px;
+}
+
+.profile_icon {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border: 1px solid #c7c7c7;
+}
+
+.profile {
+    padding: 0 20px 0 20px;
+}

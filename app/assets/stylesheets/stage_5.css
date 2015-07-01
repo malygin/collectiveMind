@@ -67,18 +67,6 @@
     background: #559499;
 }
 
-.stage5_theme .dd_nav_divider span {
-    color: #84b9bd;
-}
-
-.stage5_theme .dd_nav_divider:after {
-    border-color: #84b9bd;
-}
-
-.font_color_stage5.dd_nav_divider:after {
-    border-color: #559499;
-}
-
 .stage5_theme .icon-right {
     color: #559499;
 }

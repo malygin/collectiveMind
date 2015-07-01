@@ -64,17 +64,6 @@
     background: #80b2d6;
 }
 
-.stage1_theme .dd_nav_divider span {
-    color: #80b2d6;
-}
-
-.stage1_theme .dd_nav_divider:after {
-    border-color: #80b2d6;
-}
-
-.font_color_stage1.dd_nav_divider:after {
-    border-color: #80b2d6;
-}
 
 .stage1_theme .tabs_type_1 > li > a {
     background: #80b2d7;
@@ -659,5 +648,36 @@
 .active .c1-item-inner {
     box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
     color: #666;
+}
+
+.medal-block.gold-medal {
+    background: image-url('medal-1.png') no-repeat;
+}
+
+.medal-block.silver-medal {
+    background: image-url('medal-2.png') no-repeat;
+}
+
+/* 1st stage discussion */
+.combined_border {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.combined_border.right {
+    border-right: 1px solid #cdcdcd;
+}
+
+.combined_border.left {
+    border-left: 1px solid #cdcdcd;
+    margin-left: -1px;
+}
+
+.combined_border .post:first-child {
+    margin-top: 0;
+}
+
+.combined_border .post:last-child {
+    margin-bottom: 1px;
 }
 

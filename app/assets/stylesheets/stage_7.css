@@ -22,19 +22,6 @@
     background: #86c3cf;
 }
 
-.stage7_theme .dd_nav_divider span {
-    color: #80b2d6;
-}
-
-.stage7_theme .dd_nav_divider:after {
-    border-color: #6386bf;
-}
-
-
-.font_color_stage7.dd_nav_divider:after {
-    border-color: #86c3cf;
-}
-
 .stage7_theme .btn_cab_mod.active {
     background: #7fb8c3;
     color: #fff;
