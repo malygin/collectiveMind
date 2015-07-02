@@ -57,17 +57,11 @@ DiscontentCollectionView = Backbone.View.extend
     this.$container.isotope('remove', el);
 
   loadByAspect: (evt)->
+    evt.preventDefault();
+    filterValue =  $(this).find('input:checked').parent().data('aspect')
+    $('#tab_aspect_posts').isotope
+      filter: filterValue
 
-    dc.fetch
-      # data: $.param({aspect: $(this).data('aspect')})
-      data: $.param({aspect: $(this).find('input:checked').parent().data('aspect'), last_time_visit: $('#filter').data('visit')})
-      success: (col,res)->
-        $('#count_discontents').html('(' + dc.length + ')')
-        $('#tab_aspect_posts').isotope('updateSortData').isotope()
-        show_comments_hover()
-        activate_perfect_scrollbar()
-        colors_discontents()
-        post_colored_stripes()
 
   sortByAspect: ()->
     sortByValue = $(this).data('type')

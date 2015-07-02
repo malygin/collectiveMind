@@ -44,7 +44,7 @@ module BaseComment
 
     def add_score
       self.toggle!(:useful)
-      if self.useful
+      if useful
         user.add_score(type: :plus_comment, project: post.project, comment: self, path: post_controller_path,
                        type_score: "#{post.class.table_name}_score")
       else

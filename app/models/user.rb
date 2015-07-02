@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
   has_many :aspect_votings, class_name: 'Aspect::Voting'
   has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Aspect::Post'
 
-
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
 

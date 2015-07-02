@@ -51,7 +51,7 @@ class Discontent::Post < ActiveRecord::Base
   def by_aspect_and_subaspects(aspect_id)
     aspect = Aspect::Post.find(aspect_id.scan(/\d/).join(''))
     subaspects = aspect.aspects.map { |asp, _| asp.id }
-    @project.discontents.by_aspect([aspect.id] + subaspects).created_order
+    @project.discontents.by_aspect([aspect.id] + subaspects)
   end
 
   # привязка аспектов к несовершенству
