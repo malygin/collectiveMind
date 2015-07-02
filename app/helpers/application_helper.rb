@@ -38,11 +38,11 @@ module ApplicationHelper
     Core::Project::STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage] || name_controller == :core_aspect_posts
     end
-    nil
+    @project.main_stage
   end
 
   def can_edit_content?
-    name_controller == @project.current_stage_type
+    name_controller == @project.current_stage_type || @project.status == 100
   end
 
   # необходимость показа приветсвенной модалки или поповера

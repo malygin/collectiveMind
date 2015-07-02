@@ -110,11 +110,11 @@ class Core::Project < ActiveRecord::Base
     STAGES[stage_num][:name]
   end
 
-  def current_stage_type_for_cabinet_url
-    if STAGES[stage[0].to_i][:cabinet_url]
-      STAGES[stage[0].to_i][:cabinet_url].to_s.downcase.singularize
+  def current_stage_type_for_cabinet_url(stage_num = stage[0].to_i)
+    if STAGES[stage_num][:cabinet_url]
+      STAGES[stage_num][:cabinet_url].to_s.downcase.singularize
     else
-      STAGES[stage[0].to_i][:type_stage].to_s.downcase.singularize
+      STAGES[stage_num][:type_stage].to_s.downcase.singularize
     end
   end
 
