@@ -4,8 +4,8 @@
       .border_grey.rounded_3.stages_block
         .btn-toolbar{role: 'toolbar'}
           .btn-group{role: 'group'}
-            = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn arrow_left back_color_stage#{@project.main_stage}" do
-              = "#{@project.main_stage} СТАДИЯ:  #{@project.current_stage_name} "
+            = link_to send("#{@project.status == 100 ? name_controller.to_s.sub('core_aspect_posts', 'collect_info_posts').to_sym : @project.current_stage_type}_path", @project), id: "go_to_#{@project.status == 100 ? name_controller : @project.current_stage_type}", role: 'button', class: "btn arrow_left back_color_stage#{@project.status == 100 ? number_current_stage : @project.main_stage}" do
+              = "#{@project.status == 100 ? number_current_stage : @project.main_stage} СТАДИЯ:  #{@project.status == 100 ? @project.current_stage_name(number_current_stage) : @project.current_stage_name} "
     .col-md-7.col_padding_left_3
       .border_grey.rounded_3.stages_block
         .media.contact

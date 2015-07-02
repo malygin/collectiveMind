@@ -9,14 +9,16 @@
         .container
           .row
             .col-md-2
-              .cab_left_panel.rounded_3.border_grey{class: "back_color_stage#{@project.main_stage}_superpale"}
+              .cab_left_panel.rounded_3.border_grey{class: "back_color_stage#{@project.status == 100 ? number_current_stage : @project.main_stage}_superpale"}
                 -#.media
                 -#  .media-left
                 -#    .plus20.white{class: "font_color_stage#{@project.main_stage}"} +
                 -#  .media-body
                 -#    %small{class: "font_color_stage#{@project.main_stage}"}
                 -#      = t("my_add.#{@project.current_stage_type}")
-                - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
+
+                -#- unless [:estimate_posts, :completion_proc_posts].include?(name_controller)
+                - @project.techniques.by_stage(@project.status == 100 ? name_controller.to_s.sub('core_aspect_posts', 'collect_info_posts').to_sym : @project.current_stage_type).each do |technique|
                   .divider10
                   = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
                   role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}" do
@@ -24,8 +26,9 @@
 
               .divider10
               %ul.list-unstyled.cab_menu_left
+                -#- unless [:estimate_posts, :completion_proc_posts].include?(name_controller)
                 %li{class: "#{'active' if action_name == 'user_content' and not params[:edit_profile]}"}
-                  = link_to self.send("user_content_#{@project.current_stage_type}_path", @project), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
+                  = link_to self.send("user_content_#{@project.status == 100 ? name_controller.to_s.sub('core_aspect_posts', 'collect_info_posts').to_sym : @project.current_stage_type}_path", @project), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
                     Контент
                 %li{class: "#{'active' if params[:edit_profile]}"}
                   %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{"data-toggle" => "tab", :href => "#user_profile"}

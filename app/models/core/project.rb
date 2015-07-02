@@ -102,12 +102,12 @@ class Core::Project < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def current_stage_type
-    STAGES[stage[0].to_i][:type_stage]
+  def current_stage_type(stage_num = stage[0].to_i)
+    STAGES[stage_num][:type_stage]
   end
 
-  def current_stage_name
-    STAGES[stage[0].to_i][:name]
+  def current_stage_name(stage_num = stage[0].to_i)
+    STAGES[stage_num][:name]
   end
 
   def current_stage_type_for_cabinet_url

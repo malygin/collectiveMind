@@ -9,7 +9,7 @@
     .col-md-6
       .pull-right
         - if @project.stage == '5:0' or @project.status == 100
-          = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_plan_posts' do
+          = link_to new_plan_post_path(@project, type_mechanic: 'simple'), id: 'new_plan_posts' do
             %button.btn.add-button
               %span
                 = t 'techniques.plan_posts_simple'
