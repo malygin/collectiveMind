@@ -75,7 +75,7 @@ class Core::Project < ActiveRecord::Base
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
            }
     },
-    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, active: true,
+    4 => { name: 'Выбор идей для реализации', description: 'Выбор идей для реализации', type_stage: :novation_posts, active: true,
            substages: {
              0 => { name: 'Создание пакетов', active: true, code: :novations_add },
              1 => { name: 'Голосование', active: true, code: :novations_voting }
