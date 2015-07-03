@@ -75,6 +75,8 @@
 $ ->
   start_vote()
 
+  vote_scripts()
+
   start_play()
 
   comments_feed()

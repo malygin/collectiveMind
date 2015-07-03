@@ -96,37 +96,36 @@ class Core::Project < ActiveRecord::Base
   VOTES = {
     1 => { count_folders: 4,
            folders: {
-               0 => { name: 'Общий список', role: 'all' },
-               1 => { name: 'Необходимо', role: 'important' },
-               2 => { name: 'Важно', role: 'not_important' },
-               3 => { name: 'Неважно', role: 'unnecessary' }
+             0 => { name: 'Общий список', role: 'all' },
+             1 => { name: 'Необходимо', role: 'important' },
+             2 => { name: 'Важно', role: 'not_important' },
+             3 => { name: 'Неважно', role: 'unnecessary' }
            }
     },
     2 => { count_folders: 5,
            folders: {
-              0 => { name: 'Общий список', role: 'all' },
-              1 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_green">Срочные</span>', role: 'important' },
-              2 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_grey2">Менее срочные</span>', role: 'not_important' },
-              3 => { name: '<span class="font_green">Срочные</span><span class="font_grey2">|</span><span class="font_grey2">Менее важные</span>', role: 'necessary' },
-              4 => { name: '<span>Неважные</span><span>|</span><span>Несрочные</span>', role: 'unnecessary' }
+             0 => { name: 'Общий список', role: 'all' },
+             1 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_green">Срочные</span>', role: 'important' },
+             2 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_grey2">Менее срочные</span>', role: 'not_important' },
+             3 => { name: '<span class="font_green">Срочные</span><span class="font_grey2">|</span><span class="font_grey2">Менее важные</span>', role: 'necessary' },
+             4 => { name: '<span>Неважные</span><span>|</span><span>Несрочные</span>', role: 'unnecessary' }
            }
     },
     3 => { count_folders: 3,
            folders: {
-              0 => { name: 'Общий список', role: 'all' },
-              1 => { name: 'Нравится', role: 'vote_yes' },
-              2 => { name: 'Не нравится', role: 'vote_no' }
+             0 => { name: 'Общий список', role: 'all' },
+             1 => { name: 'Нравится', role: 'vote_yes' },
+             2 => { name: 'Не нравится', role: 'vote_no' }
            }
     },
     4 => { count_folders: 3,
            folders: {
-              0 => { name: 'Общий список', role: 'all' },
-              1 => { name: 'Да', role: 'vote_yes' },
-              2 => { name: 'Нет', role: 'vote_no' },
+             0 => { name: 'Общий список', role: 'all' },
+             1 => { name: 'Да', role: 'vote_yes' },
+             2 => { name: 'Нет', role: 'vote_no' }
            }
-    },
+    }
   }.freeze
-
 
   validates :name, presence: true
 

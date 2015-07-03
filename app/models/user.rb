@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
   has_many :aspect_votings, class_name: 'Aspect::Voting'
   has_many :voted_aspect_posts, through: :aspect_votings, source: :aspect, class_name: 'Aspect::Post'
 
-
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
 
@@ -83,18 +82,15 @@ class User < ActiveRecord::Base
     case h[:type]
       when :plus_comment
         add_score_by_type(h[:project], 5, h[:type_score])
-        # journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
       when :to_archive_plus_comment
         add_score_by_type(h[:project], -5, h[:type_score])
       when :plus_post
         add_score_by_type(h[:project], h[:score], h[:type_score])
         journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score],
                        first_id: h[:post].id, body2: h[:post].field_for_journal, viewed: false, personal: true).save!
-
       when :to_archive_plus_post
         add_score_by_type(h[:project], -h[:score], h[:type_score])
         Journal.destroy_journal_record(h[:project], 'my_add_score_' + h[:model_score], self, h[:post], true)
-
     end
   end
 
@@ -119,8 +115,8 @@ class User < ActiveRecord::Base
     core_project_users.find_by(project_id: project.id)
   end
 
-  def can_vote_for(stage, project)
-    %w(1:2 2:1 3:1 4:1).include?(project.stage) && project.get_free_votes_for(self, stage) > 0
+  def can_vote_for(project)
+    %w(1:2 2:1 3:1 4:1).include?(project.stage) && project.get_free_votes_for(self) > 0
   end
 
   def content_for_project(stage, project)
@@ -136,7 +132,8 @@ class User < ActiveRecord::Base
   end
 
   def like_comment_for(stage, project)
-    send('voting_' + stage.to_s.gsub('_posts', '_comments')).joins(:comment).joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
+    send('voting_' + stage.to_s.gsub('_posts', '_comments')).joins(:comment)
+      .joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
   end
 
   def approve_content_for(stage, project)

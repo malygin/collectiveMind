@@ -93,23 +93,6 @@ module BasePost
       self.class.name.underscore.pluralize
     end
 
-    def current_class?(stage)
-      case stage
-        when :aspect, 'aspect'
-          self.instance_of? Aspect::Post
-        when :discontent, 'discontent'
-          self.instance_of? Discontent::Post
-        when :concept, 'concept'
-          self.instance_of? Concept::Post
-        when :plan, 'plan'
-          self.instance_of? Plan::Post
-        when :estimate, 'estimate'
-          self.instance_of? Estimate::Post
-        else
-          false
-      end
-    end
-
     def stage_name
       self.class.name.deconstantize.underscore
     end

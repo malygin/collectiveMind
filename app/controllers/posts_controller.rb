@@ -90,12 +90,13 @@ class PostsController < ProjectsController
   end
 
   def show_results
-    current_user.user_checks.where(project_id: @project.id, check_field: 'results_' + self.class.to_s.gsub('::', '_').gsub('Controller', '').underscore, status: true).first_or_create
+    current_user.user_checks.where(project_id: @project.id, check_field: 'results_' + self.class.to_s.gsub('::', '_').gsub('Controller', '').underscore,
+                                   status: true).first_or_create
   end
 
   def user_vote
-    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(name_of_model_for_param.to_sym, @project)
-    @count_all_posts, @count_voted_posts  = @user_voter.count_posts_for_progress(@project) if @user_voter
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(@project)
+    @count_all_posts, @count_voted_posts = @user_voter.count_posts_for_progress(@project) if @user_voter
   end
 
   private

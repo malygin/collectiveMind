@@ -59,17 +59,19 @@ class ProjectDecorator
     concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: { post_id: nil })
   end
 
-  def get_free_votes_for(user, stage)
-    case stage
-      when :aspect_post
-        main_aspects.size - user.voted_aspect_posts.by_project(id).size
-      when :discontent_post
-        discontent_posts_for_vote.size - user.voted_discontent_posts.by_project(id).size
-      when :concept_post
-        concept_posts_for_vote.size - user.voted_concept_posts.by_project(id).size
-      when :novation_post
-        novations.size - user.voted_novation_posts.by_project(id).size
-    end
+  def get_free_votes_for(user)
+    send("#{current_stage_type}_for_vote").size - user.send("voted_#{current_stage_type}").by_project(id).size
+
+    # case stage
+    #   when :aspect_post
+    #     aspect_posts_for_vote.size - user.voted_aspect_posts.by_project(id).size
+    #   when :discontent_post
+    #     discontent_posts_for_vote.size - user.voted_discontent_posts.by_project(id).size
+    #   when :concept_post
+    #     concept_posts_for_vote.size - user.voted_concept_posts.by_project(id).size
+    #   when :novation_post
+    #     novation_posts_for_vote.size - user.voted_novation_posts.by_project(id).size
+    # end
   end
 
   def project_access(user)

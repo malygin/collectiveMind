@@ -68,5 +68,4 @@ class Aspect::PostsController < PostsController
   def prepare_data
     @aspects = Aspect::Post.where(project_id: @project)
   end
-
 end
