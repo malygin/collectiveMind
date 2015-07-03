@@ -58,11 +58,7 @@ $(document).ready(function () {
         type: 'inline',
         midClick: true
     });
-    /* welcome popup */
-    //$('.open_welcome_popup').magnificPopup({
-    //    type: 'inline',
-    //    midClick: true
-    //});
+
     /* magnific popup close button */
     $('.close_magnific').click(function () {
         var magnificPopup = $.magnificPopup.instance;
@@ -171,12 +167,6 @@ $(document).ready(function () {
         win.find('.collapse.in').removeClass('in');
         win.find('[data-toggle="collapse"]').addClass('collapsed');
     }
-
-    //$('.ch_action').hover(function(){
-    //    var ch_id = $(this).attr('data-for');
-    //    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass('active');
-    //    $('#' + ch_id).toggleClass('active');
-    //});
 
     // одинаковая высота для аспектов в слайдере на первом этапе - переделать в цсс
     var max_item_h = 0;
@@ -306,84 +296,6 @@ $(document).ready(function () {
     }
 
 
-    // скрипт для голосования
-    //var folder_len = {};
-    //var vote_icon_all = 'fa-home';
-    //
-    //$('[data-vote-poll-role]').each(function () {
-    //    var role = $(this).attr('data-vote-poll-role');
-    //    var len = count_vote_items($(this));
-    //    folder_len[role] = len;
-    //    $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(len);
-    //});
-    //var pb = $('.vote_progress');
-    //var all_len = folder_len['overall'] = count_vote_items('.all_vote');
-    //pb_stretch(pb, all_len, folder_len['overall']);
-    //
-    //function count_vote_items(me) {
-    //    return $('.vote_item_cont', me).length;
-    //}
-    //
-    //function pb_stretch(me, current, over) {
-    //    var vote_perc = (1 - current / over) * 100;
-    //    me.css('width', vote_perc + '%');
-    //}
-    //
-    //$('.vote_button').click(function () {
-    //    var role = $(this).attr('data-vote-role');
-    //    if (!$(this).hasClass('voted')) {
-    //        if ($(this).siblings().hasClass('voted')) {
-    //            var prev_role = $(this).siblings('.voted').attr('data-vote-role');
-    //            $(this).siblings('.voted').each(function () {
-    //                $(this).removeClass('voted');
-    //                $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
-    //            });
-    //        }
-    //        $(this).addClass('voted');
-    //        $('.fa', this).removeClass($(this).attr("data-icon-class")).addClass(vote_icon_all);
-    //        var vote_item = $(this).parents('.vote_item_cont').detach();
-    //        var desc_item = $('#desript_'+$(this).data('id')).detach();
-    //        console.log(desc_item);
-    //        $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(++folder_len[role]);
-    //        if (prev_role) {
-    //            $('[data-vote-folder-role = "' + prev_role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[prev_role]);
-    //        } else {
-    //            all_len--;
-    //            $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
-    //            pb_stretch(pb, all_len, folder_len['overall']);
-    //        }
-    //        $('[data-vote-poll-role = "' + role + '"] ul').append(vote_item);
-    //        $('[data-vote-poll-role = "' + role + '"] .tab-content').append(desc_item);
-    //    } else {
-    //        $(this).removeClass('voted');
-    //        $('.fa', this).removeClass(vote_icon_all).addClass($(this).attr("data-icon-class"));
-    //        var vote_item = $(this).parents('.vote_item_cont').detach();
-    //        var desc_item = $('#desript_'+$(this).data('id')).detach();
-    //        $('[data-vote-folder-role = "' + role + '"] > .vote_folder_inn > .vote_counter').text(--folder_len[role]);
-    //        $('[data-vote-poll-role = "all"] ul').append(vote_item);
-    //        $('[data-vote-poll-role = "all"] .tab-content').append(desc_item);
-    //        all_len++;
-    //
-    //
-    //        $('[data-vote-folder-role = "all"] > .vote_folder_inn > .vote_counter').text( $('[data-vote-poll-role = "all"] .vote_item_cont').length);
-    //        pb_stretch(pb, all_len, folder_len['overall']);
-    //    }
-    //    var item_e = $(this).parents('.item_expandable');
-    //    if (item_e.hasClass('opened')) {
-    //
-    //        item_e.removeClass('opened');
-    //        $(this).siblings('.vote_open_detail').children('i').toggleClass('fa-angle-right').toggleClass('fa-angle-left');
-    //    }
-    //});
-    //
-    //$('.vote_open_detail').click(function () {
-    //    $('i', this).toggleClass('fa-angle-right');
-    //    $('i', this).toggleClass('fa-angle-left');
-    //    $('.item_expandable').not($(this).parents()).removeClass('opened');
-    //    $(this).parents('.item_expandable').toggleClass('opened');
-    //});
-
-
     var popoverTemplate = ['<div class="popover help_popover_content cl_btn_container">',
         '<div class="arrow"></div>',
         '<a data-remote="true" rel="nofollow" id="close_help_popover" data-method="put" href="/project/' + $('.help_popover').data('project') + '/' + $('.help_popover').data('stage') + '/posts/check_field?check_field=' + $('.help_popover').data('status') + '&status=true">',
@@ -419,48 +331,6 @@ $(document).ready(function () {
         }
     });
 
-
-    /* cabinet 3rd stage check-and-push */
-    //var ch_its = $('.item', '.checked_items').length;
-    //var unch_its = $('.item', '.unchecked_items').length;
-    //$('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-    //
-    //$('.check_push_box').click(function () {
-    //    var item = $(this).closest('.item').detach();
-    //    var item_id = $(item).attr('data-id');
-    //    $('#discontents').find('.item[data-id=' + item_id + ']').remove();
-    //    $('#ideas').find('.item[data-id=' + item_id + ']').remove();
-    //    $('.checked_items').find('.item[data-id=' + item_id + ']').remove();
-    //    if ($(this).is(':checked')) {
-    //        $('.checked_items').append(item);
-    //        ch_its++;
-    //        unch_its--;
-    //        $('.hideable_checks').show();
-    //        $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
-    //        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-    //        /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
-    //        if ($('#for_hidden_fields').length > 0) {
-    //            $('#for_hidden_fields').append('<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>');
-    //            $('.selected_concepts').append('<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>');
-    //        }
-    //    } else {
-    //        $('.unchecked_items').append(item);
-    //        ch_its--;
-    //        unch_its++;
-    //        if (ch_its == 0) {
-    //            $('.hideable_checks').hide();
-    //        }
-    //        $('.enter_lenght .ch_lenght').empty().append("(" + ch_its + ")");
-    //        $('.enter_lenght .unch_lenght').empty().append("(" + unch_its + ")");
-    //        /*Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи*/
-    //        if ($('#for_hidden_fields').length > 0) {
-    //            $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove();
-    //            $('.selected_concepts').find('p#selected_concept_' + item_id).remove();
-    //        }
-    //    }
-    //});
-
-
     // Открытие "Добавления задач" в кабинете проектов
     $('#bottom-opener').on('click', function () {
         $('#plan_buttons button').toggleClass('disabled');
@@ -494,16 +364,4 @@ $(document).ready(function () {
         $('.dia_legend').toggleClass('active');
     });
 
-
-    /* cabinet columns */
-    //$('.exp_button').click(function(){
-    //    var parent_col = $(this).parents('.exp_col');
-    //    if (parent_col.hasClass('active')){
-    //        parent_col.toggleClass('active');
-    //        parent_col.siblings('.exp_col').toggleClass('hidden');
-    //    } else {
-    //        parent_col.toggleClass('hidden');
-    //        parent_col.siblings('.exp_col').toggleClass('active');
-    //    }
-    //});
 });
