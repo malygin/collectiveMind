@@ -27,6 +27,7 @@
 #= require plugins
 #= require comments
 #= require resources
+#= require votes
 
 # from yan's markup
 #= require jquery.magnific-popup.min
@@ -89,7 +90,7 @@ $ ->
 
   expert_news()
 
-  vote_buttons()
+  #  vote_buttons()
 
   parse_my_journal_links()
 
@@ -175,12 +176,12 @@ $ ->
     $(this).addClass 'active'
     return
 
-  # просмотр несовершенства в голосовании
-  $('.vote_open_detail_imperf').click ->
-    $('i', this).toggleClass 'fa-angle-right'
-    $('i', this).toggleClass 'fa-angle-left'
-    $('.item_expandable_imperf').not($(this).parents('.vote_item').find('.item_expandable_imperf')).removeClass 'opened'
-    $(this).parents('.vote_item').find('.item_expandable_imperf').toggleClass 'opened'
+  #  # просмотр несовершенства в голосовании
+  #  $('.vote_open_detail_imperf').click ->
+  #    $('i', this).toggleClass 'fa-angle-right'
+  #    $('i', this).toggleClass 'fa-angle-left'
+  #    $('.item_expandable_imperf').not($(this).parents('.vote_item').find('.item_expandable_imperf')).removeClass 'opened'
+  #    $(this).parents('.vote_item').find('.item_expandable_imperf').toggleClass 'opened'
 
   # Открывает и закрывает стикеры в кабинете
   $('.open_sticker').click ->
@@ -241,69 +242,69 @@ $ ->
 
 # временно!!!
 # голосование в попапе - прогресс и работа с папками - > упростить
-@vote_scripts = ->
-  folder_len = {}
-  vote_icon_all = 'fa-home'
-
-  count_vote_items = (me) ->
-    $('.vote_item_cont', me).length
-
-  pb_stretch = (me, current, over) ->
-    vote_perc = (1 - current / over) * 100
-    me.css 'width', vote_perc + '%'
-    return
-
-  $('[data-vote-poll-role]').each ->
-    role = $(this).attr('data-vote-poll-role')
-    len = count_vote_items($(this))
-    folder_len[role] = len
-    $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text len
-    return
-  pb = $('.vote_progress')
-  all_len = folder_len['overall'] = count_vote_items('.all_vote')
-  pb_stretch pb, all_len, folder_len['overall']
-  $('.vote_button').click ->
-    role = $(this).attr('data-vote-role')
-    console.log role
-    if !$(this).hasClass('voted')
-      if $(this).siblings().hasClass('voted')
-        prev_role = $(this).siblings('.voted').attr('data-vote-role')
-        $(this).siblings('.voted').each ->
-          $(this).removeClass 'voted'
-          $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
-          return
-      $(this).addClass 'voted'
-      $('.fa', this).removeClass($(this).attr('data-icon-class')).addClass vote_icon_all
-      vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text ++folder_len[role]
-
-      if prev_role
-        $('[data-vote-folder-role = "' + prev_role + '"] > .vote-folder > .vote_counter').text --folder_len[prev_role]
-      else
-        all_len--
-        $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
-        pb_stretch pb, all_len, folder_len['overall']
-      $('[data-vote-poll-role = "' + role + '"] .container>.row').append vote_item
-    else
-      $(this).removeClass 'voted'
-      $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
-      vote_item = $(this).parents('.vote_item_cont').detach()
-      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text --folder_len[role]
-      $('.all_vote>.container>.row').append vote_item
-      all_len++
-      $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
-      pb_stretch pb, all_len, folder_len['overall']
-    item_e = $(this).parents('.item_expandable')
-    if item_e.hasClass('opened')
-      item_e.removeClass 'opened'
-      $(this).siblings('.vote_open_detail').children('i').toggleClass('fa-angle-right').toggleClass 'fa-angle-left'
-    return
-  $('.vote_open_detail').click ->
-    $('i', this).toggleClass 'fa-angle-right'
-    $('i', this).toggleClass 'fa-angle-left'
-    $('.item_expandable').not($(this).parents()).removeClass 'opened'
-    $(this).parents('.item_expandable').toggleClass 'opened'
-    return
+#@vote_scripts = ->
+#  folder_len = {}
+#  vote_icon_all = 'fa-home'
+#
+#  count_vote_items = (me) ->
+#    $('.vote_item_cont', me).length
+#
+#  pb_stretch = (me, current, over) ->
+#    vote_perc = (1 - current / over) * 100
+#    me.css 'width', vote_perc + '%'
+#    return
+#
+#  $('[data-vote-poll-role]').each ->
+#    role = $(this).attr('data-vote-poll-role')
+#    len = count_vote_items($(this))
+#    folder_len[role] = len
+#    $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text len
+#    return
+#  pb = $('.vote_progress')
+#  all_len = folder_len['overall'] = count_vote_items('.all_vote')
+#  pb_stretch pb, all_len, folder_len['overall']
+#  $('.vote_button').click ->
+#    role = $(this).attr('data-vote-role')
+#    console.log role
+#    if !$(this).hasClass('voted')
+#      if $(this).siblings().hasClass('voted')
+#        prev_role = $(this).siblings('.voted').attr('data-vote-role')
+#        $(this).siblings('.voted').each ->
+#          $(this).removeClass 'voted'
+#          $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
+#          return
+#      $(this).addClass 'voted'
+#      $('.fa', this).removeClass($(this).attr('data-icon-class')).addClass vote_icon_all
+#      vote_item = $(this).parents('.vote_item_cont').detach()
+#      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text ++folder_len[role]
+#
+#      if prev_role
+#        $('[data-vote-folder-role = "' + prev_role + '"] > .vote-folder > .vote_counter').text --folder_len[prev_role]
+#      else
+#        all_len--
+#        $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
+#        pb_stretch pb, all_len, folder_len['overall']
+#      $('[data-vote-poll-role = "' + role + '"] .container>.row').append vote_item
+#    else
+#      $(this).removeClass 'voted'
+#      $('.fa', this).removeClass(vote_icon_all).addClass $(this).attr('data-icon-class')
+#      vote_item = $(this).parents('.vote_item_cont').detach()
+#      $('[data-vote-folder-role = "' + role + '"] > .vote-folder > .vote_counter').text --folder_len[role]
+#      $('.all_vote>.container>.row').append vote_item
+#      all_len++
+#      $('[data-vote-folder-role = "all"] > .vote-folder > .vote_counter').text all_len
+#      pb_stretch pb, all_len, folder_len['overall']
+#    item_e = $(this).parents('.item_expandable')
+#    if item_e.hasClass('opened')
+#      item_e.removeClass 'opened'
+#      $(this).siblings('.vote_open_detail').children('i').toggleClass('fa-angle-right').toggleClass 'fa-angle-left'
+#    return
+#  $('.vote_open_detail').click ->
+#    $('i', this).toggleClass 'fa-angle-right'
+#    $('i', this).toggleClass 'fa-angle-left'
+#    $('.item_expandable').not($(this).parents()).removeClass 'opened'
+#    $(this).parents('.item_expandable').toggleClass 'opened'
+#    return
 
 # выбор несовершенств и идей в кабинете
 @check_and_push = ->

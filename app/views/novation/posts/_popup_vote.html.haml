@@ -20,13 +20,13 @@
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_yes", :href => "#vote_tab2", :role => "tab"}
               .vote_folder_inn.poll-2-3
                 %span.vote_counter
-                  =@user_voter.voted_novation_post.by_status(1).count
+                  =@user_voter.voted_novation_posts.by_status(1).count
                 %h5 Да
           %li.col-md-4.no_padding_col{:role => "presentation"}
             %a.vote_folder{"data-toggle" => "tab", "data-vote-folder-role" => "vote_no", :href => "#vote_tab3", :role => "tab"}
               .vote_folder_inn.poll-2-4
                 %span.vote_counter
-                  =@user_voter.voted_novation_post.by_status(2).count
+                  =@user_voter.voted_novation_posts.by_status(2).count
                 %h5 Нет
       %h4.bold.text-center Нравится ли вам пакет идей?
       .divider25

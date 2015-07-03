@@ -34,17 +34,17 @@ class User < ActiveRecord::Base
   has_many :voting_plan_comments, class_name: 'Plan::CommentVoting'
 
   has_many :aspect_votings, class_name: 'Aspect::Voting'
-  has_many :voted_aspects, through: :aspect_votings, source: :aspect, class_name: 'Aspect::Post'
+  has_many :voted_aspect_posts, through: :aspect_votings, source: :aspect, class_name: 'Aspect::Post'
 
 
   has_many :post_votings, class_name: 'Discontent::Voting'
   has_many :voted_discontent_posts, through: :post_votings, source: :discontent_post, class_name: 'Discontent::Post'
 
   has_many :concept_post_votings, class_name: 'Concept::Voting'
-  has_many :voted_concept_post, through: :concept_post_votings, source: :concept_post, class_name: 'Concept::Post'
+  has_many :voted_concept_posts, through: :concept_post_votings, source: :concept_post, class_name: 'Concept::Post'
 
   has_many :novation_post_votings, class_name: 'Novation::Voting'
-  has_many :voted_novation_post, through: :novation_post_votings, source: :novation_post, class_name: 'Novation::Post'
+  has_many :voted_novation_posts, through: :novation_post_votings, source: :novation_post, class_name: 'Novation::Post'
 
   has_many :plan_post_votings, class_name: 'Plan::Voting'
   has_many :voted_plan_posts, through: :plan_post_votings, source: :plan_post, class_name: 'Plan::Post'

@@ -21,6 +21,18 @@ class ProjectDecorator
     end
   end
 
+  def current_stage_title
+    stages[main_stage][:title_stage]
+  end
+
+  def count_folders
+    votes[main_stage][:count_folders]
+  end
+
+  def vote_folders
+    votes[main_stage][:folders]
+  end
+
   # return main stage for stage '2:3' it will be 2
   def main_stage
     project.stage[0].to_i
@@ -49,14 +61,14 @@ class ProjectDecorator
 
   def get_free_votes_for(user, stage)
     case stage
-      when :aspect
-        main_aspects.size - user.voted_aspects.by_project(id).size
-      when :discontent
-        discontents_for_vote.size - user.voted_discontent_posts.by_project(id).size
-      when :concept
-        concepts_for_vote.size - user.voted_concept_post.by_project(id).size
-      when :novation
-        novations.size - user.voted_novation_post.by_project(id).size
+      when :aspect_post
+        main_aspects.size - user.voted_aspect_posts.by_project(id).size
+      when :discontent_post
+        discontent_posts_for_vote.size - user.voted_discontent_posts.by_project(id).size
+      when :concept_post
+        concept_posts_for_vote.size - user.voted_concept_posts.by_project(id).size
+      when :novation_post
+        novations.size - user.voted_novation_posts.by_project(id).size
     end
   end
 

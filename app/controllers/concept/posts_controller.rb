@@ -4,6 +4,7 @@ class Concept::PostsController < PostsController
   before_action :set_concept_post, only: [:edit, :update, :destroy]
   before_action :set_discontent_posts, only: [:new, :edit]
   before_action :set_aspect_posts, only: [:new, :edit]
+  before_action :user_vote, only: [:index]
 
   def voting_model
     Concept::Post
@@ -22,12 +23,11 @@ class Concept::PostsController < PostsController
 
   def index
     if params[:discontent] && params[:discontent] != '*'
-      @posts = @project.concepts_for_vote.includes(:concept_post_discontents)
+      @posts = @project.concept_posts_for_vote.includes(:concept_post_discontents)
                .where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
     else
-      @posts = @project.concepts_for_vote.created_order
+      @posts = @project.concept_posts_for_vote.created_order
     end
-    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:concept, @project)
     @last_time_visit = params[:last_time_visit]
 
     @project_result = ProjectDecorator.new @project unless @project.stage == '3:0'

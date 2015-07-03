@@ -4,9 +4,21 @@ class UserDecorator
     @user = user
   end
 
+  def content_for_vote(project, num_folder)
+    # если это общая папка, то выбираем контент за который пользователь еще не голосовал
+    if num_folder == 0
+      voted_content = project.send("#{project.current_stage_type}_for_vote").joins(:final_votings).where("#{project.current_stage_title}_votings.user_id = ?", user.id).pluck("#{project.current_stage_type}.id")
+      project.send("#{project.current_stage_type}_for_vote").where.not(id: voted_content)
+    else
+      user.send("voted_#{project.current_stage_type}").by_project(project.id).where("#{project.current_stage_title}_votings.status = ?", num_folder)
+    end
+  end
+
+
+
   # аспекты для голосования (необходимые, важные, неважные)
   def aspects_for_vote(project, status)
-    user.voted_aspects.by_project(project.id).where(aspect_votings: { status: status })
+    user.voted_aspect_posts.by_project(project.id).where(aspect_votings: { status: status })
   end
 
   # аспекты за которые пользователь еще не проголосовал
@@ -22,30 +34,30 @@ class UserDecorator
 
   # несовершенства за которые пользователь еще не проголосовал
   def unvote_discontents_for_vote(project)
-    vote_discontents = project.discontents_for_vote.joins(:final_votings).where(discontent_votings: { user_id: user.id }).pluck('discontent_posts.id')
-    project.discontents_for_vote.where.not(id: vote_discontents)
+    vote_discontents = project.discontent_posts_for_vote.joins(:final_votings).where(discontent_votings: { user_id: user.id }).pluck('discontent_posts.id')
+    project.discontent_posts_for_vote.where.not(id: vote_discontents)
   end
 
   # идеи для голосования (да, нет)
   def concepts_for_vote(project, status)
-    user.voted_concept_post.by_project(project.id).where(concept_votings: { status: status })
+    user.voted_concept_posts.by_project(project.id).where(concept_votings: { status: status })
   end
 
   # идеи за которые пользователь еще не проголосовал
   def unvote_concepts_for_vote(project)
-    vote_concepts = project.concepts_for_vote.joins(:final_votings).where(concept_votings: { user_id: user.id }).pluck('concept_posts.id')
+    vote_concepts = project.concept_posts_for_vote.joins(:final_votings).where(concept_votings: { user_id: user.id }).pluck('concept_posts.id')
     project.concepts_for_discussion.where.not(id: vote_concepts)
   end
 
   # пакеты для голосования (да, нет)
   def novations_for_vote(project, status)
-    user.voted_novation_post.by_project(project.id).where(novation_votings: { status: status })
+    user.voted_novation_posts.by_project(project.id).where(novation_votings: { status: status })
   end
 
   # пакеты за которые пользователь еще не проголосовал
   def unvote_novations_for_vote(project)
-    vote_novations = project.novations_for_vote.joins(:final_votings).where(novation_votings: { user_id: user.id }).pluck('novation_posts.id')
-    project.novations_for_vote.where.not(id: vote_novations)
+    vote_novations = project.novation_posts_for_vote.joins(:final_votings).where(novation_votings: { user_id: user.id }).pluck('novation_posts.id')
+    project.novation_posts_for_vote.where.not(id: vote_novations)
   end
 
   def plan_vote_status(post, type)

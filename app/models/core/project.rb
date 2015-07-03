@@ -7,19 +7,20 @@ class Core::Project < ActiveRecord::Base
   has_many :aspects, class_name: 'Aspect::Post'
   has_many :main_aspects, -> { where(aspect_id: nil, status: 0) }, class_name: 'Aspect::Post'
   has_many :other_aspects, -> { where(aspect_id: nil, status: 1) }, class_name: 'Aspect::Post'
+  has_many :aspect_posts_for_vote, -> { where(aspect_id: nil, status: 0) }, class_name: 'Aspect::Post'
 
   has_many :discontents, class_name: 'Discontent::Post'
   has_many :discontents_for_discussion, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
-  has_many :discontents_for_vote, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
+  has_many :discontent_posts_for_vote, -> { where status: [0, 1] }, class_name: 'Discontent::Post'
   has_many :discontents_approved, -> { where status: 2 }, class_name: 'Discontent::Post'
 
   has_many :concepts, class_name: 'Concept::Post'
   has_many :concepts_for_discussion, -> { where status: [0, 1] }, class_name: 'Concept::Post'
-  has_many :concepts_for_vote, -> { where status: [0, 1] }, class_name: 'Concept::Post'
+  has_many :concept_posts_for_vote, -> { where status: [0, 1] }, class_name: 'Concept::Post'
 
   has_many :novations, class_name: 'Novation::Post'
   has_many :novations_for_discussion, -> { where status: 1 }, class_name: 'Novation::Post'
-  has_many :novations_for_vote, -> { where status: 1 }, class_name: 'Novation::Post'
+  has_many :novation_posts_for_vote, -> { where status: 1 }, class_name: 'Novation::Post'
 
   has_many :plans, class_name: 'Plan::Post'
   has_many :plans_for_discussion, -> { where status: 1 }, class_name: 'Plan::Post'
@@ -47,42 +48,42 @@ class Core::Project < ActiveRecord::Base
 
   STAGES = {
     1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов',
-           type_stage: :aspect_posts,  active: true,
+           type_stage: :aspect_posts, title_stage: :aspect,  active: true,
            substages: {
              0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate },
              1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn },
              2 => { name: 'Голосование за аспекты', active: true, code: :aspects_voting }
            }
     },
-    2 => { name: 'Анализ ситуации', description: 'Выявление проблем текущей ситуации', type_stage: :discontent_posts, active: true,
+    2 => { name: 'Анализ ситуации', description: 'Выявление проблем текущей ситуации', type_stage: :discontent_posts, title_stage: :discontent, active: true,
            substages: {
              0 => { name: 'Поиск несовершенств', active: true, code: :discontents_add },
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
            }
     },
-    3 => { name: 'Сбор идей', description: 'Поиск идей по устранению проблем текущей ситуации', type_stage: :concept_posts, active: true,
+    3 => { name: 'Сбор идей', description: 'Поиск идей по устранению проблем текущей ситуации', type_stage: :concept_posts, title_stage: :concept, active: true,
            substages: {
              0 => { name: 'Поиск идей', active: true, code: :concepts_add },
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
            }
     },
-    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, active: true,
+    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, title_stage: :novation, active: true,
            substages: {
              0 => { name: 'Создание пакетов', active: true, code: :novations_add },
              1 => { name: 'Голосование', active: true, code: :novations_voting }
            }
     },
     5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей',
-           type_stage: :plan_posts, active: true,
+           type_stage: :plan_posts, title_stage: :plan, active: true,
            substages: {
              0 => { name: 'Создание проектных предложений', active: true, code: :plans_add },
              1 => { name: 'Голосование', active: true, code: :plans_voting }
 
            }
     },
-    6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, active: true
+    6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate, active: true
     },
-    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_proc_posts, active: true
+    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_proc_posts, title_stage: :completion_proc, active: true
     }
   }.freeze
 
@@ -91,6 +92,41 @@ class Core::Project < ActiveRecord::Base
     club: { name: I18n.t('form.project.club'), code: 1 },
     closed: { name: I18n.t('form.project.closed'), code: 2 }
   }.freeze
+
+  VOTES = {
+    1 => { count_folders: 4,
+           folders: {
+               0 => { name: 'Общий список', role: 'all' },
+               1 => { name: 'Необходимо', role: 'important' },
+               2 => { name: 'Важно', role: 'not_important' },
+               3 => { name: 'Неважно', role: 'unnecessary' }
+           }
+    },
+    2 => { count_folders: 5,
+           folders: {
+              0 => { name: 'Общий список', role: 'all' },
+              1 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_green">Срочные</span>', role: 'important' },
+              2 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_grey2">Менее срочные</span>', role: 'not_important' },
+              3 => { name: '<span class="font_green">Срочные</span><span class="font_grey2">|</span><span class="font_grey2">Менее важные</span>', role: 'necessary' },
+              4 => { name: '<span>Неважные</span><span>|</span><span>Несрочные</span>', role: 'unnecessary' }
+           }
+    },
+    3 => { count_folders: 3,
+           folders: {
+              0 => { name: 'Общий список', role: 'all' },
+              1 => { name: 'Нравится', role: 'vote_yes' },
+              2 => { name: 'Не нравится', role: 'vote_no' }
+           }
+    },
+    4 => { count_folders: 3,
+           folders: {
+              0 => { name: 'Общий список', role: 'all' },
+              1 => { name: 'Да', role: 'vote_yes' },
+              2 => { name: 'Нет', role: 'vote_no' },
+           }
+    },
+  }.freeze
+
 
   validates :name, presence: true
 
@@ -115,5 +151,9 @@ class Core::Project < ActiveRecord::Base
 
   def stages
     STAGES
+  end
+
+  def votes
+    VOTES
   end
 end

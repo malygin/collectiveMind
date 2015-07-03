@@ -93,6 +93,10 @@ class PostsController < ProjectsController
     current_user.user_checks.where(project_id: @project.id, check_field: 'results_' + self.class.to_s.gsub('::', '_').gsub('Controller', '').underscore, status: true).first_or_create
   end
 
+  def user_vote
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(name_of_model_for_param.to_sym, @project)
+  end
+
   private
 
   def boss?

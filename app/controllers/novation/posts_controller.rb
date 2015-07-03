@@ -3,6 +3,7 @@ class Novation::PostsController < PostsController
   include MarkupHelper
   before_action :set_novation_post, only: [:edit, :update, :destroy]
   before_action :set_discontents, only: [:new, :edit]
+  before_action :user_vote, only: [:index]
 
   def voting_model
     Novation::Post
@@ -11,7 +12,6 @@ class Novation::PostsController < PostsController
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
-    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:novation, @project)
     @project_result = ProjectDecorator.new @project unless @project.stage == '4:0'
     respond_to :html, :json
   end

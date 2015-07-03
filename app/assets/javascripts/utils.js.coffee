@@ -112,38 +112,6 @@
 
   $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
 
-# голосование за пост
-@vote_buttons = ->
-  this.vote_post = ->
-    project_id = $(this).data('project')
-    post_id = $(this).data('id')
-    stage = $(this).data('stage')
-    status = $(this).data('status')
-    if project_id and post_id and stage and status
-      $.ajax
-        url: "/project/#{project_id}/#{stage}/posts/#{post_id}/vote"
-        type: "put"
-        dataType: "script"
-        data:
-          status: status
-
-  this.vote_plan = ->
-    project_id = $(this).data('project')
-    post_id = $(this).data('id')
-    type_vote = $(this).data('type-vote')
-    status = $(this).data('status')
-    if project_id and post_id and type_vote and status
-      $.ajax
-        url: "/project/#{project_id}/plan/posts/#{post_id}/vote"
-        type: "put"
-        dataType: "script"
-        data:
-          type_vote: type_vote
-          status: status
-
-  $('.vote_controls').on('click', '.vote_button', this.vote_post)
-  $('.rate_buttons').on('click', '.btn_plan_vote', this.vote_plan)
-
 
 #show comments panel on post hover
 @show_comments_hover = ->
@@ -622,15 +590,7 @@ $('#tab_posts li#new a').on "click", (e) ->
     $(this).autocomplete(source: $(this).attr('data-url'))
     return
 
-@start_vote = ->
-  if $('div[id^=popup-vote]').length > 0
-    $.magnificPopup.open({
-      items: {
-        src: $('div[id^=popup-vote]')
-      },
-      type: 'inline'
-    });
-  return
+
 
 @add_comment_by_enter = ->
   if $('input[id^=_comment_content]').length > 0

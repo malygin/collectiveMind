@@ -2,6 +2,7 @@ class Aspect::PostsController < PostsController
   before_action :prepare_data, except: [:update, :destroy]
   before_action :set_aspect, only: [:edit, :update, :destroy]
   before_action :set_aspects, only: [:index]
+  before_action :user_vote, only: [:index]
 
   def voting_model
     Aspect::Post
@@ -15,7 +16,6 @@ class Aspect::PostsController < PostsController
     @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
     @questions_progress, @questions_progress_all = aspect_answers_count(@project)
-    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:aspect, @project)
     @project_result = ProjectDecorator.new @project unless @project.stage == '1:0' || @project.stage == '1:1'
     respond_to :html
   end
