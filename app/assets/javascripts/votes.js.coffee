@@ -26,29 +26,32 @@
         success: (data, status, response) ->
           this.vote_transfer
 
-  this.vote_progress
-
   this.vote_transfer = ->
+    #    начальная и конечная папки
     prev_folder_role = $(this).closest('.tab_vote_content').data('data-vote-poll-role')
     next_folder_role = $(this).data('data-vote-role')
 
-    $(this).addClass 'voted'
+    # проставляем статус и меняем роль на обратную
+    $(this).toggleClass 'voted'
+    $(this).attr('data-vote-role', prev_folder_role)
 
     vote_item = $(this).parents('.vote_item_cont').detach()
 
-    prev_folder = $('[data-vote-folder-role = "' + prev_folder_role + '"] > .vote_counter')
-    next_folder = $('[data-vote-folder-role = "' + next_folder_role + '"] > .vote_counter')
-    prev_folder.html(parseInt(prev_folder.html())-1)
-    next_folder.html(parseInt(next_folder.html())+1)
+    # изменяем счетчики
+    prev_folder_counter = $('[data-vote-folder-role = "' + prev_folder_role + '"] > .vote_counter')
+    next_folder_counter = $('[data-vote-folder-role = "' + next_folder_role + '"] > .vote_counter')
+    prev_folder_counter.html(parseInt(prev_folder_counter.html())-1)
+    next_folder_counter.html(parseInt(next_folder_counter.html())+1)
 
-    #    prev_folder_count = parseInt(prev_folder.text())
-    #    next_folder_count = parseInt(next_folder.text())
-    #    prev_folder.text --prev_folder_count
-    #    next_folder.text --next_folder_count
-
+    # перемещаем пост в папку
     $('[data-vote-poll-role = "' + next_folder_role + '"] .container > .row').append vote_item
 
-
+  this.vote_progress = ->
+    progress = $('.vote_progress')
+    all_posts = progress.data('progress-all')
+    voted_posts = progress.data('progress-voted')
+    vote_perc = (voted_posts / all_posts) * 100
+    progress.css 'width', vote_perc + '%'
 
   $('.vote_controls').on('click', '.vote_button', this.vote_post)
 

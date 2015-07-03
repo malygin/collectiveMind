@@ -95,6 +95,7 @@ class PostsController < ProjectsController
 
   def user_vote
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(name_of_model_for_param.to_sym, @project)
+    @count_all_posts, @count_voted_posts  = @user_voter.count_posts_for_progress(@project) if @user_voter
   end
 
   private
