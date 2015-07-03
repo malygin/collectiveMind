@@ -306,3 +306,76 @@ ru:
       select: "Вы можете выбрать %{num} проект, который на Ваш взгляд является лучшим"
       title: "Голосование за проеты"
     thanks: "Спасибо за участие в голосовании!"
+  vote:
+    aspect_posts:
+      header: 'Голосование по аспектам'
+      title: 'Распределите аспекты по папкам'
+      all:
+        name: 'Общий список'
+        title_folder: 'Перейти в общий список'
+        title_button:
+      important:
+        name: 'Необходимо'
+        title_folder: 'Перейти в список необходимых'
+        title_button: 'Отнести к необходимым'
+      not_important:
+        name: 'Важно'
+        title_folder: 'Перейти в список важных'
+        title_button: 'Отнести к важным'
+      unnecessary:
+        name: 'Неважно'
+        title_folder: 'Перейти в список неважных'
+        title_button: 'Отнести к неважным'
+    discontent_posts:
+      header: 'Голосование за несовершенства'
+      title: 'Распределите несовершенства по папкам'
+      all:
+        name: 'Общий список'
+        title_folder: 'Перейти в общий список'
+        title_button:
+      important:
+        name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_green">Срочные</span>'
+        title_folder: 'Перейти в список важных и срочных'
+        title_button: 'Отнести к важным и срочным'
+      not_important:
+        name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_grey2">Менее срочные</span>'
+        title_folder: 'Перейти в список важных и менее срочных'
+        title_button: 'Отнести к важным и менее срочным'
+      necessary:
+        name: '<span class="font_green">Срочные</span><span class="font_grey2">|</span><span class="font_grey2">Менее важные</span>'
+        title_folder: 'Перейти в список срочных и менее важных'
+        title_button: 'Отнести к срочным и менее важным'
+      unnecessary:
+        name: '<span class="font_grey2">Неважные</span><span>|</span><span class="font_grey2">Несрочные</span>'
+        title_folder: 'Перейти в список неважных и несрочных'
+        title_button: 'Отнести к неважным и несрочным'
+    concept_posts:
+      header: 'Голосование за идеи'
+      title: 'Распределите идеи по папкам'
+      all:
+        name: 'Общий список'
+        title_folder: 'Перейти в общий список'
+        title_button:
+      vote_yes:
+        name: 'Нравится'
+        title_folder: 'Перейти в список «Нравится»'
+        title_button: 'Отнести в папку «Нравится»'
+      vote_no:
+        name: 'Не нравится'
+        title_folder: 'Перейти в список «Не нравится»'
+        title_button: 'Отнести в папку «Не нравится»'
+    novation_posts:
+      header: 'Голосование за пакеты идей'
+      title: 'Распределите пакеты идей по папкам'
+      all:
+        name: 'Общий список'
+        title_folder: 'Перейти в общий список'
+        title_button:
+      vote_yes:
+        name: 'Нравится'
+        title_folder: 'Перейти в список «Нравится»'
+        title_button: 'Отнести в папку «Нравится»'
+      vote_no:
+        name: 'Не нравится'
+        title_folder: 'Перейти в список «Не нравится»'
+        title_button: 'Отнести в папку «Не нравится»'

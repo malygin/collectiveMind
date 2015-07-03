@@ -327,40 +327,31 @@ shared_examples 'welcome popup' do |stage|
   end
 end
 
-shared_examples 'vote popup' do |status, title, stage|
+shared_examples 'vote popup' do |status, stage|
   before do
     project.update_attributes(stage: status)
-    if status == '2:1'
-      # @post1.update_attributes(status: 2)
-      # @post2.update_attributes(status: 2)
-    end
     stage_path = Rails.application.routes.url_helpers.send("#{stage}_posts_path", project)
     visit stage_path
   end
 
   it 'correct voted', js: true do
-
-    expect(page).to have_content title
+    expect(page).to have_content t("vote.#{stage}_posts.header")
     expect(page).to have_content @post1.content
     expect(page).to have_content @post2.content
-    within :css, ".poll-2-1 span.vote_counter" do
+    within :css, "[data-vote-folder-role='all'] span.vote_counter" do
       expect(page).to have_content '2'
     end
-    find(:css, "#post_vote_#{@post1.id} .vote-vote1").trigger('click')
-    within :css, ".poll-2-1 span.vote_counter" do
+    find(:css, "#post_vote_#{@post1.id} a").trigger('click') if stage == 'concept'
+    find(:css, "#post_vote_#{@post1.id} button[data-status='1']").trigger('click')
+    within :css, "[data-vote-folder-role='all'] span.vote_counter" do
       expect(page).to have_content '1'
     end
-    # within :css, ".poll-2-2 span.vote_counter" do
-    #   expect(page).to have_content '1'
-    # end
-
-    find(:css, "#post_vote_#{@post2.id} .vote-vote3").trigger('click')
-    within :css, ".poll-2-1 span.vote_counter" do
-      expect(page).to have_content '0'
-    end
-    # within :css, ".poll-2-4 span.vote_counter" do
-    #   expect(page).to have_content '1'
-    # end
+    find(:css, "#post_vote_#{@post2.id} a").trigger('click') if stage == 'concept'
+    find(:css, "#post_vote_#{@post2.id} button[data-status='2']").trigger('click')
+    sleep(5)
+    expect(page).to_not have_content t("vote.#{stage}_posts.header")
+    expect(page).to have_content @post1.content
+    expect(page).to have_content @post2.content
   end
 end
 

@@ -22,6 +22,30 @@
 @import "gantt/platform";
 
 
+.stage1_theme, .stage3_theme,.stage4_theme {
+  .vote_counter {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 32px;
+    left: 35px;
+    width: 35px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .vote_folders_cont li.active .vote_folder_inn {
+    border-color: #CFCFCF;
+  }
+}
+
+.stage4_theme .poll-2-1, .stage4_theme .vote_folders_cont li.active .poll-2-1 {
+  background-position: -330px 0;
+}
+
+////////////////////////////////////
+
 .stage1_theme .modal_subhead {
   background: #99afd4;
 }
@@ -487,3 +511,4 @@
 //
 //  }
 //}
+

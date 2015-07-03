@@ -76,9 +76,7 @@ class Core::Project < ActiveRecord::Base
     5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей',
            type_stage: :plan_posts, title_stage: :plan, active: true,
            substages: {
-             0 => { name: 'Создание проектных предложений', active: true, code: :plans_add },
-             1 => { name: 'Голосование', active: true, code: :plans_voting }
-
+             0 => { name: 'Создание проектных предложений', active: true, code: :plans_add }
            }
     },
     6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate, active: true
@@ -94,36 +92,32 @@ class Core::Project < ActiveRecord::Base
   }.freeze
 
   VOTES = {
-    1 => { count_folders: 4,
-           folders: {
-             0 => { name: 'Общий список', role: 'all' },
-             1 => { name: 'Необходимо', role: 'important' },
-             2 => { name: 'Важно', role: 'not_important' },
-             3 => { name: 'Неважно', role: 'unnecessary' }
-           }
+    1 => { folders: {
+      0 => { role: 'all', type_poll: 1 },
+      1 => { role: 'important', type_poll: 2 },
+      2 => { role: 'not_important', type_poll: 3 },
+      3 => { role: 'unnecessary', type_poll: 4 }
+    }
     },
-    2 => { count_folders: 5,
-           folders: {
-             0 => { name: 'Общий список', role: 'all' },
-             1 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_green">Срочные</span>', role: 'important' },
-             2 => { name: '<span class="font_red">Важные</span><span class="font_grey2">|</span><span class="font_grey2">Менее срочные</span>', role: 'not_important' },
-             3 => { name: '<span class="font_green">Срочные</span><span class="font_grey2">|</span><span class="font_grey2">Менее важные</span>', role: 'necessary' },
-             4 => { name: '<span>Неважные</span><span>|</span><span>Несрочные</span>', role: 'unnecessary' }
-           }
+    2 => { folders: {
+      0 => { role: 'all', type_poll: 5 },
+      1 => { role: 'important', type_poll: 1 },
+      2 => { role: 'not_important', type_poll: 2 },
+      3 => { role: 'necessary', type_poll: 3 },
+      4 => { role: 'unnecessary', type_poll: 4 }
+    }
     },
-    3 => { count_folders: 3,
-           folders: {
-             0 => { name: 'Общий список', role: 'all' },
-             1 => { name: 'Нравится', role: 'vote_yes' },
-             2 => { name: 'Не нравится', role: 'vote_no' }
-           }
+    3 => { folders: {
+      0 => { role: 'all', type_poll: 1 },
+      1 => { role: 'vote_yes', type_poll: 3 },
+      2 => { role: 'vote_no', type_poll: 4 }
+    }
     },
-    4 => { count_folders: 3,
-           folders: {
-             0 => { name: 'Общий список', role: 'all' },
-             1 => { name: 'Да', role: 'vote_yes' },
-             2 => { name: 'Нет', role: 'vote_no' }
-           }
+    4 => { folders: {
+      0 => { role: 'all', type_poll: 1 },
+      1 => { role: 'vote_yes', type_poll: 3 },
+      2 => { role: 'vote_no', type_poll: 4 }
+    }
     }
   }.freeze
 

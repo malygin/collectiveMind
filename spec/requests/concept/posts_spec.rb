@@ -154,8 +154,8 @@ describe 'Concept ' do
 
     it_behaves_like 'discuss concepts'
 
-    context 'vote content', js: true, skip: true do
-      it_behaves_like 'vote popup', '3:1', 'Голосование по идеям', 'concept'
+    context 'vote content', js: true do
+      it_behaves_like 'vote popup', '3:1', 'concept'
     end
   end
 

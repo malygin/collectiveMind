@@ -4,7 +4,7 @@
       %h5 Идеи
       .divider_1_grey.margin_right_25
       .cab_cont_h450
-        %ul.list-unstyled.ps_cont{:role => "tablist"}
+        %ul.list-unstyled.ps_cont.vote_concepts{:role => "tablist"}
           .divider15
           - @user_voter.content_for_vote(@project, status).each do |post_vote|
             %li.vote_item_cont{:role => "presentation", id: "post_vote_#{post_vote.id}" }
@@ -12,13 +12,13 @@
                 = post_vote.title
                 .vote_controls.text-center
                   - @project.vote_folders.each do |num_folder, folder|
-                    -if num_folder > 0
-                      %button.btn.b_vote.vote_button.v_btn_2{data: {project: @project.id, id: post_vote.id, status: num_folder, stage: @project.current_stage_title}, class: "#{'voted' if status == num_folder}",
-                      "data-icon-class" => "fa-check", "data-vote-role" => "#{folder[:role]}", :role => "button",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Отнести в папку «Нравится» '}
+                    - if num_folder > 0
+                      %button.btn.b_vote.vote_button{data: {project: @project.id, id: post_vote.id, status: num_folder, stage: @project.current_stage_title}, class: "#{'voted ' if status == num_folder}v_btn_#{num_folder+1}",
+                      "data-icon-class" => "fa-check", "data-vote-role" => "#{status == num_folder ? 'all' : folder[:role]}", "data-vote-default-role" => "#{folder[:role]}", :role => "button",
+                      'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").html_safe}
 
-                      -#%button.btn.b_vote.vote_button.v_btn_3{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_concept_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-minus", "data-vote-role" => "vote_no", :role => "button", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Отнести в папку «Не нравится»'}
           .divider10
-    .col-md-6.tab-content
+    .col-md-6.tab-content.vote_desc_concepts
       %h5 Описание
       .divider_1_grey.margin_right_25
       - @user_voter.content_for_vote(@project, status).each do |post_vote|
@@ -42,14 +42,6 @@
                 %p
                   = post_vote.impact_env
               .divider10
-
-
-
-
-
-
-
-
 
 
 

@@ -19,17 +19,12 @@
             - @project.vote_folders.each do |num_folder, folder|
               -if num_folder > 0
                 %button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: num_folder, stage: @project.current_stage_title}, class: "#{'voted' if status == num_folder}",
-                "data-icon-class" => "fa-exclamation", "data-vote-role" => "#{folder[:role]}", :role => "button"}
+                "data-icon-class" => "fa-exclamation", "data-vote-role" => "#{status == num_folder ? 'all' : folder[:role]}", "data-vote-default-role" => "#{folder[:role]}", :role => "button",
+                'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").html_safe}
                   %i.vote{class: "vote-vote#{num_folder}"}
 
-                -#%button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 2, stage: vote_discontent_post_path(@project, post_vote.id, status: 2).split('/')[3]}, class: "#{'voted' if status == 2}", "data-icon-class" => "fa-check", "data-vote-role" => "not_important", :role => "button"}
-                -#  %i.vote.vote-vote2
-                -#%button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 3, stage: vote_discontent_post_path(@project, post_vote.id, status: 3).split('/')[3]}, class: "#{'voted' if status == 3}", "data-icon-class" => "fa-minus", "data-vote-role" => "necessary", :role => "button"}
-                -#  %i.vote.vote-vote3
-                -#%button.btn.vote_button{data: {project: @project.id, id: post_vote.id, status: 4, stage: vote_discontent_post_path(@project, post_vote.id, status: 4).split('/')[3]}, class: "#{'voted' if status == 4}", "data-icon-class" => "fa-minus", "data-vote-role" => "unnecessary", :role => "button"}
-                -#  %i.vote.vote-vote4
-            %span.vote_open_detail_imperf.grey
-              %i.fa.fa-angle-right.font_white
+            -#%span.vote_open_detail_imperf.grey
+            -#  %i.fa.fa-angle-right.font_white
             .divider15
 
   .divider50

@@ -26,7 +26,8 @@ class ProjectDecorator
   end
 
   def count_folders
-    votes[main_stage][:count_folders]
+    # votes[main_stage][:count_folders]
+    vote_folders.size
   end
 
   def vote_folders

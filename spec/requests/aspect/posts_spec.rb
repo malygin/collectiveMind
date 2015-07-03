@@ -199,7 +199,7 @@ describe 'Aspect ' do
     it_behaves_like 'discuss second aspects'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', '1:2', 'Голосование по аспектам', 'aspect'
+      it_behaves_like 'vote popup', '1:2', 'aspect'
     end
   end
 
