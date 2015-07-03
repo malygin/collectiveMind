@@ -81,7 +81,7 @@
             .stat_block
               %span
                 %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3
-                  = @project_result.results_all(name_controller).count
+                  = @project_result.count_of_added_contents(name_model)
               %h4
                 ДОБАВЛЕНО
                 =t("my_result_add.#{name_controller}")
@@ -89,7 +89,7 @@
             .stat_block
               %span
                 %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3
-                  = @project_result.results_for_next(name_controller).count
+                  = @project_result.count_of_contents_for_next_stage(name_model)
               %h4
                 =t("my_result_add.#{name_controller}")
                 ,

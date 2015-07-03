@@ -75,7 +75,7 @@ class Discontent::PostsController < PostsController
 
   def set_aspects
     # @todo выбираем только аспекты первого уровня (без вложенности) и только основные (прошедшие голосование)
-    @aspects = @project.main_aspects
+    @aspects = @project.aspects_for_discussion
   end
 
   def discontent_post_params

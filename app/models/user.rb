@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
-  include ApplicationHelper
-  include MarkupHelper
   include PgSearch
+  include UserStatistics
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lastseenable
@@ -78,28 +77,11 @@ class User < ActiveRecord::Base
     type_user == 1
   end
 
-  def add_score(h = {})
-    case h[:type]
-      when :plus_comment
-        add_score_by_type(h[:project], 5, h[:type_score])
-        # journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score], first_id: h[:post].id, body2: trim_content(field_for_journal(h[:post])), viewed: false, personal: true).save!
-      when :to_archive_plus_comment
-        add_score_by_type(h[:project], -5, h[:type_score])
-      when :plus_post
-        add_score_by_type(h[:project], h[:score], h[:type_score])
-        journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score],
-                       first_id: h[:post].id, body2: h[:post].field_for_journal, viewed: false, personal: true).save!
-
-      when :to_archive_plus_post
-        add_score_by_type(h[:project], -h[:score], h[:type_score])
-        Journal.destroy_journal_record(h[:project], 'my_add_score_' + h[:model_score], self, h[:post], true)
-
-    end
-  end
-
-  def add_score_by_type(project, score, type = :aspect_posts_score)
-    ps = core_project_users.by_project(project).first_or_create
-    ps.update_attributes!(score: score + (ps.score || 0), type => (ps.read_attribute(type) || 0) + score)
+  def add_score_by_type(h = {})
+    ps = core_project_users.by_project(h[:project]).first_or_create
+    ps.update_attributes!(score: h[:score] + (ps.score || 0), h[:type_score] => (ps.read_attribute(h[:type_score]) || 0) + h[:score])
+    journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score],
+                   first_id: h[:post].id, body2: h[:post].field_for_journal, viewed: false, personal: true).save!
   end
 
   def my_journals(project)
@@ -120,37 +102,5 @@ class User < ActiveRecord::Base
 
   def can_vote_for(stage, project)
     %w(1:2 2:1 3:1 4:1).include?(project.stage) && project.get_free_votes_for(self, stage) > 0
-  end
-
-  def content_for_project(stage, project)
-    send(stage).by_project(project.id)
-  end
-
-  def comment_for_project(stage, project)
-    send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project)
-  end
-
-  def like_content_for(stage, project)
-    send('voting_' + stage.to_s).joins(:post).where("#{stage}.project_id = ?", project)
-  end
-
-  def like_comment_for(stage, project)
-    send('voting_' + stage.to_s.gsub('_posts', '_comments')).joins(:comment).joins("INNER JOIN #{stage} ON #{stage}.id = #{stage.to_s.gsub('_posts', '_comments')}.post_id").where("#{stage}.project_id = ?", project)
-  end
-
-  def approve_content_for(stage, project)
-    send(stage).by_project(project.id).where(approve_status: true)
-  end
-
-  def approve_comment_for(stage, project)
-    send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).where(approve_status: true)
-  end
-
-  def likes_posts_for(stage, project)
-    send(stage).by_project(project.id).joins(:post_votings)
-  end
-
-  def likes_comments_for(stage, project)
-    send(stage.to_s.gsub('_posts', '_comments')).joins(:post).where("#{stage}.project_id = ?", project).joins(:comment_votings)
   end
 end

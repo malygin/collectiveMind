@@ -16,13 +16,13 @@
         %span.sort-label Сортировать по новым:
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
           #tooltip2_2.sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
-            - new_comments = @project.main_aspects.after_last_visit_comments(last_time_visit_page('aspect')).size
+            - new_comments = @project.aspects_for_discussion.after_last_visit_comments(last_time_visit_page('aspect')).size
             - if new_comments > 0
               %span.badge-red
                 = new_comments
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
           #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым аспектам"}
-            - new_posts = @project.main_aspects.after_last_visit_posts(last_time_visit_page('aspect')).size
+            - new_posts = @project.aspects_for_discussion.after_last_visit_posts(last_time_visit_page('aspect')).size
             - if new_posts > 0
               %span.badge-red
                 = new_posts
@@ -38,7 +38,7 @@
     .col-md-6
       %span.stage-heading
         Аспекты из базы знаний
-        ="(#{@project.main_aspects.size})"
+        ="(#{@project.aspects_for_discussion.size})"
     .col-md-6
       %span.stage-heading
         Аспекты, предложенные участниками

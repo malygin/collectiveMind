@@ -96,7 +96,7 @@ class Concept::PostsController < PostsController
   end
 
   def set_aspect_posts
-    @aspects = @project.main_aspects
+    @aspects = @project.aspects_for_discussion
   end
 
   def set_concept_post

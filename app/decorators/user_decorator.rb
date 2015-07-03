@@ -11,8 +11,8 @@ class UserDecorator
 
   # аспекты за которые пользователь еще не проголосовал
   def unvote_aspects_for_vote(project)
-    vote_aspects = project.main_aspects.joins(:final_votings).where(aspect_votings: { user_id: user.id }).pluck('aspect_posts.id')
-    project.main_aspects.where.not(id: vote_aspects)
+    vote_aspects = project.aspects_for_discussion.joins(:final_votings).where(aspect_votings: { user_id: user.id }).pluck('aspect_posts.id')
+    project.aspects_for_discussion.where.not(id: vote_aspects)
   end
 
   # несовершенства для голосования (необходимые, важные, неважные)
