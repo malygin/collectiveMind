@@ -123,25 +123,6 @@ class Core::Project < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def set_position_for_aspects
-    aspect = Aspect::Post.where(project_id: self, status: 0).first
-    return if aspect.position
-    aspects = Aspect::Post.scope_vote_top(id, '0')
-    aspects.each do |asp|
-      asp.update_attributes(position: asp.voted_users.size)
-    end
-  end
-
-  def concept_comments
-    Concept::Comment.joins('INNER JOIN concept_posts ON concept_comments.post_id = concept_posts.id')
-      .where('concept_posts.project_id = ?', id)
-  end
-
-  def discontent_comments
-    Discontent::Comment.joins('INNER JOIN discontent_posts ON discontent_comments.post_id = discontent_posts.id')
-      .where('discontent_posts.project_id = ?', id)
-  end
-
   def stages
     STAGES
   end

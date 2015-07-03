@@ -77,11 +77,10 @@ class User < ActiveRecord::Base
     type_user == 1
   end
 
-
   def add_score_by_type(h = {})
     ps = core_project_users.by_project(h[:project]).first_or_create
     ps.update_attributes!(score: h[:score] + (ps.score || 0), h[:type_score] => (ps.read_attribute(h[:type_score]) || 0) + h[:score])
-    if (h[:type].to_s.include? 'archive')
+    if h[:type].to_s.include? 'archive'
       Journal.destroy_journal_record(h[:project], 'my_add_score_' + h[:model_score], self, h[:post], true)
     else
       journals.build(type_event: 'my_add_score_' + h[:model_score], project: h[:project], user_informed: self, body: h[:score],
