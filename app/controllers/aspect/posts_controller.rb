@@ -58,7 +58,7 @@ class Aspect::PostsController < PostsController
   end
 
   def set_aspects
-    @aspects = @project.main_aspects
+    @aspects = @project.aspects_for_discussion
   end
 
   def aspect_params

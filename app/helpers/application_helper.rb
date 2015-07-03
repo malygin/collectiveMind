@@ -3,6 +3,10 @@ module ApplicationHelper
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end
 
+  def name_model
+    name_controller.to_s.chomp('_posts').pluralize
+  end
+
   ##
   # Хелперовский метод, вернет `true` если мы в кабинете
   # т.е. если мы на странице project_user или создаем контент

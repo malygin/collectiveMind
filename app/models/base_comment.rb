@@ -45,11 +45,11 @@ module BaseComment
     def add_score
       self.toggle!(:useful)
       if useful
-        user.add_score(type: :plus_comment, project: post.project, comment: self, path: post_controller_path,
-                       type_score: "#{post.class.table_name}_score")
+        user.add_score_by_type(type: :plus_comment, project: post.project, post: self, model_score: self.class.table_name.singularize,
+                               score: 5, type_score: "#{post.class.table_name}_score")
       else
-        user.add_score(type: :to_archive_plus_comment, project: post.project, comment: self, path: post_controller_path,
-                       type_score: "#{post.class.table_name}_score")
+        user.add_score_by_type(type: :to_archive_plus_comment, project: post.project, post: self, model_score: self.class.table_name.singularize,
+                               score: -5, type_score: "#{post.class.table_name}_score")
       end
     end
 

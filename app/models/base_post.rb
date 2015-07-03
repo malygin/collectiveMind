@@ -130,13 +130,13 @@ module BasePost
     def add_score
       self.toggle!(:useful)
       if useful
-        user.add_score(type: :plus_post, project: project, post: self,
-                       type_score: "#{self.class.table_name}_score",
-                       score: self.class::SCORE, model_score: self.class.table_name.singularize)
+        user.add_score_by_type(type: :plus_post, project: project, post: self,
+                               type_score: "#{self.class.table_name}_score",
+                               score: self.class::SCORE, model_score: self.class.table_name.singularize)
       else
-        user.add_score(type: :to_archive_plus_post, project: project, post: self,
-                       type_score: "#{self.class.table_name}_score",
-                       score: self.class::SCORE, model_score: self.class.table_name.singularize)
+        user.add_score_by_type(type: :to_archive_plus_post, project: project, post: self,
+                               type_score: "#{self.class.table_name}_score",
+                               score: -self.class::SCORE, model_score: self.class.table_name.singularize)
       end
     end
 

@@ -21,14 +21,9 @@ class Discontent::PostsController < PostsController
   end
 
   def index
-    if params[:aspect] && params[:aspect] != '*' && params[:aspect] != '#'
-      @posts = @project.discontents.by_aspect_and_subaspects(params[:aspect]).created_order
-    elsif params[:aspect] == '#'
-      @posts = @project.discontents_for_discussion.without_aspects.created_order
-    else
-      @posts = @project.discontents_for_discussion.created_order
-    end
+    @posts = @project.discontents_for_discussion
     @last_time_visit = params[:last_time_visit]
+    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:discontent, @project)
     @project_result = ProjectDecorator.new @project unless @project.stage == '2:0'
     respond_to :html, :json
   end
@@ -81,7 +76,7 @@ class Discontent::PostsController < PostsController
 
   def set_aspects
     # @todo выбираем только аспекты первого уровня (без вложенности) и только основные (прошедшие голосование)
-    @aspects = @project.main_aspects
+    @aspects = @project.aspects_for_discussion
   end
 
   def discontent_post_params

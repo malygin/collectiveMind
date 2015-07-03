@@ -56,27 +56,8 @@ class ProjectDecorator
     Core::Project::TYPE_ACCESS[type_access]
   end
 
-  def concepts_without_aspect
-    concept_ongoing_post.includes(:concept_post_discontents).where(concept_post_discontents: { post_id: nil })
-  end
-
   def get_free_votes_for(user)
     send("#{current_stage_type}_for_vote").size - user.send("voted_#{current_stage_type}").by_project(id).size
-
-    # case stage
-    #   when :aspect_post
-    #     aspect_posts_for_vote.size - user.voted_aspect_posts.by_project(id).size
-    #   when :discontent_post
-    #     discontent_posts_for_vote.size - user.voted_discontent_posts.by_project(id).size
-    #   when :concept_post
-    #     concept_posts_for_vote.size - user.voted_concept_posts.by_project(id).size
-    #   when :novation_post
-    #     novation_posts_for_vote.size - user.voted_novation_posts.by_project(id).size
-    # end
-  end
-
-  def project_access(user)
-    project.type_access == 0 ? true : (users.include?(user) || user.boss?)
   end
 
   def get_other_aspects_sorted_by(sort_rule)
@@ -91,11 +72,11 @@ class ProjectDecorator
 
   def get_main_aspects_sorted_by(sort_rule)
     if sort_rule == 'sort_by_comments'
-      main_aspects.sort_comments
+      aspects_for_discussion.sort_comments
     elsif sort_rule == 'sort_by_date'
-      main_aspects.created_order
+      aspects_for_discussion.created_order
     else
-      main_aspects
+      aspects_for_discussion
     end
   end
 
@@ -135,32 +116,12 @@ class ProjectDecorator
     project.users.sort_by { |user| -(user.likes_posts_for(stage, project).count + user.likes_comments_for(stage, project).count) }.first(3)
   end
 
-  def results_all(stage = :aspect_posts)
-    if stage == :aspect_posts
-      aspects
-    elsif stage == :discontent_posts
-      discontents
-    elsif stage == :concept_posts
-      concepts
-    elsif stage == :novation_posts
-      novations
-    elsif stage == :plan_posts
-      plan_post
-    end
+  def count_of_added_contents(model)
+    send(model).count
   end
 
-  def results_for_next(stage = :aspect_posts)
-    if stage == :aspect_posts
-      main_aspects
-    elsif stage == :discontent_posts
-      discontents_for_discussion
-    elsif stage == :concept_posts
-      concepts_for_discussion
-    elsif stage == :novation_posts
-      novations_for_discussion
-    elsif stage == :plan_posts
-      plans_for_discussion
-    end
+  def count_of_contents_for_next_stage(model)
+    send(model + '_for_discussion').count
   end
 
   def method_missing(method_name, *args, &block)
