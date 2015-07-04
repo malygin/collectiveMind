@@ -16,7 +16,7 @@ class Aspect::PostsController < PostsController
     @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
     @questions_progress, @questions_progress_all = aspect_answers_count(@project)
-    @project_result = ProjectDecorator.new @project unless @project.stage == '1:0' || @project.stage == '1:1'
+    @project_result = ProjectResulter.new @project unless @project.stage == '1:0' || @project.stage == '1:1'
     respond_to :html
   end
 

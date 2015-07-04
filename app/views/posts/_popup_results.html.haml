@@ -44,16 +44,16 @@
                       %p
                         = link_to user, user_path(@project, user)
                       %span.dia_icon
-                        = user.content_for_project(name_controller, @project_result).count
+                        = user.content_for_project(name_controller, @project).count
                         %i.fa.fa-file-text
                       %span.dia_icon
-                        = user.comment_for_project(name_controller, @project_result).count
+                        = user.comment_for_project(name_controller, @project).count
                         %i.fa.fa-comment
                       %span.dia_icon
-                        = user.like_content_for(name_controller, @project_result).count + user.like_comment_for(name_controller, @project_result).count
+                        = user.like_content_for(name_controller, @project).count + user.like_comment_for(name_controller, @project).count
                         %i.fa.fa-thumbs-up
                       %span.dia_icon
-                        = user.approve_content_for(name_controller, @project_result).count + user.approve_comment_for(name_controller, @project_result).count
+                        = user.approve_content_for(name_controller, @project).count + user.approve_comment_for(name_controller, @project).count
                         %i.fa.fa-star
 
 
@@ -72,7 +72,7 @@
               .clearfix
               .divider10
               %span.t3_likes.white.font_dark_grey.text-center
-                = user.likes_posts_for(name_controller, @project_result).count + user.likes_comments_for(name_controller, @project_result).count
+                = user.likes_posts_for(name_controller, @project).count + user.likes_comments_for(name_controller, @project).count
                 %i.fa.fa-thumbs-up.theme_font_color
 
       .stats

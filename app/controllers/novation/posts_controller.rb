@@ -12,7 +12,7 @@ class Novation::PostsController < PostsController
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
-    @project_result = ProjectDecorator.new @project unless @project.stage == '4:0'
+    @project_result = ProjectResulter.new @project unless @project.stage == '4:0'
     respond_to :html, :json
   end
 

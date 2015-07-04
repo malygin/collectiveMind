@@ -23,16 +23,13 @@ class Discontent::PostsController < PostsController
   def index
     @posts = @project.discontents_for_discussion
     @last_time_visit = params[:last_time_visit]
-    @project_result = ProjectDecorator.new @project unless @project.stage == '2:0'
+    @project_result = ProjectResulter.new @project unless @project.stage == '2:0'
     respond_to :html, :json
   end
 
   def new
     @post = current_model.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    respond_to :html, :js
   end
 
   def edit

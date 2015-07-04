@@ -30,7 +30,7 @@ class Concept::PostsController < PostsController
     end
     @last_time_visit = params[:last_time_visit]
 
-    @project_result = ProjectDecorator.new @project unless @project.stage == '3:0'
+    @project_result = ProjectResulter.new @project unless @project.stage == '3:0'
     respond_to :html, :json
   end
 
