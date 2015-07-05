@@ -47,41 +47,62 @@ class Core::Project < ActiveRecord::Base
   default_scope { order('id DESC') }
 
   STAGES = {
-    1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов',
-           type_stage: :aspect_posts, title_stage: :aspect,  active: true,
+    1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов', type_stage: :aspect_posts, title_stage: :aspect,
            substages: {
              0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate },
              1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn },
              2 => { name: 'Голосование за аспекты', active: true, code: :aspects_voting }
+           },
+           folders: {
+             0 => { role: 'all', type_poll: 1 },
+             1 => { role: 'important', type_poll: 2 },
+             2 => { role: 'not_important', type_poll: 3 },
+             3 => { role: 'unnecessary', type_poll: 4 }
            }
     },
-    2 => { name: 'Анализ ситуации', description: 'Выявление проблем текущей ситуации', type_stage: :discontent_posts, title_stage: :discontent, active: true,
+    2 => { name: 'Анализ ситуации', description: 'Выявление проблем текущей ситуации', type_stage: :discontent_posts, title_stage: :discontent,
            substages: {
              0 => { name: 'Поиск несовершенств', active: true, code: :discontents_add },
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
+           },
+           folders: {
+             0 => { role: 'all', type_poll: 5 },
+             1 => { role: 'important', type_poll: 1 },
+             2 => { role: 'not_important', type_poll: 2 },
+             3 => { role: 'necessary', type_poll: 3 },
+             4 => { role: 'unnecessary', type_poll: 4 }
            }
     },
-    3 => { name: 'Сбор идей', description: 'Поиск идей по устранению проблем текущей ситуации', type_stage: :concept_posts, title_stage: :concept, active: true,
+    3 => { name: 'Сбор идей', description: 'Поиск идей по устранению проблем текущей ситуации', type_stage: :concept_posts, title_stage: :concept,
            substages: {
              0 => { name: 'Поиск идей', active: true, code: :concepts_add },
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
+           },
+           folders: {
+             0 => { role: 'all', type_poll: 1 },
+             1 => { role: 'vote_yes', type_poll: 3 },
+             2 => { role: 'vote_no', type_poll: 4 }
            }
     },
-    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, title_stage: :novation, active: true,
+    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, title_stage: :novation,
            substages: {
              0 => { name: 'Создание пакетов', active: true, code: :novations_add },
              1 => { name: 'Голосование', active: true, code: :novations_voting }
+           },
+           folders: {
+             0 => { role: 'all', type_poll: 1 },
+             1 => { role: 'vote_yes', type_poll: 3 },
+             2 => { role: 'vote_no', type_poll: 4 }
            }
     },
-    5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей',
-           type_stage: :plan_posts, title_stage: :plan, active: true,
+    5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей', type_stage: :plan_posts, title_stage: :plan,
            substages: {
              0 => { name: 'Создание проектных предложений', active: true, code: :plans_add }
            }
     },
-    6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate, active: true
+    6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate
     },
-    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_proc_posts, title_stage: :completion_proc, active: true
+    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_proc_posts, title_stage: :completion_proc
     }
   }.freeze
 
@@ -91,43 +112,9 @@ class Core::Project < ActiveRecord::Base
     closed: { name: I18n.t('form.project.closed'), code: 2 }
   }.freeze
 
-  VOTES = {
-    1 => { folders: {
-      0 => { role: 'all', type_poll: 1 },
-      1 => { role: 'important', type_poll: 2 },
-      2 => { role: 'not_important', type_poll: 3 },
-      3 => { role: 'unnecessary', type_poll: 4 }
-    }
-    },
-    2 => { folders: {
-      0 => { role: 'all', type_poll: 5 },
-      1 => { role: 'important', type_poll: 1 },
-      2 => { role: 'not_important', type_poll: 2 },
-      3 => { role: 'necessary', type_poll: 3 },
-      4 => { role: 'unnecessary', type_poll: 4 }
-    }
-    },
-    3 => { folders: {
-      0 => { role: 'all', type_poll: 1 },
-      1 => { role: 'vote_yes', type_poll: 3 },
-      2 => { role: 'vote_no', type_poll: 4 }
-    }
-    },
-    4 => { folders: {
-      0 => { role: 'all', type_poll: 1 },
-      1 => { role: 'vote_yes', type_poll: 3 },
-      2 => { role: 'vote_no', type_poll: 4 }
-    }
-    }
-  }.freeze
-
   validates :name, presence: true
 
   def stages
     STAGES
-  end
-
-  def votes
-    VOTES
   end
 end

@@ -75,8 +75,8 @@ module ApplicationHelper
 
   # for collect_info it collect_info_posts_sub_1_quesction_true and etc, for others just like discontent_posts
   def current_stage_popover_status
-    if name_controller == :aspect_posts
-      name_controller.to_s + "_stage_popover_sub_#{@project.main_stage}_question_#{@questions_progress == 100}"
+    if name_controller == :aspect_posts && @questions_progress != 100
+      name_controller.to_s + "_stage_popover_sub_#{@project.sub_stage}"
     else
       name_controller.to_s + '_stage_popover'
     end

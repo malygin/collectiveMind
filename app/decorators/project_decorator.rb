@@ -31,7 +31,7 @@ class ProjectDecorator
   end
 
   def vote_folders
-    votes[main_stage][:folders]
+    stages[main_stage][:folders]
   end
 
   # return main stage for stage '2:3' it will be 2
