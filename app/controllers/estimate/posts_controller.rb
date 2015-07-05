@@ -14,9 +14,6 @@ class Estimate::PostsController < PostsController
     @post = Plan::Post.find(params[:id])
     @comment = comment_model.new
     @comments = @post.main_comments
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    respond_to :html, :js
   end
 end
