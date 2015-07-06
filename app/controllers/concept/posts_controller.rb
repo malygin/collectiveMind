@@ -29,7 +29,6 @@ class Concept::PostsController < PostsController
       @posts = @project.concept_posts_for_vote.created_order
     end
     @last_time_visit = params[:last_time_visit]
-
     @project_result = ProjectResulter.new @project unless @project.stage == '3:0'
     respond_to :html, :json
   end
@@ -101,14 +100,6 @@ class Concept::PostsController < PostsController
 
   def set_concept_post
     @concept_post = Concept::Post.find(params[:id])
-  end
-
-  def prepare_data
-    @aspects = Aspect::Post.where(project_id: @project, status: 0)
-    @disposts = Discontent::Post.where(project_id: @project, status: 4).order(:id)
-    # if @project.status == 8
-    #   @vote_all = Concept::Voting.by_posts_vote(@project.discontents.by_status(4).pluck(:id).join(", ")).uniq_user.count
-    # end
   end
 
   def concept_post_params

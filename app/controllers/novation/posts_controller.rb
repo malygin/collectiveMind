@@ -63,12 +63,7 @@ class Novation::PostsController < PostsController
 
   def set_discontents
     # @todo Нужно выбирать все идеи, в том числе и те, которые не привязаны к несовершенствам
-    # @discontents = Discontent::Post.by_project(@project)
-    # @concepts = []
-    # @discontents.each do |discontent|
-    #   @concepts << discontent.dispost_concepts
-    # end
-    # @concepts.flatten!.uniq!
+
     @discontents = @project.discontents
     @concepts = @project.concepts_for_discussion
   end

@@ -1,6 +1,5 @@
 class Discontent::PostsController < PostsController
   include MarkupHelper
-  include CloudinaryHelper
 
   before_action :set_aspects, only: [:index, :new, :edit]
   before_action :set_discontent_post, only: [:edit, :update, :destroy]

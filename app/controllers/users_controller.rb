@@ -14,11 +14,6 @@ class UsersController < ProjectsController
 
   def show
     redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content, edit_profile: true) if @user == current_user
-    # if @user != current_user
-    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    # else
-    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    # end
   end
 
   def update
@@ -31,13 +26,6 @@ class UsersController < ProjectsController
       to_update.merge!(avatar: img['public_id'])
     end
     flash[:success] = 'Профиль обновлен' if @user.update_attributes(to_update)
-    # redirect_to user_path(@project, @user)
-    # respond_to do |format|
-    #   if @user.update_attributes(to_update)
-    #     format.html { redirect_to user_path(@project, @user) }
-    #     format.js
-    #   end
-    # end
     respond_to :js
   end
 
@@ -83,9 +71,8 @@ class UsersController < ProjectsController
     @post.user = current_user
     @post.project = @project
     @post.status = 0
-    respond_to do |format|
-      format.js if @post.save!
-    end
+    @post.save
+    respond_to :js
   end
 
   private

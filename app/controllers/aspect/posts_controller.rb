@@ -1,7 +1,5 @@
 class Aspect::PostsController < PostsController
-  before_action :prepare_data, except: [:update, :destroy]
   before_action :set_aspect, only: [:edit, :update, :destroy]
-  before_action :set_aspects, only: [:index]
   before_action :user_vote, only: [:index]
 
   def voting_model
@@ -33,9 +31,7 @@ class Aspect::PostsController < PostsController
 
   def create
     @aspect = @project.aspects.create aspect_params.merge(user: current_user, status: 1)
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def edit
@@ -57,15 +53,7 @@ class Aspect::PostsController < PostsController
     @aspect = Aspect::Post.find(params[:id])
   end
 
-  def set_aspects
-    @aspects = @project.aspects_for_discussion
-  end
-
   def aspect_params
     params.require(:aspect_post).permit(:content, :position, :aspect_id, :short_desc, :status, :short_name, :color, :detailed_description)
-  end
-
-  def prepare_data
-    @aspects = Aspect::Post.where(project_id: @project)
   end
 end

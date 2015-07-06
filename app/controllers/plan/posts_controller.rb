@@ -16,10 +16,6 @@ class Plan::PostsController < PostsController
   def index
     @posts = @project.plans_for_discussion.created_order
     @project_result = ProjectResulter.new @project unless @project.stage == '5:0'
-    # @posts = current_model.where(project_id: @project, status: 0).order('created_at DESC')
-    # post = Plan::Post.where(project_id: @project, status: 0).first
-    # @est_stat = post.estimate_status if post
-    # @comment = comment_model.new
   end
 
   def new
@@ -38,12 +34,8 @@ class Plan::PostsController < PostsController
     if @post.valid? && @post.save
       current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project.project)
     end
-
     @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
-
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def update
@@ -60,12 +52,6 @@ class Plan::PostsController < PostsController
   def destroy
     @post.destroy if current_user?(@post.user)
     redirect_back_or user_content_plan_posts_path(@project)
-  end
-
-  def vote
-    @post_vote = voting_model.find(params[:id])
-    @post_vote.final_votings.where(user_id: current_user, type_vote: params[:type_vote].to_i).destroy_all
-    @post_vote.final_votings.create(user: current_user, type_vote: params[:type_vote], status: params[:status]).save!
   end
 
   private

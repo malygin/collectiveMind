@@ -1,8 +1,6 @@
 class Journal < ActiveRecord::Base
   include Util::Renderable
   include Util::Filterable
-  # extend ApplicationHelper
-  # extend MarkupHelper
 
   belongs_to :user
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
@@ -16,9 +14,6 @@ class Journal < ActiveRecord::Base
   scope :by_project, -> project { where(journals: { project: project }) }
   scope :events_ignore, -> events_ignore { where.not(journals: { type_event: events_ignore }) }
   scope :created_order, -> { order('journals.created_at DESC') }
-  scope :active_proc, -> { where('core_projects.status < ?', 20) }
-  scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
-  scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', [1]) }
 
   scope :auto_feed_mailer, lambda {
     joins("LEFT OUTER JOIN user_checks ON journals.user_informed = user_checks.user_id AND
@@ -48,6 +43,7 @@ class Journal < ActiveRecord::Base
       .limit(lim).order('created_at DESC')
   end
 
+  # @todo for Daniil refac может нужен едины метод для удаления ? а то два очень похожих
   def self.destroy_comment_journal(project, comment)
     where(project_id: project.id, user_id: comment.user, second_id: comment.id).destroy_all
   end

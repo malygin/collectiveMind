@@ -13,10 +13,6 @@ class CompletionProc::PostsController < PostsController
 
   def show
     @post = Plan::Post.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    respond_to :html, :js
   end
 end
