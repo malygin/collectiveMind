@@ -1,10 +1,11 @@
 class Plan::Post < ActiveRecord::Base
   include BasePost
   SCORE = 150
-  belongs_to :user
 
+  belongs_to :user
   has_many :post_novations, foreign_key: 'plan_post_id', class_name: 'Plan::PostNovation'
   has_many :estimates, class_name: 'Estimate::Post'
+
   has_many :voted_users, through: :final_votings, source: :user
   has_many :final_votings, foreign_key: 'plan_post_id', class_name: 'Plan::Voting'
 

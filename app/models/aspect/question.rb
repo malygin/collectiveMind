@@ -6,21 +6,20 @@ class Aspect::Question < ActiveRecord::Base
   has_many :answers, -> { where status: 0 }, class_name: 'Aspect::Answer', foreign_key: :question_id
   has_many :user_answers, class_name: 'Aspect::UserAnswer', foreign_key: :question_id
 
-  scope :by_project, ->(project) { where(aspect_questions: { project_id: project.id }) }
   #  status = 0 if question is active, status = 1 unless
   scope :by_status, ->(status) { where(aspect_questions: { status: status }) }
   scope :by_complete, ->(ids) { where.not(aspect_questions: { id: ids }) }
-
   scope :by_type, ->(type) { where(aspect_questions: { type_stage: type }) }
+  scope :by_project, ->(project) { where(aspect_questions: { project_id: project.id }) }
 
   validates :content, :project_id, presence: true
   default_scope { order :id }
 
-  def answer_from_type(user, answers, content, skip, type_for_questions)
+  def answer_from_type(user, answers, content, skip)
     # если вопрос пропущен, то просто создаем пустой ответ
     return true if skip
-    return false if type_for_questions == 1 && !uncorrect_answers?(answers)
-    if  content.present? && type_for_questions == 0
+    return false if type_stage == 1 && !uncorrect_answers?(answers)
+    if  content.present? && type_stage == 0
       aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i))
     end
     user.user_answers.where(project_id: project.id, question_id: id,

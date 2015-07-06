@@ -9,9 +9,4 @@ class Concept::Voting < ActiveRecord::Base
   scope :by_discontent, ->(discontent) { where(discontent_post_id: discontent.id) }
   scope :by_posts_vote, ->(posts) { where("concept_votings.discontent_post_id IN (#{posts})") unless posts.empty? }
   scope :by_status, ->(status) { where(status: status) }
-
-  def self.by_project_votings(project)
-    joins(:discontent_post)
-      .where('"discontent_posts"."project_id" = ?', project.id)
-  end
 end

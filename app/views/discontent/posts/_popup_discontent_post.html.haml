@@ -73,19 +73,7 @@
                 -#%tr
                 -#  %td.col-md-12.left-column
                 -#    = @post.whend
-              -if @post.notes.present?
-                .divider10
-                .index_block
-                  .text-center.col-md-1
-                    %i.fa.fa-exclamation-triangle.font_red
-                  .col-md-11
-                    %h5 Замечание модератора
-                    .divider10
-                    -@post.notes.each do |note|
-                      %li
-                        =note.content
-                      %br
-                .divider10
+
               -if @post.post_aspects.present?
                 .divider_1_grey
                 - @post.post_aspects.each do |asp|

@@ -21,10 +21,6 @@ class UserDecorator
     [project.send("#{project.current_stage_type}_for_vote").count, content_for_vote(project).count]
   end
 
-  def plan_vote_status(post, type)
-    plan_post_votings.by_post(post).by_type(type).first.try(:status) || 0
-  end
-
   def method_missing(method_name, *args, &block)
     user.send(method_name, *args, &block)
   end

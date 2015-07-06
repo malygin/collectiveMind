@@ -107,4 +107,8 @@ class User < ActiveRecord::Base
   def can_vote_for(project)
     %w(1:2 2:1 3:1 4:1).include?(project.stage) && project.get_free_votes_for(self) > 0
   end
+
+  def plan_vote_status(post, type)
+    plan_post_votings.by_post(post).by_type(type).first.try(:status) || 0
+  end
 end

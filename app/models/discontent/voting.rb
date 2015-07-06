@@ -3,7 +3,7 @@ class Discontent::Voting < ActiveRecord::Base
   belongs_to :discontent_post, class_name: 'Discontent::Post'
 
   validates :user_id, :discontent_post_id, presence: true
-
+  # @todo for Daniil refac   нужно?
   scope :by_positive, -> { where(against: 't') }
   scope :by_negative, -> { where(against: 'f') }
   # scope :not_admins, -> { joins(:user).merge(User.not_admins) }

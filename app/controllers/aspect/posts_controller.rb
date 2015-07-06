@@ -23,7 +23,7 @@ class Aspect::PostsController < PostsController
   def answer_question
     @aspect = Aspect::Post.find(params[:id])
     @question = Aspect::Question.find(params[:question_id])
-    @right_answer = @question.answer_from_type(current_user, params[:answers], params[:content], params[:skip], @project.type_for_questions)
+    @right_answer = @question.answer_from_type(current_user, params[:answers], params[:content], params[:skip])
     @questions_progress, @questions_progress_all  = aspect_answers_count(@project)
   end
 
