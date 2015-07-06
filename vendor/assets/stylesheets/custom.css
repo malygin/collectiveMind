@@ -8343,3 +8343,16 @@ h5.media-heading > a:hover{
 .avatar_icon.active{
     border: 2px solid #e61928;
 }
+
+
+.novation-block .post-body.no_post_head{
+    height: 120px;
+}
+
+.novation-block .post_type_3 .post_cont_hover{
+    top: 120px;
+}
+
+.novation-block  .post-bottom  {
+    border-bottom: 1px solid #d9d9d9;
+}

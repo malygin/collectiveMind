@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="post-header white"></div>
-            <div class="post-body ch_action" data-for="post_ch<%= id %>">
+            <div class="post-body no_post_head ch_action" data-for="post_ch<%= id %>">
                 <div class="media">
                     <div class="media-left text-center gradient post-poster">
                         <img class="img-circle img40" src="<%= user_avatar %>" alt="No ava">
@@ -29,16 +29,24 @@
                         </p>
                     </div>
                     <div class='media-body white-gray'>
-                        <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/novation/posts/<%= id %>?last_time_visit=<%=last_time_visit%>>)">
-                            <div class="post-text">
-                                <p>
-                                    <%= title %>
-                                </p>
-                                <div class="pull-right">
-                                    <i class="fa fa-angle-right icon-right"></i>
-                                </div>
-                            </div>
-                        </a>
+                        <table class="table">
+                            <tr class="what">
+                                <td class="col-md-12 left-column">
+                                    <a id="show_record_<%= id %>" class="font_color_stage4 bold" data-remote="true" href="/project/<%= project_id %>/novation/posts/<%= id %>?last_time_visit=<%=last_time_visit%>>)">
+
+                                        <%= title %>
+                                        <i class="fa fa-angle-right icon-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-12 left-column">
+
+
+
+                                </td>
+                            </tr>
+                        </table>
                         <% if(comments.length > 0) { %>
                         <div id="post_ch<%= id %>" class="post_cont_hover post_tall white">
                             <div class="wrapper ps_cont half_wheel_speed">
