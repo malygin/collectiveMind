@@ -95,8 +95,9 @@ class PostsController < ProjectsController
   end
 
   def user_vote
-    @user_voter = UserDecorator.new current_user if current_user.can_vote_for(@project)
-    @count_all_posts, @count_voted_posts = @user_voter.count_posts_for_progress(@project) if @user_voter
+    return unless current_user.can_vote_for(@project)
+    @user_voter = UserDecorator.new current_user
+    @count_all_posts, @count_voted_posts = @user_voter.count_posts_for_progress(@project)
   end
 
   private

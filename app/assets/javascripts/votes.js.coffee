@@ -10,37 +10,6 @@
 
 
 @vote_scripts = ->
-  this.vote_plan = ->
-    project_id = $(this).data('project')
-    post_id = $(this).data('id')
-    type_vote = $(this).data('type-vote')
-    status = $(this).data('status')
-    if project_id and post_id and type_vote and status
-      $.ajax
-        url: "/project/#{project_id}/plan/posts/#{post_id}/vote"
-        type: "put"
-        dataType: "script"
-        data:
-          type_vote: type_vote
-          status: status
-
-  this.vote_post = ->
-    el = $(this)
-    project_id = el.data('project')
-    post_id = el.data('id')
-    stage = el.data('stage')
-    status = el.data('status')
-    if project_id and post_id and stage and status
-      $.ajax
-        url: "/project/#{project_id}/#{stage}/posts/#{post_id}/vote"
-        type: "put"
-        dataType: "script"
-        data:
-          status: status
-        success: (data, status, response) ->
-          # визуализация при успешном ответе
-          vote_transfer(el)
-
   this.vote_transfer = (el)->
     # начальная и конечная папки
     prev_folder_role = el.closest('.tab_vote_content').attr('data-vote-poll-role')
@@ -103,8 +72,5 @@
     vote_perc = (voted_posts / all_posts) * 100
     progress.attr('data-progress-voted', voted_posts)
     progress.css 'width', vote_perc + '%'
-
-  $('.vote_controls').on('click', '.vote_button', this.vote_post)
-  $('.rate_buttons').on('click', '.btn_plan_vote', this.vote_plan)
 
 

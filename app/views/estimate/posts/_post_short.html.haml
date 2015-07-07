@@ -19,16 +19,9 @@
               = post_short.vote_progress(1)
       -else
         .rate_buttons.color_1.text-center
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 1}} 1
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 2}} 2
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 3}} 3
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 4}} 4
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 5}} 5
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 6}} 6
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 7}} 7
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 8}} 8
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 9}} 9
-          %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 1, status: 10}} 10
+          - 1.upto(10) do |i|
+            = link_to i, vote_plan_post_path(@project, post_short.id, type_vote: 1, status: i), method: :put, remote: true, class: "btn btn_reset back_color_stage6 font_white bold btn_plan_vote", role: "button"
+
 
 
     .col-sm-5.col_padding_left_0.divided
@@ -41,16 +34,8 @@
                   = post_short.vote_progress(2)
           -else
             .rate_buttons.color_2.text-center
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 1}} 1
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 2}} 2
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 3}} 3
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 4}} 4
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 5}} 5
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 6}} 6
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 7}} 7
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 8}} 8
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 9}} 9
-              %button.btn.btn_reset.back_color_stage6.font_white.bold.btn_plan_vote{data: {project: @project.id, id: post_short.id, type_vote: 2, status: 10}} 10
+              - 1.upto(10) do |i|
+                = link_to i, vote_plan_post_path(@project, post_short.id, type_vote: 2, status: i), method: :put, remote: true, class: "btn btn_reset back_color_stage6 font_white bold btn_plan_vote", role: "button"
 
         .col-md-2.col_padding_left_0.divided.text-center
           = link_to({action: :show, project: @project, id: post_short.id}, remote: true, class: "rating_a", id: "show_record_#{post_short.id}") do
