@@ -341,13 +341,13 @@ shared_examples 'vote popup' do |status, stage|
     within :css, "[data-vote-folder-role='all'] span.vote_counter" do
       expect(page).to have_content '2'
     end
-    find(:css, "#post_vote_#{@post1.id} a").trigger('click') if stage == 'concept'
-    find(:css, "#post_vote_#{@post1.id} button[data-status='1']").trigger('click')
+    find(:css, "#post_vote_#{@post1.id} > a").trigger('click') if stage == 'concept'
+    find(:css, "#vote_button_#{@post1.id}_1").trigger('click')
     within :css, "[data-vote-folder-role='all'] span.vote_counter" do
       expect(page).to have_content '1'
     end
-    find(:css, "#post_vote_#{@post2.id} a").trigger('click') if stage == 'concept'
-    find(:css, "#post_vote_#{@post2.id} button[data-status='2']").trigger('click')
+    find(:css, "#post_vote_#{@post2.id} > a").trigger('click') if stage == 'concept'
+    find(:css, "#vote_button_#{@post2.id}_2").trigger('click')
     sleep(5)
     expect(page).to_not have_content t("vote.#{stage}_posts.header")
     expect(page).to have_content @post1.content
