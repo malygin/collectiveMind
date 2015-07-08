@@ -75,7 +75,7 @@ class Core::Project < ActiveRecord::Base
              1 => { name: 'Голосование', active: true, code: :discontents_voting }
            }
     },
-    4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, active: true,
+    4 => { name: 'Выбор идей для реализации', description: 'Выбор идей для реализации', type_stage: :novation_posts, active: true,
            substages: {
              0 => { name: 'Создание пакетов', active: true, code: :novations_add },
              1 => { name: 'Голосование', active: true, code: :novations_voting }
@@ -102,19 +102,19 @@ class Core::Project < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def current_stage_type
-    STAGES[stage[0].to_i][:type_stage]
+  def current_stage_type(stage_num = stage[0].to_i)
+    STAGES[stage_num][:type_stage]
   end
 
-  def current_stage_name
-    STAGES[stage[0].to_i][:name]
+  def current_stage_name(stage_num = stage[0].to_i)
+    STAGES[stage_num][:name]
   end
 
-  def current_stage_type_for_cabinet_url
-    if STAGES[stage[0].to_i][:cabinet_url]
-      STAGES[stage[0].to_i][:cabinet_url].to_s.downcase.singularize
+  def current_stage_type_for_cabinet_url(stage_num = stage[0].to_i)
+    if STAGES[stage_num][:cabinet_url]
+      STAGES[stage_num][:cabinet_url].to_s.downcase.singularize
     else
-      STAGES[stage[0].to_i][:type_stage].to_s.downcase.singularize
+      STAGES[stage_num][:type_stage].to_s.downcase.singularize
     end
   end
 

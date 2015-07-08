@@ -11,6 +11,8 @@ class Novation::PostsController < PostsController
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
+    @last_time_visit = params[:last_time_visit]
+
     @user_voter = UserDecorator.new current_user if current_user.can_vote_for(:novation, @project)
     @project_result = ProjectDecorator.new @project unless @project.stage == '4:0'
     respond_to :html, :json

@@ -38,11 +38,11 @@ module ApplicationHelper
     Core::Project::STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage] || name_controller == :core_aspect_posts
     end
-    nil
+    @project.main_stage
   end
 
   def can_edit_content?
-    name_controller == @project.current_stage_type
+    name_controller == @project.current_stage_type || @project.status == 100
   end
 
   # необходимость показа приветсвенной модалки или поповера
@@ -127,6 +127,8 @@ module ApplicationHelper
       'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
     elsif name_controller == :concept_posts
       'Идеи, предложенные на этой стадии, в дальнейшем будут объединяться в пакеты.'
+    elsif name_controller == :novation_posts
+      'Пакеты, сформированные на этой стадии, на следующей стадии послужат основой для полноценных проектов, включающих в себя подробный план действий.'
     else
       'Здесь могла быть подсказка, но пока ее нет!'
     end

@@ -4,8 +4,16 @@
     %h2
       = image_tag 'good-shot1.png', class: "expl-header-img-1"
       Цель стадии
+    %p.expl-sub-heading
+      Формирование пакетов идей
+      %br
+      для исправления проблемной ситуации.
     %h2
       = image_tag 'flag1.png', class: "expl-header-img-2"
       Что делать?
+    %ol
+      %li Выбрать понравившиеся вам идеи и объединить их в пакет.
+      %li При необходимости подкорректировать выбранные идеи для получения целостного видения.
+      %li Выставить пакеты на общее обсуждение и принять участие в обсуждении пакетов других участников.
     = link_to check_field_novation_posts_path(@project, check_field: "novation_intro", status: true), method: :put, remote: true, id: "novation_intro" do
       %button.btn.red.close_magnific Начать работу

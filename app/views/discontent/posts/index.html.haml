@@ -85,7 +85,7 @@
           ="(#{@posts.count})"
     .col-md-5
       .pull-right
-        - if @project.stage=='2:0'
+        - if @project.stage=='2:0' or @project.status == 100
           = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
             %button.btn.add-button{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить несовершенство"}
               %span#tooltip2_2.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией"}

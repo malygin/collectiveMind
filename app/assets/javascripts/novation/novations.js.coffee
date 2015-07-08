@@ -62,6 +62,7 @@ NovationCollectionView = Backbone.View.extend
 if window.location.href.indexOf("novation/posts") > -1 and window.location.href.indexOf("novation/posts/") == -1
   dc = new NovationCollection
   dc.fetch
+    data: $.param({last_time_visit: $('#filter').data('visit')})
     success: (col,res)->
       dv = new NovationCollectionView({collection: dc})
       dv.render()
