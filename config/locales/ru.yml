@@ -1,6 +1,12 @@
 ---
 ru:
-
+  stage:
+    open_false: ' стадия (завершена) <br/>'
+    open_true: ' стадия (открыта) <br/>'
+  substage:
+    status_unavailable: 'подстадия недоступна'
+    status_current: 'подстадия открыта'
+    status_complete: 'подстадия завершена'
   aspect_save_post: 'добавил(a) аспект '
   aspect_post_approve_status:  'выделил(а) как важный аспект  '
   my_aspect_post_approve_status: 'выделил(а) как важный ваш аспект  '

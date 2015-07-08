@@ -3,12 +3,13 @@
   = render 'application/meta'
   %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
     .outer
-      = render partial: 'application/left_rollover'
-      = render partial: 'application/header'
+      -if has_left_rollover?
+        = render partial: 'left_rollover'
+      = render partial: 'header'
       - if profile?
-        = render partial: 'application/cabinet_stage_panel'
+        = render partial: 'cabinet_stage_panel'
       - elsif not rating?
-        = render partial: 'application/stage_panel'
+        = render partial: 'stage_panel'
       .main-block
         .container
           = yield

@@ -1,7 +1,0 @@
-- if (current_user?(post.user) and post.status == 0 and @project.can_edit_on_current_stage(post)) or boss?
-  = link_to t('link.edit'),{controller: post.class.name.underscore.pluralize,  action: 'edit', project: @project, id: post.id}, class: 'btn btn-info btn-xs'
-  \|
-  = link_to t('link.remove'),{controller: post.class.name.underscore.pluralize, action: :to_archive,  project: @project, id: post.id}, class: 'btn btn-danger btn-xs', method: :put, data: {confirm: t('confirm.accept')}
-- elsif post.instance_of? Plan::Post and post.user.group_include_user?(current_user)
-  = link_to t('link.edit'),{controller: post.class.name.underscore.pluralize,  action: 'edit', project: @project, id: post.id}, class: 'btn btn-info btn-xs'
-%br

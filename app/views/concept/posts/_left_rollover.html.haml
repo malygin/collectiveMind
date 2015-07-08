@@ -1,0 +1,39 @@
+#slide-panel.slide-outer{style: "margin-left:-400px", "data-position" => "left"}
+  %span#opener.slide-opener.i_new_stage.rounded_2.tooltip1{"data-placement" => "right", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны."}
+    = image_tag 'text-slider-opener.png' ,:class => "big",  "data-placement" => "right", "data-toggle" => "tooltip", :title => "Перейти к выбору несовершенств"
+  #tooltip_slide_panel.slide-inner.slide_stage3.white
+    .ps_cont#filter
+      .divider15
+      .checkox_item{data: {discontent: "*"}}
+        %span
+          %span.cb_input
+            %input#check0{:type => "checkbox"}/
+            %label{:for => "check0"}
+              %i.fa.fa-check
+        %span.text_label
+          %label{:for => "check0"} Выбрать все
+      .slide_table_wrap
+        - @project.discontents_for_discussion.each_with_index do |post, index|
+          .checkox_item{data: {discontent: ".discontent_#{post.id}"}}
+            %span
+              %span.cb_input
+                %input{id: "check#{index+2}", :type => "checkbox"}/
+                %label{:for => "check#{index+2}"}
+                  %i.fa.fa-check
+            %span
+              %span.color_counter.color_me.bigger{"data-me-action" => "background-color", "data-me-color" => "#{post.id}", "data-me-type" => "imperf", "data-placement" => "right", "data-toggle" => "tooltip", :title => "#{post.dispost_concepts.count > 0 ? 'Для устранения этого несовершенства '+t("dispost_concepts",count: post.dispost_concepts.count ):'Для устранения этого несовершенства  пока не предложено ни одной идеи'}" }
+                = post.dispost_concepts.count
+            %span.text_label
+              %label{:for => "check#{index+2}"}
+                = post.content
+            - new_posts = post.dispost_concepts.after_last_visit_posts(last_time_visit_page('concept')).size
+            - if new_posts > 0
+              %span.cb_doc
+                = new_posts
+            - new_comments = post.dispost_concepts.after_last_visit_comments(last_time_visit_page('concept')).size
+            - if new_comments > 0
+              %span.cb_com
+                = new_comments
+
+      .divider15
+

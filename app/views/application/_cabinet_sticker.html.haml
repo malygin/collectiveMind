@@ -1,5 +1,0 @@
-%i.fa.fa-info-circle.fa-lg.open_sticker{'data-for' => '.cabinet_sticker', class: "font_color_stage#{@project.main_stage}"}
-.cabinet_sticker.sticker.rounded_3.font_white{style: ('display: none;' if show_sticker?("#{@project.current_stage_type}_cabinet_sticker"))}
-  = t("cabinet.#{@project.current_stage_type}_sticker").html_safe
-  = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker", status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
-    %i.sticker_close.fa.fa-times.fa-lg{'data-for' => '.cabinet_sticker'}

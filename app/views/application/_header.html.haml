@@ -55,8 +55,6 @@
         %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
           %li{role: 'presentation'}
             = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-          -#%li{role: 'presentation'}
-          -#  = link_to t('menu.profile_edit'), user_path(@project, current_user), id: 'go_to_edit_profile'
           %li{role: 'presentation'}
             = link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, id: 'sign_out'
 .subhead

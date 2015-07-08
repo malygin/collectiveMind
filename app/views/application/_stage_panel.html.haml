@@ -5,19 +5,11 @@
         .btn-toolbar{role: 'toolbar'}
           - Core::Project::STAGES.each do |num_stage, stage|
             .btn-group{role: 'group'}
-              - if name_controller == stage[:type_stage] &&   @project.main_stage == num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (открыта)<br />' +"#{stage[:description]}" do
-                  ="#{num_stage} СТАДИЯ: "
-                  = stage[:name]
-              - elsif name_controller == stage[:type_stage] && @project.main_stage > num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (завершена)<br />' +"#{stage[:description]}" do
-                  ="#{num_stage} СТАДИЯ: "
-                  = stage[:name]
-              - elsif @project.main_stage > num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (завершена)<br />' +"#{stage[:description]}" do
-                  = num_stage
-              - elsif name_controller != stage[:type_stage] && @project.main_stage == num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (открыта)<br />' +"#{stage[:description]}" do
+              - if name_controller == stage[:type_stage]
+                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title:  "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
+                  ="#{num_stage} СТАДИЯ: #{stage[:name]}"
+              - elsif @project.main_stage >= num_stage
+                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
                   = num_stage
               - else
                 = link_to '#', id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big",'data-placement' => 'bottom', 'data-toggle' => 'tooltip','data-html'=>'true', title: "#{num_stage}"+' '+'стадия (недоступна) <br />'+"#{stage[:description]}" do
@@ -28,33 +20,17 @@
       -#  #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда'}
       %a(style="cursor:pointer;")
         #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover.iconate{class: "#{shown_intro(current_stage_popover_status)}", 'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}", 'data-text' => t(current_stage_popover_status), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Читайте инструкции по работе на этом этапе стадии'}
-
       .border_grey.rounded_3.progress_block
         .container
-          .row
-            = render partial: 'application/progress_bar'
-  - if not cabinet? and able_subbar?
+          .row= render partial: 'application/progress_bar'
+  - if show_stage_subbar?
     .divider10
     .row
       .col-md-12
         .border_grey.rounded_3.metro_block
           %ul.list-unstyled.list-inline
             - Core::Project::STAGES[@project.main_stage][:substages].each do |num_substage, substage|
-              - if @project.sub_stage == num_substage
-                %li{class: "#{'active theme_font_color'} #{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
-                'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'Стадия недоступна' if num_substage != @project.sub_stage }"}
-                  %i.fa.fa-circle.fa-2x
-                  %a{:href => "#"}
-                    = substage[:name]
-              - elsif @project.sub_stage > num_substage
-                %li{class: "#{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
-                'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + '(завершено)'}
-                  %i.fa.fa-circle.fa-2x
-                  %a{:href => "#"}
-                    = substage[:name]
-              - else
-                %li{class: "#{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
-                  'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{substage[:name]}"+' ' + '(недоступно)'}
-                  %i.fa.fa-circle.fa-2x
-                  %a{:href => "#"}
-                    = substage[:name]
+              %li{class: "#{'active theme_font_color' if @project.sub_stage == num_substage} #{'last' if num_substage == Core::Project::STAGES[@project.main_stage][:substages].length - 1}",
+              'data-placement' => 'bottom','data-toggle' => 'tooltip', title: t("substage.status_#{substage_status_by num_substage}")   }
+                %i.fa.fa-circle.fa-2x
+                %a{:href => "#"}= substage[:name]
