@@ -6,19 +6,19 @@
         = image_tag 'logo1.png'
     %ul.nav.navbar-nav.main_menu
       %li{class: "#{'active' unless (cabinet? or rating? or profile?)}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'Вернуться в процедуру' if (cabinet? or rating? or profile?)}"}
-        = link_to 'Процедура', current_stage_url(@project), class: 'menu_a'
+        = link_to 'Процедура', current_stage_url(@project), id: 'open_procedure', class: 'menu_a'
       %li{class: "#{'active' if cabinet?}"}
         = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
       %li.has_dropwindow
         = render partial: 'application/messages_menu'
       - if @project.closed?
         %li{class: "#{'active' if rating?}"}
-          = link_to 'Рейтинг', users_path(@project), class: 'menu_a', 'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Посмотреть рейтинг участников'
+          = link_to 'Рейтинг', users_path(@project), id: 'open_rating', class: 'menu_a', 'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Посмотреть рейтинг участников'
       - if boss?
         - unless @project.main_stage == 1 and @project.sub_stage == 0
-          %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put,  class: 'menu_a'
+          %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put, id: 'open_prev_stage', class: 'menu_a'
         - if @project.main_stage < 7
-          %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, class: 'menu_a'
+          %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, id: 'open_next_stage', class: 'menu_a'
 
     .navbar-right.text-right.user_block.font_grey
       %span.tooltip1{'data-placement' => 'bottom',"data-trigger" => "manual", 'data-toggle' => 'tooltip', title: 'Жмите сюда, чтобы освежить в памяти базу знаний'}

@@ -28,7 +28,7 @@ describe 'Discontent' do
     @post1 = @discontent1
     @post2 = @discontent2
 
-    @comment_1 = create :discontent_comment, post: @post1, user: user
+    @comment_1 = create :discontent_comment, post: @post1, user: user_data
     @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
   end
 
@@ -151,7 +151,9 @@ describe 'Discontent' do
 
     it_behaves_like 'sort discontents'
 
-    it_behaves_like 'discuss discontents'
+    context 'show discuss discontents', js: true do
+      it_behaves_like 'discuss discontents'
+    end
 
     context 'vote content', js: true do
       it_behaves_like 'vote popup', '2:1', 'discontent'

@@ -97,7 +97,7 @@ module ApplicationHelper
   end
 
   def current_stage_url(project)
-    "/project/#{project.id}/"
+    "/project/#{project.id}"
   end
 
   def model_for(type, stage)

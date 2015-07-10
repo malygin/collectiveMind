@@ -79,9 +79,8 @@ describe 'Estimate ' do
     it 'correct voted', js: true do
       expect(page).to have_selector "#progress_type_vote_1_#{@plan1.id}"
       expect(page).to have_selector "#progress_type_vote_2_#{@plan1.id}"
-
-      find(:css, "#progress_type_vote_1_#{@plan1.id} .btn_plan_vote[data-status='5']").trigger('click')
-
+      find(:css, "#progress_type_vote_1_#{@plan1.id} #btn_plan_vote_5").trigger('click')
+      sleep(5)
       expect(page).not_to have_selector "#progress_type_vote_1_#{@plan1.id} .btn_plan_vote"
       expect(page).to have_selector "#progress_type_vote_1_#{@plan1.id} .progress-bar"
     end
@@ -97,6 +96,8 @@ describe 'Estimate ' do
     it_behaves_like 'show list estimates'
 
     it_behaves_like 'discuss estimates'
+
+    it_behaves_like 'vote estimate'
   end
 
   # context 'moderator sign in ' do

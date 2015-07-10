@@ -60,10 +60,10 @@ CollectiveMind::Application.routes.draw do
     end
 
     resources :users, except: [:edit] do
-      collection do
-        get :list_users
-        get :search
-      end
+      # collection do
+      #   get :list_users
+      #   get :search
+      # end
       member do
         post :update_score
         put :journal_clear

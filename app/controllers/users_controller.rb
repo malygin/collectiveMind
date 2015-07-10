@@ -7,11 +7,6 @@ class UsersController < ProjectsController
     @users = @project.users.where(users: { type_user: 0 })
   end
 
-  def new
-    @user = User.new
-    @title = 'Sign up'
-  end
-
   def show
     redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content, edit_profile: true) if @user == current_user
   end
@@ -29,12 +24,6 @@ class UsersController < ProjectsController
     respond_to :js
   end
 
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'Пользователь удален!!'
-    redirect_to users_path
-  end
-
   # clean notifications
   def journal_clear
     if @my_journals.size > 0 && current_user?(@user)
@@ -44,26 +33,17 @@ class UsersController < ProjectsController
     respond_to :js
   end
 
+  # :nocov:
   def search
     @code = params[:code]
     @search_users = User.search params[:search_users_text]
-  end
-
-  def update_score
-    params[:value] = '0' if params[:value] == ''
-    respond_to do |format|
-      if @user.update_attributes(params[:name] => params[:value])
-        format.json { head :no_content } # 204 No Content
-        format.js { head :no_content }
-      end
-    end
   end
 
   # mail sender
   def edit_notice
     @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
     @journal_mailer = JournalMailer.new
-    @mailers = prime_admin? ? @project.journal_mailers : @project.journal_mailers.mailers_for_moderator(current_user)
+    @mailers = boss? ? @project.journal_mailers : @project.journal_mailers.mailers_for_moderator(current_user)
   end
 
   def create_notice
@@ -74,6 +54,7 @@ class UsersController < ProjectsController
     @post.save
     respond_to :js
   end
+  # :nocov:
 
   private
 

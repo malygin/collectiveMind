@@ -12,7 +12,7 @@ Spork.prefork do
   require 'websocket_rails/spec_helpers'
   require 'simplecov'
   # SimpleCov.start
-  SimpleCov.start do
+  SimpleCov.start 'rails' do
     add_filter '/spec/'
     add_filter '/config/'
     add_filter '/lib/'
@@ -20,6 +20,7 @@ Spork.prefork do
 
     add_group 'Controllers', 'app/controllers'
     add_group 'Models', 'app/models'
+    add_group 'Decorators', 'app/decorators'
   end
 
   Capybara.javascript_driver = :webkit

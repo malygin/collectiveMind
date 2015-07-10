@@ -97,80 +97,57 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
     # it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   end
 
-  # @todo edit and destroy settings missed
-  # context 'edit comment', js: true do
-  #   it 'i owner - ok' do
-  #     find(:css, "#redactor_comment_#{@comment_1.id}").trigger('click')
-  #     find(:css, "#edit_comment_#{@comment_1.id}").trigger('click')
-  #     find("#form_edit_comment_#{@comment_1.id}").find('textarea').set text_comment
-  #     find("#form_edit_comment_#{@comment_1.id}").find('.send-comment').click
-  #     expect(page).to have_content text_comment
+  # context ' redactor comment ', js: true do
+  #   before do
+  #     @comment_1 = create comment_model, post: @post1, user: user
+  #     @comment_2 = create comment_model, post: @post1, comment: @comment_1
   #   end
   #
-  #   unless moderator
-  #     it 'from other users - error' do
-  #       expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
-  #     end
-  #   end
-  # end
+  #   context 'edit comment', js: true do
   #
-  # context 'destroy comment' do
-  #   it 'i owner - ok', js: true do
-  #     expect {
+  #     it 'i owner - ok' do
   #       find(:css, "#redactor_comment_#{@comment_1.id}").trigger('click')
-  #       click_link "destroy_comment_#{@comment_1.id}"
-  #       page.driver.browser.accept_js_confirms
-  #       expect(page).not_to have_content @comment_1.content
-  #     }.to change(comment_model_name, :count).by(-1)
-  #   end
-  #
-  #   unless moderator
-  #     it 'from other users - error' do
-  #       expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
+  #       find(:css, "#edit_comment_#{@comment_1.id}").trigger('click')
+  #       find("#form_edit_comment_#{@comment_1.id}").find('textarea').set text_comment
+  #       find("#form_edit_comment_#{@comment_1.id}").find('.send-comment').click
+  #       expect(page).to have_content text_comment
   #     end
   #
-  #     # it 'post request - error' do
-  #     #   expect {
-  #     #     page.driver.submit :put,
-  #     #                        Rails.application.routes.url_helpers.send(
-  #     #                            "destroy_comment_#{comment_post_model.gsub('core/','')}_path", @comment_2.post.project, @comment_2), {}
-  #     #     expect(current_path).to eq root_path
-  #     #   }.not_to change(comment_model_name, :count)
-  #     # end
+  #     unless moderator
+  #       it 'from other users - error' do
+  #         expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
+  #       end
+  #     end
+  #   end
+  #
+  #   context 'destroy comment' do
+  #     it 'i owner - ok', js: true do
+  #       expect {
+  #         find(:css, "#redactor_comment_#{@comment_1.id}").trigger('click')
+  #         click_link "destroy_comment_#{@comment_1.id}"
+  #         page.driver.browser.accept_js_confirms
+  #         expect(page).not_to have_content @comment_1.content
+  #       }.to change(comment_model_name, :count).by(-1)
+  #     end
+  #
+  #     unless moderator
+  #       it 'from other users - error' do
+  #         expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
+  #       end
+  #
+  #       # it 'post request - error' do
+  #       #   expect {
+  #       #     page.driver.submit :put,
+  #       #                        Rails.application.routes.url_helpers.send(
+  #       #                            "destroy_comment_#{comment_post_model.gsub('core/','')}_path", @comment_2.post.project, @comment_2), {}
+  #       #     expect(current_path).to eq root_path
+  #       #   }.not_to change(comment_model_name, :count)
+  #       # end
+  #     end
   #   end
   # end
 
   # not functional now
-
-  # if moderator
-  #   it ' like comment', js: true do
-  #     prepare_awards
-  #     plus_comment_path = Rails.application.routes.url_helpers.send("plus_comment_#{comment_post_model}_path", project, @comment_1)
-  #
-  #     expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Выдать баллы')
-  #     click_link("plus_comment_#{@comment_1.id}")
-  #     sleep 5
-  #     expect(page).to have_css("a#plus_comment_#{@comment_1.id} span", text: 'Забрать баллы')
-  #
-  #   end
-  # else
-  #   it ' not button like' do
-  #     expect(page).not_to have_link("plus_comment_#{@comment_1.id}")
-  #   end
-  # end
-
-  # it 'add new comment with image', js: true do
-  #   fill_in 'comment_text_area', with: text_comment
-  #   attach_file("#{comment_model}_image", "#{Rails.root}/spec/support/images/1.jpg")
-  #   sleep(5)
-  #   # find('input.send-comment').click
-  #   find('#comment_form .send-comment').click
-  #   sleep(5)
-  #   expect(page).to have_content text_comment
-  #   expect(page).to have_selector 'a.image-popup-vertical-fit img'
-  #
-  #   Cloudinary::Api.delete_resources('comments/'+ page.first('a.image-popup-vertical-fit img')['alt'].downcase)
-  # end
 
   # context 'add new answer to answer comment', js: true do
   #   before do
@@ -185,14 +162,6 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   #
   #   it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   # end
-
-  # it 'paginate comments' do
-  #   create_list comment_model.to_sym, 11, post: @comment_1.post
-  #   refresh_page
-  #   expect(page).to have_css 'div.pagination'
-  #   expect(page).to have_css 'a.previous_page'
-  # end
-
 
 end
 
@@ -271,7 +240,6 @@ shared_examples 'admin panel post' do |moderator = false|
       find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
       visit  users_path(project)
       expect(page).to have_selector('span.rating_cell', text: 0 )
-
     end
 
     it ' approve post ', js: true do
@@ -289,6 +257,16 @@ shared_examples 'admin panel post' do |moderator = false|
       sleep(5)
       expect(page).to have_css("a:not(.theme_font_color)#approve_status_post_#{@post1.id}")
       # expect(page).to have_css("div.hide[data-important='#{@post1.id}']")
+    end
+
+    it ' approve comment ', js: true do
+      find(:css, "#show_record_#{@post1.id}").trigger('click')
+      find(:css, "#approve_status_comment_#{@comment_1.id}").trigger('click')
+      expect {
+        find(:css, "a#approve_status_comment_#{@comment_1.id}").trigger('click')
+        sleep(5)
+        # expect(page).to have_css("a#approve_status_post_#{@comment_1.id} span.theme_font_color")
+      }.to change(Journal, :count).by(1)
     end
   else
     it ' not button ' do

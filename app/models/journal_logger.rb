@@ -18,43 +18,8 @@ class JournalLogger < ActiveRecord::Base
 
   validates :body, :type_event, :project_id, presence: true
 
-  # new methods
-  def self.events_for_all(list_type, closed_projects)
-    JournalLogger.joins(:project).active_proc.where('core_projects.type_access IN (?) OR core_projects.id IN (?)', list_type, closed_projects)
-  end
-
-  def self.events_for_all_prime
-    JournalLogger.joins(:project).active_proc
-  end
-
-  def self.events_for_project(project_id)
-    JournalLogger.joins(:project).where('project_id = ?', project_id).active_proc
-  end
-
-  # older methods
-  def self.events_for_user_feed(project_id)
-    JournalLogger.where(' project_id = ? AND personal = ? ', project_id, false)
-  end
-
-  def self.events_for_user_show(project_id, user_id, lim = 5)
-    JournalLogger.where(' project_id = ? AND personal =? ', project_id, false).where('user_id= (?)', user_id).limit(lim)
-  end
-
-  def self.events_for_my_feed(project_id, user_id)
-    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, false, true)
-  end
-
   def self.events_for_content(project_id, user_id, first_id)
     JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id,
                         false, true, first_id)
-  end
-
-  def self.events_for_comment(project_id, user_id, first_id, second_id)
-    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed = ? AND personal = ? AND first_id = ? AND second_id = ?',
-                        project_id, user_id, false, true, first_id, second_id)
-  end
-
-  def self.last_event_for(user, project_id)
-    JournalLogger.where(' project_id = ? AND personal = ? ', project_id, false).where('user_id= (?)', user.id).first
   end
 end
