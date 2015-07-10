@@ -102,7 +102,7 @@ class Core::Project < ActiveRecord::Base
     },
     6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate
     },
-    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_proc_posts, title_stage: :completion_proc
+    7 => { name: 'Завершение процедуры', description: 'Завершение процедуры', type_stage: :completion_posts, title_stage: :completion
     }
   }.freeze
 

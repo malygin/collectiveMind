@@ -25,7 +25,7 @@ describe 'Completion proc ' do
 
   shared_examples 'show list completions' do
     before do
-      visit completion_proc_posts_path(project)
+      visit completion_posts_path(project)
     end
 
     it 'have content', js: true do
@@ -41,7 +41,7 @@ describe 'Completion proc ' do
 
   shared_examples 'discuss completions' do
     before do
-      visit completion_proc_posts_path(project)
+      visit completion_posts_path(project)
     end
 
     context 'show popup completion ', js: true do

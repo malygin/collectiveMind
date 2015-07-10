@@ -106,7 +106,7 @@ CollectiveMind::Application.routes.draw do
       posts_routes
     end
 
-    namespace :completion_proc do
+    namespace :completion do
       resources :posts
     end
 

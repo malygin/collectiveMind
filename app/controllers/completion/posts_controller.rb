@@ -1,4 +1,4 @@
-class CompletionProc::PostsController < PostsController
+class Completion::PostsController < PostsController
   def voting_model
     Plan::Post
   end
