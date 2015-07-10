@@ -49,9 +49,9 @@ class Core::Project < ActiveRecord::Base
   STAGES = {
     1 => { name: 'Введение в процедуру', description: 'Знакомство с описанием ситуации и ее различных аспектов', type_stage: :aspect_posts, title_stage: :aspect,
            substages: {
-             0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate },
-             1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn },
-             2 => { name: 'Голосование за аспекты', active: true, code: :aspects_voting }
+             0 => { name: 'Изучение и обсуждение БЗ', active: true, code: :aspects_esimate, status: :add },
+             1 => { name: 'Расширенная БЗ', active: true, code: :aspects_learn, status: :add },
+             2 => { name: 'Голосование за аспекты', active: true, code: :aspects_voting, status: :vote }
            },
            folders: {
              0 => { role: 'all', type_poll: 1 },
@@ -62,8 +62,8 @@ class Core::Project < ActiveRecord::Base
     },
     2 => { name: 'Анализ ситуации', description: 'Выявление проблем текущей ситуации', type_stage: :discontent_posts, title_stage: :discontent,
            substages: {
-             0 => { name: 'Поиск несовершенств', active: true, code: :discontents_add },
-             1 => { name: 'Голосование', active: true, code: :discontents_voting }
+             0 => { name: 'Поиск несовершенств', active: true, code: :discontents_add, status: :add },
+             1 => { name: 'Голосование', active: true, code: :discontents_voting, status: :vote }
            },
            folders: {
              0 => { role: 'all', type_poll: 5 },
@@ -75,8 +75,8 @@ class Core::Project < ActiveRecord::Base
     },
     3 => { name: 'Сбор идей', description: 'Поиск идей по устранению проблем текущей ситуации', type_stage: :concept_posts, title_stage: :concept,
            substages: {
-             0 => { name: 'Поиск идей', active: true, code: :concepts_add },
-             1 => { name: 'Голосование', active: true, code: :discontents_voting }
+             0 => { name: 'Поиск идей', active: true, code: :concepts_add, status: :add },
+             1 => { name: 'Голосование', active: true, code: :discontents_voting, status: :vote }
            },
            folders: {
              0 => { role: 'all', type_poll: 1 },
@@ -86,8 +86,8 @@ class Core::Project < ActiveRecord::Base
     },
     4 => { name: 'Объединение идей в пакеты', description: 'Объединение идей в пакеты', type_stage: :novation_posts, title_stage: :novation,
            substages: {
-             0 => { name: 'Создание пакетов', active: true, code: :novations_add },
-             1 => { name: 'Голосование', active: true, code: :novations_voting }
+             0 => { name: 'Создание пакетов', active: true, code: :novations_add, status: :add },
+             1 => { name: 'Голосование', active: true, code: :novations_voting, status: :vote }
            },
            folders: {
              0 => { role: 'all', type_poll: 1 },
@@ -97,7 +97,7 @@ class Core::Project < ActiveRecord::Base
     },
     5 => { name: 'Проектное предложение', description: 'Формирование проектных предложений на основе пакетов идей', type_stage: :plan_posts, title_stage: :plan,
            substages: {
-             0 => { name: 'Создание проектных предложений', active: true, code: :plans_add }
+             0 => { name: 'Создание проектных предложений', active: true, code: :plans_add, status: :add }
            }
     },
     6 => { name: 'Подведение итогов', description: 'Оценка проектов', type_stage: :estimate_posts, title_stage: :estimate

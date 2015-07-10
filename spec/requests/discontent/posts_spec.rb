@@ -12,8 +12,8 @@ describe 'Discontent' do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'discontent_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'discontent_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'discontent_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'discontent_discuss'
@@ -160,7 +160,7 @@ describe 'Discontent' do
     end
     it 'can see stage result for previous stage ', js: true do
       visit aspect_posts_path(project)
-      click_link 'aspect_intro'
+      click_link 'aspect_posts_intro'
       click_link 'show_results'
       expect(page).to have_content 'Результаты стадии 1'
     end

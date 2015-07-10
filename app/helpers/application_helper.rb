@@ -52,18 +52,8 @@ module ApplicationHelper
     name_controller == @project.current_stage_type
   end
 
-  # необходимость показа приветсвенной модалки или поповера
-  # @todo почему бы не возвращать boolean?
-  def shown_intro(check_field)
-    current_user.user_checks.check_field(@project, check_field).present? ? 'shown_intro' : ''
-  end
-
-  def show_results?(check_field)
-    current_user.user_checks.check_field(@project, check_field).present?
-  end
-
-  # Показывать ли стикер в кабинете?
-  def show_sticker?(check_field)
+  # Показывалось ли уже?
+  def show_check_field?(check_field)
     current_user.user_checks.check_field(@project, check_field).present?
   end
 

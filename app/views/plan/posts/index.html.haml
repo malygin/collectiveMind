@@ -15,7 +15,7 @@
                 = t 'techniques.plan_posts_simple'
         - else
           = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
-            .results{class: "#{show_results?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
+            .results{class: "#{show_check_field?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
@@ -41,7 +41,7 @@
 
 
 
-- if shown_intro('plan_intro') == ''
+- unless show_check_field?(name_controller.to_s+'_intro')
   = render partial: 'popup_welcome'
 - if @project_result
   = render partial: 'popup_results'

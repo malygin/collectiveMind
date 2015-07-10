@@ -4,10 +4,6 @@ class Plan::PostsController < PostsController
   before_action :set_novations, only: [:new, :edit]
   # autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
-  def voting_model
-    Plan::Post
-  end
-
   def prepare_data
     @aspects = Aspect::Post.where(project_id: @project, status: 0)
     @vote_all = Plan::Voting.where(plan_votings: { plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11

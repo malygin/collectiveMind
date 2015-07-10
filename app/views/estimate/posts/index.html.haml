@@ -14,8 +14,8 @@
 
 
 
-#render_estimate_post
+#render_for_post
 
-- if shown_intro('estimate_intro') == ''
+- unless show_check_field?(name_controller.to_s+'_intro')
   = render partial: 'popup_welcome'
 

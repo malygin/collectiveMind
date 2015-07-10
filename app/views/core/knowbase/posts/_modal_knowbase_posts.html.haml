@@ -11,7 +11,7 @@
       .carousel-inner{:role => "listbox"}
         .item.active
           .aspect-main-block{style: "border-top-color:#eac85e;"}
-            = @project.introduction.html_safe if @project.introduction
+            = @project.introduction.try(:html_safe)
 
         - @aspects.each_with_index do |asp, index|
           .item
@@ -33,14 +33,14 @@
                       %h6.aspect-main-block-heading
                         = post.title
                       %p.aspect-main-block-text
-                        = post.content.html_safe unless post.content.nil?
+                        = post.content.try(:html_safe)
 
               -else
                 - asp.knowbase_posts.each do |post|
                   %h6.aspect-main-block-heading
                     = post.title
                   %p.aspect-main-block-text
-                    = post.content.html_safe unless post.content.nil?
+                    = post.content.try(:html_safe)
 
 
       %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}

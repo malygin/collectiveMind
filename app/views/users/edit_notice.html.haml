@@ -44,7 +44,7 @@
                 %td
                   =mail.title
                 %td
-                  =mail.content.html_safe
+                  =mail.content.try(:html_safe)
                 %td
                   =mail.created_at
                 %td

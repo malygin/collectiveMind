@@ -37,7 +37,7 @@ module JournalHelper
   def path_from_journal_event(type_event)
     case type_event
     when /aspect/
-      'collect_info/posts'
+      'aspect/posts'
     when /discontent_post/
       'discontent/posts'
     when /concept_post/

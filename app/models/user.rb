@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   has_many :user_checks, class_name: 'UserCheck'
   has_many :user_answers, class_name: 'Aspect::UserAnswer'
   has_many :news, class_name: 'News'
-  has_many :core_content_user_answers, class_name: 'Core::ContentUserAnswer'
+  has_many :core_content_user_answers, class_name: 'Core::Content::UserAnswer'
   # scope :check_field, ->(p, c) { joins(:user_checks).where(user_checks: {project: p.id, status: 't', check_field: c}) }
 
   validates :name, length: { maximum: 50 }

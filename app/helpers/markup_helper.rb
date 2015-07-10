@@ -39,17 +39,6 @@ module MarkupHelper
     t.gsub("\n", '\\n').gsub("\r", '\\r').gsub("\t", '\\t').gsub("'", "\\'")
   end
 
-  def label_approve_stat(comment)
-    case comment.approve_status
-      when false
-        'label-default'
-      when true
-        'label-success'
-      else
-        'label-default'
-    end
-  end
-
   # rubocop:disable Metrics/MethodLength
   def color_progress_bar
     case name_controller

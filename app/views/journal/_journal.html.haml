@@ -6,7 +6,7 @@
       = link_to journal.user, "/project/#{journal.project_id}/users/#{journal.user.id}"
       = render partial: '/shared/user_online', object: journal.user
 
-    = journal_parser(journal, journal.project_id).html_safe
+    = journal_parser(journal, journal.project_id).try(:html_safe)
     %br
     - if journal.project
       = link_to journal.project.name, "/project/#{journal.project_id}", class: 'btn btn-xs', style: "background-color:#{journal.project.try(:color)};"

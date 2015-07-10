@@ -15,6 +15,10 @@ class PostsController < ProjectsController
     "#{self.class.name.deconstantize}::Comment".constantize
   end
 
+  def voting_model
+    "#{self.class.name.deconstantize}::Post".constantize
+  end
+
   def name_of_model_for_param
     current_model.table_name.singularize
   end
@@ -30,11 +34,11 @@ class PostsController < ProjectsController
 
   def show
     @post = current_model.prepare_to_show(params[:id], @project.id, params[:viewed])
-    @questions = Core::ContentQuestion.where(project_id: @project, post_type: name_of_model_for_param)
+    @questions = Core::Content::Question.where(project_id: @project, post_type: name_of_model_for_param)
     @comments = @post.main_comments
     @comment = comment_model.new
     @last_time_visit = params[:last_time_visit]
-    respond_to :js
+    respond_to :html,:js
   end
 
   def autocomplete
@@ -78,7 +82,7 @@ class PostsController < ProjectsController
   end
 
   def answer_content_question
-    @question = Core::ContentQuestion.find(params[:question_id])
+    @question = Core::Content::Question.find(params[:question_id])
     current_user.core_content_user_answers.create(post_id: params[:id], content_question_id: @question.id,
                                                   content_answer_id: params[:answers].first.to_i, content: params[:content]).save!
   end

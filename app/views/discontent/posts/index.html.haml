@@ -1,4 +1,4 @@
-- if shown_intro('discontent_intro') == ''
+- unless show_check_field?(name_controller.to_s+'_intro')
   = render partial: 'popup_welcome'
 
 - if @user_voter

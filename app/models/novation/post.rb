@@ -8,7 +8,7 @@ class Novation::Post < ActiveRecord::Base
   has_many :novation_post_concepts, class_name: 'Novation::PostConcept'
   has_many :novation_concepts, through: :novation_post_concepts, source: :concept_post, class_name: 'Concept::Post'
 
-  has_many :core_content_questions, -> { where post_type: 'novation' }, class_name: 'Core::ContentQuestion'
+  has_many :core_content_questions, -> { where post_type: 'novation' }, class_name: 'Core::Content::Question'
 
   validates :title, presence: true
   ATTRIBUTES_WITH_BOOL = %w(members_new members_education members_motivation resource_commands resource_support resource_competition

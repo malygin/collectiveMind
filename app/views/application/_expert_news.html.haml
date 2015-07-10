@@ -27,6 +27,6 @@
                         =Russian::strftime(news.created_at,'%d.%m.%Y')
                       %i.fa.fa-angle-right.font_grey.bold
               .dd_xprt_article.collapse{id: "xprt_#{index}"}
-                = news.body.html_safe if news.body
+                = news.body.try(:html_safe)
 
       .divider20

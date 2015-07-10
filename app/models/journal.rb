@@ -23,6 +23,11 @@ class Journal < ActiveRecord::Base
 
   validates :type_event, :project_id, presence: true
 
+  def self.events_for_content(project_id, user_id, first_id)
+    Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id,
+                        false, true, first_id)
+  end
+
   def self.events_ignore_list
     %w(reply_life_tape_comment reply_discontent_comment reply_concept_comment reply_plan_comment reply_essay_comment)
   end

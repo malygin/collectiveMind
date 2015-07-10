@@ -5,10 +5,6 @@ class Novation::PostsController < PostsController
   before_action :set_discontents, only: [:new, :edit]
   before_action :user_vote, only: [:index]
 
-  def voting_model
-    Novation::Post
-  end
-
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])

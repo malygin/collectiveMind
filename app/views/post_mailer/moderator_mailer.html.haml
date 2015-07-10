@@ -3,7 +3,7 @@
     -if @mail
       %h3=@mail.title
       %br
-      =@mail.content.html_safe
+      =@mail.content.try(:html_safe)
   %br
   %br
   %br

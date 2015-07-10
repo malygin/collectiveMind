@@ -1,0 +1,18 @@
+.popup-window.popup-explanation.popup-w710.mfp-hide.welcome_popup{id: "popup-explanation-#{number_current_stage}",class: "#{show_check_field?(name_controller.to_s+'_intro') ? 'shown_intro' : ''}"}
+  .popup.popup_rounded
+    .modal_badge.rounded_2.font_white{class: "back_color_stage#{number_current_stage}"}
+      = number_current_stage
+      СТАДИЯ
+
+    %h2
+      = image_tag 'good-shot1.png', class: "expl-header-img-1"
+      Цель стадии
+    = t("welcome.#{name_controller.to_s}.heading").try(:html_safe)
+
+    %h2
+      = image_tag 'flag1.png', class: "expl-header-img-2"
+      Что делать?
+    = t("welcome.#{name_controller.to_s}.working").try(:html_safe)
+
+    = link_to send("check_field_#{name_controller.to_s}_path", @project, check_field: "#{name_controller.to_s}_intro", status: true), method: :put, remote: true, id: "#{name_controller.to_s}_intro" do
+      %button.btn.red.close_magnific Начать работу

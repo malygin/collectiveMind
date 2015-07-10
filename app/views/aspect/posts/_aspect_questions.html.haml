@@ -1,0 +1,119 @@
+.tab-pane.main-pane.fade{id: "tab_aspect_#{asp.id}"}
+  -if asp.missed_questions(current_user, @project.type_for_questions).size > 0
+    .container
+      - if asp.knowbase_posts.size > 1
+        .row
+          .col-md-8.col-sm-8.min-col-right-padd
+            %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+              - asp.knowbase_posts.each_with_index do |post, i|
+                %li{class: "#{'active' if i == 0}", role: "presentation"}
+                  %a{style: "background-color:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                    = trim_content(post.title, 30)
+
+      .row
+        .col-md-8.col-sm-8.min-col-right-padd
+          .aspect-main-block{style: "border-top-color: #{asp.color};"}
+            - if asp.knowbase_posts.size > 1
+              .tab-content
+                - asp.knowbase_posts.each_with_index do |post, i|
+                  .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                    .row
+                      %h6.aspect-main-block-heading
+                        = post.title
+                      %p.aspect-main-block-text
+                        = post.content.try(:html_safe)
+            - elsif asp.knowbase_posts.size > 0
+              - asp.knowbase_posts.each_with_index do |post, i|
+                .row
+                  %h6.aspect-main-block-heading
+                    = post.title
+                  %p.aspect-main-block-text
+                    = post.content.try(:html_safe)
+            - else
+              .white-gray
+                .radial-gradient
+                  .block_BZ
+
+        .col-md-4.col-sm-4.min-col-left-padd
+          .carousel.slide.questionsCarousel{id: "questionsCarousel_#{asp.id}", "data-ride" => "carousel"}
+            .aspect-questions-block{id: "aspect_block_#{asp.id}", style: "border-top-color: #{asp.color};"}
+              .divider20
+              %h4.block-with-left-icon.pull-left
+                %i.left-icon.fa.fa-2x.fa-comments
+                Вопросы по аспекту
+              %span.pull-right.question_count
+                %span{id: "question_count_#{asp.id}"}
+                  = asp.questions.by_type(@project.type_for_questions).size - asp.missed_questions(current_user, @project.type_for_questions).size + 1
+                из
+                = asp.questions.by_type(@project.type_for_questions).size
+              .carousel-inner
+                - asp.missed_questions(current_user, @project.type_for_questions).each_with_index do |question, ind|
+                  .item{id: "question_#{question.id}", class: "#{'active' if ind == 0}"}
+                    %p.text.block-with-left-icon
+                      %span.left-icon.pull-right
+                        ="#{ind + 1}."
+                      = question.content
+                    -if @project.type_for_questions == 1
+                      .hint.close-notice{id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
+                        = question.hint
+                        %span.close-button
+                          %i.fa.fa-times-circle-o
+                      .hint.close-notice{id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};"}
+                        Ответ неправильный, воспользуйтесь подсказкой
+                        %span.close-button
+                          %i.fa.fa-times-circle-o
+                    = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), {method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                      .btn-group#answers_buttons(data-toggle="buttons")
+                        - question.answers.each do |answer|
+                          .form-group
+                            %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
+                              -#= check_box_tag 'answers[]', answer.id
+                              = radio_button_tag 'answers[]', answer.id
+                              = answer.content
+                            %i.fa.fa-check{style: "color:#{asp.color};"}
+                      -if @project.type_for_questions == 0
+                        = text_area_tag 'content', nil, rows: 6, placeholder: 'Ваш ответ', class: "form-control"
+                      .clearfix
+                      .form-group.bottom-buttons
+                        -if @project.type_for_questions == 1
+                          %a.btn.btn-outline.notice-button.notice.close-notice{id:"notice_question_#{question.id}", style: "border-color: #{asp.color};", data: {question: question.id}} Подсказка
+                        -if @project.type_for_questions == 0
+                          = submit_tag "Пропустить", name: 'skip', class: "btn answer-button questionsCarousel-target", style: "background-color: #{asp.color};"
+                        -#%button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Пропустить
+                        %button#send_answers.btn.answer-button.questionsCarousel-target{type: "submit", style: "background-color: #{asp.color};"} Ответить
+  - else
+    - if asp.knowbase_posts.size > 1
+      .row
+        .col-md-12.col-sm-12
+          %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
+            - asp.knowbase_posts.each_with_index do |post, i|
+              %li{class: "#{'active' if i == 0}", role: "presentation"}
+                %a{style: "background-color:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
+                  = trim_content(post.title, 30)
+
+    .row
+      .col-md-12.col-sm-12
+        - if asp.knowbase_posts.size > 1
+          .aspect-main-block{style: "border-top-color: #{asp.color};"}
+            .tab-content
+              - asp.knowbase_posts.each_with_index do |post, i|
+                .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i == 0}", role: "tabpanel"}
+                  .row
+                    .col-md-8
+                      %h6.aspect-main-block-heading
+                        = post.title
+                      %p.aspect-main-block-text
+                        = post.content.try(:html_safe)
+        - elsif asp.knowbase_posts.size > 0
+          .aspect-main-block{style: "border-top-color: #{asp.color};"}
+            .row
+              .col-md-8
+                - asp.knowbase_posts.each_with_index do |post, i|
+                  %h6.aspect-main-block-heading
+                    = post.title
+                  %p.aspect-main-block-text
+                    = post.content.try(:html_safe)
+        - else
+          .white-gray
+            .radial-gradient
+              .block_BZ

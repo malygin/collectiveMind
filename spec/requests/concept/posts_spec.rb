@@ -12,8 +12,8 @@ describe 'Concept ' do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'concept_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'concept_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'concept_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'concept_discuss'

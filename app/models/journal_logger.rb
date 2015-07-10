@@ -17,9 +17,4 @@ class JournalLogger < ActiveRecord::Base
   scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', [1]) }
 
   validates :body, :type_event, :project_id, presence: true
-
-  def self.events_for_content(project_id, user_id, first_id)
-    JournalLogger.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =? AND first_id=?', project_id, user_id,
-                        false, true, first_id)
-  end
 end

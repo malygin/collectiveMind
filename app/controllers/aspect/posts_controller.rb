@@ -2,14 +2,6 @@ class Aspect::PostsController < PostsController
   before_action :set_aspect, only: [:edit, :update, :destroy]
   before_action :user_vote, only: [:index]
 
-  def voting_model
-    Aspect::Post
-  end
-
-  def current_model
-    Aspect::Post
-  end
-
   def index
     @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
@@ -22,7 +14,7 @@ class Aspect::PostsController < PostsController
     @aspect = Aspect::Post.find(params[:id])
     @question = Aspect::Question.find(params[:question_id])
     @right_answer = @question.answer_from_type(current_user, params[:answers], params[:content], params[:skip])
-    @questions_progress, @questions_progress_all  = aspect_answers_count(@project)
+    @questions_progress, @questions_progress_all = aspect_answers_count(@project)
   end
 
   def new

@@ -1,4 +1,5 @@
 class Estimate::PostsController < PostsController
+
   def voting_model
     Plan::Post
   end

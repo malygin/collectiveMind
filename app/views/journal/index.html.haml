@@ -32,7 +32,7 @@
                 = link_to journal.user, user_path(@project,journal.user)
                 = render partial: '/shared/user_online', object: journal.user
 
-              = journal_parser(journal, @project.id).html_safe
+              = journal_parser(journal, @project.id).try(:html_safe)
               %br
               .time.pull-left(style="color:#2C2B26;")=Russian::strftime(journal.created_at, '%d %B %k:%M:%S ')
 

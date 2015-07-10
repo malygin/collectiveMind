@@ -6,10 +6,6 @@ class Concept::PostsController < PostsController
   before_action :set_aspect_posts, only: [:new, :edit]
   before_action :user_vote, only: [:index]
 
-  def voting_model
-    Concept::Post
-  end
-
   def autocomplete
     # @todo для универсализации автокомплита, нужно объединить все ресурсные модели
     field = params[:field]
@@ -17,7 +13,6 @@ class Concept::PostsController < PostsController
     answer.merge(Concept::Resource.where(project_id: params[:project]).map { |d| { value: d.name } })
     answer.merge(Concept::PostResource.autocomplete(params[:term]).where(project_id: params[:project],
                                                                          style: (field == 'resor_means_name' ? 1 : 0)).map { |d| { value: d.name } })
-
     render json: answer.sort_by { |ha| ha[:value].downcase }
   end
 
