@@ -3,7 +3,7 @@
   = render 'application/meta'
   %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
     .outer
-      -if has_left_rollover?
+      -if left_rollover?
         = render partial: 'left_rollover'
       = render partial: 'header'
       - if profile?

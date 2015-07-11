@@ -23,7 +23,7 @@ module ApplicationHelper
     controller_name == 'users' && action_name == 'index'
   end
 
-  def has_left_rollover?
+  def left_rollover?
     name_controller == :concept_posts
   end
 
@@ -31,7 +31,7 @@ module ApplicationHelper
     name_controller == @project.current_stage_type && Core::Project::STAGES[@project.main_stage][:substages]
   end
 
-  def substage_status_by num
+  def substage_status_by(num)
     if  @project.sub_stage == num
       'current'
     elsif @project.sub_stage < num

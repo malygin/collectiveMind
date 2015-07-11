@@ -9,10 +9,6 @@ class Discontent::Post < ActiveRecord::Base
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect'
   has_many :post_aspects, through: :discontent_post_aspects, source: :aspect, class_name: 'Aspect::Post'
 
-  # галочки для выбранных несовершенств группы в нововведении
-  # @todo for Daniil refac   это нужно?
-  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: { status: [1] } },
-           class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :concept_post_discontents, -> { where concept_post_discontents: { status: [0, nil] } },
            class_name: 'Concept::PostDiscontent', foreign_key: 'discontent_post_id'
   has_many :dispost_concepts, through: :concept_post_discontents, source: :post, class_name: 'Concept::Post'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Completion proc ' do
+describe 'Completion ' do
   subject { page }
 
   let!(:user) { @user = create :user }

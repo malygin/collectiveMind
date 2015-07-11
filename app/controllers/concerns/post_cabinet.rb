@@ -5,6 +5,7 @@ module PostCabinet
     before_filter :check_stage_for_cabinet, only: [:new, :edit, :user_content]
   end
 
+  # :nocov:
   def new
     @post = current_model.new
     respond_to :html
@@ -38,6 +39,7 @@ module PostCabinet
       format.json { head :no_content }
     end
   end
+  # :nocov:
 
   def user_content
     @content = current_model.by_project(@project).by_user(current_user)

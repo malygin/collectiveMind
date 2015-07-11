@@ -38,7 +38,7 @@ class PostsController < ProjectsController
     @comments = @post.main_comments
     @comment = comment_model.new
     @last_time_visit = params[:last_time_visit]
-    respond_to :html,:js
+    respond_to :html, :js
   end
 
   def autocomplete

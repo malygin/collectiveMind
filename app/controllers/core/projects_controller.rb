@@ -1,13 +1,13 @@
 class Core::ProjectsController < ApplicationController
-  before_filter :project_by_id
-  after_filter :last_seen_news, only: [:news]
-  layout 'application', only: [:news, :users]
+  before_filter :set_core_project
+  before_filter :check_access, only: [:prev_stage, :next_stage]
 
-  def project_by_id
-    return false if params[:id].nil?
-    @core_project = Core::Project.find(params[:id])
+  def show
+    @project = ProjectDecorator.new Core::Project.find(params[:id])
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project.id)
   end
 
+  # :nocov:
   def index
     @view_projects = Core::Project.where(type_access: list_type_projects_for_user)
     @core_project = @view_projects.first
@@ -17,12 +17,6 @@ class Core::ProjectsController < ApplicationController
     end
   end
 
-  def show
-    @project = ProjectDecorator.new Core::Project.find(params[:id])
-    redirect_to polymorphic_path(@project.current_stage_type, project: @project.id)
-  end
-
-  # :nocov:
   def new
     @project = Core::Project.new
     @core_project = Core::Project.all.last
@@ -62,7 +56,6 @@ class Core::ProjectsController < ApplicationController
 
   def destroy
     @core_project.update_attributes(type_access: 10)
-
     respond_to do |format|
       format.html { redirect_to core_projects_url }
       format.json { head :no_content }
@@ -93,7 +86,13 @@ class Core::ProjectsController < ApplicationController
   end
 
   def set_core_project
-    @core_project = Core::Project.find(params[:id])
+    return false if params[:id].nil?
+    @core_project = ProjectDecorator.new Core::Project.find(params[:id])
+  end
+
+  def check_access
+    return if current_user && @core_project.users.include?(current_user) && current_user.boss?
+    redirect_to root_url
   end
 
   def core_project_params

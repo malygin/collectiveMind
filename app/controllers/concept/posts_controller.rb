@@ -6,6 +6,7 @@ class Concept::PostsController < PostsController
   before_action :set_aspect_posts, only: [:new, :edit]
   before_action :user_vote, only: [:index]
 
+  # :nocov:
   def autocomplete
     # @todo для универсализации автокомплита, нужно объединить все ресурсные модели
     field = params[:field]
@@ -15,6 +16,7 @@ class Concept::PostsController < PostsController
                                                                          style: (field == 'resor_means_name' ? 1 : 0)).map { |d| { value: d.name } })
     render json: answer.sort_by { |ha| ha[:value].downcase }
   end
+  # :nocov:
 
   def index
     if params[:discontent] && params[:discontent] != '*'
@@ -43,8 +45,7 @@ class Concept::PostsController < PostsController
       end
     end
     @concept_post.save
-    current_user.journals.build(type_event: 'concept_post_save', body: trim_content(@concept_post.title), first_id: @concept_post.id,
-                                project: @project.project).save!
+    JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @concept_post)
     respond_to :js
   end
 
@@ -62,8 +63,7 @@ class Concept::PostsController < PostsController
       end
     end
     @concept_post.save
-    current_user.journals.build(type_event: 'concept_post_update', body: trim_content(@concept_post.title), first_id: @concept_post.id,
-                                project: @project.project).save!
+    JournalEventSaver.post_update_event(user: current_user, project: @project.project, post: @concept_post)
     respond_to :js
   end
 

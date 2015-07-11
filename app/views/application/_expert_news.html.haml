@@ -1,4 +1,4 @@
-%button.btn_reset.font_lighter_grey.bold.drop_opener{class: "#{'active' if unread_expert_news?}", "data-dd-opener" => "dd_1"}
+%button.btn_reset.font_lighter_grey.bold.drop_opener{id: 'open_expert_news', class: "#{'active' if unread_expert_news?}", "data-dd-opener" => "dd_1"}
   %i.fa.fa-exclamation-triangle{style: "#{'color:#e71d2b;' if unread_expert_news?}"}
 #dd_1.dropdown_window.dd_570.expert_news_drop.text-left{class: "#{'active' if unread_expert_news?}"}
   .dd_badge

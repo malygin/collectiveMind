@@ -5,6 +5,7 @@ class Discontent::PostsController < PostsController
   before_action :set_discontent_post, only: [:edit, :update, :destroy]
   before_action :user_vote, only: [:index]
 
+  # :nocov:
   # @todo Discontent::PostWhen в ресурсы? или просто искать по ним?
   def autocomplete
     field = params[:field]
@@ -14,6 +15,7 @@ class Discontent::PostsController < PostsController
       render json: []
     end
   end
+  # :nocov:
 
   def index
     @posts = @project.discontents_for_discussion
@@ -38,8 +40,7 @@ class Discontent::PostsController < PostsController
       params[:discontent_post_aspects].each { |asp|  @post.discontent_post_aspects.build(aspect_id: asp.to_i) }
     end
     if @post.save
-      current_user.journals.create!(type_event: 'discontent_post_save', anonym: @post.anonym, body: trim_content(@post.content),
-                                    first_id: @post.id, project: @project.project)
+      JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @post)
     end
     respond_to :js
   end
@@ -48,8 +49,7 @@ class Discontent::PostsController < PostsController
     if params[:discontent_post_aspects]
       @post.update_attributes(discontent_post_params)
       @post.update_post_aspects(params[:discontent_post_aspects])
-      current_user.journals.create!(type_event: "#{name_of_model_for_param}_update", anonym: @post.anonym, project: @project.project,
-                                    body: trim_content(@post.content), first_id: @post.id)
+      JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @post)
     end
     respond_to :js
   end

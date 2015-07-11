@@ -7,8 +7,6 @@ class Concept::Post < ActiveRecord::Base
 
   has_many :concept_post_discontents, class_name: 'Concept::PostDiscontent'
   has_many :concept_disposts, through: :concept_post_discontents, source: :discontent_post, class_name: 'Discontent::Post'
-  # @todo for Daniil refac
-  has_many :concept_post_discontent_checks, -> { where concept_post_discontents: { status: [1] } }, class_name: 'Concept::PostDiscontent'
 
   validates :title, presence: true
 end

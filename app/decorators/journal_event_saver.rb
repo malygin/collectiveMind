@@ -4,6 +4,13 @@ class JournalEventSaver
   # def initialize(journal)
   #   @journal = journal
   # end
+  def self.post_save_event(h = {})
+    h[:user].journals.build(type_event: h[:post].class_name + '_save', project: h[:project], body: h[:post].field_for_journal, first_id: h[:post].id).save!
+  end
+
+  def self.post_update_event(h = {})
+    h[:user].journals.build(type_event: h[:post].class_name + '_update', project: h[:project], body: h[:post].field_for_journal, first_id: h[:post].id).save!
+  end
 
   def self.comment_event(h = {})
     # @todo новости и информирование авторов

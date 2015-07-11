@@ -4,11 +4,6 @@ class Plan::PostsController < PostsController
   before_action :set_novations, only: [:new, :edit]
   # autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
-  def prepare_data
-    @aspects = Aspect::Post.where(project_id: @project, status: 0)
-    @vote_all = Plan::Voting.where(plan_votings: { plan_post_id: @project.plan_post.pluck(:id) }).uniq_user.count if @project.status == 11
-  end
-
   def index
     @posts = @project.plans_for_discussion.created_order
     @project_result = ProjectResulter.new @project unless @project.stage == '5:0'
@@ -28,7 +23,7 @@ class Plan::PostsController < PostsController
     @post = @project.plans.new plan_post_params.merge(user_id: current_user.id)
     @post.post_novations.new plan_post_novation_params
     if @post.valid? && @post.save
-      current_user.journals.create!(type_event: 'plan_post_save', body: trim_content(@post.name), first_id: @post.id, project: @project.project)
+      JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @post)
     end
     @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
     respond_to :js
@@ -36,7 +31,7 @@ class Plan::PostsController < PostsController
 
   def update
     if @post.update_attributes plan_post_params
-      current_user.journals.build(type_event: 'plan_post_update', body: trim_content(@post.name), first_id: @post.id, project: @project.project).save!
+      JournalEventSaver.post_update_event(user: current_user, project: @project.project, post: @post)
     end
     @post.update(status: current_model::STATUSES[:published])  if params[:plan_post][:published]
     if @post.post_novations.any?
