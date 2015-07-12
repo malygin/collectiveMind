@@ -1,12 +1,11 @@
 class Plan::PostsController < PostsController
-  include MarkupHelper
   before_action :set_plan, only: [:edit, :update, :destroy]
   before_action :set_novations, only: [:new, :edit]
-  # autocomplete :concept_post, :resource, :class_name: 'Concept::Post' , :full: true
 
   def index
     @posts = @project.plans_for_discussion.created_order
-    @project_result = ProjectResulter.new @project unless @project.stage == '5:0'
+    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
   end
 
   def new

@@ -5,7 +5,7 @@
       %span.stage-label Обсуждение аспектов
     .col-md-5
       .pull-right
-        - if @project.stage == '1:0' or @project.stage == '1:1' or @project.status == 100
+        - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
             %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
               = t('techniques.aspect_posts_simple')
@@ -16,17 +16,28 @@
         %span.sort-label Сортировать по новым:
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
           #tooltip2_2.sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
-            - new_comments = @project.aspects_for_discussion.after_last_visit_comments(last_time_visit_page('aspect')).size
-            - if new_comments > 0
+            -#- if @project.content_after_last_visit_for(:comments, name_controller, current_user) > 0
+            -#  %span.badge-red
+            -#    = @project.content_after_last_visit_for(:comments, name_controller, current_user)
+            -#- new_comments = @project.aspects_for_discussion.after_last_visit_comments(last_time_visit_page('aspect')).size
+            -#- if new_comments > 0
+            -#  %span.badge-red
+            -#    = new_comments
+            - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
-                = new_comments
+                = @presenter.content_after_last_visit_for[:comments]
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
           #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым аспектам"}
-            - new_posts = @project.aspects_for_discussion.after_last_visit_posts(last_time_visit_page('aspect')).size
-            - if new_posts > 0
+            -#- if @project.content_after_last_visit_for(:posts, name_controller, current_user) > 0
+            -#  %span.badge-red
+            -#    = @project.content_after_last_visit_for(:posts, name_controller, current_user)
+            -#- new_posts = @project.aspects_for_discussion.after_last_visit_posts(last_time_visit_page('aspect')).size
+            -#- if new_posts > 0
+            -#  %span.badge-red
+            -#    = new_posts
+            - if @presenter.content_after_last_visit_for[:posts] > 0
               %span.badge-red
-                = new_posts
-
+                = @presenter.content_after_last_visit_for[:posts]
 .divider10
 .divider_1_grey
 .divider10

@@ -7,11 +7,18 @@
           = aspect.aspect_posts.count
     %span.text_label
       = aspect.content
-    - new_posts = aspect.aspect_posts.after_last_visit_posts(last_time_visit_page('discontent')).size
-    - if new_posts > 0
+    -#- new_posts = aspect.aspect_posts.after_last_visit_posts(last_time_visit_page('discontent')).size
+    -#- if new_posts > 0
+    -#  %span.cb_doc
+    -#    = new_posts
+    -#- new_comments = aspect.aspect_posts.after_last_visit_comments(last_time_visit_page('discontent')).size
+    -#- if new_comments > 0
+    -#  %span.cb_com
+    -#    = new_comments
+
+    - if @presenter.after_last_visit_for_post(aspect, :posts) > 0
       %span.cb_doc
-        = new_posts
-    - new_comments = aspect.aspect_posts.after_last_visit_comments(last_time_visit_page('discontent')).size
-    - if new_comments > 0
+        = @presenter.after_last_visit_for_post(aspect, :posts)
+    - if @presenter.after_last_visit_for_post(aspect, :comments) > 0
       %span.cb_com
-        = new_comments
+        = @presenter.after_last_visit_for_post(aspect, :comments)

@@ -8,7 +8,7 @@
           ="(#{@posts.count})"
     .col-md-6
       .pull-right
-        - if @project.stage == '5:0' or @project.status == 100
+        - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_plan_posts' do
             %button.btn.add-button
               %span
@@ -21,16 +21,21 @@
         %span.sort-label Сортировать по новым:
         %span#sorter
           %span.sort-1.sort_btn.sprite.sprite-1_5.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.plans_approved.after_last_visit_comments(last_time_visit_page('plan')).size
-            - if new_comments > 0
+            -#- new_comments = @project.plans_approved.after_last_visit_comments(last_time_visit_page('plan')).size
+            -#- if new_comments > 0
+            -#  %span.badge-red
+            -#    = new_comments
+            - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
-                = new_comments
+                = @presenter.content_after_last_visit_for[:comments]
           %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения."}
-            - new_posts = @project.plans_approved.after_last_visit_posts(last_time_visit_page('plan')).size
-            - if new_posts > 0
+            -#- new_posts = @project.plans_approved.after_last_visit_posts(last_time_visit_page('plan')).size
+            -#- if new_posts > 0
+            -#  %span.badge-red
+            -#    = new_posts
+            - if @presenter.content_after_last_visit_for[:posts] > 0
               %span.badge-red
-                = new_posts
-
+                = @presenter.content_after_last_visit_for[:posts]
 
 
 .stage-post-block

@@ -4,7 +4,7 @@
 - if @project_result
   = render partial: 'popup_results'
 
--if @questions_progress != 100 and (@project.stage == '1:0' or  @project.stage == '1:1')
+-if @questions_progress != 100 && @project.can_add?(name_controller)
   = render partial: 'questions_aspects'
 -else
   = render partial: 'discuss_aspects'

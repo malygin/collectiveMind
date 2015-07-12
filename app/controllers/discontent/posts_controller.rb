@@ -1,6 +1,4 @@
 class Discontent::PostsController < PostsController
-  include MarkupHelper
-
   before_action :set_aspects, only: [:index, :new, :edit]
   before_action :set_discontent_post, only: [:edit, :update, :destroy]
   before_action :user_vote, only: [:index]
@@ -20,7 +18,8 @@ class Discontent::PostsController < PostsController
   def index
     @posts = @project.discontents_for_discussion
     @last_time_visit = params[:last_time_visit]
-    @project_result = ProjectResulter.new @project unless @project.stage == '2:0'
+    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     respond_to :html, :json
   end
 

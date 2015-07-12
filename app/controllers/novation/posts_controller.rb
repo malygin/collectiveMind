@@ -1,6 +1,4 @@
 class Novation::PostsController < PostsController
-  include CloudinaryHelper
-  include MarkupHelper
   before_action :set_novation_post, only: [:edit, :update, :destroy]
   before_action :set_discontents, only: [:new, :edit]
   before_action :user_vote, only: [:index]
@@ -8,7 +6,8 @@ class Novation::PostsController < PostsController
   def index
     @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
-    @project_result = ProjectResulter.new @project unless @project.stage == '4:0'
+    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     respond_to :html, :json
   end
 

@@ -6,7 +6,10 @@ class Aspect::Post < ActiveRecord::Base
   has_many :aspects, class_name: 'Aspect::Post', foreign_key: 'aspect_id'
 
   has_many :discontent_post_aspects, class_name: 'Discontent::PostAspect', foreign_key: :aspect_id
+
   has_many :aspect_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
+  # для связи с постами следующего уровня
+  has_many :related_next_posts, through: :discontent_post_aspects, source: :post, class_name: 'Discontent::Post'
 
   has_many :knowbase_posts, class_name: 'Core::Knowbase::Post', foreign_key: :aspect_id
 

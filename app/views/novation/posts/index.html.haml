@@ -14,7 +14,7 @@
           ="(#{@posts.count})"
     .col-md-5
       .pull-right
-        - if @project.stage == '4:0' or @project.status == 100
+        - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_novation_posts' do
             %button.btn.add-button
               %span
@@ -27,16 +27,21 @@
         %span.sort-label Сортировать по новым:
         %span#sorter
           %span.sort-1.sort_btn.sprite.sprite-1_4.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'},"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым комментариям"}
-            - new_comments = @project.novations.after_last_visit_comments(last_time_visit_page('novation')).size
-            - if new_comments > 0
+            -#- new_comments = @project.novations.after_last_visit_comments(last_time_visit_page('novation')).size
+            -#- if new_comments > 0
+            -#  %span.badge-red
+            -#    = new_comments
+            - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
-                = new_comments
+                = @presenter.content_after_last_visit_for[:comments]
           %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_4.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым нововведениям"}
-            - new_posts = @project.novations.after_last_visit_posts(last_time_visit_page('novation')).size
-            - if new_posts > 0
+            -#- new_posts = @project.novations.after_last_visit_posts(last_time_visit_page('novation')).size
+            -#- if new_posts > 0
+            -#  %span.badge-red
+            -#    = new_posts
+            - if @presenter.content_after_last_visit_for[:posts] > 0
               %span.badge-red
-                = new_posts
-
+                = @presenter.content_after_last_visit_for[:posts]
 
 .stage-post-block
   .row#tab_concept_novations

@@ -34,6 +34,12 @@ class ProjectDecorator
     stages[main_stage][:folders]
   end
 
+  def can_add?(name_controller)
+    return false if name_controller.nil?
+    name_controller = name_controller.is_a?(Symbol) ? name_controller : name_controller.gsub('/', '_').to_sym
+    name_controller == current_stage_name && stages[main_stage][:substages] && stages[main_stage][:substages][sub_stage][:status] == :add
+  end
+
   # return main stage for stage '2:3' it will be 2
   def main_stage
     project.stage[0].to_i
@@ -82,7 +88,7 @@ class ProjectDecorator
 
   # move to next stage if it '1:2' and we haven't '1:3' then go to '2:0', unless go to '1:3
   def go_to_next_stage
-    if  stages[main_stage][:substages] && stages[main_stage][:substages][sub_stage + 1]
+    if stages[main_stage][:substages] && stages[main_stage][:substages][sub_stage + 1]
       self.stage = "#{main_stage}:#{sub_stage + 1}"
     else
       self.stage = "#{main_stage + 1}:0"
@@ -92,7 +98,7 @@ class ProjectDecorator
 
   # move to prev stage if it '7:0' and we haven't '6:1' then go to '6:0', unless go to '6:1'
   def go_to_prev_stage
-    if  sub_stage > 0
+    if sub_stage > 0
       self.stage = "#{main_stage}:#{sub_stage - 1}"
     else
       # if we haven't substages in STAGES  for prev stage, then we set new_sub_stage to 0
@@ -104,6 +110,19 @@ class ProjectDecorator
 
   def to_s
     project.id.to_s
+  end
+
+  def content_after_last_visit_for(type_content, name_controller, user)
+    stage = name_controller.to_s.gsub('_posts', '').pluralize
+    send("#{stage}_for_discussion").send("after_last_visit_#{type_content}", last_time_visit_page(name_controller, user)).size
+  end
+
+  def last_time_visit_page(name_controller, user, type_event = 'visit_save', post = nil)
+    stage = name_controller.to_s.gsub('_', '/')
+    post_id = post ? "/#{post.id}" : ''
+    notice = user.loggers.where(type_event: type_event, project_id: id)
+                 .where('body = ?', "/project/#{id}/#{stage}" + post_id).order(created_at: :desc).first
+    notice ? notice.created_at : '2000-01-01 00:00:00'
   end
 
   def method_missing(method_name, *args, &block)

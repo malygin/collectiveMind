@@ -1,6 +1,4 @@
 class Concept::PostsController < PostsController
-  include MarkupHelper
-  include CloudinaryHelper
   before_action :set_concept_post, only: [:edit, :update, :destroy]
   before_action :set_discontent_posts, only: [:new, :edit]
   before_action :set_aspect_posts, only: [:new, :edit]
@@ -26,7 +24,8 @@ class Concept::PostsController < PostsController
       @posts = @project.concept_posts_for_vote.created_order
     end
     @last_time_visit = params[:last_time_visit]
-    @project_result = ProjectResulter.new @project unless @project.stage == '3:0'
+    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     respond_to :html, :json
   end
 
