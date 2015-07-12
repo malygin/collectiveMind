@@ -112,19 +112,6 @@ class ProjectDecorator
     project.id.to_s
   end
 
-  def content_after_last_visit_for(type_content, name_controller, user)
-    stage = name_controller.to_s.gsub('_posts', '').pluralize
-    send("#{stage}_for_discussion").send("after_last_visit_#{type_content}", last_time_visit_page(name_controller, user)).size
-  end
-
-  def last_time_visit_page(name_controller, user, type_event = 'visit_save', post = nil)
-    stage = name_controller.to_s.gsub('_', '/')
-    post_id = post ? "/#{post.id}" : ''
-    notice = user.loggers.where(type_event: type_event, project_id: id)
-                 .where('body = ?', "/project/#{id}/#{stage}" + post_id).order(created_at: :desc).first
-    notice ? notice.created_at : '2000-01-01 00:00:00'
-  end
-
   def method_missing(method_name, *args, &block)
     project.send(method_name, *args, &block)
   end

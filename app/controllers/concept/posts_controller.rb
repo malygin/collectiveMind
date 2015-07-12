@@ -24,8 +24,8 @@ class Concept::PostsController < PostsController
       @posts = @project.concept_posts_for_vote.created_order
     end
     @last_time_visit = params[:last_time_visit]
-    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
     @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
+    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
     respond_to :html, :json
   end
 
