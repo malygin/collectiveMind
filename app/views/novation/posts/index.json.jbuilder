@@ -12,6 +12,8 @@ json.array! @posts do |item|
   json.sort_date item.created_at.to_datetime.to_f
   json.sort_comment item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0
   json.concept_class post_concept_classes(item)
+  json.active_comments item.comments.after_last_visit(@last_time_visit).size > 0
+  json.last_time_visit CGI.escape(@last_time_visit)
   json.count_comments item.comments.count
   json.count_likes item.users_pro.count
   json.count_dislikes item.users_against.count

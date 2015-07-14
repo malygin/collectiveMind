@@ -82,7 +82,7 @@
                   .collapse{id: "cab4-#{link}", class: "#{'in' if link == :project}"}
                     .divider5
                     - attributes.each do |attribute, bool|
-                      - if bool == -1 or bool == true
+                      - if (bool == -1 || bool == true) && @post.post_novations.first.send(attribute).present?
                         %h5.bold
                           = t("activerecord.attributes.plan/post_novation.#{attribute}")
                         %p.text

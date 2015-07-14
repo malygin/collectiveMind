@@ -8,7 +8,7 @@
   .row
     %br/
     .col-md-7
-      %span.stage-heading
+      %span.stage-heading#filter{data: {visit: last_time_visit_page('novation')}}
         Пакеты идей
         %span#count_novations
           ="(#{@posts.count})"

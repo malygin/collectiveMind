@@ -3,6 +3,8 @@ module MarkupHelper
   def stage_theme
     if rating?
       'grey_theme'
+    elsif @project.status == 100
+      "stage#{number_current_stage}_theme"
     elsif action_name == 'user_content' || controller_name == 'users'
       "stage#{@project.main_stage}_theme"
     else
