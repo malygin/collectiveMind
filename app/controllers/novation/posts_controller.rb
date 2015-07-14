@@ -8,6 +8,7 @@ class Novation::PostsController < PostsController
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
     @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @last_time_visit = params[:last_time_visit]
     respond_to :html, :json
   end
 
