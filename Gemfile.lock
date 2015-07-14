@@ -661,3 +661,6 @@ DEPENDENCIES
   websocket-rails!
   will_paginate
   yard
+
+BUNDLED WITH
+   1.10.3
