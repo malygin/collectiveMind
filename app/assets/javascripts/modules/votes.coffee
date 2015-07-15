@@ -6,7 +6,6 @@
       },
       type: 'inline'
     });
-  return
 
 
 @vote_scripts = ->

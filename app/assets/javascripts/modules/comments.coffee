@@ -1,3 +1,35 @@
+#show comments panel on post hover
+@show_comments_hover = ->
+  $('.ch_action').unbind().hover ->
+    ch_id = $(this).attr('data-for')
+    $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
+    $('#' + ch_id).toggleClass 'active'
+
+
+# сворачивание комментов и скролл
+@comments_expandable_column = ->
+  $('.exp_button').click ->
+    parent_col = $(this).parents('.exp_col')
+    if parent_col.hasClass('active')
+      parent_col.toggleClass 'active'
+      parent_col.siblings('.exp_col').toggleClass 'hidden'
+      new_title = $(this).attr('data-new')
+      old_title = $(this).attr('data-original-title')
+      $(this).attr('data-original-title',new_title).attr('data-new',old_title)
+    else
+      parent_col.toggleClass 'hidden'
+      parent_col.siblings('.exp_col').toggleClass 'active'
+      new_title = $('.exp_col.active').find('.exp_button').attr('data-new')
+      old_title = $('.exp_col.active').find('.exp_button').attr('data-original-title')
+      $('.exp_col.active').find('.exp_button').attr('data-original-title',new_title).attr('data-new',old_title)
+
+# сворачивание комментов
+@comments_collapse_column = ->
+  $('#comments').on 'shown.bs.collapse', ->
+    $('.comments_action').text 'свернуть'
+  $('#comments').on 'hidden.bs.collapse', ->
+    $('.comments_action').text 'развернуть'
+
 @comments_feed = ->
   this.edit_comment = (e)->
     e.preventDefault()

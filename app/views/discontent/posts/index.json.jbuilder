@@ -1,5 +1,6 @@
 json.array! @posts do |item|
   json.id item.id
+
   json.content item.content
   json.what trim_content(item.what, 100)
   json.approve_status item.approve_status

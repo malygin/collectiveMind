@@ -10,7 +10,7 @@ ConceptCollection = Backbone.Collection.extend
   url: "/project/#{getProjectIdByUrl()}/concept/posts"
 
 ConceptView = Backbone.View.extend
-  template: JST['templates/concept_view']
+  template: JST['templates/post']
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
@@ -40,7 +40,7 @@ ConceptCollectionView = Backbone.View.extend
     show_comments_hover()
     activate_perfect_scrollbar()
     post_colored_stripes()
-    colors_discontents()
+    colors_for_content()
     return this
 
   addOne: (concept)->
@@ -59,21 +59,6 @@ ConceptCollectionView = Backbone.View.extend
     filterValue = $(this).data('discontent')
     $('#tab_dispost_concepts').isotope
       filter: filterValue
-
-#    dc.fetch
-#      # data: $.param({discontent: $(this).data('discontent')})
-#      # data: $.param({discontent: $(this).find('input:checked').closest('.checkox_item').data('discontent')})
-#      data: $.param({discontent: check_discontents(this)})
-#      data: $.param({last_time_visit: $('#sorter').data('visit')})
-#
-#
-#      success: (col,res)->
-#        $('#count_concepts').html('(' + dc.length + ')')
-#        $('#tab_dispost_concepts').isotope('updateSortData').isotope()
-#        show_comments_hover()
-#        activate_perfect_scrollbar()
-#        colors_discontents()
-#        post_colored_stripes()
 
   sortByDiscontent: ()->
     #    evt.preventDefault();

@@ -10,7 +10,7 @@ DiscontentCollection = Backbone.Collection.extend
   url: "/project/#{getProjectIdByUrl()}/discontent/posts"
 
 DiscontentView = Backbone.View.extend
-  template: JST['templates/discontent_view']
+  template: JST['templates/post']
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
@@ -41,7 +41,7 @@ DiscontentCollectionView = Backbone.View.extend
 
     show_comments_hover()
     activate_perfect_scrollbar()
-    colors_discontents()
+    colors_for_content()
     post_colored_stripes()
     return this
 

@@ -1,18 +1,18 @@
-# only used
 
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.all
 #= require jquery.ui.autocomplete
 #= require jquery.autosize
-#= require history_jquery
 
 #= require bootstrap.min
 
 #= require utils
-#= require plugins
-#= require comments
-#= require votes
+#= require_tree ./modules
+#= require cabinet
+#= require procedure
+#= require vendor
+#= require plugins/slider
 
 # from yan's markup
 #= require jquery.magnific-popup.min
@@ -32,11 +32,10 @@
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone_datalink
-#= require discontent/discontents
-#= require concept/concepts
-#= require novation/novations
 
-#= require custom_ready
+#= require_tree ./backbone_scripts
+
+
 
 # GANTT
 #= require gantt/date
@@ -57,11 +56,13 @@
 $ ->
   start_vote()
 
+  init_cabinet()
+
+  init_services()
+
   vote_scripts()
 
   comments_feed()
-
-  search()
 
   expert_news()
 
@@ -75,25 +76,14 @@ $ ->
 
   post_colored_stripes()
 
-  colors_discontents()
+  colors_for_content()
 
   comments_expandable_column()
 
+#  профиль -  доделать
   $('.avatar_icon').click ->
     $('.avatar_icon').removeClass 'active'
     $(this).addClass 'active'
-
-  $('.with_arrow').click ->
-    $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
-    if $(this).find('i.collapse_arrow').hasClass('fa-rotate-90')
-      $(this).find('i.collapse_arrow').attr('title', 'Свернуть')
-    else
-      $(this).find('i.collapse_arrow').attr('title', 'Развернуть')
-    return
-
-  $('.carousel').carousel
-    interval: 4000,
-    pause: "hover"
 
   $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
     $('#error_explanation').html 'Авторизация успешна, грузим список доступных процедур'
@@ -102,97 +92,22 @@ $ ->
   $("form#auth-form1").bind "ajax:error", (e, data, status, xhr) ->
     $('#error_explanation').html data.responseText
 
-  # аутосайз полей в кабинете
-  $('#cabinet_form textarea').not('.without_autosize').autosize()
-
-  # Используется в кабинете на стадии несовершенств, во вспомогательной технике
-  $('.open-popup').each ->
-    stageNum = $(this).attr('data-placement')
-    popupNum = $(this).attr('data-target')
-    src = '#popup-' + stageNum + '-' + popupNum
-    $(this).magnificPopup
-      type: 'inline'
-      items: [{
-        src: src
-        type: 'inline'
-      }]
-      callbacks:
-        open: ->
-          me_id = $.magnificPopup.instance['items'][0]['src']
-          pop_h = $('.modal_content', me_id).height()
-          $('.modal_content', me_id).css
-            'height': pop_h + 'px'
-            'overflow': 'hidden'
-          return
-        close: ->
-          return
-    return
-
-  ### slide panel 3rd stage ###
-
-  $('#opener').on 'click', ->
-    panel = $('#slide-panel')
-    if panel.hasClass('visible')
-      panel.removeClass('visible').animate 'margin-left': '-400px'
-    else
-      panel.addClass('visible').animate 'margin-left': '0px'
-
-  ### sort button active ###
-  # выделение кнопок сортировки
-  $('.sort_btn').click ->
-    $('.sort_btn').removeClass 'active'
-    $(this).addClass 'active'
-    return
-
-  # Открывает и закрывает стикеры в кабинете
-  $('.open_sticker').click ->
-    stick_id = $(this).attr('data-for')
-    $(stick_id).show()
-    return
-  $('.sticker_close').click ->
-    stick_id = $(this).attr('data-for')
-    $(stick_id).hide()
-    return
-
-  $('.with_plus').click ->
-    $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
-    return
-
-  # GANTT
-  if $('#gantEditorTemplates').length > 0
-    @ge = new GanttMaster()
-    @ge.init($("#workSpace"))
-    ret = JSON.parse($("#ta").val())
-    unless ret == null
-      offset = (new Date).getTime() - ret.tasks[0].start
-      i = 0
-      while i < ret.tasks.length
-        ret.tasks[i].start = ret.tasks[i].start + offset
-        i++;
-      @ge.loadProject(ret);
-
-  $('button#to_publish_plan').click ->
-    save_plan_post('save_plan_post_published')
-  $('button#to_save_plan').click ->
-    save_plan_post('save_plan_post')
-
-  if $('#list_novations').length > 0
-    $('#ul_novations').on 'click', '.open_novation', (event) ->
-      $('#selected_novation').text($(this).text()).removeClass('hidden')
-      $('#selected_novation_main_form').text($(this).text())
-      $('#select_novation').text('Выбранный пакет:')
-      $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
-        $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
-        return
-      return
 
 
-# @todo ниже можно добавлять только функции! для начальной инициализации блок выше!
 
-@save_plan_post = (input_id) ->
-  $('#plan_post_tasks_gant').val(JSON.stringify(document.ge.saveProject(), null, 2))
-  $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
-  $('input#' + input_id).click()
-  return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

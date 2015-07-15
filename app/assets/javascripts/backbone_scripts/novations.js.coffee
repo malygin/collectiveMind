@@ -10,7 +10,7 @@ NovationCollection = Backbone.Collection.extend
   url: "/project/#{getProjectIdByUrl()}/novation/posts"
 
 NovationView = Backbone.View.extend
-  template: JST['templates/novation_view']
+  template: JST['templates/post']
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
@@ -37,7 +37,7 @@ NovationCollectionView = Backbone.View.extend
     show_comments_hover()
     activate_perfect_scrollbar()
     post_colored_stripes()
-    colors_discontents()
+    colors_for_content()
     return this
 
   addOne: (novation)->
