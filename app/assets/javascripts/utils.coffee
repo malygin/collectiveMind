@@ -237,10 +237,13 @@ $colors_imperf_codes = [
 
 
 #цвет модального окна базы знаний
-@color_modal_knowbase =->
+@color_modal_knowbase = ->
   $('#myCarousel').on 'slid.bs.carousel', ->
     bgcolor = $('.myCarousel-target.active').attr('data-color');
     $('#myCarousel .header').css({background: bgcolor});
     $('.myCarousel-control').css({color: bgcolor});
 
-
+@change_collection_avatar = ->
+  $('.avatar_of_collection').on 'click', ->
+    avatar = $(this).data('avatar')
+    $('#collection_avatar').val(avatar)

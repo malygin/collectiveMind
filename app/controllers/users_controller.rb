@@ -19,6 +19,8 @@ class UsersController < ProjectsController
     if params[:user][:avatar].present?
       img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
       to_update.merge!(avatar: img['public_id'])
+    elsif params[:user][:collection_avatar].present?
+      to_update.merge!(avatar: 'collection_avatar_path:' + params[:user][:collection_avatar])
     end
     flash[:success] = 'Профиль обновлен' if @user.update_attributes(to_update)
     respond_to :js

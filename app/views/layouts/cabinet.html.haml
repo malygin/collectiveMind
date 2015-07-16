@@ -128,11 +128,12 @@
                               .divider20
                               %p Или выбрать из коллекции:
                               .divider30
+                              = f.hidden_field :collection_avatar
                               .row
                                 - (1..9).each do |i|
                                   .col-md-4
                                     .avatar_icon.img-circle
-                                      = image_tag 'avatars/'+"#{i}"+'.png'
+                                      = image_tag 'avatars/'+"#{i}"+'.png', class: 'avatar_of_collection', 'data-avatar' => "avatars/#{i}.png"
                                     .divider10
                               .divider20
                               %button.btn.btn-danger Сохранить

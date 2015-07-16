@@ -31,7 +31,12 @@ module MarkupHelper
 
   def user_image_tag(source, options = {})
     if source
-      cl_image_tag source, options
+      if source.include?('collection_avatar_path:')
+        source.gsub!('collection_avatar_path:', '')
+        image_tag source, options
+      else
+        cl_image_tag source, options
+      end
     else
       image_tag 'no-ava.png', options
     end
