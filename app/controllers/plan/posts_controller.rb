@@ -5,7 +5,7 @@ class Plan::PostsController < PostsController
   def index
     @posts = @project.plans_for_discussion.created_order
     @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
-    @project_result = ProjectResulter.new @project unless @project.can_add?(params[:controller])
+    @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)
   end
 
   def new

@@ -106,6 +106,10 @@ class PostsController < ProjectsController
 
   private
 
+  def name_controller
+    self.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
+  end
+
   def boss?
     redirect_to "/project/#{@project.id}"  unless  current_user && current_user.boss?
   end

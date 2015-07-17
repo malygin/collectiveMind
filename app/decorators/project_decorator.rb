@@ -36,7 +36,6 @@ class ProjectDecorator
 
   def can_add?(name_controller)
     return false if name_controller.nil?
-    name_controller = name_controller.is_a?(Symbol) ? name_controller : name_controller.gsub('/', '_').to_sym
     name_controller == current_stage_type && stages[main_stage][:substages] && stages[main_stage][:substages][sub_stage][:status] == :add
   end
 
