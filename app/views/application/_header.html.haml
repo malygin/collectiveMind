@@ -2,67 +2,74 @@
 %header.navbar.top_bar
   .container
     .navbar-header
-      = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Вернуться на главную страницу' do
+      = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+      title: 'Вернуться на главную страницу' do
         = image_tag 'logo1.png'
     %ul.nav.navbar-nav.main_menu
-      %li{class: "#{'active' unless (cabinet? or rating? or profile?)}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:"#{'Вернуться в процедуру' if (cabinet? or rating? or profile?)}"}
+      %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+      title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
         = link_to 'Процедура', current_stage_url(@project), id: 'open_procedure', class: 'menu_a'
-      %li{class: "#{'active' if cabinet?}"}
-        = link_to 'Кабинет', self.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big','data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
+      %li{ class: "#{'active' if cabinet?}" }
+        = link_to 'Кабинет', send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
+        id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+        title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
       %li.has_dropwindow
         = render partial: 'application/messages_menu'
       - if @project.closed?
-        %li{class: "#{'active' if rating?}"}
-          = link_to 'Рейтинг', users_path(@project), id: 'open_rating', class: 'menu_a', 'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Посмотреть рейтинг участников'
+        %li{ class: "#{'active' if rating?}" }
+          = link_to 'Рейтинг', users_path(@project), id: 'open_rating', class: 'menu_a', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+          title: 'Посмотреть рейтинг участников'
       - if boss?
-        - unless @project.main_stage == 1 and @project.sub_stage == 0
+        - unless @project.main_stage == 1 && @project.sub_stage == 0
           %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put, id: 'open_prev_stage', class: 'menu_a'
         - if @project.main_stage < 7
           %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, id: 'open_next_stage', class: 'menu_a'
 
     .navbar-right.text-right.user_block.font_grey
-      %span.tooltip1{'data-placement' => 'bottom',"data-trigger" => "manual", 'data-toggle' => 'tooltip', title: 'Жмите сюда, чтобы освежить в памяти базу знаний'}
-        = link_to  knowbase_posts_path(@project), remote: true, id: 'tooltip_db',class:'font_grey bold', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
+      %span.tooltip1{ 'data-placement' => 'bottom', 'data-trigger' => 'manual', 'data-toggle' => 'tooltip', title: 'Жмите сюда, чтобы освежить в памяти базу знаний' }
+        = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'font_grey bold', 'data-placement' => 'bottom',
+        'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
           %i.book_icon
           %small
             База знаний
       %span.auth-divider
-        = '|'
-      %span.has_dropwindow{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Открыть обращение эксперта'}
-        = render partial: 'application/expert_news', locals: {expert_news: @expert_news, project: @project}
+        |
+      %span.has_dropwindow{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Открыть обращение эксперта' }
+        = render partial: 'application/expert_news', locals: { expert_news: @expert_news, project: @project }
       %span.auth-divider
-        = '|'
+        |
       -#%span.dropdown
-      -#  %a.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+      -#  %a.font_grey.bold#lang_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
       -#    %i.fa.fa-globe.font_lighter_grey
       -#    %small
       -#      Русский
       -#      %i.fa.fa-angle-down
-      -#  %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
+      -#  %ul.dropdown-menu.dropdown-mini{ role: 'menu', 'aria-labelledby' => 'lang_dropdown' }
       -#    %li
-      -#      %a{href: '#'} English
+      -#      %a{ href: '#'} English
       -#    %li
-      -#      %a{href: '#'} Русский
+      -#      %a{ href: '#'} Русский
       -#%span.auth-divider
       -#  = '|'
       %span.dropdown
-        %span.badge.grey.middle{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг'}
+        %span.badge.grey.middle{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг' }
           = current_user.project_user_for(@project).try(:score)
-        %a.font_grey.bold#auth_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown','data-hover'=>'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+        %a.font_grey.bold#auth_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', 'data-hover' => 'dropdown', href: '#',
+        'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
           %small
             = current_user
             %i.fa.fa-angle-down
-        %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'auth_dropdown'}
-          %li{role: 'presentation'}
+        %ul.dropdown-menu.dropdown-mini{ role: 'menu', 'aria-labelledby' => 'auth_dropdown' }
+          %li{ role: 'presentation' }
             = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-          %li{role: 'presentation'}
+          %li{ role: 'presentation' }
             = link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, id: 'sign_out'
 .subhead
   .container
     %h4.font_white
       Тема процедуры:
       = @project.name
-    %button#popover_button_1.btn.btn-tooltip{type: 'button', value: 'Show'}
+    %button.btn.btn-tooltip#popover_button_1{ type: 'button', value: 'Show' }
       %i.fa.fa-lightbulb-o
       Открыть подсказки
 

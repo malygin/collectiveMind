@@ -1,6 +1,6 @@
-%span.h3{id: "edit_knowbase_post_title_#{knowbase_post.id}"}
+%span.h3{ id: "edit_knowbase_post_title_#{knowbase_post.id}" }
   = knowbase_post.title
 %br
 %br
-%div{id: "edit_knowbase_post_content_#{knowbase_post.id}"}
+%div{ id: "edit_knowbase_post_content_#{knowbase_post.id}" }
   = knowbase_post.content.try(:html_safe)

@@ -1,4 +1,4 @@
-.popup-window.popup-vote.popup-w1030.mfp-hide{id: "vote-#{@project.main_stage}"}
+.popup-window.popup-vote.popup-w1030.mfp-hide{ id: "vote-#{@project.main_stage}" }
   .popup.popup_rounded
     .modal_title
       .row
@@ -6,21 +6,21 @@
           %h4.bold.font_dark_grey
             = t("vote.#{@project.current_stage_type}.header").try(:html_safe)
     .vote_progress_cont.progress
-      .vote_progress.light-green.progress-bar{data: {'progress-all' => @count_all_posts, 'progress-voted' => @count_voted_posts}, style: "width:#{(@count_voted_posts.to_f / @count_all_posts.to_f) * 100}%;", "aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar"}
+      .vote_progress.light-green.progress-bar{ data: { 'progress-all' => @count_all_posts, 'progress-voted' => @count_voted_posts }, style: "width:#{(@count_voted_posts.to_f / @count_all_posts.to_f) * 100}%;", "aria-valuemax" => "100", "aria-valuemin" => "0", :role => "progressbar" }
     .modal_body
       .divider15
       %h5.text-center.no-margin
         = t("vote.#{@project.current_stage_type}.title").try(:html_safe)
       .divider5
-      .vote_folders_cont.no_padding_col.text-center{class: "folders_#{@project.count_folders}"}
-        %ul.nav.vote_nav.nav-tabs{:role => "tablist"}
+      .vote_folders_cont.no_padding_col.text-center{ class: "folders_#{@project.count_folders}" }
+        %ul.nav.vote_nav.nav-tabs{ :role => "tablist" }
           - @project.vote_folders.each do |num_folder, folder|
-            %li{class: "#{'active' if num_folder == 0}", :role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe)}
-              %a{"data-toggle" => "tab", "data-vote-folder-role" => "#{folder[:role]}", :href => "#vote_tab#{num_folder+1}", :role => "tab"}
-                .vote-folder{class: "vote-folder_#{folder[:type_poll]}"}
+            %li{ class: "#{'active' if num_folder == 0}", :role => "presentation", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
+              %a{ "data-toggle" => "tab", "data-vote-folder-role" => "#{folder[:role]}", :href => "#vote_tab#{num_folder + 1}", :role => "tab" }
+                .vote-folder{ class: "vote-folder_#{folder[:type_poll]}" }
                   %span.vote_counter.font_white.bold
                     = @user_voter.content_for_vote(@project, num_folder).count
-                %b.font12{class: "#{'font_color_stage'+@project.main_stage.to_s if num_folder == 0}"}
+                %b.font12{ class: "#{'font_color_stage' + @project.main_stage.to_s if num_folder == 0}" }
                   = t("vote.#{@project.current_stage_type}.#{folder[:role]}.name").try(:html_safe)
 
       .container.white.border_top_grey
@@ -28,6 +28,6 @@
           .divider25
           .tab-content
             - @project.vote_folders.each do |num_folder, folder|
-              .tab-pane.tab_vote_content{id: "vote_tab#{num_folder+1}", class: "#{'active' if num_folder == 0}", "data-vote-poll-role" => "#{folder[:role]}", :role => "tabpanel"}
+              .tab-pane.tab_vote_content{ id: "vote_tab#{num_folder + 1}", class: "#{'active' if num_folder == 0}", "data-vote-poll-role" => "#{folder[:role]}", :role => "tabpanel" }
                 = render partial: 'post_vote', locals: { folder: folder, status: num_folder }
           .divider35

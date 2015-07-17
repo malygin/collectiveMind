@@ -1,5 +1,5 @@
 - unless @comment.nil?
-  -if @comment_answer
+  - if @comment_answer
     $('#reply_comment_#{@comment_answer.id}').closest('.media.comment').next('form').collapse('hide').remove();
     $('#reply_comment_#{@comment_answer.id}').toggleClass('reply-comment cancel-reply');
     if($('#answers_#{@comment_parent.id}').length){
@@ -15,34 +15,28 @@
     answers.after(answers2);
     answers2.find('.answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
     }
-  -else
+  - else
     $("#comment_text_area").val('');
     $('.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 
 
-  $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html())+1)
+  $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html()) + 1)
   $('form.comment_add textarea').css('height', '28px')
 
 
-
-
-
-
-
-
--#-if @comment_answer.nil?
+  -#- if @comment_answer.nil?
 -#  $("#comment_text_area").val('');
 -#  $('#comments.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 -#  -#$("#comments.chat-messages").scrollTop(10000);
 -#  -#$('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
--#-else
+  -#- else
 -#  $("#child_comments_#{@comment_parent.id}").append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 -#  $("#form_reply_comment_#{@comment_answer.id}").fadeOut().empty()
--#  $('html, body').animate({ scrollTop: $('#comment_content_#{@comment.id}').offset().top}, 1000);
--#  $('#comment_content_#{@comment.id}').effect("highlight",3000);
+  -#  $('html, body').animate({ scrollTop: $('#comment_content_#{@comment.id}').offset().top }, 1000);
+  -#  $('#comment_content_#{@comment.id}').effect("highlight", 3000);
 -#  $('#reply_comment_#{@comment_answer.id}').fadeIn()
 -#
 -#
 -#-#$("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
 -#-#$('#change_comment_stat .btn').button('reset');
--#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: {comment: @new_comment, post: @comment.post})}");
+  -#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: { comment: @new_comment, post: @comment.post})}");

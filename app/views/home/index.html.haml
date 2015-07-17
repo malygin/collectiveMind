@@ -10,7 +10,7 @@
         .row
           .col-md-1.col-sm-3
             .pull-right
-              = image_tag ('md_icon.png')
+              = image_tag 'md_icon.png'
           .col-md-5.col-sm-5.no-padding
             %h4
               = project.name
@@ -20,12 +20,12 @@
             .divider3
             %h4
               %i
-                = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users.count )
+                = image_tag 'icon_users.png'
+              = t('project_users_count', count: project.users.count)
 
           .col-md-3.col-sm-3.text-center
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow-red  btn-danger', id: "go_to_closed_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn btn-arrow-red btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10
   -#- cache @opened_projects do
@@ -38,7 +38,7 @@
         .row
           .col-md-1.col-sm-1
             .pull-right
-              = image_tag ('md_icon.png')
+              = image_tag 'md_icon.png'
           .col-md-5.col-sm-5.no-padding
             %h4
               = project.name
@@ -48,10 +48,10 @@
             .divider3
             %h4
               %i
-                = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users.count )
+                = image_tag 'icon_users.png'
+              = t('project_users_count', count: project.users.count)
           .col-md-3.col-sm-3.text-center
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow-red btn-danger', id: "go_to_opened_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn btn-arrow-red btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10

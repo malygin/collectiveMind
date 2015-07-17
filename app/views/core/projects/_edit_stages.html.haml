@@ -2,15 +2,15 @@
   .nav-tabs-three-sidebar
     %ul.nav
       - (1..5).each do |stage_num|
-        %li{class:('active' if @project.current_stage?(stage_num))}
-          %a{'data-toggle' => 'tab', href: "#stage-#{stage_num}"}
+        %li{ class:('active' if @project.current_stage?(stage_num)) }
+          %a{ 'data-toggle' => 'tab', href: "#stage-#{stage_num}" }
             = "Этап #{stage_num}"
   .nav-tabs-three-content
     .tab-content
       .text-success#settings_success_update(style='display:none;')
         = t 'project_settings.success_update'
       - (1..5).each do |stage_num|
-        .tab-pane.fade{id: "stage-#{stage_num}", class:('active in' if @project.current_stage?(stage_num))}
+        .tab-pane.fade{ id: "stage-#{stage_num}", class:('active in' if @project.current_stage?(stage_num)) }
           %h4
             = Core::Project::LIST_STAGES[stage_num][:name]
           - Core::Project::LIST_STAGES[stage_num][:status].each do |status|

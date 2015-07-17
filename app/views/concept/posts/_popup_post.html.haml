@@ -1,12 +1,12 @@
 #popup-post.popup-window.detailed_popup.popup-w1030.mfp-hide
   - if boss?
     .post-top-header
-      =link_to({controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+      = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
         %i.fa.fa-trophy.fa-lg
-      = link_to({controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+      = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
         %i.fa.fa-bookmark.fa-lg
   .popup.popup_rounded.popup_color_theme_stage3
-    %div{"data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}"}
+    %div{ "data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
       %div.important.theme_font_color
         %i.fa.fa-bookmark.fa-2x
     .modal_title
@@ -22,12 +22,12 @@
                   %span(class="cc_post_#{@post.id}")
                     = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize ,action: :like, project: @project, id: @post.id, against: false}, remote: true, method: :put, id: "like_post_#{@post.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                = link_to({ controller: @post.class.name.underscore.pluralize , action: :like, project: @project, id: @post.id, against: false }, remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %span.bold
                     %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                = link_to({controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true}, remote: true, method: :put, id: "dislike_post_#{@post.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true }, remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %span.bold
                     %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
                       = @post.users_against.count
@@ -52,7 +52,7 @@
           .col-md-6.col_padding_right_0
             .innov-tags
               - @post.concept_disposts.each_with_index do |post, index|
-                .innov-tags-tag.popup_tooltip.color_me{class: "tooltip3_tag_#{index + 1}", "data-me-action" => "background-color", "data-me-color" => "#{index+1}", "data-me-type" => "imperf"}
+                .innov-tags-tag.popup_tooltip.color_me{ class: "tooltip3_tag_#{index + 1}", "data-me-action" => "background-color", "data-me-color" => "#{index + 1}", "data-me-type" => "imperf" }
                   = trim_content(post.content, 100)
 
       .container.modal_content
@@ -88,7 +88,7 @@
               %hr
                 .separator_label.text-left
                 .separator_label.pull-right
-                  %a.theme_font_color{class:"#{'font_grey' if @comments.count == 0}","aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments"}
+                  %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#comments" }
                     %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments

@@ -1,4 +1,4 @@
-%tr{class: class_for_top(number)}
+%tr{ class: class_for_top(number) }
   %td
     %span=number
   %td
@@ -6,9 +6,9 @@
       %a.pull-left(href="/project/#{@project ? @project.id : @core_project.id}/users/#{user.id}")
         = image_tag user.avatar.url(:thumb),  class: 'media-object'
         %br
-        =link_to user, user_path(@project ? @project : @core_project, user)
+        = link_to user, user_path(@project ? @project : @core_project, user)
         = render partial: '/shared/user_online', object: user
-      -if boss?
+      - if boss?
         %br
         = user.email
         %br
@@ -19,7 +19,7 @@
         = user.sign_in_count
 
   %td
-    - if @project and !user.user_project_scores(@project.id).nil?
+    - if @project && !user.user_project_scores(@project.id).nil?
       =t('show.user.generator')
       %span.text-muted=user.user_project_scores(@project.id).score_g
       %br
@@ -35,12 +35,12 @@
   %td
     %span.text-inverse
       - if @project
-        -if user.user_project_scores(@project.id).present?
+        - if user.user_project_scores(@project.id).present?
           %span.rate= user.user_project_scores(@project.id).send(@score_name ? @score_name : 'score')
-        -else
+        - else
           %span.rate 0
-      -#-else
-      -#  -if user.score
+            -#- else
+            -#  - if user.score
       -#    %span.rate= user.score
-      -#  -else
+            -#  - else
       -#    %span.rate 0

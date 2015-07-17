@@ -1,9 +1,9 @@
--if @vote
-  -if @against == 'true'
-    $("#dlk_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#dlk_comment_#{@comment.id}").html(parseInt($("#dlk_comment_#{@comment.id}").html())+1)
+- if @vote
+  - if @against == 'true'
+    $("#dlk_comment_#{@comment.id}").effect("highlight", { color: '#f5cecd' }, 1000);
+    $("#dlk_comment_#{@comment.id}").html(parseInt($("#dlk_comment_#{@comment.id}").html()) + 1)
     $("#dlk_comment_#{@comment.id}").click(function(e) { return false; });
-  -else
-    $("#lk_comment_#{@comment.id}").effect("highlight", {color: '#f5cecd'}, 1000);
-    $("#lk_comment_#{@comment.id}").html(parseInt($("#lk_comment_#{@comment.id}").html())+1)
+  - else
+    $("#lk_comment_#{@comment.id}").effect("highlight", { color: '#f5cecd' }, 1000);
+    $("#lk_comment_#{@comment.id}").html(parseInt($("#lk_comment_#{@comment.id}").html()) + 1)
     $("#lk_comment_#{@comment.id}").click(function(e) { return false; });

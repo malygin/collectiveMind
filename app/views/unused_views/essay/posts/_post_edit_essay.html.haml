@@ -1,0 +1,5 @@
+- if (current_user?(post_edit_essay.user) && post_edit_essay.status == 0 && current_stage?(@stage.to_i)) || boss?
+  = link_to t('link.edit'), { action: 'edit', project: @project.id, stage: @stage.to_i, id: post_edit_essay.id }, class: 'btn btn-info btn-xs'
+  \|
+  = link_to t('link.delete'), { action: :to_archive, project: @project.id, stage: @stage.to_i, id: post_edit_essay.id }, class: 'btn btn-danger btn-xs', method: :put, data: { confirm: t('confirm.accept') }
+%br

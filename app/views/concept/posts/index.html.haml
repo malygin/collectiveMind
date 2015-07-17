@@ -1,4 +1,4 @@
-- unless show_check_field?(name_controller.to_s+'_intro')
+- unless show_check_field?(name_controller.to_s + '_intro')
   = render partial: 'popup_welcome'
 - if @user_voter
   = render partial: 'popup_vote'
@@ -16,17 +16,17 @@
       .pull-right
         - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
-            %button.btn.add-button{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить идею"}
-              %span.tooltip1.middle{data: {name: 'sort', desc: 0, type: 'comment'},'data-placement' => 'bottom','data-toggle' => 'tooltip','data-trigger'=>'manual', title:'Добавляйте новые идеи, связанные с текущей проблемной ситуацией'}
+            %button.btn.add-button{ "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить идею" }
+              %span.tooltip1.middle{ data: { name: 'sort', desc: 0, type: 'comment' }, 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger'=>'manual', title:'Добавляйте новые идеи, связанные с текущей проблемной ситуацией' }
                 = t('techniques.concept_posts_simple')
         - else
-          = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
-            .results{class: "#{show_check_field?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
+          = link_to({ action: :show_results, project: @project.id }, remote: true, id: "show_results") do
+            .results{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии" }
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter{data: {visit: last_time_visit_page('concept')}}
-          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
+        %span#sorter{ data: { visit: last_time_visit_page('concept')} }
+          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{ data: { name: 'sort', desc: 0, type: 'comment'} }
             -#- new_comments = @project.concepts_for_discussion.after_last_visit_comments(last_time_visit_page('concept')).size
             -#- if new_comments > 0
             -#  %span.badge-red
@@ -34,7 +34,7 @@
             - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
                 = @presenter.content_after_last_visit_for[:comments]
-          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
+          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{ data: { name: 'sort', desc: 0, type: 'date' }, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи." }
             -#- new_posts = @project.concepts_for_discussion.after_last_visit_posts(last_time_visit_page('concept')).size
             -#- if new_posts > 0
             -#  %span.badge-red
@@ -44,7 +44,7 @@
                 = @presenter.content_after_last_visit_for[:posts]
 
 .stage-post-block
-  .row#tab_dispost_concepts.tooltip1{"data-placement" => "top", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи"}
+  .row#tab_dispost_concepts.tooltip1{ "data-placement" => "top", "data-toggle" => "tooltip", "data-trigger"=>'manual', :title => "Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи" }
     -#= render partial: 'post_short', collection: @posts
 
 

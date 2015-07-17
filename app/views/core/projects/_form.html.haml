@@ -1,6 +1,6 @@
 .col-md-6
   = form_for @project,  html: { class: 'new_or_edit' } do |f|
-    = render partial: 'shared/notice_messages', locals: {object: @project}
+    = render partial: 'shared/notice_messages', locals: { object: @project }
 
     .form-group
       = f.label t('form.project.name')
@@ -16,10 +16,10 @@
       = f.text_area :desc, class: 'form-control', rows: 5
     .form-group
       = f.label t('form.project.type_access')
-      = f.select :type_access, options_from_collection_for_select(Core::Project::TYPE_ACCESS, :first, :last, 0), {}, {class: 'form-control'}
+      = f.select :type_access, options_from_collection_for_select(Core::Project::TYPE_ACCESS, :first, :last, 0), { }, { class: 'form-control' }
     .form-group
       = f.label t('form.project.project_type')
-      = f.collection_select :project_type_id, Core::ProjectType.all, :id, :name, {include_blank: true}, {class: 'form-control'}
+      = f.collection_select :project_type_id, Core::ProjectType.all, :id, :name, { include_blank: true }, { class: 'form-control' }
     .form-group
       = f.label 'Дата начала'
       = f.text_field :date_start, class: 'form-control datepicker'
@@ -49,10 +49,10 @@
       = text
       %br
       - @project.project_users.by_type(code).each do |project_user|
-        = render partial: 'users/list_user', locals: {list_user: project_user.user}
+        = render partial: 'users/list_user', locals: { list_user: project_user.user }
       - unless current_user.moderator_in_project?(@project) && code == 1
         %br
         #search_users_project(data-project="#{@project.id}" data-code="#{code}")
         .search_text
-          = text_field_tag 'search_users_text','', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
-        %div{id: "search_users_#{code}"}
+          = text_field_tag 'search_users_text', '', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
+        %div{ id: "search_users_#{code}" }

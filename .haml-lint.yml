@@ -1,0 +1,10 @@
+linters:
+#  ImplicitDiv:
+#    enabled: false
+#    severity: error
+  LeadingCommentSpace:
+    enabled: false
+#  StringLiterals:
+#    Enabled: false
+  LineLength:
+    max: 170

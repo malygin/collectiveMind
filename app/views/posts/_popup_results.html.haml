@@ -32,11 +32,11 @@
           .col-md-4
           .col-md-8
             .row
-              - @project_result.sort_user_score(name_controller.to_s+'_score').each_with_index do |user, index|
+              - @project_result.sort_user_score(name_controller.to_s + '_score').each_with_index do |user, index|
                 .col-md-6
                   .dia_cell
                     %span.num_cell
-                      = index+1
+                      = index + 1
                     %span
                       = link_to user_path(@project, user) do
                         = user_image_tag user.try(:avatar), class: 'img35 img-circle'

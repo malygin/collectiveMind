@@ -11,13 +11,13 @@
             = link_to post_short.user, user_path(@project, post_short.user)
           %p.font_color_stage6
             = post_short.name
-    .col-sm-4.no_padding_col.divided{id: "progress_type_vote_1_#{post_short.id}"}
-      -if post_short.voted(current_user, 1).present?
+    .col-sm-4.no_padding_col.divided{ id: "progress_type_vote_1_#{post_short.id}" }
+      - if post_short.voted(current_user, 1).present?
         .rate_buttons.color_1
           .progress
-            .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{post_short.vote_progress(1)}", :role => "progressbar", :style => "width: #{post_short.vote_progress(1)*10}%;"}
+            .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{post_short.vote_progress(1)}", :role => "progressbar", :style => "width: #{post_short.vote_progress(1)*10}%;" }
               = post_short.vote_progress(1)
-      -else
+      - else
         .rate_buttons.color_1.text-center
           - 1.upto(10) do |i|
             = link_to i, vote_plan_post_path(@project, post_short.id, type_vote: 1, status: i), method: :put, remote: true, id: "btn_plan_vote_#{i}", class: "btn btn_reset back_color_stage6 font_white bold btn_plan_vote", role: "button"
@@ -26,17 +26,17 @@
 
     .col-sm-5.col_padding_left_0.divided
       .row
-        .col-md-10{id: "progress_type_vote_2_#{post_short.id}"}
-          -if post_short.voted(current_user, 2).present?
+        .col-md-10{ id: "progress_type_vote_2_#{post_short.id}" }
+          - if post_short.voted(current_user, 2).present?
             .rate_buttons.color_2
               .progress
-                .progress-bar{"aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{post_short.vote_progress(2)}", :role => "progressbar", :style => "width: #{post_short.vote_progress(2)*10}%;"}
+                .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{post_short.vote_progress(2)}", :role => "progressbar", :style => "width: #{post_short.vote_progress(2)*10}%;" }
                   = post_short.vote_progress(2)
-          -else
+          - else
             .rate_buttons.color_2.text-center
               - 1.upto(10) do |i|
                 = link_to i, vote_plan_post_path(@project, post_short.id, type_vote: 2, status: i), method: :put, remote: true, id: "btn_plan_vote_#{i}", class: "btn btn_reset back_color_stage6 font_white bold btn_plan_vote", role: "button"
 
         .col-md-2.col_padding_left_0.divided.text-center
-          = link_to({action: :show, project: @project, id: post_short.id}, remote: true, class: "rating_a", id: "show_record_#{post_short.id}") do
+          = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, class: "rating_a", id: "show_record_#{post_short.id}") do
             %i.fa.fa-2x.font_grey.fa-angle-right

@@ -1,12 +1,12 @@
 .col-md-12
-  = render partial: 'shared/create_success', locals: {model_name: 'discontent'}
+  = render partial: 'shared/create_success', locals: { model_name: 'discontent' }
 
 - content_for :discontent_form do
-  = form_for @post, url: {project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create'}, remote: true, html: {id: 'new_discontent'} do |f|
+  = form_for @post, url: { project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create' }, remote: true, html: { id: 'new_discontent'} do |f|
     .col-md-12
       .row
         .col-md-12
-          %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_technique{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#techniq'}
+          %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_technique{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#techniq' }
             Помощь по формулированию несовершенств
             %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
           #techniq.collapse
@@ -41,13 +41,13 @@
       .content_window.white
         .divider25
         .btn-group.cab_drop
-          %a.dropdown-toggle#select_aspect{'data-toggle' => 'dropdown'}
+          %a.dropdown-toggle#select_aspect{ 'data-toggle' => 'dropdown' }
             - if @post.post_aspects.empty?
               %span
                 = t('form.discontent.select_aspect')
             - @post.post_aspects.each do |aspect|
               %span
-                %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                %span.color_counter.color_me{ class: 'active', style: "background-color: #{aspect.color};" }
               %span.text_label
                 = aspect.content
 
@@ -55,17 +55,17 @@
             - @aspects.each do |aspect|
               %li
                 = check_box_tag 'discontent_post_aspects[]', aspect.id, @post.post_aspects.include?(aspect), id: "discontent_post_aspects_#{aspect.id}"
-                %label{for: "discontent_post_aspects_#{aspect.id}"}
+                %label{ for: "discontent_post_aspects_#{aspect.id}" }
                   %span
-                    %span.color_counter.color_me{class: 'active', style: "background-color: #{aspect.color};"}
+                    %span.color_counter.color_me{ class: 'active', style: "background-color: #{aspect.color};" }
                   %span.text_label
                     = aspect.content
               - aspect.aspects.each do |asp|
-                %li{style: "padding-left: 10px;"}
+                %li{ style: "padding-left: 10px;" }
                   = check_box_tag 'discontent_post_aspects[]', asp.id, @post.post_aspects.include?(asp), id: "discontent_post_aspects_#{asp.id}"
-                  %label{for: "discontent_post_aspects_#{asp.id}"}
+                  %label{ for: "discontent_post_aspects_#{asp.id}" }
                     %span
-                      %span.color_counter.color_me{class: 'active', style: "background-color: #{asp.color};"}
+                      %span.color_counter.color_me{ class: 'active', style: "background-color: #{asp.color};" }
                     %span.text_label
                       = asp.content
 
@@ -89,14 +89,14 @@
         .row
           .col-md-12.text-right
             - if @post.persisted?
-              = link_to 'Удалить', discontent_post_path(@project, @post), method: :delete, data: {confirm: t('confirm.delete_discontent')}, id: "destroy_discontent_#{@post.id}", class: 'btn add-button del type2'
+              = link_to 'Удалить', discontent_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_discontent') }, id: "destroy_discontent_#{@post.id}", class: 'btn add-button del type2'
             = f.submit t("form.#{action_name}"), class: 'btn add-button type2', id: 'send_post'
-            -#- if @post.persisted? and !@post.published?
+      -#- if @post.persisted? && !@post.published?
             -#  = link_to 'Опубликовать', publish_discontent_post_path(@project, @post), remote: true, method: :put, id: "publish_#{@post.id}", class: 'btn add-button type2'
       .row
         .col-md-12
           - if @mechanic_type == 'simple'
-            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_example_discontent{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
+            %a.theme_font_color.with_arrow.collapsed.not_full_width.bold.collapser_type1#open_example_discontent{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1' }
               Пример несовершенства
               %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       .divider20

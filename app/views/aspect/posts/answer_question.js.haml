@@ -2,10 +2,10 @@
 -unless @right_answer
   $('#wrong_question_#{@question.id}').removeClass('close-notice');
   $('#notice_question_#{@question.id}').removeClass('close-notice');
--else
-  $('#knob-1').data('end',#{@questions_progress});
+- else
+  $('#knob-1').data('end', #{@questions_progress});
   animateKnobChange('#knob-1');
-  getNextQuestion(#{@question.id},#{@aspect.id});
+  getNextQuestion(#{@question.id }, #{@aspect.id});
 
 
 $('button.answer-question').button('reset').removeClass('active');

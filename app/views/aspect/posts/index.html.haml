@@ -4,13 +4,13 @@
 - if @project_result
   = render partial: 'popup_results'
 
--if @questions_progress != 100 && @project.can_add?(name_controller)
+- if @questions_progress != 100 && @project.can_add?(name_controller)
   = render partial: 'questions_aspects'
--else
+- else
   = render partial: 'discuss_aspects'
 
 
-- unless show_check_field?(name_controller.to_s+'_intro')
+- unless show_check_field?(name_controller.to_s + '_intro')
   = render partial: 'popup_welcome'
 - if @project.type_for_questions == 0
   = render partial: 'popup_greetings'

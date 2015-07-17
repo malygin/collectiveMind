@@ -247,3 +247,5 @@ $colors_imperf_codes = [
   $('.avatar_of_collection').on 'click', ->
     avatar = $(this).data('avatar')
     $('#collection_avatar').val(avatar)
+
+change_collection_avatar()

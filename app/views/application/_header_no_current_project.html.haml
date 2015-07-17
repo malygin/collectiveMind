@@ -2,30 +2,30 @@
   .container
     .navbar-header
       .navbar-brand
-        %a{href: '/', id: 'go_to_logo'}
+        %a{ href: '/', id: 'go_to_logo' }
           = image_tag 'logo.png', class: 'auth_logo'
     %ul.list-inline.navbar-right.font12
       - if signed_in?
-        -if @core_project
+        - if @core_project
           %li
-            =link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
-        -elsif @project
+            = link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
+        - elsif @project
           %li
-            =link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
-        -else
+            = link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
+        - else
           %li.font_grey.no_margin
-            Добро пожаловать, #{current_user.name.to_s} !
+            Добро пожаловать, #{current_user.name} !
         %li
-          = link_to destroy_user_session_path, method: :delete, id: 'sign_out', class:'' do
-            =t('menu.sign_out')
-      -else
+          = link_to destroy_user_session_path, method: :delete, id: 'sign_out' do
+            = t('menu.sign_out')
+      - else
         %li
-          = link_to t('menu.sign_in'), '#', class: 'open-popup', id: 'sign_in', data:{target:'1',placement:'3'}
+          = link_to t('menu.sign_in'), '#', class: 'open-popup', id: 'sign_in', data: { target: '1', placement: '3' }
         %li
           %span.auth-divider
-            = "|"
+            |
         %li.disabled
-          = link_to t('menu.sign_up'), '#', class: 'open-popup', id: 'sign_up', data:{target:'2',placement:'3'}
+          = link_to t('menu.sign_up'), '#', class: 'open-popup', id: 'sign_up', data: { target: '2', placement: '3' }
 
 
 

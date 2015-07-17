@@ -1,9 +1,9 @@
 !!! 5
 %html(lang="en")
   = render 'application/meta'
-  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
+  %body{ class: stage_theme, style: 'background-color: #f4f4f4;' }
     .outer
-      -if left_rollover?
+      - if left_rollover?
         = render partial: 'left_rollover'
       = render partial: 'header'
       - if profile?
@@ -18,8 +18,8 @@
     #render_knowbase_posts
     %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
     = javascript_include_tag 'application'
-    <!-- BEGIN JIVOSITE CODE {literal} -->
+    <!-- BEGIN JIVOSITE CODE { literal} -->
     <script type='text/javascript'>
     (function(){ var widget_id = 'lC6JQwO9RE';
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
-    <!-- {/literal} END JIVOSITE CODE -->
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/' + widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+    <!-- { /literal} END JIVOSITE CODE -->

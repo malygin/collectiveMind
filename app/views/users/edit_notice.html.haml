@@ -1,14 +1,14 @@
 %section.widget
   .body
     %h3=t('menu.notice_edit')
-    #option_for_check_field{data: {project: @project.id}}
+    #option_for_check_field{ data: { project: @project.id} }
     %br
     %label
-      %input.iCheck{:name => "auto_feed_mailer", :id => "auto_feed_mailer", :class => "auto_feed_mailer", :type => "checkbox", :checked => (@auto_feed_mailer and (@auto_feed_mailer.status == false or @auto_feed_mailer.status.nil?) ) ? false : true}
+      %input.iCheck{ :name => "auto_feed_mailer", :id => "auto_feed_mailer", :class => "auto_feed_mailer", :type => "checkbox", :checked => (@auto_feed_mailer && (@auto_feed_mailer.status == false || @auto_feed_mailer.status.nil?) ) ? false : true }
         Получать автоматические уведомления
     %br
     %br
-    -if boss? and @project.type_access == 2
+    - if boss? && @project.type_access == 2
       %h3 Отправка уведомлений всем участникам закрытой процедуры
       %br
       = form_for @journal_mailer, url: { project: @project.id, action: 'create_notice' }, remote: true do |f|
@@ -40,7 +40,7 @@
             - @mailers.each_with_index  do |mail, index|
               %tr
                 %td
-                  =index+1
+                  =index + 1
                 %td
                   =mail.title
                 %td
@@ -48,9 +48,9 @@
                 %td
                   =mail.created_at
                 %td
-                  -if mail.sent
+                  - if mail.sent
                     Отправлено
-                  -elsif mail.sent == false
+                  - elsif mail.sent == false
                     Не отправлено
-                  -else
+                  - else
                     В очереди

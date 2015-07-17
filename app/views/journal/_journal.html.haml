@@ -2,7 +2,7 @@
   .icon.pull-left
     %i(class="#{journal_icon(journal)}")
   .feed-item-body
-    - if journal.user and journal.project
+    - if journal.user && journal.project
       = link_to journal.user, "/project/#{journal.project_id}/users/#{journal.user.id}"
       = render partial: '/shared/user_online', object: journal.user
 

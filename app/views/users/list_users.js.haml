@@ -1,5 +1,5 @@
--if params[:added]
-  $('#added_users').fadeOut(500, function() {$('#added_users').html("#{escape_javascript(render :partial => 'list_user', :collection => @added_users)}").fadeIn();});
+- if params[:added]
+  $('#added_users').fadeOut(500, function() { $('#added_users').html("#{escape_javascript(render :partial => 'list_user', :collection => @added_users)}").fadeIn();});
   $('li#added').addClass('active');
   $('li#others').removeClass('active');
   -#$('#tab_users a[href="#added_users"]').tab('show');
@@ -7,8 +7,8 @@
   $('#others_users').removeClass('active in').hide();
   $('#added_users').addClass('active in').show();
   $('#added_count').html('#{@added_users.size}');
--elsif params[:others]
-  $('#others_users').fadeOut(500, function() {$('#others_users').html("#{escape_javascript(render :partial => 'list_user', :collection => @users)} <div class='text-center'>#{escape_javascript(will_paginate @users)}</div>").fadeIn();});
+- elsif params[:others]
+  $('#others_users').fadeOut(500, function() { $('#others_users').html("#{escape_javascript(render :partial => 'list_user', :collection => @users)} <div class='text-center'>#{escape_javascript(will_paginate @users)}</div>").fadeIn();});
   $('li#others').addClass('active');
   $('li#added').removeClass('active');
   -#$('#tab_users a[href="#others_users"]').tab('show');

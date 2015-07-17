@@ -1,5 +1,5 @@
 = form_for @group, url: url do |f|
-  = render partial: 'shared/notice_messages', locals: {object: @group}
+  = render partial: 'shared/notice_messages', locals: { object: @group }
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control'

@@ -1,7 +1,7 @@
 = aspect.content
-%span{id: "redactor_aspect_#{aspect.id}"}
+%span{ id: "redactor_aspect_#{aspect.id}" }
   = link_to edit_aspect_post_path(@project, aspect), remote: true, id: "edit_aspect_#{aspect.id}" do
-    %span{class:'fa fa-pencil text-success'}
-  = link_to aspect_post_path(@project, aspect), method: :delete, data: {confirm: t('confirm.delete_aspect')}, id: "destroy_aspect_#{aspect.id}" do
-    %span{class:'fa fa-remove text-danger'}
+    %span{ class:'fa fa-pencil text-success' }
+  = link_to aspect_post_path(@project, aspect), method: :delete, data: { confirm: t('confirm.delete_aspect') }, id: "destroy_aspect_#{aspect.id}" do
+    %span{ class:'fa fa-remove text-danger' }
   %br

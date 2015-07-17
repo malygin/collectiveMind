@@ -1,5 +1,5 @@
 - if @group_task.errors.any?
-  $('#for_errors').html("#{escape_javascript(render partial: 'shared/notice_messages', locals: {object: @group_task})}");
+  $('#for_errors').html("#{escape_javascript(render partial: 'shared/notice_messages', locals: { object: @group_task})}");
 - else
   $('#group_task_name').val('');
   $('#group_task_description').val('');

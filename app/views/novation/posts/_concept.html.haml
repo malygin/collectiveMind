@@ -1,14 +1,14 @@
-.item{'data-id' => concept.id }
+.item{ 'data-id' => concept.id }
   %span
     %span.cb_input
-      %input.check_push_box{type: 'checkbox', id: "check_#{concept.id}", class: "checkbox_#{concept.id}"}/
-      %label{for: "check_#{concept.id}", id: "set_check_#{concept.id}"}
+      %input.check_push_box{ type: 'checkbox', id: "check_#{concept.id}", class: "checkbox_#{concept.id}"}/
+      %label{ for: "check_#{concept.id}", id: "set_check_#{concept.id}" }
         %i.fa.fa-check
   %span.cell_full_w
-    %a.a_font_reset.with_arrow.collapsed.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: ".concept_show_#{concept.id}"}
+    %a.a_font_reset.with_arrow.collapsed.collapser_type1{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: ".concept_show_#{concept.id}" }
       = concept.title
       %i.fa.fa-angle-right.fa-lg.collapse_arrow
-  .description.collapse.rotate_arrow{class: "concept_show_#{concept.id}"}
+  .description.collapse.rotate_arrow{ class: "concept_show_#{concept.id}" }
     %h6.bold
       = t('activerecord.attributes.concept/post.goal')
     %p

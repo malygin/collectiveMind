@@ -1,5 +1,5 @@
-#gantEditorTemplates{:style => "display:none;"}
-  .__template__{:type => "GANTBUTTONS"}
+#gantEditorTemplates{ :style => "display:none;" }
+  .__template__{ :type => "GANTBUTTONS" }
     /
       <div class="ganttButtonBar noprint">
       <div class="buttons">
@@ -20,7 +20,7 @@
       <span class="ganttButtonSeparator"></span>
       <button onclick="$('#workSpace').trigger('deleteCurrentTask.gantt');" class="button textual" title="delete"><span class="teamworkIcon">¢</span></button>
       </div></div>
-  .__template__{:type => "TASKSEDITHEAD"}
+  .__template__{ :type => "TASKSEDITHEAD" }
     /
       <table class="gdfTable" cellspacing="0" cellpadding="0">
       <thead>
@@ -33,10 +33,10 @@
       </tr>
       </thead>
       </table>
-  .__template__{:type => "TASKROW"}
+  .__template__{ :type => "TASKROW" }
     /
       <tr taskId="(#=obj.id#)" class="taskEditRow" level="(#=level#)">
-      <th class="gdfCell edit" align="right" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span> <span class="teamworkIcon" style="font-size:12px;" >e</span></th>
+      <th class="gdfCell edit" align="right" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow() + 1#)</span> <span class="teamworkIcon" style="font-size:12px;" >e</span></th>
       <td class="gdfCell indentCell" style="padding-left:(#=obj.level*10#)px;">
       <div class="(#=obj.isParent()?'exp-controller expcoll exp':'exp-controller'#)" align="center"></div>
       <input type="text" name="name" value="(#=obj.name#)">
@@ -47,7 +47,7 @@
       <td class="gdfCell"><input type="text" name="depends" value="(#=obj.depends#)" (#=obj.hasExternalDep?"readonly":""#)></td>
       <td class="gdfCell taskAssigs">(#=obj.getAssigsString()#)</td>
       </tr>
-  .__template__{:type => "TASKEMPTYROW"}
+  .__template__{ :type => "TASKEMPTYROW" }
     /
       <tr class="taskEditRow emptyRow" >
       <th class="gdfCell" align="right"></th>
@@ -60,18 +60,18 @@
       <td class="gdfCell"></td>
       <td class="gdfCell"></td>
       </tr>
-  .__template__{:type => "TASKBAR"}
+  .__template__{ :type => "TASKBAR" }
     /
       <div class="taskBox taskBoxDiv" taskId="(#=obj.id#)" >
       <div class="layout (#=obj.hasExternalDep?'extDep':''#)">
       <div class="taskStatus" status="(#=obj.status#)"></div>
-      <div class="taskProgress" style="width:(#=obj.progress>100?100:obj.progress#)%; background-color:(#=obj.progress>100?'red':'rgb(153,255,51);'#);"></div>
+      <div class="taskProgress" style="width:(#=obj.progress>100?100:obj.progress#)%; background-color:(#=obj.progress>100?'red':'rgb(153, 255, 51);'#);"></div>
       <div class="milestone (#=obj.startIsMilestone?'active':''#)" ></div>
       <div class="taskLabel"></div>
       <div class="milestone end (#=obj.endIsMilestone?'active':''#)" ></div>
       </div>
       </div>
-  .__template__{:type => "CHANGE_STATUS"}
+  .__template__{ :type => "CHANGE_STATUS" }
     /
       <div class="taskStatusBox">
       <div class="taskStatus cvcColorSquare" status="STATUS_ACTIVE" title="active"></div>
@@ -80,7 +80,7 @@
       <div class="taskStatus cvcColorSquare" status="STATUS_SUSPENDED" title="suspended"></div>
       <div class="taskStatus cvcColorSquare" status="STATUS_UNDEFINED" title="undefined"></div>
       </div>
-  .__template__{:type => "TASK_EDITOR"}
+  .__template__{ :type => "TASK_EDITOR" }
     /
       <div class="ganttTaskEditor" style="margin: 5px;">
       <div style="text-align: left; padding-top: 20px"><button id="saveButton" class="button big">Сохранить</button></div>

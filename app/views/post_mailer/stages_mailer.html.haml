@@ -1,19 +1,19 @@
 %html
   %body
-    -if @project
+    - if @project
       %h3
         Начался новый этап процедуры
         =@project.name
       %br
       Этап:
       %br
-      =link_to "Перейти", "http://www.mass-decision.ru/project/#{@project.id}/"
+      = link_to "Перейти", "http://www.mass-decision.ru/project/#{@project.id}/"
   %br
   %br
   %br
   %br
   %small
     =t('show.mailer.team')
-    =link_to 'massdecision', "http://mass-decision.ru/"
+    = link_to 'massdecision', "http://mass-decision.ru/"
 
 

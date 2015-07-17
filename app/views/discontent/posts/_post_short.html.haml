@@ -1,20 +1,20 @@
-.col-md-6.discontent-block{id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: {id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
-                            comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"}}
+.col-md-6.discontent-block{ id: "discontent_post_#{post_short.id}", class: "#{post_aspect_classes(post_short)}", data: { id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
+                            comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}"} }
   .full_post
     - if boss?
       .post-top-header
-        =link_to({controller: post_short.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: post_short.id}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "add_score_post_#{post_short.id}") do
+        = link_to({ controller: post_short.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: post_short.id }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "add_score_post_#{post_short.id}") do
           %i.fa.fa-trophy.fa-lg
-        = link_to({controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, approve_status: true}, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}", id: "approve_status_post_#{post_short.id}") do
+        = link_to({ controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, approve_status: true }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}", id: "approve_status_post_#{post_short.id}") do
           %i.fa.fa-bookmark.fa-lg
         -#%a.btn.btn-white.btn-xs.link_status
         -#  %i.fa.fa-exclamation-triangle.fa-lg
     .post.post_type_2
-      %div{"data-important" => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}"}
+      %div{ "data-important" => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
         %div.important.theme_font_color
           %i.fa.fa-bookmark.fa-2x
       .post-header.white
-      .post-body.no_post_head.ch_action{"data-for" => "post_ch#{post_short.id}"}
+      .post-body.no_post_head.ch_action{ "data-for" => "post_ch#{post_short.id}" }
         .media
           .media-left.text-center.gradient.post-poster
             -#= image_tag 'no-ava.png', class: "img-circle img50"
@@ -23,26 +23,26 @@
             %p.poster-name
               = link_to post_short.user, user_path(@project, post_short.user)
             %p.time
-              = Russian::strftime(post_short.created_at,'%d.%m.%Y')
+              = Russian::strftime(post_short.created_at, '%d.%m.%Y')
           .media-body
             %table.table
               %tbody
                 %tr.what
                   %td.col-md-12.left-column.bold
-                    = link_to({action: :show, project: @project, id: post_short.id}, remote: true, id: "show_record_#{post_short.id}") do
+                    = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, id: "show_record_#{post_short.id}") do
                       = trim_string(post_short.content, size = 50)
                       %i.fa.fa-angle-right.icon-right
                 %tr
                   %td.col-md-12.left-column
                     = trim_string(post_short.what, size = 50)
 
-            .post_cont_hover.white{id: "post_ch#{post_short.id}"}
+            .post_cont_hover.white{ id: "post_ch#{post_short.id}" }
               .wrapper.ps_cont.half_wheel_speed
                 .post_cont_inner
                   -post_short.comments.preview.each do |comment|
-                    .comment_preview{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{comment.content}"}
+                    .comment_preview{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{comment.content}" }
                       %span.bold.com_date
-                        = Russian::strftime(comment.created_at,'%d.%m.%Y')
+                        = Russian::strftime(comment.created_at, '%d.%m.%Y')
                       %span.bold
                         ="#{comment.user}:"
                       =comment.content
@@ -50,33 +50,33 @@
       .post-bottom.white
         .row
           -#.col-md-9.col_padding_right_3
-          -#  %span.tag-stripes.active{style: "background-color: #{post_short.aspect.color if post_short.aspect};"}
+          -#  %span.tag-stripes.active{ style: "background-color: #{post_short.aspect.color if post_short.aspect};" }
           -#    %span.tags
           -#      = post_short.aspect.content if post_short.aspect
           .col-md-1.col_padding_right_3
-            %small.pull-left{:style => "margin-right: 3px;"} Аспекты
+            %small.pull-left{ :style => "margin-right: 3px;"} Аспекты
           .col-md-8.col_padding_right_3.themes_cont
-            .post-theme{id: "stripe#{post_short.id}"}
+            .post-theme{ id: "stripe#{post_short.id}" }
               - post_short.post_aspects.each_with_index do |aspect, index|
-                %span.tag-stripes{class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};"}
+                %span.tag-stripes{ class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};" }
                   %span.tags
                     = trim_string(aspect.content, size = 30)
           .col-md-3.col_padding_left_3
             .text-right.small_icons
-              %span.popup2.comments_icon{"data-for" => "post_ch#{post_short.id}",  :class  => "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}"}
+              %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}",  :class  => "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}" }
                 %small(class="cc_post_#{post_short.id}")
                   = post_short.comments.count
                 %i.fa.fa-comment-o
               %span.popup2
                 %small(id="lk_post_#{post_short.id}" class="lk_post_#{post_short.id}")
                   = post_short.users_pro.count
-                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false}, remote: true, method: :put, id: "like_post_#{post_short.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false }, remote: true, method: :put, id: "like_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %i.fa.fa-thumbs-o-up.fa-flip-horizontal
               %span.popup2
                 %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
                   = post_short.users_against.count
-                = link_to({controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true}, remote: true, method: :put, id: "dislike_post_#{post_short.id}",'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true }, remote: true, method: :put, id: "dislike_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %i.fa.fa-thumbs-o-down.fa-flip-horizontal
-              -#-if post_short.notes.present?
+                    -#- if post_short.notes.present?
               -#  %span.popup2
               -#    %i.fa.fa-exclamation-triangle.font_lighter_grey

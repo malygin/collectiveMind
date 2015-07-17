@@ -6,8 +6,8 @@
 
 %section
   .body
-    = form_for @post,url: {project: @project.id, action: @post.persisted? ? 'update' : 'create'},  html: {class: 'lt_new'} do |f|
-      -if @post.errors.any?
+    = form_for @post, url: { project: @project.id, action: @post.persisted? ? 'update' : 'create' },  html: { class: 'lt_new'} do |f|
+      - if @post.errors.any?
         #error_explanation
           %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
           %ul
@@ -50,7 +50,7 @@
           .form-group
             =f.text_area :change, class: 'form-control', rows: 5
 
-      - if @stage.to_i > 1 and @project.status > 2
+      - if @stage.to_i > 1 && @project.status > 2
         .row
           .col-md-12
             .text-left

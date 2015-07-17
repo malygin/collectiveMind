@@ -6,16 +6,16 @@
     .col-md-5
       .pull-right
         - if @project.can_add?(name_controller) || @project.status == 100
-          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1",'data-placement' => 'bottom','data-trigger'=>'manual','data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
-            %span{"data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект"}
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button popover1", 'data-placement' => 'bottom', 'data-trigger'=>'manual', 'data-toggle' => 'popover', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
+            %span{ "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект" }
               = t('techniques.aspect_posts_simple')
         - else
-          = link_to({action: :show_results, project: @project.id}, remote: true, id: "show_results") do
-            .results{class: "#{show_check_field?('results_'+name_controller.to_s) ? 'results_blue' : 'results_red'}","data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии"}
+          = link_to({ action: :show_results, project: @project.id }, remote: true, id: "show_results") do
+            .results{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии" }
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
-          #tooltip2_2.sort-1.sort_btn.sprite.sprite-1_1{class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Сортировать по новым комментариям'}
+          #tooltip2_2.sort-1.sort_btn.sprite.sprite-1_1{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title:'Сортировать по новым комментариям' }
             -#- if @project.content_after_last_visit_for(:comments, name_controller, current_user) > 0
             -#  %span.badge-red
             -#    = @project.content_after_last_visit_for(:comments, name_controller, current_user)
@@ -27,7 +27,7 @@
               %span.badge-red
                 = @presenter.content_after_last_visit_for[:comments]
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
-          #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1{class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым аспектам"}
+          #tooltip2_2.sort-2.sort_btn.sprite.sprite-2_1{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Сортировать по новым аспектам" }
             -#- if @project.content_after_last_visit_for(:posts, name_controller, current_user) > 0
             -#  %span.badge-red
             -#    = @project.content_after_last_visit_for(:posts, name_controller, current_user)
@@ -52,7 +52,7 @@
         Аспекты, предложенные участниками
         ="(#{@project.other_aspects.size})"
   .row
-    .col-md-6.combined_border.right.tooltip1.big{ 'data-toggle'=>"tooltip",'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их"}
+    .col-md-6.combined_border.right.tooltip1.big{ 'data-toggle'=>"tooltip", 'data-placement'=>"top", title: "Знакомьтесь с предложениями других участников, комментируйте и развивайте их" }
       -@main_aspects.each do |aspect|
         =render partial: 'post_short', object: aspect
     .col-md-6.combined_border.left

@@ -1,4 +1,4 @@
-=link_to core_projects_path do
+= link_to core_projects_path do
   %span.fa.fa-angle-double-left
   =t('show.back_list_proc')
 
@@ -7,35 +7,35 @@
 %br
 #search_users_project(data-project="#{@project.id}")
 .search_text
-  =text_field_tag "search_users_text",'', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
+  =text_field_tag "search_users_text", '', style: 'width: 100%; height: 30px', placeholder: t('show.user.searsh_users_promt')
 %section
   .body
     %ul.nav.nav-tabs#tab_users
       %li#others.active
-        -#%a{:href => "#others_users", "data-toggle" => "tab"}
-        -#  Пользователи #{@users.size}
-        =link_to "/project/#{@project.id}/users/list_users?others=true", remote: true, "data-toggle" => "tab", :role => "tab" do
+        -#%a{ :href => "#others_users", "data-toggle" => "tab" }
+        -#  Пользователи #{@users.size }
+        = link_to "/project/#{@project.id}/users/list_users?others=true", remote: true, "data-toggle" => "tab", :role => "tab" do
           %span=t('show.user.others')
           %span#search_count
       %li#added
-        -#%a{:href => "#added_users", "data-toggle" => "tab"}
-        -#  Добавленные #{@added_users.size}
-        =link_to "/project/#{@project.id}/users/list_users?added=true", remote: true, "data-toggle" => "tab", :role => "tab" do
+        -#%a{ :href => "#added_users", "data-toggle" => "tab" }
+        -#  Добавленные #{@added_users.size }
+        = link_to "/project/#{@project.id}/users/list_users?added=true", remote: true, "data-toggle" => "tab", :role => "tab" do
           %span=t('show.user.added')
           %span#added_count=@added_users.size
     -#%br
     -#%br
     .tab-content
       #others_users.tab-pane.fade.in.active
-        = render :partial => 'list_user',:collection => @users
+        = render :partial => 'list_user', :collection => @users
         .text-center
           = will_paginate @users
 
       #added_users.tab-pane.fade
-        = render :partial => 'list_user',:collection => @added_users
+        = render :partial => 'list_user', :collection => @added_users
       #search_users.tab-pane.fade
 
 %br
-=link_to core_projects_path do
+= link_to core_projects_path do
   %span.fa.fa-angle-double-left
   =t('link.back_proc')

@@ -14,16 +14,16 @@
               %p.font12 massdecision@gmail.com
           .navbar-right.text-right.user_block
             %span.dropdown
-              %a.font12.font_grey.bold#lang_dropdown{'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'}
+              %a.font12.font_grey.bold#lang_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
                 %i.fa.fa-globe.font_lighter_grey
 
                 Русский
                 %i.fa.fa-angle-down.font_red
-              %ul.dropdown-menu.dropdown-mini{role: 'menu', 'aria-labelledby' => 'lang_dropdown'}
+              %ul.dropdown-menu.dropdown-mini{ role: 'menu', 'aria-labelledby' => 'lang_dropdown' }
                 %li.disabled
-                  %a.font_grey{href: '#'} English
+                  %a.font_grey{ href: '#'} English
                 %li
-                  %a.font_grey{href: '#'} Русский
+                  %a.font_grey{ href: '#'} Русский
 
       .divider30
       = render 'application/header_no_current_project'
@@ -49,7 +49,7 @@
           .text-center
             = image_tag 'logo.png', class: 'auth_logo'
           .divider35
-          = form_for(:user,  :html => {:id => 'auth-form1', :class =>'form-horizontal auth-form'}, :url => user_session_path, :remote => true) do |f|
+          = form_for(:user,  :html => { :id => 'auth-form1', :class =>'form-horizontal auth-form' }, :url => user_session_path, :remote => true) do |f|
             #error_explanation
             -#- flash.each do |name, msg|
             -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
@@ -59,21 +59,21 @@
             -#.form-group
             -#  = f.label :remember_me, 'Запомнить меня'
             -#  = f.check_box :remember_me
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{id: "sign_in", type: "submit"} Войти
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: "sign_in", type: "submit"} Войти
             .divider25
             -#.text-center
             -#  %ul.list-inline
-            -#    %li{:href => "#"} Забыли пароль?
+      -#    %li{ :href => "#"} Забыли пароль?
             -#    %li
             -#      = "|"
-            -#    %li{:href => "#"} Зарегистрироваться
+      -#    %li{ :href => "#"} Зарегистрироваться
       #popup-3-2.popup-window.detailed_popup.popup-w400.mfp-hide
         .popup.popup-rounded
           .divider35
           .text-center
             = image_tag 'logo.png', class: 'auth_logo'
           .divider35
-          = form_for(:user,  :html => {:id => 'auth-form1', :class =>'form-horizontal auth-form'}, :url => user_registration_path) do |f|
+          = form_for(:user,  :html => { :id => 'auth-form1', :class =>'form-horizontal auth-form' }, :url => user_registration_path) do |f|
             -#= devise_error_messages!
             -#- flash.each do |name, msg|
             -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
@@ -81,7 +81,7 @@
             = f.text_field :name, placeholder: 'Имя'
             = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
             = f.password_field :password, placeholder: 'Повторите пароль'
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{id: "Signin", type: "submit"} Зарегистрироваться
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: "Signin", type: "submit"} Зарегистрироваться
 
 
 

@@ -2,46 +2,46 @@
 
 
   %li.active
-    =link_to t('menu.general_rating'), "/general_rating" , style:'width:auto; margin-right: 10px;', id: 'go_to_rating'
+    = link_to t('menu.general_rating'), "/general_rating" , style:'width:auto; margin-right: 10px;', id: 'go_to_rating'
   %li.divider
 
   %li.active
-    =link_to t('menu.general_news'), "/general_news" , style:'width:auto; margin-right: 10px;', id: 'go_to_general_news'
+    = link_to t('menu.general_news'), "/general_news" , style:'width:auto; margin-right: 10px;', id: 'go_to_general_news'
 
   - if boss?
     %li.divider.hidden-xs
     %li.dropdown
-      %a#settings.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.settings.settings_title')}
+      %a#settings.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#', title: t('menu.settings.settings_title') }
         %i.fa.fa-cog
-      %ul#settings-menu.dropdown-menu.messages{role: 'menu'}
+      %ul#settings-menu.dropdown-menu.messages{ role: 'menu' }
         .text-internal.text-center=t('menu.settings.settings_admin')
         %hr
-        %li{role: 'presentation'}
-          =link_to t('menu.main'), "/" , id: 'root_page'
+        %li{ role: 'presentation' }
+          = link_to t('menu.main'), "/" , id: 'root_page'
 
 
   %li.hidden-xs.divider
   %li.hidden-xs
-    %a{href: '/', id: 'root_page', title: t('menu.main')}
+    %a{ href: '/', id: 'root_page', title: t('menu.main') }
       %i.fa.fa-home
   %li.dropdown
-    %a#account.dropdown-toggle{'data-toggle' => 'dropdown', href: '#', title: t('menu.account')}
+    %a#account.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#', title: t('menu.account') }
       %i.fa.fa-user
-    %ul#account-menu.dropdown-menu.account{role: 'menu'}
-      %li.account-picture{role: 'presentation'}
+    %ul#account-menu.dropdown-menu.account{ role: 'menu' }
+      %li.account-picture{ role: 'presentation' }
         %a.pull-left(href="/project/#{@core_project.id}/users/#{current_user.id}" id='go_to_profile')
           = image_tag current_user.avatar.url(:thumb),  class: 'media-object'
         =current_user.to_s
 
-      %li{role: 'presentation'}
+      %li{ role: 'presentation' }
         = link_to t('menu.profile_edit'), edit_user_path(@core_project, current_user), id: 'go_to_edit_profile'
 
-      %li{role: 'presentation'}
-        =link_to t('menu.journal_title'), user_path(@core_project, current_user)
+      %li{ role: 'presentation' }
+        = link_to t('menu.journal_title'), user_path(@core_project, current_user)
   %li.visible-xs.divider
   %li.visible-xs
-    %a.btn-navbar{'data-target' => '.sidebar', 'data-toggle' => 'collapse', href: '#', title: ''}
+    %a.btn-navbar{ 'data-target' => '.sidebar', 'data-toggle' => 'collapse', href: '#', title: '' }
       %i.fa.fa-bars
   %li.hidden-xs
-    %a{href: '/users/sign_out', 'data-method' => 'delete', id: 'sign_out', title: t('menu.sign_out')}
+    %a{ href: '/users/sign_out', 'data-method' => 'delete', id: 'sign_out', title: t('menu.sign_out') }
       %i.fa.fa-sign-out

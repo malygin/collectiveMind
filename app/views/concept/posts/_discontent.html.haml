@@ -2,20 +2,20 @@
   .collapser_w_checkbox
     %span
       %span.cb_input
-        %input.check_push_box{type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", name: "concept_post_discontents[#{discontent.id}]"}/
-        %label{for: "concept_post_discontents_#{discontent.id}"}
+        %input.check_push_box{ type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", name: "concept_post_discontents[#{discontent.id}]"}/
+        %label{ for: "concept_post_discontents_#{discontent.id}" }
           %i.fa.fa-check
     %span
     %span
       %i.fa.fa-square.color_me(data-me-type="imperf" data-me-action="color" data-me-color="#{discontent.id}")
     %span.cell_full_w
-      %a.a_font_reset.with_arrow.collapsed.collapser_type1{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-#{discontent.id}"}
+      %a.a_font_reset.with_arrow.collapsed.collapser_type1{ "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#imperfs3-#{discontent.id}" }
         = discontent.content
         %i.fa.fa-angle-right.fa-lg.font_dark_grey.bold.collapse_arrow
-  .collapse.rotate_arrow{id: "imperfs3-#{discontent.id}"}
+  .collapse.rotate_arrow{ id: "imperfs3-#{discontent.id}" }
     .media.comment.no_x_margin_padding
       .media-left
-        -if discontent.user
+        - if discontent.user
           = link_to user_path(@project, discontent.user) do
             = user_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle'
       .media-body
@@ -24,7 +24,7 @@
             %h6.media-heading.bold
               = link_to discontent.user, user_path(@project, discontent.user) if discontent.user
             %span.date
-              = Russian::strftime(discontent.created_at,'%d.%m.%Y %k:%M:%S')
+              = Russian::strftime(discontent.created_at, '%d.%m.%Y %k:%M:%S')
           .col-md-4.col-md-offset-4
             .small_icons.text-right
               %span.popup2
@@ -67,18 +67,18 @@
 -#.item
 -#  %span
 -#    %span.cb_input
--#      %input.check_push_box{type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", name: "concept_post_discontents[#{discontent.id}]"}/
--#      %label{for: "concept_post_discontents_#{discontent.id}"}
+        -#      %input.check_push_box{ type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", name: "concept_post_discontents[#{discontent.id}]"}/
+        -#      %label{ for: "concept_post_discontents_#{discontent.id}" }
 -#        %i.fa.fa-check
 -#  %span.cell_full_w
--#    %a.a_font_reset.with_arrow.collapsed.collapser_type1{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#imperfs3-#{discontent.id}"}
--#      %span.color_counter.color_me{'data-me-action' => 'background-color', 'data-me-color' => '0', 'data-me-type' => 'imperf'}>
+        -#    %a.a_font_reset.with_arrow.collapsed.collapser_type1{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#imperfs3-#{discontent.id}" }
+        -#      %span.color_counter.color_me{ 'data-me-action' => 'background-color', 'data-me-color' => '0', 'data-me-type' => 'imperf'}>
 -#      = discontent.content
 -#      %i.fa.fa-angle-right.fa-lg.collapse_arrow
--#    .description.collapse.rotate_arrow{id: "imperfs3-#{discontent.id}"}
+        -#    .description.collapse.rotate_arrow{ id: "imperfs3-#{discontent.id}" }
 -#      .media.comment
 -#        .media-left
--#          -if discontent.user
+        -#          - if discontent.user
 -#            = link_to user_path(@project, discontent.user) do
 -#              = user_image_tag discontent.user.try(:avatar), class: 'media-object img35 img-circle'
 -#        .media-body
@@ -87,7 +87,7 @@
 -#              %h6.media-heading.bold
 -#                = link_to discontent.user, user_path(@project, discontent.user) if discontent.user
 -#              %span.date
--#                = Russian::strftime(discontent.created_at,'%d.%m.%Y %k:%M:%S')
+        -#                = Russian::strftime(discontent.created_at, '%d.%m.%Y %k:%M:%S')
 -#            .col-md-4.col-md-offset-4
 -#              .small_icons.text-right
 -#                %span.popup2

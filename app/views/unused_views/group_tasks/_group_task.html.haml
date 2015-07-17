@@ -1,0 +1,18 @@
+%li{ id: "group_task_#{group_task.id}" }
+  .pull-right
+    %button.btn.btn-xs.btn-primary.edit-task{ type: 'button', id: "edit_task_#{group_task.id}" }
+      %i.fa.fa-edit
+    = link_to group_task_path(@project, group_task), remote: true, method: :delete, data: { confirm: t('confirm.delete_group_task') }, id: "remove_task_#{group_task.id}" do
+      %button.btn.btn-xs.btn-danger{ type: 'button' }
+        %i.fa.fa-trash-o
+  .name{ id: "task_name_#{group_task.id}" }
+    = group_task.name
+  %small.description{ id: "task_description_#{group_task.id}" }
+    = group_task.description
+  %br
+  %span.color-green Ответственные:
+  %div{ id: "#{group_task.id}_task_users" }
+  - group_task.users.each do |user|
+    = render partial: 'group_tasks/user', locals: { user: user }
+  %button.btn.btn-xs.btn-primary.assign-user{ type: 'button', id: "assign_user_to_#{group_task.id}" }
+    + Добавить ответственного

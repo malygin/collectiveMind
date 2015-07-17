@@ -1,7 +1,7 @@
 .divider10
-%div{id: "novation_notices_#{@novation.id}"}
-  = render partial: 'shared/create_success', locals: {model_name: 'novation', id: @novation.id}
-= form_for @novation, url: {project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id}, remote: true, class: 'cabinet-aspect-form' do |f|
+%div{ id: "novation_notices_#{@novation.id}" }
+  = render partial: 'shared/create_success', locals: { model_name: 'novation', id: @novation.id }
+= form_for @novation, url: { project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id }, remote: true, class: 'cabinet-aspect-form' do |f|
   .content_window.white
     .cont_heading.bold
       - if @novation.persisted?
@@ -15,10 +15,10 @@
       #for_hidden_fields
       .col-md-7
         - @novation.attributes_for_form.each do |type_attribute|
-          %a.a_font_reset.collapser_type2.collapsed.with_plus{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#cab4-#{type_attribute.first}", id: "open_#{type_attribute.first}"}
+          %a.a_font_reset.collapser_type2.collapsed.with_plus{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#cab4-#{type_attribute.first}", id: "open_#{type_attribute.first}" }
             = t("activerecord.attributes.novation/post.#{type_attribute.first}")
             %i.fa.fa-plus.font_color_stage4.collapse_plus
-          .collapse{id: "cab4-#{type_attribute.first}"}
+          .collapse{ id: "cab4-#{type_attribute.first}" }
             .divider5
             - type_attribute.second.each do |attribute, bool_attribute|
               %h6.bold
@@ -34,13 +34,13 @@
               .divider15
 
       .col-md-5
-        %h6.bold.open-popup.cab_modal_opnr#select_concept{"data-placement" => "cabinet4", "data-target" => "1"} Добавить идею для реализации
+        %h6.bold.open-popup.cab_modal_opnr#select_concept{ "data-placement" => "cabinet4", "data-target" => "1"} Добавить идею для реализации
         .divider_1_grey
         .divider20
         .selected_concepts
           - if @novation.persisted?
             - @novation.novation_concepts.each do |concept|
-              %p.bold{id: "selected_concept_#{concept.id}"}
+              %p.bold{ id: "selected_concept_#{concept.id}" }
                 = concept.title
     .divider50
     .divider_1_grey
@@ -48,7 +48,7 @@
     = f.submit 'Опубликовать', id: "publish_#{@novation.id}", class: 'btn add-button type2 pull-right', name: 'novation_post[published]'
     = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button type2 pull-right'
     - if @novation.persisted?
-      = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: {confirm: t('confirm.delete_novation')}, id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del pull-right'
+      = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: { confirm: t('confirm.delete_novation') }, id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del pull-right'
 
 #popup-cabinet4-1.popup-window.popup-w1030.mfp-hide
   .popup.transparent
@@ -56,17 +56,17 @@
       .col-md-6.col_padding_7
         .left_col.rounded_5.white
           .mod_col_top#tabs_form_navation
-            %a{'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#discontents'}
+            %a{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#discontents' }
               %button.btn.btn_cab_mod.btn_toggle.btn_reset.active Список несовершенств с их идеями
-            %a{'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#ideas'}
-              %button.btn.btn_cab_mod.btn_toggle.btn_reset{'data-show' => 'all', 'data-toggle' => 'tab'} Список идей
+            %a{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#ideas' }
+              %button.btn.btn_cab_mod.btn_toggle.btn_reset{ 'data-show' => 'all', 'data-toggle' => 'tab'} Список идей
           .tab-content
             #discontents.items.ps_cont.check_push_cont.unchecked_items.tab-pane.active
               - @discontents.each do |discontent|
-                %a.a_font_reset.collapser_type2.with_arrow.collapsed{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}"}
+                %a.a_font_reset.collapser_type2.with_arrow.collapsed{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}" }
                   = discontent.content
                   %i.fa.fa-angle-right.fa-lg.collapse_arrow.bold.font_grey
-                .collapse{id: "discontent_show_#{discontent.id}"}
+                .collapse{ id: "discontent_show_#{discontent.id}" }
                   = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
                   .divider_1_grey
                   .divider5
@@ -75,7 +75,7 @@
       .col-md-6.col_padding_7
         .right_col.rounded_5.white
           .mod_col_top
-            %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right'} Выбранные идеи
+            %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{ 'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right'} Выбранные идеи
             -#= render partial: 'application/cabinet_sticker'
           .items.ps_cont.check_push_cont.checked_items
             - if @novation.persisted?

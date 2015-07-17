@@ -7,12 +7,12 @@
       #chat-messages.chat-messages
       %footer.chat-footer.row
         .col-xs-9
-          %input#new-message.form-control.input-transparent{placeholder: 'Введите сообщение..', type: 'text'}/
+          %input#new-message.form-control.input-transparent{ placeholder: 'Введите сообщение..', type: 'text'}/
         .col-xs-3
           = form_tag group_upload_file_path(@project, @group), method: :put, multipart: true, remote: true, id: 'group_send_file' do
             = file_field_tag 'file'
 
-.chat-message#template_chat_message{style: 'display: none'}
+.chat-message#template_chat_message{ style: 'display: none' }
   .sender.pull-left
     .icon
     .time
@@ -20,8 +20,8 @@
     %span.arrow
     .sender
     .text
-.id_group{id: @group.id, style: 'display: none'}
-.last_seen_chat_at{style: 'display: none'}
+.id_group{ id: @group.id, style: 'display: none' }
+.last_seen_chat_at{ style: 'display: none' }
   = current_user.group_users.by_group(@group).last_seen_chat_at
-.current_user_name{style: 'display: none'}
+.current_user_name{ style: 'display: none' }
   = current_user.to_s

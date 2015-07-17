@@ -1,4 +1,4 @@
-.col-md-12{id: "user_#{list_user.id}"}
+.col-md-12{ id: "user_#{list_user.id}" }
   .col-md-8
     .media
       %a.pull-left(href="/project/#{@project.id}/users/#{list_user.id}")
@@ -10,7 +10,7 @@
         %br
         = list_user.email
 
-  .col-md-4{id: "list_users_#{list_user.id}"}
+  .col-md-4{ id: "list_users_#{list_user.id}" }
     - if list_user.projects.include? @project
       = link_to project_user_path(@project, list_user), remote: true, method: :delete, class:'btn btn-danger', id: "remove_user_#{list_user.id}" do
         %i.fa.fa-minus
