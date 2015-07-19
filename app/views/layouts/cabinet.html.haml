@@ -18,14 +18,14 @@
                 -#      = t("my_add.#{@project.current_stage_type}")
                 - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
                   .divider10
-                  = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project.id, type_mechanic: technique.code),
+                  = link_to send("new_#{technique.stage.to_s.downcase.singularize}_path", @project.id, type_mechanic: technique.code),
                   role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}" do
                     %button.btn.add-button.type4=t("techniques.#{technique.name}")
 
               .divider10
               %ul.list-unstyled.cab_menu_left
-                %li{ class: "#{'active' if action_name == 'user_content' && not params[:edit_profile]}" }
-                  = link_to self.send("user_content_#{@project.current_stage_type}_path", @project.id), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
+                %li{ class: "#{'active' if action_name == 'user_content' && params[:edit_profile].nil?}" }
+                  = link_to send("user_content_#{@project.current_stage_type}_path", @project.id), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
                     Контент
                 %li{ class: "#{'active' if params[:edit_profile]}" }
                   %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ "data-toggle" => "tab", :href => "#user_profile" }

@@ -1,2 +1,0 @@
-$("#assignTaskToUser#{@group_task.id} #tr_assign_to_#{@user.id}").hide();
-$("##{@group_task.id}_task_users").append("#{escape_javascript(render partial: 'user', locals: { user: @user})}");
