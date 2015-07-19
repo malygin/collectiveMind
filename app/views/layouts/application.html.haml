@@ -1,18 +1,19 @@
 !!! 5
 %html(lang="en")
   = render 'application/meta'
-  %body{ class: stage_theme, style: 'background-color: #f4f4f4;' }
-    .outer
-      - if left_rollover?
-        = render partial: 'left_rollover'
-      = render partial: 'header'
-      - if profile?
-        = render partial: 'cabinet_stage_panel'
-      - elsif not rating?
-        = render partial: 'stage_panel'
-      .main-block
-        .container
-          = yield
+  %body{ style: 'background-color: #f4f4f4;' }
+    %div{class: stage_theme}
+      .outer
+        - if left_rollover?
+          = render partial: 'left_rollover'
+        = render partial: 'header'
+        - if profile?
+          = render partial: 'cabinet_stage_panel'
+        - elsif not rating?
+          = render partial: 'stage_panel'
+        .main-block
+          .container
+            = yield
 
     #render_for_post
     #render_knowbase_posts

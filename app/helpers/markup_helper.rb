@@ -4,11 +4,11 @@ module MarkupHelper
     if rating?
       'grey_theme'
     elsif @project.status == 100
-      "stage#{number_current_stage}_theme"
+      "stage_#{number_current_stage}"
     elsif action_name == 'user_content' || controller_name == 'users'
-      "stage#{@project.main_stage}_theme"
+      "stage_#{@project.main_stage}"
     else
-      "stage#{number_current_stage}_theme"
+      "stage_#{number_current_stage}"
     end
   end
 
