@@ -4,10 +4,10 @@
       - if asp.knowbase_posts.size > 1
         .row
           .col-md-8.col-sm-8.min-col-right-padd
-            %ul.nav.nav-tabs.aspects_tabs{ :role => "tablist" }
+            %ul.nav.nav-tabs.aspects_tabs{ role: "tablist" }
               - asp.knowbase_posts.each_with_index do |post, i|
                 %li{ class: "#{'active' if i == 0}", role: "presentation" }
-                  %a{ style: "background-color:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", :href => "#article_#{index + 1}_#{i + 1}", :role => "tab" }
+                  %a{ style: "background-color:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", href: "#article_#{index + 1}_#{i + 1}", role: "tab" }
                     = trim_content(post.title, 30)
 
       .row
@@ -85,10 +85,10 @@
     - if asp.knowbase_posts.size > 1
       .row
         .col-md-12.col-sm-12
-          %ul.nav.nav-tabs.aspects_tabs{ :role => "tablist" }
+          %ul.nav.nav-tabs.aspects_tabs{ role: "tablist" }
             - asp.knowbase_posts.each_with_index do |post, i|
               %li{ class: "#{'active' if i == 0}", role: "presentation" }
-                %a{ style: "background-color:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", :href => "#article_#{index + 1}_#{i + 1}", :role => "tab" }
+                %a{ style: "background-color:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", href: "#article_#{index + 1}_#{i + 1}", role: "tab" }
                   = trim_content(post.title, 30)
 
     .row

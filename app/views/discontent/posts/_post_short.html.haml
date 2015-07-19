@@ -54,7 +54,7 @@
           -#    %span.tags
           -#      = post_short.aspect.content if post_short.aspect
           .col-md-1.col_padding_right_3
-            %small.pull-left{ :style => "margin-right: 3px;"} Аспекты
+            %small.pull-left{ style: "margin-right: 3px;"} Аспекты
           .col-md-8.col_padding_right_3.themes_cont
             .post-theme{ id: "stripe#{post_short.id}" }
               - post_short.post_aspects.each_with_index do |aspect, index|
@@ -63,7 +63,7 @@
                     = trim_string(aspect.content, size = 30)
           .col-md-3.col_padding_left_3
             .text-right.small_icons
-              %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}",  :class  => "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}" }
+              %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}",  class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}" }
                 %small(class="cc_post_#{post_short.id}")
                   = post_short.comments.count
                 %i.fa.fa-comment-o

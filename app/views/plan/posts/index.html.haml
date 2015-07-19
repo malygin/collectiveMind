@@ -15,7 +15,7 @@
                 = t 'techniques.plan_posts_simple'
         - else
           = link_to({ action: :show_results, project: @project.id }, remote: true, id: "show_results") do
-            .results{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}", "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Показать итоги стадии" }
+            .results{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}", "data-placement" => "bottom", "data-toggle" => "tooltip", title: "Показать итоги стадии" }
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
@@ -28,7 +28,7 @@
             - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
                 = @presenter.content_after_last_visit_for[:comments]
-          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active{ data: { name: 'sort', desc: 0, type: 'date' }, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения." }
+          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active{ data: { name: 'sort', desc: 0, type: 'date' }, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", title: "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения." }
             -#- new_posts = @project.plans_approved.after_last_visit_posts(last_time_visit_page('plan')).size
             -#- if new_posts > 0
             -#  %span.badge-red

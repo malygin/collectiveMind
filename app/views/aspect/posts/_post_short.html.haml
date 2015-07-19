@@ -37,24 +37,24 @@
                         =comment.content
 
     .post-bottom.text-right.small_icons
-      %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}", :class  => "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('aspect')).size > 0}" }
+      %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}", class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('aspect')).size > 0}" }
         %small{ class: "cc_post_#{post_short.id}" }
           = post_short.comments.count
         %i.fa.fa-comment-o
       %span.popup2
         %small{ id: "lk_post_#{post_short.id}", class: "lk_post_#{post_short.id}" }
           = post_short.users_pro.count
-        = link_to({ :controller => post_short.class.name.underscore.pluralize,
-        :action => :like, :project => @project, :id => post_short.id, :against => false },
-        :remote => true, :method => :put, id: "like_post_#{post_short.id}",
+        = link_to({ controller: post_short.class.name.underscore.pluralize,
+        action: :like, project: @project, id: post_short.id, against: false },
+        remote: true, method: :put, id: "like_post_#{post_short.id}",
         'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
           %i.fa.fa-thumbs-o-up.fa-flip-horizontal
       %span.popup2
         %small(id="dlk_post_#{post_short.id}" class="dlk_post_#{post_short.id}")
           =post_short.users_against.count
-        = link_to({ :controller => post_short.class.name.underscore.pluralize,
-          :action => :like, :project => @project, :id => post_short.id, :against => true },
-          :remote => true, :method => :put, id: "dislike_post_#{post_short.id}",
+        = link_to({ controller: post_short.class.name.underscore.pluralize,
+          action: :like, project: @project, id: post_short.id, against: true },
+          remote: true, method: :put, id: "dislike_post_#{post_short.id}",
            'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-original-title'=> 'Не нравится', class:'sm') do
           %i.fa.fa-thumbs-o-down.fa-flip-horizontal
       -#- if post_short.status == 1 && post_short.comments.count > 0

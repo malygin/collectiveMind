@@ -8,7 +8,7 @@
     .col-md-5
       .sort-block.pull-right
         = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: "btn add-button tooltip1 big", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger'=>'manual', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
-          %span{ "data-placement" => "bottom", "data-toggle" => "tooltip", :title => "Добавить аспект" }
+          %span{ "data-placement" => "bottom", "data-toggle" => "tooltip", title: "Добавить аспект" }
             = t('techniques.aspect_posts_simple')
 
 .ui-4.first-stage
@@ -27,14 +27,14 @@
             %li.active
               .slider-item
                 .c1-item
-                  %a{ id: "tab_intro", "data-toggle" => "tab", :href => "#tab_aspect_0" }
+                  %a{ id: "tab_intro", "data-toggle" => "tab", href: "#tab_aspect_0" }
                     %span.c1-item-inner{ style: "border-top-color: #eac85e;" }
                       Введение в процедуру
             - @main_aspects.each_with_index do |aspect, index|
               %li.li_aspect{ id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}" }
                 .slider-item
                   .c1-item
-                    %a{ id: "aspect_#{aspect.id}", "data-toggle" => "tab", :href => "#tab_aspect_#{aspect.id}" }
+                    %a{ id: "aspect_#{aspect.id}", "data-toggle" => "tab", href: "#tab_aspect_#{aspect.id}" }
                       %span.c1-item-inner{ style: "border-top-color: #{aspect.color};" }
                         =aspect.content
 

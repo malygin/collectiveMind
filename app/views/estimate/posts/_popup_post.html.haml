@@ -47,16 +47,16 @@
             .nav-tabs-one
               %ul.nav.nav-tabs
                 %li.active
-                  %a{ "data-toggle" => "tab", :href => "#tab-1" }
+                  %a{ "data-toggle" => "tab", href: "#tab-1" }
                     %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
                       Описание
                       проектного предложения
                 %li
-                  %a{ "data-toggle" => "tab", :href => "#tab-2" }
+                  %a{ "data-toggle" => "tab", href: "#tab-2" }
                     %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
                       График реализации проекта
                 %li
-                  %a{ "data-toggle" => "tab", :href => "#tab-3" }
+                  %a{ "data-toggle" => "tab", href: "#tab-3" }
                     %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
                       Оценки других
                       участников
@@ -77,7 +77,7 @@
                   = image_tag 'grey_arrow.png'
                 .divider25
                 - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
-                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#cab4-#{link}" }
+                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#cab4-#{link}" }
                     = t("activerecord.attributes.plan/post_novation.#{link}")
                     %i.fa.font_color_stage5.collapse_plus{ class: "#{link == :project ? 'fa-minus' : 'fa-plus'}" }
 
@@ -139,12 +139,12 @@
                   .col-sm-4.no_padding_col.divided
                     .rate_buttons.color_1
                       .progress
-                        .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 1)}", :role => "progressbar", :style => "width: #{user.plan_vote_status(@post, 1)*10}%;" }
+                        .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 1)}", role: "progressbar", style: "width: #{user.plan_vote_status(@post, 1)*10}%;" }
                           = user.plan_vote_status(@post, 1)
                   .col-sm-5.col_padding_left_0.divided
                     .row
                       .col-md-12
                         .rate_buttons.color_2
                           .progress
-                            .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 2)}", :role => "progressbar", :style => "width: #{user.plan_vote_status(@post, 2)*10}%;" }
+                            .progress-bar{ "aria-valuemax" => "10", "aria-valuemin" => "0", "aria-valuenow" => "#{user.plan_vote_status(@post, 2)}", role: "progressbar", style: "width: #{user.plan_vote_status(@post, 2)*10}%;" }
                               = user.plan_vote_status(@post, 2)

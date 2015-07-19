@@ -1,10 +1,9 @@
+exclude:
+  - 'app/views/devise/**/*.haml'
+  - '**/*.js.haml'
 linters:
-#  ImplicitDiv:
-#    enabled: false
-#    severity: error
   LeadingCommentSpace:
     enabled: false
-#  StringLiterals:
-#    Enabled: false
   LineLength:
     max: 170
+

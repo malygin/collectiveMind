@@ -36,12 +36,12 @@
         .divider50
         %ul.list-inline.text-center
           %li
-            %a.active{ :href => "#"} Рус
+            %a.active{ href: "#"} Рус
           %li
             %span.auth-divider
               = '|'
           %li
-            %a{ :href => "#"} Eng
+            %a{ href: "#"} Eng
 .divider35
 .auth-bottom-wrapper
   .container
@@ -49,15 +49,15 @@
       .col-md-8.col-md-offset-2
         %ul.list-inline.text-center
           %li.active
-            %a#home-tab{ "aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} Добро пожаловать
+            %a#home-tab{ "aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", href: "#home", role: "tab"} Добро пожаловать
           %li
             %span.auth-divider
               = '|'
           %li
-            %a#profile-tab{ "aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", :href => "#profile", :role => "tab"} О технологии
+            %a#profile-tab{ "aria-controls" => "home", "aria-expanded" => "true", "data-toggle" => "tab", href: "#profile", role: "tab"} О технологии
         .divider35
         #myTabContent.tab-content
-          #home.tab-pane.fade.in.active{ "aria-labelledby" => "home-tab", :role => "tabpanel" }
+          #home.tab-pane.fade.in.active{ "aria-labelledby" => "home-tab", role: "tabpanel" }
             %p
               Добро пожаловать на сайт MASSDECISION™, уникальной технологии принятия рациональных решений!
             .divider10
@@ -84,7 +84,7 @@
               и в дальнейшем эффективно реализуется именно теми, кто его вырабатывал. Качественное решение
               — ключ к успеху в бизнесе и в жизни, а технология MASSDECISION™ — это ваш ключ к
               качественному решению!
-          #profile.tab-pane.fade{ "aria-labelledby" => "profile-tab", :role => "tabpanel" }
+          #profile.tab-pane.fade{ "aria-labelledby" => "profile-tab", role: "tabpanel" }
             %p
               Технология MASSDECISION™ родилась в Иерусалиме, столице древней страны и юного государства,
               которое

@@ -8,7 +8,7 @@
           - @aspects.each_with_index do |asp, index|
             %li.myCarousel-target{ style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index + 1}", "data-target" => "#myCarousel", "data-color"=>"#{asp.color}" }
               = asp.content
-      .carousel-inner{ :role => "listbox" }
+      .carousel-inner{ role: "listbox" }
         .item.active
           .aspect-main-block{ style: "border-top-color:#eac85e;" }
             = @project.introduction.try(:html_safe)
@@ -18,10 +18,10 @@
 
             - if asp.knowbase_posts.size > 1
 
-              %ul.nav.nav-tabs.aspects_tabs{ :role => "tablist" }
+              %ul.nav.nav-tabs.aspects_tabs{ role: "tablist" }
                 - asp.knowbase_posts.each_with_index do |post, i|
                   %li{ class: "#{'active' if i == 0}", role: "presentation" }
-                    %a{ style: "background:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", :href => "#article_#{index + 1}_#{i + 1}", :role => "tab" }
+                    %a{ style: "background:#{asp.color};" , "aria-controls" => "Статья #{i + 1}", "data-toggle" => "tab", href: "#article_#{index + 1}_#{i + 1}", role: "tab" }
                       = trim_content(post.title, 30)
 
 
@@ -43,7 +43,7 @@
                     = post.content.try(:html_safe)
 
 
-      %a.myCarousel-control.left{ "data-slide" => "prev", :href => "#myCarousel", :role => "button" }
+      %a.myCarousel-control.left{ "data-slide" => "prev", href: "#myCarousel", role: "button" }
         %i.fa.fa-5x.fa-angle-left
-      %a.myCarousel-control.right{ "data-slide" => "next", :href => "#myCarousel", :role => "button" }
+      %a.myCarousel-control.right{ "data-slide" => "next", href: "#myCarousel", role: "button" }
         %i.fa.fa-5x.fa-angle-right

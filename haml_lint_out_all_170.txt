@@ -1,6 +1,5 @@
 app/views/application/_expert_news.html.haml:28 [W] RuboCop: Do not use `::` for method calls.
 app/views/application/_messages_menu.html.haml:25 [W] RuboCop: Do not use `::` for method calls.
-app/views/aspect/posts/_aspect_questions.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/aspect/posts/_aspect_questions.html.haml:7 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:10 [W] RuboCop: Space found before comma.
@@ -8,7 +7,7 @@ app/views/aspect/posts/_aspect_questions.html.haml:10 [W] RuboCop: Prefer single
 app/views/aspect/posts/_aspect_questions.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_aspect_questions.html.haml:10 [W] LineLength: Line is too long. [185/170]
+app/views/aspect/posts/_aspect_questions.html.haml:10 [W] LineLength: Line is too long. [179/170]
 app/views/aspect/posts/_aspect_questions.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:26 [W] RuboCop: Unused block argument - `i`. If it's necessary, use `_` or `_i` as an argument name to indicate that it won't be used.
 app/views/aspect/posts/_aspect_questions.html.haml:38 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -31,7 +30,6 @@ app/views/aspect/posts/_aspect_questions.html.haml:69 [W] HtmlAttributes: Prefer
 app/views/aspect/posts/_aspect_questions.html.haml:75 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:79 [W] LineLength: Line is too long. [199/170]
 app/views/aspect/posts/_aspect_questions.html.haml:83 [W] ClassesBeforeIds: Classes should be listed before IDs (.btn should precede #send_answers)
-app/views/aspect/posts/_aspect_questions.html.haml:88 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/aspect/posts/_aspect_questions.html.haml:88 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:90 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Space found before comma.
@@ -39,7 +37,7 @@ app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Prefer single
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_aspect_questions.html.haml:91 [W] LineLength: Line is too long. [183/170]
+app/views/aspect/posts/_aspect_questions.html.haml:91 [W] LineLength: Line is too long. [177/170]
 app/views/aspect/posts/_aspect_questions.html.haml:100 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_aspect_questions.html.haml:111 [W] RuboCop: Unused block argument - `i`. If it's necessary, use `_` or `_i` as an argument name to indicate that it won't be used.
 app/views/aspect/posts/_aspect_questions.html.haml:119 [W] FinalNewline: Files should end with a trailing newline
@@ -65,7 +63,7 @@ app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] RuboCop: Prefer single-
 app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] LineLength: Line is too long. [214/170]
+app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] LineLength: Line is too long. [211/170]
 app/views/aspect/posts/_discuss_aspects.html.haml:18 [W] RuboCop: Space missing after colon.
 app/views/aspect/posts/_discuss_aspects.html.haml:18 [W] LineLength: Line is too long. [224/170]
 app/views/aspect/posts/_discuss_aspects.html.haml:18 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-1 should precede #tooltip2_2)
@@ -74,7 +72,7 @@ app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] RuboCop: Prefer single-
 app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] LineLength: Line is too long. [220/170]
+app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] LineLength: Line is too long. [217/170]
 app/views/aspect/posts/_discuss_aspects.html.haml:30 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-2 should precede #tooltip2_2)
 app/views/aspect/posts/_discuss_aspects.html.haml:49 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_discuss_aspects.html.haml:53 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
@@ -106,11 +104,6 @@ app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after t
 app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
 app/views/aspect/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_popup_post.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space inside { missing.
 app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -121,11 +114,6 @@ app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Avoid comma after t
 app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space inside } missing.
 app/views/aspect/posts/_popup_post.html.haml:29 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_popup_post.html.haml:30 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after colon.
 app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Space inside { missing.
@@ -168,12 +156,7 @@ app/views/aspect/posts/_post_short.html.haml:36 [W] UnnecessaryStringOutput: `= 
 app/views/aspect/posts/_post_short.html.haml:36 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_post_short.html.haml:37 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_post_short.html.haml:40 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_post_short.html.haml:40 [W] LineLength: Line is too long. [183/170]
-app/views/aspect/posts/_post_short.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/aspect/posts/_post_short.html.haml:40 [W] LineLength: Line is too long. [179/170]
 app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space inside { missing.
 app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -184,11 +167,6 @@ app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Avoid comma after t
 app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space inside } missing.
 app/views/aspect/posts/_post_short.html.haml:53 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_post_short.html.haml:54 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Space missing after colon.
 app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Redundant curly braces around a hash parameter.
@@ -208,8 +186,7 @@ app/views/aspect/posts/_post_vote.html.haml:13 [W] RuboCop: Prefer single-quoted
 app/views/aspect/posts/_post_vote.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_post_vote.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_post_vote.html.haml:13 [W] LineLength: Line is too long. [239/170]
-app/views/aspect/posts/_post_vote.html.haml:14 [W] LineLength: Line is too long. [195/170]
-app/views/aspect/posts/_post_vote.html.haml:15 [W] LineLength: Line is too long. [173/170]
+app/views/aspect/posts/_post_vote.html.haml:14 [W] LineLength: Line is too long. [192/170]
 app/views/aspect/posts/_post_vote.html.haml:19 [W] FinalNewline: Files should end with a trailing newline
 app/views/aspect/posts/_questions_aspects.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_questions_aspects.html.haml:10 [W] RuboCop: Surrounding space missing for operator `=>`.
@@ -237,8 +214,6 @@ app/views/aspect/posts/_questions_aspects.html.haml:42 [W] RuboCop: Prefer singl
 app/views/aspect/posts/_questions_aspects.html.haml:45 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_questions_aspects.html.haml:51 [W] RuboCop: Space inside } missing.
 app/views/aspect/posts/_questions_aspects.html.haml:51 [W] FinalNewline: Files should end with a trailing newline
-app/views/aspect/posts/answer_question.js.haml:2 [W] RuboCop: Do not use `unless` with `else`. Rewrite these with the positive case first.
-app/views/aspect/posts/answer_question.js.haml:2 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
 app/views/aspect/posts/user_content.html.haml:21 [W] LineLength: Line is too long. [197/170]
 app/views/completion/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-post)
 app/views/completion/posts/_popup_post.html.haml:24 [W] RuboCop: Do not use `::` for method calls.
@@ -253,7 +228,7 @@ app/views/completion/posts/_popup_post.html.haml:53 [W] RuboCop: Prefer single-q
 app/views/completion/posts/_popup_post.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/_popup_post.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/_popup_post.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/completion/posts/_popup_post.html.haml:53 [W] LineLength: Line is too long. [189/170]
+app/views/completion/posts/_popup_post.html.haml:53 [W] LineLength: Line is too long. [186/170]
 app/views/completion/posts/_popup_post.html.haml:68 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/completion/posts/_popup_post.html.haml:68 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-2)
 app/views/completion/posts/_popup_post.html.haml:72 [W] LineLength: Line is too long. [171/170]
@@ -262,7 +237,6 @@ app/views/completion/posts/_popup_post.html.haml:74 [W] FinalNewline: Files shou
 app/views/completion/posts/index.html.haml:4 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/index.html.haml:4 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/index.html.haml:4 [W] ClassesBeforeIds: Classes should be listed before IDs (.carousel should precede #myCarousel)
-app/views/completion/posts/index.html.haml:5 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/completion/posts/index.html.haml:5 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/index.html.haml:6 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/completion/posts/index.html.haml:6 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -313,7 +287,7 @@ app/views/concept/posts/_left_rollover.html.haml:2 [W] RuboCop: Prefer single-qu
 app/views/concept/posts/_left_rollover.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_left_rollover.html.haml:2 [W] LineLength: Line is too long. [275/170]
+app/views/concept/posts/_left_rollover.html.haml:2 [W] LineLength: Line is too long. [272/170]
 app/views/concept/posts/_left_rollover.html.haml:2 [W] ClassesBeforeIds: Classes should be listed before IDs (.slide-opener should precede #opener)
 app/views/concept/posts/_left_rollover.html.haml:3 [W] RuboCop: Space found before comma.
 app/views/concept/posts/_left_rollover.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -325,21 +299,14 @@ app/views/concept/posts/_left_rollover.html.haml:3 [W] RuboCop: Prefer single-qu
 app/views/concept/posts/_left_rollover.html.haml:4 [W] ClassesBeforeIds: Classes should be listed before IDs (.slide-inner should precede #tooltip_slide_panel)
 app/views/concept/posts/_left_rollover.html.haml:7 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:7 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_left_rollover.html.haml:10 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_left_rollover.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_left_rollover.html.haml:10 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/_left_rollover.html.haml:10 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/concept/posts/_left_rollover.html.haml:11 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_left_rollover.html.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_left_rollover.html.haml:14 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_left_rollover.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_left_rollover.html.haml:14 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/_left_rollover.html.haml:14 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/concept/posts/_left_rollover.html.haml:18 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_left_rollover.html.haml:21 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_left_rollover.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:21 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/concept/posts/_left_rollover.html.haml:22 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -353,8 +320,7 @@ app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Prefer single-q
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Space inside parentheses detected.
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Space missing after colon.
 app/views/concept/posts/_left_rollover.html.haml:25 [W] RuboCop: Surrounding space missing for operator `:`.
-app/views/concept/posts/_left_rollover.html.haml:25 [W] LineLength: Line is too long. [494/170]
-app/views/concept/posts/_left_rollover.html.haml:28 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/concept/posts/_left_rollover.html.haml:25 [W] LineLength: Line is too long. [491/170]
 app/views/concept/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-post)
 app/views/concept/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/concept/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
@@ -423,9 +389,7 @@ app/views/concept/posts/_post_short.html.haml:41 [W] SpaceBeforeScript: The - sy
 app/views/concept/posts/_post_short.html.haml:44 [W] RuboCop: Do not use `::` for method calls.
 app/views/concept/posts/_post_short.html.haml:46 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/concept/posts/_post_short.html.haml:46 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/concept/posts/_post_short.html.haml:51 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_post_short.html.haml:51 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:51 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/_post_short.html.haml:51 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -436,7 +400,7 @@ app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quot
 app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_short.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:55 [W] LineLength: Line is too long. [270/170]
+app/views/concept/posts/_post_short.html.haml:55 [W] LineLength: Line is too long. [267/170]
 app/views/concept/posts/_post_short.html.haml:60 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Space inside { missing.
@@ -465,9 +429,7 @@ app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Avoid comma after 
 app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/_post_short.html.haml:70 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_post_short.html.haml:72 [W] LineLength: Line is too long. [302/170]
-app/views/concept/posts/_post_vote.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_post_vote.html.haml:7 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_vote.html.haml:10 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/_post_vote.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_vote.html.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_vote.html.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -486,10 +448,9 @@ app/views/concept/posts/_post_vote.html.haml:16 [W] RuboCop: Prefer single-quote
 app/views/concept/posts/_post_vote.html.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_vote.html.haml:16 [W] LineLength: Line is too long. [186/170]
 app/views/concept/posts/_post_vote.html.haml:17 [W] LineLength: Line is too long. [192/170]
-app/views/concept/posts/_post_vote.html.haml:18 [W] LineLength: Line is too long. [201/170]
-app/views/concept/posts/_post_vote.html.haml:19 [W] LineLength: Line is too long. [176/170]
+app/views/concept/posts/_post_vote.html.haml:18 [W] LineLength: Line is too long. [198/170]
+app/views/concept/posts/_post_vote.html.haml:19 [W] LineLength: Line is too long. [173/170]
 app/views/concept/posts/_post_vote.html.haml:26 [W] RuboCop: Space missing after colon.
-app/views/concept/posts/add_disposts.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/concept/posts/index.html.haml:14 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/concept/posts/index.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -505,7 +466,7 @@ app/views/concept/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted str
 app/views/concept/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/index.html.haml:24 [W] LineLength: Line is too long. [214/170]
+app/views/concept/posts/index.html.haml:24 [W] LineLength: Line is too long. [211/170]
 app/views/concept/posts/index.html.haml:28 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/index.html.haml:29 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -515,7 +476,7 @@ app/views/concept/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted str
 app/views/concept/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/index.html.haml:37 [W] LineLength: Line is too long. [320/170]
+app/views/concept/posts/index.html.haml:37 [W] LineLength: Line is too long. [317/170]
 app/views/concept/posts/index.html.haml:37 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-2 should precede #tooltip3_2)
 app/views/concept/posts/index.html.haml:47 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:47 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -524,7 +485,7 @@ app/views/concept/posts/index.html.haml:47 [W] RuboCop: Prefer single-quoted str
 app/views/concept/posts/index.html.haml:47 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/index.html.haml:47 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/concept/posts/index.html.haml:47 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/index.html.haml:47 [W] LineLength: Line is too long. [214/170]
+app/views/concept/posts/index.html.haml:47 [W] LineLength: Line is too long. [211/170]
 app/views/concept/posts/index.html.haml:47 [W] ClassesBeforeIds: Classes should be listed before IDs (.tooltip1 should precede #tab_dispost_concepts)
 app/views/concept/posts/new.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -537,40 +498,33 @@ app/views/concept/posts/new.html.haml:35 [W] RuboCop: Prefer single-quoted strin
 app/views/concept/posts/new.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:35 [W] LineLength: Line is too long. [239/170]
+app/views/concept/posts/new.html.haml:35 [W] LineLength: Line is too long. [236/170]
 app/views/concept/posts/new.html.haml:37 [W] LineLength: Line is too long. [184/170]
 app/views/concept/posts/new.html.haml:54 [W] RuboCop: Space missing after colon.
 app/views/concept/posts/new.html.haml:55 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #imperfs2)
-app/views/concept/posts/new.html.haml:67 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/new.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:68 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:68 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:68 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:68 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:68 [W] LineLength: Line is too long. [218/170]
+app/views/concept/posts/new.html.haml:68 [W] LineLength: Line is too long. [212/170]
 app/views/concept/posts/new.html.haml:73 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:73 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:73 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:73 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:73 [W] LineLength: Line is too long. [279/170]
-app/views/concept/posts/new.html.haml:80 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/concept/posts/new.html.haml:73 [W] LineLength: Line is too long. [276/170]
 app/views/concept/posts/new.html.haml:80 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:81 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:81 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:81 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:81 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:81 [W] LineLength: Line is too long. [227/170]
-app/views/concept/posts/new.html.haml:89 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/concept/posts/new.html.haml:81 [W] LineLength: Line is too long. [221/170]
 app/views/concept/posts/new.html.haml:89 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:89 [W] RuboCop: Space inside } missing.
 app/views/concept/posts/new.html.haml:89 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/concept/posts/new.html.haml:90 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/new.html.haml:90 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/new.html.haml:94 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/concept/posts/new.html.haml:94 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/new.html.haml:96 [W] ClassesBeforeIds: Classes should be listed before IDs (.unchecked_items should precede #unchecked_discontent_posts)
 app/views/concept/posts/new.html.haml:97 [W] FinalNewline: Files should end with a trailing newline
-app/views/concept/posts/search_disposts.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/concept/posts/user_content.html.haml:21 [W] LineLength: Line is too long. [200/170]
 app/views/concept/posts/user_content.html.haml:29 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/concept/posts/user_content.html.haml:33 [W] RuboCop: Surrounding space missing for operator `==`.
@@ -579,7 +533,6 @@ app/views/concept/posts/user_content.html.haml:35 [W] FinalNewline: Files should
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:3 [W] RuboCop: Space missing after colon.
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:5 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/core/knowbase/posts/_knowbase_post_form.html.haml:9 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:9 [W] RuboCop: Space missing after colon.
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:9 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/core/knowbase/posts/_knowbase_post_form.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -605,10 +558,8 @@ app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:9 [W] RuboCop: Pre
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:9 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:9 [W] LineLength: Line is too long. [173/170]
-app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:11 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:21 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] RuboCop: Space found before comma.
@@ -616,7 +567,7 @@ app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] RuboCop: Pr
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] LineLength: Line is too long. [181/170]
+app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:24 [W] LineLength: Line is too long. [175/170]
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:32 [W] RuboCop: Surrounding space missing for operator `==`.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:46 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -628,25 +579,16 @@ app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:48 [W] RuboCop: Pr
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:48 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:48 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/_modal_knowbase_posts.html.haml:49 [W] FinalNewline: Files should end with a trailing newline
-app/views/core/knowbase/posts/create.js.haml:2 [W] RuboCop: Space inside } missing.
-app/views/core/knowbase/posts/create.js.haml:7 [W] RuboCop: Put one space between the method name and the first argument.
-app/views/core/knowbase/posts/create.js.haml:7 [W] FinalNewline: Files should end with a trailing newline
-app/views/core/knowbase/posts/edit.js.haml:1 [W] RuboCop: Put one space between the method name and the first argument.
-app/views/core/knowbase/posts/edit.js.haml:1 [W] RuboCop: Space inside } missing.
-app/views/core/knowbase/posts/index.js.haml:6 [W] FinalNewline: Files should end with a trailing newline
 app/views/core/knowbase/posts/new.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/core/knowbase/posts/new.html.haml:6 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/core/knowbase/posts/new.html.haml:7 [W] RuboCop: Put one space between the method name and the first argument.
 app/views/core/knowbase/posts/new.html.haml:7 [W] RuboCop: Space inside } missing.
 app/views/core/knowbase/posts/new.html.haml:7 [W] FinalNewline: Files should end with a trailing newline
 app/views/core/knowbase/posts/new.html.haml:7 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/core/knowbase/posts/new.js.haml:1 [W] RuboCop: Put one space between the method name and the first argument.
-app/views/core/knowbase/posts/new.js.haml:1 [W] RuboCop: Space inside } missing.
 app/views/core/knowbase/posts/show.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/core/knowbase/posts/show.html.haml:8 [W] RuboCop: Put one space between the method name and the first argument.
 app/views/core/knowbase/posts/show.html.haml:8 [W] FinalNewline: Files should end with a trailing newline
 app/views/core/knowbase/posts/show.html.haml:8 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/core/knowbase/posts/update.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/core/projects/_aspect.html.haml:4 [W] RuboCop: Space missing after colon.
 app/views/core/projects/_aspect.html.haml:4 [W] ClassAttributeWithStaticValue: Avoid defining `class` in attributes hash for static class names
 app/views/core/projects/_aspect.html.haml:6 [W] RuboCop: Space missing after colon.
@@ -695,122 +637,16 @@ app/views/core/projects/index.html.haml:20 [W] RuboCop: Space missing after colo
 app/views/core/projects/index.html.haml:25 [W] RuboCop: Space missing after colon.
 app/views/core/projects/index.html.haml:29 [W] RuboCop: Space missing after colon.
 app/views/core/projects/new.html.haml:1 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/devise/confirmations/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/confirmations/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/confirmations/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/confirmations/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/confirmations/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/confirmations/new.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/confirmations/new.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/mailer/confirmation_instructions.html.haml:4 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/mailer/unlock_instructions.html.haml:5 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/edit.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/edit.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/edit.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/edit.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/edit.html.haml:24 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/devise/passwords/edit.html.haml:26 [W] RuboCop: Space missing after colon.
-app/views/devise/passwords/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/passwords/new.html.haml:18 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/devise/passwords/new.html.haml:20 [W] RuboCop: Space missing after colon.
-app/views/devise/registrations/edit.html.haml:3 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:3 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:3 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:3 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:8 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:16 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/edit.html.haml:26 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/edit.html.haml:29 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/registrations/edit.html.haml:29 [W] RuboCop: Prefer single-quoted strings inside interpolations.
-app/views/devise/registrations/edit.html.haml:29 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:29 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:29 [W] RuboCop: Prefer single-quoted strings inside interpolations.
-app/views/devise/registrations/edit.html.haml:29 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/edit.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/new.html.haml:11 [W] RuboCop: Space inside } missing.
-app/views/devise/registrations/new.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/new.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/new.html.haml:19 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/registrations/new.html.haml:25 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/registrations/new.html.haml:34 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/new.html.haml:34 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/new.html.haml:34 [W] RuboCop: Space inside } missing.
-app/views/devise/registrations/new.html.haml:34 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/registrations/new.html.haml:37 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/registrations/new.html.haml:39 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/registrations/new.html.haml:39 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/registrations/new.html.haml:39 [W] RuboCop: Space inside } missing.
-app/views/devise/registrations/new.html.haml:39 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:14 [W] RuboCop: Space inside } missing.
-app/views/devise/sessions/new.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:23 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:29 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/sessions/new.html.haml:39 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/sessions/new.html.haml:39 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:39 [W] RuboCop: Space inside } missing.
-app/views/devise/sessions/new.html.haml:39 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:42 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/sessions/new.html.haml:44 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/sessions/new.html.haml:44 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:44 [W] RuboCop: Space inside } missing.
-app/views/devise/sessions/new.html.haml:44 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:52 [W] RuboCop: Space inside } missing.
-app/views/devise/sessions/new.html.haml:52 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:55 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:57 [W] RuboCop: Space inside } missing.
-app/views/devise/sessions/new.html.haml:57 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/devise/sessions/new.html.haml:59 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-content should precede #myTabContent)
-app/views/devise/sessions/new.html.haml:60 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:60 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:60 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:60 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #home)
-app/views/devise/sessions/new.html.haml:87 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:87 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:87 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/sessions/new.html.haml:87 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #profile)
-app/views/devise/shared/_links.haml:1 [W] ConsecutiveComments: 19 consecutive comments can be merged into one
-app/views/devise/unlocks/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/unlocks/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/unlocks/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/unlocks/new.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/unlocks/new.html.haml:7 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/devise/unlocks/new.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/devise/unlocks/new.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_aspect.html.haml:1 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_aspect.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/_aspect.html.haml:2 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/discontent/posts/_aspect.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_aspect.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_aspect.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_aspect.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_aspect.html.haml:3 [W] RuboCop: Surrounding space missing for operator `+`.
-app/views/discontent/posts/_aspect.html.haml:3 [W] LineLength: Line is too long. [273/170]
+app/views/discontent/posts/_aspect.html.haml:3 [W] LineLength: Line is too long. [267/170]
 app/views/discontent/posts/_aspect.html.haml:24 [W] FinalNewline: Files should end with a trailing newline
 app/views/discontent/posts/_detailed_form.html.haml:28 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-cab2-1)
 app/views/discontent/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-post)
@@ -827,12 +663,7 @@ app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma aft
 app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_popup_post.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/discontent/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [302/170]
+app/views/discontent/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [281/170]
 app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
 app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -843,12 +674,7 @@ app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma aft
 app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_popup_post.html.haml:28 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/discontent/posts/_popup_post.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/discontent/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [308/170]
+app/views/discontent/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
 app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
 app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -890,22 +716,21 @@ app/views/discontent/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-qu
 app/views/discontent/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_vote.html.haml:9 [W] LineLength: Line is too long. [284/170]
-app/views/discontent/posts/_popup_vote.html.haml:16 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/discontent/posts/_popup_vote.html.haml:9 [W] LineLength: Line is too long. [281/170]
 app/views/discontent/posts/_popup_vote.html.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_vote.html.haml:18 [W] LineLength: Line is too long. [239/170]
+app/views/discontent/posts/_popup_vote.html.haml:18 [W] LineLength: Line is too long. [233/170]
 app/views/discontent/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_popup_vote.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_vote.html.haml:31 [W] LineLength: Line is too long. [182/170]
+app/views/discontent/posts/_popup_vote.html.haml:31 [W] LineLength: Line is too long. [179/170]
 app/views/discontent/posts/_popup_vote.html.haml:33 [W] FinalNewline: Files should end with a trailing newline
 app/views/discontent/posts/_post_short.html.haml:1 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/_post_short.html.haml:1 [W] LineLength: Line is too long. [198/170]
@@ -921,13 +746,11 @@ app/views/discontent/posts/_post_short.html.haml:45 [W] RuboCop: Do not use `::`
 app/views/discontent/posts/_post_short.html.haml:47 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/discontent/posts/_post_short.html.haml:47 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/discontent/posts/_post_short.html.haml:48 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/discontent/posts/_post_short.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/_post_short.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:57 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/_post_short.html.haml:57 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/discontent/posts/_post_short.html.haml:66 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_post_short.html.haml:66 [W] RuboCop: Surrounding space missing for operator `>`.
-app/views/discontent/posts/_post_short.html.haml:66 [W] LineLength: Line is too long. [195/170]
+app/views/discontent/posts/_post_short.html.haml:66 [W] LineLength: Line is too long. [191/170]
 app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Space inside { missing.
 app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -966,8 +789,7 @@ app/views/discontent/posts/_post_vote.html.haml:21 [W] RuboCop: Prefer single-qu
 app/views/discontent/posts/_post_vote.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_post_vote.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_post_vote.html.haml:21 [W] LineLength: Line is too long. [243/170]
-app/views/discontent/posts/_post_vote.html.haml:22 [W] LineLength: Line is too long. [195/170]
-app/views/discontent/posts/_post_vote.html.haml:23 [W] LineLength: Line is too long. [173/170]
+app/views/discontent/posts/_post_vote.html.haml:22 [W] LineLength: Line is too long. [192/170]
 app/views/discontent/posts/_post_vote.html.haml:30 [W] FinalNewline: Files should end with a trailing newline
 app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -976,34 +798,24 @@ app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted 
 app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:10 [W] LineLength: Line is too long. [261/170]
+app/views/discontent/posts/index.html.haml:10 [W] LineLength: Line is too long. [258/170]
 app/views/discontent/posts/index.html.haml:10 [W] ClassesBeforeIds: Classes should be listed before IDs (.btn-group should precede #tooltip2_1)
 app/views/discontent/posts/index.html.haml:12 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:12 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:18 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/index.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:19 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:20 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/index.html.haml:20 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/discontent/posts/index.html.haml:21 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:43 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:43 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:44 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/index.html.haml:44 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/discontent/posts/index.html.haml:45 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/discontent/posts/index.html.haml:45 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:55 [W] LineLength: Line is too long. [173/170]
 app/views/discontent/posts/index.html.haml:67 [W] RuboCop: Unused block argument - `index`. If it's necessary, use `_` or `_index` as an argument name to indicate that it won't be used.
@@ -1020,10 +832,10 @@ app/views/discontent/posts/index.html.haml:86 [W] RuboCop: Prefer single-quoted 
 app/views/discontent/posts/index.html.haml:86 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:86 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/discontent/posts/index.html.haml:86 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:86 [W] LineLength: Line is too long. [212/170]
+app/views/discontent/posts/index.html.haml:86 [W] LineLength: Line is too long. [209/170]
 app/views/discontent/posts/index.html.haml:86 [W] ClassesBeforeIds: Classes should be listed before IDs (.tooltip1 should precede #tooltip2_2)
 app/views/discontent/posts/index.html.haml:88 [W] RuboCop: Redundant `else`-clause.
-app/views/discontent/posts/index.html.haml:90 [W] LineLength: Line is too long. [208/170]
+app/views/discontent/posts/index.html.haml:90 [W] LineLength: Line is too long. [205/170]
 app/views/discontent/posts/index.html.haml:95 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1032,7 +844,7 @@ app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted
 app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/index.html.haml:103 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/index.html.haml:103 [W] LineLength: Line is too long. [330/170]
+app/views/discontent/posts/index.html.haml:103 [W] LineLength: Line is too long. [327/170]
 app/views/discontent/posts/index.html.haml:103 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-2 should precede #tooltip2_2)
 app/views/discontent/posts/new.html.haml:5 [W] RuboCop: Space inside } missing.
 app/views/discontent/posts/new.html.haml:9 [W] LineLength: Line is too long. [178/170]
@@ -1101,7 +913,7 @@ app/views/estimate/posts/_popup_post.html.haml:80 [W] RuboCop: Prefer single-quo
 app/views/estimate/posts/_popup_post.html.haml:80 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:80 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:80 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:80 [W] LineLength: Line is too long. [189/170]
+app/views/estimate/posts/_popup_post.html.haml:80 [W] LineLength: Line is too long. [186/170]
 app/views/estimate/posts/_popup_post.html.haml:100 [W] RuboCop: Space missing after colon.
 app/views/estimate/posts/_popup_post.html.haml:102 [W] LineLength: Line is too long. [191/170]
 app/views/estimate/posts/_popup_post.html.haml:105 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
@@ -1116,7 +928,7 @@ app/views/estimate/posts/_popup_post.html.haml:142 [W] RuboCop: Prefer single-qu
 app/views/estimate/posts/_popup_post.html.haml:142 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:142 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:142 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/estimate/posts/_popup_post.html.haml:142 [W] LineLength: Line is too long. [229/170]
+app/views/estimate/posts/_popup_post.html.haml:142 [W] LineLength: Line is too long. [223/170]
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1124,7 +936,7 @@ app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-qu
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_popup_post.html.haml:149 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/estimate/posts/_popup_post.html.haml:149 [W] LineLength: Line is too long. [233/170]
+app/views/estimate/posts/_popup_post.html.haml:149 [W] LineLength: Line is too long. [227/170]
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1132,7 +944,7 @@ app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quo
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:18 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/estimate/posts/_post_short.html.haml:18 [W] LineLength: Line is too long. [209/170]
+app/views/estimate/posts/_post_short.html.haml:18 [W] LineLength: Line is too long. [203/170]
 app/views/estimate/posts/_post_short.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:23 [W] LineLength: Line is too long. [236/170]
@@ -1143,13 +955,12 @@ app/views/estimate/posts/_post_short.html.haml:33 [W] RuboCop: Prefer single-quo
 app/views/estimate/posts/_post_short.html.haml:33 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:33 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:33 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/estimate/posts/_post_short.html.haml:33 [W] LineLength: Line is too long. [213/170]
+app/views/estimate/posts/_post_short.html.haml:33 [W] LineLength: Line is too long. [207/170]
 app/views/estimate/posts/_post_short.html.haml:38 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:38 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:38 [W] LineLength: Line is too long. [240/170]
 app/views/estimate/posts/_post_short.html.haml:41 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/estimate/posts/_post_short.html.haml:42 [W] FinalNewline: Files should end with a trailing newline
-app/views/help/posts/_help_post_form.html.haml:9 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/help/posts/_help_post_form.html.haml:9 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/_help_post_form.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/help/posts/_help_post_form.html.haml:13 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
@@ -1305,8 +1116,6 @@ app/views/help/posts/_new_help_7.html.haml:1 [W] HtmlAttributes: Prefer the hash
 app/views/help/posts/_new_help_7.html.haml:69 [W] FinalNewline: Files should end with a trailing newline
 app/views/help/posts/about.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/about.html.haml:6 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/edit.js.haml:2 [W] RuboCop: Put one space between the method name and the first argument.
-app/views/help/posts/edit.js.haml:4 [W] FinalNewline: Files should end with a trailing newline
 app/views/help/posts/show.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/show.html.haml:4 [W] RuboCop: Use `%w` or `%W` for array of words.
 app/views/help/posts/show.html.haml:6 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
@@ -1322,41 +1131,33 @@ app/views/help/posts/show.html.haml:37 [W] ClassesBeforeIds: Classes should be l
 app/views/help/posts/show.html.haml:38 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
 app/views/help/posts/show.html.haml:46 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/help/posts/show.html.haml:46 [W] ImplicitDiv: `%div.help-content` can be written as `.help-content` since `%div` is implicit
-app/views/help/posts/update.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/layouts/application.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/layouts/application.html.haml:11 [W] RuboCop: Use `!` instead of `not`.
-app/views/layouts/application.html.haml:19 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/layouts/application.html.haml:24 [W] LineLength: Line is too long. [249/170]
-app/views/layouts/application.html.haml:25 [W] FinalNewline: Files should end with a trailing newline
+app/views/layouts/application.html.haml:5 [W] SpaceInsideHashAttributes: Hash attribute should start with one space after the opening brace
+app/views/layouts/application.html.haml:5 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
+app/views/layouts/application.html.haml:12 [W] RuboCop: Use `!` instead of `not`.
+app/views/layouts/application.html.haml:20 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/layouts/application.html.haml:25 [W] LineLength: Line is too long. [249/170]
 app/views/layouts/cabinet.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/layouts/cabinet.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:28 [W] LineLength: Line is too long. [205/170]
 app/views/layouts/cabinet.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/layouts/cabinet.html.haml:38 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:38 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:38 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #cabinet_new)
-app/views/layouts/cabinet.html.haml:41 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:41 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:41 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #cabinet_content)
-app/views/layouts/cabinet.html.haml:42 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:42 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/layouts/cabinet.html.haml:43 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:43 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/layouts/cabinet.html.haml:47 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:47 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:48 [W] LineLength: Line is too long. [202/170]
 app/views/layouts/cabinet.html.haml:49 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:52 [W] RuboCop: Avoid more than 3 levels of block nesting.
-app/views/layouts/cabinet.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:52 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:53 [W] LineLength: Line is too long. [202/170]
 app/views/layouts/cabinet.html.haml:54 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/layouts/cabinet.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:59 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/layouts/cabinet.html.haml:62 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:62 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:67 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/layouts/cabinet.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1384,7 +1185,6 @@ app/views/layouts/cabinet.html.haml:76 [W] RuboCop: Prefer single-quoted strings
 app/views/layouts/cabinet.html.haml:76 [W] LineLength: Line is too long. [246/170]
 app/views/layouts/cabinet.html.haml:81 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:83 [W] RuboCop: Space missing after colon.
-app/views/layouts/cabinet.html.haml:87 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/layouts/cabinet.html.haml:87 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:87 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #user_profile)
 app/views/layouts/cabinet.html.haml:94 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1405,21 +1205,12 @@ app/views/layouts/core/projects.html.haml:17 [W] LineLength: Line is too long. [
 app/views/layouts/core/projects.html.haml:24 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/layouts/core/projects.html.haml:26 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/layouts/core/projects.html.haml:46 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-3-1)
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Surrounding space missing for operator `=>`.
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/layouts/core/projects.html.haml:52 [W] RuboCop: Space missing after colon.
 app/views/layouts/core/projects.html.haml:62 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/core/projects.html.haml:62 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/core/projects.html.haml:62 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/layouts/core/projects.html.haml:70 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-3-2)
-app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Surrounding space missing for operator `=>`.
-app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/layouts/core/projects.html.haml:76 [W] RuboCop: Space missing after colon.
 app/views/layouts/core/projects.html.haml:84 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/core/projects.html.haml:84 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/core/projects.html.haml:84 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
@@ -1429,7 +1220,6 @@ app/views/news/index.html.haml:15 [W] UnnecessaryStringOutput: `= "..."` should 
 app/views/news/index.html.haml:17 [W] FinalNewline: Files should end with a trailing newline
 app/views/news/show.html.haml:15 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/novation/posts/_concept.html.haml:4 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/novation/posts/_form_field.html.haml:1 [W] RuboCop: Space inside } missing.
 app/views/novation/posts/_form_field.html.haml:1 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/novation/posts/_form_field.html.haml:2 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #cab4-1)
 app/views/novation/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-post)
@@ -1506,9 +1296,7 @@ app/views/novation/posts/_post_short.html.haml:45 [W] RuboCop: Do not use `::` f
 app/views/novation/posts/_post_short.html.haml:47 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/novation/posts/_post_short.html.haml:47 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/novation/posts/_post_short.html.haml:48 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/novation/posts/_post_short.html.haml:53 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/novation/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:53 [W] RuboCop: Space inside } missing.
 app/views/novation/posts/_post_short.html.haml:53 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/novation/posts/_post_short.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/_post_short.html.haml:57 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1561,10 +1349,8 @@ app/views/novation/posts/_post_vote.html.haml:22 [W] RuboCop: Prefer single-quot
 app/views/novation/posts/_post_vote.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/_post_vote.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/_post_vote.html.haml:22 [W] LineLength: Line is too long. [279/170]
-app/views/novation/posts/_post_vote.html.haml:23 [W] LineLength: Line is too long. [197/170]
-app/views/novation/posts/_post_vote.html.haml:24 [W] LineLength: Line is too long. [172/170]
+app/views/novation/posts/_post_vote.html.haml:23 [W] LineLength: Line is too long. [194/170]
 app/views/novation/posts/_post_vote.html.haml:30 [W] FinalNewline: Files should end with a trailing newline
-app/views/novation/posts/answer_content_question.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/novation/posts/index.html.haml:11 [W] RuboCop: Space inside } missing.
 app/views/novation/posts/index.html.haml:14 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/novation/posts/index.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1573,19 +1359,19 @@ app/views/novation/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted st
 app/views/novation/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/index.html.haml:24 [W] LineLength: Line is too long. [214/170]
+app/views/novation/posts/index.html.haml:24 [W] LineLength: Line is too long. [211/170]
 app/views/novation/posts/index.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/index.html.haml:29 [W] LineLength: Line is too long. [219/170]
+app/views/novation/posts/index.html.haml:29 [W] LineLength: Line is too long. [216/170]
 app/views/novation/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/index.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/index.html.haml:37 [W] LineLength: Line is too long. [241/170]
+app/views/novation/posts/index.html.haml:37 [W] LineLength: Line is too long. [238/170]
 app/views/novation/posts/index.html.haml:37 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-2 should precede #tooltip3_2)
 app/views/novation/posts/new.html.haml:4 [W] LineLength: Line is too long. [172/170]
 app/views/novation/posts/new.html.haml:18 [W] LineLength: Line is too long. [195/170]
@@ -1613,16 +1399,11 @@ app/views/novation/posts/user_content.html.haml:33 [W] LineLength: Line is too l
 app/views/plan/posts/_gantt_panel.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.bottom_fix should precede #bottom-panel)
 app/views/plan/posts/_gantt_panel.html.haml:9 [W] ClassesBeforeIds: Classes should be listed before IDs (.btn should precede #bottom-opener)
 app/views/plan/posts/_gantt_panel.html.haml:12 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/plan/posts/_gantt_panel.html.haml:13 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/plan/posts/_gantt_panel.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_gantt_panel.html.haml:13 [W] ClassesBeforeIds: Classes should be listed before IDs (.noprint should precede #taZone)
-app/views/plan/posts/_gantt_panel.html.haml:15 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/plan/posts/_gantt_panel.html.haml:15 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_gantt_panel.html.haml:15 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/plan/posts/_gantt_panel.html.haml:15 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_gantt_panel.html.haml:18 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/plan/posts/_gantt_panel.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_gantt_panel.html.haml:18 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/plan/posts/_gantt_panel.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_gantt_panel.html.haml:21 [W] LineLength: Line is too long. [288/170]
 app/views/plan/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-post)
@@ -1671,7 +1452,7 @@ app/views/plan/posts/_popup_post.html.haml:78 [W] RuboCop: Prefer single-quoted 
 app/views/plan/posts/_popup_post.html.haml:78 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_popup_post.html.haml:78 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_popup_post.html.haml:78 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:78 [W] LineLength: Line is too long. [189/170]
+app/views/plan/posts/_popup_post.html.haml:78 [W] LineLength: Line is too long. [186/170]
 app/views/plan/posts/_popup_post.html.haml:89 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/plan/posts/_popup_post.html.haml:101 [W] RuboCop: Space missing after colon.
 app/views/plan/posts/_popup_post.html.haml:101 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1690,47 +1471,39 @@ app/views/plan/posts/_popup_post.html.haml:109 [W] ClassesBeforeIds: Classes sho
 app/views/plan/posts/_popup_post.html.haml:113 [W] LineLength: Line is too long. [171/170]
 app/views/plan/posts/_popup_post.html.haml:113 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_post_short.html.haml:1 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:6 [W] LineLength: Line is too long. [294/170]
-app/views/plan/posts/_post_short.html.haml:8 [W] LineLength: Line is too long. [336/170]
+app/views/plan/posts/_post_short.html.haml:5 [W] LineLength: Line is too long. [292/170]
+app/views/plan/posts/_post_short.html.haml:7 [W] LineLength: Line is too long. [334/170]
+app/views/plan/posts/_post_short.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_post_short.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:14 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
-app/views/plan/posts/_post_short.html.haml:17 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:25 [W] RuboCop: Do not use `::` for method calls.
-app/views/plan/posts/_post_short.html.haml:30 [W] RuboCop: Useless assignment to variable - `size`.
-app/views/plan/posts/_post_short.html.haml:34 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
-app/views/plan/posts/_post_short.html.haml:37 [W] RuboCop: Do not use `::` for method calls.
-app/views/plan/posts/_post_short.html.haml:39 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/plan/posts/_post_short.html.haml:39 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/plan/posts/_post_short.html.haml:40 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/plan/posts/_post_short.html.haml:48 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:49 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:49 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:53 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:53 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/plan/posts/_post_short.html.haml:55 [W] LineLength: Line is too long. [296/170]
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:58 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:58 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/plan/posts/_post_short.html.haml:60 [W] LineLength: Line is too long. [302/170]
+app/views/plan/posts/_post_short.html.haml:14 [W] RuboCop: Space missing after comma.
+app/views/plan/posts/_post_short.html.haml:14 [W] RuboCop: Space missing after colon.
+app/views/plan/posts/_post_short.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+app/views/plan/posts/_post_short.html.haml:16 [W] RuboCop: Do not use `::` for method calls.
+app/views/plan/posts/_post_short.html.haml:20 [W] RuboCop: Useless assignment to variable - `size`.
+app/views/plan/posts/_post_short.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Redundant curly braces around a hash parameter.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space inside { missing.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space missing after comma.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Avoid comma after the last item of a hash.
+app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space inside } missing.
+app/views/plan/posts/_post_short.html.haml:36 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Redundant curly braces around a hash parameter.
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space inside { missing.
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space missing after comma.
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Avoid comma after the last item of a hash.
+app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space inside } missing.
+app/views/plan/posts/_post_short.html.haml:40 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/plan/posts/_post_short.html.haml:42 [W] LineLength: Line is too long. [292/170]
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Redundant curly braces around a hash parameter.
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space inside { missing.
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space missing after comma.
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Avoid comma after the last item of a hash.
+app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space inside } missing.
+app/views/plan/posts/_post_short.html.haml:45 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/plan/posts/_post_short.html.haml:47 [W] LineLength: Line is too long. [298/170]
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1738,7 +1511,7 @@ app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quote
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Surrounding space missing for operator `*`.
-app/views/plan/posts/_progress_vote.html.haml:3 [W] LineLength: Line is too long. [223/170]
+app/views/plan/posts/_progress_vote.html.haml:3 [W] LineLength: Line is too long. [217/170]
 app/views/plan/posts/_progress_vote.html.haml:4 [W] FinalNewline: Files should end with a trailing newline
 app/views/plan/posts/index.html.haml:8 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/plan/posts/index.html.haml:17 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1747,7 +1520,7 @@ app/views/plan/posts/index.html.haml:18 [W] RuboCop: Prefer single-quoted string
 app/views/plan/posts/index.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/index.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/index.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/index.html.haml:18 [W] LineLength: Line is too long. [214/170]
+app/views/plan/posts/index.html.haml:18 [W] LineLength: Line is too long. [211/170]
 app/views/plan/posts/index.html.haml:23 [W] RuboCop: Space inside } missing.
 app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1756,7 +1529,7 @@ app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted string
 app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/index.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/index.html.haml:31 [W] LineLength: Line is too long. [337/170]
+app/views/plan/posts/index.html.haml:31 [W] LineLength: Line is too long. [334/170]
 app/views/plan/posts/index.html.haml:31 [W] ClassesBeforeIds: Classes should be listed before IDs (.sort-2 should precede #tooltip3_2)
 app/views/plan/posts/new.html.haml:10 [W] LineLength: Line is too long. [198/170]
 app/views/plan/posts/new.html.haml:38 [W] RuboCop: Space inside } missing.
@@ -1770,9 +1543,6 @@ app/views/plan/posts/new.html.haml:88 [W] LineLength: Line is too long. [214/170
 app/views/plan/posts/new.html.haml:93 [W] RuboCop: Unused block argument - `bool_attribute`. If it's necessary, use `_` or `_bool_attribute` as an argument name to indicate that it won't be used.
 app/views/plan/posts/user_content.html.haml:8 [W] RuboCop: Do not use `::` for method calls.
 app/views/plan/posts/user_content.html.haml:18 [W] LineLength: Line is too long. [183/170]
-app/views/plan/posts/vote.js.haml:1 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/vote.js.haml:1 [W] FinalNewline: Files should end with a trailing newline
-app/views/plan/posts/vote.js.haml:1 [W] LineLength: Line is too long. [188/170]
 app/views/post_mailer/add_comment.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/post_mailer/add_comment.html.haml:12 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/post_mailer/add_comment.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1805,11 +1575,9 @@ app/views/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted string
 app/views/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/posts/_popup_vote.html.haml:9 [W] LineLength: Line is too long. [284/170]
-app/views/posts/_popup_vote.html.haml:16 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
+app/views/posts/_popup_vote.html.haml:9 [W] LineLength: Line is too long. [281/170]
 app/views/posts/_popup_vote.html.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:18 [W] RuboCop: Surrounding space missing for operator `/`.
-app/views/posts/_popup_vote.html.haml:18 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/posts/_popup_vote.html.haml:18 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1819,10 +1587,10 @@ app/views/posts/_popup_vote.html.haml:20 [W] RuboCop: Prefer single-quoted strin
 app/views/posts/_popup_vote.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:20 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/posts/_popup_vote.html.haml:20 [W] LineLength: Line is too long. [229/170]
+app/views/posts/_popup_vote.html.haml:20 [W] LineLength: Line is too long. [226/170]
 app/views/posts/_popup_vote.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/posts/_popup_vote.html.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/posts/_popup_vote.html.haml:31 [W] LineLength: Line is too long. [182/170]
+app/views/posts/_popup_vote.html.haml:31 [W] LineLength: Line is too long. [179/170]
 app/views/posts/_popup_vote.html.haml:33 [W] FinalNewline: Files should end with a trailing newline
 app/views/posts/_popup_welcome.html.haml:1 [W] LineLength: Line is too long. [201/170]
 app/views/posts/_popup_welcome.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1839,23 +1607,6 @@ app/views/posts/_update_comment_form.html.haml:3 [W] RuboCop: Space missing afte
 app/views/posts/_update_comment_form.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/posts/_update_comment_form.html.haml:3 [W] LineLength: Line is too long. [172/170]
 app/views/posts/_update_comment_form.html.haml:6 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/posts/add_comment.js.haml:12 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/posts/add_comment.js.haml:12 [W] LineLength: Line is too long. [227/170]
-app/views/posts/add_comment.js.haml:13 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/posts/add_comment.js.haml:28 [W] ConsecutiveComments: 11 consecutive comments can be merged into one
-app/views/posts/change_status.js.haml:2 [E] Illegal nesting: nesting within plain text is illegal.
-app/views/posts/edit.html.haml:3 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/posts/edit_comment.js.haml:2 [W] RuboCop: Put one space between the method name and the first argument.
-app/views/posts/edit_comment.js.haml:2 [W] RuboCop: Space inside } missing.
-app/views/posts/edit_comment.js.haml:2 [W] FinalNewline: Files should end with a trailing newline
-app/views/posts/edit_comment.js.haml:2 [W] LineLength: Line is too long. [178/170]
-app/views/posts/like.js.haml:9 [W] FinalNewline: Files should end with a trailing newline
-app/views/posts/like_comment.js.haml:9 [W] FinalNewline: Files should end with a trailing newline
-app/views/posts/show.js.haml:11 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/posts/show_results.js.haml:1 [W] FinalNewline: Files should end with a trailing newline
-app/views/posts/update_comment.js.haml:6 [W] FinalNewline: Files should end with a trailing newline
-app/views/posts/vote.js.haml:5 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/posts/vote.js.haml:6 [W] FinalNewline: Files should end with a trailing newline
 app/views/shared/_cabinet_comment.html.haml:5 [W] RuboCop: Do not use `::` for method calls.
 app/views/shared/_cabinet_comment.html.haml:5 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/shared/_cabinet_comment.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1865,7 +1616,6 @@ app/views/shared/_cabinet_comment.html.haml:8 [W] RuboCop: Prefer single-quoted 
 app/views/shared/_cabinet_comment.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:8 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_cabinet_comment.html.haml:8 [W] LineLength: Line is too long. [173/170]
 app/views/shared/_cabinet_comment.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:12 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1888,13 +1638,7 @@ app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Avoid comma after th
 app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Space inside } missing.
 app/views/shared/_cabinet_comment.html.haml:28 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/shared/_cabinet_comment.html.haml:29 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:30 [W] LineLength: Line is too long. [244/170]
+app/views/shared/_cabinet_comment.html.haml:30 [W] LineLength: Line is too long. [226/170]
 app/views/shared/_cabinet_comment.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_cabinet_comment.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1907,13 +1651,7 @@ app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Avoid comma after th
 app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Space inside } missing.
 app/views/shared/_cabinet_comment.html.haml:34 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/shared/_cabinet_comment.html.haml:35 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_cabinet_comment.html.haml:36 [W] LineLength: Line is too long. [247/170]
+app/views/shared/_cabinet_comment.html.haml:36 [W] LineLength: Line is too long. [229/170]
 app/views/shared/_cabinet_comment.html.haml:41 [W] FinalNewline: Files should end with a trailing newline
 app/views/shared/_comment.html.haml:22 [W] LineLength: Line is too long. [192/170]
 app/views/shared/_comment.html.haml:26 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1923,19 +1661,9 @@ app/views/shared/_comment.html.haml:32 [W] SpaceInsideHashAttributes: Hash attri
 app/views/shared/_comment.html.haml:42 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/shared/_comment.html.haml:45 [W] LineLength: Line is too long. [222/170]
 app/views/shared/_comment.html.haml:49 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/shared/_comment.html.haml:50 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:50 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:50 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:50 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:50 [W] LineLength: Line is too long. [181/170]
 app/views/shared/_comment.html.haml:56 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/shared/_comment.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:57 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
-app/views/shared/_comment.html.haml:57 [W] LineLength: Line is too long. [181/170]
-app/views/shared/_comment.html.haml:65 [W] LineLength: Line is too long. [191/170]
-app/views/shared/_comment.html.haml:72 [W] LineLength: Line is too long. [191/170]
+app/views/shared/_comment.html.haml:65 [W] LineLength: Line is too long. [173/170]
+app/views/shared/_comment.html.haml:72 [W] LineLength: Line is too long. [173/170]
 app/views/shared/_comment.html.haml:76 [W] LineLength: Line is too long. [207/170]
 app/views/shared/_comment.html.haml:80 [W] LineLength: Line is too long. [229/170]
 app/views/shared/_comment_form.html.haml:1 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -1971,24 +1699,16 @@ app/views/shared/_create_success.html.haml:1 [W] RuboCop: Space missing after co
 app/views/shared/_create_success.html.haml:1 [W] RuboCop: Avoid comma after the last item of a hash.
 app/views/shared/_create_success.html.haml:1 [W] RuboCop: Space inside } missing.
 app/views/shared/_create_success.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/shared/_gantt_template.html.haml:1 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:1 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_gantt_template.html.haml:2 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:2 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_gantt_template.html.haml:9 [W] LineLength: Line is too long. [178/170]
 app/views/shared/_gantt_template.html.haml:10 [W] LineLength: Line is too long. [178/170]
-app/views/shared/_gantt_template.html.haml:23 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:23 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_gantt_template.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:36 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_gantt_template.html.haml:39 [W] LineLength: Line is too long. [190/170]
-app/views/shared/_gantt_template.html.haml:50 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:50 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_gantt_template.html.haml:63 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:63 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_gantt_template.html.haml:74 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:74 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_gantt_template.html.haml:83 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/shared/_gantt_template.html.haml:83 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_user_online.html.haml:1 [W] RuboCop: Operator `>` should be surrounded with a single space.
 app/views/shared/_user_online.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
@@ -2016,29 +1736,22 @@ app/views/users/show.html.haml:15 [W] RuboCop: Prefer single-quoted strings when
 app/views/users/show.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:19 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/show.html.haml:24 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:24 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:24 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #user_content)
-app/views/users/show.html.haml:25 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:25 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/show.html.haml:26 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:26 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/show.html.haml:29 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:30 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/show.html.haml:30 [W] LineLength: Line is too long. [179/170]
+app/views/users/show.html.haml:30 [W] LineLength: Line is too long. [173/170]
 app/views/users/show.html.haml:31 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/users/show.html.haml:36 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:36 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/show.html.haml:36 [W] LineLength: Line is too long. [190/170]
+app/views/users/show.html.haml:36 [W] LineLength: Line is too long. [187/170]
 app/views/users/show.html.haml:45 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/users/show.html.haml:45 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/users/show.html.haml:57 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/users/show.html.haml:61 [W] RuboCop: Space missing after colon.
-app/views/users/show.html.haml:65 [W] RuboCop: Use the new Ruby 1.9 hash syntax.
 app/views/users/show.html.haml:65 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/users/show.html.haml:65 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #user_profile)
 app/views/users/show.html.haml:96 [W] FinalNewline: Files should end with a trailing newline
-app/views/users/update.js.haml:6 [W] FinalNewline: Files should end with a trailing newline

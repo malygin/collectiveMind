@@ -2,7 +2,7 @@
   .row
     .col-md-12
       #myCarousel.carousel.slide{ "data-interval" => "false" }
-        .carousel-inner{ :role => "listbox" }
+        .carousel-inner{ role: "listbox" }
           .item.active{ "data-slide-no" => "0" }
             .row
               .col-md-10.col-md-offset-1
@@ -46,7 +46,7 @@
               .divider10
 
         %ul.list_win.list-unstyled.list-inline.text-center.rate_buttons
-          %li.arrow{ "data-slide" => "prev", :href => "#myCarousel", :role => "button" }
+          %li.arrow{ "data-slide" => "prev", href: "#myCarousel", role: "button" }
             %i.fa.fa-angle-left
           %li.myCarousel-target.active{ "data-slide-to" => "0", "data-target" => "#myCarousel" }
             %button.btn.btn_reset.back_color_stage7.font_white.bold 1
@@ -56,7 +56,7 @@
               %button.btn.btn_reset.back_color_stage7.font_white.bold
                 =index + 2
 
-          %li.arrow{ "data-slide" => "next", :href => "#myCarousel", :role => "button" }
+          %li.arrow{ "data-slide" => "next", href: "#myCarousel", role: "button" }
             %i.fa.fa-angle-right
         .divider20
 

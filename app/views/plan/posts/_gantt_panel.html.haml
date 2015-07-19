@@ -10,12 +10,12 @@
               %i.fa.fa-arrow-up.font_white
           .divider10
           #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:900px; height:600px;")
-          #taZone.noprint{ :style => "display:none;" }
+          #taZone.noprint{ style: "display:none;" }
             - if @post.persisted?
-              %textarea#ta{ :cols => "150", :rows => "8" }
+              %textarea#ta{ cols: "150", rows: "8" }
                 = @post.tasks_gant.to_json.try(:html_safe)
             - else
-              %textarea#ta{ :cols => "150", :rows => "8" }
+              %textarea#ta{ cols: "150", rows: "8" }
                 :preserve
                        { "tasks":[
                        { "id":-1, "name":"Проектное предложение", "code":"", "level":0, "status":"STATUS_ACTIVE", "canWrite":true, "start":1396994400000, "duration":21, "end":1399672799999, "startIsMilestone":true, "endIsMilestone":false, "collapsed":false, "assigs":[], "hasChild":true }
