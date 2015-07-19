@@ -20,6 +20,7 @@ body.main-page {
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
+    cursor:pointer;
 }
 
 a:focus, a:active, button:focus, button:active {
@@ -29,10 +30,6 @@ a:focus, a:active, button:focus, button:active {
 
 .a_font_reset, .a_font_reset:hover, .a_font_reset:focus {
     color: inherit;
-}
-
-.imperfect-new .innovs .innov-single .post-center-block .post-poster, .imperfect-new .innovs .innov-single .post-center-block .post-text, .right-rollover, .imperfect-new .innovs .innov-single .post-themes .tag-stripe, .popup-top-block, .popup-bottom-block, .admin-notice-displayable, .popup-imperf-admin-notice, .popup-window.authorize-popup .popup {
-    box-sizing: border-box;
 }
 
 .container {
@@ -1710,9 +1707,6 @@ i.fa.sticker_close {
     background: image-url('icon-cab-folder_5_.png') no-repeat center top;
 }
 
-.type_cab .cab_folder.back4_pale {
-    background: image-url('icon-cab-folder_5_pale.png') no-repeat center top;
-}
 
 .type_cab .cab_folder .percentage {
     position: absolute;
@@ -1725,7 +1719,7 @@ i.fa.sticker_close {
     top: 20px;
 }
 
-.cab_folder.back3 .percentage, .cab_folder.back4 .percentage, .cab_folder.back4_pale .percentage {
+.cab_folder.back3 .percentage, .cab_folder.back4 .percentage{
     top: 15px;
 }
 
@@ -2458,15 +2452,6 @@ i.fa.sticker_close {
     border-color: rgba(211, 211, 211, 0);
     border-width: 9.5px;
 }
-.subaspect li.active .collapser_type3.border_swampy:before {
-    border-left-color: #86c4b0;
-}
-.subaspect li.active .collapser_type3.border_mid_blue:before {
-    border-left-color: #8fa8e7;
-}
-.subaspect li.active .collapser_type3.border_violet:before {
-    border-left-color: #bfb0db;
-}
 .profile h3 {
     margin-top: 15px;
     margin-bottom: 5px;
@@ -3036,76 +3021,11 @@ a.dropdown-toggle i {
     border: 1px solid #d1d1d1 !important;
 }
 
-.border_swampy {
-    border-color: #86c4b0 !important;
-}
-
-.border_mid_blue {
-    border-color: #8fa8e7 !important;
-}
-
-.border_violet {
-    border-color: #bfb0db !important;
-}
-
 .border_light_grey {
     border: 1px solid #e6e6e6;
 }
 .border_top_grey {
     border-top: 1px solid #d1d1d1;
-}
-
-/* aspect colors */
-li.active > .aspect_color0_background {
-    background-color: #cfa7cc !important;
-}
-
-li.active > .aspect_color1_background {
-    background-color: #a4b1db !important;
-}
-
-li.active > .aspect_color2_background {
-    background-color: #88a2c3 !important;
-}
-
-li.active > .aspect_color3_background {
-    background-color: #8a99ae !important;
-}
-
-li.active > .aspect_color4_background {
-    background-color: #8abdea !important;
-}
-
-li.active > .aspect_color5_background {
-    background-color: #8fc8d3 !important;
-}
-
-li.active > .aspect_color6_background {
-    background-color: #a3bead !important;
-}
-
-li.active > .aspect_color7_background {
-    background-color: #a5cba2 !important;
-}
-
-li.active > .aspect_color8_background {
-    background-color: #b9dd9d !important;
-}
-
-li.active > .aspect_color9_background {
-    background-color: #d7d69e !important;
-}
-
-li.active > .aspect_color10_background {
-    background-color: #e9dd93 !important;
-}
-
-li.active > .aspect_color11_background {
-    background-color: #e7b288 !important;
-}
-
-li.active > .aspect_color12_background {
-    background-color: #d59d9e !important;
 }
 
 .sprite {

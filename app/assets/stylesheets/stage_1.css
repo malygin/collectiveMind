@@ -52,10 +52,6 @@
     color: #6ca3ca;
 }
 
-.stage1_theme .poll-2-1, .stage1_theme .vote_folders_cont li.active .poll-2-1 {
-    background-position: 0 0;
-}
-
 .stage1_theme .b_vote.voted {
     background-image: image-url('vote/vote_all_1.png');
 }
