@@ -18,10 +18,6 @@ body.main-page {
     background: #fff;
 }
 
-.outer {
-    min-height: 100%;
-}
-
 a, a:hover, a:focus, a:active {
     text-decoration: none;
 }
@@ -3215,4 +3211,28 @@ li.active > .aspect_color12_background {
 }
 .avatar_icon.active{
     border: 2px solid #e61928;
+}
+
+.book_icon {
+    display: inline-block;
+    margin-right: 2px;
+    top:2px;
+    width: 19px;
+    height: 15px;
+    background: image-url('book-icon-sprite.png') no-repeat 0 -3px;
+    position:relative;
+}
+.top-circle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #e71d2b;
+    color: #fff;
+    font-size: 9px;
+    text-align: center;
+    line-height: 15px;
 }

@@ -3,17 +3,16 @@
   = render 'application/meta'
   %body{ style: 'background-color: #f4f4f4;' }
     %div{class: stage_theme}
-      .outer
-        - if left_rollover?
-          = render partial: 'left_rollover'
-        = render partial: 'header'
-        - if profile?
-          = render partial: 'cabinet_stage_panel'
-        - elsif not rating?
-          = render partial: 'stage_panel'
-        .main-block
-          .container
-            = yield
+      - if left_rollover?
+        = render partial: 'left_rollover'
+      = render partial: 'header'
+      - if profile?
+        = render partial: 'cabinet_stage_panel'
+      - elsif not rating?
+        = render partial: 'stage_panel'
+      .main-block
+        .container
+          = yield
 
     #render_for_post
     #render_knowbase_posts
