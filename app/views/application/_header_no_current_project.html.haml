@@ -4,7 +4,7 @@
       .navbar-brand
         %a{ href: '/', id: 'go_to_logo' }
           = image_tag 'logo.png', class: 'auth_logo'
-    %ul.list-inline.navbar-right.font12
+    %ul.list-inline.navbar-right
       - if signed_in?
         - if @core_project
           %li
@@ -13,8 +13,9 @@
           %li
             = link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
         - else
-          %li.font_grey.no_margin
-            Добро пожаловать, #{current_user.name} !
+          %li
+            %p
+              Добро пожаловать, #{current_user.name} !
         %li
           = link_to destroy_user_session_path, method: :delete, id: 'sign_out' do
             = t('menu.sign_out')
