@@ -1,12 +1,13 @@
 = form_for comment, html: { id: 'comment_form', class: 'form-group comment_add main_add' }, remote: true,
-              url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize, action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
+url: url_for(controller: @post.nil? ? post.class.name.underscore.pluralize : @post.class.name.underscore.pluralize,
+action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id), method: :put do |f|
   = render 'shared/notice_messages', object: f.object
   .input_cont
-    - if comment.class_name== 'Aspect'
+    - if comment.class_name == 'Aspect'
       = f.text_area :content, id: 'comment_text_area', placeholder: 'Выскажите свое мнение об описанном аспекте'
     - else
       = f.text_area :content, id: 'comment_text_area', placeholder: 'Ваш комментарий'
-  %button.btn.send-comment{ type: 'submit', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title:'Отправить' }
+  %button.btn.send-comment{ type: 'submit', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Отправить' }
     %span.bold
       %i.fa.fa-reply.theme_font_color
 

@@ -7,7 +7,8 @@
         = "(#{@main_aspects.size})"
     .col-md-5
       .sort-block.pull-right
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: 'btn add-button tooltip1 big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title:'Добавляйте новые аспекты, не представленные в базе знаний' do
+        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: 'btn add-button tooltip1 big',
+        'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: 'Добавляйте новые аспекты, не представленные в базе знаний' do
           %span{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Добавить аспект' }
             = t('techniques.aspect_posts_simple')
 
@@ -15,7 +16,8 @@
   .container
     .row
       .col-md-2.popover-info#popover_intro{ 'data-placement' => 'top', 'data-content' => 'Прежде всего прочитайте статью методолога' }
-      .col-md-10.popover-info#popover_aspect{ 'data-placement' => 'top', 'data-content' => 'Потом ответьте на вопросы по аспектам, чтобы перейти к общему обсуждению в новом экране' }
+      .col-md-10.popover-info#popover_aspect{ 'data-placement' => 'top',
+      'data-content' => 'Потом ответьте на вопросы по аспектам, чтобы перейти к общему обсуждению в новом экране' }
     .block-content
       .slider-wrapper
         %a.slider-left.slider-nav
@@ -23,29 +25,29 @@
         %a.slider-right.slider-nav
           %i.fa.fa-caret-right.font_lighter_grey
         .slider-outer
-          %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id} }
+          %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id } }
             %li.active
               .slider-item
                 .c1-item
                   %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
-                    %span.c1-item-inner{ style: "border-top-color: #eac85e;" }
+                    %span.c1-item-inner{ style: 'border-top-color: #eac85e;' }
                       Введение в процедуру
-            - @main_aspects.each_with_index do |aspect, index|
+            - @main_aspects.each do |aspect|
               %li.li_aspect{ id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}" }
                 .slider-item
                   .c1-item
                     %a{ id: "aspect_#{aspect.id}", 'data-toggle' => 'tab', href: "#tab_aspect_#{aspect.id}" }
                       %span.c1-item-inner{ style: "border-top-color: #{aspect.color};" }
-                        =aspect.content
+                        = aspect.content
 
       .tab-content
         .tab-pane.main-pane.active.fade.in{ id: 'tab_aspect_0' }
           .row
             .col-md-12.col-sm-12
-              .aspect-main-block{ style: "border-top-color:#eac85e;" }
+              .aspect-main-block{ style: 'border-top-color:#eac85e;' }
                 = @project.introduction.try(:html_safe)
                 .row
                   .col-md-8
                     -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
         - @main_aspects.each_with_index do |asp, index|
-          = render partial: 'aspect_questions', locals: { asp: asp, index: index}
+          = render partial: 'aspect_questions', locals: { asp: asp, index: index }

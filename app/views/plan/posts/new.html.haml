@@ -7,7 +7,8 @@
   -#    %button.btn.btn_reset.font_white Нет
   .divider20
   - if @post.persisted?
-    = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_plan') }, id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del a_font_reset'
+    = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_plan') },
+    id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del a_font_reset'
     .divider10
   %span#plan_buttons
     %button.btn.add-button.type3.dark-green#to_save_plan Сохранить и выйти
@@ -35,19 +36,19 @@
         = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
   - else
     .content_window.bottom_panel_stop
-      %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{ 'data-placement' => 'cabinet5', 'data-target' => '1'} Выбрать пакет
+      %a.cont_heading.a_font_reset.bold.pocket_name.open-popup{ 'data-placement' => 'cabinet5', 'data-target' => '1' } Выбрать пакет
   .content_window.white.c_w_5
     .cont_heading
       - if @post.content
-        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form=@post.content
+        %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form= @post.content
       - else
         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form Пакет еще не выбран
     .divider10
     .row
       .col-md-4
         %ul.list-unstyled.tabs_type_2{ role: 'tablist' }
-          - @post.post_novations.first.attributes_for_form.each do |link, values|
-            %li{ role: 'presentation', class: "#{'active' if link ==:project}" }
+          - @post.post_novations.first.attributes_for_form.each do |link, _values|
+            %li{ role: 'presentation', class: "#{'active' if link == :project}" }
 
               %a.a_font_reset.scroll_tab{ 'data-toggle' => 'tab', role: 'tab', href: "#cabinet_5_cont_#{link}" }
                 = t("activerecord.attributes.plan/post_novation.#{link}")
@@ -55,7 +56,7 @@
         .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations
           - @post.post_novations.first.attributes_for_form.each do |link, attributes|
             = fields_for @post.post_novations.first do |n|
-              .tab-pane.fade.in{ role: 'tabpanel', id: "cabinet_5_cont_#{link}",  class: "#{'active' if link ==:project}" }
+              .tab-pane.fade.in{ role: 'tabpanel', id: "cabinet_5_cont_#{link}",  class: "#{'active' if link == :project}" }
                 - attributes.each do |attribute, bool|
                   - if bool == -1 || bool == true
                     %h6.bold
@@ -66,7 +67,7 @@
       = image_tag 'published.png', class: 'publish'
   .divider70
 
-  #popup-cabinet5-1.popup-window.detailed_popup.popup-w1030.mfp-hide
+  .popup-window.detailed_popup.popup-w1030.mfp-hide#popup-cabinet5-1
     .content_window.white
       .cont_heading
         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#select_novation Выбор пакета
@@ -85,12 +86,13 @@
             - @novations.each do |novation|
               .tab-pane.fade{ role: 'tabpanel', id: "show_novation_#{novation.id}", 'data-id' => novation.id }
                 - novation.attributes_for_form.each do |type_attribute|
-                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
+                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
+                  href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
                     = t("activerecord.attributes.novation/post.#{type_attribute.first}")
                     %i.fa.fa-plus.font_color_stage4.collapse_plus
                   .collapse{ id: "novation_#{novation.id}_attributes_#{type_attribute.first}" }
                     .divider5
-                    - type_attribute.second.each do |attribute, bool_attribute|
+                    - type_attribute.second.each do |attribute, _bool_attribute|
                       %h6.bold
                         = t("activerecord.attributes.novation/post.#{attribute}")
                       %p.novation_attribute{ 'data-attribute' => attribute }

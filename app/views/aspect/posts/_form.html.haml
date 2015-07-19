@@ -1,4 +1,5 @@
-= form_for aspect, url: { controller: 'aspect/posts', project: @project.id, action: aspect.persisted? ? 'update' : 'create', id: aspect.id }, remote: true, class: 'cabinet-aspect-form' do |f|
+= form_for aspect, url: { controller: 'aspect/posts', project: @project.id, action: aspect.persisted? ? 'update' : 'create', id: aspect.id },
+remote: true, class: 'cabinet-aspect-form' do |f|
   %div{ id: "aspect_notices_#{aspect.id}" }
     = render partial: 'shared/create_success', locals: { model_name: 'aspect', id: aspect.id }
   .post.post_add_type1
@@ -29,7 +30,8 @@
     -#  = render partial: "#{@project.project_type.code}_fields", locals: { f: f }
     .post-bottom.text-right.white
       - if aspect.persisted?
-        = link_to 'Удалить', aspect_post_path(@project, aspect), method: :delete, data: { confirm: t('confirm.delete_aspect') }, id: "destroy_aspect_#{aspect.id}", class: 'btn add-button type2 del'
+        = link_to 'Удалить', aspect_post_path(@project, aspect), method: :delete, data: { confirm: t('confirm.delete_aspect') },
+        id: "destroy_aspect_#{aspect.id}", class: 'btn add-button type2 del'
       = f.submit t("form.#{action_name}"), id: 'send_post_aspect', class: 'btn add-button type2 color_me', style: "background-color: #{aspect.color};"
       - if aspect.persisted? && !aspect.published?
         = link_to 'Опубликовать', publish_aspect_post_path(@project, aspect), remote: true, method: :put, id: "publish_#{aspect.id}", class: 'btn add-button type2'

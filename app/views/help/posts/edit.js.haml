@@ -1,4 +1,4 @@
 $('#edit_help_post_#{@post.id}').hide();
-$("#help_content_#{@post.id}").html("#{escape_javascript(render  partial: 'help_post_form', locals: { post: @post })}");
+$("#help_content_#{@post.id}").html("#{escape_javascript(render partial: 'help_post_form', locals: { post: @post })}");
 сommand_htmleditor('remove', 'some-textarea');
 activate_htmleditor();

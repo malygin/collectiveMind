@@ -8,7 +8,7 @@
         .auth-logo
         .divider35
         %h4 Регистрация
-        = form_for resource, as: resource_name, url: registration_path(resource_name), html: { id: 'auth-form1', class: 'form-horizontal auth-form', role: 'form'} do |f|
+        = form_for resource, as: resource_name, url: registration_path(resource_name), html: { id: 'auth-form1', class: 'form-horizontal auth-form', role: 'form' } do |f|
           = devise_error_messages!
           -#- flash.each do |name, msg|
           -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
@@ -16,13 +16,13 @@
           = f.text_field :name, placeholder: 'Имя'
           = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
           = f.password_field :password, placeholder: 'Повторите пароль'
-          %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit'} Зарегистрироваться
+          %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit' } Зарегистрироваться
         -#= f.submit 'Войти', class: 'btn btn-lg btn-block btn-danger auth-main', id: 'sign_in'
         .divider10
         .auth-bottom-links-main
           = link_to 'Забыли пароль?', new_password_path(resource_name), class: 'pull-left'
           %span.auth-divider
-            = '|'
+            |
           = link_to 'Войти', '/users/sign_in', class: 'pull-right'
         .divider35
         %p
@@ -31,10 +31,10 @@
         .divider50
         %ul.list-inline.text-center
           %li
-            %a.active{ href: '#'} Рус
+            %a.active{ href: '#' } Рус
           %li
             %span.auth-divider
-              = '|'
+              |
           %li
-            %a{ href: '#'} Eng
+            %a{ href: '#' } Eng
 .divider35

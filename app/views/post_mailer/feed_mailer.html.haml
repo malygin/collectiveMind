@@ -2,7 +2,7 @@
   %body
     %h3 У вас есть непрочитанные сообщения в процедурах
     %br
-    -@projects_feed.each do |feed|
+    - @projects_feed.each do |feed|
       = link_to "#{t('show.mailer.messages', count: feed[1])} в процедуре #{feed[0]['name']}", "http://www.mass-decision.ru/project/#{feed[0]['id']}/"
       %br
       %br
@@ -11,7 +11,7 @@
   %br
   %br
   %small
-    =t('show.mailer.team')
-    = link_to 'massdecision', "http://mass-decision.ru/"
+    = t('show.mailer.team')
+    = link_to 'massdecision', 'http://mass-decision.ru/'
 
 

@@ -1,10 +1,11 @@
 - if content_question.no_answer_for_post_and_user?(@post.id, current_user)
-  #question_content.q_pop_block.light-grey.rounded_2
+  .q_pop_block.light-grey.rounded_2#question_content
     .divider15
     %p
-      =content_question.content
+      = content_question.content
       %i.fa.fa-lg.fa-question-circle.font_color_stage4
-    = form_tag(answer_content_question_novation_post_path(@project, id: @post.id, question_id: content_question.id), { method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+    = form_tag(answer_content_question_novation_post_path(@project, id: @post.id, question_id: content_question.id),
+    { method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true }) do
       .btn-group{ 'data-toggle' => 'buttons' }
         - content_question.answers.each do |answer|
           .form-group
@@ -23,7 +24,7 @@
       .form-group.bottom-buttons
         %button.btn.answer-button.back_color_stage4 Ответить
     .divider10
-  #answer_succes.thank.light-grey.rounded_2{ style: 'display:none;' }
+  .thank.light-grey.rounded_2#answer_succes{ style: 'display:none;' }
     %h1.text-center.font_color_stage4
       %i.fa.fa-lg.fa-check-circle
     %p.text-center Спасибо за ваш ответ!

@@ -18,7 +18,8 @@
                     = link_to edit_concept_post_path(@project, post_short), id: "edit_concept_#{post_short.id}", class: 'a_font_reset' do
                       %i.glyphicon.glyphicon-pencil
                   %button.btn.btn_reset.btn_del
-                    = link_to concept_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_concept') }, id: "destroy_concept_#{post_short.id}", class: 'a_font_reset' do
+                    = link_to concept_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_concept') },
+                    id: "destroy_concept_#{post_short.id}", class: 'a_font_reset' do
                       %i.glyphicon.glyphicon-trash
             = link_to concept_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_concept_#{post_short.id}" do
               = post_short.goal
@@ -26,10 +27,11 @@
     .post-bottom.white
       .row
         .col-md-3.col_padding_right_3
-          %small.pull-left{ style: 'margin-right: 3px;'} Несовершенства
+          %small.pull-left{ style: 'margin-right: 3px;' } Несовершенства
         .col-md-9.col_padding_right_3.themes_cont
           .post-theme{ id: "stripe#{post_short.id}" }
             - post_short.concept_disposts.each_with_index do |discontent, index|
-              %span.tag-stripes.color_me{ class: "#{'active' if index==0}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
+              %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color',
+              'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
                 %span.tags
                   = trim_content(discontent.content, 30)

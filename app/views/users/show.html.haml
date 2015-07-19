@@ -21,19 +21,21 @@
 
   .col-md-10
     .tab-content
-      #user_content.tab-pane.fade.in.active{ role: 'tabpanel' }
+      .tab-pane.fade.in.active#user_content{ role: 'tabpanel' }
         %div{ role: 'tabpanel' }
           %ul.nav.nav-tabs.cab_horiz_tabs{ role: 'tablist' }
             - Core::Project::STAGES.each do |num_stage, stage|
               - if num_stage <= 5
                 %li{ class: "#{'active' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", role: 'presentation' }
-                  %a{ id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", 'data-toggle' => 'tab', href: "#cab_cont_#{num_stage}", role: 'tab' }
-                    %span.marked=num_stage
+                  %a{ id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", 'data-toggle' => 'tab',
+                  href: "#cab_cont_#{num_stage}", role: 'tab' }
+                    %span.marked= num_stage
                     СТАДИЯ
           .tab-content.cab_cont_block.rounded_3.border_grey.white
             - Core::Project::STAGES.each do |num_stage, stage|
               - if num_stage <= 5
-                .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", id: "cab_cont_#{num_stage}", role: 'tabpanel' }
+                .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}",
+                id: "cab_cont_#{num_stage}", role: 'tabpanel' }
                   .divider10
                   .container
                     .row
@@ -42,7 +44,7 @@
                           = image_tag 'grey_arrow.png'
                         .divider15
                         %span.stage-heading
-                          ="#{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})"
+                          #{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})
 
                         -# @todo move to users controllers
                         - @content = model_for(:post, stage[:type_stage]).by_project(@project).by_user(@user)
@@ -54,15 +56,15 @@
                         .divider15
                         %span.stage-heading
                           Мои комментарии
-                          ="(#{@user.comment_for_project(stage[:type_stage], @project).count})"
+                          (#{@user.comment_for_project(stage[:type_stage], @project).count})
                         .chat-messages
                           -# @todo move to users controllers
                           - @stage_comments = model_for(:comment, stage[:type_stage]).by_user(@user).stage_comments_for(@project)
-                          = render partial:'shared/cabinet_comment', collection: @stage_comments, locals: { num_stage: num_stage }
+                          = render partial: 'shared/cabinet_comment', collection: @stage_comments, locals: { num_stage: num_stage }
                   .divider20
 
       - if current_user?(@user)
-        #user_profile.tab-pane.fade{ role: 'tabpanel' }
+        .tab-pane.fade#user_profile{ role: 'tabpanel' }
           = @user
           -#%h5 Не состоит ни в одной группе
           = form_for @user, url: { action: :update, type: @project.id }, class: 'form form-horizontal' do |f|

@@ -1,9 +1,9 @@
 = link_to '/project/' + @project.id.to_s do
   %span.fa.fa-angle-double-left
-  =t('link.back_proc')
-- if ['0', '7', '8'].include? params[:id]
+  = t('link.back_proc')
+- if %w(0 7 8).include? params[:id]
   %section.widget
-    -unless @posts[1].nil?
+    - unless @posts[1].nil?
       - if boss?
         .pull-right
           = link_to edit_help_post_path(@project, @posts[1].id), remote: true, id: "edit_help_post_#{@posts[1].id}" do
@@ -11,7 +11,7 @@
             %span.label.label-success РЕДАКТИРОВАТЬ
       %br
       %br
-      %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
+      .help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
         = @posts[1].content.try(:html_safe)
 - else
   %section.widget.widget-tabs
@@ -23,8 +23,8 @@
           %a{ href: '#long_desc', 'data-toggle' => 'tab' } Инструкции по работе
 
     .body.tab-content
-      #short_desc.tab-pane.clearfix.active
-        -unless @posts[1].nil?
+      .tab-pane.clearfix.active#short_desc
+        - unless @posts[1].nil?
           - if boss?
             .pull-right
               = link_to edit_help_post_path(@project, @posts[1].id), remote: true, id: "edit_help_post_#{@posts[1].id}" do
@@ -32,10 +32,10 @@
                 %span.label.label-success РЕДАКТИРОВАТЬ
           %br
           %br
-          %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
+          .help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
             = @posts[1].content.try(:html_safe)
-      #long_desc.tab-pane
-        -unless @posts[2].nil?
+      .tab-pane#long_desc
+        - unless @posts[2].nil?
           - if boss?
             .pull-right
               = link_to edit_help_post_path(@project, @posts[2].id), remote: true, id: "edit_help_post_#{@posts[2].id}" do
@@ -43,5 +43,5 @@
                 %span.label.label-success РЕДАКТИРОВАТЬ
           %br
           %br
-          %div.help-content{ id: "help_content_#{@posts[2].id}", data: { style: 2 }, style: 'margin-left:60px;margin-right:60px;' }
+          .help-content{ id: "help_content_#{@posts[2].id}", data: { style: 2 }, style: 'margin-left:60px;margin-right:60px;' }
             = @posts[2].content.html_safe if @posts[2].content

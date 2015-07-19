@@ -1,15 +1,15 @@
 %html
   %body
     - if @mail
-      %h3=@mail.title
+      %h3= @mail.title
       %br
-      =@mail.content.try(:html_safe)
+      = @mail.content.try(:html_safe)
   %br
   %br
   %br
   %br
   %small
-    =t('show.mailer.team')
-    = link_to 'massdecision', "http://mass-decision.ru/"
+    = t('show.mailer.team')
+    = link_to 'massdecision', 'http://mass-decision.ru/'
 
 

@@ -17,13 +17,14 @@
               %tr.what
                 %td.bold
                   = post_short.content
-                  - if boss?  || (current_user?(post_short.user) && can_edit_content?)
+                  - if boss? || (current_user?(post_short.user) && can_edit_content?)
                     %span.post_btns_cont
                       %button.btn.btn_reset.btn_del
                         = link_to edit_discontent_post_path(@project, post_short), id: "edit_discontent_#{post_short.id}", class: 'a_font_reset' do
                           %i.glyphicon.glyphicon-pencil
                       %button.btn.btn_reset.btn_del
-                        = link_to discontent_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_discontent') }, id: "destroy_discontent_#{post_short.id}", class: 'a_font_reset' do
+                        = link_to discontent_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_discontent') },
+                        id: "destroy_discontent_#{post_short.id}", class: 'a_font_reset' do
                           %i.glyphicon.glyphicon-trash
               %tr.post_text
                 %td.col-md-12
@@ -33,10 +34,10 @@
     .post-bottom.white
       .row
         .col-md-2.col_padding_right_3
-          %small.pull-left{ style: 'margin-right: 3px;'} Аспекты
+          %small.pull-left{ style: 'margin-right: 3px;' } Аспекты
         .col-md-10.col_padding_right_3.themes_cont
           .post-theme{ id: "stripe#{post_short.id}" }
             - post_short.post_aspects.each_with_index do |aspect, index|
-              %span.tag-stripes{ class: "#{'active' if index==0}", style: "background-color: #{aspect.color};" }
+              %span.tag-stripes{ class: "#{'active' if index == 0}", style: "background-color: #{aspect.color};" }
                 %span.tags
                   = trim_content(aspect.content, 30)

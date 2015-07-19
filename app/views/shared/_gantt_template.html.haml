@@ -1,4 +1,4 @@
-#gantEditorTemplates{ style: "display:none;" }
+#gantEditorTemplates{ style: 'display:none;' }
   .__template__{ type: 'GANTBUTTONS' }
     /
       <div class='ganttButtonBar noprint'>
@@ -6,8 +6,10 @@
       <button onclick="$('#workSpace').trigger('undo.gantt');" class='button textual' title='отменить'><span class='teamworkIcon'>'</span></button>
       <button onclick="$('#workSpace').trigger('redo.gantt');" class='button textual' title='вернуть'><span class='teamworkIcon'>·</span></button>
       <span class='ganttButtonSeparator'></span>
-      <button onclick="$('#workSpace').trigger('addAboveCurrentTask.gantt');" class='button textual' title='вставить на уроверь выше'><span class='teamworkIcon'>l</span></button>
-      <button onclick="$('#workSpace').trigger('addBelowCurrentTask.gantt');" class='button textual' title='вставить на уровень ниже'><span class='teamworkIcon'>X</span></button>
+      <button onclick="$('#workSpace').trigger('addAboveCurrentTask.gantt');" class='button textual' title='вставить на уроверь выше'>
+      <span class='teamworkIcon'>l</span></button>
+      <button onclick="$('#workSpace').trigger('addBelowCurrentTask.gantt');" class='button textual' title='вставить на уровень ниже'>
+      <span class='teamworkIcon'>X</span></button>
       <span class='ganttButtonSeparator'></span>
       <button onclick="$('#workSpace').trigger('indentCurrentTask.gantt');" class='button textual' title='indent task'><span class='teamworkIcon'>.</span></button>
       <button onclick="$('#workSpace').trigger('outdentCurrentTask.gantt');" class='button textual' title='unindent task'><span class='teamworkIcon'>:</span></button>
@@ -36,7 +38,8 @@
   .__template__{ type: 'TASKROW' }
     /
       <tr taskId="(#=obj.id#)" class='taskEditRow' level="(#=level#)">
-      <th class='gdfCell edit' align='right' style="cursor:pointer;"><span class='taskRowIndex'>(#=obj.getRow() + 1#)</span> <span class='teamworkIcon' style="font-size:12px;" >e</span></th>
+      <th class='gdfCell edit' align='right' style="cursor:pointer;"><span class='taskRowIndex'>(#=obj.getRow() + 1#)</span>
+      <span class='teamworkIcon' style="font-size:12px;" >e</span></th>
       <td class='gdfCell indentCell' style="padding-left:(#=obj.level*10#)px;">
       <div class="(#=obj.isParent()?'exp-controller expcoll exp':'exp-controller'#)" align='center'></div>
       <input type='text' name='name' value="(#=obj.name#)">

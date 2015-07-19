@@ -12,5 +12,5 @@
         = link_to news_path(@project, @news), method: :delete, data: { confirm: t('confirm.delete_news') }, id: "destroy_news_#{@news.id}" do
           %span.glyphicon.glyphicon-remove.text-danger
 
-    =simple_format @news.body
+    = simple_format @news.body
 

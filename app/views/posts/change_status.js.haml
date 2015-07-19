@@ -1,14 +1,14 @@
 - if @post
   $("##{params[:status]}_post_#{@post.id}").toggleClass('theme_font_color');
-    -#- if params[:discuss_status]
-    -#  - if @post.discuss_status
-  -#    $("#discuss_stat_post_#{@post.id} span").removeClass('label-default').addClass('label-danger');
-    -#  - else
-  -#    $("#discuss_stat_post_#{@post.id} span").removeClass('label-danger').addClass('label-default');
-    -#- elsif params[:approve_status]
-    -#  - if @post.approve_status
-  -#    $("#approve_status_post_#{@post.id}").addClass('theme_font_color');
-  -#    $("div[data-important='#{@post.id}']").removeClass('hide');
-    -#  - else
-  -#    $("#approve_status_post_#{@post.id}").removeClass('theme_font_color');
-  -#    $("div[data-important='#{@post.id}']").addClass('hide');
+  -#- if params[:discuss_status]
+  -#  - if @post.discuss_status
+  -#  $("#discuss_stat_post_#{@post.id} span").removeClass('label-default').addClass('label-danger');
+  -#  - else
+  -#  $("#discuss_stat_post_#{@post.id} span").removeClass('label-danger').addClass('label-default');
+  -#- elsif params[:approve_status]
+  -#  - if @post.approve_status
+  -#  $("#approve_status_post_#{@post.id}").addClass('theme_font_color');
+  -#  $("div[data-important='#{@post.id}']").removeClass('hide');
+  -#  - else
+  -#  $("#approve_status_post_#{@post.id}").removeClass('theme_font_color');
+  -#  $("div[data-important='#{@post.id}']").addClass('hide');

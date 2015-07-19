@@ -1,4 +1,4 @@
-#popup-results.popup-window.detailed_popup.popup-w860.mfp-hide
+.popup-window.detailed_popup.popup-w860.mfp-hide#popup-results
   .popup.popup_rounded
     .modal_title
       .row
@@ -14,7 +14,7 @@
           .dia_legend.pull-left.font_white
             %span
               %i.fa.fa-file-text
-              =t("my_result.#{name_controller}")
+              = t("my_result.#{name_controller}")
             %span
               %i.fa.fa-comment
               комментарии
@@ -63,7 +63,7 @@
         .col-md-3
       .top3.gradient_t3
         .row
-          - @project_result.sort_user_like(name_controller).each_with_index do |user, index|
+          - @project_result.sort_user_like(name_controller).each do |user|
             .col-md-4.top3_col
               = link_to user_path(@project, user) do
                 = user_image_tag user.try(:avatar), class: 'img100 img-circle'
@@ -84,14 +84,14 @@
                   = @project_result.count_of_added_contents(name_model)
               %h4
                 ДОБАВЛЕНО
-                =t("my_result_add.#{name_controller}")
+                = t("my_result_add.#{name_controller}")
           .col-md-8
             .stat_block
               %span
                 %span.stat_num.theme_back_color.text-center.font_white.bold.rounded_3
                   = @project_result.count_of_contents_for_next_stage(name_model)
               %h4
-                =t("my_result_add.#{name_controller}")
+                = t("my_result_add.#{name_controller}")
                 ,
                 %br/
                 ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ

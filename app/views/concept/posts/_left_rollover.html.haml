@@ -1,28 +1,31 @@
-#slide-panel.slide-outer{ style: "margin-left:-400px", 'data-position' => 'left' }
-  %span#opener.slide-opener.i_new_stage.rounded_2.tooltip1{ 'data-placement' => 'right', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual', title: "Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны." }
-    = image_tag 'text-slider-opener.png' , class: 'big',  'data-placement' => 'right', 'data-toggle' => 'tooltip', title: 'Перейти к выбору несовершенств'
-  #tooltip_slide_panel.slide-inner.slide_stage3.white
+.slide-outer#slide-panel{ style: 'margin-left:-400px;', 'data-position' => 'left' }
+  %span.slide-opener.i_new_stage.rounded_2.tooltip1#opener{ 'data-placement' => 'right', 'data-toggle' => 'tooltip',
+  'data-trigger' => 'manual', title: 'Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны.' }
+    = image_tag 'text-slider-opener.png', class: 'big',  'data-placement' => 'right', 'data-toggle' => 'tooltip', title: 'Перейти к выбору несовершенств'
+  .slide-inner.slide_stage3.white#tooltip_slide_panel
     .ps_cont#filter
       .divider15
-      .checkox_item{ data: { discontent: "*"} }
+      .checkox_item{ data: { discontent: '*' } }
         %span
           %span.cb_input
-            %input#check0{ type: 'checkbox'}/
+            %input#check0{ type: 'checkbox' }
             %label{ for: 'check0' }
               %i.fa.fa-check
         %span.text_label
-          %label{ for: 'check0'} Выбрать все
+          %label{ for: 'check0' } Выбрать все
       .slide_table_wrap
         -#- @project.discontents_for_discussion.each_with_index do |post, index|
         - @presenter.content_with_counters.each_with_index do |post_with_counters, index|
-          .checkox_item{ data: { discontent: ".discontent_#{post_with_counters[:post].id}"} }
+          .checkox_item{ data: { discontent: ".discontent_#{post_with_counters[:post].id}" } }
             %span
               %span.cb_input
-                %input{ id: "check#{index + 2}", type: 'checkbox'}/
+                %input{ id: "check#{index + 2}", type: 'checkbox' }
                 %label{ for: "check#{index + 2}" }
                   %i.fa.fa-check
             %span
-              %span.color_counter.color_me.bigger{ 'data-me-action' => 'background-color', 'data-me-color' => "#{post_with_counters[:post].id}", 'data-me-type' => 'imperf', 'data-placement' => 'right', 'data-toggle' => 'tooltip', title: "#{post_with_counters[:post].dispost_concepts.count > 0 ? 'Для устранения этого несовершенства ' + t('dispost_concepts', count: post_with_counters[:post].dispost_concepts.count ):'Для устранения этого несовершенства  пока не предложено ни одной идеи'}" }
+              %span.color_counter.color_me.bigger{ 'data-me-action' => 'background-color', 'data-me-color' => "#{post_with_counters[:post].id}",
+              'data-me-type' => 'imperf', 'data-placement' => 'right', 'data-toggle' => 'tooltip',
+              title: "#{post_with_counters[:post].dispost_concepts.count > 0 ? 'Для устранения этого несовершенства ' + t('dispost_concepts', count: post_with_counters[:post].dispost_concepts.count) : 'Для устранения этого несовершенства пока не предложено ни одной идеи'}" }
                 = post_with_counters[:post].dispost_concepts.count
             %span.text_label
               %label{ for: "check#{index + 2}" }

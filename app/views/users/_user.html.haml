@@ -3,11 +3,11 @@
     .col-sm-3
       .rating_user
         .media-left
-          = link_to user_path(@project, user), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title:'Посмотреть профиль пользователя' do
+          = link_to user_path(@project, user), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Посмотреть профиль пользователя' do
             = user_image_tag user.avatar, class: 'media-object img-circle img40 img_bordered'
         .media-body
           %h5.media-heading.bold
-            = link_to user, user_path(@project, user), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title:'Посмотреть профиль пользователя'
+            = link_to user, user_path(@project, user), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Посмотреть профиль пользователя'
             = render partial: '/shared/user_online', object: user
     .col-sm-9
       .col_custom.col_type1.divided
@@ -15,22 +15,22 @@
           = user.project_user_for(@project).try(:aspect_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage2
-          =user.project_user_for(@project).try(:discontent_posts_score) || '−'
+          = user.project_user_for(@project).try(:discontent_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage3
-          =user.project_user_for(@project).try(:concept_posts_score) || '−'
+          = user.project_user_for(@project).try(:concept_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage4
-          =user.project_user_for(@project).try(:novation_posts_score) || '−'
+          = user.project_user_for(@project).try(:novation_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage5
-          =user.project_user_for(@project).try(:plan_posts_score) || '−'
+          = user.project_user_for(@project).try(:plan_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage6
-          =user.project_user_for(@project).try(:estimate_posts_score) || '−'
+          = user.project_user_for(@project).try(:estimate_posts_score) || '−'
       .col_custom.col_type1.divided
         %span.rating_cell.font_color_stage7 −
       .col_custom.col_type2.divided
         %span.rating_cell.font_dark_grey
-          =user.project_user_for(@project).try(:score) || '−'
+          = user.project_user_for(@project).try(:score) || '−'
 

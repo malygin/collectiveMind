@@ -1,13 +1,15 @@
-#popup-post.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide
+.popup-window.popup-project.detailed_popup.popup_w1150.mfp-hide#popup-post
   - if boss?
     .post-top-header
-      = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+      = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id }, remote: true, method: :put,
+      class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
         %i.fa.fa-trophy.fa-lg
-      = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+      = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true },
+      remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
         %i.fa.fa-bookmark.fa-lg
   .popup.popup_rounded.popup_color_theme_stage5
     %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
-      %div.important.theme_font_color
+      .important.theme_font_color
         %i.fa.fa-bookmark.fa-2x
     .modal_title
       .row
@@ -22,12 +24,14 @@
                   %span{ class: "cc_post_#{@post.id}" }
                     = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
-                = link_to({ controller: @post.class.name.underscore.pluralize , action: :like, project: @project, id: @post.id, against: false }, remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false },
+                remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %span.bold
                     %span{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
-                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true }, remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true },
+                remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %span.bold
                     %span{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                       = @post.users_against.count
@@ -37,12 +41,13 @@
                 -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
                   = Russian::strftime(@post.created_at, '%d.%m.%Y')
-    -#- if boss? || role_expert? || stat_expert?
-    -#  = link_to({ controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1 }, remote: true, method: :put, class: 'link_status', id: "approve_status_post_#{@post.id}") do
+                -#- if boss? || role_expert? || stat_expert?
+                -#  = link_to({ controller: @post.class.name.underscore.pluralize, action: :discuss_status, id: @post.id, approve_status: 1 },
+                -#  remote: true, method: :put, class: 'link_status', id: "approve_status_post_#{@post.id}") do
                 -#    %span.label_approve.label(class="#{label_approve_stat(@post)}")
                 -#      = t('show.important')
                 -#- elsif @post.approve_status
-                -#  %span.label.label-success=t('show.important')
+                -#  %span.label.label-success= t('show.important')
     .modal_body
       .popup-post-info
         .row.info-block
@@ -67,7 +72,7 @@
 
       .clearfix
       .tab-content.modal_content
-        #tab-1.tab-pane.fade.in.active
+        .tab-pane.fade.in.active#tab-1
           .container.modal_content
             .row
               .col-md-6.exp_col.left
@@ -75,7 +80,8 @@
                   = image_tag 'grey_arrow.png'
                 .divider25
                 - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
-                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#cab4-#{link}" }
+                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false',
+                  'data-toggle' => 'collapse', href: "#cab4-#{link}" }
                     = t("activerecord.attributes.plan/post_novation.#{link}")
                     %i.fa.font_color_stage5.collapse_plus{ class: "#{link == :project ? 'fa-minus' : 'fa-plus'}" }
 
@@ -98,15 +104,16 @@
                     .separator_label.text-left
                       %h4 Обсуждение результатов опроса
                     .separator_label.pull-right
-                      %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                      %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
                         %span.comments_action свернуть
-                .chat-messages#comments.collapse.in
-                  = render partial:'shared/comment', collection: @comments
+                .chat-messages.collapse.in#comments
+                  = render partial: 'shared/comment', collection: @comments
                 .divider15
-                = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
+                = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
+                url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
 
             .divider25
-        #tab-2.tab-pane.fade{ style: 'background: white;' }
+        .tab-pane.fade#tab-2{ style: 'background: white;' }
           .container.modal_content
             .row
               .col-md-12.col-sm-12

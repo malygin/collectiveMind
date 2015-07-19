@@ -1,7 +1,7 @@
 - if @post.errors.any?
-  $('#notice_messages').html('#{escape_javascript(render partial: 'shared/notice_messages', locals: { object: @post})}');
+  $('#notice_messages').html('#{escape_javascript(render partial: 'shared/notice_messages', locals: { object: @post })}');
   window.scrollTo(0, 0)
 - else
   сommand_htmleditor('remove', 'some-textarea');
   $('#notice_messages').html('')
-  $('#knowbase_post').html("<div id='knowbase_post_#{@post.id}'>#{escape_javascript(render  partial: 'knowbase_post', object: @post)}</div>");
+  $('#knowbase_post').html("<div id='knowbase_post_#{@post.id}'>#{escape_javascript(render partial: 'knowbase_post', object: @post)}</div>");

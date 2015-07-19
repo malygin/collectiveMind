@@ -1,7 +1,7 @@
 = link_to '/project/' + @project.id.to_s do
   %span.fa.fa-angle-double-left
-  =t('link.back_proc')
+  = t('link.back_proc')
 %section.widget
   .body
     %div{ id: 'knowbase_post' }
-      =render  partial: 'knowbase_post_form', locals: { post: @post }
+      = render partial: 'knowbase_post_form', locals: { post: @post }

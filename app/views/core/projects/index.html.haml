@@ -17,16 +17,16 @@
             = project.type_access_name
         .col-md-2
           - if current_user.can_edit_project?(project)
-            = link_to edit_core_project_path(project), class:'btn btn-sm btn-info' do
+            = link_to edit_core_project_path(project), class: 'btn btn-sm btn-info' do
               = t('link.edit')
               %i.fa.fa-arrow-right
         .col-md-2
           - if project.status == 20
-            = link_to "/project/#{project.id}/aspect/posts", class:'btn btn-sm btn-danger' do
+            = link_to "/project/#{project.id}/aspect/posts", class: 'btn btn-sm btn-danger' do
               = t('link.go_to_project')
               %i.fa.fa-arrow-right
           - else
-            = link_to core_project_path(project), class:'btn btn-sm btn-danger' do
+            = link_to core_project_path(project), class: 'btn btn-sm btn-danger' do
               = t('link.go_to_project')
               %i.fa.fa-arrow-right
       %br

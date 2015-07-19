@@ -7,7 +7,8 @@
             %ul.nav.nav-tabs.aspects_tabs{ role: 'tablist' }
               - asp.knowbase_posts.each_with_index do |post, i|
                 %li{ class: "#{'active' if i == 0}", role: 'presentation' }
-                  %a{ style: "background-color:#{asp.color};" , 'aria-controls' => "Статья #{i + 1}", 'data-toggle' => 'tab', href: "#article_#{index + 1}_#{i + 1}", role: 'tab' }
+                  %a{ style: "background-color:#{asp.color};", 'aria-controls' => "Статья #{i + 1}", 'data-toggle' => 'tab',
+                  href: "#article_#{index + 1}_#{i + 1}", role: 'tab' }
                     = trim_content(post.title, 30)
 
       .row
@@ -23,7 +24,7 @@
                       %p.aspect-main-block-text
                         = post.content.try(:html_safe)
             - elsif asp.knowbase_posts.size > 0
-              - asp.knowbase_posts.each_with_index do |post, i|
+              - asp.knowbase_posts.each do |post|
                 .row
                   %h6.aspect-main-block-heading
                     = post.title
@@ -51,18 +52,19 @@
                   .item{ id: "question_#{question.id}", class: "#{'active' if ind == 0}" }
                     %p.text.block-with-left-icon
                       %span.left-icon.pull-right
-                        ="#{ind + 1}."
+                        #{ind + 1}.
                       = question.content
                     - if @project.type_for_questions == 1
-                      .hint.close-notice{ id:"hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};" }
+                      .hint.close-notice{ id: "hint_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};" }
                         = question.hint
                         %span.close-button
                           %i.fa.fa-times-circle-o
-                      .hint.close-notice{ id:"wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};" }
+                      .hint.close-notice{ id: "wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};" }
                         Ответ неправильный, воспользуйтесь подсказкой
                         %span.close-button
                           %i.fa.fa-times-circle-o
-                    = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), { method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
+                    = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), { method: :put, remote: true,
+                    class: 'form instruments-block', id: 'form_answer_question', multipart: true }) do
                       .btn-group#answers_buttons{ 'data-toggle' => 'buttons' }
                         - question.answers.each do |answer|
                           .form-group
@@ -76,11 +78,12 @@
                       .clearfix
                       .form-group.bottom-buttons
                         - if @project.type_for_questions == 1
-                          %a.btn.btn-outline.notice-button.notice.close-notice{ id: "notice_question_#{question.id}", style: "border-color: #{asp.color};", data: { question: question.id } } Подсказка
+                          %a.btn.btn-outline.notice-button.notice.close-notice{ id: "notice_question_#{question.id}",
+                          style: "border-color: #{asp.color};", data: { question: question.id } } Подсказка
                         - if @project.type_for_questions == 0
                           = submit_tag 'Пропустить', name: 'skip', class: 'btn answer-button questionsCarousel-target', style: "background-color: #{asp.color};"
                         -#%button#send_answers.btn.answer-button.questionsCarousel-target{ type: 'submit', style: "background-color: #{asp.color};"} Пропустить
-                        %button#send_answers.btn.answer-button.questionsCarousel-target{ type: 'submit', style: "background-color: #{asp.color};" } Ответить
+                        %button.btn.answer-button.questionsCarousel-target#send_answers{ type: 'submit', style: "background-color: #{asp.color};" } Ответить
   - else
     - if asp.knowbase_posts.size > 1
       .row
@@ -88,7 +91,8 @@
           %ul.nav.nav-tabs.aspects_tabs{ role: 'tablist' }
             - asp.knowbase_posts.each_with_index do |post, i|
               %li{ class: "#{'active' if i == 0}", role: 'presentation' }
-                %a{ style: "background-color:#{asp.color};" , 'aria-controls' => "Статья #{i + 1}", 'data-toggle' => 'tab', href: "#article_#{index + 1}_#{i + 1}", role: 'tab' }
+                %a{ style: "background-color:#{asp.color};", 'aria-controls' => "Статья #{i + 1}", 'data-toggle' => 'tab',
+                href: "#article_#{index + 1}_#{i + 1}", role: 'tab' }
                   = trim_content(post.title, 30)
 
     .row
@@ -108,7 +112,7 @@
           .aspect-main-block{ style: "border-top-color: #{asp.color};" }
             .row
               .col-md-8
-                - asp.knowbase_posts.each_with_index do |post, i|
+                - asp.knowbase_posts.each do |post|
                   %h6.aspect-main-block-heading
                     = post.title
                   %p.aspect-main-block-text
