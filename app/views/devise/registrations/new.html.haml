@@ -16,7 +16,7 @@
           = f.text_field :name, placeholder: 'Имя'
           = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
           = f.password_field :password, placeholder: 'Повторите пароль'
-          %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: "Signin", type: "submit"} Зарегистрироваться
+          %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit'} Зарегистрироваться
         -#= f.submit 'Войти', class: 'btn btn-lg btn-block btn-danger auth-main', id: 'sign_in'
         .divider10
         .auth-bottom-links-main
@@ -31,10 +31,10 @@
         .divider50
         %ul.list-inline.text-center
           %li
-            %a.active{ href: "#"} Рус
+            %a.active{ href: '#'} Рус
           %li
             %span.auth-divider
               = '|'
           %li
-            %a{ href: "#"} Eng
+            %a{ href: '#'} Eng
 .divider35

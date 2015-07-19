@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html(lang='en')
   = render 'application/meta'
   %body{ class: stage_theme, style: 'background-color: #f4f4f4;' }
     .outer
@@ -28,43 +28,43 @@
                   = link_to send("user_content_#{@project.current_stage_type}_path", @project.id), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
                     Контент
                 %li{ class: "#{'active' if params[:edit_profile]}" }
-                  %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ "data-toggle" => "tab", href: "#user_profile" }
+                  %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
                     Профиль
               -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
               = yield :cabinet_sidebar
             .col-md-10#cabinet_form
               .tab-content
                 - if action_name == 'new' || action_name == 'edit'
-                  #cabinet_new.tab-pane.fade.in.active{ role: "tabpanel" }
+                  #cabinet_new.tab-pane.fade.in.active{ role: 'tabpanel' }
                     = yield
                 - else
-                  #cabinet_content.tab-pane.fade{ class: "#{'in active' unless params[:edit_profile]}", role: "tabpanel" }
-                    %div{ role: "tabpanel" }
-                      %ul.nav.nav-tabs.cab_horiz_tabs{ role: "tablist" }
+                  #cabinet_content.tab-pane.fade{ class: "#{'in active' unless params[:edit_profile]}", role: 'tabpanel' }
+                    %div{ role: 'tabpanel' }
+                      %ul.nav.nav-tabs.cab_horiz_tabs{ role: 'tablist' }
                         - Core::Project::STAGES.each do |num_stage, stage|
                           - if num_stage <= 5
                             - if name_controller == stage[:type_stage]
-                              %li.active{ role: "presentation" }
+                              %li.active{ role: 'presentation' }
                                 = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
                                   %span.marked=num_stage
                                   СТАДИЯ
                             - elsif @project.main_stage >= num_stage
-                              %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}", role: "presentation" }
+                              %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}", role: 'presentation' }
                                 = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
                                   %span.marked=num_stage
                                   СТАДИЯ
                             - else
-                              %li.disabled{ role: "presentation" }
+                              %li.disabled{ role: 'presentation' }
                                 = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
                                   %span.marked=num_stage
                                   СТАДИЯ
                       .tab-content.cab_cont_block.rounded_3.border_grey.white
-                        .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}", role: "tabpanel" }
+                        .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}", role: 'tabpanel' }
                           .divider10
                           .container
                             .row
                               .col-md-6.exp_col.left
-                                %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle'=>"tooltip", 'data-placement'=>"left", "data-new"=>"Развернуть историю комментариев", title: "Свернуть список" +" " + "#{t("my_list.#{name_controller}")}" }
+                                %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
                                   = image_tag 'grey_arrow.png'
                                 .divider15
                                 %span.stage-heading
@@ -73,7 +73,7 @@
                                 = yield
 
                               .col-md-6.exp_col.right
-                                %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle'=>"tooltip", 'data-placement'=>"right", "data-new"=>"Развернуть список" +" " + "#{t("my_list.#{name_controller}")}", title: "Свернуть историю комментариев" }
+                                %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}", title: 'Свернуть историю комментариев' }
                                   = image_tag 'grey_arrow_1.png'
                                 .divider15
                                 %span.stage-heading
@@ -84,17 +84,17 @@
 
                           .divider20
 
-                #user_profile.tab-pane.fade{ class: "#{'in active' if params[:edit_profile]}", role: "tabpanel" }
+                #user_profile.tab-pane.fade{ class: "#{'in active' if params[:edit_profile]}", role: 'tabpanel' }
                   .col-md-6.col-md-offset-3.text-center
                     .profile
                       .profile_icon.img-circle
                         .divider10
                         = image_tag 'user.png'
                         .divider10
-                        %a.btn.btn-xs.btn-danger.open-popup{ "data-placement"=>"1", "data-target"=>"1"} Изменить
+                        %a.btn.btn-xs.btn-danger.open-popup{ 'data-placement' => '1', 'data-target' => '1'} Изменить
                       .divider10
                       = form_for current_user, url: { controller: '/users', action: :update, type: @project.id, project: @project, id: current_user }, multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
-                        .cab_notice.white(style='display:none;' id="update_user_success")
+                        .cab_notice.white(style='display:none;' id='update_user_success')
                           %span.success
                             = t("form.user.update_success")
                         .notice_messages
@@ -142,5 +142,5 @@
 
     #render_for_post
     #render_knowbase_posts
-    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
+    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey='ac124f793994edd775d4d03329e6ec80')
     = javascript_include_tag 'application'

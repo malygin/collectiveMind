@@ -6,7 +6,7 @@
       = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
         %i.fa.fa-bookmark.fa-lg
   .popup.popup_rounded.popup_color_theme_stage3
-    %div{ "data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+    %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
       %div.important.theme_font_color
         %i.fa.fa-bookmark.fa-2x
     .modal_title
@@ -52,7 +52,7 @@
           .col-md-6.col_padding_right_0
             .innov-tags
               - @post.concept_disposts.each_with_index do |post, index|
-                .innov-tags-tag.popup_tooltip.color_me{ class: "tooltip3_tag_#{index + 1}", "data-me-action" => "background-color", "data-me-color" => "#{index + 1}", "data-me-type" => "imperf" }
+                .innov-tags-tag.popup_tooltip.color_me{ class: "tooltip3_tag_#{index + 1}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
                   = trim_content(post.content, 100)
 
       .container.modal_content
@@ -88,7 +88,7 @@
               %hr
                 .separator_label.text-left
                 .separator_label.pull-right
-                  %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#comments" }
+                  %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
                     %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments

@@ -1,9 +1,9 @@
 .stage-post-block.letters
   .row
     .col-md-12
-      #myCarousel.carousel.slide{ "data-interval" => "false" }
-        .carousel-inner{ role: "listbox" }
-          .item.active{ "data-slide-no" => "0" }
+      #myCarousel.carousel.slide{ 'data-interval' => 'false' }
+        .carousel-inner{ role: 'listbox' }
+          .item.active{ 'data-slide-no' => '0' }
             .row
               .col-md-10.col-md-offset-1
                 .project_win
@@ -17,7 +17,7 @@
                               = image_tag 'thanks.png'
             .divider10
           - @posts.each_with_index do |post, index|
-            .item{ "data-slide-no" => "#{index + 1}" }
+            .item{ 'data-slide-no' => "#{index + 1}" }
               .row
                 .col-md-10.col-md-offset-1
                   .project_win
@@ -25,9 +25,9 @@
                       .row
                         .col-md-3
                           .poster_win.text-center
-                            -#= image_tag 'ava2.jpg', class: 'img-circle', alt: "150x150", "data-holder-rendered" => "true"
+                            -#= image_tag 'ava2.jpg', class: 'img-circle', alt: '150x150', 'data-holder-rendered' => 'true'
                             = link_to user_path(@project, post.user) do
-                              = user_image_tag post.user.try(:avatar), class: 'img-circle', alt: "150x150", "data-holder-rendered" => "true"
+                              = user_image_tag post.user.try(:avatar), class: 'img-circle', alt: '150x150', 'data-holder-rendered' => 'true'
                             %h5 Авторы:
                             %h5
                               = link_to post.user, user_path(@project, post.user)
@@ -46,17 +46,17 @@
               .divider10
 
         %ul.list_win.list-unstyled.list-inline.text-center.rate_buttons
-          %li.arrow{ "data-slide" => "prev", href: "#myCarousel", role: "button" }
+          %li.arrow{ 'data-slide' => 'prev', href: '#myCarousel', role: 'button' }
             %i.fa.fa-angle-left
-          %li.myCarousel-target.active{ "data-slide-to" => "0", "data-target" => "#myCarousel" }
+          %li.myCarousel-target.active{ 'data-slide-to' => '0', 'data-target' => '#myCarousel' }
             %button.btn.btn_reset.back_color_stage7.font_white.bold 1
 
           - @posts.each_with_index do |post, index|
-            %li.myCarousel-target{ "data-slide-to" => "#{index + 1}", "data-target" => "#myCarousel" }
+            %li.myCarousel-target{ 'data-slide-to' => "#{index + 1}", 'data-target' => '#myCarousel' }
               %button.btn.btn_reset.back_color_stage7.font_white.bold
                 =index + 2
 
-          %li.arrow{ "data-slide" => "next", href: "#myCarousel", role: "button" }
+          %li.arrow{ 'data-slide' => 'next', href: '#myCarousel', role: 'button' }
             %i.fa.fa-angle-right
         .divider20
 

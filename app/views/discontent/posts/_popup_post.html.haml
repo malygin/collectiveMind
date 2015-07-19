@@ -6,7 +6,7 @@
       = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, status: :approve_status }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
         %i.fa.fa-bookmark.fa-lg
   .popup.popup_rounded.popup_color_theme_stage2
-    %div{ "data-important" => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+    %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
       %div.important.theme_font_color
         %i.fa.fa-bookmark.fa-2x
     .modal_title
@@ -41,14 +41,14 @@
       .container.modal_content
         .row
           .col-md-6.exp_col.left
-            %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle'=>"tooltip", 'data-placement'=>"left", "data-new"=>"Развернуть историю комментариев", title: "Свернуть несовершенство" }
+            %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть несовершенство' }
               = image_tag 'grey_arrow.png'
             .divider20
             .border_light_grey.rounded_3.imperf_left
               .media.comment.main_line
                 .container
                   .media-left
-                    -#= image_tag 'no-ava.png', class: "media-object img50 img-circle"
+                    -#= image_tag 'no-ava.png', class: 'media-object img50 img-circle'
                     = link_to user_path(@project, @post.user) do
                       = user_image_tag @post.user.try(:avatar), class: 'media-object img50 img-circle'
                   .media-body
@@ -85,7 +85,7 @@
                 .divider10
 
           .col-md-6.exp_col.right
-            %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle'=>"tooltip", 'data-placement'=>"right", "data-new"=>"Развернуть несовершенство", title: "Свернуть историю комментариев" }
+            %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-new' => 'Развернуть несовершенство', title: 'Свернуть историю комментариев' }
               = image_tag 'grey_arrow_1.png'
             .divider10
 
@@ -94,7 +94,7 @@
             -#    .separator_label.text-left
             -#      %h4 Обсуждение результатов опроса
             -#    .separator_label.pull-right
-            -#      %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#comments" }
+            -#      %a.theme_font_color{ class:"#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
             -#        %span.comments_action свернуть
             .chat-messages#comments.collapse.in
               = render partial:'shared/comment', collection: @comments

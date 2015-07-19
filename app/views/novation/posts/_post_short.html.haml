@@ -10,14 +10,14 @@
         -#%a.btn.btn-white.btn-xs.link_status
         -#  %i.fa.fa-exclamation-triangle.fa-lg
     .post.post_type_3.no_head
-      %div{ "data-important" => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
+      %div{ 'data-important' => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
         %div.important.theme_font_color
           %i.fa.fa-bookmark.fa-2x
       .post-header.white
-      .post-body.no_post_head.ch_action{ "data-for" => "post_ch#{post_short.id}" }
+      .post-body.no_post_head.ch_action{ 'data-for' => "post_ch#{post_short.id}" }
         .media
           .media-left.text-center.gradient.post-poster
-            -#= image_tag 'no-ava.png', class: "img-circle img50"
+            -#= image_tag 'no-ava.png', class: 'img-circle img50'
             = link_to user_path(@project, post_short.user) do
               = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
             %p.poster-name
@@ -54,12 +54,12 @@
           .col-md-8.col_padding_right_3.themes_cont
             .post-theme{ id: "stripe#{post_short.id}" }
               - post_short.novation_concepts.each_with_index do |post, index|
-                %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", "data-me-action" => "background-color", "data-me-color" => "#{index + 1}", "data-me-type" => "imperf" }
+                %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
                   %span.tags
                     = trim_content(post.title, 30)
           .col-md-3.col_padding_left_3
             .text-right.small_icons
-              %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}" }
+              %span.popup2.comments_icon{ 'data-for' => "post_ch#{post_short.id}" }
                 %small(class="cc_post_#{post_short.id}")
                   = post_short.comments.count
                 %i.fa.fa-comment-o

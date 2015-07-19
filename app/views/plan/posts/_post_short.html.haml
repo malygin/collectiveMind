@@ -7,11 +7,11 @@
       = link_to({ controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, status: :approve_status }, remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}", id: "approve_status_post_#{post_short.id}") do
         %i.fa.fa-bookmark.fa-lg
     .post_block
-      .post_body{ "data-for" => "post_ch#{post_short.id}" }
+      .post_body{ 'data-for' => "post_ch#{post_short.id}" }
         .post_poster
           = link_to user_path(@project, post_short.user) do
-            = user_image_tag post_short.user.try(:avatar), class: "img-circle img40"
-          = link_to post_short.user, user_path(@project, post_short.user),class:"name"
+            = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
+          = link_to post_short.user, user_path(@project, post_short.user),class:'name'
           %p.time
             = Russian::strftime(post_short.created_at, '%d.%m.%Y')
         .post_content
@@ -32,7 +32,7 @@
       .post_footer
         .tags_block
         .likes
-          %span.comments_icon{ "data-for" => "post_ch#{post_short.id}" }
+          %span.comments_icon{ 'data-for' => "post_ch#{post_short.id}" }
             %small(class="cc_post_#{post_short.id}")
               = post_short.comments.count
             %i.fa.fa-comment-o

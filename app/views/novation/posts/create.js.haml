@@ -3,7 +3,7 @@
   $('#create_novation_success').fadeIn(5000).fadeOut('slow');
   -#$("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
   -#$("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
-  $("#novation_post_title").val('');
+  $('#novation_post_title').val('');
   $(".selected_concepts").html('');
   $.each($('.checked_items .item'), function(index, value) {
   $(value).find('.check_push_box').click();

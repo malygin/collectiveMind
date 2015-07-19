@@ -1,5 +1,5 @@
 !!! 5
-%html(lang="en")
+%html(lang='en')
   = render 'application/meta'
   -# До тех времен, пока не сделаем нормальные лейауты (а лучше один)
   - if controller_name == 'sessions'
@@ -59,14 +59,14 @@
             -#.form-group
             -#  = f.label :remember_me, 'Запомнить меня'
             -#  = f.check_box :remember_me
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: "sign_in", type: "submit"} Войти
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'sign_in', type: 'submit'} Войти
             .divider25
             -#.text-center
             -#  %ul.list-inline
-      -#    %li{ href: "#"} Забыли пароль?
+      -#    %li{ href: '#'} Забыли пароль?
             -#    %li
             -#      = "|"
-      -#    %li{ href: "#"} Зарегистрироваться
+      -#    %li{ href: '#'} Зарегистрироваться
       #popup-3-2.popup-window.detailed_popup.popup-w400.mfp-hide
         .popup.popup-rounded
           .divider35
@@ -81,7 +81,7 @@
             = f.text_field :name, placeholder: 'Имя'
             = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
             = f.password_field :password, placeholder: 'Повторите пароль'
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: "Signin", type: "submit"} Зарегистрироваться
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit'} Зарегистрироваться
 
 
 

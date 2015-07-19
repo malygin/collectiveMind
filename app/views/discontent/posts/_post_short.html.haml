@@ -10,14 +10,14 @@
         -#%a.btn.btn-white.btn-xs.link_status
         -#  %i.fa.fa-exclamation-triangle.fa-lg
     .post.post_type_2
-      %div{ "data-important" => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
+      %div{ 'data-important' => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
         %div.important.theme_font_color
           %i.fa.fa-bookmark.fa-2x
       .post-header.white
-      .post-body.no_post_head.ch_action{ "data-for" => "post_ch#{post_short.id}" }
+      .post-body.no_post_head.ch_action{ 'data-for' => "post_ch#{post_short.id}" }
         .media
           .media-left.text-center.gradient.post-poster
-            -#= image_tag 'no-ava.png', class: "img-circle img50"
+            -#= image_tag 'no-ava.png', class: 'img-circle img50'
             = link_to user_path(@project, post_short.user) do
               = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
             %p.poster-name
@@ -63,7 +63,7 @@
                     = trim_string(aspect.content, size = 30)
           .col-md-3.col_padding_left_3
             .text-right.small_icons
-              %span.popup2.comments_icon{ "data-for" => "post_ch#{post_short.id}",  class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}" }
+              %span.popup2.comments_icon{ 'data-for' => "post_ch#{post_short.id}",  class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size >0}" }
                 %small(class="cc_post_#{post_short.id}")
                   = post_short.comments.count
                 %i.fa.fa-comment-o

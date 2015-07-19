@@ -2,7 +2,7 @@
   .row
     - @user_voter.content_for_vote(@project, status).each do |post_vote|
       .col-sm-6.vote_item_cont{ id: "post_vote_#{post_vote.id}" }
-        .vote_item.color_me(data-me-type="aspect" data-me-action="border-top-color" data-me-color="#{post_vote.id % 13}")
+        .vote_item.color_me(data-me-type='aspect' data-me-action='border-top-color' data-me-color="#{post_vote.id % 13}")
           .heading_cont
             %h6
               = post_vote.content
@@ -11,8 +11,8 @@
             - @project.vote_folders.each do |number_folder, folder|
               - if number_folder > 0
                 = link_to vote_aspect_post_path(@project, post_vote.id, status: number_folder), id: "vote_button_#{post_vote.id}_#{number_folder}", method: :put, remote: true, class: "btn vote_button #{'voted' if status == number_folder}",
-                "data-icon-class" => "fa-exclamation", "data-vote-role" => "#{status == number_folder ? 'all' : folder[:role]}", "data-vote-default-role" => "#{folder[:role]}", role: "button",
-                "data-placement" => "bottom", "data-toggle" => "tooltip", title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe) do
+                'data-icon-class' => 'fa-exclamation', 'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}", 'data-vote-default-role' => "#{folder[:role]}", role: 'button',
+                'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe) do
                   %i.vote{ class: "vote-vote#{number_folder}" }
 
 

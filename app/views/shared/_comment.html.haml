@@ -1,6 +1,6 @@
 .media.comment{ id: "comment#{comment.id}", class: "#{'new_comment' if @last_time_visit && (comment.created_at > @last_time_visit)}" }
   .media-left
-    -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
+    -#= image_tag 'no-ava.png', class: 'media-object img35 img-circle'
     -#= cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
     = link_to user_path(@project, comment.user) do
       = user_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
@@ -23,7 +23,7 @@
                 %i.glyphicon.glyphicon-pencil>
                 Редактировать
             %li
-              = link_to({ controller: comment.post_controller_path, action: :destroy_comment, id: comment.id }, method: :put, remote: true, data: { confirm: t('confirm.delete_comment') }, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
+              = link_to({ controller: comment.post_controller_path, action: :destroy_comment, id: comment.id }, method: :put, remote: true, data: { confirm: t('confirm.delete_comment') }, id: "destroy_comment_#{comment.id}", tabindex: '-1') do
                 %i.glyphicon.glyphicon-remove>
                 Удалить
 
@@ -58,14 +58,14 @@
        id: "dislike_comment_#{comment.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
         %i.fa.fa-thumbs-down.theme_font_color
 
-    -#%button.rate_button{ "data-for" => "comment#{comment.id}", "data-rate-action" => "like", type: "button" }
+    -#%button.rate_button{ 'data-for' => "comment#{comment.id}", 'data-rate-action' => 'like', type: 'button' }
     -#  %span.bold
     -#    %span(id="lk_comment_#{comment.id}")
     -#      =comment.users_pro.count
     -#    = link_to({ controller: comment.controller_name_for_action, action: :like_comment, project: @project, id: comment.id, against: false }, remote: true, method: :put,
     -#     id: "like_comment_#{comment.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title:'Нравится') do
     -#      %i.fa.fa-thumbs-up.theme_font_color
-    -#%button.rate_button{ "data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", type: "button" }
+    -#%button.rate_button{ 'data-for' => "comment#{comment.id}", 'data-rate-action' => 'dislike', type: 'button' }
     -#  %span.bold
     -#    %span(id="dlk_comment_#{comment.id}")
     -#      =comment.users_against.count

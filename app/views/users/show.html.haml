@@ -3,7 +3,7 @@
     .col-md-10
       %span.cab_username
         = link_to user_path(@project, @user) do
-          = user_image_tag @user.avatar, class: "img50 img-circle border_grey"
+          = user_image_tag @user.avatar, class: 'img50 img-circle border_grey'
         %h6.white
           = link_to @user, user_path(@project, @user)
 
@@ -12,28 +12,28 @@
   .col-md-2
     %ul.list-unstyled.cab_menu_left
       %li.active
-        %a.btn.btn_simple_grey.a_font_reset.text-right#show_content{ "data-toggle" => "tab", href: "#user_content" }
+        %a.btn.btn_simple_grey.a_font_reset.text-right#show_content{ 'data-toggle' => 'tab', href: '#user_content' }
           Контент
       - if current_user?(@user)
         %li
-          %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ "data-toggle" => "tab", href: "#user_profile" }
+          %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
             Профиль
 
   .col-md-10
     .tab-content
-      #user_content.tab-pane.fade.in.active{ role: "tabpanel" }
-        %div{ role: "tabpanel" }
-          %ul.nav.nav-tabs.cab_horiz_tabs{ role: "tablist" }
+      #user_content.tab-pane.fade.in.active{ role: 'tabpanel' }
+        %div{ role: 'tabpanel' }
+          %ul.nav.nav-tabs.cab_horiz_tabs{ role: 'tablist' }
             - Core::Project::STAGES.each do |num_stage, stage|
               - if num_stage <= 5
-                %li{ class: "#{'active' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", role: "presentation" }
-                  %a{ id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", "data-toggle" => "tab", href: "#cab_cont_#{num_stage}", role: "tab" }
+                %li{ class: "#{'active' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", role: 'presentation' }
+                  %a{ id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", 'data-toggle' => 'tab', href: "#cab_cont_#{num_stage}", role: 'tab' }
                     %span.marked=num_stage
                     СТАДИЯ
           .tab-content.cab_cont_block.rounded_3.border_grey.white
             - Core::Project::STAGES.each do |num_stage, stage|
               - if num_stage <= 5
-                .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", id: "cab_cont_#{num_stage}", role: "tabpanel" }
+                .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", id: "cab_cont_#{num_stage}", role: 'tabpanel' }
                   .divider10
                   .container
                     .row
@@ -62,7 +62,7 @@
                   .divider20
 
       - if current_user?(@user)
-        #user_profile.tab-pane.fade{ role: "tabpanel" }
+        #user_profile.tab-pane.fade{ role: 'tabpanel' }
           = @user
           -#%h5 Не состоит ни в одной группе
           = form_for @user, url: { action: :update, type: @project.id }, class: 'form form-horizontal' do |f|

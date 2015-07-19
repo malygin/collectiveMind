@@ -29,11 +29,11 @@
             .nav-tabs-one
               %ul.nav.nav-tabs
                 %li.active
-                  %a{ "data-toggle" => "tab", href: "#tab-1" }
+                  %a{ 'data-toggle' => 'tab', href: '#tab-1' }
                     %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
                       Описание проектного предложения
                 %li
-                  %a{ "data-toggle" => "tab", href: "#tab-2" }
+                  %a{ 'data-toggle' => 'tab', href: '#tab-2' }
                     %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
                       График реализации проекта
           .col-md-3
@@ -50,7 +50,7 @@
               .col-md-12.com_dashed_border.popup_collapsable_col.collapse.in
                 .divider25
                 - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
-                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#cab4-#{link}" }
+                  %a.a_font_reset.collapser_type2.with_plus{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#cab4-#{link}" }
                     = t("activerecord.attributes.plan/post_novation.#{link}")
                     %i.fa.font_color_stage5.collapse_plus{ class: "#{link == :project ? 'fa-minus' : 'fa-plus'}" }
 

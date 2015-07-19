@@ -9,14 +9,14 @@
     }
     $('#answers_collapse_#{@comment_parent.id}').html("<span>#{t('stages.comments', count: @comment_parent.comments.size)}</span>");
     } else {
-    var answers = $('<a id="answers_collapse_#{@comment_parent.id}" class="answers_collapse theme_font_color opened" data-toggle="collapse" href="#answers_#{@comment_parent.id}" aria-expanded="false"><span>1 ответ</span></a>');
-    var answers2 = $('<div class="com_answers collapse in" id="answers_#{@comment_parent.id}"><div class="answers_subblock level1"></div></div>');
+    var answers = $('<a id="answers_collapse_#{@comment_parent.id}" class='answers_collapse theme_font_color opened' data-toggle='collapse' href="#answers_#{@comment_parent.id}" aria-expanded='false'><span>1 ответ</span></a>');
+    var answers2 = $('<div class='com_answers collapse in' id="answers_#{@comment_parent.id}"><div class='answers_subblock level1'></div></div>');
     $('#comment#{@comment_parent.id}').after(answers);
     answers.after(answers2);
     answers2.find('.answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
     }
   - else
-    $("#comment_text_area").val('');
+    $('#comment_text_area').val('');
     $('.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 
 
@@ -25,7 +25,7 @@
 
 
   -#- if @comment_answer.nil?
--#  $("#comment_text_area").val('');
+-#  $('#comment_text_area').val('');
 -#  $('#comments.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 -#  -#$("#comments.chat-messages").scrollTop(10000);
 -#  -#$('#comment_success').fadeIn('slow').delay(1000).fadeOut('slow');
@@ -33,10 +33,10 @@
 -#  $("#child_comments_#{@comment_parent.id}").append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
 -#  $("#form_reply_comment_#{@comment_answer.id}").fadeOut().empty()
   -#  $('html, body').animate({ scrollTop: $('#comment_content_#{@comment.id}').offset().top }, 1000);
-  -#  $('#comment_content_#{@comment.id}').effect("highlight", 3000);
+  -#  $('#comment_content_#{@comment.id}').effect('highlight', 3000);
 -#  $('#reply_comment_#{@comment_answer.id}').fadeIn()
 -#
 -#
--#-#$("#change_comment_stat label").removeClass('btn-success active').addClass('btn-default');
+-#-#$('#change_comment_stat label').removeClass('btn-success active').addClass('btn-default');
 -#-#$('#change_comment_stat .btn').button('reset');
   -#$('.comments-cont').append("#{escape_javascript(render partial: 'shared/comment_form', locals: { comment: @new_comment, post: @comment.post})}");
