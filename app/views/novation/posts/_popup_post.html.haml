@@ -19,17 +19,17 @@
             .col-md-12
               .text-right.post_likes
                 %span.bold
-                  %span(class="cc_post_#{@post.id}")
+                  %span{ class: "cc_post_#{@post.id}" }
                     = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
                 = link_to({ controller: @post.class.name.underscore.pluralize , action: :like, project: @project, id: @post.id, against: false }, remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %span.bold
-                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
+                    %span{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
                 = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true }, remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %span.bold
-                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
+                    %span{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                       = @post.users_against.count
                     %i.fa.fa-thumbs-down.theme_font_color
                 -#- if @post.notes.present?
@@ -60,7 +60,7 @@
             %button.btn.btn_reset.exp_button.pull-right
               = image_tag 'grey_arrow.png'
             .divider25
-            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle='collapse' href='#cab4-1' aria-expanded='false')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-1', 'aria-expanded' => 'false' }
               = t('activerecord.attributes.novation/post.project')
               %i.fa.fa-plus.font_color_stage4.collapse_plus
             #cab4-1.collapse
@@ -87,7 +87,7 @@
               %p
                 = @post.project_time
               .divider15
-            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle='collapse' href='#cab4-2' aria-expanded='false')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-2', 'aria-expanded' => 'false' }
               = t('activerecord.attributes.novation/post.members')
               %i.fa.fa-plus.font_color_stage4.collapse_plus
             #cab4-2.collapse
@@ -126,7 +126,7 @@
 
               .divider15
 
-            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle='collapse' href='#cab4-3' aria-expanded='false')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-3', 'aria-expanded' => 'false' }
               = t('activerecord.attributes.novation/post.resource')
               %i.fa.fa-plus.font_color_stage4.collapse_plus
             #cab4-3.collapse
@@ -171,7 +171,7 @@
                 = @post.resource_competition
               .divider15
 
-            %a.a_font_reset.collapser_type2.with_plus.collapsed(data-toggle='collapse' href='#cab4-4' aria-expanded='false')
+            %a.a_font_reset.collapser_type2.with_plus.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-4', 'aria-expanded' => 'false' }
               = t('activerecord.attributes.novation/post.confidence')
               %i.fa.fa-plus.font_color_stage4.collapse_plus
             #cab4-4.collapse

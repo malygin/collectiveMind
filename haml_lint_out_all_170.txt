@@ -10,27 +10,13 @@ app/views/aspect/posts/_aspect_questions.html.haml:61 [W] RuboCop: Space missing
 app/views/aspect/posts/_aspect_questions.html.haml:65 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/aspect/posts/_aspect_questions.html.haml:65 [W] RuboCop: Space inside } missing.
 app/views/aspect/posts/_aspect_questions.html.haml:65 [W] LineLength: Line is too long. [224/170]
-app/views/aspect/posts/_aspect_questions.html.haml:66 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_aspect_questions.html.haml:69 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_aspect_questions.html.haml:79 [W] LineLength: Line is too long. [199/170]
 app/views/aspect/posts/_aspect_questions.html.haml:83 [W] ClassesBeforeIds: Classes should be listed before IDs (.btn should precede #send_answers)
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] RuboCop: Space found before comma.
 app/views/aspect/posts/_aspect_questions.html.haml:91 [W] LineLength: Line is too long. [177/170]
 app/views/aspect/posts/_aspect_questions.html.haml:111 [W] RuboCop: Unused block argument - `i`. If it's necessary, use `_` or `_i` as an argument name to indicate that it won't be used.
 app/views/aspect/posts/_aspect_questions.html.haml:119 [W] FinalNewline: Files should end with a trailing newline
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_detailed_form.html.haml:12 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/aspect/posts/_detailed_form.html.haml:12 [W] ClassAttributeWithStaticValue: Avoid defining `class` in attributes hash for static class names
 app/views/aspect/posts/_discuss_aspects.html.haml:9 [W] RuboCop: Space missing after colon.
 app/views/aspect/posts/_discuss_aspects.html.haml:9 [W] LineLength: Line is too long. [289/170]
 app/views/aspect/posts/_discuss_aspects.html.haml:14 [W] LineLength: Line is too long. [211/170]
@@ -43,9 +29,7 @@ app/views/aspect/posts/_discuss_aspects.html.haml:49 [W] SpaceBeforeScript: The 
 app/views/aspect/posts/_discuss_aspects.html.haml:53 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_discuss_aspects.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/aspect/posts/_discuss_aspects.html.haml:55 [W] LineLength: Line is too long. [192/170]
-app/views/aspect/posts/_discuss_aspects.html.haml:56 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
 app/views/aspect/posts/_discuss_aspects.html.haml:57 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_discuss_aspects.html.haml:59 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
 app/views/aspect/posts/_discuss_aspects.html.haml:60 [W] FinalNewline: Files should end with a trailing newline
 app/views/aspect/posts/_discuss_aspects.html.haml:60 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_form.html.haml:1 [W] LineLength: Line is too long. [191/170]
@@ -55,34 +39,9 @@ app/views/aspect/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes sho
 app/views/aspect/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/aspect/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
 app/views/aspect/posts/_popup_post.html.haml:16 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_popup_post.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_popup_post.html.haml:29 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_popup_post.html.haml:30 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after colon.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_popup_post.html.haml:35 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_popup_post.html.haml:36 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_popup_post.html.haml:39 [W] RuboCop: Do not use `::` for method calls.
 app/views/aspect/posts/_popup_post.html.haml:39 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
@@ -108,25 +67,9 @@ app/views/aspect/posts/_post_short.html.haml:36 [W] UnnecessaryStringOutput: `= 
 app/views/aspect/posts/_post_short.html.haml:36 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_post_short.html.haml:37 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_post_short.html.haml:40 [W] LineLength: Line is too long. [179/170]
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_post_short.html.haml:53 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_post_short.html.haml:53 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_post_short.html.haml:54 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Surrounding space missing for operator `=>`.
 app/views/aspect/posts/_post_short.html.haml:55 [W] RuboCop: Space missing after colon.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Space inside { missing.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Space missing after comma.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] RuboCop: Space inside } missing.
-app/views/aspect/posts/_post_vote.html.haml:5 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/aspect/posts/_post_vote.html.haml:13 [W] LineLength: Line is too long. [239/170]
 app/views/aspect/posts/_post_vote.html.haml:14 [W] LineLength: Line is too long. [192/170]
 app/views/aspect/posts/_post_vote.html.haml:19 [W] FinalNewline: Files should end with a trailing newline
@@ -147,22 +90,13 @@ app/views/completion/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes
 app/views/completion/posts/_popup_post.html.haml:24 [W] RuboCop: Do not use `::` for method calls.
 app/views/completion/posts/_popup_post.html.haml:47 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-1)
 app/views/completion/posts/_popup_post.html.haml:53 [W] LineLength: Line is too long. [186/170]
-app/views/completion/posts/_popup_post.html.haml:68 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/completion/posts/_popup_post.html.haml:68 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-2)
-app/views/completion/posts/_popup_post.html.haml:72 [W] LineLength: Line is too long. [171/170]
-app/views/completion/posts/_popup_post.html.haml:72 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/completion/posts/_popup_post.html.haml:72 [W] LineLength: Line is too long. [174/170]
 app/views/completion/posts/_popup_post.html.haml:74 [W] FinalNewline: Files should end with a trailing newline
 app/views/completion/posts/index.html.haml:4 [W] ClassesBeforeIds: Classes should be listed before IDs (.carousel should precede #myCarousel)
 app/views/completion/posts/index.html.haml:54 [W] RuboCop: Unused block argument - `post`. If it's necessary, use `_` or `_post` as an argument name to indicate that it won't be used.
 app/views/completion/posts/index.html.haml:57 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/concept/posts/_discontent.html.haml:5 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_discontent.html.haml:10 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_discontent.html.haml:10 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_discontent.html.haml:27 [W] RuboCop: Do not use `::` for method calls.
 app/views/concept/posts/_discontent.html.haml:67 [W] ConsecutiveComments: 44 consecutive comments can be merged into one
 app/views/concept/posts/_discontent.html.haml:117 [W] FinalNewline: Files should end with a trailing newline
@@ -187,34 +121,9 @@ app/views/concept/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes sh
 app/views/concept/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/concept/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
 app/views/concept/posts/_popup_post.html.haml:10 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_popup_post.html.haml:25 [W] RuboCop: Space found before comma.
 app/views/concept/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [282/170]
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_popup_post.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_popup_post.html.haml:39 [W] RuboCop: Do not use `::` for method calls.
 app/views/concept/posts/_popup_post.html.haml:55 [W] LineLength: Line is too long. [195/170]
 app/views/concept/posts/_popup_post.html.haml:91 [W] RuboCop: Space missing after colon.
@@ -240,32 +149,7 @@ app/views/concept/posts/_post_short.html.haml:46 [W] SpaceBeforeScript: The = sy
 app/views/concept/posts/_post_short.html.haml:51 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_short.html.haml:51 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/concept/posts/_post_short.html.haml:55 [W] LineLength: Line is too long. [267/170]
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_post_short.html.haml:61 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_post_short.html.haml:61 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_post_short.html.haml:65 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_post_short.html.haml:65 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_post_short.html.haml:67 [W] LineLength: Line is too long. [296/170]
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Space inside { missing.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Space missing after comma.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/concept/posts/_post_short.html.haml:70 [W] RuboCop: Space inside } missing.
-app/views/concept/posts/_post_short.html.haml:70 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/concept/posts/_post_short.html.haml:72 [W] LineLength: Line is too long. [302/170]
 app/views/concept/posts/_post_vote.html.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/concept/posts/_post_vote.html.haml:16 [W] LineLength: Line is too long. [186/170]
@@ -345,7 +229,6 @@ app/views/core/projects/_aspect.html.haml:6 [W] RuboCop: Space missing after col
 app/views/core/projects/_aspect.html.haml:6 [W] ClassAttributeWithStaticValue: Avoid defining `class` in attributes hash for static class names
 app/views/core/projects/_edit_stages.html.haml:5 [W] RuboCop: Space missing after colon.
 app/views/core/projects/_edit_stages.html.haml:7 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/core/projects/_edit_stages.html.haml:10 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/core/projects/_edit_stages.html.haml:13 [W] RuboCop: Space missing after colon.
 app/views/core/projects/_edit_stages.html.haml:19 [W] LineLength: Line is too long. [186/170]
 app/views/core/projects/_edit_stages.html.haml:22 [W] LineLength: Line is too long. [186/170]
@@ -353,23 +236,8 @@ app/views/core/projects/_edit_stages.html.haml:28 [W] LineLength: Line is too lo
 app/views/core/projects/_form.html.haml:19 [W] RuboCop: Space inside empty hash literal braces detected.
 app/views/core/projects/_form.html.haml:19 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/core/projects/_form.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Space inside { missing.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Space missing after comma.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/core/projects/_form.html.haml:37 [W] RuboCop: Space inside } missing.
-app/views/core/projects/_form.html.haml:37 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/core/projects/_form.html.haml:37 [W] ClassAttributeWithStaticValue: Avoid defining `class` in attributes hash for static class names
 app/views/core/projects/_form.html.haml:41 [W] RuboCop: Space missing after colon.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Space inside { missing.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Space missing after comma.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Space missing after comma.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/core/projects/_form.html.haml:55 [W] RuboCop: Space inside } missing.
-app/views/core/projects/_form.html.haml:55 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/core/projects/edit.html.haml:7 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/core/projects/edit.html.haml:10 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/core/projects/edit.html.haml:12 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
@@ -380,9 +248,7 @@ app/views/core/projects/edit.html.haml:30 [W] ClassesBeforeIds: Classes should b
 app/views/core/projects/edit.html.haml:32 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #edit_techniques)
 app/views/core/projects/edit.html.haml:37 [W] RuboCop: Space missing after colon.
 app/views/core/projects/edit.html.haml:39 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
-app/views/core/projects/edit.html.haml:42 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/core/projects/edit.html.haml:45 [W] RuboCop: Space missing after colon.
-app/views/core/projects/index.html.haml:11 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/core/projects/index.html.haml:20 [W] RuboCop: Space missing after colon.
 app/views/core/projects/index.html.haml:25 [W] RuboCop: Space missing after colon.
 app/views/core/projects/index.html.haml:29 [W] RuboCop: Space missing after colon.
@@ -424,35 +290,10 @@ app/views/discontent/posts/_popup_post.html.haml:4 [W] LineLength: Line is too l
 app/views/discontent/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [314/170]
 app/views/discontent/posts/_popup_post.html.haml:10 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
 app/views/discontent/posts/_popup_post.html.haml:16 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_popup_post.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/discontent/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [281/170]
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_popup_post.html.haml:28 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/discontent/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_popup_post.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_popup_post.html.haml:33 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/discontent/posts/_popup_post.html.haml:39 [W] RuboCop: Do not use `::` for method calls.
 app/views/discontent/posts/_popup_post.html.haml:39 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
@@ -484,32 +325,7 @@ app/views/discontent/posts/_post_short.html.haml:57 [W] RuboCop: Prefer single-q
 app/views/discontent/posts/_post_short.html.haml:57 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/discontent/posts/_post_short.html.haml:66 [W] RuboCop: Surrounding space missing for operator `>`.
 app/views/discontent/posts/_post_short.html.haml:66 [W] LineLength: Line is too long. [191/170]
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_post_short.html.haml:67 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_post_short.html.haml:67 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_post_short.html.haml:71 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_post_short.html.haml:71 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_post_short.html.haml:73 [W] LineLength: Line is too long. [296/170]
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Space inside { missing.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Space missing after comma.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/discontent/posts/_post_short.html.haml:76 [W] RuboCop: Space inside } missing.
-app/views/discontent/posts/_post_short.html.haml:76 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/discontent/posts/_post_short.html.haml:78 [W] LineLength: Line is too long. [302/170]
 app/views/discontent/posts/_post_vote.html.haml:9 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/discontent/posts/_post_vote.html.haml:21 [W] LineLength: Line is too long. [243/170]
@@ -558,44 +374,17 @@ app/views/estimate/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes s
 app/views/estimate/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/estimate/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
 app/views/estimate/posts/_popup_post.html.haml:10 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/estimate/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/estimate/posts/_popup_post.html.haml:25 [W] RuboCop: Space found before comma.
 app/views/estimate/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [282/170]
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
-app/views/estimate/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/estimate/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside } missing.
-app/views/estimate/posts/_popup_post.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/estimate/posts/_popup_post.html.haml:36 [W] RuboCop: Do not use `::` for method calls.
 app/views/estimate/posts/_popup_post.html.haml:38 [W] LineLength: Line is too long. [222/170]
 app/views/estimate/posts/_popup_post.html.haml:72 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-1)
 app/views/estimate/posts/_popup_post.html.haml:80 [W] LineLength: Line is too long. [186/170]
 app/views/estimate/posts/_popup_post.html.haml:100 [W] RuboCop: Space missing after colon.
 app/views/estimate/posts/_popup_post.html.haml:102 [W] LineLength: Line is too long. [191/170]
-app/views/estimate/posts/_popup_post.html.haml:105 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/estimate/posts/_popup_post.html.haml:105 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-2)
-app/views/estimate/posts/_popup_post.html.haml:109 [W] LineLength: Line is too long. [171/170]
-app/views/estimate/posts/_popup_post.html.haml:109 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/estimate/posts/_popup_post.html.haml:109 [W] LineLength: Line is too long. [174/170]
 app/views/estimate/posts/_popup_post.html.haml:113 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-3)
 app/views/estimate/posts/_popup_post.html.haml:142 [W] RuboCop: Surrounding space missing for operator `*`.
 app/views/estimate/posts/_popup_post.html.haml:142 [W] LineLength: Line is too long. [223/170]
@@ -611,173 +400,58 @@ app/views/estimate/posts/_post_short.html.haml:42 [W] FinalNewline: Files should
 app/views/help/posts/_help_post_form.html.haml:9 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/_help_post_form.html.haml:13 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/_help_post_form.html.haml:15 [W] FinalNewline: Files should end with a trailing newline
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:3 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:3 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:4 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:6 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:6 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:9 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:11 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:11 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:14 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:16 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:16 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:19 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:21 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:21 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:24 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:26 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:26 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:29 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:31 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:31 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:34 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Space inside { missing.
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Space missing after comma.
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/help/posts/_left_side.haml:36 [W] RuboCop: Space inside } missing.
-app/views/help/posts/_left_side.haml:36 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_left_side.haml:37 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/_left_side.haml:42 [W] FinalNewline: Files should end with a trailing newline
-app/views/help/posts/_new_help_0.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_0.html.haml:8 [W] LineLength: Line is too long. [628/170]
 app/views/help/posts/_new_help_0.html.haml:15 [W] LineLength: Line is too long. [871/170]
 app/views/help/posts/_new_help_0.html.haml:20 [W] LineLength: Line is too long. [274/170]
-app/views/help/posts/_new_help_1.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_1.html.haml:9 [W] LineLength: Line is too long. [274/170]
 app/views/help/posts/_new_help_1.html.haml:16 [W] LineLength: Line is too long. [505/170]
 app/views/help/posts/_new_help_1.html.haml:18 [W] LineLength: Line is too long. [368/170]
 app/views/help/posts/_new_help_1.html.haml:28 [W] LineLength: Line is too long. [312/170]
-app/views/help/posts/_new_help_1.html.haml:38 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_1_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_2.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_2.html.haml:7 [W] LineLength: Line is too long. [386/170]
 app/views/help/posts/_new_help_2.html.haml:12 [W] LineLength: Line is too long. [193/170]
-app/views/help/posts/_new_help_2.html.haml:14 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_2.html.haml:21 [W] LineLength: Line is too long. [704/170]
-app/views/help/posts/_new_help_2.html.haml:23 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_2.html.haml:27 [W] LineLength: Line is too long. [229/170]
 app/views/help/posts/_new_help_2.html.haml:30 [W] LineLength: Line is too long. [511/170]
-app/views/help/posts/_new_help_2.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_2_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_2_s.html.haml:77 [W] LineLength: Line is too long. [246/170]
-app/views/help/posts/_new_help_3.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:20 [W] LineLength: Line is too long. [281/170]
-app/views/help/posts/_new_help_3.html.haml:25 [W] LineLength: Line is too long. [414/170]
-app/views/help/posts/_new_help_3.html.haml:31 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:37 [W] LineLength: Line is too long. [354/170]
-app/views/help/posts/_new_help_3.html.haml:39 [W] LineLength: Line is too long. [350/170]
-app/views/help/posts/_new_help_3.html.haml:49 [W] LineLength: Line is too long. [529/170]
-app/views/help/posts/_new_help_3.html.haml:52 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:57 [W] LineLength: Line is too long. [270/170]
-app/views/help/posts/_new_help_3.html.haml:60 [W] LineLength: Line is too long. [691/170]
-app/views/help/posts/_new_help_3.html.haml:65 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:84 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:86 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:94 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:96 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:105 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:105 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:106 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:113 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:115 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:123 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:123 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:124 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:132 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:132 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:133 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:141 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:141 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:142 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:149 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:152 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:152 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:158 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_3.html.haml:161 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/help/posts/_new_help_3.html.haml:161 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/_new_help_3.html.haml:164 [W] LineLength: Line is too long. [252/170]
-app/views/help/posts/_new_help_3.html.haml:171 [W] LineLength: Line is too long. [531/170]
-app/views/help/posts/_new_help_3_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/help/posts/_new_help_3.html.haml:0 [E] Illegal element: classes and ids must have values.
 app/views/help/posts/_new_help_3_s.html.haml:13 [W] LineLength: Line is too long. [204/170]
 app/views/help/posts/_new_help_3_s.html.haml:15 [W] LineLength: Line is too long. [237/170]
 app/views/help/posts/_new_help_3_s.html.haml:61 [W] LineLength: Line is too long. [174/170]
-app/views/help/posts/_new_help_4.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_4.html.haml:17 [W] LineLength: Line is too long. [277/170]
 app/views/help/posts/_new_help_4.html.haml:19 [W] LineLength: Line is too long. [494/170]
 app/views/help/posts/_new_help_4.html.haml:23 [W] LineLength: Line is too long. [633/170]
 app/views/help/posts/_new_help_4.html.haml:29 [W] LineLength: Line is too long. [511/170]
-app/views/help/posts/_new_help_4_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_4_s.html.haml:34 [W] LineLength: Line is too long. [196/170]
 app/views/help/posts/_new_help_4_s.html.haml:41 [W] LineLength: Line is too long. [1492/170]
 app/views/help/posts/_new_help_4_s.html.haml:48 [W] LineLength: Line is too long. [347/170]
 app/views/help/posts/_new_help_4_s.html.haml:51 [W] LineLength: Line is too long. [231/170]
-app/views/help/posts/_new_help_5.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_5.html.haml:24 [W] LineLength: Line is too long. [226/170]
 app/views/help/posts/_new_help_5.html.haml:26 [W] LineLength: Line is too long. [200/170]
 app/views/help/posts/_new_help_5.html.haml:28 [W] LineLength: Line is too long. [207/170]
-app/views/help/posts/_new_help_5_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_6.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_6.html.haml:15 [W] FinalNewline: Files should end with a trailing newline
 app/views/help/posts/_new_help_6_s.html.haml:1 [W] FinalNewline: Files should end with a trailing newline
-app/views/help/posts/_new_help_6_s.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/_new_help_7.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/_new_help_7.html.haml:69 [W] FinalNewline: Files should end with a trailing newline
 app/views/help/posts/about.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/help/posts/about.html.haml:6 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/edit.js.haml:2 [W] RuboCop: Put one space between the method name and the first argument.
 app/views/help/posts/edit.js.haml:4 [W] FinalNewline: Files should end with a trailing newline
 app/views/help/posts/show.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/help/posts/show.html.haml:4 [W] RuboCop: Use `%w` or `%W` for array of words.
 app/views/help/posts/show.html.haml:6 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
-app/views/help/posts/show.html.haml:14 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/help/posts/show.html.haml:14 [W] ImplicitDiv: `%div.help-content` can be written as `.help-content` since `%div` is implicit
-app/views/help/posts/show.html.haml:21 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/help/posts/show.html.haml:23 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/help/posts/show.html.haml:26 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #short_desc)
 app/views/help/posts/show.html.haml:27 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
-app/views/help/posts/show.html.haml:35 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/help/posts/show.html.haml:35 [W] ImplicitDiv: `%div.help-content` can be written as `.help-content` since `%div` is implicit
 app/views/help/posts/show.html.haml:37 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #long_desc)
 app/views/help/posts/show.html.haml:38 [W] SpaceBeforeScript: The - symbol should have one space separating it from code
-app/views/help/posts/show.html.haml:46 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/help/posts/show.html.haml:46 [W] ImplicitDiv: `%div.help-content` can be written as `.help-content` since `%div` is implicit
 app/views/help/posts/update.js.haml:3 [W] FinalNewline: Files should end with a trailing newline
 app/views/layouts/application.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
@@ -790,28 +464,21 @@ app/views/layouts/cabinet.html.haml:2 [W] HtmlAttributes: Prefer the hash attrib
 app/views/layouts/cabinet.html.haml:23 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:28 [W] LineLength: Line is too long. [205/170]
 app/views/layouts/cabinet.html.haml:38 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #cabinet_new)
-app/views/layouts/cabinet.html.haml:41 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #cabinet_content)
 app/views/layouts/cabinet.html.haml:48 [W] LineLength: Line is too long. [202/170]
 app/views/layouts/cabinet.html.haml:49 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:52 [W] RuboCop: Avoid more than 3 levels of block nesting.
 app/views/layouts/cabinet.html.haml:53 [W] LineLength: Line is too long. [202/170]
-app/views/layouts/cabinet.html.haml:54 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/layouts/cabinet.html.haml:59 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:67 [W] LineLength: Line is too long. [253/170]
 app/views/layouts/cabinet.html.haml:71 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/layouts/cabinet.html.haml:71 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:76 [W] LineLength: Line is too long. [253/170]
 app/views/layouts/cabinet.html.haml:81 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/layouts/cabinet.html.haml:83 [W] RuboCop: Space missing after colon.
-app/views/layouts/cabinet.html.haml:87 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #user_profile)
 app/views/layouts/cabinet.html.haml:94 [W] RuboCop: Space inside } missing.
 app/views/layouts/cabinet.html.haml:94 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/layouts/cabinet.html.haml:96 [W] LineLength: Line is too long. [258/170]
-app/views/layouts/cabinet.html.haml:97 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/layouts/cabinet.html.haml:99 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/layouts/cabinet.html.haml:123 [W] ClassesBeforeIds: Classes should be listed before IDs (.popup-window should precede #popup-1-1)
-app/views/layouts/cabinet.html.haml:145 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/layouts/core/projects.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/layouts/core/projects.html.haml:17 [W] LineLength: Line is too long. [171/170]
 app/views/layouts/core/projects.html.haml:24 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/layouts/core/projects.html.haml:26 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
@@ -833,44 +500,15 @@ app/views/novation/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes s
 app/views/novation/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/novation/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
 app/views/novation/posts/_popup_post.html.haml:10 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:25 [W] RuboCop: Space found before comma.
 app/views/novation/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [282/170]
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_popup_post.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:39 [W] RuboCop: Do not use `::` for method calls.
 app/views/novation/posts/_popup_post.html.haml:54 [W] LineLength: Line is too long. [195/170]
-app/views/novation/posts/_popup_post.html.haml:63 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:66 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #cab4-1)
-app/views/novation/posts/_popup_post.html.haml:90 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:93 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #cab4-2)
 app/views/novation/posts/_popup_post.html.haml:102 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/novation/posts/_popup_post.html.haml:129 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:132 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #cab4-3)
-app/views/novation/posts/_popup_post.html.haml:174 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_popup_post.html.haml:177 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #cab4-4)
 app/views/novation/posts/_popup_post.html.haml:211 [W] RuboCop: Space missing after colon.
 app/views/novation/posts/_popup_post.html.haml:213 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #comments)
@@ -893,32 +531,7 @@ app/views/novation/posts/_post_short.html.haml:48 [W] SpaceBeforeScript: The = s
 app/views/novation/posts/_post_short.html.haml:53 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/novation/posts/_post_short.html.haml:53 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/novation/posts/_post_short.html.haml:57 [W] LineLength: Line is too long. [183/170]
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_post_short.html.haml:63 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_post_short.html.haml:63 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_post_short.html.haml:67 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_post_short.html.haml:67 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_post_short.html.haml:69 [W] LineLength: Line is too long. [296/170]
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Space inside { missing.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Space missing after comma.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/novation/posts/_post_short.html.haml:72 [W] RuboCop: Space inside } missing.
-app/views/novation/posts/_post_short.html.haml:72 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/novation/posts/_post_short.html.haml:74 [W] LineLength: Line is too long. [302/170]
 app/views/novation/posts/_post_vote.html.haml:14 [W] LineLength: Line is too long. [181/170]
 app/views/novation/posts/_post_vote.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
@@ -953,7 +566,6 @@ app/views/novation/posts/user_content.html.haml:33 [W] RuboCop: Surrounding spac
 app/views/novation/posts/user_content.html.haml:33 [W] LineLength: Line is too long. [179/170]
 app/views/plan/posts/_gantt_panel.html.haml:1 [W] ClassesBeforeIds: Classes should be listed before IDs (.bottom_fix should precede #bottom-panel)
 app/views/plan/posts/_gantt_panel.html.haml:9 [W] ClassesBeforeIds: Classes should be listed before IDs (.btn should precede #bottom-opener)
-app/views/plan/posts/_gantt_panel.html.haml:12 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_gantt_panel.html.haml:13 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/plan/posts/_gantt_panel.html.haml:13 [W] ClassesBeforeIds: Classes should be listed before IDs (.noprint should precede #taZone)
 app/views/plan/posts/_gantt_panel.html.haml:21 [W] LineLength: Line is too long. [292/170]
@@ -961,39 +573,13 @@ app/views/plan/posts/_popup_post.html.haml:1 [W] ClassesBeforeIds: Classes shoul
 app/views/plan/posts/_popup_post.html.haml:4 [W] LineLength: Line is too long. [267/170]
 app/views/plan/posts/_popup_post.html.haml:6 [W] LineLength: Line is too long. [311/170]
 app/views/plan/posts/_popup_post.html.haml:10 [W] ImplicitDiv: `%div.important.theme_font_color` can be written as `.important.theme_font_color` since `%div` is implicit
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_popup_post.html.haml:22 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_popup_post.html.haml:22 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_popup_post.html.haml:25 [W] RuboCop: Space found before comma.
 app/views/plan/posts/_popup_post.html.haml:25 [W] LineLength: Line is too long. [282/170]
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_popup_post.html.haml:27 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_popup_post.html.haml:27 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_popup_post.html.haml:30 [W] LineLength: Line is too long. [287/170]
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_popup_post.html.haml:32 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_popup_post.html.haml:32 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_popup_post.html.haml:39 [W] RuboCop: Do not use `::` for method calls.
 app/views/plan/posts/_popup_post.html.haml:41 [W] LineLength: Line is too long. [222/170]
 app/views/plan/posts/_popup_post.html.haml:70 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-1)
 app/views/plan/posts/_popup_post.html.haml:78 [W] LineLength: Line is too long. [186/170]
-app/views/plan/posts/_popup_post.html.haml:89 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/plan/posts/_popup_post.html.haml:101 [W] RuboCop: Space missing after colon.
 app/views/plan/posts/_popup_post.html.haml:103 [W] ClassesBeforeIds: Classes should be listed before IDs (.collapse should precede #comments)
 app/views/plan/posts/_popup_post.html.haml:104 [W] RuboCop: Space missing after colon.
@@ -1001,10 +587,8 @@ app/views/plan/posts/_popup_post.html.haml:106 [W] RuboCop: Space missing after 
 app/views/plan/posts/_popup_post.html.haml:106 [W] RuboCop: Space missing after colon.
 app/views/plan/posts/_popup_post.html.haml:106 [W] RuboCop: Space missing after colon.
 app/views/plan/posts/_popup_post.html.haml:106 [W] LineLength: Line is too long. [189/170]
-app/views/plan/posts/_popup_post.html.haml:109 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_popup_post.html.haml:109 [W] ClassesBeforeIds: Classes should be listed before IDs (.tab-pane should precede #tab-2)
-app/views/plan/posts/_popup_post.html.haml:113 [W] LineLength: Line is too long. [171/170]
-app/views/plan/posts/_popup_post.html.haml:113 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
+app/views/plan/posts/_popup_post.html.haml:113 [W] LineLength: Line is too long. [174/170]
 app/views/plan/posts/_post_short.html.haml:1 [W] RuboCop: Space inside } missing.
 app/views/plan/posts/_post_short.html.haml:5 [W] LineLength: Line is too long. [292/170]
 app/views/plan/posts/_post_short.html.haml:7 [W] LineLength: Line is too long. [334/170]
@@ -1012,28 +596,7 @@ app/views/plan/posts/_post_short.html.haml:14 [W] RuboCop: Space missing after c
 app/views/plan/posts/_post_short.html.haml:14 [W] RuboCop: Space missing after colon.
 app/views/plan/posts/_post_short.html.haml:16 [W] RuboCop: Do not use `::` for method calls.
 app/views/plan/posts/_post_short.html.haml:20 [W] RuboCop: Useless assignment to variable - `size`.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:36 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:36 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:40 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:40 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_post_short.html.haml:42 [W] LineLength: Line is too long. [292/170]
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space inside { missing.
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space missing after comma.
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/plan/posts/_post_short.html.haml:45 [W] RuboCop: Space inside } missing.
-app/views/plan/posts/_post_short.html.haml:45 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/plan/posts/_post_short.html.haml:47 [W] LineLength: Line is too long. [298/170]
 app/views/plan/posts/_progress_vote.html.haml:3 [W] RuboCop: Surrounding space missing for operator `*`.
 app/views/plan/posts/_progress_vote.html.haml:3 [W] LineLength: Line is too long. [217/170]
@@ -1085,23 +648,14 @@ app/views/posts/_popup_results.html.haml:87 [W] SpaceBeforeScript: The = symbol 
 app/views/posts/_popup_results.html.haml:94 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/posts/_popup_results.html.haml:97 [W] FinalNewline: Files should end with a trailing newline
 app/views/posts/_popup_vote.html.haml:9 [W] LineLength: Line is too long. [281/170]
-app/views/posts/_popup_vote.html.haml:18 [W] RuboCop: Surrounding space missing for operator `/`.
 app/views/posts/_popup_vote.html.haml:20 [W] LineLength: Line is too long. [226/170]
 app/views/posts/_popup_vote.html.haml:31 [W] LineLength: Line is too long. [179/170]
-app/views/posts/_popup_vote.html.haml:33 [W] FinalNewline: Files should end with a trailing newline
 app/views/posts/_popup_welcome.html.haml:1 [W] LineLength: Line is too long. [201/170]
-app/views/posts/_popup_welcome.html.haml:10 [W] RuboCop: Redundant use of `Object#to_s` in interpolation.
-app/views/posts/_popup_welcome.html.haml:15 [W] RuboCop: Redundant use of `Object#to_s` in interpolation.
-app/views/posts/_popup_welcome.html.haml:17 [W] RuboCop: Redundant use of `Object#to_s` in interpolation.
-app/views/posts/_popup_welcome.html.haml:17 [W] RuboCop: Redundant use of `Object#to_s` in interpolation.
-app/views/posts/_popup_welcome.html.haml:17 [W] RuboCop: Redundant use of `Object#to_s` in interpolation.
-app/views/posts/_popup_welcome.html.haml:17 [W] LineLength: Line is too long. [200/170]
+app/views/posts/_popup_welcome.html.haml:17 [W] LineLength: Line is too long. [185/170]
 app/views/posts/_popup_welcome.html.haml:18 [W] FinalNewline: Files should end with a trailing newline
 app/views/posts/_update_comment_form.html.haml:2 [W] RuboCop: Space missing after colon.
 app/views/posts/_update_comment_form.html.haml:3 [W] RuboCop: Space missing after colon.
-app/views/posts/_update_comment_form.html.haml:3 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
-app/views/posts/_update_comment_form.html.haml:3 [W] LineLength: Line is too long. [172/170]
-app/views/posts/_update_comment_form.html.haml:6 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
+app/views/posts/_update_comment_form.html.haml:3 [W] LineLength: Line is too long. [173/170]
 app/views/posts/add_comment.js.haml:12 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
 app/views/posts/add_comment.js.haml:12 [W] LineLength: Line is too long. [227/170]
 app/views/posts/add_comment.js.haml:13 [W] UnnecessaryStringOutput: `= "..."` should be rewritten as `...`
@@ -1125,23 +679,7 @@ app/views/shared/_cabinet_comment.html.haml:16 [W] LineLength: Line is too long.
 app/views/shared/_cabinet_comment.html.haml:20 [W] SpaceInsideHashAttributes: Hash attribute should end with one space before the closing brace
 app/views/shared/_cabinet_comment.html.haml:23 [W] RuboCop: Space missing after colon.
 app/views/shared/_cabinet_comment.html.haml:23 [W] LineLength: Line is too long. [243/170]
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Space inside { missing.
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Space missing after comma.
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/shared/_cabinet_comment.html.haml:28 [W] RuboCop: Space inside } missing.
-app/views/shared/_cabinet_comment.html.haml:28 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/shared/_cabinet_comment.html.haml:29 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/shared/_cabinet_comment.html.haml:30 [W] LineLength: Line is too long. [226/170]
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Space inside { missing.
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Space missing after comma.
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/shared/_cabinet_comment.html.haml:34 [W] RuboCop: Space inside } missing.
-app/views/shared/_cabinet_comment.html.haml:34 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/shared/_cabinet_comment.html.haml:35 [W] SpaceBeforeScript: The = symbol should have one space separating it from code
 app/views/shared/_cabinet_comment.html.haml:36 [W] LineLength: Line is too long. [229/170]
 app/views/shared/_cabinet_comment.html.haml:41 [W] FinalNewline: Files should end with a trailing newline
 app/views/shared/_comment.html.haml:22 [W] LineLength: Line is too long. [192/170]
@@ -1164,36 +702,13 @@ app/views/shared/_content_question.html.haml:5 [W] SpaceBeforeScript: The = symb
 app/views/shared/_content_question.html.haml:7 [W] RuboCop: Redundant curly braces around a hash parameter.
 app/views/shared/_content_question.html.haml:7 [W] RuboCop: Space inside } missing.
 app/views/shared/_content_question.html.haml:7 [W] LineLength: Line is too long. [228/170]
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Space inside { missing.
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Space missing after comma.
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/shared/_content_question.html.haml:11 [W] RuboCop: Space inside } missing.
-app/views/shared/_content_question.html.haml:11 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/shared/_content_question.html.haml:26 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/shared/_content_question.html.haml:26 [W] ClassesBeforeIds: Classes should be listed before IDs (.thank should precede #answer_succes)
 app/views/shared/_content_question.html.haml:29 [W] FinalNewline: Files should end with a trailing newline
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Space inside { missing.
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Space missing after comma.
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/shared/_create_success.html.haml:1 [W] RuboCop: Space inside } missing.
-app/views/shared/_create_success.html.haml:1 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/shared/_gantt_template.html.haml:1 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
 app/views/shared/_gantt_template.html.haml:9 [W] LineLength: Line is too long. [178/170]
 app/views/shared/_gantt_template.html.haml:10 [W] LineLength: Line is too long. [178/170]
 app/views/shared/_gantt_template.html.haml:39 [W] LineLength: Line is too long. [190/170]
 app/views/shared/_user_online.html.haml:1 [W] RuboCop: Operator `>` should be surrounded with a single space.
-app/views/shared/_user_online.html.haml:2 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Redundant curly braces around a hash parameter.
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Space inside { missing.
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Space missing after comma.
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Avoid comma after the last item of a hash.
-app/views/users/_list_user.html.haml:4 [W] RuboCop: Space inside } missing.
-app/views/users/_list_user.html.haml:4 [W] HtmlAttributes: Prefer the hash attributes syntax (%tag{ lang: 'en' }) over HTML attributes syntax (%tag(lang=en))
 app/views/users/_list_user.html.haml:15 [W] RuboCop: Space missing after colon.
 app/views/users/_list_user.html.haml:19 [W] RuboCop: Space missing after colon.
 app/views/users/_user.html.haml:6 [W] RuboCop: Space missing after colon.

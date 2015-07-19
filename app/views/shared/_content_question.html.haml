@@ -8,7 +8,7 @@
       .btn-group{ 'data-toggle' => 'buttons' }
         - content_question.answers.each do |answer|
           .form-group
-            %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
+            %button.btn.btn-xs.btn-white.answer-question{ id: "answer_#{answer.id}" }
               -#= check_box_tag 'answers[]', answer.id
               = radio_button_tag 'answers[]', answer.id
               = answer.content
@@ -23,7 +23,7 @@
       .form-group.bottom-buttons
         %button.btn.answer-button.back_color_stage4 Ответить
     .divider10
-  #answer_succes.thank.light-grey.rounded_2(style="display: none")
+  #answer_succes.thank.light-grey.rounded_2{ style: 'display:none;' }
     %h1.text-center.font_color_stage4
       %i.fa.fa-lg.fa-check-circle
     %p.text-center Спасибо за ваш ответ!

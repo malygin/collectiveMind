@@ -7,12 +7,12 @@
     %h2
       = image_tag 'good-shot1.png', class: 'expl-header-img-1'
       Цель стадии
-    = t("welcome.#{name_controller.to_s}.heading").try(:html_safe)
+    = t("welcome.#{name_controller}.heading").try(:html_safe)
 
     %h2
       = image_tag 'flag1.png', class: 'expl-header-img-2'
       Что делать?
-    = t("welcome.#{name_controller.to_s}.working").try(:html_safe)
+    = t("welcome.#{name_controller}.working").try(:html_safe)
 
-    = link_to send("check_field_#{name_controller.to_s}_path", @project, check_field: "#{name_controller.to_s}_intro", status: true), method: :put, remote: true, id: "#{name_controller.to_s}_intro" do
+    = link_to send("check_field_#{name_controller}_path", @project, check_field: "#{name_controller}_intro", status: true), method: :put, remote: true, id: "#{name_controller}_intro" do
       %button.btn.red.close_magnific Начать работу

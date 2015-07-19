@@ -63,10 +63,10 @@
                         %span.close-button
                           %i.fa.fa-times-circle-o
                     = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), { method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true}) do
-                      .btn-group#answers_buttons(data-toggle='buttons')
+                      .btn-group#answers_buttons{ 'data-toggle' => 'buttons' }
                         - question.answers.each do |answer|
                           .form-group
-                            %button.btn.btn-xs.btn-white.answer-question(id="answer_#{answer.id}")
+                            %button.btn.btn-xs.btn-white.answer-question{ id: "answer_#{answer.id}" }
                               -#= check_box_tag 'answers[]', answer.id
                               = radio_button_tag 'answers[]', answer.id
                               = answer.content

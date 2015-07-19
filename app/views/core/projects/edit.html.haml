@@ -39,7 +39,7 @@
                     = "Этап #{stage_num}"
           .nav-tabs-three-content
             .tab-content
-              .text-success#technique_success_update(style='display:none;')
+              .text-success#technique_success_update{ style: 'display:none;' }
                 = t 'technique_project.success_update'
               - (1..5).each do |stage_num|
                 .tab-pane.fade{ id: "technique_stage-#{stage_num}", class:('active in' if @project.current_stage?(stage_num)) }

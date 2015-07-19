@@ -19,17 +19,17 @@
             .col-md-12
               .text-right.post_likes
                 %span.bold
-                  %span(class="cc_post_#{@post.id}")
+                  %span{ class: "cc_post_#{@post.id}" }
                     = @post.comments.count
                   %i.fa.fa-comment.theme_font_color
                 = link_to({ controller: @post.class.name.underscore.pluralize , action: :like, project: @project, id: @post.id, against: false }, remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
                   %span.bold
-                    %span(id="lk_post_#{@post.id}" class="lk_post_#{@post.id}")
+                    %span{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
                       = @post.users_pro.count
                     %i.fa.fa-thumbs-up.theme_font_color
                 = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true }, remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                   %span.bold
-                    %span(id="dlk_post_#{@post.id}" class="dlk_post_#{@post.id}")
+                    %span{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                       = @post.users_against.count
                     %i.fa.fa-thumbs-down.theme_font_color
                 -#- if @post.notes.present?
@@ -86,7 +86,7 @@
                         %h5.bold
                           = t("activerecord.attributes.plan/post_novation.#{attribute}")
                         %p.text
-                          =@post.post_novations.first.send(attribute)
+                          = @post.post_novations.first.send(attribute)
                         .divider15
 
               .col-md-6.exp_col.right
@@ -106,10 +106,10 @@
                 = render partial:'shared/comment_form', locals:{ comment: @comment, post: @post, url_link: url_for(controller: @post.class.name.underscore.pluralize, action:'add_comment') }
 
             .divider25
-        #tab-2.tab-pane.fade(style='background: white;')
+        #tab-2.tab-pane.fade{ style: 'background: white;' }
           .container.modal_content
             .row
               .col-md-12.col-sm-12
-                #workSpace(style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;")
+                #workSpace{ style: 'padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;' }
 
                 = render 'shared/gantt_template'

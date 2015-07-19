@@ -15,7 +15,7 @@
       .container.vote_folders_cont.no_padding_col.text-center{ class: "folders_#{@project.count_folders}" }
         %ul.nav.vote_nav.row{ role: 'tablist' }
           - @project.vote_folders.each do |num_folder, folder|
-            %li{ class: "no_padding_col #{'active ' if num_folder == 0}#{'col-md-' + (12/@project.count_folders).round.to_s}", role: 'presentation' }
+            %li{ class: "no_padding_col #{'active ' if num_folder == 0}#{'col-md-' + (12 / @project.count_folders).round.to_s}", role: 'presentation' }
               %a.vote_folder{ 'data-toggle' => 'tab', 'data-vote-folder-role' => "#{folder[:role]}", href: "#vote_tab#{num_folder + 1}", role: 'tab' }
                 .vote_folder_inn{ class: "poll-2-#{folder[:type_poll]}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
                   %span.vote_counter

@@ -11,16 +11,16 @@
             %span.label.label-success РЕДАКТИРОВАТЬ
       %br
       %br
-      %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: "margin-left:60px;margin-right:60px;" }
+      %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
         = @posts[1].content.try(:html_safe)
 - else
   %section.widget.widget-tabs
     %header
       %ul.nav.nav-tabs
         %li.active
-          %a(href='#short_desc' data-toggle='tab') Теория
+          %a{ href: '#short_desc', 'data-toggle' => 'tab' } Теория
         %li
-          %a(href='#long_desc' data-toggle='tab') Инструкции по работе
+          %a{ href: '#long_desc', 'data-toggle' => 'tab' } Инструкции по работе
 
     .body.tab-content
       #short_desc.tab-pane.clearfix.active
@@ -32,7 +32,7 @@
                 %span.label.label-success РЕДАКТИРОВАТЬ
           %br
           %br
-          %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: "margin-left:60px;margin-right:60px;" }
+          %div.help-content{ id: "help_content_#{@posts[1].id}", data: { style: 1 }, style: 'margin-left:60px;margin-right:60px;' }
             = @posts[1].content.try(:html_safe)
       #long_desc.tab-pane
         -unless @posts[2].nil?
@@ -43,5 +43,5 @@
                 %span.label.label-success РЕДАКТИРОВАТЬ
           %br
           %br
-          %div.help-content{ id: "help_content_#{@posts[2].id}", data: { style: 2 }, style: "margin-left:60px;margin-right:60px;" }
+          %div.help-content{ id: "help_content_#{@posts[2].id}", data: { style: 2 }, style: 'margin-left:60px;margin-right:60px;' }
             = @posts[2].content.html_safe if @posts[2].content
