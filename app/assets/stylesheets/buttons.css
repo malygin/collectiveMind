@@ -308,10 +308,6 @@
     -webkit-border-bottom-left-radius: 0 !important;
 }
 
-a.btn-white{
-    color: rgb(95, 91, 91);
-}
-
 .bottom_btn{
     position: fixed;
     top: 100%;

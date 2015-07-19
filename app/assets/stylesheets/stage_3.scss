@@ -1,0 +1,189 @@
+$main_color_3:#bd8cb8;
+$color_3:#c292bd;
+
+.stage_3 {
+  .add-button {
+    background: $main_color_3;
+  }
+  .subhead {
+    background: #976692; /* Old browsers */
+    background: -moz-linear-gradient(top, #976692 0%, #c090bb 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #976692), color-stop(100%, #c090bb)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #976692 0%, #c090bb 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #976692 0%, #c090bb 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #976692 0%, #c090bb 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #976692 0%, #c090bb 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#976692', endColorstr='#c090bb', GradientType=0); /* IE6-9 */
+  }
+  .help_icon {
+    background: image-url('icon-help-sprite.png') no-repeat 0 -106px;
+  }
+  .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 7px;
+    border-bottom-color: #7a5276;
+  }
+  .expand_button:before {
+    border-right-color: $main_color_3;
+  }
+  .expand_button.add_col:before {
+    border-left-color: $main_color_3;
+  }
+  .media.comment.unread {
+    background: #fbf9fa;
+  }
+  .theme_back_color {
+    background: $main_color_3;
+  }
+  .theme_font_color,span a i, i, a.theme_font_color i {
+    color: $main_color_3;
+  }
+
+  .slide-inner.slide_stage3 {
+    width: 400px;
+    max-height: 565px;
+    height: 100%;
+    padding: 0 10px;
+  }
+
+  .slide-inner.slide_stage3 > .ps_cont {
+    max-height: 565px;
+  }
+  .main_menu li.active a:before {
+    border-color: rgba(211, 211, 211, 0);
+    border-width: 6px;
+  }
+
+  .stages_block .btn.back_color_stage3:hover {
+    background: #d69fd1;
+  }
+
+  button:hover .theme_font_color,a i:hover {
+    opacity: 0.8;
+  }
+
+  button:active .theme_font_color {
+    color: #bd7fb7;
+  }
+
+  .popup_color_theme_stage3 .lined-heading {
+    background: #ebdcea;
+  }
+
+  .vote_folders_cont li.active .vote_folder_inn {
+
+    border-color: #CFCFCF;
+  }
+
+  .poll-2-1,.vote_folders_cont li.active .poll-2-1 {
+    background-position: -222px 0;
+  }
+
+  .vote_counter {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 32px;
+    left: 35px;
+    width: 35px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .b_vote.voted {
+    background-image: image-url('vote/vote_all_3.png');
+  }
+
+  .dd_badge {
+    background: $color_3;
+  }
+
+  .icon-right {
+    color: #bc8bb7;
+  }
+
+  .cb_doc:not(:empty) {
+    background: image-url('slider/doc_3.png') no-repeat center right;
+    background-size: 14px auto;
+  }
+
+  .cb_com:not(:empty) {
+    background: image-url('slider/com_3.png') no-repeat center right;
+    background-size: 18px auto;
+  }
+
+  .tabs_type_1 > li > a {
+    background: $color_3;
+  }
+
+  .tabs_type_1 > li.active > a:before {
+    border-left-color: $color_3;
+  }
+
+  .plus20.font_color_stage3, .plus25.font_color_stage3 {
+    border-color: $color_3;
+  }
+  li.active .right_cursor.back_color_stage3_superpale:before {
+    border-left-color: #e9dae8;
+  }
+
+  .popup_color_theme_stage3 .new_comment {
+    background: rgba(194, 146, 189, 0.23);
+  }
+
+  .popup_color_theme_stage3 .answers_subblock {
+    border-color: $color_3;
+  }
+
+  .back_color_stage3 {
+    background-color: $color_3;
+  }
+
+  .arrow_left.back_color_stage3:after,
+  .arrow_left.back_color_stage3 {
+    border-color: rgba(136, 183, 213, 0);
+    border-right-color: $color_3;
+  }
+  .arrow_left.back_color_stage3:hover,
+  .arrow_left.back_color_stage3:focus,
+  .arrow_left.back_color_stage3:active {
+    outline: none;
+    background: #d69fd1;
+  }
+  .arrow_left.back_color_stage3:hover:after,
+  .arrow_left.back_color_stage3:focus:after,
+  .arrow_left.back_color_stage3:active:after {
+    border-right-color: #d69fd1;
+  }
+
+  .back_color_stage3_pale {
+    background-color: #bd8eb9;
+  }
+
+  .back_color_stage3_superpale {
+    background-color: #e9dae8;
+  }
+
+  .font_color_stage3 {
+    color: $color_3 !important;
+  }
+
+  .font_color_stage3_pale {
+    color: #bd8eb9 !important;
+  }
+}
+/* striped question-answer block */
+.stripe-qa {
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.stripe-qa .lined-heading {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.stripe-qa p {
+    padding: 0 5px;
+}

@@ -1,151 +1,132 @@
-<div id="<%=getStageByUrl() %>_post_<%= id %>" class="col-md-6 discontent-block" data-id="id-<%= id %>" data-date="<%= sort_date %>" data-comment="<%= sort_comment %>">
-    <div class="full-post">
+<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6" data-id="id-<%= id %>" data-date="<%= sort_date %>"
+     data-comment="<%= sort_comment %>">
+    <div class="post_full">
         <% if(admin_panel) { %>
-        <div class="post-top-header">
-            <a class="btn btn-white btn-xs link_status <%= useful ? 'theme_font_color' : '' %>" id="add_score_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%=getStageByUrl() %>/posts/<%= id %>/add_score"><i class="fa fa-trophy fa-lg"></i>
+        <div class="admin_panel">
+            <a class="btn btn-white btn-xs <%= useful ? 'theme_font_color' : '' %>"
+               id="add_score_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+               href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/add_score"><i
+                        class="fa fa-trophy fa-lg"></i>
             </a>
-            <a class="btn btn-white btn-xs link_status <%= approve_status ? 'theme_font_color' : '' %>" id="approve_status_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%=getStageByUrl() %>/posts/<%= id %>/change_status?status=approve_status"><i class="fa fa-bookmark fa-lg"></i>
+            <a class="btn btn-white btn-xs <%= approve_status ? 'theme_font_color' : '' %>"
+               id="approve_status_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+               href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/change_status?status=approve_status"><i
+                        class="fa fa-bookmark fa-lg"></i>
             </a>
             <!--<a class="btn btn-white btn-xs link_status"><i class="fa fa-exclamation-triangle fa-lg"></i>-->
             <!--</a>-->
         </div>
         <% } %>
-        <div class="post post_type_2">
-            <div class="<%= approve_status ? '' : 'hide' %>" data-important="<%= id %>">
-                <div class="important theme_font_color">
-                    <i class="fa fa-bookmark fa-2x"></i>
-                </div>
-            </div>
-            <div class="post-header white"></div>
-            <div class="post-body no_post_head ch_action" data-for="post_ch<%= id %>">
-                <div class="media">
-                    <div class="media-left text-center gradient post-poster">
-                        <img class="img-circle img40" src="<%= user_avatar %>" alt="No ava">
-                        <p class="poster-name">
-                            <%= user %>
-                        </p>
-                        <p class="time">
-                            <%= post_date %>
-                        </p>
-                    </div>
-                    <div class='media-body'>
-                        <table class="table">
-                            <tbody>
-                            <tr class="what">
-                                <td class="col-md-12 left-column bold">
-                                    <a id="show_record_<%= id %>" data-remote="true" href="/project/<%= project_id %>/<%=getStageByUrl() %>/posts/<%= id %>?last_time_visit=<%=last_time_visit%>>)">
-                                        <%= content %>
-                                        <i class="fa fa-angle-right icon-right"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <% if(comments.length > 0) { %>
-                        <div id="post_ch<%= id %>" class="post_cont_hover white">
-                            <div class="wrapper ps_cont half_wheel_speed">
-                                <div class="post_cont_inner">
-                                    <% for(var i=0; i<comments.length; i++) {%>
-                                    <div class="comment_preview" data-placement="bottom" data-toggle="tooltip" title="<%= comments[i].content %>">
-                                            <span class="bold com_date">
-                                                <%= comments[i].date %>
-                                            </span>
-                                            <span class="bold">
-                                                <%= comments[i].user %>
-                                            </span>
-                                        <%= comments[i].content %>
-                                    </div>
-                                    <% } %>
-                                </div>
-                            </div>
-                        </div>
-                        <% } %>
+        <div class="post_block">
+            <div class="post_body" data-for="post_ch<%= id %>">
+                <div class="<%= approve_status ? '' : 'hide' %>" data-important="<%= id %>">
+                    <div class="important theme_font_color">
+                        <i class="fa fa-bookmark fa-2x"></i>
                     </div>
                 </div>
-            </div>
-            <div class="post-bottom white">
-                <div class="row">
-                    <% if(typeof aspects !== 'undefined') { %>
-                    <div class="col-md-1 col_padding_right_3">
-                        <small class="pull-left" style="margin-right: 3px;">
-                            Аспекты
-                        </small>
-                    </div>
-                    <div class="col-md-8 col_padding_right_3 themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
-                            <% for(var i=0; i<aspects.length; i++) {%>
-                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes" style="background-color: <%= aspects[i].color %>;">
-                                    <span class="tags">
-                                      <%= aspects[i].content %>
-                                    </span>
-                                </span>
-                            <% } %>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% if(typeof discontents !== 'undefined') { %>
-                    <div class="col-md-2 col_padding_right_3">
-                        <small class="pull-left" style="margin-right: 3px;">
-                            Несовершенства
-                        </small>
-                    </div>
-                    <div class="col-md-7 col_padding_right_3 themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme marginL10">
-                            <% for(var i=0; i<discontents.length; i++) {%>
-                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= discontents[i].id %>" data-me-type="imperf" data-placement="top" data-toggle="tooltip" title="<%= discontents[i].content %>">
-                                    <span class="tags">
-                                      <%= discontents[i].content %>
-                                    </span>
-                                </span>
-                            <% } %>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% if(typeof concepts !== 'undefined')  { %>
-                    <div class="col-md-1 col_padding_right_3">
-                        <small class="pull-left" style="margin-right: 3px;">
-                            Идеи
-                        </small>
-                    </div>
-                    <div class="col-md-8 col_padding_right_3 themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
-                            <% for(var i=0; i<concepts.length; i++) {%>
-                            <span class="<%= i==0 ? 'active' : '' %> tag-stripes color_me" data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
-                                    <span class="tags">
-                                      <%= concepts[i].content %>
-                                    </span>
-                                </span>
-                            <% } %>
-                        </div>
-                    </div>
-                    <% } %>
+                <div class="post_poster">
+                    <img class="img-circle img40" src="<%= user_avatar %>" alt="No ava">
 
-                    <div class="col-md-3 col_padding_left_3">
-                        <div class="text-right small_icons">
-                            <span class="popup2 comments_icon <%= active_comments ? 'active' : '' %>" data-for="post_ch<%= id %>">
-                              <small class="cc_post_<%= id %>">
-                                  <%= count_comments %>
-                              </small>
-                              <i class="fa fa-comment-o"></i>
-                            </span>
-                            <span class="popup2">
-                              <small id="lk_post_<%= id %>" class="lk_post_<%= id %>">
-                                  <%= count_likes %>
-                              </small>
-                              <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%=getStageByUrl() %>/posts/<%= id %>/like?against=false">
-                                  <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
-                              </a>
-                            </span>
-                            <span class="popup2">
-                              <small id="dlk_post_<%= id %>" class="dlk_post_<%= id %>">
-                                  <%= count_dislikes %>
-                              </small>
-                              <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%=getStageByUrl() %>/posts/<%= id %>/like?against=true">
-                                  <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-                              </a>
-                            </span>
-                        </div>
+                    <a href="#" class="name">
+                        <%= user %>
+                    </a>
+
+                    <p class="time">
+                        <%= post_date %>
+                    </p>
+                </div>
+                <div class="post_content">
+                    <div class="what">
+                        <a id="show_record_<%= id %>" class="theme_font_color" data-remote="true"
+                           href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>?last_time_visit=<%= last_time_visit %>>)">
+                            <%= content %>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
+                    <div class="about">
+                        Тут должно быть описание, где оно?
+                    </div>
+                </div>
+            </div>
+            <div class="post_footer">
+                <% if(typeof aspects !== 'undefined') { %>
+                <div class="tags_block">
+                    <div class="title">Аспекты</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < aspects.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
+                              style="background-color: <%= aspects[i].color %>;">
+                    <span class="tags">
+                    <%= aspects[i].content %>
+                    </span>
+                    </span>
+                        <% } %>
+
+                    </div>
+                </div>
+                <% } %>
+                <% if(typeof discontents !== 'undefined') { %>
+                <div class="tags_block">
+                    <div class="title">Несовершенства</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < discontents.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                              data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
+                              data-me-type="imperf" data-placement="top" data-toggle="tooltip"
+                              title="<%= discontents[i].content %>">
+                            <span class="tags">
+                            <%= discontents[i].content %>
+                            </span>
+                        </span>
+                        <% } %>
+
+                    </div>
+                </div>
+                <% } %>
+                <% if(typeof concepts !== 'undefined')  { %>
+                <div class="tags_block">
+                    <div class="title">Аспекты</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < concepts.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                              data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                            <span class="tags">
+                            <%= concepts[i].content %>
+                            </span>
+                        </span>
+                        <% } %>
+
+                    </div>
+                </div>
+                <% } %>
+
+                <div class="likes">
+                        <span class="comments_icon <%= active_comments ? 'active' : '' %>" data-for="post_ch<%= id %>">
+                            <small><%= count_comments %></small>
+                            <i class="fa fa-comment-o"></i>
+                        </span>
+                        <span>
+                            <small id="lk_post_<%= id %>">
+                                <%= count_likes %>
+                            </small>
+                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=false">
+                            <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
+                        </a>
+                        </span>
+                        <span>
+                            <small id="dlk_post_<%= id %>">
+                            <%= count_dislikes %>
+                            </small>
+                             <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=true">
+                            <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+                        </a>
+                        </span>
                 </div>
             </div>
         </div>
