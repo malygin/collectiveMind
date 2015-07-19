@@ -1,0 +1,126 @@
+/* HEADER BOTTOM */
+
+.subhead {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: inset 0 6px 6px -3px rgba(0, 0, 0, 0.4);
+}
+
+a.btn-tooltip {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+  border: 0;
+  font-size: 12px;
+  border-radius: 0;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+  }
+  i {
+    font-size: 14px;
+    padding-right: 5px;
+    color: #fff;
+  }
+  &.active {
+    background: #fcf8db;
+    color: #666666;
+    i {
+      font-size: 14px;
+      padding-right: 5px;
+      color: #666666;
+    }
+  }
+}
+
+.border {
+  border: 1px solid #d1d1d1;
+  border-radius: 3px;
+}
+
+.stages_block {
+  position: relative;
+  padding: 8px 10px 4px;
+  min-height: 54px;
+  .btn {
+    border-radius: 4px !important;
+    margin-right: 6px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+  }
+  .btn-toolbar {
+    position: relative;
+  }
+}
+
+.help_icon {
+  float: left;
+  background: image-url('icon-help.png') no-repeat center center;
+  width: 50px;
+  height: 54px;
+
+  &.shown {
+    background: image-url('icon-help-sprite.png') no-repeat -48px 0;
+  }
+}
+
+.progress_block {
+  box-sizing: border-box;
+  margin-left: 56px;
+  padding-right: -56px;
+  padding-top: 8px;
+  height: 54px;
+}
+
+.knob_label {
+  display: table-cell;
+  vertical-align: middle;
+  height: 36px;
+  line-height: 1;
+  color: #787878;
+}
+
+.progress-knob .knob {
+  font-size: 12px !important;
+  font-weight: bold;
+  height: 20px !important;
+  width: 26px !important;
+  margin-top: 7px !important;
+  margin-left: -31px !important;
+}
+
+.metro_block {
+  padding-left: 11px;
+  padding-top: 10px;
+
+  ul li {
+    padding-right: 30px;
+    background-image: image-url('arrow-right.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    color: #b9b9b9;
+    &:last-of-type {
+      background-image: none;
+    }
+  }
+  &.active a {
+    color: #5b5b5b;
+  }
+  ul li a {
+    color: #b9b9b9;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    margin-top: -10px
+  }
+  &:hover {
+    color: #5b5b5b;
+  }
+}

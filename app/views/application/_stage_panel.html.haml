@@ -1,7 +1,7 @@
 .container
   .row
     .col-md-8.col_padding_right_3
-      .border_grey.rounded_3.stages_block{ class: "#{'tooltip1' if name_controller == :aspect_posts}" }
+      .border.stages_block{ class: "#{'tooltip1' if name_controller == :aspect_posts}" }
         .btn-toolbar{ role: 'toolbar' }
           - Core::Project::STAGES.each do |num_stage, stage|
             .btn-group{ role: 'group' }
@@ -21,25 +21,21 @@
                   = num_stage
 
     .col-md-4.col_padding_left_3
-      -#%a.open_welcome_popup{ href: "#popup-explanation-#{current_stage_controller}" }
-      -#  #tooltip1_2.border_grey.rounded_3.help_icon.tooltip1.help_popover{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
-      -#  title: 'Вы всегда сможете вызвать помощь по стадии, нажав сюда' }
-      %a{ style: 'cursor:pointer;' }
-        .border_grey.rounded_3.help_icon.tooltip1.help_popover.iconate#tooltip1_2{ class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
+      %a
+        .border.help_icon.tooltip1.help_popover#tooltip1_2{ class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
         'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}",
         'data-text' => t(current_stage_popover_status), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
         title: 'Читайте инструкции по работе на этом этапе стадии' }
-      .border_grey.rounded_3.progress_block
-        .container
-          .row= render partial: 'application/progress_bar'
+      .border.progress_block
+        = render partial: 'application/progress_bar'
   - if show_stage_subbar?
     .divider10
     .row
       .col-md-12
-        .border_grey.rounded_3.metro_block
-          %ul.list-unstyled.list-inline
+        .border.metro_block
+          %ul.list-inline
             - Core::Project::STAGES[@project.main_stage][:substages].each do |num_sub, substage|
               %li{ 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', title: t("substage.status_#{substage_status_by num_sub}"),
-              class: "#{'active theme_font_color' if @project.sub_stage == num_sub} #{'last' if num_sub == @project.stages[@project.main_stage][:substages].size - 1}" }
+              class: "#{'active theme_font_color' if @project.sub_stage == num_sub}" }
                 %i.fa.fa-circle.fa-2x
                 %a{ href: '#' }= substage[:name]

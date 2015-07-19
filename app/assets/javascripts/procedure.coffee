@@ -14,12 +14,12 @@
 
   # button show hints
   $('#popover_button_1').click ->
-    if $(this).hasClass('btn-tooltip')
+    $(this).toggleClass 'active'
+    if $(this).hasClass('active')
       $(this).html($(this).find('i')).append 'Закрыть подсказки'
     else
       $(this).html($(this).find('i')).append 'Открыть подсказки'
     $('.tooltip1').tooltip 'toggle'
-    $(this).toggleClass 'btn-tooltip btn-tooltip-close'
 
   $('[data-toggle=tooltip]').tooltip()
   $('.knob').knob

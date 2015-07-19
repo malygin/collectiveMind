@@ -165,48 +165,6 @@
     width: 350px;
 }
 
-.btn-tooltip, .btn-tooltip-close {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -12px;
-    border: 0;
-    font-size: 12px;
-    border-radius: 0;
-    padding: 4px 12px;
-    border-radius: 2px;
-}
-
-.btn-tooltip {
-    background-color: rgba(255, 255, 255, 0.4);
-    color: #fff;
-}
-
-.btn-tooltip-close {
-    background: #fcf8db;
-    color: #666666;
-}
-
-.btn-tooltip i {
-    font-size: 14px;
-    padding-right: 5px;
-    color: #fff;
-}
-
-.btn-tooltip-close i {
-    font-size: 14px;
-    padding-right: 5px;
-    color: #666666;
-}
-
-.btn-tooltip:hover, .btn-tooltip:focus {
-    color: #fff;
-}
-
-.btn-tooltip:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* help popover */
 .help_popover_content, .help_popover_content .popover-content {
     background: #7db2d7;

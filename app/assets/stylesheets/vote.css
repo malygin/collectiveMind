@@ -95,30 +95,6 @@ ul.vote_nav > li > a {
     text-align: center;
 }
 
-.vote_folder_inn.poll-2-1 h5 {
-}
-
-.vote_folder_inn.poll-2-2 h5 {
-    color: #e9212f;
-}
-
-.vote_folder_inn.poll-2-3 h5 {
-    color: #4daf5b;
-}
-
-.vote_folder_inn.poll-2-4 h5 {
-    color: #919191;
-}
-
-
-.vote_itemslist_cont {
-    max-width: 675px;
-}
-
-.vote_item_cont {
-    /*margin-bottom: 30px;*/
-}
-
 .vote_item {
     background: #fff;
     border-radius: 3px;
@@ -207,14 +183,6 @@ ul.vote_nav > li > a {
     height: 55px;
 }
 
-.vote_filler_cell td {
-    height: 9px;
-    padding: 0 !important;
-}
-
-.vote_filler_cell:first-child td {
-    border-bottom: 1px solid #ddd;
-}
 
 .vote_item .table, .vote_item .table .what > td {
     font-size: 12px !important;
