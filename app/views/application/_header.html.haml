@@ -12,7 +12,7 @@
         %li{ class: "#{'active' if cabinet?}" }
           = link_to 'Кабинет', send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
-          = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd-opener' => 'dd_2', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
+          = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
             Мои уведомления
             - if @my_journals_count > 0
               %span.top-circle#my_journals_count
@@ -33,7 +33,7 @@
             %span.book_icon
             База знаний
         %li
-          %a.drop_opener{ id: 'open_expert_news', class: "#{'active' if unread_expert_news?}", 'data-dd-opener' => 'dd_1' }
+          %a.drop_opener{ id: 'open_expert_news', class: "#{'active' if unread_expert_news?}", 'data-dd' => 'dd_1' }
             %span
               |
             %i.fa.fa-exclamation-triangle
@@ -56,7 +56,10 @@
     %h4.font_white
       Тема процедуры:
       = @project.name
-    %a.btn-tooltip#popover_button_1{ type: 'button', value: 'Show' }
+    %a.btn-tooltip#popover_button_1
       %i.fa.fa-lightbulb-o
       Открыть подсказки
+    %a.btn-tooltip{style: 'display: none;'}
+      %i.fa.fa-lightbulb-o
+      Закрыть подсказки
 

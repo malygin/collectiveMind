@@ -1,4 +1,4 @@
-@start_vote = ->
+@init_vote = ->
   if $('div[id^=popup-vote]').length > 0
     $.magnificPopup.open({
       items: {

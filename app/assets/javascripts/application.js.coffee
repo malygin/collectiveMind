@@ -35,8 +35,6 @@
 
 #= require_tree ./backbone_scripts
 
-
-
 # GANTT
 #= require gantt/date
 #= require gantt/ganttDrawer
@@ -54,31 +52,29 @@
 
 
 $ ->
-  start_vote()
-
+  init_procedure()
   init_cabinet()
+  init_vote()
 
-  init_services()
-
-  vote_scripts()
-
-  comments_feed()
-
-  expert_news()
-
-  parse_my_journal_links()
-
-  check_and_push()
-
-  show_comments_hover()
-
-  activate_perfect_scrollbar()
-
-  post_colored_stripes()
-
-  colors_for_content()
-
-  comments_expandable_column()
+#  vote_scripts()
+#
+#  comments_feed()
+#
+#  expert_news()
+#
+#  parse_my_journal_links()
+#
+#  check_and_push()
+#
+#  show_comments_hover()
+#
+#  activate_perfect_scrollbar()
+#
+#  post_colored_stripes()
+#
+#  colors_for_content()
+#
+#  comments_expandable_column()
 
 #  профиль -  доделать
   $('.avatar_icon').click ->

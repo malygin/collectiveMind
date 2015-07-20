@@ -70,8 +70,36 @@
     return
 
 @init_cabinet = ->
-  # аутосайз полей в кабинете - для всех стандарт
-  $('#cabinet_form textarea').not('.without_autosize').autosize()
+  # Открывает и закрывает стикеры в кабинете
+  $('.open_sticker, .sticker_close').click ->
+    $($(this).attr('data-for')).toggle()
+
+  ### Стадия сбора идей ###
+
+  # подгрузка несовершенств при клике на аспект в форме добавления идеи
+  $('.add_disposts').on "click", (e) ->
+    project_id = $(this).data('project')
+    aspect_id = $(this).data('aspect')
+    if project_id and aspect_id
+      $.ajax
+        url: "/project/#{project_id}/concept/posts/add_disposts"
+        type: "put"
+        dataType: "script"
+        data:
+          aspect: aspect_id
+
+  # поиск несовершенств в форме добавления идеи
+  $('#search_discontent').on "change", (e) ->
+    project_id = $(this).data('project')
+    val = this.value
+    if project_id and val
+      $.ajax
+        url: "/project/#{project_id}/concept/posts/search_disposts"
+        type: "put"
+        dataType: "script"
+        data:
+          search_text: val
+
 
   # GANTT
   if $('#gantEditorTemplates').length > 0
@@ -110,32 +138,8 @@
     $('#tabs_form_navation a button.active').removeClass 'active'
     $(this).children('button').addClass 'active'
 
-  # Используется в кабинете на стадии несовершенств, во вспомогательной технике
-  $('.open-popup').each ->
-    stageNum = $(this).attr('data-placement')
-    popupNum = $(this).attr('data-target')
-    src = '#popup-' + stageNum + '-' + popupNum
-    $(this).magnificPopup
-      type: 'inline'
-      items: [{
-        src: src
-        type: 'inline'
-      }]
-      callbacks:
-        open: ->
-          me_id = $.magnificPopup.instance['items'][0]['src']
-          pop_h = $('.modal_content', me_id).height()
-          $('.modal_content', me_id).css
-            'height': pop_h + 'px'
-            'overflow': 'hidden'
-        close: ->
-  # Открывает и закрывает стикеры в кабинете
-  $('.open_sticker').click ->
-    stick_id = $(this).attr('data-for')
-    $(stick_id).show()
-  $('.sticker_close').click ->
-    stick_id = $(this).attr('data-for')
-    $(stick_id).hide()
+
+
 
   $('button#to_publish_plan').click ->
     save_plan_post('save_plan_post_published')
@@ -150,26 +154,4 @@
       $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
         $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
 
-  # подгрузка несовершенств при клике на аспект в форме добавления идеи
-  $('.add_disposts').on "click", (e) ->
-    project_id = $(this).data('project')
-    aspect_id = $(this).data('aspect')
-    if project_id and aspect_id
-      $.ajax
-        url: "/project/#{project_id}/concept/posts/add_disposts"
-        type: "put"
-        dataType: "script"
-        data:
-          aspect: aspect_id
 
-  # поиск несовершенств в форме добавления идеи
-  $('#search_discontent').on "change", (e) ->
-    project_id = $(this).data('project')
-    val = this.value
-    if project_id and val
-      $.ajax
-        url: "/project/#{project_id}/concept/posts/search_disposts"
-        type: "put"
-        dataType: "script"
-        data:
-          search_text: val
