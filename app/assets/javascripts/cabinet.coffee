@@ -3,86 +3,51 @@
   $('#plan_post_tasks_gant').val(JSON.stringify(document.ge.saveProject(), null, 2))
   $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
   $('input#' + input_id).click()
-# выбор несовершенств и идей в кабинете
 
-@check_and_push = ->
+# выбор несовершенств и идей в кабинете
+@checking_items_for_cabinet = ->
   ch_its = $('.item', '.checked_items').length
   unch_its = $('.item', '.unchecked_items').length
-  $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+  $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+  # check all
   $('#check0').click ->
-    if  $("#check0").is(":checked")
-      $("#unchecked_discontent_posts input:checkbox").prop('checked', true);
-      $.each $('#unchecked_discontent_posts .item'), ->
-        item = $(this).closest('.item').detach()
-        item_id = $(item).attr('data-id')
-        $('#discontents').find('.item[data-id=' + item_id + ']').remove()
-        $('.checked_items').append item
-        ch_its++
-        unch_its--
-        $('.hideable_checks').show()
-        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
-    else
-      $("input:checkbox").prop('checked', false)
-      $.each $('.checked_items .item'), ->
-        item = $(this).closest('.item').detach()
-        item_id = $(item).attr('data-id')
-        $('.unchecked_items').append item
-        ch_its--
-        unch_its++
-        if ch_its == 0
-          $('.hideable_checks').hide()
-        $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-        $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
+    $("#unchecked_discontent_posts input:checkbox").prop('checked', true)
+    moved_its = $('#unchecked_discontent_posts .item').length
+    $('#unchecked_discontent_posts .item').appendTo('.checked_items')
+    ch_its+=moved_its
+    unch_its-=moved_its
+    $('.enter_length .ch_lenght').text '(' + ch_its + ')'
+    $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+  # check one
   $('.check_push_box').click ->
-    item = $(this).closest('.item').detach()
-    item_id = $(item).attr('data-id')
-    $('#discontents').find('.item[data-id=' + item_id + ']').remove()
-    $('#ideas').find('.item[data-id=' + item_id + ']').remove()
-    $('.checked_items').find('.item[data-id=' + item_id + ']').remove()
+    item = $($(this).data('item')).detach()
     if $(this).is(':checked')
-      $('.checked_items').append item
+      $('.checked_items').append(item.first())
       ch_its++
       unch_its--
-      $('.hideable_checks').show()
-      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
-
-      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
-
-      if $('#for_hidden_fields').length > 0
-        $('#for_hidden_fields').append '<input id="novation_post_concept_' + item_id + '" name="novation_post_concept[]" type="hidden" value="' + item_id + '"/>'
-        $('.selected_concepts').append '<p class="bold" id="selected_concept_' + item_id + '">' + $(item).find('a.collapser_type1').text() + '</p>'
     else
-      $('.unchecked_items').append item
+      $('.unchecked_items').append(item.first())
       ch_its--
       unch_its++
-      if ch_its == 0
-        $('.hideable_checks').hide()
-      $('.enter_lenght .ch_lenght').empty().append '(' + ch_its + ')'
-      $('.enter_lenght .unch_lenght').empty().append '(' + unch_its + ')'
 
-      ###Для 4 стадии, при выборе идеи мы добавляем в форму поле с ид идеи###
 
-      if $('#for_hidden_fields').length > 0
-        $('#for_hidden_fields').find('input#novation_post_concept_' + item_id).remove()
-        $('.selected_concepts').find('p#selected_concept_' + item_id).remove()
-    return
+
 
 @init_cabinet = ->
   # Открывает и закрывает стикеры в кабинете
   $('.open_sticker, .sticker_close').click ->
     $($(this).attr('data-for')).toggle()
 
-  ### Стадия сбора идей ###
+  # checking ideas and discontents
+  checking_items_for_cabinet()
 
+  ### Стадия сбора идей ###
   # подгрузка несовершенств при клике на аспект в форме добавления идеи
-  $('.add_disposts').on "click", (e) ->
-    project_id = $(this).data('project')
+  $('.show_discontents').on "click", (e) ->
     aspect_id = $(this).data('aspect')
-    if project_id and aspect_id
+    if aspect_id
       $.ajax
-        url: "/project/#{project_id}/concept/posts/add_disposts"
+        url: "/project/#{project_id}/concept/posts/show_discontents"
         type: "put"
         dataType: "script"
         data:
@@ -94,11 +59,24 @@
     val = this.value
     if project_id and val
       $.ajax
-        url: "/project/#{project_id}/concept/posts/search_disposts"
+        url: "/project/#{project_id}/concept/posts/search_discontents"
         type: "put"
         dataType: "script"
         data:
           search_text: val
+
+  ### Стадия сбора пакетов ###
+  #  copy checked items to left panel in novation form
+  $('#select_concept').click ->
+    $.magnificPopup.open
+      items: src: '#popup-cabinet4-1'
+      type: 'inline'
+      callbacks:
+        close: ->
+          its = $('.checked_items a').map(->
+            '<p>'+$.trim $(this).text()+'</p>'
+          ).get()
+          $('.selected_concepts').html(its)
 
 
   # GANTT
@@ -133,10 +111,7 @@
     $('.tab_cont5').animate { scrollTop: 0 }, 'slow'
     e.preventDefault()
 
-  #  табы в форме для идей в пакетах переключалка
-  $('#tabs_form_navation a').click (e) ->
-    $('#tabs_form_navation a button.active').removeClass 'active'
-    $(this).children('button').addClass 'active'
+
 
 
 

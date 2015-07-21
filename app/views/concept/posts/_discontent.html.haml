@@ -1,8 +1,8 @@
-.item
+.item{ class: "item_#{discontent.id}" }
   .collapser_w_checkbox
     %span
       %span.cb_input
-        %input.check_push_box{ type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", name: "concept_post_discontents[#{discontent.id}]" }/
+        %input.check_push_box{ type: 'checkbox', id: "concept_post_discontents_#{discontent.id}", 'data-item': ".item_#{discontent.id}",  name: "concept_post_discontents[#{discontent.id}]" }/
         %label{ for: "concept_post_discontents_#{discontent.id}" }
           %i.fa.fa-check
     %span

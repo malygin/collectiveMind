@@ -85,8 +85,8 @@ CollectiveMind::Application.routes.draw do
       posts_routes
     end
 
-    put 'concept/posts/add_disposts', to: 'concept/posts#add_disposts'
-    put 'concept/posts/search_disposts', to: 'concept/posts#search_disposts'
+    put 'concept/posts/show_discontents', to: 'concept/posts#show_discontents'
+    put 'concept/posts/search_discontents', to: 'concept/posts#search_discontents'
     namespace :concept do
       posts_routes
     end

@@ -1,5 +1,7 @@
 @init_procedure = ->
 
+  colors_for_content()
+
   # sort button active
   $('.sort_btn').click ->
     $('.sort_btn').toggleClass 'active'

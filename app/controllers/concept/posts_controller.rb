@@ -71,14 +71,14 @@ class Concept::PostsController < PostsController
     redirect_back_or user_content_concept_posts_path(@project)
   end
 
-  def add_disposts
+  def show_discontents
     return @disposts = current_user.discontent_posts.by_project(@project) if params[:aspect] == '*'
     aspect = Aspect::Post.find(params[:aspect])
     subaspects = aspect.aspects.map { |asp, _| asp.id }
     @disposts = @project.discontents.joins(:discontent_post_aspects).where(discontent_post_aspects: { aspect_id: [aspect.id] + subaspects })
   end
 
-  def search_disposts
+  def search_discontent
     @disposts = @project.discontents.search_discontent params[:search_text]
   end
 
