@@ -13,17 +13,6 @@
     background: #80b2d6;
 }
 
-.stage1_theme .subhead {
-    background: #6c9cbf; /* Old browsers */
-    background: -moz-linear-gradient(top, #6c9cbf 0%, #7fb1d5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6c9cbf), color-stop(100%, #7fb1d5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #6c9cbf 0%, #7fb1d5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #6c9cbf 0%, #7fb1d5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #6c9cbf 0%, #7fb1d5 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #6c9cbf 0%, #7fb1d5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c9cbf', endColorstr='#7fb1d5', GradientType=0); /* IE6-9 */
-}
-
 .stages_block .btn.back_color_stage1:hover {
     background: #89c3ed;
 }

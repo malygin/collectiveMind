@@ -3,11 +3,21 @@
 @import 'magnific-popup';
 @import 'owl.carousel';
 @import 'perfect-scrollbar.min';
-@import 'custom';
+@import "compass";
+// Логическое деление
+@import 'colors';
+@import 'header_navbar';
+@import 'header_subhead';
 @import 'landing_page';
 @import 'buttons';
-@import 'cabinet';
 @import 'rating';
+@import 'tooltips';
+@import 'popup';
+@import 'vote';
+@import 'post_block';
+
+// на удаление
+@import 'custom';
 @import 'stage_1';
 @import 'stage_2';
 @import 'stage_3';
@@ -15,13 +25,9 @@
 @import 'stage_5';
 @import 'stage_6';
 @import 'stage_7';
-//@import 'post';
-@import 'tooltips';
-@import 'popup';
-@import 'vote';
-@import 'post_block';
-@import 'header_navbar';
-@import 'header_subhead';
+@import 'cabinet';
+@import 'post';
+/////////////////
 
 @import 'dropdowns-enhancement';
 

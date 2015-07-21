@@ -1,19 +1,12 @@
-$main_color_3:#bd8cb8;
-$color_3:#c292bd;
+$base_color_3: #bd8cb8;
+$light_base_color_3: $base_color_3 * 1.1;
 
 .stage_3 {
   .add-button {
-    background: $main_color_3;
-  }
-  .subhead {
-    background: #976692; /* Old browsers */
-    background: -moz-linear-gradient(top, #976692 0%, #c090bb 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #976692), color-stop(100%, #c090bb)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #976692 0%, #c090bb 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #976692 0%, #c090bb 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #976692 0%, #c090bb 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #976692 0%, #c090bb 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#976692', endColorstr='#c090bb', GradientType=0); /* IE6-9 */
+    background: $base_color_3;
+    &:hover {
+      background: $light_base_color_3;
+    }
   }
   .help_icon {
     background: image-url('icon-help-sprite.png') no-repeat 0 -106px;
@@ -24,19 +17,19 @@ $color_3:#c292bd;
     border-bottom-color: #7a5276;
   }
   .expand_button:before {
-    border-right-color: $main_color_3;
+    border-right-color: $base_color_3;
   }
   .expand_button.add_col:before {
-    border-left-color: $main_color_3;
+    border-left-color: $base_color_3;
   }
   .media.comment.unread {
     background: #fbf9fa;
   }
   .theme_back_color {
-    background: $main_color_3;
+    background: $base_color_3;
   }
-  .theme_font_color,span a i, i, a.theme_font_color i {
-    color: $main_color_3;
+  .theme_font_color, span a i, i, a.theme_font_color i {
+    color: $base_color_3;
   }
 
   .slide-inner.slide_stage3 {
@@ -58,7 +51,7 @@ $color_3:#c292bd;
     background: #d69fd1;
   }
 
-  button:hover .theme_font_color,a i:hover {
+  button:hover .theme_font_color, a i:hover {
     opacity: 0.8;
   }
 
@@ -92,7 +85,7 @@ $color_3:#c292bd;
   }
 
   .dd_badge {
-    background: $color_3;
+    // background: $color_3;
   }
 
   .icon-right {
@@ -110,15 +103,15 @@ $color_3:#c292bd;
   }
 
   .tabs_type_1 > li > a {
-    background: $color_3;
+    // background: $color_3;
   }
 
   .tabs_type_1 > li.active > a:before {
-    border-left-color: $color_3;
+    //border-left-color: $color_3;
   }
 
   .plus20.font_color_stage3, .plus25.font_color_stage3 {
-    border-color: $color_3;
+    //border-color: $color_3;
   }
   li.active .right_cursor.back_color_stage3_superpale:before {
     border-left-color: #e9dae8;
@@ -129,17 +122,17 @@ $color_3:#c292bd;
   }
 
   .popup_color_theme_stage3 .answers_subblock {
-    border-color: $color_3;
+    //border-color: $color_3;
   }
 
   .back_color_stage3 {
-    background-color: $color_3;
+    //background-color: $color_3;
   }
 
   .arrow_left.back_color_stage3:after,
   .arrow_left.back_color_stage3 {
     border-color: rgba(136, 183, 213, 0);
-    border-right-color: $color_3;
+    //border-right-color: $color_3;
   }
   .arrow_left.back_color_stage3:hover,
   .arrow_left.back_color_stage3:focus,
@@ -162,24 +155,25 @@ $color_3:#c292bd;
   }
 
   .font_color_stage3 {
-    color: $color_3 !important;
+    //color: $color_3 !important;
   }
 
   .font_color_stage3_pale {
     color: #bd8eb9 !important;
   }
 }
+
 /* striped question-answer block */
 .stripe-qa {
-    margin-bottom: 20px;
-    font-size: 12px;
+  margin-bottom: 20px;
+  font-size: 12px;
 }
 
 .stripe-qa .lined-heading {
-    padding-top: 9px;
-    padding-bottom: 9px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .stripe-qa p {
-    padding: 0 5px;
+  padding: 0 5px;
 }
