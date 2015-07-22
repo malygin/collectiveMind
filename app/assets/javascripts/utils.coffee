@@ -171,25 +171,7 @@ $colors_imperf_codes = [
       type: "get"
       dataType: "script"
 
-# чтение отдельной новости эксперта в попапе
-#@expert_news = ->
-#  this.expert_news_read = ->
-#    project_id = $(this).data('project')
-#    news_id = $(this).data('id')
-#    # проверяем и добавляем класс, чтобы исключить дублирование лога
-#    read = $(this).hasClass('read')
-#    if project_id and news_id and !read
-#      $(this).addClass('read')
-#      # убираем статус
-#      $(this).find('.status_news').html('')
-#      unless($(".expert_news_drop .dd_xprt_notice a:not(.read)").length)
-#        $('.drop_opener i').css 'color', '#9e9e9e'
-#      $.ajax
-#        url: "/project/#{project_id}/news/#{news_id}/read"
-#        type: "get"
-#        dataType: "script"
-#
-#  $('.expert_news_drop').on('click', '.dd_xprt_notice a', this.expert_news_read)
+
 
 # get new question in 1st stage
 @getNextQuestion = (question, aspect)->

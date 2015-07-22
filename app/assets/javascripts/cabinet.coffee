@@ -1,6 +1,6 @@
-
+### functions only for cabinet ###
 @save_plan_post = (input_id) ->
-  $('#plan_post_tasks_gant').val(JSON.stringify(document.ge.saveProject(), null, 2))
+  $('#plan_post_tasks_gant').val(JSON.stringify(@ge.saveProject(), null, 2))
   $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
   $('input#' + input_id).click()
 
@@ -30,9 +30,7 @@
       ch_its--
       unch_its++
 
-
-
-
+### initialize cabinet  ###
 @init_cabinet = ->
   # Открывает и закрывает стикеры в кабинете
   $('.open_sticker, .sticker_close').click ->
@@ -78,55 +76,47 @@
           ).get()
           $('.selected_concepts').html(its)
 
+  ### Стадия сбора проектов ###
+  $('#select_novation').click ->
+    $.magnificPopup.open
+      items: src: '#popup-cabinet5-1'
+      type: 'inline'
 
-  # GANTT
+  $('#choose_novation').click  ->
+    if $('#list_novations').length > 0
+      $('#selected_novation_main_form').text('Выбранный пакет:' + $('.open_novation.active a ').text().trim())
+      $('#list_novations .active').find('.novation_attribute').each ->
+        $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
+      $.magnificPopup.close()
+
+  # Открытие "Добавления задач" в кабинете проектов
+  $('#bottom-opener').on 'click', ->
+    $('#plan_buttons button').toggleClass 'disabled'
+    new_top = if $('#bottom-panel').hasClass('visible')  then '100%' else $('.bottom_panel_stop').offset().top+60
+    $('#bottom-panel').animate('top': new_top).toggleClass 'visible'
+    $(this).toggleClass 'fa-rotate-180'
+
+  #  init GANTT
   if $('#gantEditorTemplates').length > 0
     @ge = new GanttMaster()
     @ge.init($("#workSpace"))
     ret = JSON.parse($("#ta").val())
     unless ret == null
       offset = (new Date).getTime() - ret.tasks[0].start
-      i = 0
-      while i < ret.tasks.length
-        ret.tasks[i].start = ret.tasks[i].start + offset
-        i++;
+      task.start += offset  for task in ret.tasks
       @ge.loadProject(ret);
-
-  # Открытие "Добавления задач" в кабинете проектов
-  $('#bottom-opener').on 'click', ->
-    $('#plan_buttons button').toggleClass 'disabled'
-    panel = $('#bottom-panel')
-    if panel.hasClass('visible')
-      panel.removeClass('visible').animate 'top': '100%'
-      $(this).toggleClass 'fa-rotate-180'
-    else
-      offset = $('.bottom_panel_stop').offset()
-      marg_offset = $('.bottom_fix .cont_heading').innerHeight()
-      panel.addClass('visible').animate 'top': offset.top + marg_offset + 'px'
-      $(this).toggleClass 'fa-rotate-180'
-    false
-
-  $('a.scroll_tab').on 'click', (e) ->
-    href = $(this).attr('href')
-    $('.tab_cont5').animate { scrollTop: 0 }, 'slow'
-    e.preventDefault()
-
-
-
-
-
 
   $('button#to_publish_plan').click ->
     save_plan_post('save_plan_post_published')
   $('button#to_save_plan').click ->
     save_plan_post('save_plan_post')
 
-  if $('#list_novations').length > 0
-    $('#ul_novations').on 'click', '.open_novation', (event) ->
-      $('#selected_novation').text($(this).text()).removeClass('hidden')
-      $('#selected_novation_main_form').text($(this).text())
-      $('#select_novation').text('Выбранный пакет:')
-      $('#list_novations').find($(this).find('a').attr('href')).find('.novation_attribute').each ->
-        $('#plan_post_novations textarea[id="plan_post_novation_' + $(this).attr('data-attribute') + '"]').text($.trim($(this).text()))
+
+
+
+
+
+
+
 
 
