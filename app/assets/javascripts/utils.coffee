@@ -68,50 +68,24 @@ $colors_imperf_codes = [
 ]
 
 @colors_for_content = ->
-  color_item = (object, action, color) ->
-    object.css action, '#' + color
-    return
 
   $('.color_me').each ->
     me = $(this)
-    type = me.attr('data-me-type')
-    if type == 'imperf'
-      color = $colors_imperf_codes[me.attr('data-me-color') % 49]
-    if (type == 'aspect')
-      color = $colors_aspect_codes[me.attr('data-me-color')];
+    switch me.attr('data-me-type')
+      when 'imperf' then  color = $colors_imperf_codes[me.attr('data-me-color') % 49]
+      when 'aspect' then  color = $colors_aspect_codes[me.attr('data-me-color')]
     action = me.attr('data-me-action')
     if action and color
-      color_item me, action, color
+      me.css action, '#' + color
 
 @post_colored_stripes = ->
-  count_themes_width = (cont) ->
-    width = 0
-    $('#' + cont + ' .tag-stripes').each ->
-      width = width + $(this).outerWidth()
-      return
-    width + 100
+  # show long stripe only for non-active element and after this remove active from siblings
+  $('.tag-stripes').hover ->
+    if not $(this).hasClass 'active'
+      $(this).addClass('active')
+      $(this).siblings( ".tag-stripes" ).not(this).removeClass 'active'
 
-  $('.post-theme').each ->
-    curId = $(this).attr('id')
-    $(this).width count_themes_width(curId)
-    return
-  $('.post-theme').hover ->
-    curId = $(this).attr('id')
-    $('#' + curId + ' .tag-stripes').hover ->
-      $('#' + curId + ' .tag-stripes').removeClass 'active'
-      $(this).addClass 'active'
-      return
-    return
-  $('.post-theme').mouseover ->
-    $(this).addClass 'shown'
-    $(this).closest('.themes_cont').addClass 'themesShown'
-    return
-  $('.post-theme').mouseleave ->
-    $(this).removeClass 'shown'
-    $(this).closest('.themes_cont').removeClass 'themesShown'
-    return
-  $('.tag-stripes').mouseover ->
-    $(this).closest('.post-theme').width count_themes_width($(this).closest('.post-theme').attr('id'))
+
 
 
 
@@ -197,25 +171,10 @@ $colors_imperf_codes = [
           return
         ), 1000
 
-# определение проставленных галочек при выборе несовершенств в левом слайдере
-@check_discontents= (el)->
-  arr = []
-  $(el).find('input:checked').closest('.checkox_item').each (index, element) ->
-    if $(element).data('discontent') == '*'
-      arr = $(element).data('discontent')
-      return false
-    else
-      arr.push(if $(element).data('discontent').match(/(\d+)/) then $(element).data('discontent').match(/(\d+)/)[1] else $(element).data('discontent'))
-  return arr
 
 
-# perfect scrollbar
-@activate_perfect_scrollbar = ->
-  $('.ps_cont.half_wheel_speed').perfectScrollbar wheelSpeed: 0.3
-  $('.ps_cont').perfectScrollbar()
 
-#  post colored stripes
-#  показ цветных полосок -> упростить
+
 
 
 #цвет модального окна базы знаний

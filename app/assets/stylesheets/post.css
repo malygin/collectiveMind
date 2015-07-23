@@ -384,7 +384,7 @@
 .post-theme {
     transition: all 0.1s linear;
     white-space: nowrap;
-    min-width: 350px;
+    width: 340px;
 }
 
 .post-theme.shown {

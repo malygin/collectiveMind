@@ -40,7 +40,6 @@ DiscontentCollectionView = Backbone.View.extend
         date: '[data-date] parseFloat'
 
     show_comments_hover()
-    activate_perfect_scrollbar()
     colors_for_content()
     post_colored_stripes()
     return this

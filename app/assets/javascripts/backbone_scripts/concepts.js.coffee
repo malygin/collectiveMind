@@ -38,7 +38,6 @@ ConceptCollectionView = Backbone.View.extend
         date: '[data-date] parseFloat'
 
     show_comments_hover()
-    activate_perfect_scrollbar()
     post_colored_stripes()
     colors_for_content()
     return this
