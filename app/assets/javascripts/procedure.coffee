@@ -34,23 +34,11 @@
     interval: 4000,
     pause: "hover"
 
-  if $('.popup-explanation').length
-    if !$('.popup-explanation').hasClass('shown_intro')
-      $.magnificPopup.open
-        items: src: '.popup-explanation'
-        type: 'inline'
-        closeOnContentClick: false
-        closeOnBgClick: false
-        closeBtnInside: false
-        showCloseBtn: false
-        enableEscapeKey: false
+  # intro panel with goals of stage
+  if $('.popup-explanation').length and  !$('.popup-explanation').hasClass('shown_intro')
+    popupInit('.popup-explanation', false)
 
-  ### magnific popup close button ###
-  $('.close_magnific').click ->
-    magnificPopup = $.magnificPopup.instance
-    magnificPopup.close()
-
-
+  # drop panel for header menu
   $('.drop_opener, .dd_close').click ->
     $('#' + $(this).attr('data-dd')).toggleClass('active')
 

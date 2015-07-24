@@ -100,19 +100,7 @@ $colors_imperf_codes = [
       step: ->
         cur.val(Math.ceil(this.animatedVal)).trigger("change")
 
-#open magnific popup open
-@magnificPopupOpen = (el)->
-  $.magnificPopup.open
-    items: {src: el},
-    type: 'inline',
-    fixedContentPos: false,
-    fixedBgPos:true
 
-#open magnific popup close
-@magnificPopupClose = (el)->
-  $.magnificPopup.close
-    items: {src: el},
-    type: 'inline'
 
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->
@@ -155,24 +143,15 @@ $colors_imperf_codes = [
     $("#question_count_"+aspect).html(parseInt($("#question_count_"+aspect).html())+1)
   else
     # else we try to active next aspect
-    $('#aspect_block_'+aspect).html('<div class="divider20"></div><h4 class="block-with-left-icon pull-left"><i class="left-icon fa fa-2x fa-comments"></i>Вы ответили на все вопросы по данному аспекту.</h4><span class="pull-right question_count"></span><div class="carousel-inner"></div>')
+    $('#aspect_question_result_'+aspect).show()
+    $('#aspect_block_'+aspect).hide()
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
-      $('.li_aspect').removeClass('active')
-      $('.slider-item').removeClass('active')
+      $('#li_aspect_'+aspect).find('.slider-item').removeClass('active')
       $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
     else
       # else we have not more aspects, we just show greetings
-      if($("#popup-greetings-text").length)
-        magnificPopupOpen('#popup-greetings-text')
-      else
-        setTimeout (->
-          window.location.reload(true)
-          return
-        ), 1000
-
-
-
+      popupInit('#popup-greetings-text')
 
 
 
