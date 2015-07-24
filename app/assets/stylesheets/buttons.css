@@ -32,22 +32,6 @@
     border-radius: 15px;
 }
 
-.info-button {
-    color: #fff;
-    padding: 10px 10px 10px 55px;
-    line-height: 26px;
-    margin-left: 15px;
-    border: 0;
-}
-
-.info-button:hover, .info-button:focus {
-    color: #fff;
-}
-
-.info-button.flag {
-    background: #80b2d6 image-url('flag-icon.png') no-repeat 10px bottom;
-}
-
 .btn_simple_grey {
     text-align: right;
     padding: 6px 10px;
@@ -231,20 +215,6 @@
 
 .btn_dia:focus {
     border: 1px solid #fff;
-}
-
-.btn_play, .btn_pause {
-    width: 31px;
-    height: 20px;
-}
-.btn_play.inactive, .btn_pause.inactive {
-    display: none;
-}
-.btn_play {
-    background: image-url('play.png') no-repeat;
-}
-.btn_pause {
-    background: image-url('pause.png') no-repeat;
 }
 
 .btn-arrow-red:hover,

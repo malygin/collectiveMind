@@ -2509,15 +2509,6 @@ li.active > .big_tab:after {
     background: image-url('BZ.png') bottom center no-repeat;
 }
 
-
-.clock {
-    display: block;
-    padding-left: 40px;
-    height: 30px;
-    line-height: 30px;
-    background: image-url('clock.png') no-repeat left 5px center;
-}
-
 .present_carousel .item > div {
     padding-left: 50px;
     height: 415px;
@@ -2584,50 +2575,6 @@ li.active > .big_tab:after {
 .present_carousel p {
     line-height: 30px;
 }
-.check_ul {
-    padding-left: 0;
-    margin-left: 0;
-}
-.check_ul li {
-    margin: 18px 0;
-    margin-left: 28px;
-    line-height: 30px;
-}
-.check_ul li .fa-li {
-    line-height: 26px;
-}
-.big_round_label {
-    margin: 0 auto 20px;
-    width: 65px;
-    height: 65px;
-    line-height: 65px;
-    text-align: center;
-    font-size: 46px;
-}
-.big_round_label + p {
-    line-height: 24px;
-}
-.big_arrow {
-    position: absolute;
-    display: inline-block;
-    width: 33px;
-    height: 66px;
-    opacity: .7;
-}
-.big_arrow:hover {
-    opacity: 1;
-}
-.big_arrow[data-slide="prev"] {
-    left: 0;
-    margin-left: -55px;
-    background: image-url('grey_crsl_arrow_r.png') no-repeat;
-}
-.big_arrow[data-slide="next"] {
-    right: 0;
-    margin-right: -55px;
-    background: image-url('grey_crsl_arrow.png') no-repeat;
-}
-
 
 h4 i img{
     padding-right: 10px;

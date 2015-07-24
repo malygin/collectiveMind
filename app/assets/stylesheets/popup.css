@@ -402,22 +402,6 @@ button.mfp-close {
 
 }
 
-.popup-project .tab-pane#tab-3 {
-
-}
-
-/* fifth stage popups */
-.popup-rating-detail {
-    width: 930px !important;
-}
-
-.popup-rating-detail h2 {
-    background: image-url('gears.png') no-repeat;
-    background-position: 0 9px;
-    margin-left: 12px;
-    padding-left: 54px;
-}
-
 .popup-bottom-ratings {
     height: 58px;
     color: #fff;
@@ -454,18 +438,6 @@ button.mfp-close {
     line-height: 22px;
 }
 
-.popup-rating-detail .panel-heading {
-    padding: 12px 26px;
-}
-
-.popup-rating-detail .popup-post-block {
-    padding-top: 18px;
-    padding-bottom: 18px;
-}
-
-.popup-rating-detail .popup-post-block .info-stripe {
-    line-height: 15px;
-}
 
 /* second stage popup */
 .imperf_left {
