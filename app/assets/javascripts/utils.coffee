@@ -68,7 +68,6 @@ $colors_imperf_codes = [
 ]
 
 @colors_for_content = ->
-
   $('.color_me').each ->
     me = $(this)
     switch me.attr('data-me-type')
@@ -84,23 +83,6 @@ $colors_imperf_codes = [
     if not $(this).hasClass 'active'
       $(this).addClass('active')
       $(this).siblings( ".tag-stripes" ).not(this).removeClass 'active'
-
-
-
-
-
-#animate knob progress bar from data-end
-@animateKnobChange = (el)->
-  $(el).each ->
-    cur =$(this);
-    newValue = cur.data('end');
-    $({animatedVal: cur.val()}).animate {animatedVal: newValue},
-      duration: 3000,
-      easing: "swing",
-      step: ->
-        cur.val(Math.ceil(this.animatedVal)).trigger("change")
-
-
 
 # get project id from url like /project/11/discontent/posts
 @getProjectIdByUrl = ()->
@@ -133,8 +115,6 @@ $colors_imperf_codes = [
       type: "get"
       dataType: "script"
 
-
-
 # get new question in 1st stage
 @getNextQuestion = (question, aspect)->
   # if we have more questions in aspect
@@ -156,16 +136,34 @@ $colors_imperf_codes = [
 
 
 
-#цвет модального окна базы знаний
-@color_modal_knowbase = ->
-  $('#myCarousel').on 'slid.bs.carousel', ->
-    bgcolor = $('.myCarousel-target.active').attr('data-color');
-    $('#myCarousel .header').css({background: bgcolor});
-    $('.myCarousel-control').css({color: bgcolor});
+### functions only for cabinet ###
+@save_plan_post = (input_id) ->
+  $('#plan_post_tasks_gant').val(JSON.stringify(@ge.saveProject(), null, 2))
+  $('#plan_post_novation_id').val($('#list_novations .active').attr('data-id'))
+  $('input#' + input_id).click()
 
-@change_collection_avatar = ->
-  $('.avatar_of_collection').on 'click', ->
-    avatar = $(this).data('avatar')
-    $('#collection_avatar').val(avatar)
-
-change_collection_avatar()
+# выбор несовершенств и идей в кабинете
+@checking_items_for_cabinet = ->
+  ch_its = $('.item', '.checked_items').length
+  unch_its = $('.item', '.unchecked_items').length
+  $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+  # check all
+  $('#check0').click ->
+    $("#unchecked_discontent_posts input:checkbox").prop('checked', true)
+    moved_its = $('#unchecked_discontent_posts .item').length
+    $('#unchecked_discontent_posts .item').appendTo('.checked_items')
+    ch_its+=moved_its
+    unch_its-=moved_its
+    $('.enter_length .ch_lenght').text '(' + ch_its + ')'
+    $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+  # check one
+  $('.check_push_box').click ->
+    item = $($(this).data('item')).detach()
+    if $(this).is(':checked')
+      $('.checked_items').append(item.first())
+      ch_its++
+      unch_its--
+    else
+      $('.unchecked_items').append(item.first())
+      ch_its--
+      unch_its++

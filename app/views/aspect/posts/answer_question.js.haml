@@ -4,7 +4,7 @@
   $('#notice_question_#{@question.id}').removeClass('close-notice');
 - else
   $('#knob-1').data('end', #{@questions_progress});
-  animateKnobChange('#knob-1');
+  progressDiagramChange('#knob-1');
   getNextQuestion(#{@question.id }, #{@aspect.id});
 
 

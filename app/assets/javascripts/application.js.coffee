@@ -56,31 +56,6 @@ $ ->
   init_cabinet()
   init_vote()
 
-#  vote_scripts()
-#
-#  comments_feed()
-#
-#  expert_news()
-#
-#  parse_my_journal_links()
-#
-#  check_and_push()
-#
-#  show_comments_hover()
-#
-#  activate_perfect_scrollbar()
-#
-#  post_colored_stripes()
-#
-#  colors_for_content()
-#
-#  comments_expandable_column()
-
-#  профиль -  доделать
-  $('.avatar_icon').click ->
-    $('.avatar_icon').removeClass 'active'
-    $(this).addClass 'active'
-
   $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
     $('#error_explanation').html 'Авторизация успешна, грузим список доступных процедур'
     location.reload()
