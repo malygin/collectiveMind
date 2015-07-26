@@ -1,30 +1,26 @@
 - @content.each do |post_short|
-  .post.post_add_type1.cab3_post
-    .post-header{ style: "background-color:#{post_short.color};" }
-    .post-body
-      .media
-        .media-left.text-center.gradient2.post-poster
+  .post_full
+    .post_block
+      .post_body
+        .post_poster
           = link_to user_path(@project, post_short.user) do
             = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
-          %p.poster-name
-            = link_to post_short.user, user_path(@project, post_short.user)
-        .media-body.white
-          .post-text
-            %h5.bold
-              = post_short.content
-              - if current_user?(post_short.user) && can_edit_content?
-                %span.post_btns_cont
-                  %button.btn.btn_reset.btn_del
-                    = link_to edit_aspect_post_path(@project, post_short), id: "edit_aspect_#{post_short.id}", class: 'a_font_reset' do
-                      %i.glyphicon.glyphicon-pencil
-                  %button.btn.btn_reset.btn_del
-                    = link_to aspect_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_aspect') },
-                    id: "destroy_aspect_#{post_short.id}", class: 'a_font_reset' do
-                      %i.glyphicon.glyphicon-trash
-            %p
-              %span.badge.badge_type1.grey Обоснование
+          = link_to post_short.user, user_path(@project, post_short.user)
+          %p.time
+            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+        .post_content
+          .what
+            = post_short.content
+            - if current_user?(post_short.user) && can_edit_content?
+              %span.right_icon
+                = link_to edit_aspect_post_path(@project, post_short), id: "edit_aspect_#{post_short.id}" do
+                  %i.glyphicon.glyphicon-pencil
+                = link_to aspect_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_aspect') },
+                              id: "destroy_aspect_#{post_short.id}" do
+                  %i.glyphicon.glyphicon-trash
+          .about
             = link_to aspect_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_aspect_#{post_short.id}" do
               = post_short.short_desc
-              -#%i.fa.fa-angle-right.font_grey
-
-    .post-bottom.white
+              %span.right_icon
+                %i.fa.fa-angle-right
+      .post_footer

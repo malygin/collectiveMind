@@ -1,5 +1,5 @@
+$border_grey: 1px solid #d9d9d9;
 .post_full {
-  height: 200px;
   margin-top: 10px;
   border-radius: 5px;
   overflow: hidden;
@@ -15,7 +15,7 @@
     .post_body {
       width: 100%;
       height: 130px;
-      border: 1px solid #d9d9d9;
+      border: $border_grey;
       .post_poster, .post_content {
         position: relative;
         height: 100%;
@@ -41,30 +41,39 @@
         line-height: 1.2;
         .what {
           padding: 10px 25px 10px 10px;
-          border-bottom: 1px solid #d9d9d9;
-          min-height:40px;
+          border-bottom: $border_grey;
+          min-height: 40px;
           a {
             font-weight: bold;
             font-size: 13px;
-            i {
-              position: absolute;
-              font-size: 36px;
-              right: 8px;
-              top: 1px;
+          }
+          .right_icon{
+            position: absolute;
+            right: 8px;
+            top: 12px;
+            i{
+              font-size: 15px;
+              margin-right:3px;
             }
           }
         }
         .about {
-          padding: 5px 8px;
+          padding: 5px 15px 5px 8px;
           color: #666666;
+          .right_icon{
+            position: absolute;
+            font-size: 36px;
+            right: 10px;
+            top: 40%;
+          }
         }
       }
     }
     .post_footer {
       background: white;
-      border-left: 1px solid #d9d9d9;
-      border-right: 1px solid #d9d9d9;
-      border-bottom: 1px solid #d9d9d9;
+      border-left: $border_grey;
+      border-right: $border_grey;
+      border-bottom: $border_grey;
       height: 30px;
       width: 100%;
       .tags_block, .likes {

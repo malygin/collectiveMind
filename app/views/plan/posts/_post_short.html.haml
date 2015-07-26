@@ -21,7 +21,8 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
           .what
             = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, id: "show_record_#{post_short.id}") do
               = trim_content(post_short.content, 200)
-              %i.fa.fa-angle-right
+              %span.right_icon
+                %i.fa.fa-angle-right
           -#.post_cont_hover.post_tall.white{ id: "post_ch#{post_short.id}" }
           -#  .wrapper.ps_cont.half_wheel_speed
           -#    .post_cont_inner
