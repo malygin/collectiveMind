@@ -42,7 +42,7 @@
     form.append('<div class="input_cont"><textarea name="content" placeholder="Ваш комментарий" >' + $.trim($('#comment_text_' + id).html()) + '</textarea></div>')
     form.append('<button class="btn send-comment" type="submit"><span class="bold"><i class="fa fa-reply theme_font_color"></i></span></button>')
     $('#comment_text_' + id).html(form)
-    $('#cancel_comment_' + id).append('<a href="#" class="edit-cancel" style="display:none;" data-id="' + id + '"><span class="label label-danger">Отменить</span></a>')
+    $('#cancel_comment_' + id).append('<a href="#" class="edit-cancel" style="display:none" data-id="' + id + '"><span class="label label-danger">Отменить</span></a>')
     $('#redactor_comment_' + id).fadeOut()
     $('#cancel_comment_' + id + ' .edit-cancel').fadeIn()
     $('#form_edit_comment_' + id).collapse('show')
@@ -82,7 +82,7 @@
     comments_sumbit()
 
   this.activate_button = ->
-    form = $(this).closest('form');
+    form = $(this).closest('form')
     sendButton = form.find('.send-comment')
     if (this.value? and this.value.length > 1)
       sendButton.removeClass('disabled')
@@ -110,10 +110,10 @@
 
   this.submit_enter = (e) ->
     if e.keyCode == 13
-      e.preventDefault();
+      e.preventDefault()
       if this.value? and this.value.length > 1
         $(this).closest('form').trigger 'submit'
-      return false;
+      return false
 
 
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
@@ -123,18 +123,18 @@
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
 
   #  check if url contain anchor
-  myLink = document.location.toString();
+  myLink = document.location.toString()
   if (myLink.match(/comment_(\d+)/))
-    $('#comment' + myLink.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
-    return false;
+    $('#comment' + myLink.match(/comment_(\d+)/)[1]).effect("highlight", 3000)
+    return false
 
 @comments_sumbit = ->
   this.submit_enter = (e) ->
     if e.keyCode == 13
-      e.preventDefault();
+      e.preventDefault()
       if this.value? and this.value.length > 1
         $(this).closest('form').trigger 'submit'
-      return false;
+      return false
 
   $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
 

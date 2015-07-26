@@ -23,13 +23,11 @@ DiscontentCollectionView = Backbone.View.extend
   el: '#tab_aspect_posts',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this);
-    this.collection.bind('remove', this.removeOld, this);
-    # @todo click заменен на change, т.к. при click почему то два раза вызывается loadByAspect
-    # $('#filter').on('click', 'li', this.loadByAspect)
+    this.collection.bind('add', this.renderNew, this)
+    this.collection.bind('remove', this.removeOld, this)
     $('#filter').on('change', this.loadByAspect)
-
     $('#sorter').on('click', 'span', this.sortByAspect)
+
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
@@ -45,22 +43,16 @@ DiscontentCollectionView = Backbone.View.extend
     return this
 
   addOne: (discontent)->
-    discontentView = new DiscontentView({model: discontent});
-    this.$el.append(discontentView.render().el);
-
-  renderNew: (newModel)->
-    this.$container.isotope('insert', new DiscontentView({ model:newModel }).render().el);
-
-  removeOld: (model)->
-    el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el);
+    discontentView = new DiscontentView({model: discontent})
+    this.$el.append(discontentView.render().el)
 
   loadByAspect: (evt)->
-    evt.preventDefault();
+    evt.preventDefault()
+    console.log 'filter'
     filterValue =  $(this).find('input:checked').parent().data('aspect')
+    console.log filterValue
     $('#tab_aspect_posts').isotope
       filter: filterValue
-
 
   sortByAspect: ()->
     sortByValue = $(this).data('type')
@@ -69,7 +61,7 @@ DiscontentCollectionView = Backbone.View.extend
       sortAscending: false
 
 # only for discontents url
-if window.location.href.indexOf("discontent/posts") > -1 and window.location.href.indexOf("discontent/posts/") == -1
+if isProcedurePage("discontent/posts")
   dc = new DiscontentCollection
   dc.fetch
     data: $.param({last_time_visit: $('#filter').data('visit')})

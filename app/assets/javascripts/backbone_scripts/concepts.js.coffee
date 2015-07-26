@@ -14,8 +14,8 @@ ConceptView = Backbone.View.extend
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
-    this.$el.replaceWith(newElement);
-    this.setElement(newElement);
+#    this.$el.replaceWith(newElement)
+    this.setElement(newElement)
     return this
 
 
@@ -23,10 +23,9 @@ ConceptCollectionView = Backbone.View.extend
   el: '#tab_dispost_concepts',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this);
-    this.collection.bind('remove', this.removeOld, this);
+    this.collection.bind('add', this.renderNew, this)
+    this.collection.bind('remove', this.removeOld, this)
     $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
-#    $('#filter').on('change', this.loadByDiscontent)
     $('#sorter').on('click', 'span', this.sortByDiscontent)
   render: ()->
     this.collection.forEach(this.addOne, this)
@@ -43,33 +42,34 @@ ConceptCollectionView = Backbone.View.extend
     return this
 
   addOne: (concept)->
-    conceptView = new ConceptView({model: concept});
-    this.$el.append(conceptView.render().el);
+    conceptView = new ConceptView({model: concept})
+    this.$el.append(conceptView.render().el)
 
   renderNew: (newModel)->
-    this.$container.isotope('insert', new ConceptView({ model:newModel }).render().el);
+    this.$container.isotope('insert',
+      new ConceptView({ model:newModel }).render().el)
 
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el);
+    this.$container.isotope('remove', el)
 
   loadByDiscontent: (evt)->
-    evt.preventDefault();
+    evt.preventDefault()
     filterValue = $(this).data('discontent')
     $('#tab_dispost_concepts').isotope
       filter: filterValue
 
   sortByDiscontent: ()->
-    #    evt.preventDefault();
     sortByValue = $(this).data('type')
-    #    console.log sortByValue
     $('#tab_dispost_concepts').isotope
       sortBy: sortByValue,
       sortAscending: false
 
 
 # only for concept url
-if window.location.href.indexOf("concept/posts") > -1 and window.location.href.indexOf("concept/posts/") == -1
+
+if isProcedurePage("concept/posts")
+  console.log 'concepts'
   dc = new ConceptCollection
   dc.fetch
     data: $.param({last_time_visit: $('#sorter').data('visit')})

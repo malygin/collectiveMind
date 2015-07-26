@@ -14,8 +14,8 @@ NovationView = Backbone.View.extend
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
-    this.$el.replaceWith(newElement);
-    this.setElement(newElement);
+    this.$el.replaceWith(newElement)
+    this.setElement(newElement)
     return this
 
 
@@ -23,8 +23,8 @@ NovationCollectionView = Backbone.View.extend
   el: '#tab_concept_novations',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this);
-    this.collection.bind('remove', this.removeOld, this);
+    this.collection.bind('add', this.renderNew, this)
+    this.collection.bind('remove', this.removeOld, this)
     $('#sorter').on('click', 'span', this.sortByConcept)
   render: ()->
     this.collection.forEach(this.addOne, this)
@@ -40,15 +40,15 @@ NovationCollectionView = Backbone.View.extend
     return this
 
   addOne: (novation)->
-    novationView = new NovationView({model: novation});
-    this.$el.append(novationView.render().el);
+    novationView = new NovationView({model: novation})
+    this.$el.append(novationView.render().el)
 
   renderNew: (newModel)->
-    this.$container.isotope('insert', new NovationView({ model:newModel }).render().el);
+    this.$container.isotope('insert', new NovationView({ model:newModel }).render().el)
 
   removeOld: (model)->
     el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el);
+    this.$container.isotope('remove', el)
 
   sortByConcept: ()->
     sortByValue = $(this).data('type')
@@ -58,7 +58,8 @@ NovationCollectionView = Backbone.View.extend
 
 
 # only for novation url
-if window.location.href.indexOf("novation/posts") > -1 and window.location.href.indexOf("novation/posts/") == -1
+if isProcedurePage("novation/posts")
+  console.log 'novation'
   dc = new NovationCollection
   dc.fetch
     data: $.param({last_time_visit: $('#filter').data('visit')})

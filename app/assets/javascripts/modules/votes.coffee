@@ -5,7 +5,7 @@
         src: $('div[id^=popup-vote]')
       },
       type: 'inline'
-    });
+    })
 
 
 @vote_scripts = ->

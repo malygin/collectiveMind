@@ -69,6 +69,8 @@ end
 group :development do
   gem 'rubocop'
   gem 'haml_lint'
+  gem 'coffeelint'
+
 
   gem 'ruby-prof'
   gem 'rspec-prof'

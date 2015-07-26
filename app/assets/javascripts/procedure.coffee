@@ -5,6 +5,10 @@
   carousellInit('.carousel', 4000)
   colors_for_content()
 
+  #popup for all links with target source
+  $('.open-popup').click ->
+    popupInit('#popup-'+$(this).data('target'))
+
   # аутосайз полей
   $('textarea').not('.without_autosize').autosize()
 

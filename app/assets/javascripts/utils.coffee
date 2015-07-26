@@ -95,11 +95,15 @@ $colors_imperf_codes = [
   if url
     return url[1]
 
+@isProcedurePage = (path)->
+  url = window.location.href
+  return url.indexOf(path)>0 and url.indexOf("new")==-1
+
 # парсинг юрла для показа попапа
 @parse_my_journal_links = ()->
   #  if window.location.href.indexOf("discontent/posts") > -1
-  #  $('#comment_content_' + link.match(/comment_(\d+)/)[1]).effect("highlight", 3000);
-  link = document.location.toString();
+  #  $('#comment_content_' + link.match(/comment_(\d+)/)[1]).effect("highlight", 3000)
+  link = document.location.toString()
   if link.match(/project\/(\d+)/)
     project_id = link.match(/project\/(\d+)/)[1]
   if link.match(/jr_post=(\d+)/)
@@ -128,7 +132,7 @@ $colors_imperf_codes = [
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
       $('#li_aspect_'+aspect).find('.slider-item').removeClass('active')
-      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show');
+      $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show')
     else
       # else we have not more aspects, we just show greetings
       popupInit('#popup-greetings-text')
