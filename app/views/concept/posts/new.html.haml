@@ -45,7 +45,7 @@
               %span.ch_lenght
                 - if @concept_post.persisted?
                   = "(#{@concept_post.concept_disposts.count})"
-                -else
+                - else
                   (0)
             - if @concept_post.persisted?
               = render partial: 'discontent', collection: @concept_post.concept_disposts
@@ -84,7 +84,7 @@
                   %ul.list-unstyled.subaspect
                     - aspect.aspects.each do |asp|
                       %li{ role: 'presentation' }
-                        %a.a_font_reset.btn.btn_reset.collapser_type3.show_discontents{ data: {aspect: asp.id },
+                        %a.a_font_reset.btn.btn_reset.collapser_type3.show_discontents{ data: { aspect: asp.id },
                         style: "border-color: #{aspect.color};", 'data-toggle' => 'tab', href: '#', role: 'tab' }
                           = asp.content
           .col-md-7.cab_cont_h450

@@ -21,7 +21,7 @@
                 %span
                   %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
-                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+                  = l(@post.created_at, format: '%d.%m.%Y')
     .modal_body
       .popup-post-info
         .row.info-block
@@ -70,6 +70,6 @@
           .container.modal_content
             .row
               .col-md-12.col-sm-12
-                #workSpace{ style: 'padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px; width:1115px; height:600px;' }
+                #workSpace{ style: 'padding:0px;overflow-y:auto;overflow-x:hidden;border:1px solid #e5e5e5;position:relative;margin:0 5px;width:1115px;height:600px;' }
 
                 = render 'shared/gantt_template'

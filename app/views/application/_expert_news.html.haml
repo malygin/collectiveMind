@@ -22,8 +22,7 @@
                           (не прочитано)
                     .col-xs-3.text-right
                       %span.dd_n_date
-                        -#@todo заменить на метод
-                        = Russian::strftime(news.created_at, '%d.%m.%Y')
+                        = l(news.created_at, format: '%d.%m.%Y')
                       %i.fa.fa-angle-right.font_grey.bold
               .dd_xprt_article.collapse{ id: "xprt_#{index}" }
                 = news.body.try(:html_safe)

@@ -42,25 +42,24 @@
                   .tab-pane.fade#cabinet_content{ class: "#{'in active' unless params[:edit_profile]}", role: 'tabpanel' }
                     %div{ role: 'tabpanel' }
                       %ul.nav.nav-tabs.cab_horiz_tabs{ role: 'tablist' }
-                        - Core::Project::STAGES.each do |num_stage, stage|
-                          - if num_stage <= 5
-                            - if name_controller == stage[:type_stage]
-                              %li.active{ role: 'presentation' }
-                                = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}",
-                                role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked= num_stage
-                                  СТАДИЯ
-                            - elsif @project.main_stage >= num_stage
-                              %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}", role: 'presentation' }
-                                = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}",
-                                role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked= num_stage
-                                  СТАДИЯ
-                            - else
-                              %li.disabled{ role: 'presentation' }
-                                = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked= num_stage
-                                  СТАДИЯ
+                        - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+                          - if name_controller == stage[:type_stage]
+                            %li.active{ role: 'presentation' }
+                              = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}",
+                              role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                %span.marked= num_stage
+                                СТАДИЯ
+                          - elsif @project.main_stage >= num_stage
+                            %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}", role: 'presentation' }
+                              = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}",
+                              role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                %span.marked= num_stage
+                                СТАДИЯ
+                          - else
+                            %li.disabled{ role: 'presentation' }
+                              = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
+                                %span.marked= num_stage
+                                СТАДИЯ
                       .tab-content.cab_cont_block.rounded_3.border_grey.white
                         .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}", role: 'tabpanel' }
                           .divider10

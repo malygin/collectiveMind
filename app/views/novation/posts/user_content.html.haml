@@ -7,7 +7,7 @@
             %span.percentage.font_white.bold.text-center
               #{post_short.fullness}%
           %p.time.text-center
-            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+            = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
           .what
             = post_short.title

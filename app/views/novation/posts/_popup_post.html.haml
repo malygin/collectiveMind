@@ -40,7 +40,7 @@
                 -#  %span
                 -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
                 %small
-                  = Russian::strftime(@post.created_at, '%d.%m.%Y')
+                  = l(@post.created_at, format: '%d.%m.%Y')
     .modal_body
       .poster-line.line-grey
         %span.tags_badge идеи

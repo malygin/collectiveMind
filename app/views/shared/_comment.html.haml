@@ -12,7 +12,7 @@
       %span.date_time.theme_font_color
         = distance_of_time_in_words(comment.created_at, Time.now)
         назад
-      -#= Russian::strftime(comment.created_at, '%k:%M')
+      -#= l(comment.created_at, format: '%k:%M')
       - if current_user?(comment.user) || boss?
         %span.dropdown.edit_comment{ id: "redactor_comment_#{comment.id}" }
           %button.btn_reset{ id: "edit_comment#{comment.id}", 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', type: 'button' }

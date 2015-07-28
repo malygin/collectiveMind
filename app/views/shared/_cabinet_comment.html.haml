@@ -2,7 +2,7 @@
   .media-body
     %span.comment_interf
       %span.date_time{ class: "font_color_stage#{number_current_stage || num_stage}" }
-        = Russian::strftime(cabinet_comment.created_at, '%k:%M %d.%m.%Y')
+        = l(cabinet_comment.created_at, format: '%k:%M %d.%m.%Y')
       - if current_user?(cabinet_comment.user) && can_edit_content?
         %span.dropdown.edit_comment{ id: "redactor_comment_#{cabinet_comment.id}" }
           %button.btn_reset{ id: "edit_comment#{cabinet_comment.id}", 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', type: 'button' }
@@ -23,7 +23,8 @@
       %span{ id: "cancel_comment_#{cabinet_comment.id}" }
 
   %a.font_grey.comment_text{ id: "comment_text_#{cabinet_comment.id}",
-  href: "/project/#{@project.id}/#{cabinet_comment.post.class_name_for_url}?jr_post=#{cabinet_comment.post.id}&jr_comment=#{cabinet_comment.id}#comment#{cabinet_comment.id}" }
+  href: "/project/#{@project.id}/#{cabinet_comment.post.class_name_for_url}?jr_post=#{cabinet_comment.post.id}" |
+  + "&jr_comment=#{cabinet_comment.id}#comment#{cabinet_comment.id}" } |
     = cabinet_comment.content
   .post-interfaces-buttons.text-left
     %button.rate_button{ 'data-for' => "comment#{cabinet_comment.id}", 'data-rate-action' => 'like', type: 'button' }

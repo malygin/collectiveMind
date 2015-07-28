@@ -6,7 +6,7 @@
           .cab_folder{ class: (post_short.published? ? 'back3' : 'back4') }
             %span.percentage.font_white.bold.text-center 32%
           %p.time.text-center
-            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+            = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
           .what
             = post_short.content

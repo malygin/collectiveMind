@@ -115,6 +115,10 @@
         $(this).closest('form').trigger 'submit'
       return false
 
+  $('.chat-messages').on('click', 'a.edit-comment', this.edit_comment)
+  $('.chat-messages').on('click', 'a.edit-cancel', this.edit_cancel)
+  $('.chat-messages').on('click', 'button.reply-comment', this.reply_comment)
+  $('.chat-messages').on('click', 'button.cancel-reply', this.cancel_reply)
 
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
 

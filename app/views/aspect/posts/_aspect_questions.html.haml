@@ -37,7 +37,7 @@
 
         .col-md-4.col-sm-4.min-col-left-padd
           .carousel.slide.questionsCarousel{ id: "questionsCarousel_#{asp.id}", 'data-ride' => 'carousel' }
-            .aspect-questions-block{ id: "aspect_question_result_#{asp.id}" , style: 'display: none;'}
+            .aspect-questions-block{ id: "aspect_question_result_#{asp.id}", style: 'display: none;' }
               .divider20
               %h4.block-with-left-icon.pull-left
                 %i.left-icon.fa.fa-2x.fa-comments>
@@ -70,8 +70,8 @@
                         Ответ неправильный, воспользуйтесь подсказкой
                         %span.close-button
                           %i.fa.fa-times-circle-o
-                    = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), { method: :put, remote: true,
-                    class: 'form instruments-block', id: 'form_answer_question', multipart: true }) do
+                    = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), method: :put, remote: true,
+                    class: 'form instruments-block', id: 'form_answer_question', multipart: true) do
                       .btn-group#answers_buttons{ 'data-toggle' => 'buttons' }
                         - question.answers.each do |answer|
                           .form-group

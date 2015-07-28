@@ -26,7 +26,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
             %p.poster-name
               = link_to post_short.user, user_path(@project, post_short.user)
             %p.time
-              = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+              = l(post_short.created_at, format: '%d.%m.%Y')
           .media-body.white-gray
             %table.table
               %tbody
@@ -45,7 +45,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
                   - post_short.comments.preview.each do |comment|
                     .comment_preview
                       %span.bold.com_date
-                        = Russian::strftime(comment.created_at, '%k:%M %d.%m.%y')
+                        = l(comment.created_at, format: '%k:%M %d.%m.%y')
                       %span.bold
                         #{comment.user}:
                       = comment.content

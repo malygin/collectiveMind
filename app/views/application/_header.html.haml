@@ -7,12 +7,17 @@
         title: 'Вернуться на главную страницу' do
           = image_tag 'logo1.png'
       %ul.nav.navbar-nav
-        %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
+        %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom',
+        'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
           = link_to 'Процедура', current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
-          = link_to 'Кабинет', send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'), id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
+          = link_to 'Кабинет', send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
+          id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+          title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
-          = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
+          = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,
+          class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom',
+          'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
             Мои уведомления
             - if @my_journals_count > 0
               %span.top-circle#my_journals_count
@@ -29,7 +34,8 @@
             %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, id: 'open_next_stage'
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
+          = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', 'data-placement' => 'bottom',
+          'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
             %span.book_icon
             База знаний
         %li
@@ -41,7 +47,8 @@
               |
           = render partial: 'application/expert_news', locals: { expert_news: @expert_news, project: @project }
         %li.dropdown
-          %a#auth_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', 'data-hover' => 'dropdown', href: '#','aria-haspopup' => 'true', 'aria-expanded' => 'false' }
+          %a#auth_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', 'data-hover' => 'dropdown', href: '#',
+          'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
             %span.badge{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг' }
               = current_user.project_user_for(@project).try(:score)
             = current_user
@@ -59,7 +66,7 @@
     %a.btn-tooltip#popover_button_1
       %i.fa.fa-lightbulb-o
       Открыть подсказки
-    %a.btn-tooltip.active{style: 'display: none;'}
+    %a.btn-tooltip.active{ style: 'display: none;' }
       %i.fa.fa-lightbulb-o
       Закрыть подсказки
 

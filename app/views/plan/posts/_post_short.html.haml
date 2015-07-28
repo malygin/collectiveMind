@@ -16,7 +16,7 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
             = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
           = link_to post_short.user, user_path(@project, post_short.user), class: 'name'
           %p.time
-            = Russian::strftime(post_short.created_at, '%d.%m.%Y')
+            = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
           .what
             = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, id: "show_record_#{post_short.id}") do
@@ -29,7 +29,7 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
           -#      -post_short.comments.preview.each do |comment|
           -#        .comment_preview
           -#          %span.bold.com_date
-          -#            = Russian::strftime(comment.created_at, '%k:%M %d.%m.%y')
+          -#            = l(comment.created_at, format: '%k:%M %d.%m.%y')
           -#          %span.bold
           -#            ="#{comment.user}:"
           -#          = comment.content

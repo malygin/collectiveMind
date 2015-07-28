@@ -11,7 +11,8 @@
 
           .post-theme{ id: "stripe#{post_vote.id}" }
             - post_vote.novation_concepts.each_with_index do |post, index|
-              %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
+              %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color',
+              'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
                 %span.tags
                   = trim_content(post.title, 30)
 

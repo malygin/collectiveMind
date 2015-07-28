@@ -5,7 +5,7 @@
       = content_question.content
       %i.fa.fa-lg.fa-question-circle.font_color_stage4
     = form_tag(answer_content_question_novation_post_path(@project, id: @post.id, question_id: content_question.id),
-    { method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true }) do
+    method: :put, remote: true, class: 'form instruments-block', id: 'form_answer_question', multipart: true) do
       .btn-group{ 'data-toggle' => 'buttons' }
         - content_question.answers.each do |answer|
           .form-group

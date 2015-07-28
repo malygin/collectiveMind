@@ -1,7 +1,7 @@
-.item{ class: "item_#{concept.id}"  ,'data-id': concept.id }
+.item{ class: "item_#{concept.id}", 'data-id' => concept.id }
   %span
     %span.cb_input
-      %input.check_push_box{ type: 'checkbox', id: "check_#{concept.id}", 'data-item': ".item_#{concept.id}", class: "checkbox_#{concept.id}" }/
+      %input.check_push_box{ type: 'checkbox', id: "check_#{concept.id}", 'data-item' => ".item_#{concept.id}", class: "checkbox_#{concept.id}" }/
       %label{ for: "check_#{concept.id}", id: "set_check_#{concept.id}" }
         %i.fa.fa-check
   %span.cell_full_w
