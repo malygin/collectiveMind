@@ -678,46 +678,6 @@ textarea:focus {
 }
 
 
-
-.poster-line {
-    padding: 10px;
-    position: relative;
-}
-
-.poster-line .poster-name {
-    margin-left: 17px;
-    line-height: 45px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #414040;
-}
-
-.post_likes {
-    margin-top: 5px;
-}
-
-.post_likes span {
-    margin-right: 3px;
-    font-size: 12px;
-}
-
-.post_likes i {
-    font-size: 16px;
-}
-
-.post_likes .fa-exclamation-triangle, .post_likes small {
-    margin-left: 8px;
-}
-
-
-
-.poster-line.line-grey {
-    background: #f7f7f7;
-    border-bottom: 1px solid #d1d1d1;
-    box-shadow: inset 0 5px 3px -3px rgba(0, 0, 0, 0.3);
-}
-
-
 .q_pop_block {
     padding-left: 45px;
     padding-right: 30px;

@@ -12,7 +12,7 @@
 @import 'buttons';
 @import 'rating';
 @import 'tooltips';
-@import 'popup';
+@import 'modal';
 @import 'vote';
 @import 'post_block';
 
@@ -26,6 +26,7 @@
 @import 'stage_6';
 @import 'stage_7';
 @import 'cabinet';
+//@import 'popup';
 //@import 'post';
 /////////////////
 
@@ -42,6 +43,17 @@
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
 
+
+#workSpace {
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #e5e5e5;
+  position: relative;
+  margin: 0 5px;
+  width: 1115px;
+  height: 600px;
+}
 
 .stage1_theme, .stage3_theme,.stage4_theme {
   .vote_counter {
