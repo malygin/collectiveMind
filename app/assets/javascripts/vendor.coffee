@@ -20,14 +20,15 @@
     callbacks:
       close: -> data.callbackOnClose()  if  data.callbackOnClose?
 
-@popupInit= (el, data={}) ->
+@modalInit= (el, data={}) ->
   data.withClose?=true
-  if data.withClose
-    magnificPopupOpenWithClose(el, data)
-  else
-    popup = magnificPopupOpen(el, data)
-    $('.close_magnific').click ->
-      @popupClose()
+  $(el).modal('show')
+#  if data.withClose
+#    magnificPopupOpenWithClose(el, data)
+#  else
+#    popup = magnificPopupOpen(el, data)
+#    $('.close_magnific').click ->
+#      @popupClose()
 
 @popupClose = ->
   magnificPopup = $.magnificPopup.instance
