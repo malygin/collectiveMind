@@ -1,0 +1,79 @@
+.modal.fade#modal-post
+  .modal-dialog.modal-lg
+    .modal-content
+      - if boss?
+        .post-top-header
+          = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
+          remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+            %i.fa.fa-trophy.fa-lg
+          = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true },
+          remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+            %i.fa.fa-bookmark.fa-lg
+      .popup.popup_rounded.popup_color_theme_stage1
+        %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+          .important.theme_font_color
+            %i.fa.fa-bookmark.fa-2x
+        .modal_title{ style: "border-top-color:#{@post.color};" }
+          .row
+            .col-md-8
+              %h4.bold.font_dark_grey
+                = @post.content
+            .col-md-4
+              .row
+                .col-md-12
+                  .text-right.post_likes
+                    %span.bold
+                      %span{ class: "cc_post_#{@post.id}" }
+                        = @post.comments.count
+                      %i.fa.fa-comment-o.theme_font_color
+                    = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false }, remote: true,
+                    method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                      %span.bold
+                        %span{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
+                          = @post.users_pro.count
+                        %i.fa.fa-thumbs-o-up.theme_font_color
+                    = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
+                    remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                      %span.bold
+                        %span{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
+                          = @post.users_against.count
+                        %i.fa.fa-thumbs-o-down.theme_font_color
+                    %small
+                      = Russian::strftime(@post.created_at, '%d.%m.%Y')
+        .modal_body
+          .media
+            .media-left.text-center.gradient.post-poster
+              -#= image_tag 'no-ava.png', class: 'img-circle img50'
+              = link_to user_path(@project, @post.user) do
+                = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              %p.poster-name
+                = link_to @post.user, user_path(@project, @post.user)
+            .media-body.white
+              - if @post.status == 1
+                .post-text
+                  %p
+                    %span.badge.badge_type1{ style: "background:#{@post.color};" } Обоснование
+                  %p
+                    = @post.short_desc
+              - else
+                -# @todo прицепить perfectScrollbar, без сокращения пояснения
+                .post-text.ps_cont
+                  = @post.questions.by_type(0).first.try(:content)
+
+
+          .container.modal_content.ps_cont
+
+            .divider10
+            .separator
+              %hr
+                .separator_label.text-left
+                  %h4 Обсуждение аспекта
+                .separator_label.pull-right
+                  %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                    %span.comments_action свернуть
+            .chat-messages.collapse.in#comments
+              = render partial: 'shared/comment', collection: @comments
+            .divider15
+            = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
+            url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
+            .divider25
