@@ -20,9 +20,7 @@ Metrics/MethodLength:
 AllCops:
   Exclude:
     - 'vendor/**/*'
-    - 'spec/**/*'
     - 'db/**/*'
-    - 'app/assets/**/*'
     - 'lib/**/*'
     - 'config/**/*'
     - 'bin/**/*'
