@@ -7,7 +7,7 @@
 
   #popup for all links with target source
   $('.open-popup').click ->
-    popupInit('#popup-'+$(this).data('target'))
+    modalInit('#popup-'+$(this).data('target'))
 
   # аутосайз полей
   $('textarea').not('.without_autosize').autosize()
@@ -34,7 +34,7 @@
 
   # intro panel with goals of stage
   if $('.popup-explanation').length and  !$('.popup-explanation').hasClass('shown_intro')
-    popupInit('.popup-explanation', withClose: false)
+    modalInit('.popup-explanation', withClose: false)
 
   # drop panel for header menu
   $('.drop_opener, .dd_close').click ->

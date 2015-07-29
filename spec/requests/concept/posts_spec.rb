@@ -95,14 +95,14 @@ describe 'Concept ' do
     it 'can sort to date', js: true do
       find(:css, "span#sorter span.sort-1").trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      first(:css, "#tab_dispost_concepts .post-block .what a").click
       expect(page).to have_content @concept1.title
     end
 
     it 'can sort to popular', js: true do
       find(:css, "span#sorter span.sort-2").trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      first(:css, "#tab_dispost_concepts .post-block .what a").click
       expect(page).to have_content @concept2.title
     end
   end

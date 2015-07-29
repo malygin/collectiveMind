@@ -135,7 +135,7 @@ $colors_imperf_codes = [
       $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show')
     else
       # else we have not more aspects, we just show greetings
-      popupInit('#popup-greetings-text')
+      modalInit('#popup-greetings-text')
 
 
 

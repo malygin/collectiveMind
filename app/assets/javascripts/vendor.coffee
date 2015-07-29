@@ -27,8 +27,8 @@
 #    magnificPopupOpenWithClose(el, data)
 #  else
 #    popup = magnificPopupOpen(el, data)
-#    $('.close_magnific').click ->
-#      @popupClose()
+  $('.close_magnific').click ->
+    $(el).modal('hide')
 
 @popupClose = ->
   magnificPopup = $.magnificPopup.instance
