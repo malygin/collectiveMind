@@ -14,44 +14,30 @@ ConceptView = Backbone.View.extend
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
-#    this.$el.replaceWith(newElement)
     this.setElement(newElement)
     return this
-
 
 ConceptCollectionView = Backbone.View.extend
   el: '#tab_dispost_concepts',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this)
-    this.collection.bind('remove', this.removeOld, this)
     $('#filter').on('click', '.checkox_item', this.loadByDiscontent)
     $('#sorter').on('click', 'span', this.sortByDiscontent)
+
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_dispost_concepts').isotope
-      itemSelector: '.concept-block',
+      itemSelector: '.post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
 
-    show_comments_hover()
-    post_colored_stripes()
-    colors_for_content()
     return this
 
   addOne: (concept)->
     conceptView = new ConceptView({model: concept})
     this.$el.append(conceptView.render().el)
-
-  renderNew: (newModel)->
-    this.$container.isotope('insert',
-      new ConceptView({ model:newModel }).render().el)
-
-  removeOld: (model)->
-    el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el)
 
   loadByDiscontent: (evt)->
     evt.preventDefault()
@@ -65,11 +51,8 @@ ConceptCollectionView = Backbone.View.extend
       sortBy: sortByValue,
       sortAscending: false
 
-
 # only for concept url
-
 if isProcedurePage("concept/posts")
-  console.log 'concepts'
   dc = new ConceptCollection
   dc.fetch
     data: $.param({last_time_visit: $('#sorter').data('visit')})

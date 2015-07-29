@@ -1,4 +1,4 @@
-<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6" data-id="id-<%= id %>" data-date="<%= sort_date %>"
+<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6 post-block <%= post_classes %>" data-id="id-<%= id %>" data-date="<%= sort_date %>"
      data-comment="<%= sort_comment %>">
     <div class="post_full">
         <% if(admin_panel) { %>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="post_poster">
-                    <img class="img-circle img40" src="<%= user_avatar %>" alt="No ava">
+                    <img class="img-circle img40" src="<%= user_avatar_url %>" alt="<%= user_avatar_alt %>">
 
                     <a href="#" class="name">
                         <%= user %>
@@ -56,16 +56,13 @@
                     <div class="title">Аспекты</div>
 
                     <div id="stripe<%= id %>" class="post-theme">
-
                         <% for(var i = 0; i < aspects.length; i++) { %>
-                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
-                              style="background-color: <%= aspects[i].color %>;">
-                    <span class="tags">
-                    <%= aspects[i].content %>
-                    </span>
-                    </span>
+                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes" style="background-color: <%= aspects[i].color %>;">
+                                <span class="tags">
+                                <%= aspects[i].content %>
+                                </span>
+                            </span>
                         <% } %>
-
                     </div>
                 </div>
                 <% } %>

@@ -41,6 +41,30 @@ module MarkupHelper
     end
   end
 
+  def user_image_path(source)
+    if source
+      if source.include?('collection_avatar_path:')
+        image_path(source.gsub('collection_avatar_path:', ''))
+      else
+        cl_image_path(source)
+      end
+    else
+      image_path('no-ava.png')
+    end
+  end
+
+  def user_image_alt(source)
+    if source
+      if source.include?('collection_avatar_path:')
+        image_alt(source.gsub('collection_avatar_path:', ''))
+      else
+        image_alt(source)
+      end
+    else
+      image_alt('no-ava.png')
+    end
+  end
+
   def escape_text(t)
     t.gsub("\n", '\\n').gsub("\r", '\\r').gsub("\t", '\\t').gsub("'", "\\'")
   end

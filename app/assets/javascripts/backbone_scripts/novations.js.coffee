@@ -14,41 +14,29 @@ NovationView = Backbone.View.extend
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
-    this.$el.replaceWith(newElement)
     this.setElement(newElement)
     return this
-
 
 NovationCollectionView = Backbone.View.extend
   el: '#tab_concept_novations',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this)
-    this.collection.bind('remove', this.removeOld, this)
     $('#sorter').on('click', 'span', this.sortByConcept)
+
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_concept_novations').isotope
-      itemSelector: '.novation-block',
+      itemSelector: '.post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
-    show_comments_hover()
-    post_colored_stripes()
-    colors_for_content()
+
     return this
 
   addOne: (novation)->
     novationView = new NovationView({model: novation})
     this.$el.append(novationView.render().el)
-
-  renderNew: (newModel)->
-    this.$container.isotope('insert', new NovationView({ model:newModel }).render().el)
-
-  removeOld: (model)->
-    el = $('div[data-id="id-'+model.id+'"]')
-    this.$container.isotope('remove', el)
 
   sortByConcept: ()->
     sortByValue = $(this).data('type')
@@ -56,13 +44,11 @@ NovationCollectionView = Backbone.View.extend
       sortBy: sortByValue,
       sortAscending: false
 
-
 # only for novation url
 if isProcedurePage("novation/posts")
-  console.log 'novation'
   dc = new NovationCollection
   dc.fetch
-    data: $.param({last_time_visit: $('#filter').data('visit')})
+    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new NovationCollectionView({collection: dc})
       dv.render()

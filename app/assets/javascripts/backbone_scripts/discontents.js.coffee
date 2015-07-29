@@ -14,32 +14,25 @@ DiscontentView = Backbone.View.extend
   render: ()->
     html = this.template(this.model.toJSON())
     newElement = $(html)
-    this.$el.replaceWith(newElement);
-    this.setElement(newElement);
+    this.setElement(newElement)
     return this
-
 
 DiscontentCollectionView = Backbone.View.extend
   el: '#tab_aspect_posts',
 
   initialize: ()->
-    this.collection.bind('add', this.renderNew, this)
-    this.collection.bind('remove', this.removeOld, this)
     $('#filter').on('change', this.loadByAspect)
     $('#sorter').on('click', 'span', this.sortByAspect)
 
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
-      itemSelector: '.discontent-block',
+      itemSelector: '.post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',
         date: '[data-date] parseFloat'
 
-    show_comments_hover()
-    colors_for_content()
-    post_colored_stripes()
     return this
 
   addOne: (discontent)->
@@ -48,9 +41,8 @@ DiscontentCollectionView = Backbone.View.extend
 
   loadByAspect: (evt)->
     evt.preventDefault()
-    console.log 'filter'
     filterValue =  $(this).find('input:checked').parent().data('aspect')
-    console.log filterValue
+    filterValue = ':not([class*="aspect"])' if filterValue == '#'
     $('#tab_aspect_posts').isotope
       filter: filterValue
 
@@ -64,7 +56,7 @@ DiscontentCollectionView = Backbone.View.extend
 if isProcedurePage("discontent/posts")
   dc = new DiscontentCollection
   dc.fetch
-    data: $.param({last_time_visit: $('#filter').data('visit')})
+    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new DiscontentCollectionView({collection: dc})
       dv.render()
