@@ -37,6 +37,8 @@
           %span.theme_font_color
             %i.fa.fa-bookmark.fa-lg
       %span{ id: "cancel_comment_#{comment.id}" }
+        %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' =>  comment.id }
+          %span.label.label-danger Отменить
   -#.divider10
   -#%label.label.label-success Согласен
   -#label.label.label-danger Не согласен

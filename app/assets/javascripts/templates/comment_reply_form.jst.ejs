@@ -1,0 +1,16 @@
+<form class="form-group comment_add collapse" accept-charset="UTF-8"
+      action="/project/<%= getProjectIdByUrl() %>/<%= getStageByUrl() %>/posts/<%= post_id %>/add_comment?comment=<%= comment_id %>"
+      data-remote="true" id="reply_form_<%= comment_id %>" method="post">
+
+    <input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">
+
+    <div class="input_cont">
+        <textarea name="<%= getStageByUrl() %>_comment[content]" placeholder="Ваш комментарий"><%= content %></textarea>
+    </div>
+
+    <button class="btn send-comment" type="submit">
+        <span class="bold">
+            <i class="fa fa-reply theme_font_color"></i>
+        </span>
+    </button>
+</form>

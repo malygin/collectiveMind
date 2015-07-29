@@ -5,7 +5,6 @@
     $('.comments_icon[data-for= "' + ch_id + '"]').toggleClass 'active'
     $('#' + ch_id).toggleClass 'active'
 
-
 # сворачивание комментов и скролл
 @comments_expandable_column = ->
   $('.exp_button').click ->
@@ -31,23 +30,16 @@
     $('.comments_action').text 'развернуть'
 
 @comments_feed = ->
-  this.edit_comment = (e)->
+  this.edit_comment = (e) ->
     e.preventDefault()
     id = $(this).data('id')
-    project = $(this).data('project')
-    path = $(this).data('path')
-    stage = path.replace('/posts', '').replace('/', '_')
-    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path + '/' + id + '/update_comment" data-remote="true" id="form_edit_comment_' + id + '" method="post"/>')
-    form.append('<input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">')
-    form.append('<div class="input_cont"><textarea name="content" placeholder="Ваш комментарий" >' + $.trim($('#comment_text_' + id).html()) + '</textarea></div>')
-    form.append('<button class="btn send-comment" type="submit"><span class="bold"><i class="fa fa-reply theme_font_color"></i></span></button>')
+    form = JST['templates/comment_edit_form']({ comment_id: id, content: $.trim($('#comment_text_' + id).html()) })
     $('#comment_text_' + id).html(form)
-    $('#cancel_comment_' + id).append('<a href="#" class="edit-cancel" style="display:none" data-id="' + id + '"><span class="label label-danger">Отменить</span></a>')
     $('#redactor_comment_' + id).fadeOut()
     $('#cancel_comment_' + id + ' .edit-cancel').fadeIn()
     $('#form_edit_comment_' + id).collapse('show')
     textarea_autosize()
-    comments_sumbit()
+    comments_submit()
 
   this.edit_cancel = (e) ->
     e.preventDefault()
@@ -56,30 +48,22 @@
     $('#form_edit_comment_' + id).fadeOut().remove()
     $('#cancel_comment_' + id + ' .edit-cancel').fadeOut()
     $('#redactor_comment_' + id).fadeIn()
-    $('#cancel_comment_' + id).html('')
+
+  this.reply_comment = (e) ->
+    e.preventDefault()
+    id = $(this).data('id')
+    comment = $(this).data('comment')
+    form = JST['templates/comment_reply_form']({ post_id: id, comment_id: comment, content: $('#user_name_' + comment).text().trim() + ', ' })
+    $('#comment' + comment).after(form)
+    $('#reply_form_' + comment).collapse('show')
+    $('#reply_comment_' + comment).toggleClass('reply-comment cancel-reply')
+    textarea_autosize()
+    comments_submit()
 
   this.cancel_reply = (e) ->
     e.preventDefault()
     $(this).closest('.media.comment').next('form').collapse('hide').remove()
     $(this).toggleClass('reply-comment cancel-reply')
-
-  this.reply_comment = (e) ->
-    e.preventDefault()
-    id = $(this).data('id')
-    project = $(this).data('project')
-    path = $(this).data('path')
-    comment = $(this).data('comment')
-    stage = path.replace('/posts', '').replace('/', '_')
-    form = $('<form class="form-group comment_add collapse" accept-charset="UTF-8" action="/project/' + project + '/' + path + '/' + id + '/add_comment?comment=' + comment + '" data-remote="true" id="reply_form_' + comment + '" method="post"/>')
-    form.append('<input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">')
-    form.append('<div class="input_cont"><textarea name="' + stage + '_comment[content]" placeholder="Ваш комментарий" ></textarea></div>')
-    form.append('<button class="btn send-comment" type="submit"><span class="bold"><i class="fa fa-reply theme_font_color"></i></span></button>')
-    $('#comment' + comment).after(form)
-    $('#reply_form_' + comment).collapse('show')
-    $('#reply_comment_' + comment).toggleClass('reply-comment cancel-reply')
-    $('#reply_form_' + comment + ' textarea').html($('#user_name_' + comment).text().trim() + ', ')
-    textarea_autosize()
-    comments_sumbit()
 
   this.activate_button = ->
     form = $(this).closest('form')
@@ -88,18 +72,6 @@
       sendButton.removeClass('disabled')
     else
       sendButton.addClass('disabled')
-
-  this.color_for_idea = ->
-    $(this).closest('form').find('.comment-idea').toggleClass('btn-warning')
-
-  this.color_for_problem = ->
-    $(this).closest('form').find('.comment-problem').toggleClass('btn-danger')
-
-  this.toggle_discuss = ->
-    $(this).toggleClass('label-default label-danger')
-
-  this.toggle_approve = ->
-    $(this).toggleClass('label-default label-success')
 
   this.autosize = ->
     $(this).autosize()
@@ -122,9 +94,8 @@
 
   $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
 
-  $('body').on('click', 'form.comment_add textarea', this.autosize)
-
-  $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
+  textarea_autosize()
+  comments_submit()
 
   #  check if url contain anchor
   myLink = document.location.toString()
@@ -132,25 +103,9 @@
     $('#comment' + myLink.match(/comment_(\d+)/)[1]).effect("highlight", 3000)
     return false
 
-@comments_sumbit = ->
-  this.submit_enter = (e) ->
-    if e.keyCode == 13
-      e.preventDefault()
-      if this.value? and this.value.length > 1
-        $(this).closest('form').trigger 'submit'
-      return false
-
-  $('form.comment_add').on('keypress', 'textarea', this.submit_enter)
+@comments_submit = ->
+  $('form.comment_add').off('keypress', 'textarea').on('keypress', 'textarea', this.submit_enter)
 
 @textarea_autosize = ->
-  this.autosize = ->
-    $(this).autosize()
-
   $('body').on('click', 'form.comment_add textarea', this.autosize)
 
-@add_comment_by_enter = ->
-  if $('input[id^=_comment_content]').length > 0
-    $('input[id^=_comment_content]').keypress = (e)->
-      if (e.which == 10 || e.which == 13)
-        this.parent.submit()
-      return

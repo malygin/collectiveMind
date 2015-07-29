@@ -8,7 +8,7 @@
   .row
     %br/
     .col-md-7
-      %span.stage-heading#filter{ data: { visit: last_time_visit_page('novation') } }
+      %span.stage-heading
         Пакеты идей
         %span#count_novations
           (#{@posts.count})
@@ -26,7 +26,7 @@
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter
+        %span#sorter{ data: { visit: last_time_visit_page('novation') } }
           %span.sort-1.sort_btn.sprite.sprite-1_4.sort-comment{ data: { name: 'sort', desc: 0, type: 'comment' }, 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Сортировать по новым комментариям' }
             -#- new_comments = @project.novations.after_last_visit_comments(last_time_visit_page('novation')).size

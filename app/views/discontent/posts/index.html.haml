@@ -16,7 +16,7 @@
         %span.vert_stripe.back2
         %span.vert_stripe.back3
       %span.text_label Все аспекты
-    %ul.dropdown-menu.index-of-aspects#filter{ data: { visit: last_time_visit_page('discontent') } }
+    %ul.dropdown-menu.index-of-aspects#filter
       %li{ data: { aspect: '*' } }
         %input#ex2_2_0{ name: 'ex2_2', type: 'radio', value: '0' }/
         %label.checkox_item{ for: 'ex2_2_0' }
@@ -76,7 +76,7 @@
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter
+        %span#sorter{ data: { visit: last_time_visit_page('discontent') } }
           %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{ data: { name: 'sort', desc: 0, type: 'comment' } }
             - if @presenter.content_after_last_visit_for[:comments] > 0
               %span.badge-red
