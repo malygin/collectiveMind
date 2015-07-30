@@ -54,7 +54,7 @@ module PostComments
 
   def change_status_for_comment
     @comment = comment_model.find(params[:comment_id])
-    type = @comment.change_status(params[:discuss_status], params[:approve_status])
+    type = @comment.change_status(params[:approve_status])
     JournalEventSaver.change_comment_status_event(user: current_user, comment: @comment, project: @project.project, type: type) if type
     respond_to :js
   end

@@ -2,18 +2,13 @@
   - if @comment_answer
     $('#reply_comment_#{@comment_answer.id}').closest('.media.comment').next('form').collapse('hide').remove();
     $('#reply_comment_#{@comment_answer.id}').toggleClass('reply-comment cancel-reply');
+
     if($('#answers_#{@comment_parent.id}').length){
     $('#answers_#{@comment_parent.id} > .answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
-    if(!$('#answers_collapse_#{@comment_parent.id}').hasClass('opened')){
-    $('#answers_#{@comment_parent.id}').collapse('show');
-    }
-    $('#answers_collapse_#{@comment_parent.id}').html("<span>#{t('stages.comments', count: @comment_parent.comments.size)}</span>");
+    if(!$('#answers_collapse_#{@comment_parent.id}').hasClass('opened')){ $('#answers_#{@comment_parent.id}').collapse('show'); }
+    $('#answers_collapse_#{@comment_parent.id}').html("#{t('stages.comments', count: @comment_parent.comments.size)}");
     } else {
-    $('#comment#{@comment_parent.id}').after("<a id=\"answers_collapse_#{@comment_parent.id}\" class='answers_collapse theme_font_color opened' "
-    + "data-toggle='collapse' href=\"#answers_#{@comment_parent.id}\" aria-expanded='false'><span>1 ответ</span></a>")
-    $('#answers_collapse_#{@comment_parent.id}').after("<div id=\"answers_#{@comment_parent.id}\" class='com_answers collapse in'>"
-    + "<div class='answers_subblock level1'></div></div>");
-    $('#answers_#{@comment_parent.id}').find('.answers_subblock').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    $('#comment#{@comment_parent.id}').after("#{escape_javascript(render partial: 'shared/comment_level', object: @comment)}");
     }
   - else
     $('#comment_text_area').val('');

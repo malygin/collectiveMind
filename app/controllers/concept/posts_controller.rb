@@ -97,7 +97,7 @@ class Concept::PostsController < PostsController
   end
 
   def concept_post_params
-    params.require(:concept_post).permit(:goal, :user_id, :number_views, :status, :content, :censored, :discuss_status,
+    params.require(:concept_post).permit(:goal, :user_id, :number_views, :status, :content, :censored,
                                          :useful, :approve_status, :title, :actors, :impact_env)
   end
 end

@@ -26,11 +26,7 @@
     $('.btn-tooltip').toggle()
     tooltipToggle('.tooltip1')
 
-  # two kinds of accordion lists
-  $('.with_arrow').click ->
-    $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
-  $('.with_plus').click ->
-    $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
+  KindsOfAccordionLists()
 
   # intro panel with goals of stage
   if $('.popup-explanation').length and  !$('.popup-explanation').hasClass('shown_intro')
@@ -62,8 +58,12 @@
   $('.answer-button,.li_aspect').click ->
     $('.notice').addClass 'close-notice'
 
-
-
+# two kinds of accordion lists
+@KindsOfAccordionLists = ->
+  $('.with_arrow').click ->
+    $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
+  $('.with_plus').click ->
+    $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
 
 
 

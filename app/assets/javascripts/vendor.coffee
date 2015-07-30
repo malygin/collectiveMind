@@ -81,8 +81,23 @@
       task.start += offset  for task in ret.tasks
       @ge.loadProject(ret)
 
+@projectTaskManagerProject = (el, project ) ->
+  if $('#gantEditorTemplates').length > 0
+    @ge = new GanttMaster()
+    @ge.init($(el))
+    project.canWrite = false
+    @ge.loadProject(project)
+    setTimeout (->
+      @ge.gantt.refreshGantt()
+      return
+    ), 3000
 
-
+@like_counter = (id, against, type_post) ->
+  against_type = if against then 'dlk' else 'lk'
+  post = $(".#{against_type}_#{type_post}_#{id}")
+  post.effect('highlight', { color: '#f5cecd' }, 1000)
+  post.html(parseInt(post.html()) + 1)
+  return false
 
 
 

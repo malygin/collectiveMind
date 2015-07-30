@@ -9,25 +9,26 @@
 @comments_expandable_column = ->
   $('.exp_button').click ->
     parent_col = $(this).parents('.exp_col')
+    sibling_col = parent_col.siblings('.exp_col')
+    current_button = $(this)
     if parent_col.hasClass('active')
       parent_col.toggleClass 'active'
-      parent_col.siblings('.exp_col').toggleClass 'hidden'
-      new_title = $(this).attr('data-new')
-      old_title = $(this).attr('data-original-title')
-      $(this).attr('data-original-title',new_title).attr('data-new',old_title)
+      sibling_col.toggleClass 'hidden'
     else
       parent_col.toggleClass 'hidden'
-      parent_col.siblings('.exp_col').toggleClass 'active'
-      new_title = $('.exp_col.active').find('.exp_button').attr('data-new')
-      old_title = $('.exp_col.active').find('.exp_button').attr('data-original-title')
-      $('.exp_col.active').find('.exp_button').attr('data-original-title',new_title).attr('data-new',old_title)
+      sibling_col.toggleClass 'active'
+      current_button = $('.exp_col.active').find('.exp_button')
+
+    new_title = current_button.attr('data-new')
+    old_title = current_button.attr('data-original-title')
+    current_button.attr('data-original-title', new_title).attr('data-new', old_title)
 
 # сворачивание комментов
 @comments_collapse_column = ->
   $('#comments').on 'shown.bs.collapse', ->
-    $('.comments_action').text 'свернуть'
+    $('.comments_action').text $('.comments_action').data('data-original-action')
   $('#comments').on 'hidden.bs.collapse', ->
-    $('.comments_action').text 'развернуть'
+    $('.comments_action').text $('.comments_action').data('data-new-action')
 
 @comments_feed = ->
   this.edit_comment = (e) ->

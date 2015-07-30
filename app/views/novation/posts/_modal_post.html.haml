@@ -212,7 +212,8 @@
                     .separator_label.text-left
                       %h4 Обсуждение результатов опроса
                     .separator_label.pull-right
-                      %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                      %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
+                      'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
                         %span.comments_action свернуть
                 .chat-messages.collapse.in#comments
                   = render partial: 'shared/comment', collection: @comments
