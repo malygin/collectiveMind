@@ -45,9 +45,7 @@ def validate_default_profile(project, user)
   expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
 end
 
-# rubocop:disable Metrics/MethodLength
-def validate_default_links_and_sidebar(project, user)
-  visit "/project/#{project.id}"
+def validate_default_header(project, user)
   expect(page).to have_link('go_to_logo', href: "/project/#{project.id}")
   expect(page).to have_content project.name
   expect(page).to have_link('open_procedure', text: 'Процедура', href: "/project/#{project.id}")
@@ -56,6 +54,11 @@ def validate_default_links_and_sidebar(project, user)
   expect(page).to have_link('open_rating', text: 'Рейтинг', href: users_path(project))
   expect(page).to have_link('tooltip_db', text: 'База знаний', href: knowbase_posts_path(project))
   expect(page).to have_button('open_expert_news')
+end
+
+def validate_default_links_and_sidebar(project, user)
+  visit "/project/#{project.id}"
+  validate_default_header(project, user)
   validate_default_profile(project, user)
   project.stages.select { |k, _| k <= 6 }.each do |num_stage, stage|
     if num_stage == 1
