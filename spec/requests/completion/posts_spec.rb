@@ -4,9 +4,9 @@ describe 'Completion ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '7:0' }
+  let(:project) { @project = create :closed_project, stage: '7:0' }
 
   before do
     create :core_project_user, user: user, core_project: project

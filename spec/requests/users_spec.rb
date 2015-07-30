@@ -6,7 +6,7 @@ describe 'Users ' do
   let!(:user) { @user = create :user }
   let!(:user_content) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '1:0' }
+  let(:project) { @project = create :closed_project, stage: '1:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -15,7 +15,6 @@ describe 'Users ' do
     @user_check = create :user_check, user: user, project: project, check_field: 'aspect_posts_intro'
     @moderator_check = create :user_check, user: moderator, project: project, check_field: 'aspect_posts_intro'
   end
-
 
   context 'ordinary user sign in ' do
     before do
@@ -35,7 +34,7 @@ describe 'Users ' do
         click_button 'update_profile'
         # expect(current_path).to eq user_path(project.id, user.id)
         # expect(current_path).to eq polymorphic_path(project.current_stage_type, project: project, action: :user_content)
-        expect(page).to have_content t("form.user.update_success")
+        expect(page).to have_content t('form.user.update_success')
       end
 
       it 'owner - success change password' do
@@ -50,7 +49,7 @@ describe 'Users ' do
         fill_in 'user_password', with: new_password
         fill_in 'user_password_confirmation', with: new_password
         click_button 'update_profile'
-        expect(page).to have_content t("form.user.update_success")
+        expect(page).to have_content t('form.user.update_success')
         click_link 'auth_dropdown'
         click_link 'sign_out'
         expect(current_path).to eq root_path
@@ -74,7 +73,7 @@ describe 'Users ' do
         fill_in 'user_password', with: new_password
         fill_in 'user_password_confirmation', with: wrong_password
         click_button 'update_profile'
-        expect(page).to_not have_content t("form.user.update_success")
+        expect(page).to_not have_content t('form.user.update_success')
         expect(page).to have_content t('errors.messages.not_saved', count: 1)
       end
 
@@ -130,7 +129,6 @@ describe 'Users ' do
         expect(page).to have_content @plan.content
         expect(page).to have_content @plan_comment.content
       end
-
     end
 
     context 'my journal', js: true do
@@ -158,5 +156,4 @@ describe 'Users ' do
       end
     end
   end
-
 end

@@ -4,9 +4,9 @@ describe 'Discontent' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '2:0' }
+  let(:project) { @project = create :closed_project, stage: '2:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -48,7 +48,7 @@ describe 'Discontent' do
 
   shared_examples 'filter discontents' do
     before do
-      #create new aspect
+      # create new aspect
       @aspect2 = create :aspect, project: project
       @discontent3 = create :discontent, project: project, user: user
       create :discontent_post_aspect, post_id: @discontent3.id, aspect_id: @aspect2.id
@@ -63,7 +63,7 @@ describe 'Discontent' do
     end
 
     it 'can select first aspect in dropdown', js: true do
-      find(:css, "a.select-aspect").trigger('click')
+      find(:css, 'a.select-aspect').trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
@@ -75,7 +75,7 @@ describe 'Discontent' do
     end
 
     it 'can select second aspect in dropdown', js: true do
-      find(:css, "a.select-aspect").trigger('click')
+      find(:css, 'a.select-aspect').trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
@@ -93,16 +93,16 @@ describe 'Discontent' do
     end
 
     it 'can sort to comment', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-1').trigger('click')
       sleep(5)
-      first(:css, "#tab_aspect_posts .post-block .what a").click
+      first(:css, '#tab_aspect_posts .post-block .what a').click
       expect(page).to have_content @discontent1.content
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-2').trigger('click')
       sleep(5)
-      first(:css, "#tab_aspect_posts .post-block .what a").click
+      first(:css, '#tab_aspect_posts .post-block .what a').click
       expect(page).to have_content @discontent2.content
     end
   end
@@ -185,6 +185,4 @@ describe 'Discontent' do
     #
     # it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам'
   end
-
-
 end

@@ -1,7 +1,7 @@
 include SessionsHelper
 include ApplicationHelper
 
-def sign_in user
+def sign_in(user)
   visit new_user_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: 'pascal2003'
@@ -39,45 +39,40 @@ def validate_not_have_admin_links_for_user(project)
   expect(page).not_to have_link('open_next_stage', href: "/project/#{project.id}/next_stage")
 end
 
+def validate_default_profile(project, user)
+  click_link 'auth_dropdown'
+  expect(page).to have_link('go_to_profile', text: 'Профиль', href: user_path(project, user))
+  expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
+end
+
+# rubocop:disable Metrics/MethodLength
 def validate_default_links_and_sidebar(project, user)
   visit "/project/#{project.id}"
-
   expect(page).to have_link('go_to_logo', href: "/project/#{project.id}")
   expect(page).to have_content project.name
-
   expect(page).to have_link('open_procedure', text: 'Процедура', href: "/project/#{project.id}")
   expect(page).to have_link('open_cabinet', text: 'Кабинет', href: new_aspect_post_path(project, type_mechanic: 'simple'))
   expect(page).to have_link('clear_my_journals', text: 'Мои уведомления', href: journal_clear_user_path(project, user))
   expect(page).to have_link('open_rating', text: 'Рейтинг', href: users_path(project))
   expect(page).to have_link('tooltip_db', text: 'База знаний', href: knowbase_posts_path(project))
   expect(page).to have_button('open_expert_news')
-  expect(page).to have_link('auth_dropdown')
-  click_link 'auth_dropdown'
-  expect(page).to have_link('go_to_profile', text: 'Профиль', href: user_path(project, user))
-  expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
-
-  expect(page).to have_link('go_to_aspect_posts', text: '1 СТАДИЯ: Введение в процедуру', href: aspect_posts_path(project))
-  expect(page).to have_link('go_to_discontent_posts', text: '2')
-  expect(page).to have_link('go_to_concept_posts', text: '3')
-  expect(page).to have_link('go_to_novation_posts', text: '4')
-  expect(page).to have_link('go_to_plan_posts', text: '5')
-  expect(page).to have_link('go_to_estimate_posts', text: '6')
-  # expect(page).to have_link('go_to_comletion_posts', text: '7')
+  validate_default_profile(project, user)
+  project.stages.select { |k, _| k <= 6 }.each do |num_stage, stage|
+    if num_stage == 1
+      stage_path = Rails.application.routes.url_helpers.send("#{stage[:type_stage]}_path", project)
+      expect(page).to have_link("go_to_#{stage[:type_stage]}", text: "#{num_stage} СТАДИЯ: #{stage[:name]}", href: stage_path)
+    else
+      expect(page).to have_link("go_to_#{stage[:type_stage]}", text: num_stage.to_s, href: '#')
+    end
+  end
 end
 
 def validate_projects_links(projects, expect)
-  if projects[:opened]
+  projects.each do |type, project|
     if expect[:expect]
-      expect(page).to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
+      expect(page).to have_link("go_to_#{type}_project_" + project.id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{project.id}")
     else
-      expect(page).not_to have_link('go_to_opened_project_'+projects[:opened].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:opened].id}")
-    end
-  end
-  if projects[:closed]
-    if expect[:expect]
-      expect(page).to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
-    else
-      expect(page).not_to have_link('go_to_closed_project_'+projects[:closed].id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{projects[:closed].id}")
+      expect(page).not_to have_link("go_to_#{type}_project_" + project.id.to_s, text: I18n.t('link.go_to_project'), href: "/project/#{project.id}")
     end
   end
 end

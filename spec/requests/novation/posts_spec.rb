@@ -4,9 +4,9 @@ describe 'Novation ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '4:0' }
+  let(:project) { @project = create :closed_project, stage: '4:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -53,16 +53,16 @@ describe 'Novation ' do
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-1').trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .post-block .what a").click
+      first(:css, '#tab_concept_novations .post-block .what a').click
       expect(page).to have_content @novation1.content
     end
 
     it 'can sort to popular', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-2').trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .post-block .what a").click
+      first(:css, '#tab_concept_novations .post-block .what a').click
       expect(page).to have_content @novation2.content
     end
   end

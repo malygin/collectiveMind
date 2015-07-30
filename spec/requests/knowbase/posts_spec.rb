@@ -27,7 +27,7 @@ describe 'Knowbase ' do
     end
 
     it 'have content', js: true do
-      find(:css, "#tooltip_db").trigger('click')
+      find(:css, '#tooltip_db').trigger('click')
       expect(page).to have_content 'Введение в процедуру'
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
@@ -44,7 +44,6 @@ describe 'Knowbase ' do
     end
 
     it_behaves_like 'show list knowbase posts'
-
   end
 
   # context 'moderator sign in ' do

@@ -5,7 +5,7 @@ describe 'Aspect ' do
 
   let!(:user) { @user = create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project }
+  let(:project) { @project = create :closed_project }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -41,7 +41,6 @@ describe 'Aspect ' do
     @comment_1 = create :aspect_comment, post: @post1, user: user
     @comment_2 = create :aspect_comment, post: @post1, comment: @comment_1
   end
-
 
   shared_examples 'show list aspects' do
     before do

@@ -19,21 +19,21 @@ describe 'Cabinet Aspects' do
     end
 
     it 'correct' do
-      expect {
+      expect do
         fill_in 'aspect_post_content', with: 'new aspect'
         fill_in 'aspect_post_short_desc', with: 'because'
         click_button 'send_post_aspect'
         expect(page).to have_content t('form.aspect.new_success')
-      }.to change(Aspect::Post, :count).by(1)
+      end.to change(Aspect::Post, :count).by(1)
     end
 
     it 'empty fields - error' do
-      expect {
+      expect do
         click_button 'send_post_aspect'
         within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
-      }.not_to change(Aspect::Post, :count)
+      end.not_to change(Aspect::Post, :count)
     end
   end
 
@@ -41,11 +41,11 @@ describe 'Cabinet Aspects' do
     new_content = 'new cool content'
     visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_aspect_post_#{@aspect.id}" do
-      expect {
+      expect do
         fill_in 'aspect_post_content', with: new_content
         click_button 'send_post_aspect'
         expect(page).to have_content t('form.aspect.edit_success')
-      }.not_to change(Aspect::Post, :count)
+      end.not_to change(Aspect::Post, :count)
     end
     visit edit_aspect_post_path(@project, @aspect)
     within :css, "form#edit_aspect_post_#{@aspect.id}" do
@@ -56,11 +56,11 @@ describe 'Cabinet Aspects' do
   context 'destroy' do
     it 'author - ok', js: true do
       visit user_content_aspect_posts_path(@project)
-      expect {
+      expect do
         click_link "destroy_aspect_#{@aspect.id}"
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_aspect_posts_path(@project)
-      }.to change(Aspect::Post, :count).by(-1)
+      end.to change(Aspect::Post, :count).by(-1)
     end
   end
 
@@ -73,10 +73,10 @@ describe 'Cabinet Aspects' do
 
   it 'publish', js: true do
     visit edit_aspect_post_path(@project, @aspect)
-    expect {
+    expect do
       click_link "publish_#{@aspect.id}"
       refresh_page
       expect(page).not_to have_link "publish_#{@aspect.id}"
-    }.to change(Aspect::Post.published, :count).by(1)
+    end.to change(Aspect::Post.published, :count).by(1)
   end
 end

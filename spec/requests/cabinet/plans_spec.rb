@@ -19,18 +19,18 @@ describe 'Cabinet Plans' do
     end
 
     it 'correct' do
-      expect {
+      expect do
         fill_in 'plan_post_novation_project_goal', with: 'new plan'
         click_button 'to_save_plan'
         expect(page).to have_content t('form.plan.new_success')
-      }.to change(Plan::Post, :count).by(1)
+      end.to change(Plan::Post, :count).by(1)
     end
 
     it 'empty fields - error' do
-      expect {
+      expect do
         click_button 'to_save_plan'
         expect(page).to have_css 'div#error_explanation'
-      }.not_to change(Plan::Post, :count)
+      end.not_to change(Plan::Post, :count)
     end
   end
 
@@ -38,11 +38,11 @@ describe 'Cabinet Plans' do
     new_content = 'new cool content'
     visit user_content_plan_posts_path(@project)
     find(:css, "#edit_plan_#{@plan.id}").trigger('click')
-    expect {
+    expect do
       fill_in 'plan_post_content', with: new_content
       click_button 'to_save_plan'
       expect(page).to have_content t('form.plan.edit_success')
-    }.not_to change(Plan::Post, :count)
+    end.not_to change(Plan::Post, :count)
     visit user_content_plan_posts_path(@project)
     expect(page).to have_content new_content
   end
@@ -50,11 +50,11 @@ describe 'Cabinet Plans' do
   context 'destroy' do
     it 'author - ok', js: true do
       visit user_content_plan_posts_path(@project)
-      expect {
+      expect do
         execute_script("$('#destroy_plan_#{@plan.id}').click()")
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_plan_posts_path(@project)
-      }.to change(Plan::Post, :count).by(-1)
+      end.to change(Plan::Post, :count).by(-1)
     end
   end
 
@@ -65,11 +65,11 @@ describe 'Cabinet Plans' do
 
   it 'publish', js: true do
     visit edit_plan_post_path(@project, @plan)
-    expect {
+    expect do
       click_button 'to_publish_plan'
       refresh_page
       # expect(page).to have_css 'img.publish'
       expect(page).not_to have_button 'to_publish_plan'
-    }.to change(Plan::Post.published, :count).by(1)
+    end.to change(Plan::Post.published, :count).by(1)
   end
 end

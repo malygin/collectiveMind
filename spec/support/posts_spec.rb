@@ -40,12 +40,11 @@ shared_examples 'base post' do |factory_name, class_name|
   it { expect(build(factory_name, status: 4)).not_to be_valid }
 end
 
-shared_examples 'content with comments' do |moderator = false, count = 2, project_status = 1|
+shared_examples 'content with comments' do |_moderator = false, count = 2, _project_status = 1|
   let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
   let(:comment_model_name) { @comment_2.class.name.constantize }
   let(:comment_post_model) { @comment_2.class.name.underscore.gsub('/comment', '_post') }
   let(:text_comment) { attributes_for(comment_model.to_sym)[:content] }
-
 
   it ' user likes comment', js: true do
     like_comment_path = Rails.application.routes.url_helpers.send("like_comment_#{comment_post_model}_path", project, @comment_1)
@@ -162,12 +161,10 @@ shared_examples 'content with comments' do |moderator = false, count = 2, projec
   #
   #   it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
   # end
-
 end
 
-shared_examples 'likes posts' do |moderator = false|
+shared_examples 'likes posts' do |_moderator = false|
   let(:post_model) { @post1.class.name.underscore.gsub('/post', '_post') }
-
 
   it ' user likes post', js: true do
     like_post_path = Rails.application.routes.url_helpers.send("like_#{post_model}_path", project, @post1)
@@ -212,34 +209,34 @@ shared_examples 'admin panel post' do |moderator = false|
       stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
 
       expect(page).to have_link("add_score_post_#{@post1.id}", href: plus_post_path)
-      expect {
+      expect do
         find(:css, "a#add_score_post_#{@post1.id}").trigger('click')
         sleep(5)
         expect(page).to have_css("a.theme_font_color#add_score_post_#{@post1.id}")
-      }.to change(Journal, :count).by(1)
-      visit  users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: @post1.class::SCORE )
+      end.to change(Journal, :count).by(1)
+      visit users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: @post1.class::SCORE)
       visit stage_post_path
-      expect {
+      expect do
         find(:css, "a#add_score_post_#{@post1.id}").trigger('click')
         sleep(5)
         expect(page).to have_css("a:not(.theme_font_color)#add_score_post_#{@post1.id}")
-      }.to change(Journal, :count).by(-1)
-      visit  users_path(project)
-      expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE )
+      end.to change(Journal, :count).by(-1)
+      visit users_path(project)
+      expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE)
     end
 
     it ' score comment ', js: true do
       stage_post_path = Rails.application.routes.url_helpers.send("#{stage_model}_path", project)
       find(:css, "#show_record_#{@post1.id}").trigger('click')
       find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
-      visit  users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: 5 )
+      visit users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: 5)
       visit stage_post_path
       find(:css, "#show_record_#{@post1.id}").trigger('click')
       find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
-      visit  users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: 0 )
+      visit users_path(project)
+      expect(page).to have_selector('span.rating_cell', text: 0)
     end
 
     it ' approve post ', js: true do
@@ -247,12 +244,12 @@ shared_examples 'admin panel post' do |moderator = false|
 
       expect(page).to have_link("approve_status_post_#{@post1.id}", href: discuss_post_path)
 
-      expect {
+      expect do
         find(:css, "a#approve_status_post_#{@post1.id}").trigger('click')
         sleep(5)
         expect(page).to have_css("a.theme_font_color#approve_status_post_#{@post1.id}")
         # expect(page).to have_css("div:not(.hide)[data-important='#{@post1.id}']")
-      }.to change(Journal, :count).by(1)
+      end.to change(Journal, :count).by(1)
       find(:css, "a#approve_status_post_#{@post1.id}").trigger('click')
       sleep(5)
       expect(page).to have_css("a:not(.theme_font_color)#approve_status_post_#{@post1.id}")
@@ -262,11 +259,11 @@ shared_examples 'admin panel post' do |moderator = false|
     it ' approve comment ', js: true do
       find(:css, "#show_record_#{@post1.id}").trigger('click')
       find(:css, "#approve_status_comment_#{@comment_1.id}").trigger('click')
-      expect {
+      expect do
         find(:css, "a#approve_status_comment_#{@comment_1.id}").trigger('click')
         sleep(5)
         # expect(page).to have_css("a#approve_status_post_#{@comment_1.id} span.theme_font_color")
-      }.to change(Journal, :count).by(1)
+      end.to change(Journal, :count).by(1)
     end
   else
     it ' not button ' do
@@ -297,8 +294,8 @@ shared_examples 'welcome popup' do |stage|
 
   it 'have welcome popover', js: true do
     click_link "#{stage}_posts_intro"
-    expect(page).to have_css(".help_popover_content")
-    expect(page).to have_link("close_help_popover")
+    expect(page).to have_css('.help_popover_content')
+    expect(page).to have_link('close_help_popover')
     # @todo position element out page
     # click_link "close_help_popover"
     # expect(page).not_to have_css(".help_popover_content")
@@ -332,4 +329,3 @@ shared_examples 'vote popup' do |status, stage|
     expect(page).to have_content @post2.content
   end
 end
-

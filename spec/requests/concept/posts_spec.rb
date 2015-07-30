@@ -4,9 +4,9 @@ describe 'Concept ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '3:0' }
+  let(:project) { @project = create :closed_project, stage: '3:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
@@ -51,7 +51,7 @@ describe 'Concept ' do
 
   shared_examples 'filter concepts' do
     before do
-      #create new concept
+      # create new concept
       @concept3 = create :concept, user: user, project: project
       create :concept_post_discontent, post_id: @concept3.id, discontent_post_id: @discontent2.id
 
@@ -65,7 +65,7 @@ describe 'Concept ' do
     end
 
     it 'can select first discontent in slider', js: true do
-      find(:css, "span#opener").trigger('click')
+      find(:css, 'span#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent1.id}']").trigger('click')
@@ -76,7 +76,7 @@ describe 'Concept ' do
     end
 
     it 'can select second discontent in slider', js: true do
-      find(:css, "span#opener").trigger('click')
+      find(:css, 'span#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent2.id}']").trigger('click')
@@ -93,16 +93,16 @@ describe 'Concept ' do
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-1').trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .post-block .what a").click
+      first(:css, '#tab_dispost_concepts .post-block .what a').click
       expect(page).to have_content @concept1.title
     end
 
     it 'can sort to popular', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-2').trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .post-block .what a").click
+      first(:css, '#tab_dispost_concepts .post-block .what a').click
       expect(page).to have_content @concept2.title
     end
   end
@@ -178,5 +178,4 @@ describe 'Concept ' do
     #
     # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
   end
-
 end

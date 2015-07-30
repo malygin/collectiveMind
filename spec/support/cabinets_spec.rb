@@ -30,9 +30,9 @@ shared_examples 'base cabinet' do
 
     it 'close sticker' do
       expect(page).to have_content t("cabinet.#{@current_stage_type}_sticker")[0..130]
-      expect {
-          click_link 'cabinet_close_sticker'
-      }.to change(UserCheck, :count).by(1)
+      expect do
+        click_link 'cabinet_close_sticker'
+      end.to change(UserCheck, :count).by(1)
       refresh_page
       expect(page).not_to have_content t("cabinet.#{stage_name}_sticker")
     end
@@ -43,14 +43,12 @@ shared_examples 'base cabinet' do
       user_content_path = Rails.application.routes.url_helpers.send("user_content_#{@current_stage_type}_path", @project)
       visit user_content_path
       expect(page).to have_link("go_to_user_content_#{@current_stage_type}", href: user_content_path)
-      Core::Project::STAGES.each do |num_stage, stage|
-        if num_stage <= 5
-          if @main_stage >= num_stage
-            user_content_path = Rails.application.routes.url_helpers.send("user_content_#{stage[:type_stage]}_path", @project)
-            expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: user_content_path)
-          else
-            expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: '#')
-          end
+      Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+        if @main_stage >= num_stage
+          user_content_path = Rails.application.routes.url_helpers.send("user_content_#{stage[:type_stage]}_path", @project)
+          expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: user_content_path)
+        else
+          expect(page).to have_link("go_to_user_content_#{stage[:type_stage]}", href: '#')
         end
       end
     end

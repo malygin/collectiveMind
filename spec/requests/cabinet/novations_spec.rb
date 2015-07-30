@@ -43,16 +43,15 @@ describe 'Cabinet Novations' do
       end
 
       it { expect(page).to have_content t('form.novation.new_success') }
-
     end
 
     it 'empty fields - error' do
-      expect {
+      expect do
         click_button 'send_post_novation'
         within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
-      }.not_to change(Novation::Post, :count)
+      end.not_to change(Novation::Post, :count)
     end
   end
 
@@ -60,11 +59,11 @@ describe 'Cabinet Novations' do
     new_content = 'new cool content'
     visit user_content_novation_posts_path(@project)
     click_link "edit_novation_#{@novation.id}"
-    expect {
+    expect do
       fill_in 'novation_post_title', with: new_content
       click_button 'send_post_novation'
       expect(page).to have_content t('form.novation.edit_success')
-    }.not_to change(Novation::Post, :count)
+    end.not_to change(Novation::Post, :count)
     visit user_content_novation_posts_path(@project)
     expect(page).to have_content new_content
   end
@@ -72,11 +71,11 @@ describe 'Cabinet Novations' do
   context 'destroy' do
     it 'author - ok', js: true do
       visit user_content_novation_posts_path(@project)
-      expect {
+      expect do
         click_link "destroy_novation_#{@novation.id}"
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_novation_posts_path(@project)
-      }.to change(Novation::Post, :count).by(-1)
+      end.to change(Novation::Post, :count).by(-1)
     end
   end
 
@@ -90,10 +89,10 @@ describe 'Cabinet Novations' do
 
   it 'publish', js: true do
     visit edit_novation_post_path(@project, @novation)
-    expect {
+    expect do
       click_button "publish_#{@novation.id}"
       refresh_page
       expect(page).not_to have_link "publish_#{@novation.id}"
-    }.to change(Novation::Post.published, :count).by(1)
+    end.to change(Novation::Post.published, :count).by(1)
   end
 end

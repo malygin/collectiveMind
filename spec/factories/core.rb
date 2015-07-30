@@ -38,5 +38,4 @@ FactoryGirl.define do
 
     association :aspect, factory: :aspect
   end
-
 end
