@@ -1,15 +1,19 @@
 .col-md-6{ id: "plan_post_#{post_short.id}", data: { id: "id-#{post_short.id}", date: "#{post_short.created_at.to_datetime.to_f}",
 comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_at.to_datetime.to_f : 0}" } }
   .post_full
-    .admin_panel
-      = link_to({ controller: post_short.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: post_short.id },
-      remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "add_score_post_#{post_short.id}") do
-        %i.fa.fa-trophy.fa-lg
-      = link_to({ controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, status: :approve_status },
-      remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}",
-      id: "approve_status_post_#{post_short.id}") do
-        %i.fa.fa-bookmark.fa-lg
+    - if boss?
+      .admin_panel
+        = link_to({ controller: post_short.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: post_short.id },
+        remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.useful}", id: "add_score_post_#{post_short.id}") do
+          %i.fa.fa-trophy.fa-lg
+        = link_to({ controller: post_short.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: post_short.id, status: :approve_status },
+        remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if post_short.approve_status}",
+        id: "approve_status_post_#{post_short.id}") do
+          %i.fa.fa-bookmark.fa-lg
     .post_block
+      %div{ 'data-important' => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
+      .important.theme_font_color
+        %i.fa.fa-bookmark.fa-2x
       .post_body{ 'data-for' => "post_ch#{post_short.id}" }
         .post_poster
           = link_to user_path(@project, post_short.user) do
@@ -41,13 +45,13 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
               = post_short.comments.count
             %i.fa.fa-comment-o
           %span
-            %small{ id: "lk_post_#{post_short.id}" }
+            %small{ id: "lk_post_#{post_short.id}", class: "lk_post_#{post_short.id}" }
               = post_short.users_pro.count
             = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false },
             remote: true, method: :put, id: "like_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
               %i.fa.fa-thumbs-o-up.fa-flip-horizontal
           %span
-            %small{ id: "dlk_post_#{post_short.id}" }
+            %small{ id: "dlk_post_#{post_short.id}", class: "dlk_post_#{post_short.id}" }
               = post_short.users_against.count
             = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true },
             remote: true, method: :put, id: "dislike_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
