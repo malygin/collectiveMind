@@ -12,6 +12,9 @@
       }
       .panel .panel-heading {
         background: (nth($base_colors, $i)) * 1.5;
+        i{
+          color:nth($base_colors, $i);
+        }
       }
     }
   }
@@ -118,9 +121,23 @@
             padding: 9px 11px;
             color: $black;
             font-weight: 600;
+            a{
+              color:black;
+              display:block;
+            }
+            i{
+              float:right;
+              margin-top:4px;
+            }
           }
           .panel-body {
             padding: 15px 0;
+            h5{
+              font-weight:bold;
+            }
+            p{
+              margin-bottom:10px;
+            }
           }
         }
       }
