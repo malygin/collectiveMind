@@ -1,7 +1,7 @@
 $red: #e61928;
 $black: #000000;
 $white: #ffffff;
-$light_grey:#797979;
+$light_grey: #797979;
 $dark_grey: #414040;
 // 1 стадия
 $base_color_1: #80B2D6;
@@ -9,13 +9,18 @@ $base_color_1: #80B2D6;
 $base_color_2: #678CCA;
 // 3 стадия
 $base_color_3: #bd8cb8;
+$service_color_3: #ebdcea;
 // 4 стадия
 $base_color_4: #8E8BC7;
+$service_color_4: #d5d6ea;
 // 5 стадия
 $base_color_5: #699FA4;
+$service_color_5: #cee1e5;
 // 6 стадия
 $base_color_6: #84B9BD;
+$service_color_6: #cee1e5;
 // 7 стадия
 $base_color_7: #8CCCD8;
 
 $base_colors: $base_color_1, $base_color_2, $base_color_3, $base_color_4, $base_color_5, $base_color_6, $base_color_7;
+$service_colors: $service_color_3, $service_color_4, $service_color_5;

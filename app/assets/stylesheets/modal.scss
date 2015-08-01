@@ -1,5 +1,5 @@
 .modal-backdrop {
-  background:#bababa;
+  background: #bababa;
   height: 100%;
 }
 
@@ -10,11 +10,18 @@
         color: nth($base_colors, $i);
 
       }
+      .panel .panel-heading i {
+        color: nth($base_colors, $i);
+      }
+    }
+  }
+}
+
+@for $i from 3 through 5 {
+  .stage_#{$i} {
+    .modal {
       .panel .panel-heading {
-        background: (nth($base_colors, $i)) * 1.5;
-        i{
-          color:nth($base_colors, $i);
-        }
+        background: (nth($service_colors, $i - 2));
       }
     }
   }
@@ -27,10 +34,10 @@
       right: -70px;
       background: $white;
       padding: 3px 9px;
-      font-size:31px;
-      opacity:0.6;
-      &:hover{
-        opacity:1;
+      font-size: 31px;
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
       }
 
     }
@@ -121,22 +128,22 @@
             padding: 9px 11px;
             color: $black;
             font-weight: 600;
-            a{
-              color:black;
-              display:block;
+            a {
+              color: black;
+              display: block;
             }
-            i{
-              float:right;
-              margin-top:4px;
+            i {
+              float: right;
+              margin-top: 4px;
             }
           }
           .panel-body {
             padding: 15px 0;
-            h5{
-              font-weight:bold;
+            h5 {
+              font-weight: bold;
             }
-            p{
-              margin-bottom:10px;
+            p {
+              margin-bottom: 10px;
             }
           }
         }
