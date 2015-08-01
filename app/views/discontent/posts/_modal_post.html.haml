@@ -1,56 +1,47 @@
 .modal.fade#modal-post
   .modal-dialog.modal-lg
-    .modal-content
-      - if boss?
-        .post-top-header
-          = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
+    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
+    - if boss?
+      .admin_panel
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
           remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
-            %i.fa.fa-trophy.fa-lg
-          = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, status: :approve_status },
+          %i.fa.fa-trophy.fa-lg
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, status: :approve_status },
           remote: true, method: :put, class: "btn btn-white btn-xs link_status #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
-            %i.fa.fa-bookmark.fa-lg
-      .popup.popup_rounded.popup_color_theme_stage2
+          %i.fa.fa-bookmark.fa-lg
+      .modal-content
         %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
           .important.theme_font_color
             %i.fa.fa-bookmark.fa-2x
-        .modal_title
+        .modal-header
           .row
             .col-md-8
-              %h4.bold.font_dark_grey
+              %h4
                 = @post.content
             .col-md-4
-              .row
-                .col-md-12
-                  .text-right.post_likes
-                    %span.bold
-                      %span{ class: "cc_post_#{@post.id}" }
-                        = @post.comments.count
-                      %i.fa.fa-comment.theme_font_color
-                    = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false },
+              .likes
+                %a
+                  %small{ class: "cc_post_#{@post.id}" }
+                    = @post.comments.count
+                  %i.fa.fa-comment
+                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false },
                     remote: true, method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
-                      %span.bold
-                        %span{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
-                          = @post.users_pro.count
-                        %i.fa.fa-thumbs-up.theme_font_color
-                    = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true },
+                  %small{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
+                    = @post.users_pro.count
+                  %i.fa.fa-thumbs-up
+                = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true },
                     remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
-                      %span.bold
-                        %span{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
-                          = @post.users_against.count
-                        %i.fa.fa-thumbs-down.theme_font_color
-                    -#- if @post.notes.present?
-                    -#  %span
-                    -#    %i.fa.fa-exclamation-triangle.font_lighter_grey
-                    %small
-                      = l(@post.created_at, format: '%d.%m.%Y')
-        .modal_body
-          .container.modal_content
+                  %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
+                    = @post.users_against.count
+                  %i.fa.fa-thumbs-down
+                %small
+                  = l(@post.created_at, format: '%d.%m.%Y')
+        .modal-body
+          .post-body
             .row
               .col-md-6.exp_col.left
-                %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
+                %a.exp_button{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
                 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть несовершенство' }
-                  = image_tag 'grey_arrow.png'
-                .divider20
                 .border_light_grey.rounded_3.imperf_left
                   .media.comment.main_line
                     .container
@@ -74,12 +65,6 @@
                     %tr
                       %td.col-md-12.left-column
                         = @post.whered
-                    -#%tr
-                    -#  %td.col-md-12.left-column.bold
-                    -#    = t('activerecord.attributes.discontent/post.whend')
-                    -#%tr
-                    -#  %td.col-md-12.left-column
-                    -#    = @post.whend
 
                   - if @post.post_aspects.present?
                     .divider_1_grey
@@ -92,11 +77,8 @@
                     .divider10
 
               .col-md-6.exp_col.right
-                %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                %a.exp_button{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
                 'data-new' => 'Развернуть несовершенство', title: 'Свернуть историю комментариев' }
-                  = image_tag 'grey_arrow_1.png'
-                .divider10
-
                 -#.separator
                 -#  %hr
                 -#    .separator_label.text-left
