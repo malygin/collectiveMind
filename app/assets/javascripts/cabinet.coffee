@@ -43,13 +43,13 @@
 
   #  copy checked items to left panel in novation form
   $('#select_concept').click ->
-    mp = modalInit('#popup-cabinet4-1', callbackOnClose: updateListOfConceptsAfterPopupClose)
+    mp = modalInit('#modal-cabinet4-1', callbackOnClose: updateListOfConceptsAfterPopupClose)
 
 
 
   ### Стадия сбора проектов ###
   $('#select_novation').click ->
-    modalInit('#popup-cabinet5-1')
+    modalInit('#modal-cabinet5-1')
 
   $('#choose_novation').click  ->
     if $('#list_novations').length > 0

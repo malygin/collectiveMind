@@ -125,8 +125,9 @@
                         -#      %input{ type: 'checkbox'}/
                         -#      Получать автоматические уведомления
                         = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
-                        .popup-window.detailed_popup.mfp-hide.popup-w415#popup-1-1
-                          .popup.popup_rounded
+                        .modal.fade#popup-1-1
+                          .modal-dialog.modal-sm
+                            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
                             .modal-body.text-center.padding60
                               .form-group
                                 = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'

@@ -23,7 +23,7 @@ describe 'Cabinet Novations' do
       before do
         fill_in 'novation_post_title', with: 'new novation'
         find('#select_concept').click
-        within :css, '#popup-cabinet4-1' do
+        within :css, '#modal-cabinet4-1' do
           find("a#open_discontent_#{@concept.concept_disposts.first.id}").click
           execute_script("$('#check_#{@concept.id}').click()")
           find('.mfp-close').click

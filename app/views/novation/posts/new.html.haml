@@ -53,8 +53,9 @@ remote: true, class: 'cabinet-aspect-form' do |f|
       = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: { confirm: t('confirm.delete_novation') },
       id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del pull-right'
 
-.popup-window.popup-w1030.mfp-hide#popup-cabinet4-1
-  .popup.transparent
+.modal.fade#modal-cabinet4-1
+  .modal-dialog.modal-lg
+    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
     .row
       .col-md-6.col_padding_7
         .left_col.rounded_5.white

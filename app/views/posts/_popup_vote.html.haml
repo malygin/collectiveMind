@@ -1,5 +1,6 @@
-.modal.fade.popup-window.popup-vote.popup-w1030{ id: "vote-#{@project.main_stage}" }
+.modal.fade{ id: "vote-#{@project.main_stage}" }
   .modal-dialog.modal-lg
+    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
     .modal-content
       .popup.popup_rounded
         .modal_title

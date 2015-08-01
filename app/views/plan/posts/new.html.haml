@@ -61,36 +61,38 @@
       = image_tag 'published.png', class: 'publish'
   .divider70
 
-  .popup-window.detailed_popup.popup-w1030.mfp-hide#popup-cabinet5-1
-    .content_window.white
-      .divider15
-      .row
-        .col-md-5
-          %ul.list-unstyled.tabs_type_2.less_margin#ul_novations{ role: 'tablist' }
-            - @novations.each do |novation|
-              %li.open_novation{ role: 'presentation' }
-                %a.a_font_reset{ 'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab' }
-                  = novation.title
-        .col-md-7
-          .tab-content#list_novations
-            .divider3
-            - @novations.each do |novation|
-              .tab-pane.fade{ role: 'tabpanel', id: "show_novation_#{novation.id}", 'data-id' => novation.id }
-                - novation.attributes_for_form.each do |type_attribute|
-                  %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
-                  href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
-                    = t("activerecord.attributes.novation/post.#{type_attribute.first}")
-                    %i.fa.fa-plus.font_color_stage4.collapse_plus
-                  .collapse{ id: "novation_#{novation.id}_attributes_#{type_attribute.first}" }
-                    .divider5
-                    - type_attribute.second.each do |attribute, _bool_attribute|
-                      %h6.bold
-                        = t("activerecord.attributes.novation/post.#{attribute}")
-                      %p.novation_attribute{ 'data-attribute' => attribute }
-                        = novation.send(attribute)
-                      .divider15
-      .row
-        %a.btn#choose_novation Выбрать пакет
+  .modal.fade#modal-cabinet5-1
+    .modal-dialog.modal-lg
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
+      .content_window.white
+        .divider15
+        .row
+          .col-md-5
+            %ul.list-unstyled.tabs_type_2.less_margin#ul_novations{ role: 'tablist' }
+              - @novations.each do |novation|
+                %li.open_novation{ role: 'presentation' }
+                  %a.a_font_reset{ 'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab' }
+                    = novation.title
+          .col-md-7
+            .tab-content#list_novations
+              .divider3
+              - @novations.each do |novation|
+                .tab-pane.fade{ role: 'tabpanel', id: "show_novation_#{novation.id}", 'data-id' => novation.id }
+                  - novation.attributes_for_form.each do |type_attribute|
+                    %a.a_font_reset.collapser_type2.collapsed.stage4_pale_back.with_plus{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
+                    href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
+                      = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                      %i.fa.fa-plus.font_color_stage4.collapse_plus
+                    .collapse{ id: "novation_#{novation.id}_attributes_#{type_attribute.first}" }
+                      .divider5
+                      - type_attribute.second.each do |attribute, _bool_attribute|
+                        %h6.bold
+                          = t("activerecord.attributes.novation/post.#{attribute}")
+                        %p.novation_attribute{ 'data-attribute' => attribute }
+                          = novation.send(attribute)
+                        .divider15
+        .row
+          %a.btn#choose_novation Выбрать пакет
 
   = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
   = f.submit 'Save', class: 'hidden', id: 'save_plan_post_published', name: 'plan_post[published]'

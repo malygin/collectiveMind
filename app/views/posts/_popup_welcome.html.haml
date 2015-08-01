@@ -1,6 +1,7 @@
-.modal.fade.popup-window.popup-explanation.popup-w710.welcome_popup{ id: "popup-explanation-#{number_current_stage}",
+.modal.fade{ id: "popup-explanation-#{number_current_stage}",
 class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : ''}" }
   .modal-dialog.modal-lg
+    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
     .modal-content
       .popup.popup_rounded
         .modal_badge.rounded_2.font_white{ class: "back_color_stage#{number_current_stage}" }
