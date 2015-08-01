@@ -1,3 +1,131 @@
-.modal-backdrop{
-  height:100%;
+.modal-backdrop {
+  background:#bababa;
+  height: 100%;
+}
+
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .modal {
+      .modal-header .likes > a > i {
+        color: nth($base_colors, $i);
+
+      }
+      .panel .panel-heading {
+        background: (nth($base_colors, $i)) * 1.5;
+      }
+    }
+  }
+}
+
+.modal {
+  .modal-dialog {
+    > button.close {
+      position: absolute;
+      right: -70px;
+      background: $white;
+      padding: 3px 9px;
+      font-size:31px;
+      opacity:0.6;
+      &:hover{
+        opacity:1;
+      }
+
+    }
+  }
+  .admin_panel {
+    margin-top: 10px;
+    padding: 5px;
+    background: $white*0.94;
+    @include border-top-radius(5px);
+  }
+  .modal-content {
+    border: none;
+  }
+  .modal-header {
+    padding-left: 30px;
+    padding-right: 30px;
+    h4 {
+      color: $dark_grey;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0;
+    }
+    .likes {
+      text-align: right;
+      a {
+        margin-right: 5px;
+        i {
+          font-size: 16px;
+        }
+        small {
+          margin-right: 3px;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .modal-body {
+    padding: 0;
+    .post-header {
+      background: #f7f7f7;
+      border-bottom: 1px solid #d1d1d1;
+      box-shadow: inset 0 5px 3px -3px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      .post-poster {
+        padding: 20px 0 18px 27px;
+        display: inline-block;
+        span {
+          margin-left: 25px;
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+      .tags_block {
+        float: right;
+        padding-top: 35px;
+        padding-bottom: 10px;
+        .tags_badge {
+          position: absolute;
+          top: 5px;
+          right: 0;
+          background: $white;
+          color: $light_grey;
+          padding: 1px 20px;
+          box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+        .tag {
+          float: right;
+          padding: 0 27px 0 9px;
+          font-size: 10px;
+          color: $white;
+          margin-bottom: 3px;
+          @include border-left-radius(2px);
+          clear: both;
+
+        }
+
+      }
+    }
+    .post-body {
+      padding: 0 15px;
+      .post-content {
+        padding-top: 26px;
+        .panel {
+          margin-bottom: 5px;
+          font-size: 12px;
+          .panel-heading {
+            padding: 9px 11px;
+            color: $black;
+            font-weight: 600;
+          }
+          .panel-body {
+            padding: 15px 0;
+          }
+        }
+      }
+    }
+
+  }
+
 }

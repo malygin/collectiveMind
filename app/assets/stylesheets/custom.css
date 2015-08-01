@@ -2348,12 +2348,6 @@ i.fa.sticker_close {
 .exp_col.hidden {
     width: 0;
 }
-.exp_col.left .exp_button {
-    margin-right: -10px;
-}
-.exp_col.right .exp_button {
-    margin-left: -10px;
-}
 .exp_col.left .exp_button:focus,
 .exp_col.right .exp_button:focus {
     box-shadow: none;
