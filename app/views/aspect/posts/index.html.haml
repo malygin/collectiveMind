@@ -2,7 +2,7 @@
   = render partial: 'popup_vote'
 
 - if @project_result
-  = render partial: 'popup_results'
+  = render partial: 'modal_results'
 
 - if @questions_progress != 100 && @project.can_add?(name_controller)
   = render partial: 'questions_aspects'
