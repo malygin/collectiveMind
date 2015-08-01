@@ -12,7 +12,7 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
           %i.fa.fa-bookmark.fa-lg
     .post_block
       %div{ 'data-important' => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
-      .important.theme_font_color
+      .important
         %i.fa.fa-bookmark.fa-2x
       .post_body{ 'data-for' => "post_ch#{post_short.id}" }
         .post_poster

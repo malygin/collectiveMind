@@ -5,10 +5,12 @@
 
 @for $i from 1 through length($base_colors) {
   .stage_#{$i} {
+    .important {
+      color: nth($base_colors, $i);
+    }
     .modal {
       .modal-header .likes > a > i {
         color: nth($base_colors, $i);
-
       }
       .panel .panel-heading i {
         color: nth($base_colors, $i);
@@ -149,7 +151,27 @@
         }
       }
     }
-
+    .post {
+      width: 100%;
+      min-height: 130px;
+      border-bottom: 1px solid #d7d9dd;
+      .post-poster, post-content {
+        position: relative;
+        height: 100%;
+        float: left;
+      }
+      .post-poster{
+        width: 17%;
+        background: linear-gradient(to top, #fff, #e9eff7);
+        border-right: 1px solid #d7d9dd;
+        text-align: center;
+        padding: 20px 10px;
+      }
+      .post-content{
+        width: 83%;
+        overflow: hidden;
+      }
+    }
   }
 
 }
