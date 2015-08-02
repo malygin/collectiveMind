@@ -49,8 +49,8 @@ class JournalEventSaver
                             first_id: h[:comment].post.id, second_id: h[:comment].id).save!
 
     if h[:comment].user != h[:user]
-      h[:user].journals.build(type_event: 'my_' + [:comment].class_name + '_' + type, user_informed: [:comment].user, project: h[:project],
-                              body: [:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
+      h[:user].journals.build(type_event: 'my_' + h[:comment].class_name + '_' + type, user_informed: h[:comment].user, project: h[:project],
+                              body: h[:comment].field_for_journal, body2: h[:comment].post.field_for_journal,
                               first_id: h[:comment].post.id, second_id: h[:comment].id,
                               personal: true, viewed: false).save!
     end

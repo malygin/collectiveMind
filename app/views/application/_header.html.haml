@@ -21,7 +21,7 @@
             Мои уведомления
             - if @my_journals_count > 0
               %span.top-circle#my_journals_count
-                0
+                = @my_journals_count
           = render partial: 'application/messages_menu'
         - if @project.closed?
           %li{ class: "#{'active' if rating?}" }

@@ -69,8 +69,10 @@
             -#    %li
             -#      = "|"
       -#    %li{ href: '#'} Зарегистрироваться
-      .popup-window.detailed_popup.popup-w400.mfp-hide#popup-sign_up
-        .popup.popup-rounded
+      .modal.fade#popup-sign_up
+        .modal-dialog.modal-sm
+          -#.popup-window.detailed_popup.popup-w400.mfp-hide#popup-sign_up
+          -#.popup.popup-rounded
           .divider35
           .text-center
             = image_tag 'logo.png', class: 'auth_logo'
@@ -89,8 +91,8 @@
 
 
 
-    /
-      Javascripts
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-    = javascript_include_tag 'application'
+      /
+        Javascripts
+        \==================================================
+      / Placed at the end of the document so the pages load faster
+      = javascript_include_tag 'application'

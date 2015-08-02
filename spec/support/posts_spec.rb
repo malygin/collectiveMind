@@ -289,10 +289,11 @@ shared_examples 'welcome popup' do |stage|
     expect(page).to have_content 'Цель стадии'
     expect(page).to have_link("#{stage}_posts_intro", href: user_check_path, text: 'Начать работу')
     click_link "#{stage}_posts_intro"
+    sleep(5)
     expect(page).not_to have_content 'Цель стадии'
   end
 
-  it 'have welcome popover', js: true do
+  xit 'have welcome popover', js: true do
     click_link "#{stage}_posts_intro"
     expect(page).to have_css('.help_popover_content')
     expect(page).to have_link('close_help_popover')
@@ -311,8 +312,8 @@ shared_examples 'vote popup' do |status, stage|
 
   it 'correct voted', js: true do
     expect(page).to have_content t("vote.#{stage}_posts.header")
-    expect(page).to have_content @post1.content
-    expect(page).to have_content @post2.content
+    expect(page).to have_content @post1.field_for_journal
+    expect(page).to have_content @post2.field_for_journal
     within :css, "[data-vote-folder-role='all'] span.vote_counter" do
       expect(page).to have_content '2'
     end
@@ -325,7 +326,7 @@ shared_examples 'vote popup' do |status, stage|
     find(:css, "#vote_button_#{@post2.id}_2").trigger('click')
     sleep(5)
     expect(page).to_not have_content t("vote.#{stage}_posts.header")
-    expect(page).to have_content @post1.content
-    expect(page).to have_content @post2.content
+    expect(page).to have_content @post1.field_for_journal
+    expect(page).to have_content @post2.field_for_journal
   end
 end

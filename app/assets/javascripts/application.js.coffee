@@ -54,7 +54,7 @@
 $ ->
   init_procedure()
   init_cabinet()
-  init_vote()
+  vote_scripts()
 
   $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
     $('#error_explanation')

@@ -26,7 +26,7 @@ describe 'Cabinet Novations' do
         within :css, '#modal-cabinet4-1' do
           find("a#open_discontent_#{@concept.concept_disposts.first.id}").click
           execute_script("$('#check_#{@concept.id}').click()")
-          find('.mfp-close').click
+          find('.close').click
         end
         find('a#open_project').click
         fill_in 'novation_post_project_change', with: 'sss'

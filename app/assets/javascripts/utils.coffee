@@ -173,8 +173,8 @@ $colors_imperf_codes = [
       unch_its++
 
 @like_counter = (id, against, type_post) ->
-  against_type = if against then 'dlk' else 'lk'
-  post = $(".#{against_type}_#{type_post}_#{id}")
+  against_type = if against == 'true' then 'dlk' else 'lk'
+  post = $("\##{against_type}_#{type_post}_#{id}")
   post.effect('highlight', { color: '#f5cecd' }, 1000)
   post.html(parseInt(post.html()) + 1)
   return false

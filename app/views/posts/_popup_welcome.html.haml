@@ -1,4 +1,4 @@
-.modal.fade{ id: "popup-explanation-#{number_current_stage}",
+.modal.fade.md-modal-explanation{ id: "modal-explanation-#{number_current_stage}",
 class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : ''}" }
   .modal-dialog.modal-lg
     %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
@@ -20,4 +20,4 @@ class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : '
 
         = link_to send("check_field_#{name_controller}_path", @project, check_field: "#{name_controller}_intro", status: true),
         method: :put, remote: true, id: "#{name_controller}_intro" do
-          %button.btn.red.close_magnific Начать работу
+          %button.btn.red.md-close-modal Начать работу

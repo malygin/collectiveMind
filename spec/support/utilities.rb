@@ -53,7 +53,6 @@ def validate_default_header(project, user)
   expect(page).to have_link('clear_my_journals', text: 'Мои уведомления', href: journal_clear_user_path(project, user))
   expect(page).to have_link('open_rating', text: 'Рейтинг', href: users_path(project))
   expect(page).to have_link('tooltip_db', text: 'База знаний', href: knowbase_posts_path(project))
-  expect(page).to have_button('open_expert_news')
 end
 
 def validate_default_links_and_sidebar(project, user)

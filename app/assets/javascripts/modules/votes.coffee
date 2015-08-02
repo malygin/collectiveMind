@@ -1,13 +1,3 @@
-@init_vote = ->
-  if $('div[id^=popup-vote]').length > 0
-    $.magnificPopup.open({
-      items: {
-        src: $('div[id^=popup-vote]')
-      },
-      type: 'inline'
-    })
-
-
 @vote_scripts = ->
   this.vote_transfer = (el)->
     # начальная и конечная папки
@@ -71,5 +61,4 @@
     vote_perc = (voted_posts / all_posts) * 100
     progress.attr('data-progress-voted', voted_posts)
     progress.css 'width', vote_perc + '%'
-
 

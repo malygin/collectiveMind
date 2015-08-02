@@ -23,7 +23,7 @@
                 'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}", 'data-vote-default-role' => "#{folder[:role]}", role: 'button',
                 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
                 title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe) do
-                  %i.vote{ class: "vote-vote#{number_folder}" }
+                  %i.vote.fa.fa-check{ class: "vote-vote#{number_folder}" }
 
             -#%span.vote_open_detail_imperf.grey
             -#  %i.fa.fa-angle-right.font_white

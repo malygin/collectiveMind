@@ -29,8 +29,12 @@
   KindsOfAccordionLists()
 
   # intro panel with goals of stage
-  if $('.popup-explanation').length and  !$('.popup-explanation').hasClass('shown_intro')
-    modalInit('.popup-explanation', withClose: false)
+  if $('.md-modal-explanation').length and !$('.md-modal-explanation').hasClass('shown_intro')
+    modalInit('.md-modal-explanation', withClose: false)
+
+  # vote modal open
+  if $('.md-modal-vote').length > 0
+    $('.md-modal-vote').modal('show')
 
   # drop panel for header menu
   $('.drop_opener, .dd_close').click ->

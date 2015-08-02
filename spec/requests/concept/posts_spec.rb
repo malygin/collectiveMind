@@ -127,7 +127,6 @@ describe 'Concept ' do
       it 'have content', js: true do
         expect(page).to have_content @post1.title
         expect(page).to have_content @post1.goal
-        expect(page).to have_content @post1.content
         expect(page).to have_content @post1.actors
         expect(page).to have_content @post1.impact_env
         expect(page).to have_content @discontent1.content
