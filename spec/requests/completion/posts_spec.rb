@@ -51,8 +51,8 @@ describe 'Completion ' do
       end
 
       it 'have content' do
-        expect(page).to have_content 'Описание проектного предложения'
-        expect(page).to have_content 'График реализации проекта'
+        expect(page).to have_content t('show.plan.desc')
+        expect(page).to have_content t('show.plan.diagram')
       end
     end
   end

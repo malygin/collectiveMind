@@ -67,7 +67,7 @@
                         %span.close-button
                           %i.fa.fa-times-circle-o
                       .hint.close-notice{ id: "wrong_question_#{question.id}", style: "color:#{asp.color};border-color:#{asp.color};" }
-                        Ответ неправильный, воспользуйтесь подсказкой
+                        = t('show.aspect.notice')
                         %span.close-button
                           %i.fa.fa-times-circle-o
                     = form_tag(answer_question_aspect_post_path(@project, id: asp.id, question_id: question.id), method: :put, remote: true,

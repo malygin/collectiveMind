@@ -13,11 +13,11 @@
     %ul.list-unstyled.cab_menu_left
       %li.active
         %a.btn.btn_simple_grey.a_font_reset.text-right#show_content{ 'data-toggle' => 'tab', href: '#user_content' }
-          Контент
+          = t('menu.content')
       - if current_user?(@user)
         %li
           %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
-            Профиль
+            = t('menu.account')
 
   .col-md-10
     .tab-content

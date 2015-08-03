@@ -5,7 +5,7 @@
       .header{ style: 'background:#eac85e;' }
         %ul.carousel-indicators
           %li.myCarousel-target.active{ style: 'border-top-color:#eac85e;', 'data-slide-to' => '0', 'data-target' => '#myCarousel', 'data-color' => '#eac85e' }
-            Введение в процедуру
+            = t('stages.aspects_title')
           - @aspects.each_with_index do |asp, index|
             %li.myCarousel-target{ style: "border-top-color:#{asp.color};", 'data-slide-to' => "#{index + 1}", 'data-target' => '#myCarousel',
             'data-color' => "#{asp.color}" }

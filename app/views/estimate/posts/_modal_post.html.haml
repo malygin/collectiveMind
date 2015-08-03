@@ -56,17 +56,15 @@
                     %li.active
                       %a{ 'data-toggle' => 'tab', href: '#tab-1' }
                         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
-                          Описание
-                          проектного предложения
+                          = t('show.estimate.desc')
                     %li
                       %a{ 'data-toggle' => 'tab', href: '#tab-2' }
                         %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
-                          График реализации проекта
+                          = t('show.estimate.diagram')
                     %li
                       %a{ 'data-toggle' => 'tab', href: '#tab-3' }
                         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
-                          Оценки других
-                          участников
+                          = t('show.estimate.rating')
               .col-md-3
                 .popup-post-block.pull-right
                   = link_to user_path(@project, @post.user) do
@@ -126,13 +124,13 @@
                   .container
                     .col-sm-3.col_padding_left_0.col_padding_right_3
                       .border_grey.col_rate_head
-                        Проект
+                        = t('show.estimate.name')
                     .col-sm-4.col_padding_left_3.col_padding_right_3
                       .border_grey.col_rate_head
-                        Этот проект важен для проблемы, заданной заказчиком?
+                        = t('show.estimate.field_left')
                     .col-sm-5.col_padding_right_0.col_padding_left_3
                       .border_grey.col_rate_head
-                        Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
+                        = t('show.estimate.field_right')
                 .divider10
                 - @post.voted_users.uniq.each do |user|
                   .rating_line

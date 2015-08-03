@@ -48,7 +48,7 @@ describe 'Aspect ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Введение в процедуру'
+      expect(page).to have_content t('stages.aspects_title')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "#li_aspect_#{@aspect1.id} a").trigger('click')
@@ -93,9 +93,9 @@ describe 'Aspect ' do
     end
 
     it 'have content' do
-      expect(page).to have_content 'Обсуждение аспектов'
-      expect(page).to have_content 'Аспекты из базы знаний (2)'
-      expect(page).to have_content 'Аспекты, предложенные участниками (0)'
+      expect(page).to have_content t('show.aspect.title')
+      expect(page).to have_content "#{t('show.aspect.main')} (2)"
+      expect(page).to have_content "#{t('show.aspect.other')} (0)"
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       expect(page).to have_link 'new_aspect_posts'
@@ -144,7 +144,7 @@ describe 'Aspect ' do
         click_button 'send_answers'
       end
       expect(page).not_to have_content @question_1_2.content
-      expect(page).to have_content 'Ответ неправильный, воспользуйтесь подсказкой'
+      expect(page).to have_content t('show.aspect.notice')
       find(:css, "#notice_question_#{@question_1_1.id}").trigger('click')
       expect(page).to have_content @question_1_1.hint
     end
@@ -159,9 +159,9 @@ describe 'Aspect ' do
     end
 
     it 'have content' do
-      expect(page).to have_content 'Обсуждение аспектов'
-      expect(page).to have_content 'Аспекты из базы знаний (2)'
-      expect(page).to have_content 'Аспекты, предложенные участниками (0)'
+      expect(page).to have_content t('show.aspect.title')
+      expect(page).to have_content "#{t('show.aspect.main')} (2)"
+      expect(page).to have_content "#{t('show.aspect.other')} (0)"
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       # expect(page).to have_link 'new_aspect_posts'
@@ -221,6 +221,6 @@ describe 'Aspect ' do
     #
     #   it_behaves_like 'discuss second aspects', true
     #
-    #   it_behaves_like 'vote popup', 2, 'Голосование по аспектам'
+    #   it_behaves_like 'vote popup', '1:2', 'aspect'
   end
 end

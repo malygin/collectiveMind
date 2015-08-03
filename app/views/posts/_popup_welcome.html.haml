@@ -10,7 +10,7 @@ class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : '
 
         %h2
           = image_tag 'good-shot1.png', class: 'expl-header-img-1'
-          Цель стадии
+          = t("welcome.header")
         = t("welcome.#{name_controller}.heading").try(:html_safe)
 
         %h2
@@ -20,4 +20,4 @@ class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : '
 
         = link_to send("check_field_#{name_controller}_path", @project, check_field: "#{name_controller}_intro", status: true),
         method: :put, remote: true, id: "#{name_controller}_intro" do
-          %button.btn.red.md-close-modal Начать работу
+          %button.btn.red.md-close-modal= t("welcome.begining")

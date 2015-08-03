@@ -7,7 +7,7 @@ action: 'add_comment', project: @project.id, id: @post.nil? ? post.id : @post.id
       = f.text_area :content, id: 'comment_text_area', placeholder: 'Выскажите свое мнение об описанном аспекте'
     - else
       = f.text_area :content, id: 'comment_text_area', placeholder: 'Ваш комментарий'
-  %button.btn.send-comment{ type: 'submit', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Отправить' }
+  %button.btn.send-comment.disabled{ type: 'submit', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Отправить' }
     %span.bold
       %i.fa.fa-reply.theme_font_color
 

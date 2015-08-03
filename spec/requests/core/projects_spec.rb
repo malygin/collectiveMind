@@ -54,13 +54,13 @@ describe 'Core Project ' do
     it_behaves_like 'have_content_for_ordinary_user'
 
     it 'have base link ' do
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
+      expect(page).to have_link('sign_out', text: t('menu.sign_out'), href: destroy_user_session_path)
     end
 
     it 'success sign out ', js: true do
       click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти')
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться')
+      expect(page).to have_link('sign_in', text: t('menu.sign_in'))
+      expect(page).to have_link('sign_up', text: t('menu.sign_up'))
     end
 
     context 'success redirect to root path ' do
@@ -131,14 +131,14 @@ describe 'Core Project ' do
       end
 
       it 'success go to closed project for invited user ' do
-        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: t('link.go_to_project'), href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, user)
         validate_not_have_admin_links_for_user(project)
         validation_visit_links_for_user(closed_project_for_invite, user)
       end
 
       xit 'success refirect if closed stage ' do
-        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: t('link.go_to_project'), href: "/project/#{closed_project_for_invite.id}").click
         visit discontent_posts_path(closed_project_for_invite)
         expect(page.current_path).to eq aspect_posts_path(closed_project_for_invite)
       end
@@ -156,13 +156,13 @@ describe 'Core Project ' do
     it_behaves_like 'have_content_for_moderator'
 
     it 'have base link ' do
-      expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
+      expect(page).to have_link('sign_out', text: t('menu.sign_out'), href: destroy_user_session_path)
     end
 
     it 'success sign out ', js: true do
       click_link 'sign_out'
-      expect(page).to have_link('sign_in', text: 'Войти')
-      expect(page).to have_link('sign_up', text: 'Зарегистрироваться')
+      expect(page).to have_link('sign_in', text: t('menu.sign_in'))
+      expect(page).to have_link('sign_up', text: t('menu.sign_up'))
     end
 
     context 'success redirect to root path ' do
@@ -233,13 +233,13 @@ describe 'Core Project ' do
       end
 
       it 'success go to closed project for invited user ' do
-        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: t('link.go_to_project'), href: "/project/#{closed_project_for_invite.id}").click
         validate_default_links_and_sidebar(closed_project_for_invite, moderator)
         validation_visit_links_for_user(closed_project_for_invite, moderator)
       end
 
       xit 'success refirect if closed stage ' do
-        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: 'Перейти к процедуре', href: "/project/#{closed_project_for_invite.id}").click
+        find_link("go_to_closed_project_#{closed_project_for_invite.id}", text: t('link.go_to_project'), href: "/project/#{closed_project_for_invite.id}").click
         visit discontent_posts_path(closed_project_for_invite)
         expect(page.current_path).to eq aspect_posts_path(closed_project_for_invite)
       end

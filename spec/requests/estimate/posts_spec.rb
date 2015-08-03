@@ -39,8 +39,8 @@ describe 'Estimate ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Этот проект важен для проблемы, заданной заказчиком?'
-      expect(page).to have_content 'Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?'
+      expect(page).to have_content t('show.estimate.field_left')
+      expect(page).to have_content t('show.estimate.field_right')
       expect(page).to have_content @plan1.name
       expect(page).to have_content @plan2.name
     end
@@ -52,8 +52,8 @@ describe 'Estimate ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Этот проект важен для проблемы, заданной заказчиком?'
-      expect(page).to have_content 'Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?'
+      expect(page).to have_content t('show.estimate.field_left')
+      expect(page).to have_content t('show.estimate.field_right')
       expect(page).to have_content @plan1.name
       expect(page).to have_content @plan2.name
     end
@@ -64,9 +64,9 @@ describe 'Estimate ' do
       end
 
       it 'have content' do
-        expect(page).to have_content 'Описание проектного предложения'
-        expect(page).to have_content 'График реализации проекта'
-        expect(page).to have_content 'Оценки других участников'
+        expect(page).to have_content t('show.estimate.desc')
+        expect(page).to have_content t('show.estimate.diagram')
+        expect(page).to have_content t('show.estimate.rating')
       end
     end
   end

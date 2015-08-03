@@ -93,7 +93,7 @@
   $('.chat-messages').on('click', 'button.reply-comment', this.reply_comment)
   $('.chat-messages').on('click', 'button.cancel-reply', this.cancel_reply)
 
-  $('.form-new-comment,.chat-messages').on('keyup', 'textarea.comment-textarea', this.activate_button)
+  $('#comment_form, .chat-messages').on('keyup', 'textarea', this.activate_button)
 
   textarea_autosize()
   comments_submit()

@@ -28,7 +28,7 @@ describe 'Knowbase ' do
 
     it 'have content', js: true do
       find(:css, '#tooltip_db').trigger('click')
-      expect(page).to have_content 'Введение в процедуру'
+      expect(page).to have_content t('stages.aspects_title')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "#myCarousel ul li.myCarousel-target[data-slide-to='1']").trigger('click')

@@ -61,7 +61,8 @@
             -#.form-group
             -#  = f.label :remember_me, 'Запомнить меня'
             -#  = f.check_box :remember_me
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'sign_in', type: 'submit' } Войти
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'sign_in', type: 'submit' }
+              = t('menu.sign_in')
             .divider25
             -#.text-center
             -#  %ul.list-inline
@@ -85,7 +86,8 @@
             = f.text_field :name, placeholder: 'Имя'
             = f.password_field :password, placeholder: 'Ваш пароль (не менее 8 символов)'
             = f.password_field :password, placeholder: 'Повторите пароль'
-            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit' } Зарегистрироваться
+            %button.btn.btn-lg.btn-block.btn-danger.auth-main{ id: 'Signin', type: 'submit' }
+              = t('menu.sign_up')
 
 
 

@@ -41,7 +41,7 @@ describe 'Concept ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content "#{t('show.concept.title')} (2)"
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
     end
@@ -113,7 +113,7 @@ describe 'Concept ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content "#{t('show.concept.title')} (2)"
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
       expect(page).to have_link 'new_concept_posts'
@@ -175,6 +175,6 @@ describe 'Concept ' do
     #
     # it_behaves_like 'discuss concepts'
     #
-    # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
+    # it_behaves_like 'vote popup', '3:1', 'concept'
   end
 end

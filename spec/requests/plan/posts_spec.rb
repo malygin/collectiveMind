@@ -39,7 +39,7 @@ describe 'Plan ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content "#{t('show.plan.title')} (2)"
       expect(page).to have_content @plan1.content
       expect(page).to have_content @plan2.content
     end
@@ -53,7 +53,7 @@ describe 'Plan ' do
     end
 
     it 'have content' do
-      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content "#{t('show.plan.title')} (2)"
       expect(page).to have_content @plan1.content
       expect(page).to have_content @plan2.content
       expect(page).to have_link 'new_plan_posts'

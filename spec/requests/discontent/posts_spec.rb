@@ -38,7 +38,7 @@ describe 'Discontent' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content "#{t('show.discontent.title')} (2)"
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
     end
@@ -113,7 +113,7 @@ describe 'Discontent' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content "#{t('show.discontent.title')} (2)"
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       expect(page).to have_link 'new_discontent_posts'
@@ -158,11 +158,12 @@ describe 'Discontent' do
     context 'vote content', js: true do
       it_behaves_like 'vote popup', '2:1', 'discontent'
     end
+
     it 'can see stage result for previous stage ', js: true do
       visit aspect_posts_path(project)
       click_link 'aspect_posts_intro'
       click_link 'show_results'
-      expect(page).to have_content 'Результаты стадии 1'
+      expect(page).to have_content "#{t('show.result_stage')} 1"
     end
   end
 
@@ -183,6 +184,6 @@ describe 'Discontent' do
     #
     # it_behaves_like 'discuss discontents'
     #
-    # it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам'
+    # it_behaves_like 'vote popup', '2:1', 'discontent'
   end
 end

@@ -2,7 +2,7 @@
   .row
     %br/
     .col-md-7
-      %span.stage-label Обсуждение аспектов
+      %span.stage-label= t('show.aspect.title')
     .col-md-5
       .pull-right
         - if @project.can_add?(name_controller) || @project.status == 100
@@ -49,11 +49,11 @@
   .row
     .col-md-6
       %span.stage-heading
-        Аспекты из базы знаний
+        = t('show.aspect.main')
         (#{@project.aspects_for_discussion.size})
     .col-md-6
       %span.stage-heading
-        Аспекты, предложенные участниками
+        = t('show.aspect.other')
         (#{@project.other_aspects.size})
   .row
     .col-md-6.combined_border.right.tooltip1.big{ 'data-toggle' => 'tooltip', 'data-placement' => 'top',

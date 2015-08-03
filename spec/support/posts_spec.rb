@@ -40,7 +40,7 @@ shared_examples 'base post' do |factory_name, class_name|
   it { expect(build(factory_name, status: 4)).not_to be_valid }
 end
 
-shared_examples 'content with comments' do |_moderator = false, count = 2, _project_status = 1|
+shared_examples 'content with comments' do |moderator = false, count = 2, _project_status = 1|
   let(:comment_model) { @comment_2.class.name.underscore.gsub('/comment', '_comment') }
   let(:comment_model_name) { @comment_2.class.name.constantize }
   let(:comment_post_model) { @comment_2.class.name.underscore.gsub('/comment', '_post') }
@@ -77,9 +77,18 @@ shared_examples 'content with comments' do |_moderator = false, count = 2, _proj
       find('#comment_form.main_add .send-comment').click
     end
 
-    it { expect(page).to have_content text_comment }
+    it 'correct' do
+      expect(page).to have_content text_comment
+      expect change(comment_model_name, :count).by(1)
+      expect change(Journal, :count).by(count)
+    end
+  end
 
-    it { expect change(Journal, :count).by(count) }
+  context 'add empty comment', js: true do
+    it 'not add' do
+      find('#comment_form.main_add .send-comment').click
+      expect(page).to have_css('#comment_form .send-comment.disabled')
+    end
   end
 
   context ' add new answer comment', js: true do
@@ -89,78 +98,67 @@ shared_examples 'content with comments' do |_moderator = false, count = 2, _proj
       find("#reply_form_#{@comment_1.id}").find('.send-comment').click
     end
 
-    it { expect(page).to have_content text_comment }
-
-    it { expect change(comment_model_name, :count).by(1) }
-
-    # it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
+    it 'correct' do
+      expect(page).to have_content text_comment
+      expect change(comment_model_name, :count).by(1)
+      expect change(Journal, :count).by(count)
+    end
   end
 
-  # context ' redactor comment ', js: true do
-  #   before do
-  #     @comment_1 = create comment_model, post: @post1, user: user
-  #     @comment_2 = create comment_model, post: @post1, comment: @comment_1
-  #   end
-  #
-  #   context 'edit comment', js: true do
-  #
-  #     it 'i owner - ok' do
-  #       find(:css, "#redactor_comment_#{@comment_1.id}").trigger('click')
-  #       find(:css, "#edit_comment_#{@comment_1.id}").trigger('click')
-  #       find("#form_edit_comment_#{@comment_1.id}").find('textarea').set text_comment
-  #       find("#form_edit_comment_#{@comment_1.id}").find('.send-comment').click
-  #       expect(page).to have_content text_comment
-  #     end
-  #
-  #     unless moderator
-  #       it 'from other users - error' do
-  #         expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
-  #       end
-  #     end
-  #   end
-  #
-  #   context 'destroy comment' do
-  #     it 'i owner - ok', js: true do
-  #       expect {
-  #         find(:css, "#redactor_comment_#{@comment_1.id}").trigger('click')
-  #         click_link "destroy_comment_#{@comment_1.id}"
-  #         page.driver.browser.accept_js_confirms
-  #         expect(page).not_to have_content @comment_1.content
-  #       }.to change(comment_model_name, :count).by(-1)
-  #     end
-  #
-  #     unless moderator
-  #       it 'from other users - error' do
-  #         expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
-  #       end
-  #
-  #       # it 'post request - error' do
-  #       #   expect {
-  #       #     page.driver.submit :put,
-  #       #                        Rails.application.routes.url_helpers.send(
-  #       #                            "destroy_comment_#{comment_post_model.gsub('core/','')}_path", @comment_2.post.project, @comment_2), {}
-  #       #     expect(current_path).to eq root_path
-  #       #   }.not_to change(comment_model_name, :count)
-  #       # end
-  #     end
-  #   end
-  # end
+  context 'add new answer to answer comment', js: true do
+    before do
+      click_button "reply_comment_#{@comment_2.id}"
+      find("#reply_form_#{@comment_2.id}").find('textarea').set text_comment
+      find("#reply_form_#{@comment_2.id}").find('.send-comment').click
+    end
 
-  # not functional now
+    it 'correct' do
+      expect(page).to have_content text_comment
+      expect change(comment_model_name, :count).by(1)
+      expect change(Journal, :count).by(count)
+    end
+  end
 
-  # context 'add new answer to answer comment', js: true do
-  #   before do
-  #     click_button "reply_comment_#{@comment_2.id}"
-  #     find("#form_reply_comment_#{@comment_2.id}").find('.comment-textarea').set text_comment
-  #     find("#form_reply_comment_#{@comment_2.id}").find('.send-comment').click
-  #   end
-  #
-  #   it { expect(page).to have_content text_comment }
-  #
-  #   it { expect change(comment_model_name, :count).by(1) }
-  #
-  #   it { expect change(Journal.events_for_my_feed(project, user_data), :count).by(1) }
-  # end
+  context ' redactor comment ', js: true do
+    before do
+      @comment_3 = create comment_model, post: @post1, user: user
+    end
+
+    context 'edit comment', js: true do
+
+      it 'i owner - ok' do
+        find(:css, "#edit_comment#{@comment_3.id}").trigger('click')
+        find(:css, "#edit_comment_#{@comment_3.id}").trigger('click')
+        find("#form_edit_comment_#{@comment_3.id}").find('textarea').set text_comment
+        find("#form_edit_comment_#{@comment_3.id}").find('.send-comment').click
+        expect(page).to have_content text_comment
+      end
+
+      unless moderator
+        it 'from other users - error' do
+          expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
+        end
+      end
+    end
+
+    context 'destroy comment' do
+      it 'i owner - ok', js: true do
+        expect {
+          find(:css, "#edit_comment#{@comment_3.id}").trigger('click')
+          click_link "destroy_comment_#{@comment_3.id}"
+          page.driver.browser.accept_js_confirms
+          sleep(5)
+          expect(page).not_to have_content @comment_3.content
+        }.to change(comment_model_name, :count).by(-1)
+      end
+
+      unless moderator
+        it 'from other users - error' do
+          expect(page).not_to have_css "#redactor_comment_#{@comment_2.id}"
+        end
+      end
+    end
+  end
 end
 
 shared_examples 'likes posts' do |_moderator = false|
@@ -286,11 +284,11 @@ shared_examples 'welcome popup' do |stage|
   it 'have welcome popup', js: true do
     user_check_path = Rails.application.routes.url_helpers.send("check_field_#{stage}_posts_path", project, check_field: "#{stage}_posts_intro", status: true)
 
-    expect(page).to have_content 'Цель стадии'
-    expect(page).to have_link("#{stage}_posts_intro", href: user_check_path, text: 'Начать работу')
+    expect(page).to have_content t('welcome.header')
+    expect(page).to have_link("#{stage}_posts_intro", href: user_check_path, text: t('welcome.begining'))
     click_link "#{stage}_posts_intro"
     sleep(5)
-    expect(page).not_to have_content 'Цель стадии'
+    expect(page).not_to have_content t('welcome.header')
   end
 
   xit 'have welcome popover', js: true do

@@ -39,7 +39,7 @@ describe 'Novation ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Пакеты идей (2)'
+      expect(page).to have_content "#{t('show.novation.title')} (2)"
       expect(page).to have_content @novation1.title
       expect(page).to have_content @novation2.title
     end
@@ -73,7 +73,7 @@ describe 'Novation ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Пакеты идей (2)'
+      expect(page).to have_content "#{t('show.novation.title')} (2)"
       expect(page).to have_content @novation1.content
       expect(page).to have_content @novation2.content
       expect(page).to have_link 'new_novation_posts'
@@ -131,6 +131,6 @@ describe 'Novation ' do
     #
     # it_behaves_like 'discuss novations'
     #
-    # it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей'
+    # it_behaves_like 'vote popup', '4:1', 'novation'
   end
 end

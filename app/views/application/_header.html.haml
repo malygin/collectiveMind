@@ -9,23 +9,23 @@
       %ul.nav.navbar-nav
         %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom',
         'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
-          = link_to 'Процедура', current_stage_url(@project), id: 'open_procedure'
+          = link_to t('menu.open_procedure'), current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
-          = link_to 'Кабинет', send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
+          = link_to t('menu.open_cabinet'), send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
           id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
           title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
           = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,
           class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
-            Мои уведомления
+            = t('menu.open_my_journals')
             - if @my_journals_count > 0
               %span.top-circle#my_journals_count
                 = @my_journals_count
           = render partial: 'application/messages_menu'
         - if @project.closed?
           %li{ class: "#{'active' if rating?}" }
-            = link_to 'Рейтинг', users_path(@project), id: 'open_rating', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+            = link_to t('menu.open_rating'), users_path(@project), id: 'open_rating', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
             title: 'Посмотреть рейтинг участников'
         - if boss?
           - unless @project.main_stage == 1 && @project.sub_stage == 0
@@ -37,7 +37,7 @@
           = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
             %span.book_icon
-            База знаний
+            = t('menu.base_knowledge')
         %li
           %a.drop_opener{ id: 'open_expert_news', class: "#{'active' if unread_expert_news?}", 'data-dd' => 'dd_1' }
             %span

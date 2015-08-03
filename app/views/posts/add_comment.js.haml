@@ -13,6 +13,7 @@
   - else
     $('#comment_text_area').val('');
     $('.chat-messages').append("#{escape_javascript(render partial: 'shared/comment', object: @comment)}");
+    $('#comment_form .send-comment').addClass('disabled')
 
   $(".cc_post_#{@comment.post.id}").html(parseInt($(".cc_post_#{@comment.post.id}").html()) + 1)
   $('form.comment_add textarea').css('height', '28px')

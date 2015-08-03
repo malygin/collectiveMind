@@ -24,13 +24,13 @@ end
 def validation_visit_links_for_user(project, user)
   # validate rating
   visit users_path(project)
-  expect(page).to have_content 'Участник'
+  expect(page).to have_content t('show.rating.header')
 
   # validate profile
   visit user_path(project, user)
-  expect(page).to have_content 'Изменить'
-  expect(page).to have_content 'Контент'
-  expect(page).to have_content 'Профиль'
+  expect(page).to have_content t('menu.account_edit')
+  expect(page).to have_content t('menu.content')
+  expect(page).to have_content t('menu.account')
 end
 
 def validate_not_have_admin_links_for_user(project)
@@ -41,18 +41,18 @@ end
 
 def validate_default_profile(project, user)
   click_link 'auth_dropdown'
-  expect(page).to have_link('go_to_profile', text: 'Профиль', href: user_path(project, user))
-  expect(page).to have_link('sign_out', text: 'Выйти', href: destroy_user_session_path)
+  expect(page).to have_link('go_to_profile', text: t('menu.account'), href: user_path(project, user))
+  expect(page).to have_link('sign_out', text: t('menu.sign_out'), href: destroy_user_session_path)
 end
 
 def validate_default_header(project, user)
   expect(page).to have_link('go_to_logo', href: "/project/#{project.id}")
   expect(page).to have_content project.name
-  expect(page).to have_link('open_procedure', text: 'Процедура', href: "/project/#{project.id}")
-  expect(page).to have_link('open_cabinet', text: 'Кабинет', href: new_aspect_post_path(project, type_mechanic: 'simple'))
-  expect(page).to have_link('clear_my_journals', text: 'Мои уведомления', href: journal_clear_user_path(project, user))
-  expect(page).to have_link('open_rating', text: 'Рейтинг', href: users_path(project))
-  expect(page).to have_link('tooltip_db', text: 'База знаний', href: knowbase_posts_path(project))
+  expect(page).to have_link('open_procedure', text: t('menu.open_procedure'), href: "/project/#{project.id}")
+  expect(page).to have_link('open_cabinet', text: t('menu.open_cabinet'), href: new_aspect_post_path(project, type_mechanic: 'simple'))
+  expect(page).to have_link('clear_my_journals', text: t('menu.open_my_journals'), href: journal_clear_user_path(project, user))
+  expect(page).to have_link('open_rating', text: t('menu.open_rating'), href: users_path(project))
+  expect(page).to have_link('tooltip_db', text: t('menu.base_knowledge'), href: knowbase_posts_path(project))
 end
 
 def validate_default_links_and_sidebar(project, user)
@@ -62,7 +62,7 @@ def validate_default_links_and_sidebar(project, user)
   project.stages.select { |k, _| k <= 6 }.each do |num_stage, stage|
     if num_stage == 1
       stage_path = Rails.application.routes.url_helpers.send("#{stage[:type_stage]}_path", project)
-      expect(page).to have_link("go_to_#{stage[:type_stage]}", text: "#{num_stage} СТАДИЯ: #{stage[:name]}", href: stage_path)
+      expect(page).to have_link("go_to_#{stage[:type_stage]}", text: "#{num_stage} #{t('stages.name')} #{stage[:name]}", href: stage_path)
     else
       expect(page).to have_link("go_to_#{stage[:type_stage]}", text: num_stage.to_s, href: '#')
     end
