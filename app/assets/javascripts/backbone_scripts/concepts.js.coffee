@@ -27,7 +27,7 @@ ConceptCollectionView = Backbone.View.extend
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_dispost_concepts').isotope
-      itemSelector: '.post-block',
+      itemSelector: '.md-post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',

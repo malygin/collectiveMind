@@ -26,7 +26,7 @@ NovationCollectionView = Backbone.View.extend
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_concept_novations').isotope
-      itemSelector: '.post-block',
+      itemSelector: '.md-post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',

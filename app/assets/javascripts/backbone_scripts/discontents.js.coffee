@@ -27,7 +27,7 @@ DiscontentCollectionView = Backbone.View.extend
   render: ()->
     this.collection.forEach(this.addOne, this)
     this.$container =  $('#tab_aspect_posts').isotope
-      itemSelector: '.post-block',
+      itemSelector: '.md-post-block',
       layoutMode: 'fitRows',
       getSortData:
         comment: '[data-comment] parseFloat',

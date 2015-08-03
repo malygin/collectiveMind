@@ -1,6 +1,6 @@
 .modal.fade#modal-post
   .modal-dialog.modal-lg
-    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
+    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     - if boss?
       .admin_panel
         = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id }, remote: true, method: :put,

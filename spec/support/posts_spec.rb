@@ -125,7 +125,6 @@ shared_examples 'content with comments' do |moderator = false, count = 2, _proje
     end
 
     context 'edit comment', js: true do
-
       it 'i owner - ok' do
         find(:css, "#edit_comment#{@comment_3.id}").trigger('click')
         find(:css, "#edit_comment_#{@comment_3.id}").trigger('click')
@@ -143,13 +142,13 @@ shared_examples 'content with comments' do |moderator = false, count = 2, _proje
 
     context 'destroy comment' do
       it 'i owner - ok', js: true do
-        expect {
+        expect do
           find(:css, "#edit_comment#{@comment_3.id}").trigger('click')
           click_link "destroy_comment_#{@comment_3.id}"
           page.driver.browser.accept_js_confirms
           sleep(5)
           expect(page).not_to have_content @comment_3.content
-        }.to change(comment_model_name, :count).by(-1)
+        end.to change(comment_model_name, :count).by(-1)
       end
 
       unless moderator
