@@ -86,8 +86,11 @@ shared_examples 'content with comments' do |moderator = false, count = 2, _proje
 
   context 'add empty comment', js: true do
     it 'not add' do
-      find('#comment_form.main_add .send-comment').click
       expect(page).to have_css('#comment_form .send-comment.disabled')
+      fill_in 'comment_text_area', with: 'a'
+      expect(page).to have_css('#comment_form .send-comment.disabled')
+      fill_in 'comment_text_area', with: 'aa'
+      expect(page).to have_css('#comment_form .send-comment:not(.disabled)')
     end
   end
 
