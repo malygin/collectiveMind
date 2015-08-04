@@ -20,7 +20,7 @@ body.main-page {
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
-    cursor:pointer;
+    cursor:pointer!important;
 }
 
 a:focus, a:active, button:focus, button:active {

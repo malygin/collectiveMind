@@ -1,3 +1,20 @@
+@for $i from 1 through length($theme_colors) {
+  .aspect-main-block.theme_color_#{$i} {
+    border-top-color: nth($theme_colors, $i);
+    h5 {
+      color: nth($theme_colors, $i);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 .stage1_theme .main_menu li.active a:after {
     border-color: rgba(211, 211, 211, 0);
     border-width: 6px;

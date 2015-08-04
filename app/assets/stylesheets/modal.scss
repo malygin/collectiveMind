@@ -1,6 +1,9 @@
-.modal-backdrop {
-  background: #bababa;
-  height: 100%;
+$sizes_modal: 770, 1100;
+
+@each $size in $sizes_modal{
+  .modal_#{$size}{
+    width:#{$size}px;
+  }
 }
 
 @for $i from 1 through length($base_colors) {
@@ -160,20 +163,25 @@
         height: 100%;
         float: left;
       }
-      .post-poster{
+      .post-poster {
         width: 17%;
         background: linear-gradient(to top, #fff, #e9eff7);
         border-right: 1px solid #d7d9dd;
         text-align: center;
         padding: 20px 10px;
       }
-      .post-content{
+      .post-content {
         width: 83%;
         overflow: hidden;
       }
     }
   }
-  .modal-results{
+  .modal-results {
 
   }
+}
+
+.modal-backdrop {
+  background: #bababa;
+  height: 100%;
 }

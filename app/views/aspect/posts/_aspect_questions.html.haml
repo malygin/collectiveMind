@@ -19,16 +19,16 @@
                 - asp.knowbase_posts.each_with_index do |post, i|
                   .tab-pane.fade{ id: "article_#{index + 1}_#{i + 1}", class: "#{'active in' if i == 0}", role: 'tabpanel' }
                     .row
-                      %h6.aspect-main-block-heading
+                      %h6
                         = post.title
-                      %p.aspect-main-block-text
+                      %p
                         = post.content.try(:html_safe)
             - elsif asp.knowbase_posts.size > 0
               - asp.knowbase_posts.each do |post|
                 .row
-                  %h6.aspect-main-block-heading
+                  %h6
                     = post.title
-                  %p.aspect-main-block-text
+                  %p
                     = post.content.try(:html_safe)
             - else
               .white-gray
@@ -111,18 +111,18 @@
                 .tab-pane.fade{ id: "article_#{index + 1}_#{i + 1}", class: "#{'active in' if i == 0}", role: 'tabpanel' }
                   .row
                     .col-md-8
-                      %h6.aspect-main-block-heading
+                      %h6
                         = post.title
-                      %p.aspect-main-block-text
+                      %p
                         = post.content.try(:html_safe)
         - elsif asp.knowbase_posts.size > 0
           .aspect-main-block{ style: "border-top-color: #{asp.color};" }
             .row
               .col-md-8
                 - asp.knowbase_posts.each do |post|
-                  %h6.aspect-main-block-heading
+                  %h6
                     = post.title
-                  %p.aspect-main-block-text
+                  %p
                     = post.content.try(:html_safe)
         - else
           .white-gray
