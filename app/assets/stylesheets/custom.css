@@ -2930,7 +2930,7 @@ a.dropdown-toggle i {
 }
 
 .sprite {
-    background-image: image-url('spritesheet.png');
+    background-image: image-url('sorting.png');
     background-repeat: no-repeat;
     display: block;
     position: relative;

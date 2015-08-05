@@ -68,7 +68,7 @@
                               .col-md-6.exp_col.left
                                 %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
                                 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
-                                  = image_tag 'grey_arrow.png'
+                                  = image_tag 'arrows/grey_arrow.png'
                                 .divider15
                                 %span.stage-heading
                                   #{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})
@@ -78,7 +78,7 @@
                               .col-md-6.exp_col.right
                                 %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
                                 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}", title: 'Свернуть историю комментариев' }
-                                  = image_tag 'grey_arrow_1.png'
+                                  = image_tag 'arrows/grey_arrow_1.png'
                                 .divider15
                                 %span.stage-heading
                                   Мои комментарии

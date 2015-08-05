@@ -39,7 +39,7 @@
                   .row
                     .col-md-6.exp_col.left
                       %button.btn.btn_reset.exp_button.pull-right
-                        = image_tag 'grey_arrow.png'
+                        = image_tag 'arrows/grey_arrow.png'
                       .divider15
                       %span.stage-heading
                         #{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})
@@ -50,7 +50,7 @@
 
                     .col-md-6.exp_col.right
                       %button.btn.btn_reset.exp_button.pull-left
-                        = image_tag 'grey_arrow_1.png'
+                        = image_tag 'arrows/grey_arrow_1.png'
                       .divider15
                       %span.stage-heading
                         Мои комментарии
