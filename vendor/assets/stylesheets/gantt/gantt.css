@@ -227,7 +227,7 @@ body{
   top:0;
   position:absolute;
   width:18px;
-  background: image-url('gantt/milestone.png') no-repeat;
+  background: image-url('../gantt/milestone.png') no-repeat;
   height:18px;
   display:none;
 }
@@ -248,7 +248,7 @@ body{
 }
 
 .taskBoxDiv .layout.extDep{
-  background-image: image-url('gantt/hasExternalDeps.png');
+  background-image: image-url('../gantt/hasExternalDeps.png');
 }
 
 
@@ -362,11 +362,11 @@ input[readonly]{
 
 .expcoll{
   cursor: pointer;
-  background-image: image-url('gantt/toggle-expand.png');
+  background-image: image-url('../gantt/toggle-expand.png');
 }
 
 .expcoll.exp{
-  background-image: image-url('gantt/toggle_collapse.png');
+  background-image: image-url('../gantt/toggle_collapse.png');
 }
 
 .ui-resizable-helper { border: 1px dotted #00F;  }

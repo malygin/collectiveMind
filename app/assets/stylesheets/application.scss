@@ -3,17 +3,23 @@
 @import 'owl.carousel';
 @import 'perfect-scrollbar.min';
 @import "compass";
-// Логическое деление
+
+//Переменные
 @import 'colors';
+
+// Логическое деление
+@import 'landing_page';
 @import 'header_navbar';
 @import 'header_subhead';
-@import 'landing_page';
+@import 'post_block';
+@import 'vote';
+@import 'modal';
+
 @import 'buttons';
 @import 'rating';
 @import 'tooltips';
-@import 'modal';
-@import 'vote';
-@import 'post_block';
+
+
 @import 'carousel';
 
 // на удаление
