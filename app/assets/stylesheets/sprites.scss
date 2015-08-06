@@ -1,7 +1,7 @@
 .icons {
   background-repeat: no-repeat;
   margin-right: 2px;
-  vertical-align: text-top;
+  vertical-align: middle;
   display: inline-block;
 }
 
@@ -20,8 +20,8 @@
   @extend .icons;
 }
 
-.red-icon-sprite, .red-icon-flag1, .red-icon-gears, .red-icon-good-shot1, .red-icon-new, .red-icon-users {
-  background-image: image-url('red-icon.png');
+.i-red-sprite, .i-red-flag, .i-red-gears, .i-red-shot, .i-red-new, .i-red-users {
+  background-image: image-url('i-red.png');
   @extend .icons;
 }
 
@@ -45,7 +45,7 @@
   @extend .icons;
 }
 
-.text-sprite, .text-published, .text-text-slider-opener, .text-thanks, .text-winner {
+.text-sprite, .text-published, .text-slider-opener, .text-thanks, .text-winner {
   background-image: image-url('text.png');
   @extend .icons;
 }
@@ -74,7 +74,9 @@
 }
 
 .logotips-text {
-  background-position: 0 -176px;
+  background-position: 0 -181px;
+  width: 121px;
+  height: 25px;
 }
 
 ////////////////////////////////////////////////////
@@ -104,6 +106,8 @@
 
 .arrows-left {
   background-position: 0 -141px;
+  width: 11px;
+  height: 11px;
 }
 
 .arrows-right-big {
@@ -112,6 +116,8 @@
 
 .arrows-right {
   background-position: 0 -218px;
+  width: 11px;
+  height: 11px;
 }
 
 .arrows-tooltip {
@@ -150,23 +156,27 @@
 
 ////////////////////////////////////////////////////
 
-.red-icon-flag1 {
+.i-red-flag {
   background-position: 0 0;
+  width: 33px;
+  height: 34px;
 }
 
-.red-icon-gears {
+.i-red-gears {
   background-position: 0 -34px;
 }
 
-.red-icon-good-shot1 {
+.i-red-shot {
   background-position: 0 -65px;
+  width: 40px;
+  height: 33px;
 }
 
-.red-icon-new {
+.i-red-new {
   background-position: 0 -97px;
 }
 
-.red-icon-users {
+.i-red-users {
   background-position: 0 -117px;
   width: 37px;
   height: 23px;
@@ -258,12 +268,16 @@
   background-position: 0 0;
 }
 
-.text-text-slider-opener {
+.text-slider-opener {
   background-position: 0 -57px;
+  width: 16px;
+  height: 107px;
 }
 
 .text-thanks {
   background-position: 0 -164px;
+  width: 189px;
+  height: 29px;
 }
 
 .text-winner {

@@ -38,8 +38,8 @@
                 .container
                   .row
                     .col-md-6.exp_col.left
-                      %button.btn.btn_reset.exp_button.pull-right
-                        = image_tag 'arrows/grey_arrow.png'
+                      %a.exp_button
+                        %span.arrows-left
                       .divider15
                       %span.stage-heading
                         #{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})
@@ -49,8 +49,8 @@
                       = render template: "#{stage[:type_stage].to_s.gsub('_posts', '/posts')}/user_content"
 
                     .col-md-6.exp_col.right
-                      %button.btn.btn_reset.exp_button.pull-left
-                        = image_tag 'arrows/grey_arrow_1.png'
+                      %a.exp_button
+                        %span.arrows-right
                       .divider15
                       %span.stage-heading
                         Мои комментарии

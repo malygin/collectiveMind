@@ -64,6 +64,7 @@
               .row
                 .col-md-6.exp_col.left
                   %a.exp_button
+                    %span.arrows-left
                   .post-content
                     - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
                       .panel
@@ -84,6 +85,7 @@
 
                 .col-md-6.exp_col.right
                   %a.exp_button
+                    %span.arrows-right
                   .post-comments
                     .separator
                       %hr

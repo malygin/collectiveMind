@@ -37,7 +37,7 @@ module MarkupHelper
         cl_image_tag source, options
       end
     else
-      image_tag 'no-ava.png', options
+      image_tag 'avatars/no-ava.png', options
     end
   end
 
@@ -49,7 +49,7 @@ module MarkupHelper
         cl_image_path(source)
       end
     else
-      image_path('no-ava.png')
+      image_path('avatars/no-ava.png')
     end
   end
 
@@ -61,7 +61,7 @@ module MarkupHelper
         image_alt(source)
       end
     else
-      image_alt('no-ava.png')
+      image_alt('avatars/no-ava.png')
     end
   end
 

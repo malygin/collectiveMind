@@ -49,7 +49,7 @@
         .modal-dialog.modal-sm
           .divider35
           .text-center
-            = image_tag 'logo.png', class: 'auth_logo'
+            %span.logotips-sm
           .divider35
           = form_for(:user,  html: { id: 'auth-form1', class: 'form-horizontal auth-form' }, url: user_session_path, remote: true) do |f|
             #error_explanation
@@ -76,7 +76,7 @@
           -#.popup.popup-rounded
           .divider35
           .text-center
-            = image_tag 'logo.png', class: 'auth_logo'
+            %span.logotips-sm
           .divider35
           = form_for(:user,  html: { id: 'auth-form1', class: 'form-horizontal auth-form' }, url: user_registration_path) do |f|
             -#= devise_error_messages!

@@ -5,7 +5,7 @@
       .navbar-header
         = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
         title: 'Вернуться на главную страницу' do
-          = image_tag 'logo1.png'
+          %span.logotips-text
       %ul.nav.navbar-nav
         %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom',
         'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }

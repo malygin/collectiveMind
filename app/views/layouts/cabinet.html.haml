@@ -66,9 +66,10 @@
                           .container
                             .row
                               .col-md-6.exp_col.left
-                                %button.btn.btn_reset.exp_button.pull-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
+                                %a.exp_button
+                                  %span.arrows-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
                                 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
-                                  = image_tag 'arrows/grey_arrow.png'
+
                                 .divider15
                                 %span.stage-heading
                                   #{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})
@@ -76,9 +77,9 @@
                                 = yield
 
                               .col-md-6.exp_col.right
-                                %button.btn.btn_reset.exp_button.pull-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                                %a.exp_button
+                                  %span.arrows-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
                                 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}", title: 'Свернуть историю комментариев' }
-                                  = image_tag 'arrows/grey_arrow_1.png'
                                 .divider15
                                 %span.stage-heading
                                   Мои комментарии
@@ -93,7 +94,7 @@
                     .profile
                       .profile_icon.img-circle
                         .divider10
-                        = image_tag 'user.png'
+                        = image_tag 'avatars/user.png'
                         .divider10
                         %a.btn.btn-xs.btn-danger.open-popup{ 'data-placement' => '1', 'data-target' => '1' }
                           = t('menu.account_edit')

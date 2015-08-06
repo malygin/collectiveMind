@@ -53,6 +53,7 @@
           .row
             .col-md-6.exp_col.left
               %a.exp_button
+                %span.arrows-left
               .post-content
                 .panel
                   .panel-heading
@@ -164,6 +165,7 @@
                 = render partial: 'shared/content_question', collection: @questions
             .col-md-6.exp_col.right
               %a.exp_button
+                %span.arrows-right
               .post-comments
                 .separator
                   %hr

@@ -1,7 +1,7 @@
 .slide-outer#slide-panel{ style: 'margin-left:-400px;', 'data-position' => 'left' }
   %span.slide-opener.i_new_stage.rounded_2.tooltip1#opener{ 'data-placement' => 'right', 'data-toggle' => 'tooltip',
   'data-trigger' => 'manual', title: 'Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны.' }
-    = image_tag 'text-slider-opener.png', class: 'big',  'data-placement' => 'right', 'data-toggle' => 'tooltip', title: 'Перейти к выбору несовершенств'
+    %span.text-slider-opener.big{'data-placement' => 'right', 'data-toggle' => 'tooltip', title: 'Перейти к выбору несовершенств'}
   .slide-inner.slide_stage3.white#tooltip_slide_panel
     .ps_cont#filter
       .divider15

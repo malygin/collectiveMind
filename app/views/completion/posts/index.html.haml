@@ -14,7 +14,7 @@
                           .post-accost
                             = @project.completion_text.try(:html_safe)
                             %p.text-center
-                              = image_tag 'thanks.png'
+                              %span.text-thanks
             .divider10
           - @posts.each_with_index do |post, index|
             .item{ 'data-slide-no' => "#{index + 1}" }

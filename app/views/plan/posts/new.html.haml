@@ -58,7 +58,7 @@
                     = n.text_area attribute.to_sym, class: 'form-control', rows: 5
                     .divider15
     - if @post.published?
-      = image_tag 'published.png', class: 'publish'
+      %span.text-published
   .divider70
 
   .modal.fade#modal-cabinet5-1
