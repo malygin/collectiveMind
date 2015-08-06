@@ -2570,7 +2570,7 @@ h5.media-heading > a:hover{
 }
 
 .results {
-    background-image: image-url('results.png');
+    background-image: image-url('i-result.png');
     background-repeat: no-repeat;
     display: block;
     margin-top: -7px;
@@ -2930,7 +2930,7 @@ a.dropdown-toggle i {
 }
 
 .sprite {
-    background-image: image-url('sorting.png');
+    background-image: image-url('i-sort.png');
     background-repeat: no-repeat;
     display: block;
     position: relative;

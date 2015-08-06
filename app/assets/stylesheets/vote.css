@@ -64,13 +64,13 @@ ul.vote_nav > li > a {
     margin: 7px;
     box-sizing: content-box;
     border: 1px solid transparent;
-    background: transparent image-url('icon-vote-sprite2.png') no-repeat no-repeat;
+    background: transparent image-url('i-vote.png') no-repeat no-repeat;
     border-radius: 5px;
 }
 
 .vote_folders_cont li.active .vote_folder_inn {
 
-    background: image-url('icon-vote-sprite2.png') no-repeat no-repeat;
+    background: image-url('i-vote.png') no-repeat no-repeat;
 }
 
 

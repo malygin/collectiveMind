@@ -76,12 +76,11 @@ a.btn-tooltip {
 
 .help_icon {
   float: left;
-  background: image-url('icon-help.png') no-repeat center center;
   width: 50px;
   height: 54px;
 
   &.shown {
-    background: image-url('icon-help-sprite.png') no-repeat -48px 0;
+    background: image-url('i-help.png') no-repeat -48px 0;
   }
 }
 
