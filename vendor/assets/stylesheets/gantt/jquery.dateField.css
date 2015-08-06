@@ -38,12 +38,12 @@
   border: none;
 }
 .calElement.prev {
-    background: transparent image-url('../gantt/prev.png') no-repeat 10px 0;
+    background: transparent image-url('gantt/prev.png') no-repeat 10px 0;
     float:left;
 }
 
 .calElement.next {
-    background: transparent image-url('../gantt/next.png') no-repeat;
+    background: transparent image-url('gantt/next.png') no-repeat;
     float:right;
 }
 

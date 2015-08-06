@@ -16,7 +16,7 @@
 }
 
 .icon-sprite, .icon-cab-bulb, .icon-edit, .icon-exclamation-del, .icon-exclamation, .icon-sort-date, .icon-sort-rate {
-  background-image: image-url('icon.png');
+  background-image: image-url('icons.png');
   @extend .icons;
 }
 
@@ -294,6 +294,8 @@
 
 .text-winner {
   background-position: 0 -193px;
+  width: 120px;
+  height: 120px;
 }
 
 ////////////////////////////////////////////////////
