@@ -1,53 +1,83 @@
+.icons {
+  background-repeat: no-repeat;
+  margin-right: 2px;
+  vertical-align: text-top;
+  display: inline-block;
+}
+
+.logotips-sprite, .logotips-icon, .logotips-lg, .logotips-sm, .logotips-text {
+  background-image: image-url('logotips.png');
+  @extend .icons;
+}
+
 .arrows-sprite, .arrows-angle-down, .arrows-arrow-right, .arrows-cursor, .arrows-dd_arrow, .arrows-icon-dropdown, .arrows-left-big, .arrows-left, .arrows-right-big, .arrows-right, .arrows-tooltip, .arrows-vote {
   background-image: image-url('arrows.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .icon-sprite, .icon-cab-bulb, .icon-edit, .icon-exclamation-del, .icon-exclamation, .icon-sort-date, .icon-sort-rate {
   background-image: image-url('icon.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
-.logotips-sprite, .logotips-logo, .logotips-logo1, .logotips-md_icon {
-  background-image: image-url('logotips.png');
-  background-repeat: no-repeat;
-}
-
-.red-icon-sprite, .red-icon-flag1, .red-icon-gears, .red-icon-good-shot1, .red-icon-icon-new, .red-icon-icon_users {
+.red-icon-sprite, .red-icon-flag1, .red-icon-gears, .red-icon-good-shot1, .red-icon-new, .red-icon-users {
   background-image: image-url('red-icon.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .medal-sprite, .medal-gold, .medal-silver {
   background-image: image-url('medal.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .smile-sprite, .smile-no, .smile-yes {
   background-image: image-url('smile.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .speed-sprite, .speed-cursor_grey, .speed-cursor_red, .speed-scale1, .speed-scale2, .speed-scale3, .speed-scale4, .speed-scale5 {
   background-image: image-url('speed.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .vote-sprite, .vote-vote_all_1, .vote-vote_all_2, .vote-vote_all_3, .vote-vote_all_4, .vote-vote_green, .vote-vote_grey, .vote-vote_red {
   background-image: image-url('vote/vote.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .text-sprite, .text-published, .text-text-slider-opener, .text-thanks, .text-winner {
   background-image: image-url('text.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
 .slider-sprite, .slider-com_2, .slider-com_3, .slider-doc_2, .slider-doc_3 {
   background-image: url('slider.png');
-  background-repeat: no-repeat;
+  @extend .icons;
 }
 
+////////////////////////////////////////////////////
+
+.logotips-icon {
+  background-position: 0 0;
+  width: 30px;
+  height: 34px;
+}
+
+.logotips-lg {
+  background-position: 0 -34px;
+}
+
+.logotips-sm {
+  background-position: 0 -119px;
+  width: 120px;
+  height: 62px;
+}
+
+.logotips-text {
+  background-position: 0 -176px;
+}
+
+////////////////////////////////////////////////////
 .arrows-angle-down {
   background-position: 0 0;
 }
@@ -92,6 +122,8 @@
   background-position: 0 -239px;
 }
 
+////////////////////////////////////////////////////
+
 .icon-cab-bulb {
   background-position: 0 0;
 }
@@ -116,17 +148,7 @@
   background-position: 0 -105px;
 }
 
-.logotips-logo {
-  background-position: 0 0;
-}
-
-.logotips-logo1 {
-  background-position: 0 -85px;
-}
-
-.logotips-md_icon {
-  background-position: 0 -110px;
-}
+////////////////////////////////////////////////////
 
 .red-icon-flag1 {
   background-position: 0 0;
@@ -140,13 +162,17 @@
   background-position: 0 -65px;
 }
 
-.red-icon-icon-new {
+.red-icon-new {
   background-position: 0 -97px;
 }
 
-.red-icon-icon_users {
+.red-icon-users {
   background-position: 0 -117px;
+  width: 37px;
+  height: 23px;
 }
+
+////////////////////////////////////////////////////
 
 .medal-gold {
   background-position: 0 0;
@@ -156,6 +182,8 @@
   background-position: 0 -253px;
 }
 
+////////////////////////////////////////////////////
+
 .smile-no {
   background-position: 0 0;
 }
@@ -163,6 +191,8 @@
 .smile-yes {
   background-position: 0 -38px;
 }
+
+////////////////////////////////////////////////////
 
 .speed-cursor_grey {
   background-position: 0 0;
@@ -192,6 +222,8 @@
   background-position: 0 -518px;
 }
 
+////////////////////////////////////////////////////
+
 .vote-vote_all_1 {
   background-position: 0 0;
 }
@@ -220,6 +252,8 @@
   background-position: 0 -330px;
 }
 
+////////////////////////////////////////////////////
+
 .text-published {
   background-position: 0 0;
 }
@@ -235,6 +269,8 @@
 .text-winner {
   background-position: 0 -193px;
 }
+
+////////////////////////////////////////////////////
 
 .slider-com_2 {
   background-position: 0 0;

@@ -3,7 +3,7 @@
     .navbar-header
       .navbar-brand
         %a{ href: '/', id: 'go_to_logo' }
-          = image_tag 'logo.png', class: 'auth_logo'
+          %span.logotips-sm
     %ul.list-inline.navbar-right
       - if signed_in?
         - if @core_project

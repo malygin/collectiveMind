@@ -73,7 +73,6 @@
   }
 }
 
-
 .widget-block {
   background: #e1e8f3;
   border: 1px solid #e2e2e2;
@@ -87,22 +86,29 @@
   }
   .image_1 {
     height: 100%;
-    background: image-url("home_page-1_1.png") center left 70px no-repeat, image-url("home_page-1_2.png") bottom right no-repeat;
+    background: image-url("home-page/1_1.png") center left 70px no-repeat, image-url("home-page/1_2.png") bottom right no-repeat;
   }
 
   .image_2 {
     height: 100%;
-    background: image-url("home_page-2_2.png") left no-repeat, image-url("home_page-2_1.png") center right 90px no-repeat;
+    background: image-url("home-page/2_2.png") left no-repeat, image-url("home-page/2_1.png") center right 90px no-repeat;
   }
 
   .image_3 {
     height: 100%;
-    background: image-url("home_page-3_1.png") center left 130px no-repeat, image-url("home_page-3_2.png") top 20px right 170px no-repeat;
+    background: image-url("home-page/3_1.png") center left 130px no-repeat, image-url("home-page/3_2.png") top 20px right 170px no-repeat;
   }
 }
 
 .widget-block-procedure {
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid #e2e2e2;
+  .col-md-5 {
+    padding: 0;
+  }
+  .col-md-3 {
+    text-align: center
+  }
 }
