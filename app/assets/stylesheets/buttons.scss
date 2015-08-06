@@ -102,22 +102,6 @@
     text-align: center;
 }
 
-.v_btn_1 {
-    background-image: image-url('vote/vote_red.png');
-}
-
-.v_btn_2 {
-    width: 28px;
-    height: 24px;
-    background-image: image-url('vote/vote_green.png');
-}
-
-.v_btn_3 {
-    width: 28px;
-    height: 24px;
-    background-image: image-url('vote/vote_grey.png');
-}
-
 .rate_buttons {
     padding: 25px 0;
 }
@@ -184,34 +168,6 @@
     margin-bottom: 28px;
 }
 
-.r_u_sure {
-    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.3);
-    padding: 11px;
-    padding-left: 50px;
-}
-
-.r_u_sure_vert {
-    padding-bottom: 10px;
-}
-
-.r_u_sure_vert p {
-    padding-top: 47px;
-    background: image-url('icon-exclamation-del.png') no-repeat center top 12px;
-}
-
-.r_u_sure.del {
-    background: image-url('icon-exclamation-del.png') no-repeat left 13px center;
-}
-
-.r_u_sure .btn, .r_u_sure_vert .btn {
-    padding: 2px;
-    min-width: 42px;
-    margin-left: 8px;
-}
-
-.r_u_sure.del .btn, .r_u_sure_vert.del .btn {
-    background: #787880;
-}
 
 .add-button.del {
     background: #787880;

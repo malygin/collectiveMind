@@ -114,13 +114,19 @@ a.btn-tooltip {
   padding-top: 10px;
 
   ul li {
-    padding-right: 30px;
-    background-image: image-url('arrow-right.png');
-    background-repeat: no-repeat;
-    background-position: right center;
     color: #b9b9b9;
+    &:after {
+      content: "";
+      background: image-url('arrows.png') 0 -7px;
+      width: 24px;
+      height: 10px;
+      margin: -10px 0 0 5px;
+      @extend .icons;
+    }
     &:last-of-type {
-      background-image: none;
+      &:after {
+        background-image: none;
+      }
     }
   }
   &.active a {

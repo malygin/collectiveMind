@@ -30,7 +30,7 @@
 }
 
 .project_win {
-    background: image-url("stripe.png") repeat;
+    background: image-url("background/stripe.png") repeat;
     margin-top: 20px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     border-radius: 6px;
@@ -84,7 +84,7 @@
 
 
 .badge-win {
-    background: image-url('winner.png') no-repeat;
+    background: image-url('background/winner.png') no-repeat;
     margin-top: -10px;
     width: 120px;
     height: 120px;
@@ -108,5 +108,5 @@
 
 .letters {
     height: 100%;
-    background: image-url("lettersTL.png") top 30px left 30px no-repeat, image-url("letters.png") bottom 10px right no-repeat;
+    background: image-url("background/lettersTL.png") top 30px left 30px no-repeat, image-url("background/letters.png") bottom 10px right no-repeat;
 }

@@ -332,7 +332,7 @@ button.mfp-close {
 }
 
 .popup-project .popup-header h2 {
-    background: image-url('gears.png') no-repeat;
+    /*background: image-url('gears.png') no-repeat;*/
     background-position: 0 9px;
     margin-left: 28px;
     padding-left: 56px;

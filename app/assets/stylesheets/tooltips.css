@@ -14,7 +14,8 @@
     border: none !important;
     width: 13px;
     height: 10px;
-    background: image-url('tooltip-arrow.png') center no-repeat;
+    background: image-url('arrows.png') no-repeat;
+    background-position: 0 -229px;
 }
 
 .tooltip.top .tooltip-arrow {

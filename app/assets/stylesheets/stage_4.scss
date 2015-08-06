@@ -56,7 +56,7 @@ $base_color_4: #8E8BC7;
   }
 
    .b_vote.voted {
-    background-image: image-url('vote/vote_all_4.png');
+//    background-image: image-url('vote/vote_all_4.png');
   }
 
    .dd_badge {
@@ -97,14 +97,10 @@ $base_color_4: #8E8BC7;
     color: #fff;
   }
 
-  .stage4_theme .r_u_sure {
-    background: image-url('icon-exclamation.png') no-repeat left 13px center;
-  }
-
   .stage4_theme .pocket_name {
     color: #8584c0;
     padding-left: 40px;
-    background-image: image-url('icon-cab-folder-4_small.png');
+//    background-image: image-url('icon-cab-folder-4_small.png');
     background-repeat: no-repeat;
     background-position: 0px center;
   }

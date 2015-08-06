@@ -59,7 +59,7 @@
 }
 
 .stage1_theme .b_vote.voted {
-    background-image: image-url('vote/vote_all_1.png');
+//    background-image: image-url('vote/vote_all_1.png');
 }
 
 .stage1_theme .dd_badge {
@@ -163,7 +163,7 @@
 }
 
 .stage1_theme .vote {
-    background-image: image-url('i-vote-btn.png');
+    background-image: image-url('vote/i-vote-btn.png');
     background-repeat: no-repeat;
     display: block;
 }
@@ -652,13 +652,13 @@
     color: #666;
 }
 
-.medal-block.gold-medal {
-    background: image-url('medal-1.png') no-repeat;
-}
-
-.medal-block.silver-medal {
-    background: image-url('medal-2.png') no-repeat;
-}
+//.medal-block.gold-medal {
+//    background: image-url('medal-1.png') no-repeat;
+//}
+//
+//.medal-block.silver-medal {
+//    background: image-url('medal-2.png') no-repeat;
+//}
 
 /* 1st stage discussion */
 .combined_border {
