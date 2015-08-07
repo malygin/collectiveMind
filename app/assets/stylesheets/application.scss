@@ -13,6 +13,7 @@
 @import 'landing_page';
 @import 'header_navbar';
 @import 'header_subhead';
+@import 'dropdown_window';
 @import 'post_block';
 @import 'vote';
 @import 'modal';
@@ -128,7 +129,7 @@
 .comment_add.main_add{
   border-top: none;
 }
-.grey_theme .dd_badge,.white_theme .dd_badge {
+.grey_theme .badge {
   background: #BEB8B8;
 }
 

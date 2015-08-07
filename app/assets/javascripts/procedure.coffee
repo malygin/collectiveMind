@@ -37,7 +37,7 @@
     $('.md-modal-vote').modal('show')
 
   # drop panel for header menu
-  $('.drop_opener, .dd_close').click ->
+  $('.drop_opener, .dw_close').click ->
     $('#' + $(this).attr('data-dd')).toggleClass('active')
 
   # height of tabs on 1st stafe
