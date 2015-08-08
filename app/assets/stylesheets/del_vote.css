@@ -56,23 +56,6 @@ ul.vote_nav > li > a {
     border-radius: 5px;
 }
 
-.vote_folders_cont li.active .vote_folder_inn {
-
-    background: image-url('vote/i-vote.png') no-repeat no-repeat;
-}
-
-
-.poll-2-2, .vote_folders_cont li.active .poll-2-2 {
-    background-position: 0 -79px;
-}
-
-.poll-2-3, .vote_folders_cont li.active .poll-2-3 {
-    background-position: 0 -158px;
-}
-
-.poll-2-4, .vote_folders_cont li.active .poll-2-4 {
-    background-position: 0 -237px;
-}
 
 .vote_folder_inn h5 {
     position: relative;

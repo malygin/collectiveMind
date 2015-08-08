@@ -55,19 +55,32 @@
   @extend .icons;
 }
 
-
-.vote-folder,.vote-folder_1,.vote-folder_2,.vote-folder_3,.vote-folder_4,.vote-folder_5 {
+.vote-folder, .vote-folder_1, .vote-folder_2, .vote-folder_3, .vote-folder_4, .vote-folder_5 {
   background-image: image-url('vote/vote_folder_big.png');
   width: 61px;
   height: 53px;
   @extend .icons;
 }
 
-
-.vote-btn2_1,.vote-btn2_2,.vote-btn2_3,.vote-btn2_4 {
+.vote-btn2_1, .vote-btn2_2, .vote-btn2_3, .vote-btn2_4 {
   background-image: image-url('vote/i-vote-btn-sm.png');
   width: 27px;
   height: 30px;
+  @extend .icons;
+}
+
+.vote-folder1_2, .vote-folder1_3, .vote-folder1_4 {
+  background-image: image-url('vote/i-vote.png');
+  width: 110px;
+  height: 80px;
+  @extend .icons;
+}
+
+
+.vote-btn1_1, .vote-btn1_2, .vote-btn1_3, .vote-btn1_4 {
+  background-image: image-url('vote/i-vote-btn.png');
+  width: 24px;
+  height: 22px;
   @extend .icons;
 }
 
@@ -102,8 +115,8 @@
 
 .arrows-arrow-right {
   background-position: 0 -7px;
-  width:24px;
-  height:10px;
+  width: 24px;
+  height: 10px;
 }
 
 .arrows-cursor {
@@ -349,12 +362,12 @@
 .vote-folder_4 {
   background-position: -221px -4px;
 }
+
 .vote-folder_5 {
   background-position: -292px -4px;
 }
 
 ////////////////////////////////////////////////////////
-
 
 .vote-btn2_1 {
 
@@ -373,4 +386,41 @@
   margin-top: 9px;
   background-position: -115px -5px;
 }
+
 //////////////////////////////////////////////////////////
+
+.vote-folder1_2 {
+  background-position: 0 -79px;
+}
+
+.vote-folder1_3 {
+  background-position: 0 -158px;
+}
+
+.vote-folder1_4 {
+  background-position: 0 -237px;
+}
+
+///////////////////////////////////////////////////////////
+
+.vote-btn1_1 {
+  background-position: -5px -5px;
+}
+
+.vote-btn1_2 {
+  width: 24px;
+  height: 22px;
+  background-position: -5px -37px;
+}
+
+.vote-btn1_3 {
+  width: 24px;
+  height: 22px;
+  background-position: -39px -5px;
+}
+
+.vote-btn1_4 {
+  width: 24px;
+  height: 22px;
+  background-position: -39px -37px;
+}
