@@ -4,18 +4,6 @@ h4.tall_modal_title {
     margin: 20px 0 10px;
 }
 
-.vote_progress_cont {
-    background: #e6e6e6; /* Old browsers */
-    background: -moz-linear-gradient(top, #e6e6e6 0%, #ffffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6e6e6), color-stop(100%, #ffffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #e6e6e6 0%, #ffffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #e6e6e6 0%, #ffffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #e6e6e6 0%, #ffffff 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #e6e6e6 0%, #ffffff 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6e6', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
-    height: 7px;
-    margin-bottom: 0;
-}
 
 .vote_progress {
     height: 7px;

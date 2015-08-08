@@ -1,4 +1,4 @@
-$sizes_modal: 710, 770, 1100;
+$sizes_modal: 710, 770,1030, 1100;
 
 @each $size in $sizes_modal {
   .modal_#{$size} {
