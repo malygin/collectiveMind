@@ -108,134 +108,13 @@
 
 
 
-  
-    <h2>
-      Class Method Summary
-      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
-    </h2>
-
-    <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#min_stage_knowbase_post-class_method" title="min_stage_knowbase_post (class method)">+ (Object) <strong>min_stage_knowbase_post</strong>(project) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#set_knowbase_posts_sort-class_method" title="set_knowbase_posts_sort (class method)">+ (Object) <strong>set_knowbase_posts_sort</strong>(sortable) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-    </ul>
-  
-
-
-  
-
-  <div id="class_method_details" class="method_details_list">
-    <h2>Class Method Details</h2>
-
-    
-      <div class="method_details first">
-  <h3 class="signature first" id="min_stage_knowbase_post-class_method">
-  
-    + (<tt>Object</tt>) <strong>min_stage_knowbase_post</strong>(project) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-13
-14
-15</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/models/core/knowbase/post.rb', line 13</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_min_stage_knowbase_post'>min_stage_knowbase_post</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>project_id:</span> <span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>stage:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stage_knowbase_order'>stage_knowbase_order</span><span class='lparen'>(</span><span class='id identifier rubyid_project'>project</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_minimum'>minimum</span><span class='lparen'>(</span><span class='symbol'>:stage</span><span class='rparen'>)</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="set_knowbase_posts_sort-class_method">
-  
-    + (<tt>Object</tt>) <strong>set_knowbase_posts_sort</strong>(sortable) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-9
-10
-11</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'app/models/core/knowbase/post.rb', line 9</span>
-
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_knowbase_posts_sort'>set_knowbase_posts_sort</span><span class='lparen'>(</span><span class='id identifier rubyid_sortable'>sortable</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_sortable'>sortable</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_update_attributes!'>update_attributes!</span><span class='lparen'>(</span><span class='label'>stage:</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
 
 </div>
 
     <div id="footer">
-  Generated on Wed May 13 15:35:12 2015 by
+  Generated on Mon Aug  3 16:30:22 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.0).
 </div>

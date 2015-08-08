@@ -17,7 +17,7 @@
                   .col-xs-9
                     = news.title
                     - unless news.read?(@project, current_user)
-                      %span.status_news{ id: "status_news_#{news.id}"}
+                      %span.status_news{ id: "status_news_#{news.id}" }
                         (не прочитано)
                   .col-xs-3.text-right
                     %span.date

@@ -13,7 +13,7 @@
                   %i.fa.fa-lg{ class: "#{journal_icon(journal.type_event)} #{journal_color(journal.type_event)}" }
                 .col-md-11
                   = l(journal.created_at, format: '%k:%M %d.%m.%Y')
-                  = link_to journal.user, user_path(@project, journal.user), class:"bold"
+                  = link_to journal.user, user_path(@project, journal.user), class: 'bold'
                   %p
                     - if k > 1
                       = t('menu.journal_count', count: k - 1)

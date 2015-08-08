@@ -160,16 +160,16 @@
       <pre class="lines">
 
 
+29
+30
 31
-32
-33
-34</pre>
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/jobs/feed_mailer.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'app/jobs/feed_mailer.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
-  <span class='id identifier rubyid_users'>users</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>users:</span> <span class='lbrace'>{</span> <span class='label'>type_user:</span> <span class='lbracket'>[</span><span class='int'>2</span><span class='comma'>,</span><span class='int'>3</span><span class='comma'>,</span><span class='int'>4</span><span class='comma'>,</span><span class='int'>5</span><span class='comma'>,</span><span class='int'>8</span><span class='comma'>,</span><span class='kw'>nil</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_users'>users</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>users:</span> <span class='lbrace'>{</span> <span class='label'>type_user:</span> <span class='lbracket'>[</span><span class='int'>2</span><span class='comma'>,</span> <span class='int'>3</span><span class='comma'>,</span> <span class='int'>4</span><span class='comma'>,</span> <span class='int'>5</span><span class='comma'>,</span> <span class='int'>8</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_mailer'>mailer</span><span class='lparen'>(</span><span class='id identifier rubyid_users'>users</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -182,7 +182,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed May 13 15:35:10 2015 by
+  Generated on Mon Aug  3 16:30:21 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.0).
 </div>
