@@ -11,7 +11,7 @@
         .divider35
         .auth-logo
         .divider35
-        = form_for resource, as: resource_name, url: session_path(resource_name), html: { id: 'auth-form1', class: 'form-horizontal auth-form', role: 'form' } do |f|
+        = form_for resource, as: resource_name, url: session_path(resource_name), html: { id: 'auth-form1', class: 'form-horizontal form-auth', role: 'form' } do |f|
           = devise_error_messages!
           -#- flash.each do |name, msg|
           -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
