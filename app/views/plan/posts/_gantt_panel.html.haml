@@ -1,14 +1,12 @@
-.bottom_fix#bottom-panel
+.gantt_panel#bottom-panel
   .container
     .row
-      .col-md-2
-      .col-md-10
-        .content_window.white
+      .col-md-10.col-md-offset-2
+        .content_window
           .cont_heading
-            %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active Добавление задач в проектное предложение
-            %button.btn.btn_reset.btn_round30#bottom-opener
-              %i.fa.fa-arrow-up.font_white
-          .divider10
+            %button.btn-gantt Добавление задач в проектное предложение
+            %button.btn-icon-gantt#bottom-opener
+              %i.fa.fa-arrow-up
           #workSpace{ style: 'width:900px;' }
           .noprint#taZone{ style: 'display:none;' }
             - if @post.persisted?

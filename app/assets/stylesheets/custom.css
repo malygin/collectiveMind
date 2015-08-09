@@ -1032,6 +1032,7 @@ h5 i {
     overflow: hidden;
     font-size: 12px;
     position: relative;
+    background:white;
 }
 
 .height_100, .content_window.height100 {
@@ -1586,39 +1587,6 @@ i.fa.sticker_close {
 
 .cab5_placeholder {
     font-size: 13px;
-}
-
-.bottom_fix {
-    position: fixed;
-    z-index: 700;
-    width: 100%;
-    top: 100%;
-    margin-top: -60px;
-}
-
-.bottom_fix.visible {
-    position: absolute;
-}
-
-.bottom_fix .content_window {
-    box-shadow: 0 -1px 2px 1px rgba(0, 0, 0, 0.3);
-    min-height: 1000px;
-}
-
-.bottom_fix .cont_heading {
-    background: #eecfab;
-}
-
-.bottom_fix .cont_heading .btn_cab_mod.active {
-    background: #e0b27d;
-    border: 1px solid #e0b27d;
-}
-
-.bottom_fix .btn_round30 {
-    position: absolute;
-    right: 35px;
-    line-height: 30px;
-    background: #e0b27d;
 }
 
 /* digest */

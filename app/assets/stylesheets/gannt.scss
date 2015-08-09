@@ -10,9 +10,55 @@
   border: 1px solid #d0d0d0;
 }
 
-.ganttButtonBar h1{
+.ganttButtonBar h1 {
   color: #000000;
   font-weight: bold;
   font-size: 28px;
   margin-left: 10px;
+}
+
+.gantt_panel {
+  position: fixed;
+  z-index: 700;
+  width: 100%;
+  top: 100%;
+  margin-top: -60px;
+
+  &.visible {
+    position: absolute;
+  }
+
+  .content_window {
+    box-shadow: 0 -1px 2px 1px rgba(0, 0, 0, 0.3);
+    min-height: 1000px;
+  }
+
+  .cont_heading {
+    background: #eecfab;
+    color: white;
+    margin-bottom: 10px;
+    button {
+      background: #e0b27d;
+      border: 1px solid #e0b27d;
+      font-size: 14px;
+      @include box-shadow-inset;
+      &.btn-gantt {
+        font-size: 12px;
+        margin: 0px;
+        margin-right: 10px;
+        padding: 5px 22px;
+        border-radius: 10px;
+      }
+      &.btn-icon-gantt {
+        position: absolute;
+        right: 35px;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+      }
+    }
+  }
+
+  .btn_round30 {
+  }
 }
