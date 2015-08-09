@@ -69,10 +69,10 @@
   @extend .icons;
 }
 
-.vote-folder1_2, .vote-folder1_3, .vote-folder1_4 {
+.vote-folder1_1,.vote-folder1_2, .vote-folder1_3, .vote-folder1_4 {
   background-image: image-url('vote/i-vote.png');
-  width: 110px;
-  height: 80px;
+  width: 100px;
+  height: 60px;
   @extend .icons;
 }
 
@@ -388,6 +388,10 @@
 }
 
 //////////////////////////////////////////////////////////
+
+.vote-folder1_1 {
+  background-position: 0 0;
+}
 
 .vote-folder1_2 {
   background-position: 0 -79px;

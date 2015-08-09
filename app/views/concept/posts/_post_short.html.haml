@@ -20,7 +20,6 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
       .post-body.no_post_head.ch_action{ 'data-for' => "post_ch#{post_short.id}" }
         .media
           .media-left.text-center.gradient.post-poster
-            -#= image_tag 'no-ava.png', class: 'img-circle img50'
             = link_to user_path(@project, post_short.user) do
               = user_image_tag post_short.user.try(:avatar)
             %p.poster-name
