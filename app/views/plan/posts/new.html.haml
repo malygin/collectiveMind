@@ -31,7 +31,7 @@
   - else
     .content_window.bottom_panel_stop
       %a.cont_heading.a_font_reset.bold.pocket_name.open-popup#select_novation Выбрать пакет
-  .content_window.white.c_w_5
+  .content_window.c_w_5
     .cont_heading
       - if @post.content
         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active#selected_novation_main_form= @post.content
@@ -64,7 +64,7 @@
   .modal.fade#modal-cabinet5-1
     .modal-dialog.modal-lg
       %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
-      .content_window.white
+      .content_window
         .divider15
         .row
           .col-md-5

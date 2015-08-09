@@ -20,3 +20,25 @@
   box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
   webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
 }
+
+@mixin square35{
+  width: 35px;
+  height: 35px;
+}
+
+
+@mixin square40{
+  width: 40px;
+  height: 40px;
+}
+
+@mixin square50{
+  width: 50px;
+  height: 50px;
+}
+
+
+@mixin square100{
+  width: 50px;
+  height: 50px;
+}

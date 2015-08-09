@@ -4,7 +4,7 @@
     = render partial: 'shared/create_success', locals: { model_name: 'concept' }
 
     = form_for @concept_post, url: { project: @project.id, action: @concept_post.persisted? ? 'update' : 'create' }, remote: true do |f|
-      .content_window.white
+      .content_window
         %a.theme_font_color.with_arrow.collapser_type1#open_fields{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1' }
           %span.enter_length.bold Создать идею
           %i.fa.fa-chevron-circle-right.fa-lg.fa-rotate-90.collapse_arrow{ title: 'Свернуть' }
@@ -50,7 +50,7 @@
             - if @concept_post.persisted?
               = render partial: 'discontent', collection: @concept_post.concept_disposts
           .divider15
-    .content_window.white
+    .content_window
       %a.theme_font_color.with_arrow.collapser_type1#open_discontents{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs2' }
         %span.enter_length.bold
           Привязать идею к несовершенству

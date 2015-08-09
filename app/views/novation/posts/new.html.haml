@@ -3,7 +3,7 @@
   = render partial: 'shared/create_success', locals: { model_name: 'novation', id: @novation.id }
 = form_for @novation, url: { project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id },
 remote: true, class: 'cabinet-aspect-form' do |f|
-  .content_window.white
+  .content_window
     .cont_heading.bold
       - if @novation.persisted?
         %span.pocket_name.breadcr

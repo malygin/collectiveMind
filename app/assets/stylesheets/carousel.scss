@@ -80,3 +80,90 @@
     }
   }
 }
+
+/* present carousel */
+
+.present_carousel .item > div {
+  padding-left: 50px;
+  height: 415px;
+}
+
+.slide_1 {
+  background: image-url('../present/1.png') no-repeat right 95px bottom 40px;
+}
+
+.slide_2 {
+  background: image-url('../present/2_1.png') no-repeat left bottom, image-url('../present/2_2.png') no-repeat right top;
+}
+
+.slide_3 {
+  background: image-url('../present/3.png') no-repeat right top;
+}
+
+.slide_4_1 {
+  background: image-url('../present/4_1.png') no-repeat right bottom;
+}
+
+.slide_4_2 {
+  background: image-url('../present/4_2.png') no-repeat right bottom;
+}
+
+.slide_4_3 {
+  background: image-url('../present/4_3.png') no-repeat right bottom;
+}
+
+.slide_4_4 {
+  background: image-url('../present/4_4.png') no-repeat right bottom;
+}
+
+.slide_4_5 {
+  background: image-url('../present/4_5.png') no-repeat right bottom;
+}
+
+.slide_4_6 {
+  background: image-url('../present/4_6.png') no-repeat right bottom;
+}
+
+.slide_4_7 {
+  background: image-url('../present/4_7.png') no-repeat right bottom;
+}
+
+.slide_11 {
+  background: image-url('../present/11.png') no-repeat right bottom;
+}
+
+.red_indicators li .btn {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  opacity: .5;
+}
+
+.red_indicators li.active .btn {
+  opacity: 1;
+}
+
+.red_indicators li {
+  padding: 0 2px;
+}
+
+.present_carousel {
+  position: relative;
+}
+
+.present_carousel .present_nav {
+  position: absolute;
+  z-index: 1110;
+  top: 50%;
+  margin-top: -33px;
+  width: 100%;
+}
+
+.present_carousel h3 {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.present_carousel p {
+  line-height: 30px;
+}
