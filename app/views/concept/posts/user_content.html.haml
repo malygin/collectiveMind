@@ -4,7 +4,7 @@
       .post_body
         .post_poster
           = link_to user_path(@project, post_short.user) do
-            = user_image_tag post_short.user.avatar, class: 'img-circle img40'
+            = user_image_tag post_short.user.avatar
           = link_to post_short.user, user_path(@project, post_short.user)
           %p.time
             = l(post_short.created_at, format: '%d.%m.%Y')

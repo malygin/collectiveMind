@@ -22,7 +22,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
           .media-left.text-center.gradient.post-poster
             -#= image_tag 'no-ava.png', class: 'img-circle img50'
             = link_to user_path(@project, post_short.user) do
-              = user_image_tag post_short.user.try(:avatar), class: 'img-circle img40'
+              = user_image_tag post_short.user.try(:avatar
             %p.poster-name
               = link_to post_short.user, user_path(@project, post_short.user)
             %p.time

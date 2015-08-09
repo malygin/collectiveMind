@@ -123,6 +123,10 @@ $sizes_modal: 710, 770,1030, 1100;
       .post-poster {
         padding: 20px 0 18px 27px;
         display: inline-block;
+        img{
+          @include circle50;
+
+        }
         span {
           margin-left: 25px;
           font-weight: bold;

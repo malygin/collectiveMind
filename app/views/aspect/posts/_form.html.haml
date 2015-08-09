@@ -8,7 +8,7 @@ remote: true, class: 'cabinet-aspect-form' do |f|
       .media
         .media-left.text-center.gradient2.post-poster
           = link_to user_path(@project, current_user) do
-            = user_image_tag current_user.avatar, class: 'img-circle img40'
+            = user_image_tag current_user.avatar
           %p.poster-name
             = link_to current_user, user_path(@project, current_user)
           %p.poster-name

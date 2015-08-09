@@ -29,6 +29,7 @@ $border_grey: 1px solid #d9d9d9;
         padding: 20px 10px;
         font-size: 9px;
         img {
+          @include circle40;
           margin-bottom: 10px;
         }
         a.name {
