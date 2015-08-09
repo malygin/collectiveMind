@@ -1621,82 +1621,8 @@ i.fa.sticker_close {
     background: #e0b27d;
 }
 
-/* cabinet notices */
-.cab_notice {
-    padding-top: 13px;
-    padding-bottom: 13px;
-    padding-left: 30px;
-    padding-right: 15px;
-    position: relative;
-    line-height: 20px;
-    border-radius: 3px;
-    box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-}
-
-.cabnot_close {
-    position: absolute;
-    top: 11px;
-    right: 11px;
-    cursor: pointer;
-    color: #828282;
-}
-
-.cabnot_close:hover {
-    color: #b5b5b5;
-}
-
-.cab_notice span {
-    display: inline-block;
-    width: 100%;
-    margin: 0 auto;
-    min-height: 63px;
-    padding-left: 60px;
-    padding-right: 0px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 13px;
-    color: #666;
-}
-
-/*.cab_notice span.success {*/
-    /*background: image-url('smile-yes.png') no-repeat left top 15px;*/
-/*}*/
-
-/*.cab_notice span.fail {*/
-    /*background: image-url('smile-no.png') no-repeat left top 10px;*/
-/*}*/
-
-.cl_btn {
-    position: absolute;
-    top: 7px;
-    right: 9px;
-    cursor: pointer;
-}
-
-.cl_btn_container {
-    position: relative;
-}
-
 /* digest */
-.stage2_theme .modal_subhead, .stage3_theme .modal_subhead, .stage4_theme .modal_subhead, .stage5_theme .modal_subhead {
-    background: #99afd4;
-}
 
-.mod_sub_l {
-    padding-left: 45px;
-}
-
-.mod_sub_r {
-    padding-right: 45px;
-}
-
-.mod_sub_l h5 {
-    margin-top: 6px;
-    margin-bottom: 7px;
-    font-size: 13px;
-    font-weight: bold;
-}
 
 .dia_legend {
     line-height: 23px;

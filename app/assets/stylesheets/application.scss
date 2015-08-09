@@ -7,7 +7,6 @@
 //Переменные
 @import 'colors';
 @import 'mixins';
-
 @import 'sprites';
 
 // Логическое деление
@@ -18,6 +17,7 @@
 @import 'post_block';
 @import 'vote';
 @import 'modal';
+@import 'notice';
 
 @import 'buttons';
 @import 'rating';
@@ -53,6 +53,7 @@
 @import "gantt/gantt";
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
+@import "gannt";
 
 
 #workSpace {
@@ -66,36 +67,8 @@
   height: 600px;
 }
 
-.stage1_theme, .stage3_theme,.stage4_theme {
-  .vote_counter {
-    position: absolute;
-    display: block;
-    text-align: center;
-    top: 32px;
-    left: 35px;
-    width: 35px;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-  }
-
-  .vote_folders_cont li.active .vote_folder_inn {
-    border-color: #CFCFCF;
-  }
-}
-
 ////////////////////////////////////
 
-.stage1_theme .modal_subhead {
-  background: #99afd4;
-}
-
-.popup_present .popup .modal_badge{
-  position: absolute;
-  top: -5px;
-  left: 30px;
-  padding: 5px 30px;
-}
 .media.contact a:hover{
   color: inherit;
 }
@@ -163,24 +136,6 @@
 }
 
 
-// GANNT
-.resEdit {
-  padding: 15px;
-}
-
-.resLine {
-  width: 95%;
-  padding: 3px;
-  margin: 5px;
-  border: 1px solid #d0d0d0;
-}
-
-.ganttButtonBar h1{
-  color: #000000;
-  font-weight: bold;
-  font-size: 28px;
-  margin-left: 10px;
-}
 
 /* to make scrollbars always visible */
 .always-visible.ps-container > .ps-scrollbar-x-rail,
