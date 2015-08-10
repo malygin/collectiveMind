@@ -49,6 +49,8 @@ module PostComments
     @comment = current_model.find(params[:id]).add_comment(params[name_of_comment_for_param], current_user,
                                                            @comment_parent, @comment_answer)
     @new_comment = comment_model.new
+    # $pubnub.publish(:http_sync => true, message: { 'tutu' => 'mu' }, channel: 'notifications', callback: lambda { |envelope| puts("channel: #{envelope.channel}; msg: #{envelope.message}") })
+    # $pubnub.publish(message: { 'tutu' => 'mu' }, channel: 'notifications', callback: lambda { |envelope| puts("channel: #{envelope.channel}; msg: #{envelope.message}") })
     respond_to :js
   end
 
