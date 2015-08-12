@@ -22,7 +22,7 @@ module BaseComment
     scope :by_user, ->(user) { where(user_id: user.id) }
     scope :preview, -> { reorder(created_at: :desc).limit(2) }
     scope :after_last_visit, ->(last_time) { where("#{table_name}.created_at >= ?", last_time) if last_time.present? }
-    scope :stage_comments_for, lambda  { |project|
+    scope :stage_comments_for, lambda { |project|
       joins(:post).where("#{table_name.gsub('_comments', '_posts')}.project_id = ?", project.id)
         .reorder("#{table_name.gsub('_posts', '_comments')}.created_at DESC")
     }

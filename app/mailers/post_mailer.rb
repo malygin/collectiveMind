@@ -5,7 +5,7 @@ class PostMailer < ActionMailer::Base
 
   def add_comment(post, comment)
     @user = post.user
-    @comment  = comment
+    @comment = comment
     @post = post
     # @todo тему нельзя писать кириллицей
     mail(to: @user.email, subject: 'Massdecision ')

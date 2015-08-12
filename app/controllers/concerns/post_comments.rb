@@ -5,7 +5,7 @@ module PostComments
     @comment = comment_model.find(params[:id])
     @against = params[:against]
     @vote = @comment.comment_votings.create(user: current_user, comment: @comment, against: @against) unless @comment.voting_users.include? current_user
-    JournalEventSaver.like_comment_event(user: current_user, project: @project.project, comment: @comment, against:  @against)
+    JournalEventSaver.like_comment_event(user: current_user, project: @project.project, comment: @comment, against: @against)
     respond_to :js
   end
 
@@ -49,8 +49,6 @@ module PostComments
     @comment = current_model.find(params[:id]).add_comment(params[name_of_comment_for_param], current_user,
                                                            @comment_parent, @comment_answer)
     @new_comment = comment_model.new
-    # $pubnub.publish(:http_sync => true, message: { 'tutu' => 'mu' }, channel: 'notifications', callback: lambda { |envelope| puts("channel: #{envelope.channel}; msg: #{envelope.message}") })
-    # $pubnub.publish(message: { 'tutu' => 'mu' }, channel: 'notifications', callback: lambda { |envelope| puts("channel: #{envelope.channel}; msg: #{envelope.message}") })
     respond_to :js
   end
 

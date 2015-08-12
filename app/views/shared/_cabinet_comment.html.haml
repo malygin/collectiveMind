@@ -38,7 +38,7 @@
       %span.bold
         %span{ id: "dlk_comment_#{cabinet_comment.id}" }
           = cabinet_comment.users_against.count
-        = link_to({ controller: cabinet_comment.post_controller_path, action: :like_comment, project: @project,  id: cabinet_comment.id, against: true },
+        = link_to({ controller: cabinet_comment.post_controller_path, action: :like_comment, project: @project, id: cabinet_comment.id, against: true },
         remote: true, method: :put, id: "dislike_comment_#{cabinet_comment.id}") do
           %i.fa.fa-thumbs-down{ class: "font_color_stage#{number_current_stage || num_stage}" }
     -#%button.reply_btn.collapsed{ 'data-target' => '#reply_form_1', 'data-toggle' => 'collapse', type: 'button' }

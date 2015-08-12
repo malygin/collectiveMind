@@ -7,7 +7,7 @@
             - if name_controller == stage[:type_stage]
               = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", class: 'btn big',
               'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-html' => 'true',
-              title:  "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
+              title: "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
                 #{num_stage} СТАДИЯ: #{stage[:name]}
             - elsif @project.main_stage >= num_stage
               = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}",

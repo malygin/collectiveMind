@@ -19,7 +19,7 @@ json.array! @posts do |item|
   json.count_comments item.comments.count
   json.count_likes item.users_pro.count
   json.count_dislikes item.users_against.count
-  json.aspects item.post_aspects do  |aspect|
+  json.aspects item.post_aspects do |aspect|
     json.id aspect.id
     json.color aspect.color
     json.content aspect.content

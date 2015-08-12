@@ -25,7 +25,7 @@ class Novation::PostsController < PostsController
     if @novation.save
       JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @novation)
     end
-    @novation.update(status: current_model::STATUSES[:published])   if params[:novation_post][:published]
+    @novation.update(status: current_model::STATUSES[:published]) if params[:novation_post][:published]
     if params[:novation_post_concept]
       params[:novation_post_concept].each { |asp| @novation.novation_post_concepts.create(concept_post_id: asp.to_i) }
     end
