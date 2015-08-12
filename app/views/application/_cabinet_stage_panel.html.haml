@@ -1,26 +1,22 @@
-.container
-  .row
-    .col-md-5.col_padding_right_3
-      .border_grey.rounded_3.stages_block
-        .btn-toolbar{ role: 'toolbar' }
-          .btn-group{ role: 'group' }
-            = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}",
-            role: 'button', class: "btn arrow_left back_color_stage#{@project.main_stage}" do
-              #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
+.subhead_navigate
+  .container
+    .col-md-5
+      .border-block
+        .btn-group
+          = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}",
+              role: 'button', class: "btn arrow_left back_color_stage#{@project.main_stage}" do
+            #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
 
-    .col-md-7.col_padding_left_3
-      .border_grey.rounded_3.stages_block
-        .media.contact
-          .media-left
-            = link_to user_path(@project, current_user) do
-              = user_image_tag current_user.avatar
-          .media-body
-            %h5.media-heading.bold
-              = link_to current_user, user_path(@project, current_user)
-
-        %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.cabinet_sticker', class: "font_color_stage#{@project.main_stage}" }
-        .cabinet_sticker.sticker.rounded_3.font_white{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
-          = t("cabinet.#{@project.current_stage_type}_sticker").try(:html_safe)
-          = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker",
-          status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
-            %i.sticker_close.fa.fa-times.fa-lg{ 'data-for' => '.cabinet_sticker' }
+    .col-md-7
+      .border-block
+        .contact
+          = link_to user_path(@project, current_user) do
+            = user_image_tag current_user.avatar
+          = link_to current_user, user_path(@project, current_user)
+        .info
+          %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.cabinet_sticker' }
+          .cabinet_sticker.sticker.rounded_3{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
+            = t("cabinet.#{@project.current_stage_type}_sticker").try(:html_safe)
+            = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker",
+              status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
+              %i.sticker_close.fa.fa-times.fa-lg{ 'data-for' => '.cabinet_sticker' }
