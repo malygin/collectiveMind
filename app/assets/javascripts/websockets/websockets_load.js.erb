@@ -1,7 +1,7 @@
 <% if ENV['RAILS_ENV'] != 'test' %>
 var pubnub = PUBNUB.init({
-    publish_key: '<%= 'demo' %>',
-    subscribe_key: '<%= 'demo' %>'
+    publish_key: '<%= ENV['PUBNUB_PUBLISH_KEY'].to_s || 'demo' %>',
+    subscribe_key: '<%= ENV['PUBNUB_SUBSCRIBE_KEY'].to_s || 'demo' %>'
 });
 <% end %>
 <% Rails.logger.info "hello, it's 111 #{ENV['PUBNUB_SUBSCRIBE_KEY']}" %>

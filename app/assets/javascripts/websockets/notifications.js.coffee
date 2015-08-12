@@ -1,42 +1,28 @@
-#@notificate_my_journals = ->
-#  if $("#set_notification_message").length > 0
-#    Messenger.options =
-#      extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
-#    msg = Messenger().post
-#      extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
-#      message: "Обратите внимание! У вас есть непрочитанные уведомления. <br>"
-#      type: "error"
-#      showCloseButton: true
-#      actions:
-#        cancel:
-#          label: 'Просмотреть'
-#          action: ->
-#            msg.hide()
-#            $('#messages').click()
-#
-#  return
-
 @notifications = ->
   if $('#current_user_id').length > 0
     user_id = $('#current_user_id').text().trim()
     channel_name = 'notifications_' + user_id
   if channel_name and document.location.pathname.match('project')
-    console.log 123
     pubnub.subscribe
       channel: channel_name
       message: (data) ->
-        console.log data
-        return
-#  if document.location.pathname.match('project')
-#    unless (typeof Websockets == 'function')
-#      return
-#    ws = Websockets.connection()
-#
-#    private_channel = ws.subscribe_private('notifications')
-#    private_channel.on_success = ->
-#      console.log("Has joined the channel notifications")
-#    private_channel.on_failure = ->
-#      console.log("Authorization failed channel notifications")
-#    private_channel.bind 'latest', (data) ->
-#      $('#notifications').html(data);
-#      $(".count").effect("bounce", "slow")
+        journal_count = $('#my_journals_count')
+        journal_count.addClass('top-circle').html((parseInt(journal_count.html()) || 0) + 1)
+        journal_count.effect("bounce", "slow")
+        journal_post = JST['templates/notification_message'](data)
+        $('#dd_2 .ps_cont').append(journal_post)
+
+        Messenger.options =
+          extraClasses: "messenger-fixed messenger-on-top messenger-on-right messenger-theme-air"
+        msg = Messenger().post
+          extraClasses: "messenger-fixed messenger-on-top  messenger-on-right messenger-theme-air"
+          message: "Обратите внимание! У вас есть непрочитанные уведомления. <br>"
+          type: "error"
+          showCloseButton: true
+          actions:
+            cancel:
+              label: 'Просмотреть'
+              action: ->
+                msg.hide()
+                $('#clear_my_journals').click()
+

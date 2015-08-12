@@ -1,4 +1,4 @@
-json.array! @posts do |item|
+arr_json = json.array! @posts do |item|
   json.id item.id
   json.title item.title.present? ? item.title : 'Пакет без названия'
   json.content trim_content(item.project_change, 200)
@@ -29,3 +29,4 @@ json.array! @posts do |item|
     json.content trim_content(comment.content, 100)
   end
 end
+Rails.logger.info arr_json
