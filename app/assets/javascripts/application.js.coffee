@@ -52,7 +52,6 @@
 
 #= require websockets/websockets_load.js.erb
 #= require websockets/notifications
-#= require websockets/ui-notifications
 #= require websockets/messenger.min
 
 
