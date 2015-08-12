@@ -1,41 +1,39 @@
-.container
-  .row
-    .col-md-8.col_padding_right_3
-      .border.stages_block{ class: "#{'tooltip1' if name_controller == :aspect_posts}" }
-        .btn-toolbar{ role: 'toolbar' }
+.subhead_navigate
+  .container
+    .col-md-8
+      .border-block{ class: "#{'tooltip1' if name_controller == :aspect_posts}" }
+        .btn-group
           - Core::Project::STAGES.each do |num_stage, stage|
-            .btn-group{ role: 'group' }
-              - if name_controller == stage[:type_stage]
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button',
-                class: "btn back_color_stage#{num_stage} big", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-html' => 'true',
-                title:  "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
-                  #{num_stage} СТАДИЯ: #{stage[:name]}
-              - elsif @project.main_stage >= num_stage
-                = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", role: 'button',
-                class: "btn back_color_stage#{num_stage} big", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-html' => 'true',
-                title: "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
-                  = num_stage
-              - else
-                = link_to '#', id: "go_to_#{stage[:type_stage]}", role: 'button', class: "btn back_color_stage#{num_stage} big", 'data-placement' => 'bottom',
-                'data-toggle' => 'tooltip', 'data-html' => 'true', title: "#{num_stage}" + ' ' + 'стадия (недоступна) <br />' + "#{stage[:description]}" do
-                  = num_stage
+            - if name_controller == stage[:type_stage]
+              = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}", class: 'btn big',
+              'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-html' => 'true',
+              title:  "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
+                #{num_stage} СТАДИЯ: #{stage[:name]}
+            - elsif @project.main_stage >= num_stage
+              = link_to send("#{stage[:type_stage]}_path", @project.id), id: "go_to_#{stage[:type_stage]}",
+                    class: 'btn big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-html' => 'true',
+                    title: "#{num_stage}" + t("stage.open_#{@project.main_stage == num_stage}") + "#{stage[:description]}" do
+                = num_stage
+            - else
+              = link_to '#', id: "go_to_#{stage[:type_stage]}", class: 'btn big', 'data-placement' => 'bottom',
+                    'data-toggle' => 'tooltip', 'data-html' => 'true', title: "#{num_stage}" + ' ' + 'стадия (недоступна) <br />' + "#{stage[:description]}" do
+                = num_stage
 
-    .col-md-4.col_padding_left_3
+    .col-md-4
       %a
-        .border.help_icon.tooltip1.help_popover#tooltip1_2{ class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
-        'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}",
-        'data-text' => t(current_stage_popover_status), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
-        title: 'Читайте инструкции по работе на этом этапе стадии' }
-      .border.progress_block
+        .border-block.help_icon.tooltip1.help_popover#tooltip1_2{ class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
+          'data-project' => "#{@project.id}", 'data-stage' => "#{name_controller.to_s.gsub('_posts', '')}", 'data-status' => "#{current_stage_popover_status}",
+          'data-text' => t(current_stage_popover_status), 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+          title: 'Читайте инструкции по работе на этом этапе стадии' }
+      .border-block.progress_block
         = render partial: 'application/progress_bar'
-  - if show_stage_subbar?
-    .divider10
-    .row
+    - if show_stage_subbar?
+
       .col-md-12
-        .border.metro_block
+        .border-block.metro_block
           %ul.list-inline
             - Core::Project::STAGES[@project.main_stage][:substages].each do |num_sub, substage|
               %li{ 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', title: t("substage.status_#{substage_status_by num_sub}"),
-              class: "#{'active theme_font_color' if @project.sub_stage == num_sub}" }
+                class: "#{'active theme_font_color' if @project.sub_stage == num_sub}" }
                 %i.fa.fa-circle.fa-2x
                 %a{ href: '#' }= substage[:name]

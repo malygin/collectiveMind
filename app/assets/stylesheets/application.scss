@@ -3,12 +3,10 @@
 @import 'owl.carousel';
 @import 'perfect-scrollbar.min';
 @import "compass";
-
 //Переменные
 @import 'colors';
 @import 'mixins';
 @import 'sprites';
-
 // Логическое деление
 @import 'landing_page';
 @import 'header_navbar';
@@ -18,14 +16,10 @@
 @import 'vote';
 @import 'modal';
 @import 'notice';
-
 @import 'buttons';
 @import 'rating';
 @import 'tooltips';
-
-
 @import 'carousel';
-
 // на удаление
 @import 'custom';
 @import 'stage_1';
@@ -40,15 +34,12 @@
 //@import 'popup';
 //@import 'post';
 /////////////////
-
 @import 'dropdowns-enhancement';
-
 //@import 'jquery.ui.autocomplete';
 //@import "jquery.ui.chatbox";
 //@import "datepicker/datepicker3";
 //@import "selectize";
 //@import "selectize.default";
-
 //GANTT
 @import "gantt/gantt";
 @import "gantt/jquery.dateField";
@@ -58,7 +49,6 @@
 @import "messenger-1.4.1/messenger";
 @import "messenger-1.4.1/messenger-spinner";
 @import "messenger-1.4.1/messenger-theme-air";
-
 
 #workSpace {
   padding: 0;
@@ -73,57 +63,61 @@
 
 ////////////////////////////////////
 
-.media.contact a:hover{
+.media.contact a:hover {
   color: inherit;
 }
-#error_explanation ul{
+
+#error_explanation ul {
   text-align: left;
 }
+
 // hide checkbox in answers for 1 stage
 .answer-question input {
   display: none;
 }
+
 // none background for not active tab aspect for 1 stage
-.nav-tabs.aspects_tabs>li:not(.active)>a{
+.nav-tabs.aspects_tabs > li:not(.active) > a {
   background: none !important;
 }
+
 // inverse color for active tab aspect for 1 stage
-.nav-tabs.aspects_tabs>li.active>a{
+.nav-tabs.aspects_tabs > li.active > a {
   color: #fff !important;
 }
 
-.notice.close-notice{
-  display:none;
+.notice.close-notice {
+  display: none;
 }
 
-#tooltip1_3 + .tooltip{
+#tooltip1_3 + .tooltip {
   left: 310px !important;
 }
+
 .media.comment .comment_text {
-//  word-break: break-all;
+  //  word-break: break-all;
   word-wrap: break-word;
 }
 
-.comment_add.main_add{
+.comment_add.main_add {
   border-top: none;
 }
+
 .grey_theme .badge {
   background: #BEB8B8;
 }
 
-.rating_user .media-heading a:hover{
+.rating_user .media-heading a:hover {
   color: #337ab7;
 }
 
-.vert_stripe.back0{
+.vert_stripe.back0 {
   background: #948E93;
 }
 
-.color_counter span{
+.color_counter span {
   color: #fff !important;
 }
-
-
 
 /* to make scrollbars always visible */
 .always-visible.ps-container > .ps-scrollbar-x-rail,
@@ -132,7 +126,18 @@
 }
 
 // welcome screen high popover
-.help_popover_content{
+.help_popover_content {
   z-index: 1000 !important;
 }
 
+.font_red {
+  color: #e9212f !important;
+}
+
+.font_grey2 {
+  color: #919191;
+}
+
+.font_green {
+  color: #4daf5b;
+}

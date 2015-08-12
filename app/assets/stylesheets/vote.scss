@@ -9,6 +9,9 @@
   }
   .modal-body {
     padding: 25px !important;
+    ul.tab-nav_folders {
+      width: 60%;
+    }
     .tab-content {
       padding: 20px;
     }
@@ -76,18 +79,20 @@ ul.tab-nav_folders {
   cursor: pointer;
 }
 
-.item_expandable_imperf.opened{
+.item_expandable_imperf.opened {
   height: 100% !important;
 }
 
 .stage_2 {
-  ul.tab-nav_folders {
-    li {
-      .vote-folder_2, .vote-folder_3 {
-        margin-left: -39px;
+  .modal-vote {
+    ul.tab-nav_folders {
+      width: 90%;
+      li {
+        .vote-folder_2, .vote-folder_3 {
+          margin-left: -39px;
+        }
       }
     }
-
   }
 }
 

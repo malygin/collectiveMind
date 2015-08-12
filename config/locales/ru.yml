@@ -359,15 +359,15 @@ ru:
         title_folder: 'Перейти в общий список'
         title_button:
       important:
-        name: 'Необходимо'
+        name: '<span class="font_red">Необходимо</span>'
         title_folder: 'Перейти в список необходимых'
         title_button: 'Отнести к необходимым'
       not_important:
-        name: 'Важно'
+        name: '<span class="font_green">Важно</span>'
         title_folder: 'Перейти в список важных'
         title_button: 'Отнести к важным'
       unnecessary:
-        name: 'Неважно'
+        name: '<span class="font_grey2">Важные</span>'
         title_folder: 'Перейти в список неважных'
         title_button: 'Отнести к неважным'
     discontent_posts:
@@ -390,7 +390,7 @@ ru:
         title_folder: 'Перейти в список срочных и менее важных'
         title_button: 'Отнести к срочным и менее важным'
       unnecessary:
-        name: '<span class="font_grey2">Неважные</span><span>|</span><span class="font_grey2">Несрочные</span>'
+        name: '<span class="font_grey2">Неважные</span><span class="font_grey2">|</span><span class="font_grey2">Несрочные</span>'
         title_folder: 'Перейти в список неважных и несрочных'
         title_button: 'Отнести к неважным и несрочным'
     concept_posts:
