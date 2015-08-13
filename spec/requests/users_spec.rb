@@ -155,5 +155,27 @@ describe 'Users ' do
         end
       end
     end
+
+    context 'my expert news', js: true do
+      before do
+        @expert_news = create :news, project: project
+        visit "/project/#{project.id}"
+      end
+
+      it 'have news' do
+        within :css, '.md-expert-news' do
+          expect(page).to have_content t('news.header')
+          expect(page).to have_content @expert_news.title
+          expect(page).not_to have_content @expert_news.body
+          expect(page).to have_content t('news.unread')
+        end
+      end
+
+      it 'have content on click' do
+        find(:css, ".md-news-notice a").trigger('click')
+        expect(page).to have_content @expert_news.body
+        expect(page).not_to have_content t('news.unread')
+      end
+    end
   end
 end

@@ -30,6 +30,7 @@
         = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
   - else
     .content_window.bottom_panel_stop
+      = f.text_area :content, class: 'form-control without_autosize', rows: 1, style: 'width: 100%;margin-top:10px;', placeholder: 'Введите название проекта'
       %a.cont_heading.a_font_reset.bold.pocket_name.open-popup#select_novation Выбрать пакет
   .content_window.c_w_5
     .cont_heading
