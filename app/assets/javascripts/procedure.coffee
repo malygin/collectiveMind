@@ -86,7 +86,7 @@
       # убираем статус
       $(this).find('.status_news').html('')
       unless($(".md-expert-news .md-news-notice a:not(.read)").length)
-        $('.drop_opener i').css 'color', '#9e9e9e'
+        $('#open_expert_news').removeClass('active')
       $.ajax
         url: "/project/#{project_id}/news/#{news_id}/read"
         type: "get"

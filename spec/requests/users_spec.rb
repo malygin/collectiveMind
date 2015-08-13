@@ -172,7 +172,7 @@ describe 'Users ' do
       end
 
       it 'have content on click' do
-        find(:css, ".md-news-notice a").trigger('click')
+        find(:css, '.md-news-notice a').trigger('click')
         expect(page).to have_content @expert_news.body
         expect(page).not_to have_content t('news.unread')
       end
