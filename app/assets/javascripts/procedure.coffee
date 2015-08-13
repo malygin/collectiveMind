@@ -4,6 +4,8 @@
   carousellInit('.questionsCarousel')
   carousellInit('.carousel', 4000)
   colors_for_content()
+  KindsOfAccordionLists()
+  expert_news()
 
   #popup for all links with target source
   $('.open-popup').click ->
@@ -26,8 +28,6 @@
     $('.btn-tooltip').toggle()
     tooltipToggle('.tooltip1')
 
-  KindsOfAccordionLists()
-
   # intro panel with goals of stage
   if $('.md-modal-explanation').length and !$('.md-modal-explanation').hasClass('shown_intro')
     modalInit('.md-modal-explanation', withClose: false)
@@ -38,6 +38,11 @@
 
   # drop panel for header menu
   $('.drop_opener, .dw_close').click ->
+    # close opened news
+    $('.md-news-notice a').each ->
+      $(this).addClass('collapsed') unless $(this).hasClass('collapsed')
+    $('.md-news-article').each ->
+      $(this).removeClass('in')
     $('#' + $(this).attr('data-dd')).toggleClass('active')
 
   # height of tabs on 1st stafe
@@ -68,6 +73,26 @@
     $(this).find('i.collapse_arrow').toggleClass 'fa-rotate-90'
   $('.with_plus').click ->
     $(this).find('i.collapse_plus').toggleClass('fa-plus').toggleClass('fa-minus')
+
+# чтение отдельной новости эксперта в попапе
+@expert_news = ->
+  this.expert_news_read = ->
+    project_id = $(this).data('project')
+    news_id = $(this).data('id')
+    # проверяем и добавляем класс, чтобы исключить дублирование лога
+    read = $(this).hasClass('read')
+    if project_id and news_id and !read
+      $(this).addClass('read')
+      # убираем статус
+      $(this).find('.status_news').html('')
+      unless($(".md-expert-news .md-news-notice a:not(.read)").length)
+        $('#open_expert_news').removeClass('active')
+      $.ajax
+        url: "/project/#{project_id}/news/#{news_id}/read"
+        type: "get"
+        dataType: "script"
+
+  $('.md-expert-news').on('click', '.md-news-notice a', this.expert_news_read)
 
 
 

@@ -1,7 +1,7 @@
-.dropdown_window.expert_news#dd_1{ class: "#{'active' if unread_expert_news?}" }
+.dropdown_window.expert_news.md-expert-news#dd_1{ class: "#{'active' if unread_expert_news?}" }
   .dw_badge
     %i.fa.fa-exclamation-triangle
-    Новости от эксперта
+    = t('news.header')
   .dw_wrapper
     .dw_top
       .text-right
@@ -10,7 +10,7 @@
       .ps_cont
         - unless expert_news.empty?
           - expert_news.each_with_index do |news, index|
-            .dw_notice
+            .dw_notice.md-news-notice
               %a.collapsed{ class: "#{'read' if news.read?(project, current_user)}", data: { project: project.id, id: news.id },
                 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#xprt_#{index}" }
                 .row
@@ -18,10 +18,10 @@
                     = news.title
                     - unless news.read?(@project, current_user)
                       %span.status_news{ id: "status_news_#{news.id}" }
-                        (не прочитано)
+                        = t('news.unread')
                   .col-xs-3.text-right
                     %span.date
                       = l(news.created_at, format: '%d.%m.%Y')
                     %i.fa.fa-angle-right
-            .dw_article.collapse{ id: "xprt_#{index}" }
+            .dw_article.md-news-article.collapse{ id: "xprt_#{index}" }
               = news.body.try(:html_safe)

@@ -65,7 +65,7 @@ describe 'Plan ' do
       end
 
       it 'have content' do
-        expect(page).to have_content @post1.name
+        expect(page).to have_content @post1.content
       end
 
       it_behaves_like 'content with comments'
