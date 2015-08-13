@@ -5,3 +5,4 @@ Pub.nub = Pubnub.new(
     subscribe_key: ENV['PUBNUB_SUBSCRIBE_KEY'].present? ? ENV['PUBNUB_SUBSCRIBE_KEY'] : 'demo'
 )
 
+
