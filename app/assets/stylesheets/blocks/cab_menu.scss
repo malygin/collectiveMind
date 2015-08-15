@@ -1,0 +1,83 @@
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .add-techniq {
+      background: rgba(nth($base_colors, $i), .1);
+    }
+  }
+}
+
+@for $i from 1 through length($base_colors) {
+  .cab-horiz-tabs > li:nth-child(#{$i}) {
+    &.active a {
+      color: nth($base_colors, $i);
+    }
+  }
+}
+
+.cab-menu {
+  text-align: right;
+  .add-techniq {
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+    border-radius: 3px;
+
+    a {
+      font-size: 13px;
+      line-height: 1.2;
+      padding: 7px;
+      white-space: normal;
+      border-radius: 4px;
+      text-align: right;
+    }
+  }
+
+  .menu {
+    display: inline;
+    list-style: none;
+    li {
+      width: 100%;
+      margin: 10px 0;
+      a.btn {
+        width: 100%;
+        @include background-image(linear-gradient(to bottom, #fff 0%, #f3f3f3 100%));
+        text-align: right;
+        padding: 6px 10px;
+        width: 100%;
+        border: 1px solid #b1b1b1;
+        border-radius: 5px;
+        color: black;
+      }
+    }
+  }
+}
+
+.cab-horiz-tabs {
+  border-bottom: 0;
+  > li > a {
+    margin-bottom: 1px;
+    margin-right: 4px;
+    padding: 7px 27px 6px 17px;
+    border: 1px solid #c1c1c1;
+    border-bottom: 0;
+    color: #5d5d5d;
+    @include background-image(linear-gradient(to bottom, #fff 0%, #f1f1f1 100%));
+    > .marked {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    &:hover{
+      border: 1px solid #c1c1c1;
+      border-bottom: 0;
+    }
+  }
+  > li.active > a {
+    background: #ffffff;
+    margin-bottom: 1px;
+    border: 1px solid #c1c1c1;
+    border-bottom: 0;
+    &:hover{
+      border-bottom:0;
+    }
+  }
+}

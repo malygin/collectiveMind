@@ -18,6 +18,10 @@
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.4);
     }
   }
+  &.btn-danger {
+    background: #e61928;
+  }
+
 }
 
 .btn-round {
@@ -51,11 +55,6 @@
 .btn_reset:focus {
   outline: none;
   border-color: transparent;
-}
-
-.btn-danger {
-  background: #e61928;
-  border-radius: 3px;
 }
 
 .btn_simple_grey {
