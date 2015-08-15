@@ -11,11 +11,7 @@ $light_base_color_3: $base_color_3 * 1.1;
   .help_icon {
     background: image-url('i-help.png') no-repeat 0 -106px;
   }
-  .main_menu li.active a:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 7px;
-    border-bottom-color: #7a5276;
-  }
+
   .expand_button:before {
     border-right-color: $base_color_3;
   }
@@ -41,10 +37,6 @@ $light_base_color_3: $base_color_3 * 1.1;
 
   .slide-inner.slide_stage3 > .ps_cont {
     max-height: 565px;
-  }
-  .main_menu li.active a:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 6px;
   }
 
   .stages_block .btn.back_color_stage3:hover {

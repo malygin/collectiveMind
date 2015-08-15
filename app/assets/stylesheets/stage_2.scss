@@ -1,13 +1,4 @@
-.stage2_theme .main_menu li.active a:after {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 6px;
-}
 
-.stage2_theme .main_menu li.active a:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 7px;
-    border-bottom-color: #435c84;
-}
 
 .stage2_theme .add-button {
     background: #6388c5;
@@ -25,13 +16,6 @@
     color: #678cca;
 }
 
-.popup_color_theme_stage2 .expand_button:before {
-    border-right-color: #678cca;
-}
-
-.popup_color_theme_stage2 .expand_button.add_col:before {
-    border-left-color: #678cca;
-}
 .stage2_theme .theme_back_color {
     background: #759fe2;
 }
@@ -89,14 +73,6 @@
     border-color: #678cca;
 }
 
-
-.popup_color_theme_stage2 .new_comment{
-    background: rgba(103, 140, 202, 0.25);
-}
-.popup_color_theme_stage2 .answers_subblock{
-    border-color: #678cca;
-}
-
 .stage2_theme .vote_nav{
     margin-left:40px;
     border-bottom:0;
@@ -149,17 +125,6 @@
 .arrow_left.back_color_stage2:active:after{
     border-right-color: #6d99e0;
 }
-
-
-
-.back_color_stage2_pale {
-    background-color: #6489c6;
-}
-
-.back_color_stage2_superpale {
-    background-color: #e2e7f4;
-}
-
 .font_color_stage2 {
     color: #678cca !important;
 }
