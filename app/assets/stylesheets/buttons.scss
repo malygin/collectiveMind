@@ -1,3 +1,15 @@
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .btn {
+      background: nth($base_colors, $i);
+    }
+  }
+}
+
+.btn{
+  color:white;
+}
+
 .left > .exp_button,.right >  .exp_button{
   top:5px;
   position:absolute;
