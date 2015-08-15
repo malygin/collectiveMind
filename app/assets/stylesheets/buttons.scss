@@ -45,33 +45,6 @@
     border: 1px solid #b1b1b1;
     border-radius: 5px;
 }
-.btn_thin_grey {
-    text-align: left;
-    width: 120px;
-    padding: 2px 8px;
-    font-size: 12px;
-}
-.btn_thin_grey.inline {
-    width: auto;
-    text-align: center;
-    padding: 2px 8px;
-    font-size: 12px;
-}
-.btn_simple_grey, .btn_thin_grey {
-    border: 1px solid #b1b1b1;
-    border-radius: 5px;
-    background: #f3f3f3; /* Old browsers */
-    background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #f3f3f3)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #ffffff 0%, #f3f3f3 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #ffffff 0%, #f3f3f3 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #ffffff 0%, #f3f3f3 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f3f3f3', GradientType=0); /* IE6-9 */
-}
-.btn_simple_grey:focus,.btn_thin_grey:focus {
-    border: 1px solid #b1b1b1;
-}
 
 .comment_add .btn {
     position: absolute;
@@ -385,31 +358,6 @@ p .add-button + .add-button {
 .expand_button:before {
     border-color: rgba(211, 211, 211, 0);
     border-width: 9px;
-}
-
-
-.expand_button.add_col {
-    width: auto;
-    padding-left: 20px;
-    left: 0;
-    font-size: 12px;
-    visibility: hidden;
-}
-
-.exp .expand_button.add_col {
-    visibility: visible;
-}
-
-.expand_button.add_col:before {
-    border-color: rgba(211, 211, 211, 0);
-    border-width: 9px;
-    border-right-color: rgba(211, 211, 211, 0);
-}
-
-
-.expand_button.add_col:before,
-.expand_button.add_col:after {
-    left: 0;
 }
 
 .post-interfaces-buttons {

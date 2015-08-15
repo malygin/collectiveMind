@@ -15,9 +15,6 @@ $light_base_color_3: $base_color_3 * 1.1;
   .expand_button:before {
     border-right-color: $base_color_3;
   }
-  .expand_button.add_col:before {
-    border-left-color: $base_color_3;
-  }
   .media.comment.unread {
     background: #fbf9fa;
   }
