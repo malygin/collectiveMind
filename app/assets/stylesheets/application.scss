@@ -7,19 +7,23 @@
 @import 'colors';
 @import 'mixins';
 @import 'sprites';
-// Логическое деление
-@import 'landing_page';
-@import 'header_navbar';
-@import 'header_subhead';
-@import 'dropdown_window';
-@import 'post_block';
-@import 'forms';
-@import 'vote';
-@import 'modal';
-@import 'notice';
-@import 'buttons';
+// Блоки
+@import 'blocks/landing_page';
+@import 'blocks/header_navbar';
+@import 'blocks/header_subhead';
+@import 'blocks/dropdown_window';
+@import 'blocks/post_block';
+@import 'blocks/rating-line';
+@import 'blocks/forms';
+@import 'blocks/vote';
+@import 'blocks/modal';
+@import 'blocks/notice';
+
+// Элементы
+@import 'elements/buttons';
+@import 'elements/tooltips';
+
 @import 'rating';
-@import 'tooltips';
 @import 'carousel';
 // на удаление
 @import 'custom';
@@ -43,7 +47,7 @@
 @import "gantt/gantt";
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
-@import "gannt";
+@import "blocks/gannt";
 
 #workSpace {
   padding: 0;

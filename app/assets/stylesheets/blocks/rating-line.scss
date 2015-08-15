@@ -1,0 +1,29 @@
+.rating-line{
+  background:white;
+  margin:10px 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0px rgba(0,0,0,0.4);
+  margin-bottom: 12px;
+  padding:7px 10px;
+  [class='col-sm-']{
+    padding:0;
+  }
+  .rate-info{
+    padding:10px;
+    img{
+      @include circle40;
+      margin-right:10px;
+    }
+    a{
+      font-weight:bold;
+    }
+  }
+  .rate-block{
+    padding:23px 0;
+    text-align:center;
+    border-left:1px solid #d7d7d7;
+    i{
+      color:#787878;
+    }
+  }
+}
