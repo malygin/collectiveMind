@@ -1,4 +1,4 @@
-require 'resque/server'
+# require 'resque/server'
 #@todo их почему то больше нет
 #require 'resque_scheduler'
 #require 'resque_scheduler/server'

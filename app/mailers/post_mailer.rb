@@ -1,5 +1,5 @@
 class PostMailer < ActionMailer::Base
-  include Resque::Mailer
+  # include Resque::Mailer
 
   default from: 'mass-decision@yandex.ru'
 

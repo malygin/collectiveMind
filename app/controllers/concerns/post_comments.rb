@@ -49,6 +49,7 @@ module PostComments
     @comment = current_model.find(params[:id]).add_comment(params[name_of_comment_for_param], current_user,
                                                            @comment_parent, @comment_answer)
     @new_comment = comment_model.new
+    Delayed::Job.enqueue(ProcessLoggerJob)
     respond_to :js
   end
 

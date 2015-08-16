@@ -111,3 +111,4 @@ Rails.application.configure do
        socket_failure_delay: 0.2
       }
 end
+

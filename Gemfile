@@ -49,14 +49,13 @@ gem 'virtus'
 
 gem 'websocket-rails', git: 'https://github.com/samhane/websocket-rails.git'
 
-gem 'resque'
-gem 'resque_mailer'
-gem 'resque-scheduler'
-gem 'resque-status'
-gem 'rufus-scheduler', '< 3.0.0'
 gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
 
 gem 'rails-observers'
+
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :development, :test do
   gem 'quiet_assets'

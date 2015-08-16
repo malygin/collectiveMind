@@ -1,4 +1,4 @@
-require 'resque/status_server'
+# require 'resque/status_server'
 #@todo
 #require 'resque_scheduler'
 #require 'resque_scheduler/server'
