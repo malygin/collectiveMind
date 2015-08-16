@@ -16,5 +16,7 @@ class JournalLogger < ActiveRecord::Base
   scope :not_moderators, -> { joins(:user).where('users.type_user is null') }
   scope :for_moderators, -> { joins(:user).where('users.type_user in (?)', [1]) }
 
+  scope :by_format, -> f { where(journal_loggers: { request_format: f }) }
+
   validates :body, :type_event, :project_id, presence: true
 end

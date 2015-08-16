@@ -67,7 +67,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
           .col-md-3.col_padding_left_3
             .text-right.small_icons
               %span.popup2.comments_icon{ 'data-for' => "post_ch#{post_short.id}",
-              class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page('discontent')).size > 0}" }
+              class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page).size > 0}" }
                 %small{ class: "cc_post_#{post_short.id}" }
                   = post_short.comments.count
                 %i.fa.fa-comment-o

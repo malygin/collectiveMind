@@ -23,7 +23,8 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
             = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
           .what
-            = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, id: "show_record_#{post_short.id}") do
+            = link_to({ controller: 'plan/posts', action: :show, project: @project.id, id: post_short.id, last_time_visit: last_time_visit_page },
+            remote: true, id: "show_record_#{post_short.id}") do
               = trim_content(post_short.content, 200)
               %span.right_icon
                 %i.fa.fa-angle-right
@@ -40,7 +41,8 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
       .post_footer
         .tags_block
         .likes
-          %span.comments_icon{ 'data-for' => "post_ch#{post_short.id}" }
+          %span.comments_icon{ 'data-for' => "post_ch#{post_short.id}",
+          class: "#{'active' if post_short.comments.after_last_visit(last_time_visit_page).size > 0}" }
             %small{ class: "cc_post_#{post_short.id}" }
               = post_short.comments.count
             %i.fa.fa-comment-o

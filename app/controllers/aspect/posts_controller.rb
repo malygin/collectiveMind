@@ -6,7 +6,7 @@ class Aspect::PostsController < PostsController
     @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
     @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
     @questions_progress, @questions_progress_all = aspect_answers_count(@project)
-    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
+    @last_visit_presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)
     respond_to :html
   end

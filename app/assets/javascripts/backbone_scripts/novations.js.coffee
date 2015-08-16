@@ -48,7 +48,6 @@ NovationCollectionView = Backbone.View.extend
 if isProcedurePage("novation/posts")
   dc = new NovationCollection
   dc.fetch
-    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new NovationCollectionView({collection: dc})
       dv.render()

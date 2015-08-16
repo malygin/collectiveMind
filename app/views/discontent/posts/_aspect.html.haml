@@ -17,9 +17,9 @@
     -#  %span.cb_com
     -#    = new_comments
 
-    - if @presenter.after_last_visit_for_post(aspect, :posts) > 0
+    - if @last_visit_presenter.after_last_visit_for_post(aspect, :posts) > 0
       %span.cb_doc
-        = @presenter.after_last_visit_for_post(aspect, :posts)
-    - if @presenter.after_last_visit_for_post(aspect, :comments) > 0
+        = @last_visit_presenter.after_last_visit_for_post(aspect, :posts)
+    - if @last_visit_presenter.after_last_visit_for_post(aspect, :comments) > 0
       %span.cb_com
-        = @presenter.after_last_visit_for_post(aspect, :comments)
+        = @last_visit_presenter.after_last_visit_for_post(aspect, :comments)

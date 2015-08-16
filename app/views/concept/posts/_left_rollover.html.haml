@@ -15,7 +15,7 @@
           %label{ for: 'check0' } Выбрать все
       .slide_table_wrap
         -#- @project.discontents_for_discussion.each_with_index do |post, index|
-        - @presenter.content_with_counters.each_with_index do |post_with_counters, index|
+        - @last_visit_presenter.content_with_counters.each_with_index do |post_with_counters, index|
           .checkox_item{ data: { discontent: ".discontent_#{post_with_counters[:post].id}" } }
             %span
               %span.cb_input

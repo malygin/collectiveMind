@@ -56,7 +56,6 @@ DiscontentCollectionView = Backbone.View.extend
 if isProcedurePage("discontent/posts")
   dc = new DiscontentCollection
   dc.fetch
-    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new DiscontentCollectionView({collection: dc})
       dv.render()

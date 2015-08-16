@@ -25,12 +25,12 @@
             %span.vert_stripe.back2
             %span.vert_stripe.back3
           %span.text_label Все аспекты
-          - if @presenter.content_after_last_visit_for[:posts] > 0
+          - if @last_visit_presenter.posts > 0
             %span.cb_doc
-              = @presenter.content_after_last_visit_for[:posts]
-          - if @presenter.content_after_last_visit_for[:comments] > 0
+              = @last_visit_presenter.posts
+          - if @last_visit_presenter.comments > 0
             %span.cb_com
-              = @presenter.content_after_last_visit_for[:comments]
+              = @last_visit_presenter.comments
 
       %li{ data: { aspect: '#' } }
         %input#ex2_2_1{ name: 'ex2_2', type: 'radio', value: '1' }/
@@ -40,12 +40,12 @@
             %span.vert_stripe.back0
             %span.vert_stripe.back0
           %span.text_label Без аспекта
-          - if @presenter.content_after_last_visit_for[:posts] > 0
+          - if @last_visit_presenter.posts > 0
             %span.cb_doc
-              = @presenter.content_after_last_visit_for[:posts]
-          - if @presenter.content_after_last_visit_for[:comments] > 0
+              = @last_visit_presenter.posts
+          - if @last_visit_presenter.comments > 0
             %span.cb_com
-              = @presenter.content_after_last_visit_for[:comments]
+              = @last_visit_presenter.comments
 
       - @aspects.each do |aspect|
         = render partial: 'aspect', object: aspect, locals: { level: 0 }
@@ -76,17 +76,17 @@
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter{ data: { visit: last_time_visit_page('discontent') } }
-          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{ data: { name: 'sort', desc: 0, type: 'comment' } }
-            - if @presenter.content_after_last_visit_for[:comments] > 0
+        %span#sorter
+          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{ data: { type: 'comment' } }
+            - if @last_visit_presenter.comments > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:comments]
-          %span.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active#tooltip2_2{ data: { name: 'sort', desc: 0, type: 'date' },
+                = @last_visit_presenter.comments
+          %span.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active#tooltip2_2{ data: { type: 'date' },
           'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
           title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства.' }
-            - if @presenter.content_after_last_visit_for[:posts] > 0
+            - if @last_visit_presenter.posts > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:posts]
+                = @last_visit_presenter.posts
 
 .stage-post-block
   .row#tab_aspect_posts

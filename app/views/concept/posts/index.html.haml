@@ -27,25 +27,17 @@
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        %span#sorter{ data: { visit: last_time_visit_page('concept') } }
-          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{ data: { name: 'sort', desc: 0, type: 'comment' } }
-            -#- new_comments = @project.concepts_for_discussion.after_last_visit_comments(last_time_visit_page('concept')).size
-            -#- if new_comments > 0
-            -#  %span.badge-red
-            -#    = new_comments
-            - if @presenter.content_after_last_visit_for[:comments] > 0
+        %span#sorter
+          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{ data: { type: 'comment' } }
+            - if @last_visit_presenter.comments > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:comments]
-          %span.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active#tooltip3_2{ data: { name: 'sort', desc: 0, type: 'date' },
+                = @last_visit_presenter.comments
+          %span.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active#tooltip3_2{ data: { type: 'date' },
           'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
           title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи.' }
-            -#- new_posts = @project.concepts_for_discussion.after_last_visit_posts(last_time_visit_page('concept')).size
-            -#- if new_posts > 0
-            -#  %span.badge-red
-            -#    = new_posts
-            - if @presenter.content_after_last_visit_for[:posts] > 0
+            - if @last_visit_presenter.posts > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:posts]
+                = @last_visit_presenter.posts
 
 .stage-post-block
   .row.tooltip1#tab_dispost_concepts{ 'data-placement' => 'top', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',

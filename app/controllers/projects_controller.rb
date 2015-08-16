@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     # record url without params for easy parsing
     return unless current_user && @project && request.method == 'GET'
     current_user.loggers.create type_event: 'visit_save', project_id: @project.id,
-                                body: request.original_fullpath.split('?')[0]
+                                body: request.original_fullpath.split('?')[0], request_format: request.format.to_sym
   end
 
   def news_data

@@ -17,8 +17,7 @@ class Discontent::PostsController < PostsController
 
   def index
     @posts = @project.discontents_for_discussion
-    @last_time_visit = params[:last_time_visit]
-    @presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
+    @last_visit_presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)
     respond_to :html, :json
   end

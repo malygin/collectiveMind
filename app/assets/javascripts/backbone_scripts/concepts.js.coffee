@@ -55,7 +55,6 @@ ConceptCollectionView = Backbone.View.extend
 if isProcedurePage("concept/posts")
   dc = new ConceptCollection
   dc.fetch
-    data: $.param({last_time_visit: $('#sorter').data('visit')})
     success: (col,res)->
       dv = new ConceptCollectionView({collection: dc})
       dv.render()

@@ -19,29 +19,15 @@
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
           .sort-1.sort_btn.sprite.sprite-1_1#tooltip2_2{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}", 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Сортировать по новым комментариям' }
-            -#- if @project.content_after_last_visit_for(:comments, name_controller, current_user) > 0
-            -#  %span.badge-red
-            -#    = @project.content_after_last_visit_for(:comments, name_controller, current_user)
-            -#- new_comments = @project.aspects_for_discussion.after_last_visit_comments(last_time_visit_page('aspect')).size
-            -#- if new_comments > 0
-            -#  %span.badge-red
-            -#    = new_comments
-            - if @presenter.content_after_last_visit_for[:comments] > 0
+            - if @last_visit_presenter.comments > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:comments]
+                = @last_visit_presenter.comments
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
           .sort-2.sort_btn.sprite.sprite-2_1#tooltip2_2{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}", 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Сортировать по новым аспектам' }
-            -#- if @project.content_after_last_visit_for(:posts, name_controller, current_user) > 0
-            -#  %span.badge-red
-            -#    = @project.content_after_last_visit_for(:posts, name_controller, current_user)
-            -#- new_posts = @project.aspects_for_discussion.after_last_visit_posts(last_time_visit_page('aspect')).size
-            -#- if new_posts > 0
-            -#  %span.badge-red
-            -#    = new_posts
-            - if @presenter.content_after_last_visit_for[:posts] > 0
+            - if @last_visit_presenter.posts > 0
               %span.badge-red
-                = @presenter.content_after_last_visit_for[:posts]
+                = @last_visit_presenter.posts
 .divider10
 .divider_1_grey
 .divider10
