@@ -32,49 +32,48 @@
                     = yield
                 - else
                   .tab-pane.fade#cabinet_content{ class: "#{'in active' unless params[:edit_profile]}" }
-                    %div
-                      %ul.nav.nav-tabs.cab-horiz-tabs
-                        - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
-                          - if name_controller == stage[:type_stage]
-                            %li.active
-                              = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
-                                %span.marked= num_stage
-                                СТАДИЯ
-                          - elsif @project.main_stage >= num_stage
-                            %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}" }
-                              = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
-                                %span.marked= num_stage
-                                СТАДИЯ
-                          - else
-                            %li.disabled
-                              = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}" do
-                                %span.marked= num_stage
-                                СТАДИЯ
-                      .tab-content.cab-cont-block
-                        .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}" }
-                          .row
-                            .col-md-6.exp_col.left
-                              %a.exp_button
-                                %span.arrows-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
+                    %ul.nav.nav-tabs.cab-horiz-tabs
+                      - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+                        - if name_controller == stage[:type_stage]
+                          %li.active
+                            = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                        - elsif @project.main_stage >= num_stage
+                          %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}" }
+                            = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                        - else
+                          %li.disabled
+                            = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                    .tab-content.cab-cont-block
+                      .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}" }
+                        .row
+                          .col-md-6.exp_col.left
+                            %a.exp_button
+                              %span.arrows-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
                                 'data-new' => 'Развернуть историю комментариев', title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
 
-                              .content
-                                %h5
-                                  #{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})
+                            .content
+                              %h5
+                                #{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})
 
-                                = yield
+                              = yield
 
-                            .col-md-6.exp_col.right
-                              %a.exp_button
-                                %span.arrows-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                          .col-md-6.exp_col.right
+                            %a.exp_button
+                              %span.arrows-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
                                 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}", title: 'Свернуть историю комментариев' }
 
-                              .content
-                                %h5
-                                  Мои комментарии
-                                  (#{current_user.comment_for_project(name_controller, @project).count})
-                                .chat-messages
-                                  = render partial: 'shared/cabinet_comment', collection: @stage_comments
+                            .content
+                              %h5
+                                Мои комментарии
+                                (#{current_user.comment_for_project(name_controller, @project).count})
+                              .chat-messages
+                                = render partial: 'shared/cabinet_comment', collection: @stage_comments
 
                 .tab-pane.fade#user_profile{ class: "#{'in active' if params[:edit_profile]}" }
                   .col-md-6.col-md-offset-3.text-center

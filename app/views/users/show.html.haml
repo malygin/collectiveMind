@@ -1,65 +1,57 @@
-.cab_user.rounded_3.border_grey.light-grey.striped
-  .row
-    .col-md-10
-      %span.cab_username
-        = link_to user_path(@project, @user) do
-          = user_image_tag @user.avatar, class: 'img50 img-circle border_grey'
-        %h6.white
-          = link_to @user, user_path(@project, @user)
+.cab-user
+  = link_to user_path(@project, @user) do
+    = user_image_tag @user.avatar
+  %span.name
+    = link_to @user, user_path(@project, @user)
 
-.divider15
 .row
   .col-md-2
-    %ul.list-unstyled.cab_menu_left
-      %li.active
-        %a.btn.btn_simple_grey.a_font_reset.text-right#show_content{ 'data-toggle' => 'tab', href: '#user_content' }
-          = t('menu.content')
-      - if current_user?(@user)
-        %li
-          %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
-            = t('menu.account')
+    .cab-menu
+      %ul.menu
+        %li.active
+          %a.btn#show_content{ 'data-toggle' => 'tab', href: '#user_content' }
+            = t('menu.content')
+        - if current_user?(@user)
+          %li
+            %a.btn#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
+              = t('menu.account')
 
   .col-md-10
     .tab-content
-      .tab-pane.fade.in.active#user_content{ role: 'tabpanel' }
-        %div{ role: 'tabpanel' }
-          %ul.nav.nav-tabs.cab_horiz_tabs{ role: 'tablist' }
-            - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
-              %li{ class: "#{'active' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}", role: 'presentation' }
-                %a{ id: "tab_user_content_#{stage[:type_stage]}", class: "cab_tab_color#{num_stage}", 'data-toggle' => 'tab',
-                href: "#cab_cont_#{num_stage}", role: 'tab' }
-                  %span.marked= num_stage
-                  СТАДИЯ
-          .tab-content.cab_cont_block.rounded_3.border_grey.white
-            - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
-              .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}",
-              id: "cab_cont_#{num_stage}", role: 'tabpanel' }
-                .divider10
-                .container
-                  .row
-                    .col-md-6.exp_col.left
-                      %a.exp_button
-                        %span.arrows-left
-                      .divider15
-                      %span.stage-heading
-                        #{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})
+      .tab-pane.fade.in.active#user_content
+        %ul.nav.nav-tabs.cab-horiz-tabs
+          - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+            %li{ class: "#{'active' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}" }
+              %a{ id: "tab_user_content_#{stage[:type_stage]}", 'data-toggle' => 'tab', href: "#cab_cont_#{num_stage}" }
+                %span.marked= num_stage
+                СТАДИЯ
+        .tab-content.cab-cont-block
+          - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+            .tab-pane.fade{ class: "#{'active in' if @project.main_stage == num_stage || (@project.main_stage > 5 && num_stage == 5)}",
+              id: "cab_cont_#{num_stage}" }
+              .row
+                .col-md-6.exp_col.left
+                  %a.exp_button
+                    %span.arrows-left
+                  .content
+                    %h5
+                      #{t("my.#{stage[:type_stage]}")} (#{@user.content_for_project(stage[:type_stage], @project).count})
 
+                    -# @todo move to users controllers
+                    - @content = model_for(:post, stage[:type_stage]).by_project(@project).by_user(@user)
+                    = render template: "#{stage[:type_stage].to_s.gsub('_posts', '/posts')}/user_content"
+
+                .col-md-6.exp_col.right
+                  %a.exp_button
+                    %span.arrows-right
+                  .content
+                    %h5
+                      Мои комментарии
+                      (#{@user.comment_for_project(stage[:type_stage], @project).count})
+                    .chat-messages
                       -# @todo move to users controllers
-                      - @content = model_for(:post, stage[:type_stage]).by_project(@project).by_user(@user)
-                      = render template: "#{stage[:type_stage].to_s.gsub('_posts', '/posts')}/user_content"
-
-                    .col-md-6.exp_col.right
-                      %a.exp_button
-                        %span.arrows-right
-                      .divider15
-                      %span.stage-heading
-                        Мои комментарии
-                        (#{@user.comment_for_project(stage[:type_stage], @project).count})
-                      .chat-messages
-                        -# @todo move to users controllers
-                        - @stage_comments = model_for(:comment, stage[:type_stage]).by_user(@user).stage_comments_for(@project)
-                        = render partial: 'shared/cabinet_comment', collection: @stage_comments, locals: { num_stage: num_stage }
-                .divider20
+                      - @stage_comments = model_for(:comment, stage[:type_stage]).by_user(@user).stage_comments_for(@project)
+                      = render partial: 'shared/cabinet_comment', collection: @stage_comments, locals: { num_stage: num_stage }
 
       - if current_user?(@user)
         .tab-pane.fade#user_profile{ role: 'tabpanel' }

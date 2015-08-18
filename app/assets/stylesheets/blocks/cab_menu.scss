@@ -47,6 +47,25 @@
         border-radius: 5px;
         color: black;
       }
+      &.active .btn {
+        &:after, &:before {
+          right: -2px;
+          margin-top: -8.5px;
+          border: solid transparent;
+          content: " ";
+          display: block;
+          top: 50%;
+          height: 0;
+          width: 0;
+          position: absolute;
+        }
+
+        &:before {
+          border-color: rgba(211, 211, 211, 0);
+          border-width: 9.5px;
+          border-left-color: #848484;
+        }
+      }
     }
   }
 }
@@ -66,7 +85,7 @@
       font-weight: bold;
       margin-right: 5px;
     }
-    &:hover{
+    &:hover {
       border: 1px solid #c1c1c1;
       border-bottom: 0;
     }
@@ -76,8 +95,50 @@
     margin-bottom: 1px;
     border: 1px solid #c1c1c1;
     border-bottom: 0;
-    &:hover{
-      border-bottom:0;
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+}
+
+.cab-user {
+  padding: 7px 15px;
+  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
+  margin-bottom: 15px;
+  border: 1px solid #d1d1d1;
+  background-color: #ededed;
+  background-image: image-url('background/stripes_back.png');
+  background-repeat: repeat;
+  img {
+    @include circle50;
+    z-index: 2;
+    position: relative;
+  }
+  .name {
+    position: relative;
+    z-index: 1;
+    margin-right: 60px;
+    a {
+      display: inline-block;
+      position: relative;
+      padding: 5px 20px;
+      margin: 0;
+      left: -15px;
+      z-index: 1;
+      border-radius: 10px;
+      box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.4);
+      background: white;
+    }
+    &:after {
+      content: " ";
+      position: absolute;
+      z-index: -1;
+      width: 55px;
+      height: 32px;
+      top: 3px;
+      right: -14px;
+      background: image-url('background/grey_ribbon.png') no-repeat;
     }
   }
 }

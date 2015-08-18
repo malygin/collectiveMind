@@ -3,40 +3,6 @@
     margin-top: 45px;
 }
 
-.cabinet-left-col {
-    padding-right: 28px;
-    padding-bottom: 21px;
-    border-right: 2px solid #ececec;
-}
-
-.cabinet-right-col {
-    padding-left: 28px;
-    padding-bottom: 21px;
-    margin-left: -2px;
-    border-left: 2px solid #ececec;
-}
-
-.cabinet-left-col .stage-label {
-    background: #bcbcbc;
-    display: block;
-    width: 250px;
-    height: 45px;
-    border-radius: 3px;
-    line-height: 16px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-    padding: 15px;
-}
-
-.cabinet-tab-heading h5 {
-    font-weight: bold;
-    color: #666666;
-}
-
-.cabinet-tabs-subblock-2ndlev-li a {
-    color: #666666;
-}
 
 .cabinet {
     color: #666666;
