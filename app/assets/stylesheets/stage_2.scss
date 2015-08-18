@@ -96,23 +96,6 @@
     background-color: #678cca;
 }
 
-
-.arrow_left.back_color_stage2:after,
-.arrow_left.back_color_stage2 {
-    border-color: rgba(136, 183, 213, 0);
-    border-right-color: #678cca;
-}
-.arrow_left.back_color_stage2:hover,
-.arrow_left.back_color_stage2:focus,
-.arrow_left.back_color_stage2:active {
-    outline: none;
-    background: #6d99e0;
-}
-.arrow_left.back_color_stage2:hover:after,
-.arrow_left.back_color_stage2:focus:after,
-.arrow_left.back_color_stage2:active:after{
-    border-right-color: #6d99e0;
-}
 .font_color_stage2 {
     color: #678cca !important;
 }

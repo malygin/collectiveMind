@@ -100,24 +100,6 @@ $base_color_4: #8E8BC7;
   .back_color_stage4 {
     background-color: #8e8bc7;
   }
-
-  .arrow_left.back_color_stage4:after,
-  .arrow_left.back_color_stage4 {
-    border-color: rgba(136, 183, 213, 0);
-    border-right-color: #8e8bc7;
-  }
-  .arrow_left.back_color_stage4:hover,
-  .arrow_left.back_color_stage4:focus,
-  .arrow_left.back_color_stage4:active {
-    outline: none;
-    background: #9b98dd;
-  }
-  .arrow_left.back_color_stage4:hover:after,
-  .arrow_left.back_color_stage4:focus:after,
-  .arrow_left.back_color_stage4:active:after {
-    border-right-color: #9b98dd;
-  }
-
   .back_color_stage4_pale {
     background-color: #afafd9;
   }

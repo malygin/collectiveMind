@@ -99,22 +99,6 @@ $light_base_color_3: $base_color_3 * 1.1;
     //background-color: $color_3;
   }
 
-  .arrow_left.back_color_stage3:after,
-  .arrow_left.back_color_stage3 {
-    border-color: rgba(136, 183, 213, 0);
-    //border-right-color: $color_3;
-  }
-  .arrow_left.back_color_stage3:hover,
-  .arrow_left.back_color_stage3:focus,
-  .arrow_left.back_color_stage3:active {
-    outline: none;
-    background: #d69fd1;
-  }
-  .arrow_left.back_color_stage3:hover:after,
-  .arrow_left.back_color_stage3:focus:after,
-  .arrow_left.back_color_stage3:active:after {
-    border-right-color: #d69fd1;
-  }
 
   .back_color_stage3_pale {
     background-color: #bd8eb9;

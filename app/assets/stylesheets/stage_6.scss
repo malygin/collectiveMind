@@ -3,23 +3,6 @@
 }
 
 
-.arrow_left.back_color_stage6:after,
-.arrow_left.back_color_stage6{
-    border-color: rgba(136, 183, 213, 0);
-    border-right-color: #84b9bd;
-}
-.arrow_left.back_color_stage6:hover,
-.arrow_left.back_color_stage6:focus,
-.arrow_left.back_color_stage6:active {
-    outline: none;
-    background: #8ad1cb;
-}
-.arrow_left.back_color_stage6:hover:after,
-.arrow_left.back_color_stage6:focus:after,
-.arrow_left.back_color_stage6:active:after{
-    border-right-color: #8ad1cb;
-}
-
 .font_color_stage6 {
     color: #84b9bd !important;
 }
