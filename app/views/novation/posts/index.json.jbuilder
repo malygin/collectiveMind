@@ -29,4 +29,3 @@ json.array! @posts do |item|
     json.content trim_content(comment.content, 100)
   end
 end
-

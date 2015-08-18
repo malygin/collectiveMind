@@ -48,7 +48,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
                 %span.tags
                   = trim_string(aspect.content, 30)
         .likes
-          %span.comments_icon{ 'data-for' => "post_ch#{post_short.id}", class: "#{'active' if  post_short.comments.after_last_visit(last_time_visit_page).size > 0}" }
+          %span.comments_icon{ 'data-for' => "post_ch#{post_short.id}", class: "#{'active' if post_short.comments.after_last_visit(last_time_visit_page).size > 0}" }
             %small{ class: "cc_post_#{post_short.id}" }
               = post_short.comments.count
             %i.fa.fa-comment-o
@@ -61,6 +61,6 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
           %span
             %small{ id: "dlk_post_#{post_short.id}", class: "dlk_post_#{post_short.id}" }
               = post_short.users_against.count
-            = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project,  id: post_short.id, against: true },
+            = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: true },
                 remote: true, method: :put, id: "dislike_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
               %i.fa.fa-thumbs-o-down.fa-flip-horizontal
