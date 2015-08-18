@@ -14,22 +14,6 @@ every_day_at_20_hours:
   args:
   description: "This job..."
 
-every_hour:
-  #  every: "1d"
-  cron: "0 0-23 * * *"
-  class: ModeratorMailer
-  queue: moderator_mailer
-  args:
-  description: "This job..."
-
-every_day:
-  #  every: "1d"
-  cron: "0 20 * * *"
-  class: StagesMailer
-  queue: stages_mailer
-  args:
-  description: "This job..."
-
 every_minute_puts_time_in_console:
   #  every: "1d"
   cron: "0-59 * * * *"

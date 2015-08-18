@@ -1,5 +1,5 @@
-include ApplicationHelper
-
+# include MarkupHelper
+#
 # class CommentNotification
 #   @queue = :comment_notification
 #
@@ -10,10 +10,10 @@ include ApplicationHelper
 #     post = current_model.constantize.find(post_id)
 #     comment = get_comment_for_stage(comment_stage, comment_id)
 #
-#     project.users_in_project.each do |user|
+#     project.users.each do |user|
 #       next unless user != current_user && user != comment.user
 #       current_user.journals.build(type_event: name_of_comment_for_param + '_' + type, user_informed: user, project: project,
-#                                   body: "#{trim_content(comment.content)}", body2: trim_content(field_for_journal(post)),
+#                                   body: "#{trim_content(comment.content)}", body2: trim_content(post.field_for_journal),
 #                                   first_id: post.id, second_id: comment.id,
 #                                   personal: true, viewed: false, visible: false).save!
 #     end
@@ -28,10 +28,10 @@ include ApplicationHelper
 #     current_user = User.find(current_user_id)
 #     post = current_model.constantize.find(post_id)
 #
-#     project.users_in_project.each do |user|
+#     project.users.each do |user|
 #       if user != current_user && user != post.user
 #         current_user.journals.build(type_event: name_of_model_for_param + '_' + type, user_informed: user, project: project,
-#                                     body: "#{trim_content(field_for_journal(post))}", first_id: post.id, personal: true, viewed: false, visible: false).save!
+#                                     body: "#{trim_content(post.field_for_journal)}", first_id: post.id, personal: true, viewed: false, visible: false).save!
 #       end
 #     end
 #   end

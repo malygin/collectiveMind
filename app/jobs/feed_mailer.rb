@@ -14,20 +14,22 @@ def mailer(users)
   h.each { |k, v| PostMailer.feed_mailer(k, v).deliver }
 end
 
+# рассылка о непрочитанных уведомлениях у модераторов
 class FeedModeratorMailer
   @queue = :feed_moderator_mailer
 
   def self.perform
-    moderators = User.where(users: { type_user: User::TYPES_USER[:admin] })
+    moderators = User.where(users: { type_user: 1 })
     mailer(moderators)
   end
 end
 
+# рассылка о непрочитанных уведомлениях у пользователей
 class FeedUserMailer
   @queue = :feed_user_mailer
 
   def self.perform
-    users = User.where(users: { type_user: [2, 3, 4, 5, 8, nil] })
+    users = User.where(users: { type_user: [0, nil] })
     mailer(users)
   end
 end
