@@ -24,7 +24,7 @@ class Plan::PostsController < PostsController
     if @post.valid? && @post.save
       JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @post)
     end
-    @post.update status: current_model::STATUSES[:published]  if params[:plan_post][:published]
+    @post.update status: current_model::STATUSES[:published] if params[:plan_post][:published]
     respond_to :js
   end
 
@@ -32,7 +32,7 @@ class Plan::PostsController < PostsController
     if @post.update_attributes plan_post_params
       JournalEventSaver.post_update_event(user: current_user, project: @project.project, post: @post)
     end
-    @post.update(status: current_model::STATUSES[:published])  if params[:plan_post][:published]
+    @post.update(status: current_model::STATUSES[:published]) if params[:plan_post][:published]
     if @post.post_novations.any?
       @post.post_novations.first.update_attributes plan_post_novation_params
     end

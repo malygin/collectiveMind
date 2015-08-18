@@ -21,7 +21,7 @@ module JournalHelper
 
   def journal_color(j)
     case j
-    when  /aspect/
+    when /aspect/
       'font_color_stage1'
     when /discontent/
       'font_color_stage2'

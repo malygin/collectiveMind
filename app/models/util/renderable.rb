@@ -9,9 +9,9 @@ module Util::Renderable
       include Rails.application.routes.url_helpers
       include JournalHelper
 
-      def protect_against_forgery?
-        false
-      end
+      # def protect_against_forgery?
+      #   false
+      # end
     end
     action_view.render partial: partial, locals: locals
   end

@@ -1,4 +1,4 @@
-module  UserStatistics
+module UserStatistics
   def content_for_project(stage, project)
     send(stage).by_project(project.id)
   end

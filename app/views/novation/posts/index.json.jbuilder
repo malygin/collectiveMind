@@ -18,7 +18,7 @@ json.array! @posts do |item|
   json.count_comments item.comments.count
   json.count_likes item.users_pro.count
   json.count_dislikes item.users_against.count
-  json.concepts item.novation_concepts do  |concept|
+  json.concepts item.novation_concepts do |concept|
     json.id concept.id
     json.content trim_content(concept.content, 30)
   end
@@ -29,3 +29,4 @@ json.array! @posts do |item|
     json.content trim_content(comment.content, 100)
   end
 end
+

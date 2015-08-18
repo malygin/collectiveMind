@@ -50,6 +50,10 @@
 @import "gantt/platform";
 @import "blocks/gannt";
 
+@import "messenger-1.4.1/messenger";
+@import "messenger-1.4.1/messenger-spinner";
+@import "messenger-1.4.1/messenger-theme-air";
+
 #workSpace {
   padding: 0;
   overflow-y: auto;

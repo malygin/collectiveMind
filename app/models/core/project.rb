@@ -24,7 +24,7 @@ class Core::Project < ActiveRecord::Base
 
   has_many :plans, class_name: 'Plan::Post'
   has_many :plans_for_discussion, -> { where status: 1 }, class_name: 'Plan::Post'
-  has_many :plans_approved, -> { where status: 2  }, class_name: 'Plan::Post'
+  has_many :plans_approved, -> { where status: 2 }, class_name: 'Plan::Post'
 
   has_many :estimates, -> { where status: 0 }, class_name: 'Estimate::Post'
 

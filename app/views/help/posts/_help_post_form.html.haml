@@ -1,4 +1,4 @@
-= form_for post, url: { project: @project.id,  action: post.persisted? ? 'update' : 'create' }, remote: true do |f|
+= form_for post, url: { project: @project.id, action: post.persisted? ? 'update' : 'create' }, remote: true do |f|
   #notice_messages
   -#= f.text_field :title, class: 'form-control', placeholder: t('form.enter_text'), id:'title-textfield'
   -#%br

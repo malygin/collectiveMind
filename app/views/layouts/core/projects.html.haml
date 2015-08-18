@@ -44,7 +44,7 @@
           .modal-content
             .logotip
               %span.logotips-sm
-            = form_for(:user,  html: { id: 'auth-form1', class: 'form-horizontal form-auth' }, url: user_session_path, remote: true) do |f|
+            = form_for(:user, html: { id: 'auth-form1', class: 'form-horizontal form-auth' }, url: user_session_path, remote: true) do |f|
               #error_explanation
               -#- flash.each do |name, msg|
               -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
@@ -68,7 +68,7 @@
           .modal-content
             .logotip
               %span.logotips-sm
-            = form_for(:user,  html: { id: 'auth-form1', class: 'form-horizontal form-auth' }, url: user_registration_path) do |f|
+            = form_for(:user, html: { id: 'auth-form1', class: 'form-horizontal form-auth' }, url: user_registration_path) do |f|
               -#= devise_error_messages!
               -#- flash.each do |name, msg|
               -#  = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
@@ -87,4 +87,5 @@
         Javascripts
         \==================================================
       / Placed at the end of the document so the pages load faster
+      %script{ src: 'http://cdn.pubnub.com/pubnub-3.7.13.min.js' }
       = javascript_include_tag 'application'

@@ -3,7 +3,7 @@ class JournalLogger < ActiveRecord::Base
   belongs_to :user_informed, class_name: 'User', foreign_key: :user_informed
   belongs_to :project, class_name: 'Core::Project', foreign_key: 'project_id'
 
-  default_scope {  order 'created_at DESC' }
+  default_scope { order 'created_at DESC' }
   scope :select_users_for_news, -> user { where(user: user) }
   scope :by_type_event, -> type_event { where(journal_loggers: { type_event: type_event }) if type_event.present? }
   scope :date_begin, -> date_begin { where("DATE(journal_loggers.created_at + time '04:00') >= ?", date_begin) if date_begin.present? }

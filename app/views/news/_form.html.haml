@@ -1,5 +1,5 @@
 .body
-  = form_for @news, url: { project: @project.id,  action: @news.persisted? ? 'update' : 'create' }, class: 'form form-horizontal' do |f|
+  = form_for @news, url: { project: @project.id, action: @news.persisted? ? 'update' : 'create' }, class: 'form form-horizontal' do |f|
     = render 'shared/notice_messages', object: f.object
     %fieldset
       .form-group

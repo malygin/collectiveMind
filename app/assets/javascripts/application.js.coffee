@@ -50,11 +50,16 @@
 #= require gantt/jquery.timers
 #= require gantt/platform
 
+#= require websockets/websockets_load.js.erb
+#= require websockets/notifications
+#= require websockets/messenger.min
+
 
 $ ->
   init_procedure()
   init_cabinet()
   vote_scripts()
+  notifications()
 
   $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
     $('#error_explanation')

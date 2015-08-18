@@ -28,7 +28,7 @@ Spork.prefork do
   Capybara.save_and_open_page_path = 'tmp/capybara-screenshot'
 
   Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-    "#{example.full_description.gsub(' ', '-').gsub(%r{^.*/spec/}, '')}"
+    "#{example.full_description.tr(' ', '-').gsub(%r{^.*/spec/}, '')}"
   end
 
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }

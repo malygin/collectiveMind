@@ -35,7 +35,7 @@ class Discontent::PostsController < PostsController
     @post = @project.discontents.build(discontent_post_params)
     @post.user = current_user
     if params[:discontent_post_aspects]
-      params[:discontent_post_aspects].each { |asp|  @post.discontent_post_aspects.build(aspect_id: asp.to_i) }
+      params[:discontent_post_aspects].each { |asp| @post.discontent_post_aspects.build(aspect_id: asp.to_i) }
     end
     if @post.save
       JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @post)

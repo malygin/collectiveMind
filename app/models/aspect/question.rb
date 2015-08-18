@@ -19,7 +19,7 @@ class Aspect::Question < ActiveRecord::Base
     # если вопрос пропущен, то просто создаем пустой ответ
     return true if skip
     return false if type_stage == 1 && !uncorrect_answers?(answers)
-    if  content.present? && type_stage == 0
+    if content.present? && type_stage == 0
       aspect.comments.create!(content: content, user: user, answer_id: answers.try(:first).try(:to_i))
     end
     user.user_answers.where(project_id: project.id, question_id: id,
