@@ -49,11 +49,11 @@
           %li.arrow{ 'data-slide' => 'prev', href: '#myCarousel', role: 'button' }
             %i.fa.fa-angle-left
           %li.myCarousel-target.active{ 'data-slide-to' => '0', 'data-target' => '#myCarousel' }
-            %button.btn.btn_reset.back_color_stage7.font_white.bold 1
+            %button.btn.btn_reset.bold 1
 
           - @posts.each_with_index do |_post, index|
             %li.myCarousel-target{ 'data-slide-to' => "#{index + 1}", 'data-target' => '#myCarousel' }
-              %button.btn.btn_reset.back_color_stage7.font_white.bold
+              %button.btn.btn_reset.bold
                 = index + 2
 
           %li.arrow{ 'data-slide' => 'next', href: '#myCarousel', role: 'button' }

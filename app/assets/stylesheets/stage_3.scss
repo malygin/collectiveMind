@@ -12,9 +12,6 @@ $light_base_color_3: $base_color_3 * 1.1;
     background: image-url('i-help.png') no-repeat 0 -106px;
   }
 
-  .expand_button:before {
-    border-right-color: $base_color_3;
-  }
   .media.comment.unread {
     background: #fbf9fa;
   }
@@ -81,14 +78,6 @@ $light_base_color_3: $base_color_3 * 1.1;
   .cb_com:not(:empty) {
 //    background: image-url('slider/com_3.png') no-repeat center right;
     background-size: 18px auto;
-  }
-
-  .tabs_type_1 > li > a {
-    // background: $color_3;
-  }
-
-  .tabs_type_1 > li.active > a:before {
-    //border-left-color: $color_3;
   }
 
   .plus20.font_color_stage3, .plus25.font_color_stage3 {

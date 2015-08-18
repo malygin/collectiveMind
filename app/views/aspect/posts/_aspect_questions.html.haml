@@ -88,9 +88,9 @@
                           %a.btn.btn-outline.notice-button.notice.close-notice{ id: "notice_question_#{question.id}",
                           style: "border-color: #{asp.color};", data: { question: question.id } } Подсказка
                         - if @project.type_for_questions == 0
-                          = submit_tag 'Пропустить', name: 'skip', class: 'btn answer-button questionsCarousel-target', style: "background-color: #{asp.color};"
+                          = submit_tag 'Пропустить', name: 'skip', class: 'btn answer-button questionsCarousel-target'
                         -#%button#send_answers.btn.answer-button.questionsCarousel-target{ type: 'submit', style: "background-color: #{asp.color};"} Пропустить
-                        %button.btn.answer-button.questionsCarousel-target#send_answers{ type: 'submit', style: "background-color: #{asp.color};" } Ответить
+                        %button.btn.answer-button.questionsCarousel-target#send_answers{ type: 'submit' } Ответить
   - else
     - if asp.knowbase_posts.size > 1
       .row
