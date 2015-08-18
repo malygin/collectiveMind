@@ -37,6 +37,7 @@
     li {
       width: 100%;
       margin: 10px 0;
+      position: relative;
       a.btn {
         width: 100%;
         @include background-image(linear-gradient(to bottom, #fff 0%, #f3f3f3 100%));
@@ -49,7 +50,7 @@
       }
       &.active .btn {
         &:after, &:before {
-          right: -2px;
+          right: -18px;
           margin-top: -8.5px;
           border: solid transparent;
           content: " ";
