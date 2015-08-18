@@ -8,7 +8,7 @@
     background: #6d99e0;
 }
 
-.stage2_theme .help_icon {
+.stage_2 .help_icon {
     background: image-url('i-help.png') no-repeat 0 -53px;
 }
 
@@ -59,37 +59,6 @@
 
 .plus20.font_color_stage2, .plus25.font_color_stage2 {
     border-color: #678cca;
-}
-
-.stage2_theme .vote_nav{
-    margin-left:40px;
-    border-bottom:0;
-}
-.stage2_theme .vote_nav li{
-    padding-top:10px;
-    padding-bottom: 10px;
-}
-.stage2_theme .vote_nav li:hover,.stage2_theme .vote_nav >  li.active,.vote_button.voted{
-    filter: brightness(120%);
-    -webkit-filter: brightness(120%);
-    -moz-filter: brightness(120%);
-}
-.stage2_theme .vote_nav > li.active{
-    padding-top:9px;
-    padding-bottom: 9px;
-    border: 1px #b9b9b9 solid;
-    border-radius:5px ;
-}
-.stage2_theme .vote_nav.nav-tabs > li.active > a, .stage2_theme .vote_nav.nav-tabs > li.active > a:focus, .stage2_theme .vote_nav.nav-tabs > li.active > a:hover{
-    background-color:none;
-    color:none;
-    border:0;
-}
-.stage2_theme .vote_nav.nav-tabs > li{
-    margin-left:10px;
-    margin-right:10px;
-    padding-left:5px;
-    padding-right:5px;
 }
 
 .back_color_stage2 {
@@ -174,25 +143,4 @@
     background: #cee6c6;
     border-left: 1px solid #bed2b6;
     border-top: 1px solid #bed2b6;
-}
-
-/* type 2 */
-.post.post_type_2 {
-    height: 166px;
-}
-
-.post.post_type_2 .media-left, .post.post_type_2 .media-body {
-    height: 130px;
-}
-
-.post_type_2 .post_cont_hover {
-    top: 130px;
-}
-
-.post_type_2 .post_cont_hover.active {
-    top: 48px;
-}
-
-.post_type_2 .post_cont_hover .wrapper {
-    height: 69px;
 }

@@ -2161,3 +2161,10 @@ a.dropdown-toggle i {
     padding-top: 5px;
 }
 
+.slide-inner.slide_stage3 {
+    width: 400px;
+    max-height: 565px;
+    height: 100%;
+    padding: 0 10px;
+}
+
