@@ -14,10 +14,6 @@ body {
     background: #f4f4f4;
 }
 
-body.main-page {
-    background: #fff;
-}
-
 a, a:hover, a:focus, a:active {
     text-decoration: none;
     cursor: pointer !important;
@@ -26,10 +22,6 @@ a, a:hover, a:focus, a:active {
 a:focus, a:active, button:focus, button:active {
     border: 0;
     outline: none !important;
-}
-
-.a_font_reset, .a_font_reset:hover, .a_font_reset:focus {
-    color: inherit;
 }
 
 .container {
@@ -724,9 +716,6 @@ h5 i {
     overflow: hidden;
     padding: 5px 10px;
     height: 25px;
-}
-
-.post .post-theme {
     position: relative;
     top: -5px;
 }
@@ -780,21 +769,6 @@ h5 i {
     color: #e71d2b !important;
 }
 
-.post .what .left-column {
-    position: relative;
-    line-height: 1.2;
-}
-
-.post .what .fa-angle-right, .post.post_type_3.merged .media-body h5 i {
-    position: absolute;
-    top: 50%;
-    margin-top: -18px;
-    font-size: 36px;
-}
-
-.post .what .fa-angle-right {
-    right: 8px;
-}
 
 .media-body .pull-right .fa-angle-right {
     right: 8px;
@@ -804,9 +778,6 @@ h5 i {
     margin-top: -44px;
 }
 
-.post.post_type_3.merged .media-body h5 i {
-    right: 0;
-}
 
 /* new 3rd stage styles */
 .slide_table_wrap {
@@ -1294,64 +1265,7 @@ i.fa.sticker_close {
 }
 
 /* 4th stage cabinet media */
-.media.type_cab {
-    overflow: hidden;
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-    margin-top: 10px;
-    box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.4);
-}
 
-.media.type_cab {
-    height: 95px;
-}
-
-.type_cab.with_bottom {
-    height: 120px;
-}
-
-.type_cab.with_bottom .post-bottom {
-    padding-top: 0;
-}
-
-.type_cab .media-left {
-    width: 33%;
-    padding-top: 15px;
-}
-
-.type_cab .media-left, .type_cab .media-body {
-    border-top: 1px solid #d0d0d0;
-    box-shadow: inset 0 2px 3px -2px rgba(0, 0, 0, 0.3);
-    height: 90px;
-}
-
-.type_cab .cab_folder {
-    position: relative;
-    height: 50px;
-}
-
-.type_cab .cab_folder.back1 {
-    /* background: image-url('icon-cab-folder.png') no-repeat center top;*/
-}
-
-.type_cab .cab_folder.back2 {
-    /*background: image-url('icon-cab-folder_.png') no-repeat center top;*/
-}
-
-.type_cab .cab_folder.back3 {
-    /*background: image-url('icon-cab-folder_5.png') no-repeat center top;*/
-}
-
-.type_cab .cab_folder.back4 {
-    /*background: image-url('icon-cab-folder_5_.png') no-repeat center top;*/
-}
-
-.type_cab .cab_folder .percentage {
-    position: absolute;
-    width: 100%;
-    display: block;
-    padding-left: 5px;
-}
 
 .cab_folder.back1 .percentage, .cab_folder.back2 .percentage {
     top: 20px;
@@ -1361,101 +1275,6 @@ i.fa.sticker_close {
     top: 15px;
 }
 
-.type_cab .media-body {
-    padding-left: 15px;
-    padding-right: 15px;
-    position: relative;
-}
-
-.type_cab .media-body a {
-    display: table-cell;
-    height: 56px;
-    font-size: 12px;
-    padding-top: 10px;
-    padding-right: 40px;
-    vertical-align: middle;
-    position: relative;
-}
-
-.type_cab .media-body .fa-angle-right, .post_type_3.cab .media-body .fa-angle-right {
-    position: absolute;
-    bottom: 3px;
-    right: 7px;
-}
-
-.type_cab .media-bottom.ideas {
-    display: block;
-    padding-left: 30px;
-    background: image-url('icon-cab-bulb.png') no-repeat left top;
-}
-
-.type_cab .media-bottom .fa {
-    position: absolute;
-    right: 0px;
-    font-size: 30px;
-}
-
-/* 4th cab */
-.post_type_3.cab {
-    height: 130px;
-}
-
-.post_type_3 .post-bottom {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-.post_type_3.cab .media-left, .post_type_3.cab .media-body {
-    height: 95px;
-}
-
-.post_type_3.cab .media-left {
-    width: 25%;
-    padding-top: 18px;
-}
-
-.post_type_3.cab .media-body {
-    padding-left: 15px;
-    padding-right: 60px;
-    position: relative;
-}
-
-
-.post_type_3.cab .cab_folder {
-    position: relative;
-    height: 50px;
-}
-
-/*.post_type_3.cab .cab_folder.back1 {*/
-    /*background: image-url('icon-cab-folder.png') no-repeat center top;*/
-/*}*/
-
-/*.post_type_3.cab .cab_folder.back2 {*/
-    /*background: image-url('icon-cab-folder_.png') no-repeat center top;*/
-/*}*/
-
-/*.post_type_3.cab .cab_folder.back2_pale {*/
-    /*background: image-url('icon-cab-folder_pale.png') no-repeat center top;*/
-/*}*/
-
-/*.post_type_3.cab .cab_folder.back3 {*/
-    /*background: image-url('icon-cab-folder_5.png') no-repeat center top;*/
-/*}*/
-
-/*.post_type_3.cab .cab_folder.back4 {*/
-    /*background: image-url('icon-cab-folder_5_.png') no-repeat center top;*/
-/*}*/
-
-.post_type_3.cab .cab_folder .percentage {
-    position: absolute;
-    width: 100%;
-    display: block;
-    padding-left: 5px;
-}
-
-.cab_folder.back1 .percentage, .cab_folder.back2 .percentage, .cab_folder.back2_pale .percentage {
-    top: 20px;
-}
 
 /* 5 */
 .pocket_name {
@@ -2168,3 +1987,101 @@ a.dropdown-toggle i {
     padding: 0 10px;
 }
 
+
+
+
+.stages_block .btn.back_color_stage7:hover {
+    background: #97e0ef;
+}
+
+.stage7_theme .btn_cab_mod.active {
+    background: #7fb8c3;
+    color: #fff;
+}
+
+.list_win .active .back_color_stage7 {
+    background: #9ee7f4;
+}
+
+.back_color_stage7 {
+    background-color: #8cccd8;
+}
+
+.font_color_stage7 {
+    color: #86c3cf !important;
+}
+
+.project_win {
+    background: image-url("background/stripe.png") repeat;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    height: 450px;
+
+}
+
+.radial-gradient {
+    height: 100%;
+    border-radius: 6px;
+    background: radial-gradient(circle, rgba(253, 255, 254, 0.70) 30%, rgba(227, 232, 236, 0.7) 60%);
+    padding-bottom: 40px;
+}
+
+.poster_win {
+    padding-top: 40px;
+}
+
+.poster_win img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.poster_win h5 {
+    margin-top: 20px;
+}
+
+.post-win, .post-accost {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.post-accost {
+    padding-left: 10px;
+}
+
+.post-win h4, .post-accost h4 {
+    line-height: 1.4;
+}
+
+.post-win h5, .post-accost h5 {
+    margin-top: 30px;
+}
+
+.post-win p, .post-accost p {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+
+.list_win li {
+    color: #a4a4a4;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.list_win li:hover {
+    cursor: pointer;
+    color: #323232;
+}
+
+.list_win .active {
+    color: #323232;
+}
+
+
+.letters {
+    height: 100%;
+    background: image-url("background/lettersTL.png") top 30px left 30px no-repeat, image-url("background/letters.png") bottom 10px right no-repeat;
+}
