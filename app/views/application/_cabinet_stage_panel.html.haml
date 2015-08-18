@@ -4,7 +4,7 @@
       .border-block
         .btn-group
           = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}",
-              role: 'button', class: "btn arrow_left" do
+              role: 'button', class: 'btn arrow_left' do
             #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
 
     .col-md-7
