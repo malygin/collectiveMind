@@ -19,7 +19,7 @@ class Discontent::Post < ActiveRecord::Base
   has_many :final_votings, foreign_key: 'discontent_post_id', class_name: 'Discontent::Voting'
   has_many :voted_users, through: :final_votings, source: :user
 
-  validates :content,  presence: true
+  validates :content, presence: true
 
   default_scope { order :id }
   scope :without_aspects, -> { includes(:discontent_post_aspects).where(discontent_post_aspects: { post_id: nil }) }

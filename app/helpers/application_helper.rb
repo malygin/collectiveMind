@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def substage_status_by(num)
-    if  @project.sub_stage == num
+    if @project.sub_stage == num
       'current'
     elsif @project.sub_stage < num
       'unavailable'

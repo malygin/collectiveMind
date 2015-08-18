@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ModuleLength
 module BasePost
   extend ActiveSupport::Concern
   include Util::Filterable
@@ -102,7 +103,7 @@ module BasePost
       if saved_vote.present?
         vote_status = saved_vote.first.status
         saved_vote.destroy_all
-        return if  vote_status == status.to_i
+        return if vote_status == status.to_i
       end
       final_votings.create(user: user, status: status).save!
     end
@@ -120,7 +121,7 @@ module BasePost
     def add_comment(params, user, comment_parent, comment_answer)
       content = params[:content]
       return false if content == ''
-      img, is_file = Util::ImageLoader.load(params)  if params[:image]
+      img, is_file = Util::ImageLoader.load(params) if params[:image]
       comment = comments.create(content: content, image: img ? img['public_id'] : nil, isFile: img ? is_file : nil,
                                 user: user, comment_id: comment_parent ? comment_parent.id : nil)
       JournalEventSaver.comment_event(user: user, project: project, post: self, comment: comment, answer: comment_answer)

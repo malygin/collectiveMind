@@ -51,7 +51,7 @@
         .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations
           - @post.post_novations.first.attributes_for_form.each do |link, attributes|
             = fields_for @post.post_novations.first do |n|
-              .tab-pane.fade.in{ role: 'tabpanel', id: "cabinet_5_cont_#{link}",  class: "#{'active' if link == :project}" }
+              .tab-pane.fade.in{ role: 'tabpanel', id: "cabinet_5_cont_#{link}", class: "#{'active' if link == :project}" }
                 - attributes.each do |attribute, bool|
                   - if bool == -1 || bool == true
                     %h6.bold

@@ -19,9 +19,8 @@
           class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom',
           'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
             = t('menu.open_my_journals')
-            - if @my_journals_count > 0
-              %span.top-circle#my_journals_count
-                = @my_journals_count
+            %span#my_journals_count{ class: @my_journals_count > 0 ? 'top-circle' : '' }
+              = @my_journals_count > 0 ? @my_journals_count : nil
           = render partial: 'application/messages_menu'
         - if @project.closed?
           %li{ class: "#{'active' if rating?}" }

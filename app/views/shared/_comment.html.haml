@@ -37,7 +37,7 @@
           %span.theme_font_color
             %i.fa.fa-bookmark.fa-lg
       %span{ id: "cancel_comment_#{comment.id}" }
-        %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' =>  comment.id }
+        %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' => comment.id }
           %span.label.label-danger Отменить
   -#.divider10
   -#%label.label.label-success Согласен
@@ -48,7 +48,7 @@
   .post-interfaces-buttons.text-left
     - if boss?
       = link_to({ controller: comment.post.class.name.underscore.pluralize, action: :add_score_for_comment, project: @project.id, id: comment.id },
-      remote: true, method: :put,  id: "add_score_for_comment_#{comment.id}") do
+      remote: true, method: :put, id: "add_score_for_comment_#{comment.id}") do
         %i.fa.fa-trophy{ class: "#{comment.useful ? 'font_red' : 'font_grey'}" }
     %span.bold
       %span{ id: "lk_comment_#{comment.id}" }
@@ -61,7 +61,7 @@
     %span.bold
       %span{ id: "dlk_comment_#{comment.id}" }
         = comment.users_against.count
-      = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project,  id: comment.id, against: true },
+      = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project, id: comment.id, against: true },
       remote: true, method: :put,
        id: "dislike_comment_#{comment.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
         %i.fa.fa-thumbs-down.theme_font_color

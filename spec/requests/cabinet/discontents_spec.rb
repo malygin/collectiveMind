@@ -28,7 +28,7 @@ describe 'Cabinet Discontents' do
       end
     end
 
-    context 'correct', js: true  do
+    context 'correct', js: true do
       before do
         find('#select_aspect').click
         # @todo не выбирается аспект

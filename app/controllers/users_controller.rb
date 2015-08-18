@@ -1,7 +1,7 @@
 class UsersController < ProjectsController
   before_action :set_user
   before_filter :correct_user, only: [:update]
-  before_filter :journal_data, only: [:index, :new, :show,  :journal_clear, :edit_notice]
+  before_filter :journal_data, only: [:index, :new, :show, :journal_clear, :edit_notice]
 
   def index
     @users = @project.users.where(users: { type_user: 0 })

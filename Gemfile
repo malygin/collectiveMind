@@ -56,6 +56,8 @@ gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
 gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
 
+gem 'rails-observers'
+
 group :development, :test do
   gem 'quiet_assets'
   gem 'rspec-rails'

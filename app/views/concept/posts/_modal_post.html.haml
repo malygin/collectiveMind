@@ -29,7 +29,7 @@
                 %small{ id: "lk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                   = @post.users_pro.count
                 %i.fa.fa-thumbs-up
-              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project,  id: @post.id, against: true },
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
                             remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
                 %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                   = @post.users_against.count
