@@ -12,8 +12,8 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
           %i.fa.fa-bookmark.fa-lg
     .post_block
       %div{ 'data-important' => "#{post_short.id}", class: "#{'hide' unless post_short.approve_status}" }
-      .important
-        %i.fa.fa-bookmark.fa-2x
+        .important
+          %i.fa.fa-bookmark.fa-2x
       .post_body{ 'data-for' => "post_ch#{post_short.id}" }
         .post_poster
           = link_to user_path(@project, post_short.user) do
@@ -28,16 +28,16 @@ comment: "#{post_short.last_comment.present? ? post_short.last_comment.created_a
               = trim_content(post_short.content, 200)
               %span.right_icon
                 %i.fa.fa-angle-right
-          -#.post_cont_hover.post_tall.white{ id: "post_ch#{post_short.id}" }
-          -#  .wrapper.ps_cont.half_wheel_speed
-          -#    .post_cont_inner
-          -#      -post_short.comments.preview.each do |comment|
-          -#        .comment_preview
-          -#          %span.bold.com_date
-          -#            = l(comment.created_at, format: '%k:%M %d.%m.%y')
-          -#          %span.bold
-          -#            ="#{comment.user}:"
-          -#          = comment.content
+      -#.post_cont_hover.post_tall.white{ id: "post_ch#{post_short.id}" }
+      -#  .wrapper.ps_cont.half_wheel_speed
+      -#    .post_cont_inner
+      -#      -post_short.comments.preview.each do |comment|
+      -#        .comment_preview
+      -#          %span.bold.com_date
+      -#            = l(comment.created_at, format: '%k:%M %d.%m.%y')
+      -#          %span.bold
+      -#            ="#{comment.user}:"
+      -#          = comment.content
       .post_footer
         .tags_block
         .likes
