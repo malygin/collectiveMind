@@ -6,13 +6,13 @@
         = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
         title: 'Вернуться на главную страницу' do
           %span.logotips-text
-      %ul.nav.navbar-nav
+      %ul.nav.navbar-nav.main-navigation
         %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom',
         'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
           = link_to t('menu.open_procedure'), current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
           = link_to t('menu.open_cabinet'), send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
-          id: 'open_cabinet', class: 'menu_a big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+          id: 'open_cabinet', class: 'big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
           title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
           = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,
@@ -53,10 +53,10 @@
               = current_user.project_user_for(@project).try(:score)
             = current_user
             %span.fa.fa-angle-down
-          %ul.dropdown-menu{ role: 'menu', 'aria-labelledby' => 'auth_dropdown' }
-            %li{ role: 'presentation' }
+          %ul.dropdown-menu{ 'aria-labelledby' => 'auth_dropdown' }
+            %li
               = link_to t('menu.account'), user_path(@project, current_user), id: 'go_to_profile'
-            %li{ role: 'presentation' }
+            %li
               = link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, id: 'sign_out'
 .subhead
   .container

@@ -1,3 +1,29 @@
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    header ul.main-navigation > li.active a:before {
+      border-bottom-color: nth($base_colors, $i) * 0.7;
+    }
+  }
+}
+
+header ul.main-navigation > li.active a {
+  &:before, &:after {
+    border: solid transparent;
+    content: " ";
+    display: block;
+    left: 50%;
+    bottom: -2px;
+    margin-left: -5px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:before {
+    border-width: 7px;
+  }
+}
+
 .navbar {
   margin-bottom: 0;
   font-size: 13px;
