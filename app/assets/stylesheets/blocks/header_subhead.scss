@@ -5,7 +5,7 @@
     .subhead {
       @include background-image(linear-gradient(top, nth($base_colors, $i)  * 0.8 0%, nth($base_colors, $i) * 1.02));
     }
-    .subhead_navigate .metro_block ul li.active i,.info i {
+    .subhead_navigate .metro_block ul li.active i, .info i {
       color: nth($base_colors, $i);
 
     }
@@ -146,19 +146,27 @@
       }
     }
   }
-  .contact{
-    width:200px;
-    float:left;
-    a{
-      font-weight:bold;
-      img{
-        margin-right:14px;
+  .contact {
+    width: 200px;
+    float: left;
+    a {
+      font-weight: bold;
+      img {
+        margin-right: 14px;
       }
     }
   }
-  .info{
-    float:right;
-    margin-top:8px;
+  .info {
+    float: right;
+    margin-top: 8px;
+  }
+}
+
+@for $i from 1 through 6 {
+  .stage_#{$i} {
+    .help_icon {
+      background: image-url('i-help.png') no-repeat 0 -53px*($i - 1);
+    }
   }
 }
 
@@ -171,3 +179,5 @@
     background: image-url('i-help.png') no-repeat -48px 0;
   }
 }
+
+

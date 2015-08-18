@@ -25,7 +25,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
           .what
             = link_to({ action: :show, project: @project, id: post_short.id }, remote: true, id: "show_record_#{post_short.id}") do
               = trim_content(post_short.title)
-              %i.fa.fa-angle-right.icon-right
+              %i.fa.fa-angle-right
           .about
             = trim_content(post_short.content)
       -#.post_cont_hover.post_tall.white{ id: "post_ch#{post_short.id}" }

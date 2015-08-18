@@ -8,9 +8,6 @@ $light_base_color_3: $base_color_3 * 1.1;
       background: $light_base_color_3;
     }
   }
-  .help_icon {
-    background: image-url('i-help.png') no-repeat 0 -106px;
-  }
 
   .media.comment.unread {
     background: #fbf9fa;
@@ -110,10 +107,6 @@ $light_base_color_3: $base_color_3 * 1.1;
 
   .font_color_stage3 {
     //color: $color_3 !important;
-  }
-
-  .font_color_stage3_pale {
-    color: #bd8eb9 !important;
   }
 }
 
