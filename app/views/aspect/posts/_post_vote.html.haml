@@ -1,6 +1,6 @@
-.row
+.row.md-vote-container
   - @user_voter.content_for_vote(@project, status).each do |post_vote|
-    .col-sm-6.vote_item_cont{ id: "post_vote_#{post_vote.id}" }
+    .col-sm-6.md_vote_item_cont{ id: "post_vote_#{post_vote.id}" }
       .vote_item.color_me{ 'data-me-type' => 'aspect', 'data-me-action' => 'border-top-color', 'data-me-color' => "#{post_vote.id % 13}" }
         .vi_head
           %h6

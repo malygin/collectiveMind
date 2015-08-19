@@ -5,7 +5,7 @@
         %h4
           = t("vote.#{@project.current_stage_type}.header").try(:html_safe)
       .progress
-        .vote_progress.progress-bar{ data: { 'progress-all' => @count_all_posts, 'progress-voted' => @count_voted_posts },
+        .md_vote_progress.progress-bar{ data: { 'progress-all' => @count_all_posts, 'progress-voted' => @count_voted_posts },
         style: "width:#{(@count_voted_posts.to_f / @count_all_posts.to_f) * 100}%;", 'aria-valuemax' => '100', 'aria-valuemin' => '0', role: 'progressbar' }
       .modal-body
         .text-center

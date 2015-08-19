@@ -20,16 +20,16 @@
     post_id = el.data('id')
     stage = el.data('stage')
     # удаляем пост из начальной папки
-    vote_item = el.parents('.vote_item_cont').detach()
+    vote_item = el.parents('.md_vote_item_cont').detach()
     if stage == 'concept'
       # удаляем описание идеи из правой колонки
       vote_desc = $('#desript_'+post_id).detach()
       # перемещаем пост и описание в конечную папку
-      $('[data-vote-poll-role = "' + next_folder_role + '"] .container .vote_concepts').append vote_item
-      $('[data-vote-poll-role = "' + next_folder_role + '"] .container .vote_desc_concepts').append vote_desc
+      $('[data-vote-poll-role = "' + next_folder_role + '"] .md-vote-container .md_vote_concepts').append vote_item
+      $('[data-vote-poll-role = "' + next_folder_role + '"] .md-vote-container .md_vote_desc_concepts').append vote_desc
     else
       # перемещаем пост в конечную папку
-      $('[data-vote-poll-role = "' + next_folder_role + '"] .container > .row').append vote_item
+      $('[data-vote-poll-role = "' + next_folder_role + '"] .md-vote-container').append vote_item
 
   this.vote_change_role = (el)->
     if el.hasClass('voted')
@@ -51,7 +51,7 @@
     next_folder_counter.html(parseInt(next_folder_counter.html())+1)
 
   this.vote_progress = (prev_folder_role, next_folder_role)->
-    progress = $('.vote_progress')
+    progress = $('.md_vote_progress')
     all_posts = parseInt(progress.attr('data-progress-all'))
     voted_posts = parseInt(progress.attr('data-progress-voted'))
     if prev_folder_role == 'all'
