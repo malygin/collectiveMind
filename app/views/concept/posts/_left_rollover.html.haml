@@ -5,7 +5,7 @@
   .slide-inner.slide_stage3.white#tooltip_slide_panel
     .ps_cont#filter
       .divider15
-      .checkox_item{ data: { discontent: '*' } }
+      .checkox_item{ data: { group: 'all' } }
         %span
           %span.cb_input
             %input#check0{ type: 'checkbox' }
@@ -16,7 +16,7 @@
       .slide_table_wrap
         -#- @project.discontents_for_discussion.each_with_index do |post, index|
         - @last_visit_presenter.content_with_counters.each_with_index do |post_with_counters, index|
-          .checkox_item{ data: { discontent: ".discontent_#{post_with_counters[:post].id}" } }
+          .checkox_item{ data: { group: "discontent_#{post_with_counters[:post].id}" } }
             %span
               %span.cb_input
                 %input{ id: "check#{index + 2}", type: 'checkbox' }
@@ -32,14 +32,6 @@
             %span.text_label
               %label{ for: "check#{index + 2}" }
                 = post_with_counters[:post].content
-            -#- new_posts = post.dispost_concepts.after_last_visit_posts(last_time_visit_page('concept')).size
-            -#- if new_posts > 0
-            -#  %span.cb_doc
-            -#    = new_posts
-            -#- new_comments = post.dispost_concepts.after_last_visit_comments(last_time_visit_page('concept')).size
-            -#- if new_comments > 0
-            -#  %span.cb_com
-            -#    = new_comments
             - if post_with_counters[:posts] > 0
               %span.cb_doc
                 = post_with_counters[:posts]

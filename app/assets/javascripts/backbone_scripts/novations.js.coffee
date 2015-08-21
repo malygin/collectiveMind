@@ -25,13 +25,8 @@ NovationCollectionView = Backbone.View.extend
 
   render: ()->
     this.collection.forEach(this.addOne, this)
-    this.$container =  $('#tab_concept_novations').isotope
-      itemSelector: '.md-post-block',
-      layoutMode: 'fitRows',
-      getSortData:
-        comment: '[data-comment] parseFloat',
-        date: '[data-date] parseFloat'
-
+    this.$container = $('#tab_concept_novations').shuffle
+      itemSelector: '.md-post-block'
     return this
 
   addOne: (novation)->
@@ -40,9 +35,11 @@ NovationCollectionView = Backbone.View.extend
 
   sortByConcept: ()->
     sortByValue = $(this).data('type')
-    $('#tab_concept_novations').isotope
-      sortBy: sortByValue,
-      sortAscending: false
+    opts =
+      reverse: true
+      by: ($el) ->
+        $el.data sortByValue
+    $('#tab_concept_novations').shuffle 'sort', opts
 
 # only for novation url
 if isProcedurePage("novation/posts")

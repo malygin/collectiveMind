@@ -17,7 +17,7 @@
         %span.vert_stripe.back3
       %span.text_label Все аспекты
     %ul.dropdown-menu.index-of-aspects#filter
-      %li{ data: { aspect: '*' } }
+      %li{ data: { group: 'all' } }
         %input#ex2_2_0{ name: 'ex2_2', type: 'radio', value: '0' }/
         %label.checkox_item{ for: 'ex2_2_0' }
           %span
@@ -32,7 +32,7 @@
             %span.cb_com
               = @last_visit_presenter.comments
 
-      %li{ data: { aspect: '#' } }
+      %li{ data: { group: '#' } }
         %input#ex2_2_1{ name: 'ex2_2', type: 'radio', value: '1' }/
         %label.checkox_item{ for: 'ex2_2_1' }
           %span

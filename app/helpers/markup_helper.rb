@@ -18,15 +18,15 @@ module MarkupHelper
   end
 
   def post_concept_classes(post)
-    post.novation_concepts.map { |c| "concept_#{c.id}" }.join(' ')
+    post.novation_concepts.map { |c| "&quot;concept_#{c.id}&quot;" }.join(', ')
   end
 
   def post_aspect_classes(post)
-    post.post_aspects.map { |c| "aspect_#{c.id}" }.join(' ')
+    post.post_aspects.map { |c| "&quot;aspect_#{c.id}&quot;" }.join(', ')
   end
 
   def post_discontent_classes(post)
-    post.concept_disposts.map { |c| "discontent_#{c.id}" }.join(' ')
+    post.concept_disposts.map { |c| "&quot;discontent_#{c.id}&quot;" }.join(', ')
   end
 
   def user_image_tag(source, options = {})

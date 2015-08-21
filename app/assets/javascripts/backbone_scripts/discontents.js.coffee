@@ -26,13 +26,8 @@ DiscontentCollectionView = Backbone.View.extend
 
   render: ()->
     this.collection.forEach(this.addOne, this)
-    this.$container =  $('#tab_aspect_posts').isotope
-      itemSelector: '.md-post-block',
-      layoutMode: 'fitRows',
-      getSortData:
-        comment: '[data-comment] parseFloat',
-        date: '[data-date] parseFloat'
-
+    this.$container = $('#tab_aspect_posts').shuffle
+      itemSelector: '.md-post-block'
     return this
 
   addOne: (discontent)->
@@ -41,16 +36,20 @@ DiscontentCollectionView = Backbone.View.extend
 
   loadByAspect: (evt)->
     evt.preventDefault()
-    filterValue =  $(this).find('input:checked').parent().data('aspect')
-    filterValue = ':not([class*="aspect"])' if filterValue == '#'
-    $('#tab_aspect_posts').isotope
-      filter: filterValue
+    groupName = $(this).find('input:checked').parent().data('group')
+    if groupName == '#'
+      $('#tab_aspect_posts').shuffle 'shuffle', ($el, shuffle) ->
+        $el.data('groups').toString().indexOf('aspect') == -1
+    else
+      $('#tab_aspect_posts').shuffle 'shuffle', groupName
 
   sortByAspect: ()->
     sortByValue = $(this).data('type')
-    $('#tab_aspect_posts').isotope
-      sortBy: sortByValue,
-      sortAscending: false
+    opts =
+      reverse: true
+      by: ($el) ->
+        $el.data sortByValue
+    $('#tab_aspect_posts').shuffle 'sort', opts
 
 # only for discontents url
 if isProcedurePage("discontent/posts")

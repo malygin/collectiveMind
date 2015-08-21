@@ -26,13 +26,8 @@ ConceptCollectionView = Backbone.View.extend
 
   render: ()->
     this.collection.forEach(this.addOne, this)
-    this.$container =  $('#tab_dispost_concepts').isotope
-      itemSelector: '.md-post-block',
-      layoutMode: 'fitRows',
-      getSortData:
-        comment: '[data-comment] parseFloat',
-        date: '[data-date] parseFloat'
-
+    this.$container = $('#tab_dispost_concepts').shuffle
+      itemSelector: '.md-post-block'
     return this
 
   addOne: (concept)->
@@ -41,15 +36,16 @@ ConceptCollectionView = Backbone.View.extend
 
   loadByDiscontent: (evt)->
     evt.preventDefault()
-    filterValue = $(this).data('discontent')
-    $('#tab_dispost_concepts').isotope
-      filter: filterValue
+    groupName = $(this).data('group')
+    $('#tab_dispost_concepts').shuffle 'shuffle', groupName
 
   sortByDiscontent: ()->
     sortByValue = $(this).data('type')
-    $('#tab_dispost_concepts').isotope
-      sortBy: sortByValue,
-      sortAscending: false
+    opts =
+      reverse: true
+      by: ($el) ->
+        $el.data sortByValue
+    $('#tab_dispost_concepts').shuffle 'sort', opts
 
 # only for concept url
 if isProcedurePage("concept/posts")

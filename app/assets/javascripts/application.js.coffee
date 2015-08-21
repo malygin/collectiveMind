@@ -26,7 +26,6 @@
 #= require perfect-scrollbar.jquery.min
 #= require dropdowns-enhancement
 
-#= require isotope.pkgd.min
 #= require underscore
 #= require_tree ./templates
 #= require backbone
@@ -53,6 +52,8 @@
 #= require websockets/websockets_load.js.erb
 #= require websockets/notifications
 #= require websockets/messenger.min
+
+#= require jquery.shuffle.modernizr.min
 
 
 $ ->
