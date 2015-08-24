@@ -68,7 +68,7 @@ describe 'Concept ' do
       find(:css, 'span#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent1.id}']").trigger('click')
+      find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent1.id}']").trigger('click')
       sleep(5)
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
@@ -79,7 +79,7 @@ describe 'Concept ' do
       find(:css, 'span#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent2.id}']").trigger('click')
+      find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent2.id}']").trigger('click')
       sleep(5)
       # expect(page).to have_content @concept1.title
       # expect(page).to have_content @concept2.title
