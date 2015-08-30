@@ -2,7 +2,7 @@
   .comment-user
     = link_to user_path(@project, comment.user) do
       = user_image_tag comment.user.try(:avatar)
-    = link_to user_path(@project, comment.user), id: "user_name_#{comment.id}", class:'user' do
+    = link_to user_path(@project, comment.user), id: "user_name_#{comment.id}", class: 'user' do
       = comment.user
     .comment-action
       .date
