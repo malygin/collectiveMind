@@ -38,10 +38,10 @@
   }
   &.arrow_left {
     left: 20px;
-    border-top-left-radius: 0!important;
-    border-bottom-left-radius: 0!important;
     -webkit-border-top-left-radius: 0 !important;
     -webkit-border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
     position:relative;
     &:after, &:before {
       right: 100%;
