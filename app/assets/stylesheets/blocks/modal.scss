@@ -1,4 +1,4 @@
-$sizes_modal: 710, 770, 1030, 1100;
+$sizes_modal: 710, 770, 985, 1030, 1100;
 
 @each $size in $sizes_modal {
   .modal-#{$size} {
@@ -67,7 +67,7 @@ $sizes_modal: 710, 770, 1030, 1100;
         font-size: 14.7px;
         margin-bottom: 45px;
         padding-left: 50px;
-        li{
+        li {
           line-height: 18px;
           margin-bottom: 15px;
         }

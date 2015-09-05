@@ -1,6 +1,6 @@
 .modal.fade#modal-post
   .modal-dialog.modal-lg
-    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
+    %button.close{ 'data-dismiss' => 'modal' } &times;
     - if boss?
       .admin_panel
         = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
@@ -40,7 +40,7 @@
         .post-header
           .post-poster
             = link_to user_path(@project, @post.user) do
-              = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              = user_image_tag @post.user.try(:avatar)
             %span
               = link_to @post.user, user_path(@project, @post.user)
           .tags_block

@@ -40,7 +40,7 @@
         .post-header
           .post-poster
             = link_to user_path(@project, @post.user) do
-              = user_image_tag @post.user.try(:avatar), class: 'img-circle img50'
+              = user_image_tag @post.user.try(:avatar)
             %span
               = link_to @post.user, user_path(@project, @post.user)
           .tags_block
