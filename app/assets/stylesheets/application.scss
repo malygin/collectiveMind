@@ -21,11 +21,9 @@
 @import 'blocks/cab_menu';
 @import 'blocks/cab_block';
 @import 'blocks/comments';
-
 // Элементы
 @import 'elements/buttons';
 @import 'elements/tooltips';
-
 @import 'rating';
 @import 'carousel';
 // на удаление
@@ -42,14 +40,10 @@
 @import "gantt/jquery.dateField";
 @import "gantt/platform";
 @import "blocks/gannt";
-
 @import "messenger-1.4.1/messenger";
 @import "messenger-1.4.1/messenger-spinner";
 @import "messenger-1.4.1/messenger-theme-air";
-
-
 ///////Reset styles
-
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300);
 
 html {
@@ -75,6 +69,10 @@ a:focus, a:active, button:focus, button:active {
   outline: none !important;
 }
 
+a img {
+  @include circle50;
+}
+
 .container {
   width: 100%;
   max-width: 1150px;
@@ -94,12 +92,6 @@ textarea:focus {
 }
 
 ////////////////////////////////////////
-
-
-
-
-
-
 
 #workSpace {
   padding: 0;

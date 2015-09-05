@@ -1,7 +1,48 @@
-.comment{
-  .comment-user{
-    img{
-      @include circle40;
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .comment {
+      a, span {
+        color: nth($base_colors, $i);
+      }
+    }
+  }
+}
+
+.comment {
+  .comment-user {
+    > a, > span {
+      margin-right: 8px;
+    }
+    .user {
+      font-weight: 700;
+      img {
+        margin-right: 10px;
+        @include circle40;
+      }
+    }
+    .date {
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: 1px;
+    }
+  }
+  .comment-content{
+    font-size: 13px;
+    margin-top: 10px;
+    line-height: 22px;
+    color: #787878;
+    word-wrap: break-word;
+  }
+  .comment-likes {
+    margin-top:10px;
+    span small{
+      color:#333333;
+      font-size:14px;
+      font-weight:bold;
+    }
+    button {
+      background: none;
+      border: 0;
     }
   }
 }

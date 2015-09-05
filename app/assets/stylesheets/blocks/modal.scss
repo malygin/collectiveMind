@@ -215,6 +215,29 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
             }
           }
         }
+        table {
+          background: #f8f8f8;
+          tr {
+            td {
+              padding: 10px 15px;
+              font-size: 12px;
+            }
+            &:first-child td {
+              padding: 18px 15px;
+              border-bottom: 1px solid #f8cece;
+              a {
+                font-weight: bold;
+                font-size: 14px;
+                img {
+                  margin-right: 15px;
+                }
+              }
+            }
+            &:nth-child(2n) td {
+              font-weight: bold;
+            }
+          }
+        }
       }
     }
     .post {

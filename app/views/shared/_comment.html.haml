@@ -1,35 +1,34 @@
 .comment{ id: "comment#{comment.id}", class: "#{'new_comment' if @last_time_visit && (comment.created_at > @last_time_visit)}" }
   .comment-user
-    = link_to user_path(@project, comment.user) do
-      = user_image_tag comment.user.try(:avatar)
     = link_to user_path(@project, comment.user), id: "user_name_#{comment.id}", class: 'user' do
+      = user_image_tag comment.user.try(:avatar)
       = comment.user
-    .comment-action
-      .date
-        = distance_of_time_in_words(comment.created_at, Time.now)
-        назад
-      - if current_user?(comment.user) || boss?
-        .edit_comment.dropdown{ id: "redactor_comment_#{comment.id}" }
-          %a{ id: "edit_comment#{comment.id}", 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown' }
-            %i.fa.fa-cog.fa-lg
-          %ul.dropdown-menu{ 'aria-labelledby' => "edit_comment#{comment.id}" }
-            %li
-              %a.edit-comment{ data: { project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize },
+    %span.date
+      = distance_of_time_in_words(comment.created_at, Time.now)
+      назад
+    - if current_user?(comment.user) || boss?
+      %span.edit_comment.dropdown{ id: "redactor_comment_#{comment.id}" }
+        %a{ id: "edit_comment#{comment.id}", 'data-toggle' => 'dropdown' }
+          %i.fa.fa-cog.fa-lg
+        %ul.dropdown-menu{ 'aria-labelledby' => "edit_comment#{comment.id}" }
+          %li
+            %a.edit-comment{ data: { project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize },
               id: "edit_comment_#{comment.id}", href: '#', tabindex: '-1' }
-                %i.glyphicon.glyphicon-pencil
-                Редактировать
-            %li
-              = link_to({ controller: comment.post_controller_path, action: :destroy_comment, id: comment.id }, method: :put, remote: true,
+              %i.glyphicon.glyphicon-pencil
+              Редактировать
+          %li
+            = link_to({ controller: comment.post_controller_path, action: :destroy_comment, id: comment.id }, method: :put, remote: true,
               data: { confirm: t('confirm.delete_comment') }, id: "destroy_comment_#{comment.id}", tabindex: '-1') do
-                %i.glyphicon.glyphicon-remove
-                Удалить
-        - if boss?
-          = link_to({ controller: comment.post_controller_path, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id,
+              %i.glyphicon.glyphicon-remove
+              Удалить
+      - if boss?
+        = link_to({ controller: comment.post_controller_path, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id,
           approve_status: true }, remote: true, method: :put, id: "approve_status_comment_#{comment.id}") do
-            %span.badge.badge_important{ class: "#{'theme_back_color' if comment.approve_status}" }= t('show.important')
-        - elsif comment.approve_status
-          %span.theme_font_color
+          %span{ class: "#{'theme_back_color' if comment.approve_status}" }
             %i.fa.fa-bookmark.fa-lg
+      - elsif comment.approve_status
+        %span.theme_font_color
+          %i.fa.fa-bookmark.fa-lg
       %span{ id: "cancel_comment_#{comment.id}" }
         %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' => comment.id }
           %span.label.label-danger Отменить
@@ -56,8 +55,7 @@
         %i.fa.fa-thumbs-down
     %span{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Перейти в обсуждение' }
       %button.reply-comment.collapsed{ data: { project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize,
-      comment: comment.id }, id: "reply_comment_#{comment.id}",
-       'data-target' => "#reply_form_#{comment.id}", 'data-toggle' => 'collapse', type: 'button' }
+      comment: comment.id }, id: "reply_comment_#{comment.id}", 'data-target' => "#reply_form_#{comment.id}", 'data-toggle' => 'collapse' }
         %i.fa.fa-reply
 %a.answers_collapse.opened{ id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}",
 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#answers_#{comment.id}" }
