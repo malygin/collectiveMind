@@ -8,25 +8,25 @@
         = render partial: '/shared/user_online', object: user
     .col-sm-9
       .col-custom
-        %span.color-1
+        %span.md-rate.color-1
           = user.project_user_for(@project).try(:aspect_posts_score) || '−'
       .col-custom
-        %span.color-2
+        %span.md-rate.color-2
           = user.project_user_for(@project).try(:discontent_posts_score) || '−'
       .col-custom
-        %span.color-3
+        %span.md-rate.color-3
           = user.project_user_for(@project).try(:concept_posts_score) || '−'
       .col-custom
-        %span.color-4
+        %span.md-rate.color-4
           = user.project_user_for(@project).try(:novation_posts_score) || '−'
       .col-custom
-        %span.color-5
+        %span.md-rate.color-5
           = user.project_user_for(@project).try(:plan_posts_score) || '−'
       .col-custom
-        %span.color-6
+        %span.md-rate.color-6
           = user.project_user_for(@project).try(:estimate_posts_score) || '−'
       .col-custom
-        %span.color-7 −
+        %span.md-rate.color-7 −
       .col-total
         %span
           = user.project_user_for(@project).try(:score) || '−'

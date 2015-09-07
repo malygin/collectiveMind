@@ -215,7 +215,7 @@ shared_examples 'admin panel post' do |moderator = false|
         expect(page).to have_css("a.theme_font_color#add_score_post_#{@post1.id}")
       end.to change(Journal, :count).by(1)
       visit users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: @post1.class::SCORE)
+      expect(page).to have_selector('span.md-rate', text: @post1.class::SCORE)
       visit stage_post_path
       expect do
         find(:css, "a#add_score_post_#{@post1.id}").trigger('click')
@@ -223,7 +223,7 @@ shared_examples 'admin panel post' do |moderator = false|
         expect(page).to have_css("a:not(.theme_font_color)#add_score_post_#{@post1.id}")
       end.to change(Journal, :count).by(-1)
       visit users_path(project)
-      expect(page).not_to have_selector('span.rating_cell', text: @post1.class::SCORE)
+      expect(page).not_to have_selector('span.md-rate', text: @post1.class::SCORE)
     end
 
     it ' score comment ', js: true do
@@ -231,12 +231,12 @@ shared_examples 'admin panel post' do |moderator = false|
       find(:css, "#show_record_#{@post1.id}").trigger('click')
       find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
       visit users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: 5)
+      expect(page).to have_selector('span.md-rate', text: 5)
       visit stage_post_path
       find(:css, "#show_record_#{@post1.id}").trigger('click')
       find(:css, "#add_score_for_comment_#{@comment_1.id}").trigger('click')
       visit users_path(project)
-      expect(page).to have_selector('span.rating_cell', text: 0)
+      expect(page).to have_selector('span.md-rate', text: 0)
     end
 
     it ' approve post ', js: true do
