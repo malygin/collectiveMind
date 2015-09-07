@@ -9,7 +9,7 @@
     - if current_user?(comment.user) || boss?
       %span.edit_comment.dropdown{ id: "redactor_comment_#{comment.id}" }
         %a{ id: "edit_comment#{comment.id}", 'data-toggle' => 'dropdown' }
-          %i.fa.fa-cog.fa-lg
+          %span.fa.fa-cog.fa-lg
         %ul.dropdown-menu{ 'aria-labelledby' => "edit_comment#{comment.id}" }
           %li
             %a.edit-comment{ data: { project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize },
@@ -24,11 +24,9 @@
       - if boss?
         = link_to({ controller: comment.post_controller_path, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id,
           approve_status: true }, remote: true, method: :put, id: "approve_status_comment_#{comment.id}") do
-          %span{ class: "#{'theme_back_color' if comment.approve_status}" }
-            %i.fa.fa-bookmark.fa-lg
+          %span.fa.fa-bookmark.fa-lg{ class: "#{comment.approve_status ? ' ' : 'grey'}" }
       - elsif comment.approve_status
-        %span.theme_font_color
-          %i.fa.fa-bookmark.fa-lg
+        %span.fa.fa-bookmark.fa-lg
       %span{ id: "cancel_comment_#{comment.id}" }
         %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' => comment.id }
           %span.label.label-danger Отменить
@@ -57,12 +55,12 @@
       %button.reply-comment.collapsed{ data: { project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize,
       comment: comment.id }, id: "reply_comment_#{comment.id}", 'data-target' => "#reply_form_#{comment.id}", 'data-toggle' => 'collapse' }
         %i.fa.fa-reply
-%a.answers_collapse.opened{ id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}",
-'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#answers_#{comment.id}" }
-  %span
-    - if comment.comments.size > 0
+%a.answers_collapse.opened{ id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? ' ' : 'grey'}",
+'data-toggle' => 'collapse', href: "#answers_#{comment.id}" }
+  - if comment.comments.size > 0
+    %span
       = t('stages.comments', count: comment.comments.size)
 .com_answers.collapse.in{ id: "answers_#{comment.id}" }
-  .answers_subblock.level1
+  .answers_subblock
     - comment.comments.each do |c|
       = render partial: 'shared/comment', object: c

@@ -1,5 +1,5 @@
 .modal.fade#modal-post
-  .modal-dialog.modal-lg
+  .modal-dialog.modal-1030
     %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     - if boss?
       .admin_panel
@@ -97,7 +97,6 @@
                             %span.comments_action свернуть
                     .chat-messages.collapse.in#comments
                       = render partial: 'shared/comment', collection: @comments
-                    .divider15
                     = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
                       url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
 

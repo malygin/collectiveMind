@@ -4,13 +4,11 @@
 
     <input name="utf8" type="hidden" value="✓"><input name="_method" type="hidden" value="put">
 
-    <div class="input_cont">
-        <textarea name="<%= getStageByUrl() %>_comment[content]" placeholder="Ваш комментарий"><%= content %></textarea>
-    </div>
+    <textarea name="<%= getStageByUrl() %>_comment[content]" placeholder="Ваш комментарий"><%= content %></textarea>
 
     <button class="btn send-comment disabled" type="submit">
-        <span class="bold">
-            <i class="fa fa-reply theme_font_color"></i>
-        </span>
+
+        <i class="fa fa-reply"></i>
+
     </button>
 </form>

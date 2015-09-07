@@ -527,64 +527,11 @@ textarea:focus {
     padding-left: 20px;
 }
 
-.answers_subblock {
-    border-left: 2px solid transparent;
-    margin-bottom: 6px;
-    margin-top: 10px;
-}
-
-.answers_subblock.level1 {
-    border-color: #8cc5f1;
-}
-
-.answers_subblock.level2 {
-    border-color: #c2e2b0;
-}
 
 .rate_button.pushed i {
     color: #c1c1c1;
 }
 
-.comment_add {
-    position: relative;
-    margin: 3px 16px;
-}
-
-.comment_add.main_add {
-    padding-top: 20px;
-    border-top: 1px solid #cfcfcf;
-}
-
-.input_cont {
-    margin-right: 58px;
-    min-height: 40px;
-}
-
-.input_cont textarea {
-    width: 100%;
-    box-sizing: content-box;
-    height: 28px;
-    line-height: 28px;
-    padding-left: 8px;
-    border: 1px solid #d9d7d9;
-    border-radius: 3px;
-}
-
-.input_cont ::-webkit-input-placeholder {
-    color: #434343 !important;
-}
-
-.input_cont ::-moz-placeholder {
-    color: #434343;
-}
-
-.input_cont :-moz-placeholder {
-    color: #434343;
-}
-
-.input_cont :-ms-input-placeholder {
-    color: #434343;
-}
 
 .q_pop_block {
     padding-left: 45px;

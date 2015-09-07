@@ -1,5 +1,5 @@
 .modal.fade#modal-post
-  .modal-dialog.modal-lg
+  .modal-dialog.modal-1030
     %button.close{ 'data-dismiss' => 'modal' } &times;
     - if boss?
       .admin_panel
@@ -172,12 +172,11 @@
                     .separator_label.text-left
                       %h4 Обсуждение результатов опроса
                     .separator_label.pull-right
-                      %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
+                      %a{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
                         'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
                         %span.comments_action свернуть
                 .chat-messages.collapse.in#comments
                   = render partial: 'shared/comment', collection: @comments
-                .divider15
                 = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
                   url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
 

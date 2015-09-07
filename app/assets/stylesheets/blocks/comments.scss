@@ -5,10 +5,21 @@
         color: nth($base_colors, $i);
       }
     }
+    .answers_subblock {
+      border-left-color: nth($base_colors, $i);
+    }
+    .comment_add .btn{
+      background: white;
+      color: nth($base_colors, $i);
+    }
   }
 }
-
+.chat-messages{
+  margin-bottom:15px;
+}
 .comment {
+  padding: 7px 7px 10px 7px;
+  margin: 3px 9px;
   .comment-user {
     > a, > span {
       margin-right: 8px;
@@ -26,23 +37,57 @@
       margin-top: 1px;
     }
   }
-  .comment-content{
+  .comment-content {
     font-size: 13px;
     margin-top: 10px;
     line-height: 22px;
     color: #787878;
     word-wrap: break-word;
+    a {
+      color: #787878;
+    }
   }
   .comment-likes {
-    margin-top:10px;
-    span small{
-      color:#333333;
-      font-size:14px;
-      font-weight:bold;
+    margin-top: 10px;
+    span small {
+      color: #333333;
+      font-size: 14px;
+      font-weight: bold;
     }
     button {
       background: none;
       border: 0;
     }
   }
+}
+
+.comment_add {
+  position: relative;
+  margin: 3px 16px 35px 16px;
+
+  textarea {
+    width: 85%;
+    height: 28px;
+    float:left;
+    box-sizing: content-box;
+    line-height: 28px;
+    padding-left: 8px;
+    margin-right:10px;
+    border: 1px solid #d9d7d9;
+    border-radius: 3px;
+    @include input-placeholder {
+      color: #434343;
+    }
+  }
+  .btn {
+    padding: 2px 9px;
+    font-size: 20px;
+    border: 1px solid #dedede;
+  }
+
+}
+
+.answers_subblock {
+  border-left:2px solid;
+  margin:10px 0 6px 0;
 }
