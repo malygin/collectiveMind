@@ -65,7 +65,7 @@ describe 'Concept ' do
     end
 
     it 'can select first discontent in slider', js: true do
-      find(:css, 'span#opener').trigger('click')
+      find(:css, '#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent1.id}']").trigger('click')
@@ -76,7 +76,7 @@ describe 'Concept ' do
     end
 
     it 'can select second discontent in slider', js: true do
-      find(:css, 'span#opener').trigger('click')
+      find(:css, '#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent2.id}']").trigger('click')
