@@ -1,10 +1,9 @@
-.slide-outer#slide-panel{ style: 'margin-left:-400px;', 'data-position' => 'left' }
-  %span.slide-opener.i_new_stage.rounded_2.tooltip1#opener{ 'data-placement' => 'right', 'data-toggle' => 'tooltip',
-  'data-trigger' => 'manual', title: 'Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны.' }
+.slide-outer#slide-panel{ 'data-position' => 'left' }
+  .slide-opener.tooltip1#opener{ 'data-placement' => 'right', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+  title: 'Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны.' }
     %span.text-slider-opener.big{ 'data-placement' => 'right', 'data-toggle' => 'tooltip', title: 'Перейти к выбору несовершенств' }
-  .slide-inner.slide_stage3.white#tooltip_slide_panel
+  .slide-inner#tooltip_slide_panel
     .ps_cont#filter
-      .divider15
       .checkox_item{ data: { group: 'all' } }
         %span
           %span.cb_input
@@ -14,7 +13,6 @@
         %span.text_label
           %label{ for: 'check0' } Выбрать все
       .slide_table_wrap
-        -#- @project.discontents_for_discussion.each_with_index do |post, index|
         - @last_visit_presenter.content_with_counters.each_with_index do |post_with_counters, index|
           .checkox_item{ data: { group: "discontent_#{post_with_counters[:post].id}" } }
             %span
@@ -38,5 +36,4 @@
             - if post_with_counters[:comments] > 0
               %span.cb_com
                 = post_with_counters[:comments]
-      .divider15
 
