@@ -12,6 +12,11 @@
   }
 }
 
+.grey_theme .subhead {
+  @include background-image(linear-gradient(top, #969b9f 0%, #afafaf 100%));
+}
+
+
 .subhead {
   position: relative;
   padding: 10px;

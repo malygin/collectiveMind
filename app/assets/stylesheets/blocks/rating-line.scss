@@ -1,3 +1,4 @@
+//Rating modal
 .rating-line{
   background:white;
   margin:10px 0;
@@ -27,3 +28,79 @@
     }
   }
 }
+
+//Rating page
+
+@for $i from 1 through length($base_colors) {
+  .badge-#{$i} {
+    background: nth($base_colors, $i);
+  }
+  .color-#{$i}{
+    color:nth($base_colors, $i);
+  }
+}
+
+.rating-stage {
+  margin-bottom:20px;
+  .badge {
+    min-width: 70px;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 5px;
+    font-weight: normal;
+    &-user{
+      background:white;
+      padding-left: 22px;
+      padding-right: 22px;
+      color: #414040;
+    }
+  }
+
+}
+
+.col-custom, .col-total {
+  width: 12%;
+  float: left;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 1px;
+  text-align: center;
+}
+
+.col-total {
+  width: 16%;
+}
+
+.rating_line {
+  background: white;
+  margin: 10px 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 12px;
+  padding: 7px 10px;
+  .col-custom,.col-total {
+    border-left: 1px solid #d7d7d7;
+  }
+  span {
+    display: inline-block;
+    width: 100%;
+    padding: 13px 0;
+    line-height: 19px;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.rating_user{
+  a{
+    font-weight:bold;
+    font-size: 13px;
+    img{
+      @include circle40;
+      margin-right: 15px;
+    }
+  }
+}
+
+
+

@@ -24,7 +24,6 @@
 // Элементы
 @import 'elements/buttons';
 @import 'elements/tooltips';
-@import 'rating';
 @import 'carousel';
 // на удаление
 @import 'custom';
@@ -140,10 +139,6 @@ textarea:focus {
 .media.comment .comment_text {
   //  word-break: break-all;
   word-wrap: break-word;
-}
-
-.grey_theme .badge {
-  background: #BEB8B8;
 }
 
 .rating_user .media-heading a:hover {
