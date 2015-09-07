@@ -74,7 +74,7 @@ shared_examples 'content with comments' do |moderator = false, count = 2, _proje
   context 'add new comment', js: true do
     before do
       fill_in 'comment_text_area', with: text_comment
-      find('#comment_form.main_add .send-comment').click
+      find('#comment_form .send-comment').click
     end
 
     it 'correct' do
