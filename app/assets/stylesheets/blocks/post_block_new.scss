@@ -1,0 +1,29 @@
+.content-collapse {
+  > a {
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+.content-block {
+  padding: 25px 20px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  margin: 15px 0;
+  overflow: hidden;
+  font-size: 12px;
+  position: relative;
+  background: white;
+  .form-group {
+    label {
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+  }
+  &.example {
+    p:nth-child(2n) {
+      margin: 10px 0 20px 0;
+      color: #9e9e9e;
+    }
+  }
+}
