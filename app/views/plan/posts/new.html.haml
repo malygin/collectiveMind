@@ -69,7 +69,7 @@
         .divider15
         .row
           .col-md-5
-            %ul.list-unstyled.tabs_type_2.less_margin#ul_novations{ role: 'tablist' }
+            %ul.list-unstyled.tabs_type_2#ul_novations
               - @novations.each do |novation|
                 %li.open_novation{ role: 'presentation' }
                   %a.a_font_reset{ 'data-toggle' => 'tab', href: "#show_novation_#{novation.id}", role: 'tab' }

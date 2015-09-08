@@ -4,15 +4,13 @@
       background: rgba(nth($base_colors, $i), .1);
     }
   }
-}
-
-@for $i from 1 through length($base_colors) {
   .cab-horiz-tabs > li:nth-child(#{$i}) {
     &.active a {
       color: nth($base_colors, $i);
     }
   }
 }
+
 
 .cab-menu {
   text-align: right;

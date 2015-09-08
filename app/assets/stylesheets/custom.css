@@ -866,14 +866,6 @@ h5 i {
     vertical-align: middle;
 }
 
-
-.cabinet_popup_links {
-    overflow: hidden;
-    border-radius: 5px;
-    margin-top: 10px;
-    box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.4);
-}
-
 .stages_block .open_sticker {
     position: absolute;
     top: 50%;
