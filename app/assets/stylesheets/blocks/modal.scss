@@ -12,16 +12,16 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
       color: nth($base_colors, $i);
     }
     .modal {
-      .modal-header .likes > a > i {
-        color: nth($base_colors, $i);
-      }
-      .panel .panel-heading i {
+      .modal-header .likes > a > i, .panel .panel-heading i, .count > i, {
         color: nth($base_colors, $i);
       }
       &.modal-explanation {
         .modal_badge {
           background: nth($base_colors, $i);
         }
+      }
+      .subhead-stripe, .stat-block .badge {
+        background: nth($base_colors, $i);
       }
     }
   }
@@ -57,7 +57,6 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
       }
       h2 {
         font-size: 28px;
-        font-weight: bold;
         line-height: 46px;
         margin-bottom: 40px;
         font-weight: 600;
@@ -92,6 +91,71 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
       }
     }
   }
+  &.modal-results {
+    .legend {
+      line-height: 23px;
+      font-size: 11px;
+      span {
+        margin-right: 19px;
+      }
+    }
+    .result-block {
+      padding: 18px 68px;
+      .result-cell {
+        display: table;
+        > .cell {
+          display: table-cell;
+          font-weight: bold;
+          font-size: 13px;
+          padding: 10px 5px;
+          a {
+            img {
+              @include circle35;
+            }
+          }
+          .legend span {
+            margin-right: 10px;
+            font-size: 11px;
+            color: #bbbbbb;
+          }
+        }
+
+      }
+      .top {
+        text-align: center;
+        a {
+          font-size: 12px;
+          img {
+            display: block;
+            margin: 0 auto;
+            @include circle100;
+          }
+        }
+        .count {
+          margin-top: 10px;
+          font-size: 12px;
+          i {
+            font-size: 13px;
+          }
+        }
+      }
+      .stat-block {
+        display: table;
+        &> .cell{
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0 5px;
+        }
+        .badge {
+          line-height: 30px;
+          width: 36px;
+          height: 36px;
+          font-size: 19px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
   .modal-dialog {
     > button.close {
       position: absolute;
@@ -106,6 +170,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
 
     }
   }
+
   .admin_panel {
     margin-top: 10px;
     padding: 5px;
@@ -259,6 +324,23 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
       .post-content {
         width: 83%;
         overflow: hidden;
+      }
+    }
+    .subhead-stripe {
+      color: white;
+      padding: 0 35px;
+      h5 {
+        margin-top: 6px;
+        margin-bottom: 7px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .btn {
+        margin-top: 3px;
+        width: 80px;
+        padding: 2px 0 3px;
+        font-size: 11px;
+        border: 1px solid #fff;
       }
     }
   }

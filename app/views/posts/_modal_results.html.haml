@@ -1,17 +1,17 @@
-.modal.fade#modal-results
-  %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
-  .modal-dialog.modal-lg.modal-results
+.modal.fade.modal-results#modal-results
+  .modal-dialog.modal-lg
+    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     .modal-content
       .modal-header
         %h4
           = t('show.result_stage')
           = number_current_stage
       .modal-body
-        .subhead
+        .subhead-stripe
           .row
             .col-md-4
               %h5 Вклад в процедуру
-            .col-md-8
+            .col-md-6
               .legend
                 %span
                   %i.fa.fa-file-text
@@ -25,69 +25,70 @@
                 %span
                   %i.fa.fa-star
                   важный материал
-              %button.pull-right.btn.btn_reset.btn_dia
-                %i>
+            .col-md-2
+              %button.pull-right.btn
                 Подробнее
-        .dia_block
+        .result-block
           .row
-            .col-md-4
-            .col-md-8
+            .col-md-8.col-md-offset-4
               .row
                 - @project_result.sort_user_score(name_controller.to_s + '_score').each_with_index do |user, index|
                   .col-md-6
-                    .dia_cell
-                      %span.num_cell
+                    .result-cell
+                      .cell
                         = index + 1
-                      %span
+                      .cell
                         = link_to user_path(@project, user) do
-                          = user_image_tag user.try(:avatar), class: 'img35 img-circle'
-                      %span
-                        %p
-                          = link_to user, user_path(@project, user)
-                        %span.dia_icon
-                          = user.content_for_project(name_controller, @project).count
-                          %i.fa.fa-file-text
-                        %span.dia_icon
-                          = user.comment_for_project(name_controller, @project).count
-                          %i.fa.fa-comment
-                        %span.dia_icon
-                          = user.like_content_for(name_controller, @project).count + user.like_comment_for(name_controller, @project).count
-                          %i.fa.fa-thumbs-up
-                        %span.dia_icon
-                          = user.approve_content_for(name_controller, @project).count + user.approve_comment_for(name_controller, @project).count
-                          %i.fa.fa-star
-        .subhead
+                          = user_image_tag user.try(:avatar)
+                      .cell
+                        = link_to user, user_path(@project, user)
+                        .legend
+                          %span
+                            = user.content_for_project(name_controller, @project).count
+                            %i.fa.fa-file-text
+                          %span
+                            = user.comment_for_project(name_controller, @project).count
+                            %i.fa.fa-comment
+                          %span
+                            = user.like_content_for(name_controller, @project).count + user.like_comment_for(name_controller, @project).count
+                            %i.fa.fa-thumbs-up
+                          %span
+                            = user.approve_content_for(name_controller, @project).count + user.approve_comment_for(name_controller, @project).count
+                            %i.fa.fa-star
+        .subhead-stripe
           .row
             .col-md-9
               %h5 Популярность контента
-        .dia_block_top
+        .result-block
           .row
             - @project_result.sort_user_like(name_controller).each do |user|
               .col-md-4
                 .top
                   = link_to user_path(@project, user) do
-                    = user_image_tag user.try(:avatar), class: 'img100 img-circle'
-                  %span
-                    = link_to user, user_path(@project, user)
-                  %span
+                    = user_image_tag user.try(:avatar)
+                    = user
+                  .count
                     = user.likes_posts_for(name_controller, @project).count + user.likes_comments_for(name_controller, @project).count
                     %i.fa.fa-thumbs-up
-
-        .stats
+        .result-block
           .row
             .col-md-4
-              .stat_block
-                %span
-                  = @project_result.count_of_added_contents(name_model)
-                %h4
-                  ДОБАВЛЕНО
-                  = t("my_result_add.#{name_controller}")
+              .stat-block
+                .cell
+                  .badge
+                    = @project_result.count_of_added_contents(name_model)
+                .cell
+                  %h4
+                    ДОБАВЛЕНО
+                    = t("my_result_add.#{name_controller}")
             .col-md-8
-              .stat_block
-                %span
-                  = @project_result.count_of_contents_for_next_stage(name_model)
-                %h4
-                  = t("my_result_add.#{name_controller}")
-                  ,
-                  %br/
-                  ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ
+              .stat-block
+                .cell
+                  .badge
+                    = @project_result.count_of_contents_for_next_stage(name_model)
+                .cell
+                  %h4
+                    = t("my_result_add.#{name_controller}")
+                    ,
+                    %br/
+                    ПРИНЯТЫХ ДЛЯ ДАЛЬНЕЙШЕЙ РАБОТЫ
