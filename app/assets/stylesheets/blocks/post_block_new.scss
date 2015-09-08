@@ -1,12 +1,20 @@
-.content-collapse {
-  > a {
-    font-weight: bold;
-    font-size: 12px;
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    a.collapser {
+      color: nth($base_colors, $i);
+
+    }
   }
 }
 
+a.collapser {
+  font-weight: bold;
+  font-size: 12px;
+  display: block;
+}
+
 .content-block {
-  padding: 25px 20px;
+  padding: 10px 20px;
   border-radius: 3px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   margin: 15px 0;
@@ -25,5 +33,10 @@
       margin: 10px 0 20px 0;
       color: #9e9e9e;
     }
+  }
+  hr {
+    height: 1px;
+    margin-top: 10px;
+    background: #cdcdcd;
   }
 }

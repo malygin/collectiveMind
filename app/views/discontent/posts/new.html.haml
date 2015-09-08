@@ -3,7 +3,7 @@
 - content_for :discontent_form do
   = form_for @post, url: { project: @project.id, id: @post, action: @post.persisted? ? 'update' : 'create' }, remote: true, html: { id: 'new_discontent' } do |f|
     .content-collapse
-      %a.with_arrow.collapsed#open_technique{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#techniq' }
+      %a.collapser.with_arrow.collapsed#open_technique{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#techniq' }
         Помощь по формулированию несовершенств
         %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       .collapse#techniq
@@ -66,7 +66,7 @@
         = f.submit t("form.#{action_name}"), class: 'btn add-button type2', id: 'send_post'
     .content-collapse
       - if @mechanic_type == 'simple'
-        %a.with_arrow.collapsed#open_example_discontent{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1' }
+        %a.collapser.with_arrow.collapsed#open_example_discontent{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1' }
           Пример несовершенства
           %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
       .content-block.example.collapse#imperfs1
