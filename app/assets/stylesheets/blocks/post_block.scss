@@ -48,20 +48,20 @@ $border_grey: 1px solid #d9d9d9;
             font-weight: bold;
             font-size: 13px;
           }
-          .right_icon{
+          .right_icon {
             position: absolute;
             right: 8px;
             top: 12px;
-            i{
+            i {
               font-size: 15px;
-              margin-right:3px;
+              margin-right: 3px;
             }
           }
         }
         .about {
           padding: 5px 15px 5px 8px;
           color: #666666;
-          .right_icon{
+          .right_icon {
             position: absolute;
             font-size: 36px;
             right: 10px;
@@ -90,8 +90,29 @@ $border_grey: 1px solid #d9d9d9;
           float: left;
         }
         .post-theme {
-          min-width: 344px;
-          margin-top: 1px;
+          overflow: hidden;
+          padding: 5px 10px;
+          height: 25px;
+          position: relative;
+          top: -5px;
+          transition: all 0.1s linear;
+          white-space: nowrap;
+          &:hover{
+            position: relative;
+            z-index: 100;
+            background: #fff;
+            width:auto;
+            box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+          }
+        }
+        .themes_cont {
+          width: 344px;
+          overflow: hidden;
+          margin-top: 7px;
+          &:hover {
+            overflow: visible;
+            width: auto;
+          }
         }
       }
       .likes {

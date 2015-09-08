@@ -1,4 +1,5 @@
-<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6 md-post-block" data-groups="[<%= post_classes %>]" data-id="id-<%= id %>" data-date="<%= sort_date %>"
+<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6 md-post-block" data-groups="[<%= post_classes %>]"
+     data-id="id-<%= id %>" data-date="<%= sort_date %>"
      data-comment="<%= sort_comment %>">
     <div class="post_full">
         <% if(admin_panel) { %>
@@ -52,53 +53,56 @@
                 <% if(typeof aspects !== 'undefined') { %>
                 <div class="tags_block">
                     <div class="title">Аспекты</div>
-
-                    <div id="stripe<%= id %>" class="post-theme">
-                        <% for(var i = 0; i < aspects.length; i++) { %>
-                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes" style="background-color: <%= aspects[i].color %>;">
+                    <div class="themes_cont">
+                        <div id="stripe<%= id %>" class="post-theme">
+                            <% for(var i = 0; i < aspects.length; i++) { %>
+                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
+                                  style="background-color: <%= aspects[i].color %>;">
                                 <span class="tags">
                                 <%= aspects[i].content %>
                                 </span>
                             </span>
-                        <% } %>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
                 <% } %>
                 <% if(typeof discontents !== 'undefined') { %>
                 <div class="tags_block">
                     <div class="title">Несовершенства</div>
+                    <div class="themes_cont">
+                        <div id="stripe<%= id %>" class="post-theme">
 
-                    <div id="stripe<%= id %>" class="post-theme">
-
-                        <% for(var i = 0; i < discontents.length; i++) { %>
-                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
-                              data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
-                              data-me-type="imperf" data-placement="top" data-toggle="tooltip"
-                              title="<%= discontents[i].content %>">
+                            <% for(var i = 0; i < discontents.length; i++) { %>
+                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                                  data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
+                                  data-me-type="imperf" data-placement="top" data-toggle="tooltip"
+                                  title="<%= discontents[i].content %>">
                             <span class="tags">
                             <%= discontents[i].content %>
                             </span>
                         </span>
-                        <% } %>
-
+                            <% } %>
+                        </div>
                     </div>
                 </div>
                 <% } %>
                 <% if(typeof concepts !== 'undefined')  { %>
                 <div class="tags_block">
                     <div class="title">Аспекты</div>
+                    <div class="themes_cont">
+                        <div id="stripe<%= id %>" class="post-theme">
 
-                    <div id="stripe<%= id %>" class="post-theme">
-
-                        <% for(var i = 0; i < concepts.length; i++) { %>
-                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
-                              data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                            <% for(var i = 0; i < concepts.length; i++) { %>
+                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                                  data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
                             <span class="tags">
                             <%= concepts[i].content %>
                             </span>
                         </span>
-                        <% } %>
+                            <% } %>
 
+                        </div>
                     </div>
                 </div>
                 <% } %>
@@ -112,17 +116,19 @@
                             <small id="lk_post_<%= id %>">
                                 <%= count_likes %>
                             </small>
-                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=false">
+                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+                           href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=false">
                             <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
                         </a>
                         </span>
                         <span>
                             <small id="dlk_post_<%= id %>">
-                            <%= count_dislikes %>
+                                <%= count_dislikes %>
                             </small>
-                             <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put" href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=true">
-                            <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-                        </a>
+                             <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+                                href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=true">
+                                 <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+                             </a>
                         </span>
                 </div>
             </div>
