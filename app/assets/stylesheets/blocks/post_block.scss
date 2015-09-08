@@ -45,7 +45,6 @@ $border_grey: 1px solid #d9d9d9;
           border-bottom: $border_grey;
           min-height: 40px;
           a {
-            font-weight: bold;
             font-size: 13px;
 
           }
@@ -56,6 +55,10 @@ $border_grey: 1px solid #d9d9d9;
             i {
               font-size: 15px;
               margin-right: 3px;
+              &.fa{
+                font-size:30px;
+                margin-top: -7px;
+              }
             }
           }
         }
