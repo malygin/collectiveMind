@@ -662,43 +662,7 @@ h5 i {
     padding-right: 20px !important;
 }
 
-/* dropdown menu */
-.dropdown-toggle {
-    display: inline-block;
-    padding-right: 10px;
-    position: relative;
-}
 
-.dropdown-toggle:after {
-    position: absolute;
-    right: -15px;
-    top: 0;
-    content: " ";
-    display: block;
-    width: 18px;
-    height: 18px;
-    background: image-url('arrows.png') no-repeat;
-    background-position: 0 -57px;
-}
-
-.dropdown-toggle span {
-    display: inline-block;
-    padding: 0 20px 0 0;
-}
-
-.dropdown-menu {
-    z-index: 1090;
-}
-
-.dropdown-toggle span.cb_doc, .dropdown-toggle span.cb_com, .dropdown-toggle span.color_counter > span {
-    display: none;
-}
-
-.dropdown-toggle span.color_counter {
-    display: inline-block;
-    width: 11px;
-    height: 11px;
-}
 
 .ta_icon {
     background-image: image-url('icons.png');

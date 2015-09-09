@@ -7,23 +7,21 @@
 - if @project_result
   = render partial: 'modal_results'
 .stage-info-sort-block
-  .btn-group.tooltip1#tooltip2_1{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+  .dropdown-block.tooltip1#tooltip2_1{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
   title: 'Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом.' }
     %span Фильтр аспектов:
     %a.dropdown-toggle.select-aspect{ 'data-toggle' => 'dropdown' }
-      %span
-        %span.vert_stripe.back1
-        %span.vert_stripe.back2
-        %span.vert_stripe.back3
+      -(2..4).each do |i|
+        %span.stripe{ class:"stripe-#{i}" }
       %span.text_label Все аспекты
-    %ul.dropdown-menu.index-of-aspects#filter
+      %span.arrows-icon-dropdown
+    %ul.dropdown-menu#filter
       %li{ data: { group: 'all' } }
-        %input#ex2_2_0{ name: 'ex2_2', type: 'radio', value: '0' }/
+        %input#ex2_2_0{ name: 'ex2_2', type: 'radio', value: '0' }
         %label.checkox_item{ for: 'ex2_2_0' }
           %span
-            %span.vert_stripe.back1
-            %span.vert_stripe.back2
-            %span.vert_stripe.back3
+            -(2..4).each do |i|
+              %span.stripe{ class:"stripe-#{i}" }
           %span.text_label Все аспекты
           - if @last_visit_presenter.posts > 0
             %span.cb_doc
@@ -36,9 +34,8 @@
         %input#ex2_2_1{ name: 'ex2_2', type: 'radio', value: '1' }/
         %label.checkox_item{ for: 'ex2_2_1' }
           %span
-            %span.vert_stripe.back0
-            %span.vert_stripe.back0
-            %span.vert_stripe.back0
+            -(1..3).each do
+              %span.stripe.stripe-1
           %span.text_label Без аспекта
           - if @last_visit_presenter.posts > 0
             %span.cb_doc
@@ -69,10 +66,10 @@
               %span.tooltip1#tooltip2_2{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
               title: 'Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией' }
                 = t('techniques.discontent_posts_simple')
-        -#- else
-        -#  = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
-        -#    .results{ class: "#{show_results?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
-        -#    'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Показать итоги стадии' }
+      -#- else
+      -#  = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
+      -#    .results{ class: "#{show_results?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+      -#    'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Показать итоги стадии' }
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
