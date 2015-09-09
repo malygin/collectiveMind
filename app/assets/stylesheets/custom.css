@@ -173,55 +173,6 @@ textarea:focus {
     height: 100%;
 }
 
-/* first stage slider */
-.slider-wrapper {
-    width: 100%;
-    margin-bottom: 15px;
-    position: relative;
-}
-
-.slider-wrapper .slider-nav {
-    position: absolute;
-    top: 25%;
-    display: block;
-    cursor: pointer;
-}
-
-.slider-wrapper .slider-nav i {
-    font-size: 26px;
-}
-
-.slider-left {
-    left: 0px;
-}
-
-.slider-right {
-    right: 0px;
-}
-
-.slider-outer {
-    width: 97%;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.slider-inner {
-    overflow: hidden;
-}
-
-.slider-inner li {
-    display: block;
-    float: left;
-}
-
-.slider-item {
-    float: left;
-
-}
-
-.slider-item .c1-item {
-    margin: 3px;
-}
 
 /* left sliding panel */
 

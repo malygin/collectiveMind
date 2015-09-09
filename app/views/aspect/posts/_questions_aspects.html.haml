@@ -1,6 +1,5 @@
 .stage-info-sort-block
   .row
-    %br/
     .col-md-7
       %span.stage-heading
         Аспекты
@@ -18,36 +17,31 @@
       .col-md-2.popover-info#popover_intro{ 'data-placement' => 'top', 'data-content' => 'Прежде всего прочитайте статью методолога' }
       .col-md-10.popover-info#popover_aspect{ 'data-placement' => 'top',
       'data-content' => 'Потом ответьте на вопросы по аспектам, чтобы перейти к общему обсуждению в новом экране' }
-    .block-content
-      .slider-wrapper
-        %a.slider-left.slider-nav
-          %i.fa.fa-caret-left.font_lighter_grey
-        %a.slider-right.slider-nav
-          %i.fa.fa-caret-right.font_lighter_grey
-        .slider-outer
-          %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id } }
-            %li.active
-              .slider-item
-                .c1-item
-                  %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
-                    %span.c1-item-inner{ style: 'border-top-color: #eac85e;' }
-                      = t('stages.aspects_title')
-            - @main_aspects.each do |aspect|
-              %li.li_aspect{ id: "li_aspect_#{aspect.id}", class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}" }
-                .slider-item
-                  .c1-item
-                    %a{ id: "aspect_#{aspect.id}", 'data-toggle' => 'tab', href: "#tab_aspect_#{aspect.id}" }
-                      %span.c1-item-inner{ style: "border-top-color: #{aspect.color};" }
-                        = aspect.content
 
-      .tab-content
-        .tab-pane.main-pane.active.fade.in{ id: 'tab_aspect_0' }
-          .row
-            .col-md-12.col-sm-12
-              .aspect-main-block{ style: 'border-top-color:#eac85e;' }
-                = @project.introduction.try(:html_safe)
-                .row
-                  .col-md-8
-                    -#%button.btn.back_color_stage1.font_white.btn-arrow-stage1.pull-right#remove_noLink Далее
-        - @main_aspects.each_with_index do |asp, index|
-          = render partial: 'aspect_questions', locals: { asp: asp, index: index }
+    .slider-wrapper
+      .slider-nav
+        %a.slider-left
+          %i.fa.fa-caret-left
+        %a.slider-right
+          %i.fa.fa-caret-right
+      .slider-outer
+        %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id } }
+          %li.slider-item.active{ style: 'border-top-color: #eac85e;' }
+            %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
+              = t('stages.aspects_title')
+              hkjhkhkjhkjhkjh sfsdfsdfsdfs
+          - @main_aspects.each do |aspect|
+            %li.slider-item.li_aspect{ id: "li_aspect_#{aspect.id}",
+            class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}", style: "border-top-color: #{aspect.color};" }
+              %a{ id: "aspect_#{aspect.id}", 'data-toggle' => 'tab', href: "#tab_aspect_#{aspect.id}" }
+                = aspect.content
+    .tab-content
+      .tab-pane.main-pane.active.fade.in{ id: 'tab_aspect_0' }
+        .row
+          .col-md-12.col-sm-12
+            .aspect-main-block{ style: 'border-top-color:#eac85e;' }
+              = @project.introduction.try(:html_safe)
+              .row
+                .col-md-8
+      - @main_aspects.each_with_index do |asp, index|
+        = render partial: 'aspect_questions', locals: { asp: asp, index: index }

@@ -46,8 +46,8 @@
     $('#' + $(this).attr('data-dd')).toggleClass('active')
 
   # height of tabs on 1st stafe
-  $('.c1-item-inner').each ->
-    $(this).css 'height', ($('#first-stage-slider').innerHeight()-6) + 'px'
+#  $('.slider-item').each ->
+#    $(this).css 'height', ($('#first-stage-slider').innerHeight()-6) + 'px'
 
   $('.avatar_of_collection').on 'click', ->
     avatar = $(this).data('avatar')

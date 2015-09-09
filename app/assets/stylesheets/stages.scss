@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 .stage1_theme .add-button {
     background: #80b2d6;
 }
@@ -144,26 +135,6 @@
 }
 
 /* first stage styles */
-
-/* aspects (ui-4) */
-.ui-4.first-stage {
-    padding-top: 19px;
-    margin-left: -5px;
-}
-
-.ui-4.first-stage > .container {
-    padding: 0;
-
-}
-
-.ui-4.first-stage .block-content .nav-tabs {
-    border-bottom: 0px;
-    padding: 0 23px;
-}
-
-.ui-4.first-stage .tab-content {
-    padding-top: 0;
-}
 
 .min-col-right-padd {
     padding-right: 7px;
@@ -502,67 +473,6 @@
     clear: both;
 }
 
-.c1-item {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    height: auto !important;
-}
-
-.c1-item-inner {
-    position: relative;
-    display: block;
-    line-height: 16px;
-    padding: 8px 20px 10px;
-    max-width: 270px;
-    border-radius: 3px;
-    border-top: 3px solid transparent;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
-    background: #fff;
-    color: #777;
-    font-size: 13px;
-}
-
-.c1-item-inner.color-theme-1 {
-    border-top-color: #ecd72a;
-}
-
-.c1-item-inner.color-theme-2 {
-    border-top-color: #bfe6e8;
-}
-
-.c1-item-inner.color-theme-3 {
-    border-top-color: #bcddc6;
-}
-
-.c1-item-inner.color-theme-4 {
-    border-top-color: #e3c6e5;
-}
-
-.c1-item-inner.color-theme-5 {
-    border-top-color: #85edec;
-}
-
-.c1-item-inner.color-theme-6 {
-    border-top-color: #85bbed;
-}
-
-.c1-item-inner.color-theme-7 {
-    border-top-color: #f298c0;
-}
-
-.c1-item-inner.color-theme-8 {
-    border-top-color: #98b6f2;
-}
-
-.c1-item-inner.color-theme-9 {
-    border-top-color: #566687;
-}
-
-.active .c1-item-inner {
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
-    color: #666;
-}
 
 //.medal-block.gold-medal {
 //    background: image-url('medal-1.png') no-repeat;
