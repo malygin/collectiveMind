@@ -1,5 +1,5 @@
 .modal.fade#modal-post
-  .modal-dialog.modal-1030
+  .modal-dialog.modal-1150
     %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     - if boss?
       .admin_panel
@@ -40,24 +40,20 @@
         .post-header
           .row
             .col-md-9
-              .nav-tabs-one
-                %ul.nav.nav-tabs
-                  %li.active
-                    %a{ 'data-toggle' => 'tab', href: '#tab-1' }
-                      %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
-                        = t('show.plan.desc')
-                  %li
-                    %a{ 'data-toggle' => 'tab', href: '#tab-2' }
-                      %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
-                        = t('show.plan.diagram')
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{ 'data-toggle' => 'tab', href: '#tab-1' }
+                    %button.btn
+                      = t('show.plan.desc')
+                %li
+                  %a{ 'data-toggle' => 'tab', href: '#tab-2' }
+                    %button.btn
+                      = t('show.plan.diagram')
             .col-md-3
               .pull-right
                 = link_to user_path(@project, @post.user) do
-                  = user_image_tag @post.user.try(:avatar), class: 'media-object img-circle img50 img_bordered'
-                %span
-                  = link_to @post.user, user_path(@project, @post.user)
-
-        .clearfix
+                  = user_image_tag @post.user.try(:avatar)
+                  = @post.user
         .tab-content
           .tab-pane.fade.in.active#tab-1
             .post-body
@@ -100,7 +96,7 @@
                     = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
                       url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
 
-          .tab-pane.fade#tab-2{ style: 'background: white;' }
+          .tab-pane.fade#tab-2
             .post-body
               .row
                 .col-md-12.col-sm-12

@@ -1,4 +1,4 @@
-$sizes_modal: 710, 770, 985, 1030, 1100;
+$sizes_modal: 710, 770, 985, 1030, 1100, 1150;
 
 @each $size in $sizes_modal {
   .modal-#{$size} {
@@ -27,7 +27,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100;
   }
 }
 
-@for $i from 3 through 5 {
+@for $i from 3 through 6 {
   .stage_#{$i} {
     .modal {
       .panel .panel-heading {
