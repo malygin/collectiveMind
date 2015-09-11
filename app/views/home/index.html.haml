@@ -23,7 +23,7 @@
 
           .col-md-3
             .divider5
-            = link_to current_stage_url(project), class: 'btn btn-arrow-red btn-danger', id: "go_to_closed_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
   -#- cache @opened_projects do
   - if @opened_projects.present?
@@ -47,6 +47,6 @@
               = t('project_users_count', count: project.users.count)
           .col-md-3
             .divider5
-            = link_to current_stage_url(project), class: 'btn btn-arrow-red btn-danger', id: "go_to_opened_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10

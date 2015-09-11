@@ -26,8 +26,11 @@
   &:hover {
     opacity: 0.8;
   }
-  &.btn-danger {
+  &.btn-danger  {
     background: #e61928;
+    &.arrow_right, &.arrow_right:after {
+      border-left-color: #e61928;;
+    }
   }
 
   &.btn-round {
@@ -61,7 +64,31 @@
     &:hover,&:focus,&:active{
       opacity:0.8;
     }
-
+  }
+  &.arrow_right {
+    right: 20px;
+    -webkit-border-top-right-radius: 0 !important;
+    -webkit-border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    position:relative;
+    &:after, &:before {
+      left: 100%;
+      top: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      border-width: 17px;
+      margin-top: -17px;
+    }
+    &:active {
+      box-shadow: none;
+    }
+    &:hover,&:focus,&:active{
+      opacity:0.8;
+    }
   }
 
 }
@@ -89,14 +116,6 @@
 .btn_reset:focus {
   outline: none;
   border-color: transparent;
-}
-
-.btn_simple_grey {
-  text-align: right;
-  padding: 6px 10px;
-  width: 100%;
-  border: 1px solid #b1b1b1;
-  border-radius: 5px;
 }
 
 .q_pop_block .form-group .btn {
@@ -171,49 +190,6 @@
   background: #787880;
 }
 
-.btn_dia {
-  margin-top: 3px;
-  width: 80px;
-  padding: 2px 0 3px;
-  font-size: 11px;
-  border: 1px solid #fff;
-}
-
-.btn_dia:focus {
-  border: 1px solid #fff;
-}
-
-.btn-arrow-red:hover,
-.btn-arrow-red:focus,
-.btn-arrow-red:active,
-.btn-arrow-red.active,
-.open .dropdown-toggle.btn-arrow {
-  outline: none;
-  background: #d9534f;
-}
-
-.btn-arrow-red:hover:after,
-.btn-arrow-red:focus:after,
-.btn-arrow-red:active:after,
-.btn-arrow-red.active:after {
-  border-left-color: #d9534f;
-}
-
-.btn-arrow-red:active,
-.btn-arrow-red.active,
-.open .dropdown-toggle.btn-arrow-red {
-  background: #d9534f;
-  color: #fff;
-  box-shadow: none;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-.btn-arrow:active:after,
-.btn-arrow.active:after,
-.open .dropdown-toggle.btn-arrow:after {
-  border-left-color: #d9534f;
-}
 
 .add-button {
   color: #fff;
