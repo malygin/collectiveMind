@@ -40,6 +40,12 @@
     font-weight: bold;
     padding: 1px 6px;
   }
+  &.btn-oval{
+    padding: 0 22px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 28px;
+  }
   &.arrow_left {
     left: 20px;
     -webkit-border-top-left-radius: 0 !important;

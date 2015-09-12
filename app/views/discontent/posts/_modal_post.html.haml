@@ -64,7 +64,7 @@
                       = @post.whered
 
                 - if @post.post_aspects.present?
-                  .divider_1_grey
+                  %hr
                   - @post.post_aspects.each do |asp|
                     .index_block
                       .text-center.col-md-1

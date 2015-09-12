@@ -1,6 +1,6 @@
 @for $i from 3 through 6 {
   .stage_#{$i} {
-    .panel .panel-heading {
+    .panel > .panel-heading {
       background: nth($service_colors, $i - 2);
       &.arrow-right:before {
         border-left-color: nth($service_colors, $i - 2);

@@ -2,7 +2,7 @@
   .row.md-vote-container
     .col-md-6
       %h5 Идеи
-      .divider_1_grey.margin_right_25
+      %hr
       .cab_cont_h450
         %ul.list-unstyled.ps_cont.md_vote_concepts{ role: 'tablist' }
           .divider15
@@ -23,7 +23,7 @@
           .divider10
     .col-md-6.tab-content.md_vote_desc_concepts
       %h5 Описание
-      .divider_1_grey.margin_right_25
+      %hr
       - @user_voter.content_for_vote(@project, status).each do |post_vote|
         .tab-pane.fade.in{ id: "desript_#{post_vote.id}" }
           .cab_cont_h450

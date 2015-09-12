@@ -3,7 +3,7 @@
 = form_for @novation, url: { project: @project.id, action: @novation.persisted? ? 'update' : 'create', id: @novation.id },
 remote: true do |f|
   .content-block
-    .heading
+    .content-head
       - if @novation.persisted?
         %span.pocket_name.breadcr
           = link_to user_content_novation_posts_path(@project), id: 'open_user_content_from_edit' do
@@ -12,76 +12,76 @@ remote: true do |f|
       = f.text_area :title, rows: 1, class: 'form-control transp_ta without_autosize', placeholder: t('activerecord.attributes.novation/post.title')
     .content-body
       #for_hidden_fields
-      .col-md-7
-        - @novation.attributes_for_form.each do |type_attribute|
-          .panel
-            .panel-heading
-              %a.collapsed.with_arrow{ 'data-toggle' => 'collapse', href: "#cab4-#{type_attribute.first}", id: "open_#{type_attribute.first}" }
-                = t("activerecord.attributes.novation/post.#{type_attribute.first}")
-                %i.fa.fa-angle-right.fa-lg.collapse_arrow
-            .collapse{ id: "cab4-#{type_attribute.first}" }
-              .panel-body
-                - type_attribute.second.each do |attribute, bool_attribute|
-                  %b
-                    = t("activerecord.attributes.novation/post.#{attribute}")
-                  - if bool_attribute
-                    .input-group
-                      = f.radio_button "#{attribute}_bool".to_sym, true
-                      = label "#{attribute}_bool".to_sym, 'Да'
-                    .input-group
-                      = f.radio_button "#{attribute}_bool".to_sym, false
-                      = label "#{attribute}_bool".to_sym, 'Нет'
-                  = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
+      .row
+        .col-md-7
+          - @novation.attributes_for_form.each do |type_attribute|
+            .panel
+              .panel-heading
+                %a.collapsed.with_arrow{ 'data-toggle' => 'collapse', href: "#cab4-#{type_attribute.first}", id: "open_#{type_attribute.first}" }
+                  = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                  %i.fa.fa-angle-right.fa-lg.collapse_arrow
+              .collapse{ id: "cab4-#{type_attribute.first}" }
+                .panel-body
+                  - type_attribute.second.each do |attribute, bool_attribute|
+                    %b
+                      = t("activerecord.attributes.novation/post.#{attribute}")
+                    - if bool_attribute
+                      .input-group
+                        = f.radio_button "#{attribute}_bool".to_sym, true
+                        = label "#{attribute}_bool".to_sym, 'Да'
+                      .input-group
+                        = f.radio_button "#{attribute}_bool".to_sym, false
+                        = label "#{attribute}_bool".to_sym, 'Нет'
+                    = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
 
-      .col-md-5
-        %b.open-modal#select_concept{ 'data-placement' => 'cabinet4', 'data-target' => '1' }
-          %i.icon-cab-bulb
-          Добавить идею для реализации
-        %hr
-        .selected_concepts
-          - if @novation.persisted?
-            - @novation.novation_concepts.each do |concept|
-              %p.bold{ id: "selected_concept_#{concept.id}" }
-                = concept.title
-    %hr
-    = f.submit 'Опубликовать', id: "publish_#{@novation.id}", class: 'btn add-button type2 pull-right', name: 'novation_post[published]'
-    = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button type2 pull-right'
-    - if @novation.persisted?
-      = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: { confirm: t('confirm.delete_novation') },
-      id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del pull-right'
+        .col-md-5
+          .open-modal#select_concept{ 'data-placement' => 'cabinet4', 'data-target' => '1' }
+            %i.icon-cab-bulb
+            %b Добавить идею для реализации
+          %hr
+          .selected_concepts
+            - if @novation.persisted?
+              - @novation.novation_concepts.each do |concept|
+                %p.bold{ id: "selected_concept_#{concept.id}" }
+                  = concept.title
+      %hr
+      .pull-right
+        = f.submit 'Опубликовать', id: "publish_#{@novation.id}", class: 'btn add-button type2', name: 'novation_post[published]'
+        = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button type2'
+        - if @novation.persisted?
+          = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: { confirm: t('confirm.delete_novation') },
+          id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del'
 
 .modal.fade#modal-cabinet4-1
-  .modal-dialog.modal-lg
+  .modal-dialog.modal-1030
     %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     .row
-      .col-md-6.col_padding_7
-        .left_col.rounded_5.white
-          .mod_col_top#tabs_form_navation
-            %ul.nav.nav-tabs
-              %li.active
-                %a{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#discontents' }
-                  Список несовершенств с их идеями
-              %li
-                %a{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#ideas' }
-                  Список идей
+      .col-md-6
+        .modal-content
+          .modal-heading#tabs_form_navation
+            %button.btn.btn-oval.active{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#discontents' }
+              Список несовершенств с их идеями
+
+            %button.btn.btn-oval{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#ideas' }
+              Список идей
           .tab-content
-            .items.ps_cont.check_push_cont.unchecked_items.tab-pane.active#discontents
+            .unchecked_items.tab-pane.active#discontents
               - @discontents.each do |discontent|
-                %a.a_font_reset.collapser_type2.with_arrow.collapsed{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
-                href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}" }
-                  = discontent.content
-                  %i.fa.fa-angle-right.fa-lg.collapse_arrow.bold.font_grey
-                .collapse{ id: "discontent_show_#{discontent.id}" }
-                  = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
-                  .divider_1_grey
-                  .divider5
-            .items.ps_cont.check_push_cont.unchecked_items.tab-pane#ideas
+                .panel
+                  .panel-heading
+                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}" }
+                      = discontent.content
+                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                  .collapse{ id: "discontent_show_#{discontent.id}" }
+                    .panel-body
+                      = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
+            .unchecked_items.ps_cont.tab-pane#ideas
               = render partial: 'novation/posts/concept', collection: @concepts
-      .col-md-6.col_padding_7
-        .right_col.rounded_5.white
-          .mod_col_top
+      .col-md-6
+        .modal-content
+          .modal-heading
             %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{ 'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right' } Выбранные идеи
           -#= render partial: 'application/cabinet_sticker'
-          .items.ps_cont.check_push_cont.checked_items
+          .checked_items.ps_cont
             - if @novation.persisted?
               = render partial: 'novation/posts/concept', collection: @novation.novation_concepts

@@ -65,10 +65,10 @@
                     - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
                       .panel
                         .panel-heading
-                          %a.with_plus{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false',
+                          %a.with_arrow{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false',
                             'data-toggle' => 'collapse', href: "#cab4-#{link}" }
                             = t("activerecord.attributes.plan/post_novation.#{link}")
-                            %i.fa.collapse_plus{ class: "#{link == :project ? 'fa-minus' : 'fa-plus'}" }
+                            %i.fa.fa-angle-right.fa-lg.collapse_arrow
 
                         .collapse{ id: "cab4-#{link}", class: "#{'in' if link == :project}" }
                           .panel-body

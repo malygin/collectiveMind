@@ -244,8 +244,8 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
       padding: 0 15px;
       .post-content {
         padding-top: 26px;
-        .panel-heading{
-          font-weight:600;
+        .panel-heading {
+          font-weight: 600;
         }
         table {
           background: #f8f8f8;
@@ -316,4 +316,8 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
 .modal-backdrop {
   background: #bababa;
   height: 100%;
+}
+
+.open-modal {
+  cursor: pointer;
 }

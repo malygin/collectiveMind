@@ -13,6 +13,14 @@ a.collapser {
   display: block;
 }
 
+@for $i from 3 through 6 {
+  .stage_#{$i} {
+    .content-block .content-head {
+      background: nth($service_colors, $i - 2);
+    }
+  }
+}
+
 .content-block {
   padding: 10px 20px;
   border-radius: 3px;
@@ -22,6 +30,12 @@ a.collapser {
   font-size: 12px;
   position: relative;
   background: white;
+  .content-head{
+    margin:-10px -20px 20px -20px;
+    padding: 10px 20px;
+
+
+  }
   .form-group {
     label {
       margin-bottom: 8px;

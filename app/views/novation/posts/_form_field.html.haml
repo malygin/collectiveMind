@@ -1,8 +1,9 @@
-%a.a_font_reset.collapser_type2.collapsed{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#cab4-1' } Деятельность (5)
-.collapse#cab4-1
-  .divider5
-  - @novation.attributes_for_form.each do |attribute|
-    %h6.bold
-      = t("activerecord.attributes.novation/post.#{attribute}")
-    = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
-    .divider15
+.panel
+  .panel-heading
+    %a.collapsed{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#cab4-1' } Деятельность (5)
+  .collapse#cab4-1
+    .panel-body
+      - @novation.attributes_for_form.each do |attribute|
+        %b
+          = t("activerecord.attributes.novation/post.#{attribute}")
+        = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3

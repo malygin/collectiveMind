@@ -1,17 +1,9 @@
 .nav-tabs {
-  border-bottom:0;
+  border-bottom: 0;
   margin-top: 38px;
   padding-left: 20px;
   font-size: 15.3px;
   position: relative;
   z-index: 100;
   margin-bottom: -1px;
-  > li {
-    > a > button.btn {
-      padding: 0 22px;
-      border-radius: 10px;
-      font-size: 12px;
-      line-height: 28px;
-    }
-  }
 }
