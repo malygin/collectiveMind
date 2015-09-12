@@ -80,7 +80,7 @@
                     .profile
                       .profile_icon
                         = image_tag 'avatars/user.png'
-                        %a.btn.btn-xs.btn-danger.open-popup{ 'data-placement' => '1', 'data-target' => '1' }
+                        %a.btn.btn-xs.btn-danger.open-modal{ 'data-placement' => '1', 'data-target' => '1' }
                           = t('menu.account_edit')
                       = form_for current_user, url: { controller: '/users', action: :update, type: @project.id, project: @project, id: current_user },
                       multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
@@ -106,7 +106,7 @@
 
                         = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
 
-                        .modal.fade#popup-1-1
+                        .modal.fade#modal-1-1
                           .modal-dialog.modal-sm
                             %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
                             .modal-body.text-center.padding60

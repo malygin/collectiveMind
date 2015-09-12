@@ -1,19 +1,19 @@
 .techniq
   .row
     .col-md-6
-      .open-popup#first{ 'data-placement' => 'cab2', 'data-target' => '1' }
+      .open-modal#first{ 'data-placement' => 'cab2', 'data-target' => '1' }
         То, что не достаточно хорошо
-    .col-md-6.no_padding_col
-      .open-popup{ 'data-placement' => 'cab2', 'data-target' => '1' }
+    .col-md-6
+      .open-modal{ 'data-placement' => 'cab2', 'data-target' => '1' }
         То, что хорошо, но можно существенно улучшить
     .col-md-6
-      .open-popup{ 'data-placement' => 'cab2', 'data-target' => '1' }
+      .open-modal{ 'data-placement' => 'cab2', 'data-target' => '1' }
         То, что мешает работе
     .col-md-6
-      .open-popup{ 'data-placement' => 'cab2', 'data-target' => '1' }
+      .open-modal{ 'data-placement' => 'cab2', 'data-target' => '1' }
         То, чего не хватает
 
-.modal.fade#popup-1
+.modal.fade#modal-1
   .modal-dialog
     %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     = yield :discontent_form

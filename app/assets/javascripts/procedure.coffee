@@ -7,9 +7,9 @@
   KindsOfAccordionLists()
   expert_news()
 
-  #popup for all links with target source
-  $('.open-popup').click ->
-    modalInit('#popup-'+$(this).data('target'))
+  #modal for all links with target source
+  $('.open-modal').click ->
+    modalInit('#modal-'+$(this).data('target'))
 
   # аутосайз полей
   $('textarea').not('.without_autosize').autosize()
