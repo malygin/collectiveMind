@@ -150,7 +150,7 @@ $colors_imperf_codes = [
 @checking_items_for_cabinet = ->
   ch_its = $('.item', '.checked_items').length
   unch_its = $('.item', '.unchecked_items').length
-  $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+  $('.unch_lenght').text '(' + unch_its + ')'
   # check all
   $('#check0').click ->
     $("#unchecked_discontent_posts input:checkbox").prop('checked', true)
@@ -158,8 +158,8 @@ $colors_imperf_codes = [
     $('#unchecked_discontent_posts .item').appendTo('.checked_items')
     ch_its+=moved_its
     unch_its-=moved_its
-    $('.enter_length .ch_lenght').text '(' + ch_its + ')'
-    $('.enter_length .unch_lenght').text '(' + unch_its + ')'
+    $('.ch_lenght').text '(' + ch_its + ')'
+    $('.unch_lenght').text '(' + unch_its + ')'
   # check one
   $('.check_push_box').click ->
     item = $($(this).data('item')).detach()

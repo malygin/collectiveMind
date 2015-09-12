@@ -34,3 +34,13 @@ $theme_colors: #88a2c3, #8a99ae, #8abdea, #8fc8d3, #a3bead, #a5cba2, #b9dd9d, #d
 
 $techniq_colors: #eae7c6, #e1d5ed, #cae0ed, #cee6c6;
 $stripe_colors: #948E93, #de95d1, #6184bd, #60cdaf;
+
+
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .color {
+      color: nth($base_colors, $i)  !important;
+    }
+  }
+}
+

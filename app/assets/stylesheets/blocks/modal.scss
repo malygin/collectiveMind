@@ -27,16 +27,6 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
   }
 }
 
-@for $i from 3 through 6 {
-  .stage_#{$i} {
-    .modal {
-      .panel .panel-heading {
-        background: (nth($service_colors, $i - 2));
-      }
-    }
-  }
-}
-
 .modal {
   &.modal-explanation {
 
@@ -141,7 +131,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
       }
       .stat-block {
         display: table;
-        &> .cell{
+        & > .cell {
           display: table-cell;
           vertical-align: middle;
           padding: 0 5px;
@@ -254,31 +244,8 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
       padding: 0 15px;
       .post-content {
         padding-top: 26px;
-        .panel {
-          margin-bottom: 5px;
-          font-size: 12px;
-          .panel-heading {
-            padding: 9px 11px;
-            color: $black;
-            font-weight: 600;
-            a {
-              color: black;
-              display: block;
-            }
-            i {
-              float: right;
-              margin-top: 4px;
-            }
-          }
-          .panel-body {
-            padding: 15px 0;
-            h5 {
-              font-weight: bold;
-            }
-            p {
-              margin-bottom: 10px;
-            }
-          }
+        .panel-heading{
+          font-weight:600;
         }
         table {
           background: #f8f8f8;
