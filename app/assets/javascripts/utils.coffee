@@ -131,7 +131,7 @@ $colors_imperf_codes = [
     $('#aspect_block_'+aspect).hide()
     $('#li_aspect_'+aspect).addClass('complete')
     if($(".li_aspect:not(.complete)").length)
-      $('#li_aspect_'+aspect).find('.slider-item').removeClass('active')
+      $('#li_aspect_'+aspect).removeClass('active')
       $('#li_aspect_'+aspect).parent().find('.li_aspect:not(.complete):first').find('a').tab('show')
     else
       # else we have not more aspects, we just show greetings

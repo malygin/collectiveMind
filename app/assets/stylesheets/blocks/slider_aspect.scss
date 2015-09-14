@@ -27,12 +27,13 @@
     width: 97%;
     margin: 0 auto;
     overflow: hidden;
-    .slider-inner {
+    ul.slider-inner {
       overflow: hidden;
       display: table;
       border-spacing: 10px;
       border-collapse: separate;
-      .slider-item {
+      list-style: none;
+      > li {
         display: table-cell;
         line-height: 16px;
         padding: 8px 20px 10px;
@@ -45,7 +46,7 @@
         a {
           color: #777;
         }
-        &.active{
+        &.active {
           box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
         }
       }

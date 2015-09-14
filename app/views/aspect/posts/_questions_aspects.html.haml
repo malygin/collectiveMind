@@ -26,12 +26,11 @@
           %i.fa.fa-caret-right
       .slider-outer
         %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id } }
-          %li.slider-item.active{ style: 'border-top-color: #eac85e;' }
+          %li.active{ style: 'border-top-color: #eac85e;' }
             %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
               = t('stages.aspects_title')
-              hkjhkhkjhkjhkjh sfsdfsdfsdfs
           - @main_aspects.each do |aspect|
-            %li.slider-item.li_aspect{ id: "li_aspect_#{aspect.id}",
+            %li.li_aspect{ id: "li_aspect_#{aspect.id}",
             class: "#{'complete' if aspect.missed_questions(current_user, @project.type_for_questions).size == 0}", style: "border-top-color: #{aspect.color};" }
               %a{ id: "aspect_#{aspect.id}", 'data-toggle' => 'tab', href: "#tab_aspect_#{aspect.id}" }
                 = aspect.content
