@@ -25,7 +25,7 @@
         %a.slider-right
           %i.fa.fa-caret-right
       .slider-outer
-        %ul.slider-inner.list-unstyled#first-stage-slider{ data: { project: @project.id } }
+        %ul.slider-inner#first-stage-slider{ data: { project: @project.id } }
           %li.active{ style: 'border-top-color: #eac85e;' }
             %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
               = t('stages.aspects_title')
