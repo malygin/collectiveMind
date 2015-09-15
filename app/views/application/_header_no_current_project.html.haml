@@ -21,12 +21,12 @@
             = t('menu.sign_out')
       - else
         %li
-          = link_to t('menu.sign_in'), '#', class: 'open-popup', id: 'sign_in', data: { target: 'sign_in' }
+          = link_to t('menu.sign_in'), '#', class: 'open-modal', id: 'sign_in', data: { target: 'sign_in' }
         %li
           %span.auth-divider
             |
         %li.disabled
-          = link_to t('menu.sign_up'), '#', class: 'open-popup', id: 'sign_up', data: { target: 'sign_up' }
+          = link_to t('menu.sign_up'), '#', class: 'open-modal', id: 'sign_up', data: { target: 'sign_up' }
 
 
 
