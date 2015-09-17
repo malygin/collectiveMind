@@ -220,35 +220,3 @@
     border: 0;
     background: #7db2d7;
 }
-
-.stages_block .open_sticker {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -5px;
-}
-
-.open_sticker {
-    cursor: pointer;
-}
-
-.sticker {
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    width: 370px;
-    margin-top: 18px;
-    padding: 10px 55px 10px 20px;
-    background: #e4bd54;
-    font-size: 12px;
-    z-index: 1;
-    border-radius:3px;
-}
-
-i.fa.sticker_close {
-    position: absolute;
-    right: 8px;
-    top: 15px;
-    cursor: pointer;
-    color: #fff;
-}

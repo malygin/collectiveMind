@@ -13,9 +13,9 @@
             = user_image_tag current_user.avatar
           = link_to current_user, user_path(@project, current_user)
         .info
-          %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.cabinet_sticker' }
-          .cabinet_sticker.sticker{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
+          %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.sticker' }
+          .sticker{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
             = t("cabinet.#{@project.current_stage_type}_sticker").try(:html_safe)
             = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker",
               status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
-              %i.sticker_close.fa.fa-times.fa-lg{ 'data-for' => '.cabinet_sticker' }
+              %i.fa.fa-times.fa-lg.sticker_close{ 'data-for' => '.sticker' }
