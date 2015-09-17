@@ -1,21 +1,41 @@
 /* tooltips */
-.tooltip-inner {
-  max-width: none;
-  padding: 10px 12px;
-  background: #fcf8db;
-  color: #000;
-  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.4);
-  font-size: 11px;
-  text-align: left;
-  white-space: normal;
-}
+.tooltip{
+  &.top .tooltip-arrow {
+    bottom: -5px;
+  }
 
-.tooltip-arrow {
-  border: none !important;
-  width: 13px;
-  height: 10px;
-  background: image-url('arrows.png') no-repeat;
-  background-position: 0 -229px;
+  &.bottom .tooltip-arrow {
+    top: -5px;
+    @include transform (rotate(180deg));
+  }
+
+  &.right .tooltip-arrow {
+    left: -5px;
+    @include transform (rotate(90deg));
+  }
+
+  &.left .tooltip-arrow {
+    right: -5px;
+    @include transform (rotate(270deg));
+  }
+  .tooltip-inner {
+    max-width: none;
+    padding: 10px 12px;
+    background: #fcf8db;
+    color: #000;
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.4);
+    font-size: 11px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .tooltip-arrow {
+    border: none !important;
+    width: 13px;
+    height: 10px;
+    background: image-url('arrows.png') no-repeat;
+    background-position: 0 -229px;
+  }
 }
 
 .help_icon + .tooltip {
@@ -26,35 +46,4 @@
   > .tooltip-arrow {
     left: 67%;
   }
-}
-
-.tooltip.top .tooltip-arrow {
-  bottom: -5px;
-}
-
-.tooltip.bottom .tooltip-arrow {
-  top: -5px;
-  @include transform (rotate(180deg));
-}
-
-.tooltip.right .tooltip-arrow {
-  left: -5px;
-  @include transform (rotate(90deg));
-}
-
-.tooltip.left .tooltip-arrow {
-  right: -5px;
-  @include transform (rotate(270deg));
-}
-
-#tooltip2_1 + .tooltip > .tooltip-inner {
-  width: 310px !important;
-}
-
-#tooltip2_1 + .tooltip {
-  left: 200px !important;
-}
-
-#tooltip2_2 + .tooltip > .tooltip-inner {
-  width: 232px !important;
 }
