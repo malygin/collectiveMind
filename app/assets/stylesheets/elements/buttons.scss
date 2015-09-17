@@ -316,10 +316,11 @@ p .add-button + .add-button {
   background-repeat: no-repeat;
   display: block;
   position: relative;
-  float:left;
+  float: left;
   text-align: center;
   margin-left: 5px;
   margin-right: 5px;
+  cursor: pointer;
   &.sort-comment, &.sort-date {
     width: 32px;
     height: 31px;
@@ -347,7 +348,11 @@ p .add-button + .add-button {
       background-position: ($i*(-42px)-5px) -5px;
     }
     .sort-date {
-      background-position: (($i*(-42px)-5px))-210px -5px;
+      @if $i==1 {
+        background-position: -5px -5px;
+      } @else {
+        background-position: (($i*(-42px)-5px))-210px -5px;
+      }
     }
   }
 }
