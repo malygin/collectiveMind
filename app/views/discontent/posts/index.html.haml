@@ -72,11 +72,11 @@
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{ data: { type: 'comment' } }
+          %span.sort_btn.sort-comment{ data: { type: 'comment' } }
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-          %span.sort-2.sort_btn.sprite.sprite-2_2.tooltip_m.sort-date.active{ data: { type: 'date' },
+          %span.sort_btn.sort-date.active.tooltip_m{ data: { type: 'date' },
            title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства.' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red

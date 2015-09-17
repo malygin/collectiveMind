@@ -9,7 +9,7 @@
   }
 }
 
-.btn{
+.btn {
   color: white;
   cursor: pointer;
   &.btn-white, &.btn-white:focus, &.btn-white.active {
@@ -17,7 +17,7 @@
     border-radius: 3px;
     border: 1px solid #ddd;
     box-shadow: none;
-    color:#5f5b5b;
+    color: #5f5b5b;
 
     &:hover {
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.4);
@@ -26,7 +26,7 @@
   &:hover {
     opacity: 0.8;
   }
-  &.btn-danger  {
+  &.btn-danger {
     background: #e61928;
     &.arrow_right, &.arrow_right:after {
       border-left-color: #e61928;;
@@ -40,7 +40,7 @@
     font-weight: bold;
     padding: 1px 6px;
   }
-  &.btn-oval{
+  &.btn-oval {
     padding: 0 22px;
     border-radius: 10px;
     font-size: 12px;
@@ -50,9 +50,9 @@
     left: 20px;
     -webkit-border-top-left-radius: 0 !important;
     -webkit-border-bottom-left-radius: 0 !important;
-    border-top-left-radius: 0!important;
-    border-bottom-left-radius: 0!important;
-    position:relative;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    position: relative;
     &:after, &:before {
       right: 100%;
       top: 50%;
@@ -67,17 +67,17 @@
     &:active {
       box-shadow: none;
     }
-    &:hover,&:focus,&:active{
-      opacity:0.8;
+    &:hover, &:focus, &:active {
+      opacity: 0.8;
     }
   }
   &.arrow_right {
     right: 20px;
     -webkit-border-top-right-radius: 0 !important;
     -webkit-border-bottom-right-radius: 0 !important;
-    border-top-right-radius: 0!important;
-    border-bottom-right-radius: 0!important;
-    position:relative;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    position: relative;
     &:after, &:before {
       left: 100%;
       top: 50%;
@@ -92,8 +92,8 @@
     &:active {
       box-shadow: none;
     }
-    &:hover,&:focus,&:active{
-      opacity:0.8;
+    &:hover, &:focus, &:active {
+      opacity: 0.8;
     }
   }
 
@@ -195,7 +195,6 @@
 .add-button.del {
   background: #787880;
 }
-
 
 .add-button {
   color: #fff;
@@ -308,4 +307,47 @@ p .add-button + .add-button {
 
 .post-win button {
   margin-top: 30px;
+}
+
+///Sort buttons///
+
+.sort_btn {
+  background-image: image-url('i-sort.png');
+  background-repeat: no-repeat;
+  display: block;
+  position: relative;
+  float:left;
+  text-align: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  &.sort-comment, &.sort-date {
+    width: 32px;
+    height: 31px;
+  }
+  &.active, &:hover {
+    opacity: 0.8;
+  }
+  .badge-red {
+    padding-top: 2px;
+    border-radius: 50%;
+    text-align: center;
+    background: #e71d2b;
+    color: white;
+    position: absolute;
+    top: -10px;
+    left: -8px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .sort-comment {
+      background-position: ($i*(-42px)-5px) -5px;
+    }
+    .sort-date {
+      background-position: (($i*(-42px)-5px))-210px -5px;
+    }
+  }
 }

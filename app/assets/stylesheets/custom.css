@@ -179,28 +179,6 @@ textarea:focus {
     margin-right: 5px;
 }
 
-.sort-1, .sort-2 {
-    display: block;
-    float: left;
-    cursor: pointer;
-    text-align: center;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.sort-1 span, .sort-2 span {
-    position: relative;
-    font-size: 11px;
-}
-
-.sort-1 span {
-    top: -21px;
-}
-a
-.sort-2 span {
-    top: -18px;
-}
-
 .form-group .fa-check {
     position: absolute;
     display: none;
@@ -925,102 +903,6 @@ a.dropdown-toggle i {
 /* borders */
 .border_grey {
     border: 1px solid #d1d1d1 !important;
-}
-
-.sprite {
-    background-image: image-url('i-sort.png');
-    background-repeat: no-repeat;
-    display: block;
-    position: relative;
-}
-
-.sprite-2_1 {
-    width: 32px;
-    height: 31px;
-    background-position: -5px -5px;
-}
-
-.sprite-1_1 {
-    width: 32px;
-    height: 31px;
-    background-position: -47px -5px;
-}
-
-.sprite-1_2 {
-    width: 32px;
-    height: 31px;
-    background-position: -89px -5px;
-}
-
-.sprite-1_3 {
-    width: 32px;
-    height: 31px;
-    background-position: -131px -5px;
-}
-
-.sprite-1_4 {
-    width: 32px;
-    height: 31px;
-    background-position: -173px -5px;
-}
-
-.sprite-1_5 {
-    width: 32px;
-    height: 31px;
-    background-position: -215px -5px;
-}
-
-.sprite-1_6 {
-    width: 32px;
-    height: 31px;
-    background-position: -257px -5px;
-}
-
-.sprite-2_2 {
-    width: 32px;
-    height: 31px;
-    background-position: -299px -5px;
-}
-
-.sprite-2_3 {
-    width: 32px;
-    height: 31px;
-    background-position: -341px -5px;
-}
-
-.sprite-2_4 {
-    width: 32px;
-    height: 31px;
-    background-position: -383px -5px;
-}
-
-.sprite-2_5 {
-    width: 32px;
-    height: 31px;
-    background-position: -425px -5px;
-}
-
-.sprite-2_6 {
-    width: 32px;
-    height: 31px;
-    background-position: -467px -5px;
-}
-
-.sprite.active, .sprite:hover {
-    opacity: 0.8;
-}
-
-.sprite span.badge-red {
-    padding-top: 2px;
-    border-radius: 50%;
-    text-align: center;
-    background: #e71d2b;
-    color: white;
-    position: absolute;
-    top: -10px;
-    left: -8px;
-    width: 20px;
-    height: 20px;
 }
 
 .avatar_icon {

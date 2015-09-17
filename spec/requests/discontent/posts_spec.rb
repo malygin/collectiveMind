@@ -93,14 +93,14 @@ describe 'Discontent' do
     end
 
     it 'can sort to comment', js: true do
-      find(:css, 'span#sorter span.sort-1').trigger('click')
+      find(:css, 'span#sorter span.sort-comment').trigger('click')
       sleep(5)
       first(:css, '#tab_aspect_posts .md-post-block .what a').click
       expect(page).to have_content @discontent1.content
     end
 
     it 'can sort to date', js: true do
-      find(:css, 'span#sorter span.sort-2').trigger('click')
+      find(:css, 'span#sorter span.sort-date').trigger('click')
       sleep(5)
       first(:css, '#tab_aspect_posts .md-post-block .what a').click
       expect(page).to have_content @discontent2.content

@@ -17,13 +17,13 @@
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
-          .sort-1.sort_btn.sprite.sprite-1_1.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",
+          .sort_btn.sort-comment.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",
           title: 'Сортировать по новым комментариям' }
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
         = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
-          .sort-2.sort_btn.sprite.sprite-2_1.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}",
+          .sort_btn.sort-date.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}",
           title: 'Сортировать по новым аспектам' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red

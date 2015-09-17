@@ -27,12 +27,12 @@
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_4.sort-comment.tooltip_b{ data: { type: 'comment' },
+          %span.sort_btn.sort-comment.tooltip_b{ data: { type: 'comment' },
           title: 'Сортировать по новым комментариям' }
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-          %span.sort-2.sort_btn.sprite.sprite-2_4.tooltip_m.sort-date.active{ data: { type: 'date' },
+          %span.sort_btn.sort-date.active.tooltip_m{ data: { type: 'date' },
           title: 'Сортировать по новым нововведениям' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red

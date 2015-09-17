@@ -53,14 +53,14 @@ describe 'Novation ' do
     end
 
     it 'can sort to date', js: true do
-      find(:css, 'span#sorter span.sort-1').trigger('click')
+      find(:css, 'span#sorter span.sort-comment').trigger('click')
       sleep(5)
       first(:css, '#tab_concept_novations .md-post-block .what a').click
       expect(page).to have_content @novation1.content
     end
 
     it 'can sort to popular', js: true do
-      find(:css, 'span#sorter span.sort-2').trigger('click')
+      find(:css, 'span#sorter span.sort-date').trigger('click')
       sleep(5)
       first(:css, '#tab_concept_novations .md-post-block .what a').click
       expect(page).to have_content @novation2.content
