@@ -17,7 +17,7 @@
         - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
             %button.btn.add-button.tooltip_b{ title: 'Добавить идею' }
-              %span.tooltip1.middle.tooltip_b{ data: { name: 'sort', desc: 0, type: 'comment' },
+              %span.tooltip_m{ data: { name: 'sort', desc: 0, type: 'comment' },
               'data-trigger' => 'manual', title: 'Добавляйте новые идеи, связанные с текущей проблемной ситуацией' }
                 = t('techniques.concept_posts_simple')
         - else
@@ -32,14 +32,14 @@
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-          %span.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active.tooltip_b#tooltip3_2{ data: { type: 'date' },
-          'data-trigger' => 'manual', title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи.' }
+          %span.sort-2.sort_btn.sprite.sprite-2_3.tooltip_m.sort-date.active{ data: { type: 'date' },
+          title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи.' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red
                 = @last_visit_presenter.posts
 
 .stage-post-block
-  .row.tooltip1.tooltip_b#tab_dispost_concepts{ 'data-trigger' => 'manual', title: 'Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи' }
+  .row.tooltip_m_t#tab_dispost_concepts{ title: 'Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи' }
     -#= render partial: 'post_short', collection: @posts
 
 

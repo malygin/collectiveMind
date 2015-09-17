@@ -39,12 +39,28 @@
 @tooltipInit =  ->
   $('.tooltip_b').tooltip
     placement: 'bottom'
+    html: 'true'
   $('.tooltip_r').tooltip
     placement: 'right'
+    html: 'true'
   $('.tooltip_l').tooltip
     placement: 'left'
+    html: 'true'
   $('.tooltip_t').tooltip
     placement: 'top'
+    html: 'true'
+  $('.tooltip_m').tooltip
+    placement: 'bottom'
+    html: 'true'
+    trigger: 'manual'
+  $('.tooltip_m_t').tooltip
+    placement: 'top'
+    html: 'true'
+    trigger: 'manual'
+  $('.tooltip_m_r').tooltip
+    placement: 'right'
+    html: 'true'
+    trigger: 'manual'
 @tooltipToggle = (el) ->
   $(el).tooltip('toggle')
 

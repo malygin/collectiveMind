@@ -26,8 +26,9 @@
   # button show hints
   $('.btn-tooltip').click ->
     $('.btn-tooltip').toggle()
-    tooltipToggle('.tooltip1')
-
+    tooltipToggle('.tooltip_m')
+    tooltipToggle('.tooltip_m_t')
+    tooltipToggle('.tooltip_m_r')
   # intro panel with goals of stage
   if $('.md-modal-explanation').length and !$('.md-modal-explanation').hasClass('shown_intro')
     modalInit('.md-modal-explanation', withClose: false)

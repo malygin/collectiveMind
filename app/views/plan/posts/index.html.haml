@@ -25,8 +25,8 @@
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-          %span.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active.tooltip_b#tooltip3_2{ data: { type: 'date' },
-          'data-trigger' => 'manual', title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения.' }
+          %span.sort-2.sort_btn.sprite.sprite-2_5.tooltip_m.sort-date.active{ data: { type: 'date' },
+          title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения.' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red
                 = @last_visit_presenter.posts

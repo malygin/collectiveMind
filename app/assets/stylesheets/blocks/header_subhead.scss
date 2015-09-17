@@ -177,7 +177,7 @@
   float: left;
   width: 50px;
   height: 54px;
-
+  cursor: pointer;
   &.shown {
     background: image-url('i-help.png') no-repeat -48px 0;
   }

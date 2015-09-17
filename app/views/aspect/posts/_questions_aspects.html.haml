@@ -6,8 +6,8 @@
         = "(#{@main_aspects.size})"
     .col-md-5
       .sort-block.pull-right
-        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: 'btn add-button tooltip1 big tooltip_b',
-         'data-trigger' => 'manual', title: 'Добавляйте новые аспекты, не представленные в базе знаний' do
+        = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: 'btn add-button tooltip_m',
+         title: 'Добавляйте новые аспекты, не представленные в базе знаний' do
           %span.tooltip_b{ title: 'Добавить аспект' }
             = t('techniques.aspect_posts_simple')
 
