@@ -43,15 +43,15 @@
       %small{ id: "lk_comment_#{comment.id}" }
         = comment.users_pro.count
       = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project, id: comment.id, against: false },
-      remote: true, method: :put, id: "like_comment_#{comment.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+      remote: true, method: :put, id: "like_comment_#{comment.id}", class: 'tooltip_b', title: 'Нравится') do
         %i.fa.fa-thumbs-up
     %span
       %small{ id: "dlk_comment_#{comment.id}" }
         = comment.users_against.count
       = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project, id: comment.id, against: true },
-      remote: true, method: :put, id: "dislike_comment_#{comment.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+      remote: true, method: :put, id: "dislike_comment_#{comment.id}", class: 'tooltip_b', title: 'Не нравится') do
         %i.fa.fa-thumbs-down
-    %span{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Перейти в обсуждение' }
+    %span.tooltip_b{ title: 'Перейти в обсуждение' }
       %button.reply-comment.collapsed{ data: { project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize,
       comment: comment.id }, id: "reply_comment_#{comment.id}", 'data-target' => "#reply_form_#{comment.id}", 'data-toggle' => 'collapse' }
         %i.fa.fa-reply

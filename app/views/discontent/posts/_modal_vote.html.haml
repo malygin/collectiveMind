@@ -13,7 +13,7 @@
             = t("vote.#{@project.current_stage_type}.title").try(:html_safe)
         %ul.tab-nav_folders
           - @project.vote_folders.each do |num_folder, folder|
-            %li{ class: "#{'active' if num_folder == 0}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
+            %li.tooltip_b{ class: "#{'active' if num_folder == 0}",
                 title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
               %a{ 'data-toggle' => 'tab', 'data-vote-folder-role' => "#{folder[:role]}", href: "#vote_tab#{num_folder + 1}" }
                 %div{ class: "vote-folder_#{folder[:type_poll]}" }

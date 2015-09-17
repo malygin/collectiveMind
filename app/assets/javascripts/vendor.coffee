@@ -36,8 +36,15 @@
 
 
 
-@tooltipInit = (el) ->
-  $(el).tooltip()
+@tooltipInit =  ->
+  $('.tooltip_b').tooltip
+    placement: 'bottom'
+  $('.tooltip_r').tooltip
+    placement: 'right'
+  $('.tooltip_l').tooltip
+    placement: 'left'
+  $('.tooltip_t').tooltip
+    placement: 'top'
 @tooltipToggle = (el) ->
   $(el).tooltip('toggle')
 

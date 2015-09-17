@@ -15,8 +15,7 @@
           - @project.vote_folders.each do |num_folder, folder|
             %li{ class: "#{'active ' if num_folder == 0}" }
               %a{ 'data-toggle' => 'tab', 'data-vote-folder-role' => "#{folder[:role]}", href: "#vote_tab#{num_folder + 1}" }
-                %div{ class: "vote-folder1_#{folder[:type_poll]}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
-                    title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
+                .tooltip_b{ class: "vote-folder1_#{folder[:type_poll]}", title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
                   %span.vote_counter
                     = @user_voter.content_for_vote(@project, num_folder).count
                 %p
@@ -24,5 +23,5 @@
         .tab-content
           - @project.vote_folders.each do |num_folder, folder|
             .tab-pane.tab_vote_content{ id: "vote_tab#{num_folder + 1}", class: "#{'active' if num_folder == 0}",
-                  'data-vote-poll-role' => "#{folder[:role]}", role: 'tabpanel' }
+                  'data-vote-poll-role' => "#{folder[:role]}" }
               = render partial: 'post_vote', locals: { folder: folder, status: num_folder }

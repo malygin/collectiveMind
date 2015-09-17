@@ -15,10 +15,9 @@
                     - if number_folder > 0
                       = link_to '', vote_concept_post_path(@project, post_vote.id, status: number_folder), method: :put, remote: true,
                       id: "vote_button_#{post_vote.id}_#{number_folder}", 'data-id' => post_vote.id, 'data-stage' => @project.current_stage_title,
-                      class: "btn b_vote vote_button #{'voted ' if status == number_folder}vote-btn_#{number_folder + 1}", 'data-icon-class' => 'fa-exclamation',
-                      'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}", 'data-vote-default-role' => "#{folder[:role]}", role: 'button',
-                      'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
-                      title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe)
+                      class: "btn b_vote vote_button tooltip_b #{'voted ' if status == number_folder}vote-btn_#{number_folder + 1}",
+                      'data-icon-class' => 'fa-exclamation', 'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}",
+                      'data-vote-default-role' => "#{folder[:role]}", title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe)
 
           .divider10
     .col-md-6.tab-content.md_vote_desc_concepts

@@ -1,5 +1,5 @@
 @init_procedure = ->
-  tooltipInit('[data-toggle=tooltip]')
+  tooltipInit()
   progressDiagramInit('.knob')
   carousellInit('.questionsCarousel')
   carousellInit('.carousel', 4000)

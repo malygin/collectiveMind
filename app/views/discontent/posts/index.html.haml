@@ -7,7 +7,7 @@
 - if @project_result
   = render partial: 'modal_results'
 .stage-info-sort-block
-  .dropdown-block.tooltip1#tooltip2_1{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+  .dropdown-block.tooltip1.tooltip_b#tooltip2_1{ 'data-trigger' => 'manual',
   title: 'Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом.' }
     %span Фильтр аспектов:
     %a.dropdown-toggle.select-aspect{ 'data-toggle' => 'dropdown' }
@@ -62,14 +62,14 @@
       .pull-right
         - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
-            %button.btn.add-button{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Добавить несовершенство' }
-              %span.tooltip1#tooltip2_2{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+            %button.btn.add-button.tooltip_b{ title: 'Добавить несовершенство' }
+              %span.tooltip1.tooltip_b#tooltip2_2{ 'data-trigger' => 'manual',
               title: 'Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией' }
                 = t('techniques.discontent_posts_simple')
       -#- else
       -#  = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
-      -#    .results{ class: "#{show_results?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
-      -#    'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Показать итоги стадии' }
+      -#    .results.tooltip_b{ class: "#{show_results?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+      -#     title: 'Показать итоги стадии' }
 
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
@@ -78,8 +78,8 @@
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-          %span.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active#tooltip2_2{ data: { type: 'date' },
-          'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 'data-trigger' => 'manual',
+          %span.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active.tooltip_b#tooltip2_2{ data: { type: 'date' },
+          'data-trigger' => 'manual',
           title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства.' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red

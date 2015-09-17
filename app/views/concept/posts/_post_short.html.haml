@@ -32,7 +32,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
       -#  .wrapper.ps_cont.half_wheel_speed
       -#    .post_cont_inner
       -#      - post_short.comments.preview.each do |comment|
-      -#        .comment_preview{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "#{comment.content}" }
+      -#        .comment_preview.tooltip_b{ title: "#{comment.content}" }
       -#          %span.bold.com_date
       -#            = l(comment.created_at, format: '%k:%M %d.%m.%y')
       -#          %span.bold
@@ -43,8 +43,8 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
           .title Несовершенства
           .post-theme{ id: "stripe#{post_short.id}" }
             - post_short.concept_disposts.each_with_index do |dispost, index|
-              %span.tag-stripes.color_me{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}",
-                'data-me-type' => 'imperf', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: "#{dispost.content}" }
+              %span.tag-stripes.color_me.tooltip_t{ class: "#{'active' if index == 0}", 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}",
+                'data-me-type' => 'imperf', title: "#{dispost.content}" }
                 %span.tags
                   = trim_content(dispost.content, 30)
         .likes
@@ -56,12 +56,12 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
             %small{ id: "lk_post_#{post_short.id}", class: "lk_post_#{post_short.id}" }
               = post_short.users_pro.count
             = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: false },
-                remote: true, method: :put, id: "like_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                remote: true, method: :put, id: "like_post_#{post_short.id}", class: 'tooltip_b', title: 'Нравится') do
               %i.fa.fa-thumbs-o-up.fa-flip-horizontal
           %span
             %small{ id: "dlk_post_#{post_short.id}", class: "dlk_post_#{post_short.id}" }
               = post_short.users_against.count
             = link_to({ controller: post_short.class.name.underscore.pluralize, action: :like, project: @project, id: post_short.id, against: true },
-                remote: true, method: :put, id: "dislike_post_#{post_short.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                remote: true, method: :put, id: "dislike_post_#{post_short.id}", class: 'tooltip_b', title: 'Не нравится') do
               %i.fa.fa-thumbs-o-down.fa-flip-horizontal
                 %i.fa.fa-thumbs-o-down.fa-flip-horizontal

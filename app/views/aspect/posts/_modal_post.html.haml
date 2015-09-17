@@ -25,12 +25,12 @@
                   = @post.comments.count
                 %i.fa.fa-comment-o
               = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false }, remote: true,
-                    method: :put, id: "like_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Нравится') do
+                    method: :put, id: "like_post_#{@post.id}", class: 'tooltip_b', title: 'Нравится') do
                 %small{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
                   = @post.users_pro.count
                 %i.fa.fa-thumbs-o-up
               = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
-                    remote: true, method: :put, id: "dislike_post_#{@post.id}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Не нравится') do
+                    remote: true, method: :put, id: "dislike_post_#{@post.id}", class: 'tooltip_b', title: 'Не нравится') do
                 %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
                   = @post.users_against.count
                 %i.fa.fa-thumbs-o-down

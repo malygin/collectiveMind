@@ -11,8 +11,8 @@
         - unless expert_news.empty?
           - expert_news.each_with_index do |news, index|
             .dw_notice.md-news-notice
-              %a.collapsed{ class: "#{'read' if news.read?(project, current_user)}", data: { project: project.id, id: news.id },
-                'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#xprt_#{index}" }
+              %a.collapsed{ class: "#{'read' if news.read?(project, current_user)}", data: { project: project.id, id: news.id, toggle: 'collapse' },
+                href: "#xprt_#{index}" }
                 .row
                   .col-xs-9
                     = news.title

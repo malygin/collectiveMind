@@ -54,8 +54,8 @@
                         .row
                           .col-md-6.exp_col.left
                             %a.exp_button
-                              %span.arrows-left{ 'data-toggle' => 'tooltip', 'data-placement' => 'left',
-                                'data-new' => 'Развернуть историю комментариев', title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
+                              %span.arrows-left.tooltip_l{ 'data-new' => 'Развернуть историю комментариев',
+                              title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
 
                             .content
                               %h5
@@ -65,8 +65,8 @@
 
                           .col-md-6.exp_col.right
                             %a.exp_button
-                              %span.arrows-right{ 'data-toggle' => 'tooltip', 'data-placement' => 'right',
-                                'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}", title: 'Свернуть историю комментариев' }
+                              %span.arrows-right.tooltip_r{ 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}",
+                               title: 'Свернуть историю комментариев' }
 
                             .content
                               %h5

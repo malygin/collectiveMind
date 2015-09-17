@@ -3,29 +3,24 @@
   %nav.navbar.navbar-default
     .container
       .navbar-header
-        = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
-        title: 'Вернуться на главную страницу' do
+        = link_to "/project/#{@project.id}", id: 'go_to_logo', class: 'navbar-brand tooltip_b', title: 'Вернуться на главную страницу' do
           %span.logotips-text
       %ul.nav.navbar-nav.main-navigation
-        %li{ class: "#{'active' unless cabinet? || rating? || profile?}", 'data-placement' => 'bottom',
-        'data-toggle' => 'tooltip', title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
+        %li.tooltip_b{ class: "#{'active' unless cabinet? || rating? || profile?}", title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
           = link_to t('menu.open_procedure'), current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
           = link_to t('menu.open_cabinet'), send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
-          id: 'open_cabinet', class: 'big', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
-          title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
+          id: 'open_cabinet', class: 'tooltip_b', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
           = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,
-          class: 'has_circle drop_opener', id: 'clear_my_journals', 'data-dd' => 'dd_2', 'data-placement' => 'bottom',
-          'data-toggle' => 'tooltip', title: 'Следите за тем, кому понравились ваши комментарии' do
+          class: 'has_circle drop_opener tooltip_b', id: 'clear_my_journals', 'data-dd' => 'dd_2', title: 'Следите за тем, кому понравились ваши комментарии' do
             = t('menu.open_my_journals')
             %span#my_journals_count{ class: @my_journals_count > 0 ? 'top-circle' : '' }
               = @my_journals_count > 0 ? @my_journals_count : nil
           = render partial: 'application/messages_menu'
         - if @project.closed?
           %li{ class: "#{'active' if rating?}" }
-            = link_to t('menu.open_rating'), users_path(@project), id: 'open_rating', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip',
-            title: 'Посмотреть рейтинг участников'
+            = link_to t('menu.open_rating'), users_path(@project), id: 'open_rating', class: 'tooltip_b', title: 'Посмотреть рейтинг участников'
         - if boss?
           - unless @project.main_stage == 1 && @project.sub_stage == 0
             %li= link_to '<= ', "/project/#{@project.id}/prev_stage", method: :put, id: 'open_prev_stage'
@@ -33,8 +28,7 @@
             %li= link_to '=> ', "/project/#{@project.id}/next_stage", method: :put, id: 'open_next_stage'
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', 'data-placement' => 'bottom',
-          'data-toggle' => 'tooltip', title: 'Открыть базу знаний' do
+          = link_to knowbase_posts_path(@project), remote: true, id: 'tooltip_db', class: 'tooltip_b', title: 'Открыть базу знаний' do
             %span.book_icon
             = t('menu.base_knowledge')
         %li
@@ -46,9 +40,8 @@
               |
           = render partial: 'application/expert_news', locals: { expert_news: @expert_news, project: @project }
         %li.dropdown
-          %a#auth_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', 'data-hover' => 'dropdown', href: '#',
-          'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
-            %span.badge{ 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: 'Ваш суммарный рейтинг' }
+          %a#auth_dropdown{ data: { target: '#', toggle: 'dropdown', hover: 'dropdown' }, href: '#' }
+            %span.badge.tooltip_b{ title: 'Ваш суммарный рейтинг' }
               = current_user.project_user_for(@project).try(:score)
             = current_user
             %span.fa.fa-angle-down

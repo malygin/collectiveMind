@@ -25,8 +25,7 @@
         = f.text_area :impact_env, class: 'form-control', rows: 1
 
       .text-right
-        = f.submit t("form.#{action_name}"), class: 'btn add-button', id: 'send_post_concept', 'data-placement' => 'top',
-            'data-toggle' => 'tooltip', title: "Идею всегда можно доработать в разделе 'контент' "
+        = f.submit t("form.#{action_name}"), class: 'btn add-button tooltip_t', id: 'send_post_concept', title: "Идею всегда можно доработать в разделе 'контент' "
         - if @concept_post.persisted? && !@concept_post.published?
           = link_to 'Опубликовать', publish_concept_post_path(@project, @concept_post), remote: true, method: :put,
               id: "publish_#{@concept_post.id}", class: 'btn add-button'

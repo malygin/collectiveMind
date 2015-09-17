@@ -4,9 +4,9 @@
   .progress-knob
     .knob-content
       .knob-item
-        %input.knob#knob-1{ 'data-anglearc' => '360', 'data-angleoffset' => '70', 'data-bgcolor' => '#f4f4f4',
-                'data-end' => "#{@project.status > 0 ? @questions_progress || 0 : 0}", 'data-fgcolor' => "#{color_progress_bar}",
-                'data-font' => "'Open Sans', sans-serif", 'data-thickness' => '.1', value: '0' }
+        %input.knob#knob-1{ data: { anglearc: '360', angleoffset: 70, bgcolor: '#f4f4f4',
+                end: "#{@project.status > 0 ? @questions_progress || 0 : 0}", fgcolor: "#{color_progress_bar}",
+                font: "'Open Sans', sans-serif", thickness: '.1' }, value: '0' }
 
 .knob-block
   .knob_label
@@ -14,6 +14,6 @@
   .progress-knob
     .knob-content
       .knob-item
-        %input.knob#knob-2{ 'data-anglearc' => '360', 'data-angleoffset' => '70', 'data-bgcolor' => '#f4f4f4',
-                'data-end' => "#{@project.status > 0 ? @questions_progress_all || 0 : 0}", 'data-fgcolor' => "#{color_progress_bar}",
-                'data-font' => "'Open Sans', sans-serif", 'data-thickness' => '.1', value: '0' }
+        %input.knob#knob-2{ data: { anglearc: '360', angleoffset: 70, bgcolor: '#f4f4f4',
+                end: "#{@project.status > 0 ? @questions_progress_all || 0 : 0}", fgcolor: "#{color_progress_bar}",
+                font: "'Open Sans', sans-serif", thickness: '.1' }, value: '0' }
