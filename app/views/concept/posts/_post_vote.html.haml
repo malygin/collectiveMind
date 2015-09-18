@@ -1,46 +1,41 @@
-.container
-  .row.md-vote-container
-    .col-md-6
-      %h5 Идеи
-      %hr
-      .cab_cont_h450
-        %ul.list-unstyled.ps_cont.md_vote_concepts{ role: 'tablist' }
-          .divider15
-          - @user_voter.content_for_vote(@project, status).each do |post_vote|
-            %li.md_vote_item_cont{ role: 'presentation', id: "post_vote_#{post_vote.id}" }
-              %a.big_tab.a_font_reset.rounded_3.border_grey.lighter-grey{ 'data-toggle' => 'tab', href: "#desript_#{post_vote.id}", role: 'tab' }
-                = post_vote.title
-                .vote_controls.text-center
-                  - @project.vote_folders.each do |number_folder, folder|
-                    - if number_folder > 0
-                      = link_to '', vote_concept_post_path(@project, post_vote.id, status: number_folder), method: :put, remote: true,
+.row.md-vote-container
+  .col-md-6
+    %h5 Идеи
+    %hr
+    %ul.panels-vote.ps_cont.md_vote_concepts
+      - @user_voter.content_for_vote(@project, status).each do |post_vote|
+        %li.md_vote_item_cont{ role: 'presentation', id: "post_vote_#{post_vote.id}" }
+          %a{ 'data-toggle' => 'tab', href: "#desript_#{post_vote.id}" }
+            = post_vote.title
+          .vote_controls
+            - @project.vote_folders.each do |number_folder, folder|
+              - if number_folder > 0
+                = link_to '', vote_concept_post_path(@project, post_vote.id, status: number_folder), method: :put, remote: true,
                       id: "vote_button_#{post_vote.id}_#{number_folder}", 'data-id' => post_vote.id, 'data-stage' => @project.current_stage_title,
-                      class: "btn b_vote vote_button tooltip_b #{'voted ' if status == number_folder}vote-btn_#{number_folder + 1}",
+                      class: "tooltip_b #{'voted ' if status == number_folder}vote-btn1_#{number_folder + 1}",
                       'data-icon-class' => 'fa-exclamation', 'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}",
                       'data-vote-default-role' => "#{folder[:role]}", title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe)
-
-          .divider10
-    .col-md-6.tab-content.md_vote_desc_concepts
-      %h5 Описание
-      %hr
-      - @user_voter.content_for_vote(@project, status).each do |post_vote|
-        .tab-pane.fade.in{ id: "desript_#{post_vote.id}" }
-          .cab_cont_h450
-            .ps_cont
-              .divider15
-              .stripe-qa
-                .lined-heading.back_color_stage3_superpale
-                  %span.bold-stripe Суть идеи, что и как будет изменено?
-                %p
-                  = post_vote.goal
-              .stripe-qa
-                .lined-heading.back_color_stage3_superpale
-                  %span.bold-stripe Кто будет действовать иначе после реализации идеи?
-                %p
-                  = post_vote.actors
-              .stripe-qa
-                .lined-heading.back_color_stage3_superpale
-                  %span.bold-stripe Чьи интересы будут затронуты?
-                %p
-                  = post_vote.impact_env
-              .divider10
+  .col-md-6.tab-content.md_vote_desc_concepts
+    %h5 Описание
+    %hr
+    - @user_voter.content_for_vote(@project, status).each do |post_vote|
+      .tab-pane.fade.in{ id: "desript_#{post_vote.id}" }
+        .ps_cont
+          .panel
+            .panel-heading
+              Суть идеи, что и как будет изменено?
+            .panel-body
+              %p
+                = post_vote.goal
+          .panel
+            .panel-heading
+              Кто будет действовать иначе после реализации идеи?
+            .panel-body
+              %p
+                = post_vote.actors
+          .panel
+            .panel-heading
+              Чьи интересы будут затронуты?
+            .panel-body
+              %p
+                = post_vote.impact_env

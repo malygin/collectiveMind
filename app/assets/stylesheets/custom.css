@@ -417,16 +417,6 @@ h5 i {
 
 /* new 3rd stage styles */
 
-.checkox_item .text_label {
-    width: 100%;
-}
-
-.checkox_item .text_label label {
-    font-weight: normal !important;
-    margin: 0;
-    cursor: pointer;
-}
-
 .cb_doc,
 .cb_com {
     text-align: right;

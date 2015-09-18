@@ -19,7 +19,7 @@
           - @project.vote_folders.each do |number_folder, folder|
             - if number_folder > 0
               = link_to '', vote_novation_post_path(@project, post_vote.id, status: number_folder), id: "vote_button_#{post_vote.id}_#{number_folder}",
-                method: :put, remote: true, class: "btn b_vote vote_button tooltip_b #{'voted ' if status == number_folder}vote-btn_#{number_folder + 1}",
+                method: :put, remote: true, class: "tooltip_b #{'voted ' if status == number_folder}vote-btn1_#{number_folder + 1}",
                 'data-icon-class' => 'fa-exclamation', 'data-vote-role' => "#{status == number_folder ? 'all' : folder[:role]}",
                 'data-vote-default-role' => "#{folder[:role]}", title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_button").try(:html_safe)
 

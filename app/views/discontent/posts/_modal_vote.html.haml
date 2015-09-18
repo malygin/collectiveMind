@@ -11,7 +11,7 @@
         .text-center
           %h5
             = t("vote.#{@project.current_stage_type}.title").try(:html_safe)
-        %ul.tab-nav_folders
+        %ul.tab-nav_folders{ class: "folders_#{@project.count_folders}" }
           - @project.vote_folders.each do |num_folder, folder|
             %li.tooltip_b{ class: "#{'active' if num_folder == 0}",
                 title: t("vote.#{@project.current_stage_type}.#{folder[:role]}.title_folder").try(:html_safe) }
