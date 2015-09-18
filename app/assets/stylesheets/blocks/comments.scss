@@ -92,6 +92,8 @@
   margin:10px 0 6px 0;
 }
 
+///Comments in hover panel
+
 .comment_preview {
   width: 100%;
   height: 17px;
@@ -116,4 +118,21 @@
 
 .comments_icon.active, .comments_icon.active .fa {
   color: #e71d2b !important;
+}
+
+.post_comments_cont {
+  height: 50px;
+}
+
+.post_cont_hover {
+  top: 130px;
+  border-top: 1px solid #d9d9d9;
+}
+
+.post_cont_hover.active {
+  top: 50px;
+}
+
+.post_cont_hover .wrapper {
+  height: 50px;
 }

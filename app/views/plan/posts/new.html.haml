@@ -43,7 +43,7 @@
         .col-md-4
           %ul.list-unstyled.tabs_type_2
             - @post.post_novations.first.attributes_for_form.each do |link, _values|
-              %li{class: "#{'active' if link == :project}" }
+              %li{ class: "#{'active' if link == :project}" }
 
                 %a.a_font_reset.scroll_tab{ 'data-toggle' => 'tab', href: "#cabinet_5_cont_#{link}" }
                   = t("activerecord.attributes.plan/post_novation.#{link}")
