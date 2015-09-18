@@ -11,6 +11,11 @@
   margin: 0px 0 5px;
 }
 
+.ps-container .ps-scrollbar-y-rail {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
 .radial-gradient > .ps-container > .ps-scrollbar-y-rail {
   margin-right: 20px;
   margin-top: 50px;
