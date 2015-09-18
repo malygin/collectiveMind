@@ -27,12 +27,13 @@ remote: true do |f|
                       %b
                         = t("activerecord.attributes.novation/post.#{attribute}")
                       - if bool_attribute
-                        .input-group
-                          = f.radio_button "#{attribute}_bool".to_sym, true
-                          = label "#{attribute}_bool".to_sym, 'Да'
-                        .input-group
-                          = f.radio_button "#{attribute}_bool".to_sym, false
-                          = label "#{attribute}_bool".to_sym, 'Нет'
+                        .check-group
+                          .input-group
+                            = f.radio_button "#{attribute}_bool".to_sym, true
+                            = label "#{attribute}_bool".to_sym, 'Да'
+                          .input-group
+                            = f.radio_button "#{attribute}_bool".to_sym, false
+                            = label "#{attribute}_bool".to_sym, 'Нет'
                       = f.text_area attribute.to_sym, class: 'form-control', rows: 3
 
         .col-md-5

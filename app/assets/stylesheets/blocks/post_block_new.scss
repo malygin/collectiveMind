@@ -37,16 +37,23 @@ a.collapser {
   }
   .form-group {
     margin-bottom: 25px;
-    b {
-      margin-bottom: 10px;
-    }
     label {
       margin-bottom: 8px;
       font-weight: 400;
     }
-    .form-control{
+    .form-control {
+      margin-top: 10px;
+    }
+    .input-group {
+      label {
+        font-weight: 600;
+        margin-left: 10px;
+      }
+    }
+    .check-group{
       margin-top:10px;
     }
+
   }
   &.example {
     p:nth-child(2n) {
