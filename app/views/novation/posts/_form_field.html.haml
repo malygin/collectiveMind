@@ -4,6 +4,7 @@
   .collapse#cab4-1
     .panel-body
       - @novation.attributes_for_form.each do |attribute|
-        %b
-          = t("activerecord.attributes.novation/post.#{attribute}")
-        = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
+        .form-group
+          %b
+            = t("activerecord.attributes.novation/post.#{attribute}")
+          = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3

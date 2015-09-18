@@ -30,16 +30,22 @@ a.collapser {
   font-size: 12px;
   position: relative;
   background: white;
-  .content-head{
-    margin:-10px -20px 20px -20px;
+  .content-head {
+    margin: -10px -20px 20px -20px;
     padding: 10px 20px;
-
 
   }
   .form-group {
+    margin-bottom: 25px;
+    b {
+      margin-bottom: 10px;
+    }
     label {
       margin-bottom: 8px;
       font-weight: 400;
+    }
+    .form-control{
+      margin-top:10px;
     }
   }
   &.example {
@@ -54,3 +60,8 @@ a.collapser {
     background: #cdcdcd;
   }
 }
+
+//.i-pencil {
+//  background: image-url('icons.png') 0 -23px no-repeat;
+//  padding-right: 30px;
+//}

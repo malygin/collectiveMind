@@ -431,14 +431,6 @@ h5 i {
 }
 
 
-
-.ta_icon {
-    background-image: image-url('icons.png');
-    background-position: 0 -23px;
-    background-repeat: no-repeat;
-    padding-right: 30px;
-}
-
 .content_window {
     padding: 0 20px;
     border-radius: 3px;

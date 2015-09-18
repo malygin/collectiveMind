@@ -23,16 +23,17 @@ remote: true do |f|
               .collapse{ id: "cab4-#{type_attribute.first}" }
                 .panel-body
                   - type_attribute.second.each do |attribute, bool_attribute|
-                    %b
-                      = t("activerecord.attributes.novation/post.#{attribute}")
-                    - if bool_attribute
-                      .input-group
-                        = f.radio_button "#{attribute}_bool".to_sym, true
-                        = label "#{attribute}_bool".to_sym, 'Да'
-                      .input-group
-                        = f.radio_button "#{attribute}_bool".to_sym, false
-                        = label "#{attribute}_bool".to_sym, 'Нет'
-                    = f.text_area attribute.to_sym, class: 'form-control ta_icon', rows: 3
+                    .form-group
+                      %b
+                        = t("activerecord.attributes.novation/post.#{attribute}")
+                      - if bool_attribute
+                        .input-group
+                          = f.radio_button "#{attribute}_bool".to_sym, true
+                          = label "#{attribute}_bool".to_sym, 'Да'
+                        .input-group
+                          = f.radio_button "#{attribute}_bool".to_sym, false
+                          = label "#{attribute}_bool".to_sym, 'Нет'
+                      = f.text_area attribute.to_sym, class: 'form-control', rows: 3
 
         .col-md-5
           .open-modal#select_concept{ 'data-placement' => 'cabinet4', 'data-target' => '1' }
