@@ -205,25 +205,6 @@
   font-size: 13px;
 }
 
-.add-button.type3 {
-  width: 100%;
-  padding: 11px 12px;
-  line-height: 20px;
-  margin-left: 0;
-  font-size: 13px;
-  white-space: normal;
-}
-
-.add-button.type4 {
-  width: 100%;
-  margin-left: 0;
-  font-size: 13px;
-  text-align: right;
-  white-space: normal;
-  line-height: 1.2;
-  padding: 8px;
-}
-
 .add-button:hover, .add-button:focus {
   color: #fff;
 }
@@ -241,64 +222,6 @@ p .add-button + .add-button {
 .add-button span {
   margin-right: 9px;
   font-size: 16px;
-}
-
-.aspect-questions-block .hint .close-button, .aspect-questions-block .wrong-answer .close-button {
-  position: absolute;
-  font-size: 30px;
-  top: -29px;
-  right: -23px;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.aspect-questions-block .notice .close-button:hover {
-  opacity: 1;
-}
-
-.instruments-block .form-group.bottom-buttons {
-  margin: 7px 0;
-}
-
-.instruments-block .bottom-buttons .notice-button {
-  color: #9f9f9f;
-}
-
-.instruments-block .bottom-buttons .answer-button {
-  color: #fff;
-}
-
-.instruments-block .form-group.bottom-buttons .btn + .btn {
-  margin-left: 8px;
-}
-
-.instruments-block button {
-  white-space: normal;
-  text-align: left;
-}
-
-.post-interfaces-buttons {
-  margin-top: 10px;
-  text-align: right;
-}
-
-.post-interfaces-buttons.text-left {
-  text-align: left;
-}
-
-.post-interfaces-buttons button {
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: 0 3px;
-}
-
-.post-interfaces-buttons button img {
-  display: block;
-}
-
-.post-interfaces-buttons .reply_btn:not(.collapsed) i {
-  color: #c1c1c1;
 }
 
 .post-win button {

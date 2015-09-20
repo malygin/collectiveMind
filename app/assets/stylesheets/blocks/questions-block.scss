@@ -1,0 +1,84 @@
+.aspect-questions-block {
+  padding: 20px 0 10px;
+  .hint, .wrong-answer {
+    display: block;
+    border: 3px solid #fff;
+    border-radius: 7px;
+    padding: 8px 18px;
+    line-height: 1.4;
+    position: relative;
+    margin: 7px 0 13px 0;
+  }
+  .hint.close-notice, .wrong-answer.close-notice {
+    display: none;
+  }
+
+  .left-icon {
+    position: absolute;
+    display: block;
+  }
+  h4 {
+    margin: 0 50px 0 15px;
+    .left-icon {
+      font-size: 18px;
+      left: -35px;
+      color: #7f7f7f;
+    }
+  }
+  .text {
+    line-height: 1.5;
+    padding-top: 15px;
+    .left-icon {
+      left: -20px;
+    }
+  }
+  .block-with-left-icon {
+    position: relative;
+    font-size: 13px;
+  }
+  .question_count {
+    margin-right: 30px;
+    font-size: 12px;
+  }
+
+  .hint .close-button, .wrong-answer .close-button {
+    position: absolute;
+    font-size: 30px;
+    top: -29px;
+    right: -23px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .notice .close-button:hover {
+    opacity: 1;
+  }
+}
+
+.instruments-block {
+  margin-top: 15px;
+
+  .btn-group > .btn:first-child {
+    margin-left: -1px;
+  }
+
+  .form-group {
+    position: relative;
+    clear: both;
+    &.bottom-buttons {
+      margin: 7px 0;
+      .notice-button {
+        color: #9f9f9f;
+      }
+      .answer-button {
+        color: #fff;
+      }
+      .btn + .btn {
+        margin-left: 8px;
+      }
+    }
+  }
+  button {
+    white-space: normal;
+    text-align: left;
+  }
+}
