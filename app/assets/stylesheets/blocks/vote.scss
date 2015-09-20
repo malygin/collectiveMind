@@ -91,6 +91,9 @@ ul.tab-nav_folders {
       background: #f9f8f8;
     }
   }
+  .vote_controls {
+    padding: 10px;
+  }
 }
 
 .vote_controls {
@@ -157,4 +160,10 @@ ul.tab-nav_folders {
     }
   }
 }
+.vote-folder1_3 + p {
+  color: #49B058;
+}
 
+.vote-folder1_4 +p{
+  color:#919191;
+}
