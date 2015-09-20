@@ -2,7 +2,7 @@
   .divider200
   - if @post.persisted?
     = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_plan') },
-    id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del a_font_reset'
+    id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del'
     .divider10
   %span#plan_buttons
     %button.btn.add-button.type3.dark-green#to_save_plan Сохранить и выйти
@@ -24,7 +24,7 @@
     .panel-heading
       - if @post.persisted?
         %span.pocket_name.breadcr
-          = link_to user_content_plan_posts_path(@project), class: 'a_font_reset bold' do
+          = link_to user_content_plan_posts_path(@project) do
             Мои проекты
             %small &gt;
         = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
@@ -45,7 +45,7 @@
             - @post.post_novations.first.attributes_for_form.each do |link, _values|
               %li{ class: "#{'active' if link == :project}" }
 
-                %a.a_font_reset.scroll_tab{ 'data-toggle' => 'tab', href: "#cabinet_5_cont_#{link}" }
+                %a.scroll_tab{ 'data-toggle' => 'tab', href: "#cabinet_5_cont_#{link}" }
                   = t("activerecord.attributes.plan/post_novation.#{link}")
         .col-md-8
           .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations

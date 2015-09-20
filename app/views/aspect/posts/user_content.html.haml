@@ -19,7 +19,7 @@
                               id: "destroy_aspect_#{post_short.id}" do
                   %i.glyphicon.glyphicon-trash
           .about
-            = link_to aspect_post_path(@project, post_short), remote: true, class: 'a_font_reset', id: "show_aspect_#{post_short.id}" do
+            = link_to aspect_post_path(@project, post_short), remote: true, id: "show_aspect_#{post_short.id}" do
               = post_short.short_desc
               %span.right_icon
                 %i.fa.fa-angle-right

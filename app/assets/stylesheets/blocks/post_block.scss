@@ -1,4 +1,11 @@
 $border_grey: 1px solid #d9d9d9;
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .post_full .what a,.post_full .post_footer .likes i {
+      color: nth($base_colors, $i)  !important;
+    }
+  }
+}
 .post_full {
   margin-top: 10px;
   border-radius: 5px;
@@ -16,6 +23,12 @@ $border_grey: 1px solid #d9d9d9;
       width: 100%;
       height: 130px;
       border: $border_grey;
+      .important {
+        width: 60px;
+        height: 60px;
+        margin-left: 7px;
+        position: absolute;
+      }
       .post_poster, .post_content {
         position: relative;
         height: 100%;
@@ -46,6 +59,7 @@ $border_grey: 1px solid #d9d9d9;
           min-height: 40px;
           a {
             font-size: 13px;
+            font-weight: bold;
 
           }
           .right_icon {
@@ -55,8 +69,8 @@ $border_grey: 1px solid #d9d9d9;
             i {
               font-size: 15px;
               margin-right: 3px;
-              &.fa{
-                font-size:30px;
+              &.fa {
+                font-size: 30px;
                 margin-top: -7px;
               }
             }
@@ -90,7 +104,7 @@ $border_grey: 1px solid #d9d9d9;
         .title {
           font-size: 12px;
           padding: 5px 0 5px 7px;
-          position:relative;
+          position: relative;
           float: left;
         }
         .post-theme {
@@ -98,16 +112,16 @@ $border_grey: 1px solid #d9d9d9;
           padding: 5px 10px;
           height: 25px;
           position: absolute;
-          margin-top:2px;
-          margin-left:100px;
+          margin-top: 2px;
+          margin-left: 100px;
           transition: all 0.1s linear;
           white-space: nowrap;
           width: 320px;
           display: list-item;
-          &:hover{
+          &:hover {
             z-index: 100;
             background: #fff;
-            width:auto;
+            width: auto;
             box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
           }
         }
@@ -115,7 +129,7 @@ $border_grey: 1px solid #d9d9d9;
       .likes {
         padding: 4px 5px;
         width: 21%;
-        text-align:right;
+        text-align: right;
         span {
           margin-right: 2px;
 

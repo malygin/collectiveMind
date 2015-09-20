@@ -1,7 +1,7 @@
 .row.md-vote-container
   - @user_voter.content_for_vote(@project, status).each do |post_vote|
-    .col-sm-4.md_vote_item_cont.item_expandable.h_2{ id: "post_vote_#{post_vote.id}" }
-      .vote_item
+    .col-sm-4.md_vote_item_cont{ id: "post_vote_#{post_vote.id}" }
+      .vote-item
         .vi_head
           %h6
             = trim_content(post_vote.title, 50)
