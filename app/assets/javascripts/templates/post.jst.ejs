@@ -53,57 +53,56 @@
                 <% if(typeof aspects !== 'undefined') { %>
                 <div class="tags_block">
                     <div class="title">Аспекты</div>
-                    <div class="themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
-                            <% for(var i = 0; i < aspects.length; i++) { %>
-                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
-                                  style="background-color: <%= aspects[i].color %>;">
+
+                    <div id="stripe<%= id %>" class="post-theme">
+                        <% for(var i = 0; i < aspects.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
+                              style="background-color: <%= aspects[i].color %>;">
                                 <span class="tags">
                                 <%= aspects[i].content %>
                                 </span>
                             </span>
-                            <% } %>
-                        </div>
+                        <% } %>
                     </div>
+
                 </div>
                 <% } %>
                 <% if(typeof discontents !== 'undefined') { %>
                 <div class="tags_block">
                     <div class="title">Несовершенства</div>
-                    <div class="themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
 
-                            <% for(var i = 0; i < discontents.length; i++) { %>
-                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
-                                  data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
-                                  data-me-type="imperf" data-placement="top" data-toggle="tooltip"
-                                  title="<%= discontents[i].content %>">
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < discontents.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me tooltip_t"
+                              data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
+                              data-me-type="imperf" title="<%= discontents[i].content %>">
                             <span class="tags">
                             <%= discontents[i].content %>
                             </span>
                         </span>
-                            <% } %>
-                        </div>
+                        <% } %>
                     </div>
+
                 </div>
                 <% } %>
                 <% if(typeof concepts !== 'undefined')  { %>
                 <div class="tags_block">
                     <div class="title">Аспекты</div>
-                    <div class="themes_cont">
-                        <div id="stripe<%= id %>" class="post-theme">
 
-                            <% for(var i = 0; i < concepts.length; i++) { %>
-                            <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
-                                  data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < concepts.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                              data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
                             <span class="tags">
                             <%= concepts[i].content %>
                             </span>
                         </span>
-                            <% } %>
+                        <% } %>
 
-                        </div>
                     </div>
+
                 </div>
                 <% } %>
 

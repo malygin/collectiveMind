@@ -7,7 +7,7 @@
 
 .tag-stripes {
   line-height: 1.1;
-  display: inline-block;
+  display: inline;
   white-space: nowrap;
   box-sizing: border-box;
   cursor: default;
@@ -15,8 +15,12 @@
   &:hover {
     width: auto;
     padding: 0 15px 0 7px;
-    .tags{
-      display: inline-block;
+    .tags {
+      display:inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
     }
   }
   .tags {
