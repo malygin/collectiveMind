@@ -19,16 +19,16 @@ $border_grey: 1px solid #d9d9d9;
   }
   .post_block {
     border-top: 4px solid white;
+    .important {
+      width: 60px;
+      height: 60px;
+      margin-left: 7px;
+      position: absolute;
+    }
     .post_body {
       width: 100%;
       height: 130px;
       border: $border_grey;
-      .important {
-        width: 60px;
-        height: 60px;
-        margin-left: 7px;
-        position: absolute;
-      }
       .post_poster, .post_content {
         position: relative;
         height: 100%;

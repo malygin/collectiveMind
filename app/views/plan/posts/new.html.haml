@@ -20,7 +20,7 @@
   - unless @post.persisted?
     = f.hidden_field :content
   = hidden_field_tag 'plan_post[novation_id]'
-  .panel
+  .panel.js-bottom_panel_stop
     .panel-heading
       - if @post.persisted?
         %span.pocket_name.breadcr

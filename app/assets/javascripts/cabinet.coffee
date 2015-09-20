@@ -61,7 +61,7 @@
   # Открытие "Добавления задач" в кабинете проектов
   $('#bottom-opener').on 'click', ->
     $('#plan_buttons button').toggleClass 'disabled'
-    new_top = if $('#bottom-panel').hasClass('visible')  then '100%' else $('.bottom_panel_stop').offset().top+60
+    new_top = if $('#bottom-panel').hasClass('visible')  then '100%' else $('.js-bottom_panel_stop').offset().top+60
     $('#bottom-panel').animate('top': new_top).toggleClass 'visible'
     $(this).toggleClass 'fa-rotate-180'
 
