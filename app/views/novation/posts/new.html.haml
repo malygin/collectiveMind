@@ -55,35 +55,39 @@ remote: true do |f|
           id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del'
 
 .modal.fade#modal-cabinet4-1
-  .modal-dialog.modal-1030
+  .modal-dialog.modal-relation.modal-1030
     %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
     .row
       .col-md-6
         .modal-content
-          .modal-heading#tabs_form_navation
-            %button.btn.btn-oval.active{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#discontents' }
-              Список несовершенств с их идеями
-
-            %button.btn.btn-oval{ 'data-show' => 'collapse', 'data-toggle' => 'tab', href: '#ideas' }
-              Список идей
-          .tab-content
-            .unchecked_items.tab-pane.active#discontents
-              - @discontents.each do |discontent|
-                .panel
-                  .panel-heading
-                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}" }
-                      = discontent.content
-                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                  .collapse{ id: "discontent_show_#{discontent.id}" }
-                    .panel-body
-                      = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
-            .unchecked_items.ps_cont.tab-pane#ideas
-              = render partial: 'novation/posts/concept', collection: @concepts
+          .modal-navigate#tabs_form_navation
+            %ul.nav
+              %li.active
+                %button.btn.btn-oval.active{ 'data-toggle' => 'tab', href: '#discontents' }
+                  Список несовершенств с их идеями
+              %li
+                %button.btn.btn-oval{ 'data-toggle' => 'tab', href: '#ideas' }
+                  Список идей
+          .modal-body
+            .tab-content
+              .unchecked_items.tab-pane.active#discontents
+                - @discontents.each do |discontent|
+                  .panel
+                    .panel-heading
+                      %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: "#discontent_show_#{discontent.id}", id: "open_discontent_#{discontent.id}" }
+                        = discontent.content
+                        %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                    .collapse{ id: "discontent_show_#{discontent.id}" }
+                      .panel-body
+                        = render partial: 'novation/posts/concept', collection: discontent.dispost_concepts
+              .unchecked_items.ps_cont.tab-pane#ideas
+                = render partial: 'novation/posts/concept', collection: @concepts
       .col-md-6
         .modal-content
-          .modal-heading
+          .modal-navigate
             %button.btn.btn_cab_mod.btn_toggle.btn_reset.active{ 'data-show' => 'collapse', 'data-usage' => 'modal_4_top_right' } Выбранные идеи
           -#= render partial: 'application/cabinet_sticker'
-          .checked_items.ps_cont
-            - if @novation.persisted?
-              = render partial: 'novation/posts/concept', collection: @novation.novation_concepts
+          .modal-body
+            .checked_items.ps_cont
+              - if @novation.persisted?
+                = render partial: 'novation/posts/concept', collection: @novation.novation_concepts
