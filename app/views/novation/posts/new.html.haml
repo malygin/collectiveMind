@@ -5,7 +5,7 @@ remote: true do |f|
   .content-block
     .content-head
       - if @novation.persisted?
-        %span.pocket_name.breadcr
+        %span.pocket.breadcr
           = link_to user_content_novation_posts_path(@project), id: 'open_user_content_from_edit' do
             Мои пакеты
             %small &gt;

@@ -86,6 +86,7 @@
                       multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
                         .cab_notice{ style: 'display:none;', id: 'update_user_success' }
                           %span.success
+                          .text
                             = t('form.user.update_success')
                         .notice_messages
                           = render 'shared/notice_messages', object: f.object

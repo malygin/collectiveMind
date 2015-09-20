@@ -160,13 +160,18 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
 
     }
   }
-  .modal-relation{
-    >.row>.col-md-6{
-      padding-right:0px;
+  .modal-relation {
+    > .row > .col-md-6 {
+      padding-right: 0px;
     }
-    .modal-body{
-      padding:15px;
+    .modal-body {
+      padding: 15px;
       height: 560px;
+    }
+  }
+  .modal-choose {
+    .modal-body {
+      padding: 15px;
     }
   }
   .admin_panel {
@@ -203,12 +208,11 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
     }
   }
   .modal-navigate {
-    background: $service_color_4;
     padding: 10px;
     border-radius: 6px 6px 0 0;
-    .nav li{
-      display:inline-block;
-      margin-right:10px;
+    .nav li {
+      display: inline-block;
+      margin-right: 10px;
     }
   }
   .modal-body {
@@ -339,3 +343,14 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
   cursor: pointer;
 }
 
+.stage_4 {
+  .modal-navigate {
+    background: $service_color_4;
+  }
+}
+
+.stage_5 {
+  .modal-navigate {
+    background: $service_color_5;
+  }
+}

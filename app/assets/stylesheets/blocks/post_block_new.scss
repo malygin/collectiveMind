@@ -50,8 +50,8 @@ a.collapser {
         margin-left: 10px;
       }
     }
-    .check-group{
-      margin-top:10px;
+    .check-group {
+      margin-top: 10px;
     }
 
   }
@@ -68,7 +68,16 @@ a.collapser {
   }
 }
 
-//.i-pencil {
-//  background: image-url('icons.png') 0 -23px no-repeat;
-//  padding-right: 30px;
-//}
+.block-btn {
+  margin-top: 200px;
+  .btn {
+    width: 100%;
+    padding: 11px 12px;
+    line-height: 20px;
+    margin: 5px 0;
+    font-size: 13px;
+    white-space: normal;
+    background: #325d66 !important;
+    color:white;
+  }
+}

@@ -1,14 +1,11 @@
 - content_for :cabinet_sidebar do
-  .divider200
-  - if @post.persisted?
-    = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_plan') },
-    id: "destroy_plan_#{@post.id}", class: 'btn add-button type3 del'
-    .divider10
-  %span#plan_buttons
-    %button.btn.add-button.type3.dark-green#to_save_plan Сохранить и выйти
-    .divider10
+  .block-btn#plan_buttons
+    - if @post.persisted?
+      = link_to 'Удалить', plan_post_path(@project, @post), method: :delete, data: { confirm: t('confirm.delete_plan') },
+      id: "destroy_plan_#{@post.id}", class: 'btn del'
+    %button.btn#to_save_plan Сохранить и выйти
     - unless @post.published?
-      %button.btn.add-button.type3.dark-green#to_publish_plan Опубликовать
+      %button.btn#to_publish_plan Опубликовать
 - content_for :special_for_gantt do
   = render 'gantt_panel'
 
@@ -16,21 +13,23 @@
 %div{ id: "plan_notices_#{@post.id}" }
   = render partial: 'shared/create_success', locals: { model_name: 'plan', id: @post.id }
 = form_for @post, url: { project: @project.id, action: @post.persisted? ? 'update' : 'create', id: @post.id }, remote: true do |f|
-  = f.hidden_field :tasks_gant
-  - unless @post.persisted?
-    = f.hidden_field :content
-  = hidden_field_tag 'plan_post[novation_id]'
-  .panel.js-bottom_panel_stop
-    .panel-heading
-      - if @post.persisted?
-        %span.pocket_name.breadcr
-          = link_to user_content_plan_posts_path(@project) do
-            Мои проекты
-            %small &gt;
-        = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
-      - else
-        = f.text_area :content, class: 'form-control without_autosize', rows: 1, style: 'width: 100%;margin-top:10px;', placeholder: 'Введите название проекта'
-        %a.pocket_name.open-modal#select_novation Выбрать пакет
+  .hidden
+    = f.hidden_field :tasks_gant
+    - unless @post.persisted?
+      = f.hidden_field :content
+    = hidden_field_tag 'plan_post[novation_id]'
+    = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
+    = f.submit 'Save', class: 'hidden', id: 'save_plan_post_published', name: 'plan_post[published]'
+  .panel-choose.js-bottom_panel_stop
+    - if @post.persisted?
+      %span.pocket_name.breadcr
+        = link_to user_content_plan_posts_path(@project) do
+          Мои проекты
+          %small &gt;
+      = f.text_area :content, class: 'form-control transp_ta without_autosize', rows: 1, style: 'width: 500px;'
+    - else
+      //= f.text_area :content, class: 'form-control without_autosize', rows: 1, style: 'width: 100%;margin-top:10px;', placeholder: 'Введите название проекта'
+      %a.pocket.open-modal#select_novation Выбрать пакет
   .content-block
     .content-head
       %button.btn.btn-oval.active#selected_novation_main_form
@@ -41,12 +40,13 @@
     .content-body
       .row
         .col-md-4
-          %ul.list-unstyled.tabs_type_2
+          %ul.list-unstyled
             - @post.post_novations.first.attributes_for_form.each do |link, _values|
               %li{ class: "#{'active' if link == :project}" }
-
-                %a.scroll_tab{ 'data-toggle' => 'tab', href: "#cabinet_5_cont_#{link}" }
-                  = t("activerecord.attributes.plan/post_novation.#{link}")
+                .panel
+                  .panel-heading
+                    %a.scroll_tab{ 'data-toggle' => 'tab', href: "#cabinet_5_cont_#{link}" }
+                      = t("activerecord.attributes.plan/post_novation.#{link}")
         .col-md-8
           .tab-content.tab_cont5.ps_cont.always-visible#plan_post_novations
             - @post.post_novations.first.attributes_for_form.each do |link, attributes|
@@ -62,36 +62,36 @@
         %span.text-published
 
   .modal.fade#modal-cabinet5-1
-    .modal-dialog.modal-lg
+    .modal-dialog.modal-choose.modal-1030
       %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
       .modal-content
-        .row
-          .col-md-5
-            - @novations.each do |novation|
-              .panel.open_novation
-                .panel-heading.arrow-right
-                  %a{ 'data-toggle' => 'tab', href: "#show_novation_#{novation.id}" }
-                    = novation.title
-          .col-md-7
-            .tab-content#list_novations
-              - @novations.each do |novation|
-                .tab-pane.fade{ id: "show_novation_#{novation.id}", 'data-id' => novation.id }
-                  - novation.attributes_for_form.each do |type_attribute|
-                    .panel
-                      .panel-heading
-                        %a.collapsed.with_arrow{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
-                        href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
-                          = t("activerecord.attributes.novation/post.#{type_attribute.first}")
-                          %i.fa.fa-angle-right.fa-lg.collapse_arrow
-                      .collapse{ id: "novation_#{novation.id}_attributes_#{type_attribute.first}" }
-                        .panel-body
-                          - type_attribute.second.each do |attribute, _bool_attribute|
-                            %b
-                              = t("activerecord.attributes.novation/post.#{attribute}")
-                            %p.novation_attribute{ 'data-attribute' => attribute }
-                              = novation.send(attribute)
-
+        .modal-navigate
           %a.btn#choose_novation Выбрать пакет
-
-  = f.submit 'Save', class: 'hidden', id: 'save_plan_post'
-  = f.submit 'Save', class: 'hidden', id: 'save_plan_post_published', name: 'plan_post[published]'
+        .modal-body
+          .row
+            .col-md-5
+              %ul.list-unstyled
+                - @novations.each do |novation|
+                  %li
+                    .panel.open_novation
+                      .panel-heading
+                        %a{ 'data-toggle' => 'tab', href: "#show_novation_#{novation.id}" }
+                          = novation.title
+            .col-md-7
+              .tab-content#list_novations
+                - @novations.each do |novation|
+                  .tab-pane.fade{ id: "show_novation_#{novation.id}", 'data-id' => novation.id }
+                    - novation.attributes_for_form.each do |type_attribute|
+                      .panel
+                        .panel-heading
+                          %a.collapsed.with_arrow{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse',
+                          href: "#novation_#{novation.id}_attributes_#{type_attribute.first}" }
+                            = t("activerecord.attributes.novation/post.#{type_attribute.first}")
+                            %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                        .collapse{ id: "novation_#{novation.id}_attributes_#{type_attribute.first}" }
+                          .panel-body
+                            - type_attribute.second.each do |attribute, _bool_attribute|
+                              %b
+                                = t("activerecord.attributes.novation/post.#{attribute}")
+                              %p.novation_attribute{ 'data-attribute' => attribute }
+                                = novation.send(attribute)

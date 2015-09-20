@@ -8,12 +8,10 @@
   background: white;
   span {
     display: inline-block;
-    width: 100%;
     margin: 0 auto;
-    padding: 10px 0px 10px 60px;
-    font-size: 13px;
-    color: #666;
-    background:image-url('smile.png') no-repeat;
+    width: 38px;
+    height: 38px;
+    background: image-url('smile.png') no-repeat;
     &.success {
       background-position: 0 -38px;
     }
@@ -21,5 +19,11 @@
     &.fail {
       background-position: 0 0;
     }
+  }
+  .text {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    padding-left:10px;
   }
 }
