@@ -36,7 +36,7 @@ Spork.prefork do
   ActiveRecord::Migration.maintain_test_schema!
 
   Capybara::Webkit.configure do |config|
-    config.allow_url("0.0.0.0")
+    config.allow_url('0.0.0.0')
   end
 
   RSpec.configure do |config|
