@@ -35,6 +35,10 @@ Spork.prefork do
 
   ActiveRecord::Migration.maintain_test_schema!
 
+  Capybara::Webkit.configure do |config|
+    config.allow_url("0.0.0.0")
+  end
+
   RSpec.configure do |config|
     config.infer_spec_type_from_file_location!
     config.profile_examples = 10
@@ -51,7 +55,7 @@ Spork.prefork do
 
     config.before :each, js: true do
       page.driver.block_unknown_urls
-      page.driver.allow_url '0.0.0.0'
+      # page.driver.allow_url '0.0.0.0'
       page.driver.allow_url 'res.cloudinary.com'
       Capybara.default_wait_time = 5
     end
