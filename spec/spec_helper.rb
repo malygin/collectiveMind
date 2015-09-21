@@ -39,7 +39,6 @@ Spork.prefork do
     config.allow_url('0.0.0.0')
     config.allow_url('res.cloudinary.com')
     config.block_unknown_urls
-
   end
 
   RSpec.configure do |config|
