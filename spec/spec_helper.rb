@@ -37,6 +37,9 @@ Spork.prefork do
 
   Capybara::Webkit.configure do |config|
     config.allow_url('0.0.0.0')
+    config.allow_url('res.cloudinary.com')
+    config.block_unknown_urls
+
   end
 
   RSpec.configure do |config|
@@ -54,9 +57,9 @@ Spork.prefork do
     config.include AbstractController::Translation
 
     config.before :each, js: true do
-      page.driver.block_unknown_urls
+      # page.driver.block_unknown_urls
       # page.driver.allow_url '0.0.0.0'
-      page.driver.allow_url 'res.cloudinary.com'
+      # page.driver.allow_url
       Capybara.default_wait_time = 5
     end
 
