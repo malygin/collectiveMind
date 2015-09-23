@@ -1,11 +1,11 @@
-=link_to '/project/'+@project.id.to_s do
+= link_to '/project/' + @project.id.to_s do
   %span.fa.fa-angle-double-left
-  =t('link.back_proc')
+  = t('link.back_proc')
 
 %section.widget
-  %div(style="width:50%;margin-left:53px;")
+  %div{ style: 'width:50%;margin-left:53px;' }
     %br
-    <iframe width="560" height="315" src="//www.youtube.com/embed/zcg1OrGYoOE" frameborder="0" allowfullscreen></iframe>
+    <iframe width='560' height='315' src="//www.youtube.com/embed/zcg1OrGYoOE" frameborder='0' allowfullscreen></iframe>
     %br
     «Пояснение автора проекта Олега Савельзона»
     %br

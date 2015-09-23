@@ -4,7 +4,6 @@ class Core::ProjectUsersController < ProjectsController
   before_filter :news_data
 
   def show
-
   end
 
   def create
@@ -25,7 +24,7 @@ class Core::ProjectUsersController < ProjectsController
   end
 
   def user_analytics
-    redirect_to(root_path) unless prime_admin? or role_expert?
+    redirect_to(root_path) unless prime_admin? || role_expert?
     @count_people = @project.count_people.to_json
     @average_time = @project.average_time.to_json
     @count_pages = @project.count_pages
@@ -43,6 +42,6 @@ class Core::ProjectUsersController < ProjectsController
 
   def ready_to_concept
     current_user.project_user_for(@project).update ready_to_concept: true
-    render json: {head: :ok}
+    render json: { head: :ok }
   end
 end

@@ -4,16 +4,16 @@ describe 'Novation ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '4:0' }
+  let(:project) { @project = create :closed_project, stage: '4:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'novation_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'novation_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'novation_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'novation_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'novation_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'novation_discuss'
@@ -39,7 +39,7 @@ describe 'Novation ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Пакеты идей (2)'
+      expect(page).to have_content "#{t('show.novation.title')} (2)"
       expect(page).to have_content @novation1.title
       expect(page).to have_content @novation2.title
     end
@@ -53,16 +53,16 @@ describe 'Novation ' do
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-comment').trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .novation-block .post a").click
+      first(:css, '#tab_concept_novations .md-post-block .what a').click
       expect(page).to have_content @novation1.content
     end
 
     it 'can sort to popular', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-date').trigger('click')
       sleep(5)
-      first(:css, "#tab_concept_novations .novation-block .post a").click
+      first(:css, '#tab_concept_novations .md-post-block .what a').click
       expect(page).to have_content @novation2.content
     end
   end
@@ -73,7 +73,7 @@ describe 'Novation ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Пакеты идей (2)'
+      expect(page).to have_content "#{t('show.novation.title')} (2)"
       expect(page).to have_content @novation1.content
       expect(page).to have_content @novation2.content
       expect(page).to have_link 'new_novation_posts'
@@ -112,7 +112,7 @@ describe 'Novation ' do
     it_behaves_like 'discuss novations'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', '4:1', 'Голосование по пакетам идей', 'novation'
+      it_behaves_like 'vote popup', '4:1', 'novation'
     end
   end
 
@@ -131,6 +131,6 @@ describe 'Novation ' do
     #
     # it_behaves_like 'discuss novations'
     #
-    # it_behaves_like 'vote popup', 10, 'Голосование по пакетам идей'
+    # it_behaves_like 'vote popup', '4:1', 'novation'
   end
 end

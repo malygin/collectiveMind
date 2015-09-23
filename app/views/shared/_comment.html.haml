@@ -1,81 +1,66 @@
-.media.comment{id: "comment#{comment.id}"}
-  .media-left
-    -#= image_tag 'no-ava.png', class: "media-object img35 img-circle"
-    -#= cl_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
-    = link_to user_path(@project, comment.user) do
-      = user_image_tag comment.user.try(:avatar), class: 'media-object img35 img-circle'
-  .media-body
-    %h5.media-heading.bold{id: "user_name_#{comment.id}"}
-      = link_to comment.user, user_path(@project, comment.user)
-    %span.comment_interf
-      %span.date_time.theme_font_color
-        =Russian::strftime(comment.created_at,'%k:%M')
-      - if current_user?(comment.user) or boss?
-        %span.dropdown.edit_comment{id: "redactor_comment_#{comment.id}"}
-          %button.btn_reset{id: "edit_comment#{comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            %i.fa.fa-cog.fa-lg.theme_font_color
-          %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{comment.id}", :role => "menu"}
-            %li
-              %a.edit-comment{data:{ project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{comment.id}", href: "#", tabindex: "-1"}
-                %i.glyphicon.glyphicon-pencil>
-                Редактировать
-            %li
-              = link_to({controller: comment.controller_name_for_action, action: :destroy_comment, id: comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{comment.id}", tabindex: "-1") do
-                %i.glyphicon.glyphicon-remove>
-                Удалить
-
-        - if boss?
-          = link_to({controller: comment.controller_name_for_action, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id, approve_status: true}, remote: true, method: :put, class: "link_status", id: "approve_stat_comment_#{comment.id}") do
-            %span.badge.badge_important{class: "#{'theme_back_color' if comment.approve_status}"}= t('show.important')
-        - elsif comment.approve_status
-          %span.badge.badge_important.theme_back_color= t('show.important')
-      %span{id: "cancel_comment_#{comment.id}"}
-  -#.divider10
-  -#%label.label.label-success Согласен
-  -#label.label.label-danger Не согласен
-  -#%span.font12 Пояснение:
-  %p.font_grey.comment_text{id: "comment_text_#{comment.id}"}
-    =comment.content
-  .post-interfaces-buttons.text-left
-    %span.bold
-      %span(id="lk_comment_#{comment.id}")
-        =comment.users_pro.count
-      =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put,
-           id: "like_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Нравится') do
-        %i.fa.fa-thumbs-up.theme_font_color
-
-    %span.bold
-      %span(id="dlk_comment_#{comment.id}")
-        =comment.users_against.count
-      =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put,
-       id: "dislike_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Не нравится') do
-        %i.fa.fa-thumbs-down.theme_font_color
-
-    -#%button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "like", :type => "button"}
-    -#  %span.bold
-    -#    %span(id="lk_comment_#{comment.id}")
-    -#      =comment.users_pro.count
-    -#    =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => comment.id, :against => false}, :remote => true, :method => :put,
-    -#     id: "like_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Нравится') do
-    -#      %i.fa.fa-thumbs-up.theme_font_color
-    -#%button.rate_button{"data-for" => "comment#{comment.id}", "data-rate-action" => "dislike", :type => "button"}
-    -#  %span.bold
-    -#    %span(id="dlk_comment_#{comment.id}")
-    -#      =comment.users_against.count
-    -#    =link_to({controller: comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => comment.id, :against => true}, :remote => true, :method => :put,
-    -#     id: "dislike_comment_#{comment.id}",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Не нравится') do
-    -#      %i.fa.fa-thumbs-down.theme_font_color
-
-    %button.reply-comment.reply_btn.collapsed{data:{ project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize, comment: comment.id}, id: "reply_comment_#{comment.id}",
-     "data-target" => "#reply_form_#{comment.id}", "data-toggle" => "collapse", :type => "button",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Перейти в обсуждение'}
-      %span.bold
-        %i.fa.fa-reply.theme_font_color
-.divider10
-%a.answers_collapse.opened{id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? 'theme_font_color' : 'font_grey'}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#answers_#{comment.id}"}
-  -if comment.comments.size > 0
+.comment{ id: "comment#{comment.id}", class: "#{'new_comment' if @last_time_visit && (comment.created_at > @last_time_visit)}" }
+  .comment-user
+    = link_to user_path(@project, comment.user), id: "user_name_#{comment.id}", class: 'user' do
+      = user_image_tag comment.user.try(:avatar)
+      = comment.user
+    %span.date
+      = distance_of_time_in_words(comment.created_at, Time.now)
+      назад
+    - if current_user?(comment.user) || boss?
+      %span.edit_comment.dropdown{ id: "redactor_comment_#{comment.id}" }
+        %a{ id: "edit_comment#{comment.id}", 'data-toggle' => 'dropdown' }
+          %span.fa.fa-cog.fa-lg
+        %ul.dropdown-menu{ 'aria-labelledby' => "edit_comment#{comment.id}" }
+          %li
+            %a.edit-comment{ data: { project: @project.id, id: comment.id, path: comment.post.class.name.underscore.pluralize },
+              id: "edit_comment_#{comment.id}", href: '#', tabindex: '-1' }
+              %i.glyphicon.glyphicon-pencil
+              Редактировать
+          %li
+            = link_to({ controller: comment.post_controller_path, action: :destroy_comment, id: comment.id }, method: :put, remote: true,
+              data: { confirm: t('confirm.delete_comment') }, id: "destroy_comment_#{comment.id}", tabindex: '-1') do
+              %i.glyphicon.glyphicon-remove
+              Удалить
+      - if boss?
+        = link_to({ controller: comment.post_controller_path, action: :change_status_for_comment, id: comment.post.id, comment_id: comment.id,
+          approve_status: true }, remote: true, method: :put, id: "approve_status_comment_#{comment.id}") do
+          %span.fa.fa-bookmark.fa-lg{ class: "#{comment.approve_status ? ' ' : 'grey'}" }
+      - elsif comment.approve_status
+        %span.fa.fa-bookmark.fa-lg
+      %span{ id: "cancel_comment_#{comment.id}" }
+        %a.edit-cancel{ href: '#', style: 'display:none;', 'data-id' => comment.id }
+          %span.label.label-danger Отменить
+  .comment-content
+    %p{ id: "comment_text_#{comment.id}" }
+      = comment.content
+  .comment-likes
+    - if boss?
+      %span
+        = link_to({ controller: comment.post.class.name.underscore.pluralize, action: :add_score_for_comment, project: @project.id, id: comment.id },
+        remote: true, method: :put, id: "add_score_for_comment_#{comment.id}") do
+          %i.fa.fa-trophy{ class: "#{comment.useful ? 'font_red' : 'font_grey'}" }
+    %span
+      %small{ id: "lk_comment_#{comment.id}" }
+        = comment.users_pro.count
+      = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project, id: comment.id, against: false },
+      remote: true, method: :put, id: "like_comment_#{comment.id}", class: 'tooltip_b', title: 'Нравится') do
+        %i.fa.fa-thumbs-up
+    %span
+      %small{ id: "dlk_comment_#{comment.id}" }
+        = comment.users_against.count
+      = link_to({ controller: comment.post_controller_path, action: :like_comment, project: @project, id: comment.id, against: true },
+      remote: true, method: :put, id: "dislike_comment_#{comment.id}", class: 'tooltip_b', title: 'Не нравится') do
+        %i.fa.fa-thumbs-down
+    %span.tooltip_b{ title: 'Перейти в обсуждение' }
+      %button.reply-comment.collapsed{ data: { project: @project.id, id: comment.post.id, path: comment.post.class.name.underscore.pluralize,
+      comment: comment.id }, id: "reply_comment_#{comment.id}", 'data-target' => "#reply_form_#{comment.id}", 'data-toggle' => 'collapse' }
+        %i.fa.fa-reply
+%a.answers_collapse.opened{ id: "answers_collapse_#{comment.id}", class: "#{comment.comments.present? ? ' ' : 'grey'}",
+'data-toggle' => 'collapse', href: "#answers_#{comment.id}" }
+  - if comment.comments.size > 0
     %span
       = t('stages.comments', count: comment.comments.size)
-.com_answers.collapse.in{id: "answers_#{comment.id}"}
-  .answers_subblock.level1
+.com_answers.collapse.in{ id: "answers_#{comment.id}" }
+  .answers_subblock
     - comment.comments.each do |c|
       = render partial: 'shared/comment', object: c

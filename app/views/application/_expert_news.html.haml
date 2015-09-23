@@ -1,32 +1,27 @@
-%button.btn_reset.font_lighter_grey.bold.drop_opener{class: "#{'active' if expert_news.present?}", "data-dd-opener" => "dd_1"}
-  %i.fa.fa-exclamation-triangle{style: "#{'color:#e71d2b;' if unread_expert_news?}"}
-#dd_1.dropdown_window.dd_570.expert_news_drop.text-left{class: "#{'active' if expert_news.present?}"}
-  .dd_badge
+.dropdown_window.expert_news.md-expert-news#dd_1{ class: "#{'active' if unread_expert_news?}" }
+  .dw_badge
     %i.fa.fa-exclamation-triangle
-    %small Новости от эксперта
-  .dd_wrapper.white
-    .dd_top.light-grey
-      %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_1"}
-    .dd_bottom
-      .divider20
-      .container
-        .ps_cont
-          - unless expert_news.empty?
-            - expert_news.each_with_index do |news, index|
-              .dd_xprt_notice
-                %a.a_font_reset.collapsed{class: "#{'read' if news.read?(project, current_user)}", data: {project: project.id, id: news.id}, "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#xprt_#{index}"}
-                  .row
-                    .col-xs-9
-                      =news.title
-
-                      -unless news.read?(@project, current_user)
-                        %span.status_news{id: "status_news_#{news.id}", style: "color:#e71d2b;"}
-                          (не прочитано)
-                    .col-xs-3.text-right
-                      %span.dd_n_date
-                        =Russian::strftime(news.created_at,'%d.%m.%Y')
-                      %i.fa.fa-angle-right.font_grey.bold
-              .dd_xprt_article.collapse{id: "xprt_#{index}"}
-                = news.body.html_safe if news.body
-
-      .divider20
+    = t('news.header')
+  .dw_wrapper
+    .dw_top
+      .text-right
+        %i.fa.fa-close.fa-lg.dw_close{ 'data-dd' => 'dd_1' }
+    .dw_content
+      .ps_cont
+        - unless expert_news.empty?
+          - expert_news.each_with_index do |news, index|
+            .dw_notice.md-news-notice
+              %a.collapsed{ class: "#{'read' if news.read?(project, current_user)}", data: { project: project.id, id: news.id, toggle: 'collapse' },
+                href: "#xprt_#{index}" }
+                .row
+                  .col-xs-9
+                    = news.title
+                    - unless news.read?(@project, current_user)
+                      %span.status_news{ id: "status_news_#{news.id}" }
+                        = t('news.unread')
+                  .col-xs-3.text-right
+                    %span.date
+                      = l(news.created_at, format: '%d.%m.%Y')
+                    %i.fa.fa-angle-right
+            .dw_article.md-news-article.collapse{ id: "xprt_#{index}" }
+              = news.body.try(:html_safe)

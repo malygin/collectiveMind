@@ -11,19 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529223637) do
+ActiveRecord::Schema.define(version: 20150816121207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "awards", force: :cascade do |t|
-    t.string  "name",     limit: 255
-    t.string  "url",      limit: 255
-    t.text    "desc"
-    t.integer "position"
-  end
-
-  create_table "collect_info_answers", force: :cascade do |t|
+  create_table "aspect_answers", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "question_id"
@@ -33,11 +26,76 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.boolean  "correct"
   end
 
-  add_index "collect_info_answers", ["created_at"], name: "index_collect_info_answers_on_created_at", using: :btree
-  add_index "collect_info_answers", ["question_id"], name: "index_collect_info_answers_on_question_id", using: :btree
-  add_index "collect_info_answers", ["user_id"], name: "index_collect_info_answers_on_user_id", using: :btree
+  add_index "aspect_answers", ["created_at"], name: "index_aspect_answers_on_created_at", using: :btree
+  add_index "aspect_answers", ["question_id"], name: "index_aspect_answers_on_question_id", using: :btree
+  add_index "aspect_answers", ["user_id"], name: "index_aspect_answers_on_user_id", using: :btree
 
-  create_table "collect_info_questions", force: :cascade do |t|
+  create_table "aspect_comment_votings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.boolean  "against",    default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "aspect_comment_votings", ["comment_id", "user_id"], name: "index_aspect_comment_votings_on_comment_id_and_user_id", using: :btree
+  add_index "aspect_comment_votings", ["comment_id"], name: "index_aspect_comment_votings_on_comment_id", using: :btree
+  add_index "aspect_comment_votings", ["user_id"], name: "index_aspect_comment_votings_on_user_id", using: :btree
+
+  create_table "aspect_comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.boolean  "useful"
+    t.boolean  "censored",       default: false
+    t.integer  "comment_id"
+    t.boolean  "discuss_status"
+    t.boolean  "approve_status"
+    t.string   "image"
+    t.boolean  "isFile"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "answer_id"
+  end
+
+  add_index "aspect_comments", ["comment_id"], name: "index_aspect_comments_on_comment_id", using: :btree
+  add_index "aspect_comments", ["post_id"], name: "index_aspect_comments_on_post_id", using: :btree
+  add_index "aspect_comments", ["user_id"], name: "index_aspect_comments_on_user_id", using: :btree
+
+  create_table "aspect_post_votings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.boolean  "against"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "aspect_post_votings", ["post_id", "user_id"], name: "index_aspect_post_votings_on_post_id_and_user_id", using: :btree
+  add_index "aspect_post_votings", ["post_id"], name: "index_aspect_post_votings_on_post_id", using: :btree
+  add_index "aspect_post_votings", ["user_id"], name: "index_aspect_post_votings_on_user_id", using: :btree
+
+  create_table "aspect_posts", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "position"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "project_id"
+    t.text     "short_desc"
+    t.integer  "status",               default: 0
+    t.integer  "aspect_id"
+    t.string   "color"
+    t.string   "short_name"
+    t.text     "detailed_description"
+    t.boolean  "approve_status"
+    t.boolean  "useful"
+  end
+
+  add_index "aspect_posts", ["aspect_id"], name: "index_aspect_posts_on_aspect_id", using: :btree
+  add_index "aspect_posts", ["project_id"], name: "index_aspect_posts_on_project_id", using: :btree
+  add_index "aspect_posts", ["user_id"], name: "index_aspect_posts_on_user_id", using: :btree
+
+  create_table "aspect_questions", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
@@ -50,12 +108,12 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "type_comment"
   end
 
-  add_index "collect_info_questions", ["aspect_id"], name: "index_collect_info_questions_on_aspect_id", using: :btree
-  add_index "collect_info_questions", ["created_at"], name: "index_collect_info_questions_on_created_at", using: :btree
-  add_index "collect_info_questions", ["project_id"], name: "index_collect_info_questions_on_project_id", using: :btree
-  add_index "collect_info_questions", ["user_id"], name: "index_collect_info_questions_on_user_id", using: :btree
+  add_index "aspect_questions", ["aspect_id"], name: "index_aspect_questions_on_aspect_id", using: :btree
+  add_index "aspect_questions", ["created_at"], name: "index_aspect_questions_on_created_at", using: :btree
+  add_index "aspect_questions", ["project_id"], name: "index_aspect_questions_on_project_id", using: :btree
+  add_index "aspect_questions", ["user_id"], name: "index_aspect_questions_on_user_id", using: :btree
 
-  create_table "collect_info_user_answers", force: :cascade do |t|
+  create_table "aspect_user_answers", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "answer_id"
     t.integer  "question_id"
@@ -66,13 +124,13 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.text     "content"
   end
 
-  add_index "collect_info_user_answers", ["answer_id"], name: "index_collect_info_user_answers_on_answer_id", using: :btree
-  add_index "collect_info_user_answers", ["aspect_id"], name: "index_collect_info_user_answers_on_aspect_id", using: :btree
-  add_index "collect_info_user_answers", ["project_id"], name: "index_collect_info_user_answers_on_project_id", using: :btree
-  add_index "collect_info_user_answers", ["question_id"], name: "index_collect_info_user_answers_on_question_id", using: :btree
-  add_index "collect_info_user_answers", ["user_id"], name: "index_collect_info_user_answers_on_user_id", using: :btree
+  add_index "aspect_user_answers", ["answer_id"], name: "index_aspect_user_answers_on_answer_id", using: :btree
+  add_index "aspect_user_answers", ["aspect_id"], name: "index_aspect_user_answers_on_aspect_id", using: :btree
+  add_index "aspect_user_answers", ["project_id"], name: "index_aspect_user_answers_on_project_id", using: :btree
+  add_index "aspect_user_answers", ["question_id"], name: "index_aspect_user_answers_on_question_id", using: :btree
+  add_index "aspect_user_answers", ["user_id"], name: "index_aspect_user_answers_on_user_id", using: :btree
 
-  create_table "collect_info_votings", force: :cascade do |t|
+  create_table "aspect_votings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "aspect_id"
     t.datetime "created_at", null: false
@@ -80,9 +138,16 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.integer  "status"
   end
 
-  add_index "collect_info_votings", ["aspect_id", "user_id"], name: "index_collect_info_votings_on_aspect_id_and_user_id", using: :btree
-  add_index "collect_info_votings", ["aspect_id"], name: "index_collect_info_votings_on_aspect_id", using: :btree
-  add_index "collect_info_votings", ["user_id"], name: "index_collect_info_votings_on_user_id", using: :btree
+  add_index "aspect_votings", ["aspect_id", "user_id"], name: "index_aspect_votings_on_aspect_id_and_user_id", using: :btree
+  add_index "aspect_votings", ["aspect_id"], name: "index_aspect_votings_on_aspect_id", using: :btree
+  add_index "aspect_votings", ["user_id"], name: "index_aspect_votings_on_user_id", using: :btree
+
+  create_table "awards", force: :cascade do |t|
+    t.string  "name",     limit: 255
+    t.string  "url",      limit: 255
+    t.text    "desc"
+    t.integer "position"
+  end
 
   create_table "concept_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -217,71 +282,6 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   add_index "concept_votings", ["concept_post_id"], name: "index_concept_votings_on_concept_post_id", using: :btree
   add_index "concept_votings", ["discontent_post_id"], name: "index_concept_votings_on_discontent_post_id", using: :btree
   add_index "concept_votings", ["user_id"], name: "index_concept_votings_on_user_id", using: :btree
-
-  create_table "core_aspect_comment_votings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "comment_id"
-    t.boolean  "against",    default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "core_aspect_comment_votings", ["comment_id", "user_id"], name: "index_core_aspect_comment_votings_on_comment_id_and_user_id", using: :btree
-  add_index "core_aspect_comment_votings", ["comment_id"], name: "index_core_aspect_comment_votings_on_comment_id", using: :btree
-  add_index "core_aspect_comment_votings", ["user_id"], name: "index_core_aspect_comment_votings_on_user_id", using: :btree
-
-  create_table "core_aspect_comments", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.boolean  "useful"
-    t.boolean  "censored",       default: false
-    t.integer  "comment_id"
-    t.boolean  "discuss_status"
-    t.boolean  "approve_status"
-    t.string   "image"
-    t.boolean  "isFile"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "answer_id"
-  end
-
-  add_index "core_aspect_comments", ["comment_id"], name: "index_core_aspect_comments_on_comment_id", using: :btree
-  add_index "core_aspect_comments", ["post_id"], name: "index_core_aspect_comments_on_post_id", using: :btree
-  add_index "core_aspect_comments", ["user_id"], name: "index_core_aspect_comments_on_user_id", using: :btree
-
-  create_table "core_aspect_post_votings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
-    t.boolean  "against"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "core_aspect_post_votings", ["post_id", "user_id"], name: "index_core_aspect_post_votings_on_post_id_and_user_id", using: :btree
-  add_index "core_aspect_post_votings", ["post_id"], name: "index_core_aspect_post_votings_on_post_id", using: :btree
-  add_index "core_aspect_post_votings", ["user_id"], name: "index_core_aspect_post_votings_on_user_id", using: :btree
-
-  create_table "core_aspect_posts", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "project_id"
-    t.text     "short_desc"
-    t.integer  "status",               default: 0
-    t.integer  "core_aspect_id"
-    t.string   "color"
-    t.string   "short_name"
-    t.text     "detailed_description"
-    t.boolean  "approve_status"
-    t.boolean  "useful"
-  end
-
-  add_index "core_aspect_posts", ["core_aspect_id"], name: "index_core_aspect_posts_on_core_aspect_id", using: :btree
-  add_index "core_aspect_posts", ["project_id"], name: "index_core_aspect_posts_on_project_id", using: :btree
-  add_index "core_aspect_posts", ["user_id"], name: "index_core_aspect_posts_on_user_id", using: :btree
 
   create_table "core_content_answers", force: :cascade do |t|
     t.text     "content"
@@ -437,19 +437,19 @@ ActiveRecord::Schema.define(version: 20150529223637) do
   create_table "core_project_users", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "ready_to_concept",         default: false
-    t.boolean  "ready_to_plan",            default: false
-    t.boolean  "owner",                    default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "ready_to_concept",       default: false
+    t.boolean  "ready_to_plan",          default: false
+    t.boolean  "owner",                  default: false
     t.integer  "type_user"
-    t.integer  "collect_info_posts_score", default: 0
-    t.integer  "discontent_posts_score",   default: 0
-    t.integer  "concept_posts_score",      default: 0
-    t.integer  "novation_posts_score",     default: 0
-    t.integer  "plan_posts_score",         default: 0
-    t.integer  "estimate_posts_score",     default: 0
-    t.integer  "score",                    default: 0
+    t.integer  "aspect_posts_score",     default: 0
+    t.integer  "discontent_posts_score", default: 0
+    t.integer  "concept_posts_score",    default: 0
+    t.integer  "novation_posts_score",   default: 0
+    t.integer  "plan_posts_score",       default: 0
+    t.integer  "estimate_posts_score",   default: 0
+    t.integer  "score",                  default: 0
   end
 
   add_index "core_project_users", ["project_id", "user_id"], name: "index_core_project_users_on_project_id_and_user_id", using: :btree
@@ -841,10 +841,11 @@ ActiveRecord::Schema.define(version: 20150529223637) do
     t.string   "body2"
     t.integer  "user_informed"
     t.boolean  "viewed"
-    t.boolean  "personal",      default: false
-    t.boolean  "visible",       default: true
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "personal",       default: false
+    t.boolean  "visible",        default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "request_format"
   end
 
   add_index "journal_loggers", ["project_id"], name: "index_journal_loggers_on_project_id", using: :btree

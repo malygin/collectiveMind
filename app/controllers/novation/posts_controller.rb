@@ -1,30 +1,14 @@
 class Novation::PostsController < PostsController
-  include CloudinaryHelper
-  include MarkupHelper
   before_action :set_novation_post, only: [:edit, :update, :destroy]
   before_action :set_discontents, only: [:new, :edit]
-
-  def voting_model
-    Novation::Post
-  end
+  before_action :user_vote, only: [:index]
 
   def index
-    @posts= nil
+    @posts = nil
     @posts = @project.novations.created_order.where(status: [current_model::STATUSES[:published], current_model::STATUSES[:approved]])
-    respond_to do |format|
-
-      format.html # show.html.erb
-      format.json { render json: @posts.each_with_index.map { |item, index| {id: item.id, index: index+1, title: item.title.present? ? item.title : 'Пакет без названия', content: trim_content(item.project_change, 200), approve_status: item.approve_status, useful: item.useful, admin_panel: boss?,
-                                                                             user: item.user.to_s, user_avatar: item.user.try(:avatar) ? cl_image_path(item.user.try(:avatar)) : ActionController::Base.helpers.asset_path('no-ava.png'), post_date: Russian::strftime(item.created_at, '%d.%m.%Y'),
-                                                                             project_id: item.project_id, sort_date: item.created_at.to_datetime.to_f, sort_comment: item.last_comment.present? ? item.last_comment.created_at.to_datetime.to_f : 0,
-                                                                             concept_class: post_concept_classes(item),
-                                                                             count_comments: item.comments.count,
-                                                                             count_likes: item.users_pro.count,
-                                                                             count_dislikes: item.users_against.count,
-                                                                             concepts: item.novation_concepts.map { |concept| {id: concept.id, content: trim_content(concept.content, 30)} },
-                                                                             comments: item.comments.preview.map { |comment| {id: comment.id, date: Russian::strftime(comment.created_at, '%k:%M %d.%m.%y'), user: comment.user.to_s, content: trim_content(comment.content, 50)} }} } }
-
-    end
+    @last_visit_presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
+    @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)
+    respond_to :html, :json
   end
 
   def new
@@ -38,37 +22,26 @@ class Novation::PostsController < PostsController
   def create
     @novation = @project.novations.create novation_params.merge(user: current_user)
     if @novation.save
-      current_user.journals.build(type_event: 'novation_post_save', body: trim_content(@novation.title), first_id: @novation.id, project: @project).save!
+      JournalEventSaver.post_save_event(user: current_user, project: @project.project, post: @novation)
     end
-    @novation.fullness = @novation.update_fullness
-    if params[:novation_post][:published]
-      @novation.update status: current_model::STATUSES[:published]
-    end
-
+    @novation.update(status: current_model::STATUSES[:published]) if params[:novation_post][:published]
     if params[:novation_post_concept]
-      params[:novation_post_concept].each do |asp|
-        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
-      end
+      params[:novation_post_concept].each { |asp| @novation.novation_post_concepts.create(concept_post_id: asp.to_i) }
     end
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   def update
     @novation.update_attributes novation_params
-    @novation.update_fullness
     if params[:novation_post][:published]
       @novation.update status: current_model::STATUSES[:published]
     end
 
-    if params[:novation_post_concept]
-      @novation.novation_post_concepts.destroy_all
-      params[:novation_post_concept].each do |asp|
-        @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
-      end
+    return unless params[:novation_post_concept]
+    @novation.novation_post_concepts.destroy_all
+    params[:novation_post_concept].each do |asp|
+      @novation.novation_post_concepts.create(concept_post_id: asp.to_i)
     end
-
   end
 
   def destroy
@@ -77,20 +50,16 @@ class Novation::PostsController < PostsController
   end
 
   private
+
   def set_novation_post
     @novation = current_model.find(params[:id])
   end
 
   def set_discontents
     # @todo Нужно выбирать все идеи, в том числе и те, которые не привязаны к несовершенствам
-    # @discontents = Discontent::Post.by_project(@project)
-    # @concepts = []
-    # @discontents.each do |discontent|
-    #   @concepts << discontent.dispost_concepts
-    # end
-    # @concepts.flatten!.uniq!
+
     @discontents = @project.discontents
-    @concepts = @project.concept_ongoing_post
+    @concepts = @project.concepts_for_discussion
   end
 
   def novation_params

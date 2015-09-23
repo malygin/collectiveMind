@@ -1,0 +1,71 @@
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    header ul.main-navigation > li.active a:before {
+      border-bottom-color: nth($base_colors, $i) * 0.7;
+    }
+  }
+}
+
+header ul.main-navigation > li.active a {
+  &:before, &:after {
+    border: solid transparent;
+    content: " ";
+    display: block;
+    left: 50%;
+    bottom: -2px;
+    margin-left: -5px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:before {
+    border-width: 7px;
+  }
+}
+
+.navbar {
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: $grey;
+}
+
+.navbar-brand {
+  margin-right: 60px;
+}
+
+.navbar-default {
+  background-color: #f4f4f4;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
+  background-color: transparent;
+  color: $black;
+}
+
+.dropdown-menu {
+  top: 40px;
+}
+
+.nav.navbar-nav.navbar-right {
+  > li {
+    > a {
+      padding: 15px 2px;
+      &.active > i {
+        color: $red_2;
+      }
+      > i {
+        color: $grey;
+      }
+      > .badge {
+        padding: 2px 7px;
+        border-radius: 2px;
+        font-size: 10px;
+        background-color: $grey;
+      }
+    }
+  }
+}
+
+

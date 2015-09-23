@@ -12,6 +12,7 @@ class AuthWebsocketController < WebsocketRails::BaseController
   end
 
   private
+
   def auth_user
     if current_user.nil?
       deny_channel
@@ -21,7 +22,7 @@ class AuthWebsocketController < WebsocketRails::BaseController
   end
 
   def auth_group_user
-    #@todo tmp
+    # @todo tmp
     auth_user
   end
 end

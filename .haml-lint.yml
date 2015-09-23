@@ -1,0 +1,6 @@
+linters:
+  LeadingCommentSpace:
+    enabled: false
+  LineLength:
+    max: 170
+

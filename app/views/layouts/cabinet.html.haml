@@ -1,7 +1,7 @@
 !!! 5
-%html(lang="en")
+%html{ lang: 'en' }
   = render 'application/meta'
-  %body{class: stage_theme, style: 'background-color: #f4f4f4;'}
+  %body{ class: stage_theme, style: 'background-color: #f4f4f4;' }
     .outer
       = render partial: 'application/header'
       = render partial: 'application/cabinet_stage_panel'
@@ -9,115 +9,127 @@
         .container
           .row
             .col-md-2
-              .cab_left_panel.rounded_3.border_grey{class: "back_color_stage#{@project.main_stage}_superpale"}
-                -#.media
-                -#  .media-left
-                -#    .plus20.white{class: "font_color_stage#{@project.main_stage}"} +
-                -#  .media-body
-                -#    %small{class: "font_color_stage#{@project.main_stage}"}
-                -#      = t("my_add.#{@project.current_stage_type}")
-                - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
-                  .divider10
-                  = link_to self.send("new_#{technique.stage.to_s.downcase.singularize}_path", @project, type_mechanic: technique.code),
-                  role: 'button', class: 'a_font_reset text-right', id: "new_#{technique.name}" do
-                    %button.btn.add-button.type4=t("techniques.#{technique.name}")
+              .cab-menu
+                .add-techniq
+                  - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
+                    = link_to t("techniques.#{technique.name}"), send("new_#{technique.stage.to_s.downcase.singularize}_path", @project.id,
+                    type_mechanic: technique.code), class: 'btn', id: "new_#{technique.name}"
+                %ul.menu
+                  %li{ class: "#{'active' if action_name == 'user_content' && params[:edit_profile].nil?}" }
+                    = link_to send("user_content_#{@project.current_stage_type}_path", @project.id), class: 'btn', id: "user_content_#{@project.current_stage_type}" do
+                      = t('menu.content')
+                  %li{ class: "#{'active' if params[:edit_profile]}" }
+                    %a.btn#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }
+                      = t('menu.account')
+                -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
+                = yield :cabinet_sidebar
 
-              .divider10
-              %ul.list-unstyled.cab_menu_left
-                %li{class: "#{'active' if action_name == 'user_content'}"}
-                  = link_to self.send("user_content_#{@project.current_stage_type}_path", @project), class: 'btn btn_simple_grey a_font_reset text-right', id: "user_content_#{@project.current_stage_type}" do
-                    Контент
-                %li
-                  %a.btn.btn_simple_grey.a_font_reset.text-right#edit_profile{"data-toggle" => "tab", :href => "#user_profile"}
-                    Профиль
-              -# Этот yield только для проектов, там сбоку есть кнопки для сохранения и т.д.
-              = yield :cabinet_sidebar
+
             .col-md-10#cabinet_form
               .tab-content
-                - if action_name == 'new' or action_name == 'edit'
-                  #cabinet_new.tab-pane.fade.in.active{:role => "tabpanel"}
+                - if action_name == 'new' || action_name == 'edit'
+                  .tab-pane.fade.in.active#cabinet_new
                     = yield
                 - else
-                  #cabinet_content.tab-pane.fade.in.active{:role => "tabpanel"}
-                    %div{:role => "tabpanel"}
-                      %ul.nav.nav-tabs.cab_horiz_tabs{:role => "tablist"}
-                        - Core::Project::STAGES.each do |num_stage, stage|
-                          -if num_stage <= 5
-                            - if name_controller == stage[:type_stage]
-                              %li.active{:role => "presentation"}
-                                = link_to send("user_content_#{stage[:type_stage]}_path", @project), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked=num_stage
-                                  СТАДИЯ
-                            - elsif @project.main_stage >= num_stage
-                              %li{class: "#{'active' if @project.main_stage > 5 and num_stage == 5}", :role => "presentation"}
-                                = link_to send("user_content_#{stage[:type_stage]}_path", @project), id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked=num_stage
-                                  СТАДИЯ
-                            - else
-                              %li.disabled{:role => "presentation"}
-                                = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}", role: 'tab', class: "cab_tab_color#{num_stage}" do
-                                  %span.marked=num_stage
-                                  СТАДИЯ
-                      .tab-content.cab_cont_block.rounded_3.border_grey.white
-                        .tab-pane.fade.active.in{id: "cab_cont_#{number_current_stage}", :role => "tabpanel"}
-                          .divider10
-                          .container
-                            .row
-                              .col-md-6.exp_col.left
-                                %button.btn.btn_reset.exp_button.pull-right
-                                  = image_tag 'grey_arrow.png'
-                                .divider15
-                                %span.stage-heading
-                                  ="#{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})"
+                  .tab-pane.fade#cabinet_content{ class: "#{'in active' unless params[:edit_profile]}" }
+                    %ul.nav.nav-tabs.cab-horiz-tabs
+                      - Core::Project::STAGES.select { |k, _| k <= 5 }.each do |num_stage, stage|
+                        - if name_controller == stage[:type_stage]
+                          %li.active
+                            = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                        - elsif @project.main_stage >= num_stage
+                          %li{ class: "#{'active' if @project.main_stage > 5 && num_stage == 5}" }
+                            = link_to send("user_content_#{stage[:type_stage]}_path", @project.id), id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                        - else
+                          %li.disabled
+                            = link_to '#', id: "go_to_user_content_#{stage[:type_stage]}" do
+                              %span.marked= num_stage
+                              СТАДИЯ
+                    .tab-content.cab-cont-block
+                      .tab-pane.fade.active.in{ id: "cab_cont_#{number_current_stage}" }
+                        .row
+                          .col-md-6.exp_col.left
+                            %a.exp_button
+                              %span.arrows-left.tooltip_l{ 'data-new' => 'Развернуть историю комментариев',
+                              title: 'Свернуть список' + ' ' + "#{t("my_list.#{name_controller}")}" }
 
-                                = yield
+                            .content
+                              %h5
+                                #{t("my.#{name_controller}")} (#{current_user.content_for_project(name_controller, @project).count})
 
-                              .col-md-6.exp_col.right
-                                %button.btn.btn_reset.exp_button.pull-left
-                                  = image_tag 'grey_arrow_1.png'
-                                .divider15
-                                %span.stage-heading
-                                  Мои комментарии
-                                  ="(#{current_user.comment_for_project(name_controller, @project).count})"
-                                .chat-messages
-                                  = render partial:'shared/cabinet_comment', collection: @stage_comments
+                              = yield
 
-                          .divider20
+                          .col-md-6.exp_col.right
+                            %a.exp_button
+                              %span.arrows-right.tooltip_r{ 'data-new' => 'Развернуть список' + ' ' + "#{t("my_list.#{name_controller}")}",
+                               title: 'Свернуть историю комментариев' }
 
-                #user_profile.tab-pane.fade{:role => "tabpanel"}
-                  = form_for current_user, url: {controller: '/users', action: :update, type: @project.id, project: @project, id: current_user}, remote: true, method: :put, class: 'form form-horizontal' do |f|
-                    .cab_notice.white(style='display:none;' id="update_user_success")
-                      %span.success
-                        = t("form.user.update_success")
-                    .notice_messages
-                      = render 'shared/notice_messages', object: f.object
-                    .form-group
-                      = f.text_field :name, class: 'form-control', placeholder: 'Имя'
-                    .form-group
-                      = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
-                    .form-group
-                      = f.text_field :email, class: 'form-control', placeholder: 'Email'
-                    .form-group
-                      = f.password_field :password, class: 'form-control', placeholder: 'Новый пароль'
-                    .form-group
-                      = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
-                    .form-group
-                      = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
-                    .form-group
-                      = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
-                    .form-group
-                      = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
-                    -#.form-group
-                    -#  .checkbox
-                    -#    %label
-                    -#      %input{type: 'checkbox'}/
-                    -#      Получать автоматические уведомления
-                    = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+                            .content
+                              %h5
+                                Мои комментарии
+                                (#{current_user.comment_for_project(name_controller, @project).count})
+                              .chat-messages
+                                = render partial: 'shared/cabinet_comment', collection: @stage_comments
 
+                .tab-pane.fade#user_profile{ class: "#{'in active' if params[:edit_profile]}" }
+                  .col-md-6.col-md-offset-3.text-center
+                    .profile
+                      .profile_icon
+                        = image_tag 'avatars/user.png'
+                        %a.btn.btn-xs.btn-danger.open-modal{ 'data-placement' => '1', 'data-target' => '1' }
+                          = t('menu.account_edit')
+                      = form_for current_user, url: { controller: '/users', action: :update, type: @project.id, project: @project, id: current_user },
+                      multipart: true, authenticity_token: true, remote: true, method: :put, class: 'form form-horizontal' do |f|
+                        .cab_notice{ style: 'display:none;', id: 'update_user_success' }
+                          %span.success
+                          .text
+                            = t('form.user.update_success')
+                        .notice_messages
+                          = render 'shared/notice_messages', object: f.object
+                        .form-group
+                          = f.text_field :name, class: 'form-control', placeholder: 'Имя'
+                        .form-group
+                          = f.text_field :surname, class: 'form-control', placeholder: 'Фамилия'
+                        .form-group
+                          = f.text_field :email, class: 'form-control', placeholder: 'Email'
+                        .form-group
+                          = f.password_field :password, class: 'form-control', placeholder: 'Новый пароль'
+                        .form-group
+                          = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Подтвердите пароль'
+                        .form-group
+                          = f.text_field :skype, class: 'form-control', placeholder: 'Skype'
+                        .form-group
+                          = f.text_field :phone, class: 'form-control', placeholder: 'Телефон'
+
+                        = f.submit t('form.user.update'), class: 'btn btn-danger ', id: 'update_profile'
+
+                        .modal.fade#modal-1-1
+                          .modal-dialog.modal-sm
+                            %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
+                            .modal-body.text-center.padding60
+                              .form-group
+                                = f.file_field :avatar, class: 'form-control', placeholder: 'Аватар'
+                              .divider20
+                              %p Или выбрать из коллекции:
+                              .divider30
+                              = hidden_field_tag 'collection_avatar'
+                              .row
+                                - (1..9).each do |i|
+                                  .col-md-4
+                                    .avatar_icon.img-circle
+                                      = image_tag 'avatars/' + "#{i}" + '.png', class: 'avatar_of_collection', 'data-avatar' => "avatars/#{i}.png"
+                                    .divider10
+                              .divider20
+                              %button.btn.btn-danger Сохранить
         -# а этот yield только для ганта
         = yield :special_for_gantt
 
     #render_for_post
     #render_knowbase_posts
-    %script(src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ac124f793994edd775d4d03329e6ec80")
+    %script{ src: '//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js', 'data-apikey' => 'ac124f793994edd775d4d03329e6ec80' }
+    %script{ src: 'http://cdn.pubnub.com/pubnub-3.7.13.min.js' }
     = javascript_include_tag 'application'

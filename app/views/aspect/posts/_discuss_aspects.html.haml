@@ -1,0 +1,47 @@
+.stage-info-sort-block
+  .row
+    .col-md-7
+      %span.stage-label= t('show.aspect.title')
+    .col-md-5
+      .pull-right
+        - if @project.can_add?(name_controller) || @project.status == 100
+          = link_to new_aspect_post_path(@project, type_mechanic: 'simple'), id: 'new_aspect_posts', class: 'btn add-button popover1', 'data-placement' => 'bottom',
+          'data-trigger' => 'manual', 'data-toggle' => 'popover', title: 'Добавляйте новые аспекты, не представленные в базе знаний' do
+            %span.tootlip_b{ title: 'Добавить аспект' }
+              = t('techniques.aspect_posts_simple')
+        - else
+          = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
+            .results.tooltip_b{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+            title: 'Показать итоги стадии' }
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
+          .sort_btn.sort-comment.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",
+          title: 'Сортировать по новым комментариям' }
+            - if @last_visit_presenter.comments > 0
+              %span.badge-red
+                = @last_visit_presenter.comments
+        = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
+          .sort_btn.sort-date.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}",
+          title: 'Сортировать по новым аспектам' }
+            - if @last_visit_presenter.posts > 0
+              %span.badge-red
+                = @last_visit_presenter.posts
+%hr
+.stage-post-block
+  .row
+    .col-md-6
+      %span.stage-heading
+        = t('show.aspect.main')
+        (#{@project.aspects_for_discussion.size})
+    .col-md-6
+      %span.stage-heading
+        = t('show.aspect.other')
+        (#{@project.other_aspects.size})
+  .row.tooltip_m_t{ title: 'Знакомьтесь с предложениями других участников, комментируйте и развивайте их' }
+    .col-md-6.combined_border.right
+      - @main_aspects.each do |aspect|
+        = render partial: 'post_short', object: aspect
+    .col-md-6.combined_border.left
+      - @other_aspects.each do |aspect|
+        = render partial: 'post_short', object: aspect

@@ -6,21 +6,20 @@ describe 'Users ' do
   let!(:user) { @user = create :user }
   let!(:user_content) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '1:0' }
+  let(:project) { @project = create :closed_project, stage: '1:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'collect_info_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'collect_info_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'aspect_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'aspect_posts_intro'
   end
-
 
   context 'ordinary user sign in ' do
     before do
       sign_in user
-      visit collect_info_posts_path(project)
+      visit aspect_posts_path(project)
     end
 
     context 'edit profile', js: true do
@@ -29,13 +28,13 @@ describe 'Users ' do
         new_surname = 'My cool surname'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         click_button 'update_profile'
         # expect(current_path).to eq user_path(project.id, user.id)
         # expect(current_path).to eq polymorphic_path(project.current_stage_type, project: project, action: :user_content)
-        expect(page).to have_content t("form.user.update_success")
+        expect(page).to have_content t('form.user.update_success')
       end
 
       it 'owner - success change password' do
@@ -44,14 +43,15 @@ describe 'Users ' do
         new_password = 'new password'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         fill_in 'user_password', with: new_password
         fill_in 'user_password_confirmation', with: new_password
         click_button 'update_profile'
-        expect(page).to have_content t("form.user.update_success")
-        refresh_page
+        expect(page).to have_content t('form.user.update_success')
+        click_link 'auth_dropdown'
+        click_link 'sign_out'
         expect(current_path).to eq root_path
         click_link 'sign_in'
         fill_in 'user_email', with: user.email
@@ -67,13 +67,13 @@ describe 'Users ' do
         wrong_password = 'wrong password'
         click_link 'auth_dropdown'
         click_link 'go_to_profile'
-        click_link 'edit_profile'
+        expect(page).to have_css 'li.active > a#edit_profile'
         fill_in 'user_name', with: new_name
         fill_in 'user_surname', with: new_surname
         fill_in 'user_password', with: new_password
         fill_in 'user_password_confirmation', with: wrong_password
         click_button 'update_profile'
-        expect(page).to_not have_content t("form.user.update_success")
+        expect(page).to_not have_content t('form.user.update_success')
         expect(page).to have_content t('errors.messages.not_saved', count: 1)
       end
 
@@ -129,7 +129,6 @@ describe 'Users ' do
         expect(page).to have_content @plan.content
         expect(page).to have_content @plan_comment.content
       end
-
     end
 
     context 'my journal', js: true do
@@ -156,6 +155,27 @@ describe 'Users ' do
         end
       end
     end
-  end
 
+    context 'my expert news', js: true do
+      before do
+        @expert_news = create :news, project: project
+        visit "/project/#{project.id}"
+      end
+
+      it 'have news' do
+        within :css, '.md-expert-news' do
+          expect(page).to have_content t('news.header')
+          expect(page).to have_content @expert_news.title
+          expect(page).not_to have_content @expert_news.body
+          expect(page).to have_content t('news.unread')
+        end
+      end
+
+      it 'have content on click' do
+        find(:css, '.md-news-notice a').trigger('click')
+        expect(page).to have_content @expert_news.body
+        expect(page).not_to have_content t('news.unread')
+      end
+    end
+  end
 end

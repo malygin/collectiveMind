@@ -1,13 +1,6 @@
 - if @post.valid?
   $('.notice_messages').hide();
-  $.magnificPopup.instance.close();
-  $('#create_discontent_success').fadeIn(5000).fadeOut('slow');
-  $('#discontent_post_content').val('');
-  $('#discontent_post_what').val('')
-  $('#discontent_post_whered').val('')
-  $('#discontent_post_whend').val('')
-
-  -#$("#open_my_#{@project.current_stage_type}").text("#{t("my.#{@project.current_stage_type}")} (#{current_user.content_for_project(@project).count})");
-  -#$("#open_my_#{@project.current_stage_type}").fadeOut('slow').fadeIn('slow');
+  $('#create_discontent_success').fadeIn(3000).fadeOut('slow');
+  $('#discontent_post_content, #discontent_post_what, #discontent_post_whered, #discontent_post_whend ').val('');
 - else
   $('.notice_messages').html("#{escape_javascript(render 'shared/notice_messages', object: @post)}");

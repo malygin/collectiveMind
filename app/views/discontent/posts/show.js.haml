@@ -1,7 +1,0 @@
-$('#render_for_post').empty();
-$("#render_for_post").html('#{escape_javascript(render partial: 'modal_discontent_post')}');
-magnificPopupOpen('#popup-imperf');
-comments_feed();
-comments_expandable_column();
-history_change("#{discontent_posts_path(@project)}");
-

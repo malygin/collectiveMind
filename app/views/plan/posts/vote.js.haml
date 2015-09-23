@@ -1,1 +1,2 @@
-$("#progress_type_vote_#{params[:type_vote]}_#{@post_vote.id}").html("#{escape_javascript(render partial: 'progress_vote', object: @post_vote, locals: {type_vote: params[:type_vote]})}");
+$("#progress_type_vote_#{params[:type_vote]}_#{@post_vote.id}").
+html("#{escape_javascript(render partial: 'progress_vote', object: @post_vote, locals: { type_vote: params[:type_vote] })}")

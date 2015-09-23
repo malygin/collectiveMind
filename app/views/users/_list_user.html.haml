@@ -1,7 +1,7 @@
-.col-md-12{id: "user_#{list_user.id}"}
+.col-md-12{ id: "user_#{list_user.id}" }
   .col-md-8
     .media
-      %a.pull-left(href="/project/#{@project.id}/users/#{list_user.id}")
+      %a.pull-left{ href: "/project/#{@project.id}/users/#{list_user.id}" }
         = link_to user_path(@project, list_user) do
           = user_image_tag list_user.avatar, class: 'media-object'
         %br
@@ -10,12 +10,12 @@
         %br
         = list_user.email
 
-  .col-md-4{id: "list_users_#{list_user.id}"}
+  .col-md-4{ id: "list_users_#{list_user.id}" }
     - if list_user.projects.include? @project
-      = link_to project_user_path(@project, list_user), remote: true, method: :delete, class:'btn btn-danger', id: "remove_user_#{list_user.id}" do
+      = link_to project_user_path(@project, list_user), remote: true, method: :delete, class: 'btn btn-danger', id: "remove_user_#{list_user.id}" do
         %i.fa.fa-minus
         = t('link.delete')
     - else
-      = link_to project_users_path(@project, user: list_user), remote: true, method: :post, class:'btn btn-success', id: "add_user_#{list_user.id}" do
+      = link_to project_users_path(@project, user: list_user), remote: true, method: :post, class: 'btn btn-success', id: "add_user_#{list_user.id}" do
         %i.fa.fa-plus
         = t('link.add')

@@ -1,0 +1,435 @@
+.icons {
+  background-repeat: no-repeat;
+  margin-right: 2px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.logotips-sprite, .logotips-icon, .logotips-lg, .logotips-sm, .logotips-text {
+  background-image: image-url('logotips.png');
+  @extend .icons;
+}
+
+.arrows-sprite, .arrows-angle-down, .arrows-arrow-right, .arrows-cursor, .arrows-dd_arrow, .arrows-icon-dropdown, .arrows-left-big, .arrows-left, .arrows-right-big, .arrows-right, .arrows-tooltip, .arrows-vote {
+  background-image: image-url('arrows.png');
+  @extend .icons;
+}
+
+.icon-sprite, .icon-cab-bulb, .icon-edit, .icon-exclamation-del, .icon-exclamation, .icon-sort-date, .icon-sort-rate {
+  background-image: image-url('icons.png');
+  @extend .icons;
+}
+
+.i-red-sprite, .i-red-flag, .i-red-gears, .i-red-shot, .i-red-new, .i-red-users {
+  background-image: image-url('i-red.png');
+  @extend .icons;
+}
+
+.medal-sprite, .medal-gold, .medal-silver {
+  background-image: image-url('medal.png');
+  @extend .icons;
+}
+
+.smile-sprite, .smile-no, .smile-yes {
+  background-image: image-url('smile.png');
+  @extend .icons;
+}
+
+.speed-sprite, .speed-cursor_grey, .speed-cursor_red, .speed-scale1, .speed-scale2, .speed-scale3, .speed-scale4, .speed-scale5 {
+  background-image: image-url('speed.png');
+  @extend .icons;
+}
+
+.vote-sprite, .vote-vote_all_1, .vote-vote_all_2, .vote-vote_all_3, .vote-vote_all_4, .vote-btn_1, .vote-btn_2, .vote-btn_3 {
+  background-image: image-url('vote/vote.png');
+  @extend .icons;
+}
+
+.text-sprite, .text-published, .text-slider-opener, .text-thanks, .text-winner {
+  background-image: image-url('text.png');
+  @extend .icons;
+}
+
+.slider-sprite, .slider-com_2, .slider-com_3, .slider-doc_2, .slider-doc_3 {
+  background-image: url('slider.png');
+  @extend .icons;
+}
+
+.vote-folder, .vote-folder_1, .vote-folder_2, .vote-folder_3, .vote-folder_4, .vote-folder_5 {
+  background-image: image-url('vote/vote_folder_big.png');
+  width: 61px;
+  height: 53px;
+  @extend .icons;
+}
+
+.vote-btn2_1, .vote-btn2_2, .vote-btn2_3, .vote-btn2_4 {
+  background-image: image-url('vote/i-vote-btn-sm.png');
+  width: 27px;
+  height: 30px;
+  @extend .icons;
+}
+
+.vote-folder1_1,.vote-folder1_2, .vote-folder1_3, .vote-folder1_4 {
+  background-image: image-url('vote/i-vote.png');
+  width: 100px;
+  height: 60px;
+  @extend .icons;
+}
+
+
+.vote-btn1_1, .vote-btn1_2, .vote-btn1_3, .vote-btn1_4 {
+  background-image: image-url('vote/i-vote-btn.png');
+  width: 24px;
+  height: 22px;
+  @extend .icons;
+}
+
+////////////////////////////////////////////////////
+
+.logotips-icon {
+  background-position: 0 0;
+  width: 30px;
+  height: 34px;
+}
+
+.logotips-lg {
+  background-position: 0 -34px;
+}
+
+.logotips-sm {
+  background-position: 0 -119px;
+  width: 120px;
+  height: 62px;
+}
+
+.logotips-text {
+  background-position: 0 -181px;
+  width: 121px;
+  height: 25px;
+}
+
+////////////////////////////////////////////////////
+.arrows-angle-down {
+  background-position: 0 0;
+  width: 9px;
+  height: 8px;
+}
+
+.arrows-arrow-right {
+  background-position: 0 -7px;
+  width: 24px;
+  height: 10px;
+}
+
+.arrows-cursor {
+  background-position: 0 -17px;
+}
+
+.arrows-dd_arrow {
+  background-position: 0 -42px;
+  width: 27px;
+  height: 15px;
+}
+
+.arrows-icon-dropdown {
+  width: 18px;
+  height: 18px;
+  background-position: 0 -57px;
+}
+
+.arrows-left-big {
+  background-position: 0 -75px;
+}
+
+.arrows-left {
+  background-position: 0 -141px;
+  width: 11px;
+  height: 11px;
+}
+
+.arrows-right-big {
+  background-position: 0 -152px;
+}
+
+.arrows-right {
+  background-position: 0 -218px;
+  width: 11px;
+  height: 11px;
+}
+
+.arrows-tooltip {
+  background-position: 0 -229px;
+}
+
+.arrows-vote {
+  background-position: 0 -239px;
+}
+
+////////////////////////////////////////////////////
+
+.icon-cab-bulb {
+  background-position: 0 0;
+  width:23px;
+  height:23px;
+  vertical-align: bottom;
+}
+
+.icon-edit {
+  background-position: 0 -23px;
+}
+
+.icon-exclamation-del {
+  background-position: 0 -36px;
+}
+
+.icon-exclamation {
+  background-position: 0 -58px;
+}
+
+.icon-sort-date {
+  background-position: 0 -80px;
+}
+
+.icon-sort-rate {
+  background-position: 0 -105px;
+}
+
+////////////////////////////////////////////////////
+
+.i-red-flag {
+  background-position: 0 0;
+  width: 33px;
+  height: 34px;
+}
+
+.i-red-gears {
+  background-position: 0 -34px;
+}
+
+.i-red-shot {
+  background-position: 0 -65px;
+  width: 40px;
+  height: 33px;
+}
+
+.i-red-new {
+  background-position: 0 -97px;
+}
+
+.i-red-users {
+  background-position: 0 -117px;
+  width: 37px;
+  height: 23px;
+}
+
+////////////////////////////////////////////////////
+
+.medal-gold {
+  background-position: 0 0;
+}
+
+.medal-silver {
+  background-position: 0 -253px;
+}
+
+////////////////////////////////////////////////////
+
+.smile-no {
+  background-position: 0 0;
+}
+
+.smile-yes {
+  background-position: 0 -38px;
+}
+
+////////////////////////////////////////////////////
+
+.speed-cursor_grey {
+  background-position: 0 0;
+}
+
+.speed-cursor_red {
+  background-position: 0 -73px;
+}
+
+.speed-scale1 {
+  background-position: 0 -146px;
+}
+
+.speed-scale2 {
+  background-position: 0 -239px;
+}
+
+.speed-scale3 {
+  background-position: 0 -332px;
+}
+
+.speed-scale4 {
+  background-position: 0 -425px;
+}
+
+.speed-scale5 {
+  background-position: 0 -518px;
+}
+
+////////////////////////////////////////////////////
+
+.vote-vote_all_1 {
+  background-position: 0 0;
+}
+
+.vote-vote_all_2 {
+  background-position: 0 -55px;
+}
+
+.vote-vote_all_3 {
+  background-position: 0 -110px;
+}
+
+.vote-vote_all_4 {
+  background-position: 0 -165px;
+}
+
+.vote-btn_1 {
+  width: 28px;
+  height: 24px;
+  background-position: 0 -220px;
+}
+
+.vote-btn_2 {
+  width: 28px;
+  height: 24px;
+  background-position: 0 -275px;
+}
+
+.vote-btn_3 {
+  width: 28px;
+  height: 24px;
+  background-position: 0 -330px;
+}
+
+////////////////////////////////////////////////////
+
+.text-published {
+  background-position: 0 0;
+}
+
+.text-slider-opener {
+  background-position: 0 -57px;
+  width: 16px;
+  height: 107px;
+}
+
+.text-thanks {
+  background-position: 0 -164px;
+  width: 189px;
+  height: 29px;
+}
+
+.text-winner {
+  background-position: 0 -193px;
+  width: 120px;
+  height: 120px;
+}
+
+////////////////////////////////////////////////////
+
+.slider-com_2 {
+  background-position: 0 0;
+}
+
+.slider-com_3 {
+  background-position: 0 -18px;
+}
+
+.slider-doc_2 {
+  background-position: 0 -36px;
+}
+
+.slider-doc_3 {
+  background-position: 0 -64px;
+}
+
+/////////////////////////////////////////////////////
+
+.vote-folder_1 {
+  background-position: -5px -5px;
+}
+
+.vote-folder_2 {
+  background-position: -77px -5px;
+}
+
+.vote-folder_3 {
+  background-position: -150px -5px;
+}
+
+.vote-folder_4 {
+  background-position: -221px -4px;
+}
+
+.vote-folder_5 {
+  background-position: -292px -4px;
+}
+
+////////////////////////////////////////////////////////
+
+.vote-btn2_1 {
+
+  background-position: -5px -5px;
+}
+
+.vote-btn2_2 {
+  background-position: -42px -5px;
+}
+
+.vote-btn2_3 {
+  background-position: -79px -5px;
+}
+
+.vote-btn2_4 {
+  margin-top: 9px;
+  background-position: -115px -5px;
+}
+
+//////////////////////////////////////////////////////////
+
+.vote-folder1_1 {
+  background-position: 0 0;
+}
+
+.vote-folder1_2 {
+  background-position: 0 -79px;
+}
+
+.vote-folder1_3 {
+  background-position: 0 -158px;
+}
+
+.vote-folder1_4 {
+  background-position: 0 -237px;
+}
+
+///////////////////////////////////////////////////////////
+
+.vote-btn1_1 {
+  background-position: -5px -5px;
+}
+
+.vote-btn1_2 {
+  width: 24px;
+  height: 22px;
+  background-position: -5px -37px;
+}
+
+.vote-btn1_3 {
+  width: 24px;
+  height: 22px;
+  background-position: -39px -5px;
+}
+
+.vote-btn1_4 {
+  width: 24px;
+  height: 22px;
+  background-position: -39px -37px;
+}

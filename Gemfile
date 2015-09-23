@@ -14,6 +14,7 @@ gem 'haml-rails'
 gem 'seed_migration'
 gem 'russian'
 gem 'json'
+gem 'jbuilder'
 gem 'will_paginate'
 gem 'devise_lastseenable'
 gem 'memcachier'
@@ -53,7 +54,9 @@ gem 'resque_mailer'
 gem 'resque-scheduler'
 gem 'resque-status'
 gem 'rufus-scheduler', '< 3.0.0'
-gem 'rails-backbone', :github => 'codebrew/backbone-rails', :branch => 'master'
+gem 'rails-backbone', github: 'codebrew/backbone-rails', branch: 'master'
+
+gem 'rails-observers'
 
 group :development, :test do
   gem 'quiet_assets'
@@ -63,11 +66,12 @@ group :development, :test do
   gem 'bullet'
   gem 'i18n-tasks'
   gem 'spring', '1.3.6'
-
 end
 
 group :development do
   gem 'rubocop'
+  gem 'haml_lint'
+  gem 'coffeelint'
   gem 'ruby-prof'
   gem 'rspec-prof'
   gem 'brakeman', require: false

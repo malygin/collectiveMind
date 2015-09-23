@@ -1,33 +1,23 @@
-= link_to "/project/#{project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true, class: 'has_circle drop_opener menu_a', id: 'clear_my_journals', "data-dd-opener" => "dd_2",'data-placement' => 'bottom','data-toggle' => 'tooltip', title:'Следите за теми,кому понравились ваши комментарии' do
-  -#%a.has_circle.drop_opener.menu_a{"data-dd-opener" => "dd_2"}
-  Мои уведомления
-  - if my_journals.size > 0 and @my_journals_count > 0
-    %span.top-circle#my_journals_count
-      = my_journals.size
-#dd_2.dropdown_window.dd_435.notifications_drop.text-left
-  .dd_wrapper
-    .dd_top.thin.light-grey
-      %i.fa.fa-close.fa-lg.dd_close{"data-dd-closer" => "dd_2"}
-    .dd_bottom.white
-      .divider10
-      .container
-        .row
-          .col-xs-12
-            .ps_cont
-              - unless my_journals.empty?
-                - my_journals.each do |journal, k|
-                  %span.dd_notice.moder{:href => "#"}
-                    %span.dd_n_cell.left
-                      %i.fa.fa-lg(class="#{journal_icon(journal)}")
-                    %span.dd_n_cell.right
-                      = Russian::strftime(journal.created_at,'%k:%M %d.%m.%Y')
-                      %span.bold
-                        = link_to journal.user, user_path(@project, journal.user)
-                      %p
-                        - if k > 1
-                          = t('menu.journal_count', count: k-1)
-                        = journal_parser(journal, project.id).html_safe
-              - else
-                %a
-                  = t('menu.journal_empty')
-      .divider20
+.dropdown_window.notifications#dd_2
+  .dw_wrapper
+    .dw_top
+      .text-right
+        %i.fa.fa-close.fa-lg.dw_close{ 'data-dd' => 'dd_2' }
+    .dw_content
+      .ps_cont
+        - if @my_journals.present?
+          - @my_journals.each do |journal, k|
+            .dw_notice
+              .row
+                .col-md-1
+                  %i.fa.fa-lg{ class: "#{journal_icon(journal.type_event)} #{journal_color(journal.type_event)}" }
+                .col-md-11
+                  = l(journal.created_at, format: '%k:%M %d.%m.%Y')
+                  = link_to journal.user, user_path(@project, journal.user), class: 'bold'
+                  %p
+                    - if k > 1
+                      = t('menu.journal_count', count: k - 1)
+                    = journal_parser(journal, @project.id).try(:html_safe)
+        - else
+          %a
+            = t('menu.journal_empty')

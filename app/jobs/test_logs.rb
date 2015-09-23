@@ -4,5 +4,4 @@ class LogTask
   def self.perform
     Rails.logger.info "hello, it's #{Time.now}"
   end
-
 end

@@ -4,16 +4,16 @@ describe 'Estimate ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '6:0' }
+  let(:project) { @project = create :closed_project, stage: '6:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'estimate_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'estimate_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'estimate_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'estimate_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'estimate_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'estimate_discuss'
@@ -39,8 +39,8 @@ describe 'Estimate ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Этот проект важен для проблемы, заданной заказчиком?'
-      expect(page).to have_content 'Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?'
+      expect(page).to have_content t('show.estimate.field_left')
+      expect(page).to have_content t('show.estimate.field_right')
       expect(page).to have_content @plan1.name
       expect(page).to have_content @plan2.name
     end
@@ -52,8 +52,8 @@ describe 'Estimate ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Этот проект важен для проблемы, заданной заказчиком?'
-      expect(page).to have_content 'Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?'
+      expect(page).to have_content t('show.estimate.field_left')
+      expect(page).to have_content t('show.estimate.field_right')
       expect(page).to have_content @plan1.name
       expect(page).to have_content @plan2.name
     end
@@ -64,9 +64,9 @@ describe 'Estimate ' do
       end
 
       it 'have content' do
-        expect(page).to have_content 'Описание проектного предложения'
-        expect(page).to have_content 'График реализации проекта'
-        expect(page).to have_content 'Оценки других участников'
+        expect(page).to have_content t('show.estimate.desc')
+        expect(page).to have_content t('show.estimate.diagram')
+        expect(page).to have_content t('show.estimate.rating')
       end
     end
   end
@@ -79,9 +79,8 @@ describe 'Estimate ' do
     it 'correct voted', js: true do
       expect(page).to have_selector "#progress_type_vote_1_#{@plan1.id}"
       expect(page).to have_selector "#progress_type_vote_2_#{@plan1.id}"
-
-      find(:css, "#progress_type_vote_1_#{@plan1.id} .btn_plan_vote[data-status='5']").trigger('click')
-
+      find(:css, "#progress_type_vote_1_#{@plan1.id} #btn_plan_vote_5").trigger('click')
+      sleep(5)
       expect(page).not_to have_selector "#progress_type_vote_1_#{@plan1.id} .btn_plan_vote"
       expect(page).to have_selector "#progress_type_vote_1_#{@plan1.id} .progress-bar"
     end
@@ -97,6 +96,8 @@ describe 'Estimate ' do
     it_behaves_like 'show list estimates'
 
     it_behaves_like 'discuss estimates'
+
+    it_behaves_like 'vote estimate'
   end
 
   # context 'moderator sign in ' do

@@ -1,0 +1,18 @@
+- if @user_voter
+  = render partial: 'modal_vote'
+
+- if @project_result
+  = render partial: 'modal_results'
+
+- if @questions_progress != 100 && @project.can_add?(name_controller)
+  = render partial: 'questions_aspects'
+- else
+  = render partial: 'discuss_aspects'
+
+
+- unless show_check_field?(name_controller.to_s + '_intro')
+  = render partial: 'modal_welcome'
+- if @project.type_for_questions == 0
+  = render partial: 'modal_greetings'
+
+

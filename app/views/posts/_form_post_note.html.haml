@@ -1,8 +1,0 @@
-= form_for form_post_note, html: {class: 'new_or_edit', id: "note_for_post_#{@post_aspect_note ? @post_aspect_note.id : @post.id}_#{@type}",style: 'height: 0px;display:none;'}, remote: true, url: {project: @project.id, id: @post.id, con_id: @post_aspect_note ? @post_aspect_note.id : nil, action: 'create_note' }, method: :put do |f|
-  = render 'shared/notice_messages', object: f.object
-  =f.hidden_field :type_field, value: @type
-  =f.text_area :content, class: 'form-control', style: 'height: 40px;', placeholder: t('form.comment_promt'), id:'edit_post_note_text_area'
-  .pull-right
-    %button.btn.btn-danger.btn-xs(type="button" onclick="reset_post_note_form(#{@post_aspect_note ? @post_aspect_note.id : @post.id},#{@type}); return false;")=t('form.cancel')
-    =f.submit t('form.send'), id: "send_post_#{@post.class_name == "Discontent" ? @post.id : @type}", class: 'btn btn-xs btn-success'
-

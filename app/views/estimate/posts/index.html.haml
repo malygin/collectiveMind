@@ -2,20 +2,18 @@
   .container
     .col-sm-3.col_padding_left_0.col_padding_right_3
       .border_grey.col_rate_head
-        Проект
+        = t('show.estimate.name')
     .col-sm-4.col_padding_left_3.col_padding_right_3
       .border_grey.col_rate_head
-        Этот проект важен для проблемы, заданной заказчиком?
+        = t('show.estimate.field_left')
     .col-sm-5.col_padding_right_0.col_padding_left_3
       .border_grey.col_rate_head
-        Этот проект реализуем в предложенные сроки при наличии запланированных ресурсов с учетом рисков проекта?
+        = t('show.estimate.field_right')
 .divider10
 = render partial: 'post_short', collection: @posts
 
 
 
-#render_estimate_post
-
-- if shown_intro('estimate_intro') == ''
-  = render partial: 'popup_welcome'
+- unless show_check_field?(name_controller.to_s + '_intro')
+  = render partial: 'modal_welcome'
 

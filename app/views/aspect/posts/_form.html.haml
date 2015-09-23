@@ -1,0 +1,25 @@
+= form_for aspect, url: { controller: 'aspect/posts', project: @project.id, action: aspect.persisted? ? 'update' : 'create', id: aspect.id },
+remote: true do |f|
+  %div{ id: "aspect_notices_#{aspect.id}" }
+    = render partial: 'shared/create_success', locals: { model_name: 'aspect', id: aspect.id }
+  .post-form-block
+    .post-body
+      .post-poster
+        = link_to user_path(@project, current_user) do
+          = user_image_tag current_user.avatar
+        %br
+        = link_to current_user, user_path(@project, current_user)
+      .post-content
+        .form-group
+          = f.text_area :content, class: 'form-control', rows: 1, placeholder: t('activerecord.attributes.aspect/post.content')
+        %span.badge
+          = t('activerecord.attributes.aspect/post.short_desc')
+        .form-group
+          = f.text_area :short_desc, class: 'form-control', rows: '4'
+    .post-footer
+      - if aspect.persisted?
+        = link_to 'Удалить', aspect_post_path(@project, aspect), method: :delete, data: { confirm: t('confirm.delete_aspect') },
+        id: "destroy_aspect_#{aspect.id}", class: 'btn'
+      = f.submit t("form.#{action_name}"), id: 'send_post_aspect', class: 'btn'
+      - if aspect.persisted? && !aspect.published?
+        = link_to 'Опубликовать', publish_aspect_post_path(@project, aspect), remote: true, method: :put, id: "publish_#{aspect.id}", class: 'btn'

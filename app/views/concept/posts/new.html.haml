@@ -1,51 +1,90 @@
-.row
-  .col-md-12
-    .divider10
-    = render partial: 'shared/create_success', locals: {model_name: 'concept'}
-
-    = form_for @concept_post, url: {project: @project.id, action: @concept_post.persisted? ? 'update' : 'create'}, remote: true do |f|
-      .content_window.white
-        .divider25
-        %p
+= render partial: 'shared/create_success', locals: { model_name: 'concept' }
+= form_for @concept_post, url: { project: @project.id, action: @concept_post.persisted? ? 'update' : 'create' }, remote: true do |f|
+  .content-block
+    %a.with_arrow.collapser#open_fields{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1' }
+      Создать идею
+      .pull-right
+        %i.fa.fa-chevron-circle-right.fa-lg.fa-rotate-90.collapse_arrow{ title: 'Свернуть' }
+    .collapse.in#imperfs1
+      %hr
+      .form-group
+        %label
           = t('activerecord.attributes.concept/post.title')
         = f.text_area :title, class: 'form-control', rows: 1
-        .divider15
-        %p
+      .form-group
+        %label
           = t('activerecord.attributes.concept/post.goal')
         = f.text_area :goal, class: 'form-control', rows: 2
-        .divider15
-        %p
-          = t('activerecord.attributes.concept/post.content')
-        = f.text_area :content, class: 'form-control', rows: 2
-        .divider15
-        %p
+      .form-group
+        %label
           = t('activerecord.attributes.concept/post.actors')
         = f.text_area :actors, class: 'form-control', rows: 1
-        .divider15
-        %p
+      .form-group
+        %label
           = t('activerecord.attributes.concept/post.impact_env')
         = f.text_area :impact_env, class: 'form-control', rows: 1
-        .divider15
-        %p
-          = f.submit t("form.#{action_name}"), class: 'btn add-button type2 pull-right', id: 'send_post_concept'
-          - if @concept_post.persisted? and !@concept_post.published?
-            = link_to 'Опубликовать', publish_concept_post_path(@project, @concept_post), remote: true, method: :put, id: "publish_#{@concept_post.id}", class: 'btn add-button type2'
 
-        .divider15
-        .check_push_cont.checked_items
-          %p.hideable_checks.enter_lenght{style: ('display: block;' if @concept_post.persisted?)}
-            Устраняемые несовершенства
-            %span.ch_lenght
-              - if @concept_post.persisted?
-                = "(#{@concept_post.concept_disposts.count})"
-          - if @concept_post.persisted?
-            = render partial: 'discontent', collection: @concept_post.concept_disposts
-      .divider10
-    .content_window.white
-      %a.theme_font_color.with_arrow.collapser_type1#open_discontents{'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs1'}
-        %span.enter_lenght
-          = 'Привязать идею к несовершенству'
-          %span.unch_lenght
-        %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow
-      #imperfs1.collapse.in.check_push_cont.rotate_arrow.unchecked_items
-        = render partial: 'discontent', collection: @discontent_posts
+      .text-right
+        = f.submit t("form.#{action_name}"), class: 'btn add-button tooltip_t', id: 'send_post_concept', title: "Идею всегда можно доработать в разделе 'контент' "
+        - if @concept_post.persisted? && !@concept_post.published?
+          = link_to 'Опубликовать', publish_concept_post_path(@project, @concept_post), remote: true, method: :put,
+              id: "publish_#{@concept_post.id}", class: 'btn add-button'
+
+      .checked_items
+        %p
+          Устраняемые несовершенства
+          %span.ch_lenght
+            - if @concept_post.persisted?
+              = "(#{@concept_post.concept_disposts.count})"
+            - else
+              (0)
+        - if @concept_post.persisted?
+          = render partial: 'discontent', collection: @concept_post.concept_disposts
+  .content-block
+    %a.with_arrow.collapser#open_discontents{ 'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#imperfs2' }
+      Привязать идею к несовершенству
+      %span.unch_lenght
+      .pull-right
+        %i.fa.fa-chevron-circle-right.fa-lg.collapse_arrow.fa-rotate-90{ title: 'Свернуть' }
+    .collapse.in#imperfs2
+      %hr
+      %h6 Выберите несовершенства, которые устраняются вашей идеей
+      %hr
+      .row
+        .col-md-5.cab_cont_h450
+          .ps_cont
+            .form-group
+              = text_field_tag 'search_discontent', nil, placeholder: 'Свободный поиск', class: 'form-control', 'data-project' => @project.id
+            .panel
+              .panel-heading.arrow-right
+                %a.show_discontents{ data: { aspect: '*' },
+                      'data-toggle' => 'tab', href: '#' }
+                  Мои несовершенства
+            %h6 Аспекты
+            - @aspects.each do |aspect|
+              .panel
+                .panel-heading{ style: "background-color: #{aspect.color};" }
+                  %a.with_arrow.collapsed.show_discontents{ data: { aspect: aspect.id }, 'data-toggle' => 'collapse', href: "#aspect#{aspect.id}" }
+                    = aspect.content
+                    %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                .collapse{ id: "aspect#{aspect.id}" }
+                  .panel-body
+                    %ul.list-unstyled.subaspect
+                      - aspect.aspects.each do |asp|
+                        %li
+                          %a.collapse.show_discontents{ data: { aspect: asp.id }, style: "border-color: #{aspect.color};", 'data-toggle' => 'tab', href: '#' }
+                            = asp.content
+        .col-md-7.cab_cont_h450
+          .ps_cont
+            .panel-table
+              .panel-heading
+                .cell
+                  .check
+                    %input#check0{ type: 'checkbox' }
+                    %label{ for: 'check0' }
+                      %i.fa.fa-check
+                .cell
+                  %b.color
+                    Выбрать все в этой группе
+            .unchecked_items#unchecked_discontent_posts
+              = render partial: 'discontent', collection: @discontent_posts

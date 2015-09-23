@@ -1,0 +1,6 @@
+%a.answers_collapse.theme_font_color.opened{ id: "answers_collapse_#{@comment_parent.id}",
+'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: "#answers_#{@comment_parent.id}" }
+  %span= t('stages.comments', count: 1)
+.com_answers.collapse.in{ id: "answers_#{@comment_parent.id}" }
+  .answers_subblock.level1
+    = render partial: 'shared/comment', object: comment_level

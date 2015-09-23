@@ -1,8 +1,8 @@
-=link_to '/project/'+@project.id.to_s do
+= link_to '/project/' + @project.id.to_s do
   %span.fa.fa-angle-double-left
-  =t('link.back_proc')
+  = t('link.back_proc')
 %section.widget
   .body
-    -if @post
-      %div{id: "knowbase_post_#{@post.id}"}
-        =render  partial: 'knowbase_post', object: @post
+    - if @post
+      %div{ id: "knowbase_post_#{@post.id}" }
+        = render partial: 'knowbase_post', object: @post

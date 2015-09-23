@@ -1,5 +1,5 @@
-$('#knowbase_post_#{@post.id}').html("#{escape_javascript(render  partial: 'knowbase_post_form', locals: { post: @post})}");
-сommand_htmleditor('remove','some-textarea');
+$('#knowbase_post_#{@post.id}').html("#{escape_javascript(render partial: 'knowbase_post_form', locals: { post: @post })}");
+сommand_htmleditor('remove', 'some-textarea');
 activate_htmleditor();
 -#tinyMCE.get('some-textarea').show();
 

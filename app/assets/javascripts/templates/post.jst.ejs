@@ -1,0 +1,136 @@
+<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6 md-post-block" data-groups="[<%= post_classes %>]"
+     data-id="id-<%= id %>" data-date="<%= sort_date %>"
+     data-comment="<%= sort_comment %>">
+    <div class="post_full">
+        <% if(admin_panel) { %>
+        <div class="admin_panel">
+            <a class="btn btn-white btn-xs <%= useful ? 'theme_font_color' : '' %>"
+               id="add_score_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+               href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/add_score"><i
+                        class="fa fa-trophy fa-lg"></i>
+            </a>
+            <a class="btn btn-white btn-xs <%= approve_status ? 'theme_font_color' : '' %>"
+               id="approve_status_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+               href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/change_status?status=approve_status"><i
+                        class="fa fa-bookmark fa-lg"></i>
+            </a>
+        </div>
+        <% } %>
+        <div class="post_block">
+            <div class="post_body" data-for="post_ch<%= id %>">
+                <div class="<%= approve_status ? '' : 'hide' %>" data-important="<%= id %>">
+                    <div class="important theme_font_color">
+                        <i class="fa fa-bookmark fa-2x"></i>
+                    </div>
+                </div>
+                <div class="post_poster">
+                    <img src="<%= user_avatar_url %>" alt="<%= user_avatar_alt %>">
+
+                    <a href="#" class="name">
+                        <%= user %>
+                    </a>
+
+                    <p class="time">
+                        <%= post_date %>
+                    </p>
+                </div>
+                <div class="post_content">
+                    <div class="what">
+                        <a id="show_record_<%= id %>" data-remote="true"
+                           href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>?last_time_visit=<%= last_time_visit %>">
+                            <%= title %>
+                            <span class="right_icon">
+                                <i class="fa fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="about">
+                        <%= content %>
+                    </div>
+                </div>
+            </div>
+            <div class="post_footer">
+                <% if(typeof aspects !== 'undefined') { %>
+                <div class="tags_block">
+                    <div class="title">Аспекты</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+                        <% for(var i = 0; i < aspects.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
+                              style="background-color: <%= aspects[i].color %>;">
+                                <span class="tags">
+                                <%= aspects[i].content %>
+                                </span>
+                            </span>
+                        <% } %>
+                    </div>
+
+                </div>
+                <% } %>
+                <% if(typeof discontents !== 'undefined') { %>
+                <div class="tags_block">
+                    <div class="title">Несовершенства</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < discontents.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me tooltip_t"
+                              data-me-action="background-color" data-me-color="<%= discontents[i].id %>"
+                              data-me-type="imperf" title="<%= discontents[i].content %>">
+                            <span class="tags">
+                            <%= discontents[i].content %>
+                            </span>
+                        </span>
+                        <% } %>
+                    </div>
+
+                </div>
+                <% } %>
+                <% if(typeof concepts !== 'undefined')  { %>
+                <div class="tags_block">
+                    <div class="title">Аспекты</div>
+
+                    <div id="stripe<%= id %>" class="post-theme">
+
+                        <% for(var i = 0; i < concepts.length; i++) { %>
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                              data-me-action="background-color" data-me-color="<%= i %>" data-me-type="imperf">
+                            <span class="tags">
+                            <%= concepts[i].content %>
+                            </span>
+                        </span>
+                        <% } %>
+
+                    </div>
+
+                </div>
+                <% } %>
+
+                <div class="likes">
+                        <span class="comments_icon <%= active_comments ? 'active' : '' %>" data-for="post_ch<%= id %>">
+                            <small><%= count_comments %></small>
+                            <i class="fa fa-comment-o"></i>
+                        </span>
+                        <span>
+                            <small id="lk_post_<%= id %>">
+                                <%= count_likes %>
+                            </small>
+                        <a id="like_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+                           href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=false">
+                            <i class="fa fa-thumbs-o-up fa-flip-horizontal"></i>
+                        </a>
+                        </span>
+                        <span>
+                            <small id="dlk_post_<%= id %>">
+                                <%= count_dislikes %>
+                            </small>
+                             <a id="dislike_post_<%= id %>" data-remote="true" rel="nofollow" data-method="put"
+                                href="/project/<%= project_id %>/<%= getStageByUrl() %>/posts/<%= id %>/like?against=true">
+                                 <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+                             </a>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

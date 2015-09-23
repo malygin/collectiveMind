@@ -1,2 +1,3 @@
 $("#redactor_comment_#{@comment.id}").hide();
-$('#comment_text_#{@comment.id}').html("#{escape_javascript(render  partial: 'update_comment_form', locals: { comment: @comment, url_link: url_for(action: 'update_comment')})}");
+$('#comment_text_#{@comment.id}').
+html("#{escape_javascript(render partial: 'update_comment_form', locals: { comment: @comment, url_link: url_for(action: 'update_comment') })}");

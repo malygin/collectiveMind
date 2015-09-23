@@ -1,40 +1,48 @@
+- unless show_check_field?(name_controller.to_s + '_intro')
+  = render partial: 'modal_welcome'
+- if @user_voter
+  = render partial: 'modal_vote'
+- if @project_result
+  = render partial: 'modal_results'
 .stage-info-sort-block
   .row
-    %br/
+    %br
     .col-md-7
       %span.stage-heading
-        Идеи
+        = t('show.concept.title')
         %span#count_concepts
-          ="(#{@posts.count})"
+          (#{@posts.count})
     .col-md-5
+      .pull-right
+        - if @project.can_add?(name_controller) || @project.status == 100
+          = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
+            %button.btn.add-button.tooltip_b{ title: 'Добавить идею' }
+              %span.tooltip_m{ data: { name: 'sort', desc: 0, type: 'comment' },
+              'data-trigger' => 'manual', title: 'Добавляйте новые идеи, связанные с текущей проблемной ситуацией' }
+                = t('techniques.concept_posts_simple')
+        - else
+          = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
+            .results.tooltip_b{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+            title: 'Показать итоги стадии' }
+
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_3.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.concept_ongoing_post.after_last_visit_comments(last_time_visit_page('concept')).size
-            - if new_comments > 0
+          %span.sort_btn.sort-comment{ data: { type: 'comment' } }
+            - if @last_visit_presenter.comments > 0
               %span.badge-red
-                = new_comments
-          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_3.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи."}
-            - new_posts = @project.concept_ongoing_post.after_last_visit_posts(last_time_visit_page('concept')).size
-            - if new_posts > 0
+                = @last_visit_presenter.comments
+          %span.sort_btn.sort-date.active.tooltip_m{ data: { type: 'date' },
+          title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться идеи.' }
+            - if @last_visit_presenter.posts > 0
               %span.badge-red
-                = new_posts
-
-        - if @project.stage == '3:0'
-          = link_to new_concept_post_path(@project, type_mechanic: 'simple'), id: 'new_concept_posts' do
-            %button.btn.add-button
-              %span
-                = t('techniques.concept_posts_simple')
+                = @last_visit_presenter.posts
 
 .stage-post-block
-  .row#tab_dispost_concepts
+  .row.tooltip_m_t#tab_dispost_concepts{ title: 'Знакомьтесь с предложениями других участников, комментируйте и развивайте их идеи' }
     -#= render partial: 'post_short', collection: @posts
 
 
 
-- if shown_intro('concept_intro') == ''
-  = render partial: 'popup_welcome'
-- if current_user.can_vote_for(:concept, @project)
-  = render partial: 'popup_vote'
+
 

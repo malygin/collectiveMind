@@ -1,0 +1,19 @@
+.modal.fade.modal-explanation.md-modal-explanation{ id: "modal-explanation-#{number_current_stage}",
+class: "#{show_check_field?(name_controller.to_s + '_intro') ? 'shown_intro' : ''}" }
+  .modal-dialog.modal-710
+    .modal_badge
+      = number_current_stage
+      СТАДИЯ
+    .modal-content
+      %h2
+        %span.i-red-shot
+        = t('welcome.header')
+      = t("welcome.#{name_controller}.heading").try(:html_safe)
+
+      %h2
+        %span.i-red-flag
+        Что делать?
+      = t("welcome.#{name_controller}.working").try(:html_safe)
+
+      = link_to t('welcome.begining'), send("check_field_#{name_controller}_path", @project, check_field: "#{name_controller}_intro", status: true),
+        method: :put, remote: true, id: "#{name_controller}_intro", class: 'btn btn-danger md-close-modal'

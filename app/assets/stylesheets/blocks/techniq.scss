@@ -1,0 +1,21 @@
+@for $i from 1 through length($techniq_colors) {
+  .techniq > .row > .col-md-6:nth-child(#{$i}) {
+    background: nth($techniq_colors, $i);
+    border: 1px solid nth($techniq_colors, $i) * 0.9;
+  }
+}
+
+.techniq {
+  overflow: hidden;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  > .row > .col-md-6 {
+    height: 140px;
+    padding: 50px 70px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+
+  }
+}

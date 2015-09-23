@@ -27,9 +27,9 @@ describe 'Discontent::Voting', type: :model do
     expect(Discontent::Voting.by_negative).to match_array [dv2]
   end
 
-  it 'not_admins' do
-    create :discontent_voting, user: create(:moderator)
-    dv = create :discontent_voting
-    expect(Discontent::Voting.not_admins).to match_array [dv]
-  end
+  # it 'not_admins' do
+  #   create :discontent_voting, user: create(:moderator)
+  #   dv = create :discontent_voting
+  #   expect(Discontent::Voting.not_admins).to match_array [dv]
+  # end
 end

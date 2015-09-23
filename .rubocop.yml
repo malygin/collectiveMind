@@ -1,13 +1,29 @@
-inherit_from: .rubocop_todo.yml
+Style/AsciiComments:
+  Enabled: false
+Style/CaseIndentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+#  think about documentation
+Style/Documentation:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+Metrics/AbcSize:
+  Max: 70
+Metrics/LineLength:
+  Max: 170
+Metrics/MethodLength:
+  Max: 11
 
 AllCops:
   Exclude:
     - 'vendor/**/*'
-    - 'spec/**/*'
     - 'db/**/*'
-    - 'app/assets/**/*'
     - 'lib/**/*'
     - 'config/**/*'
     - 'bin/**/*'
     - 'script/**/*'
+    - 'Guardfile'
 

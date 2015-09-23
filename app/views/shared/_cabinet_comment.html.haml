@@ -1,41 +1,41 @@
-.media.comment.in_cab{id: "comment#{cabinet_comment.id}"}
-  .media-body
-    %span.comment_interf
-      %span.date_time{class: "font_color_stage#{number_current_stage || num_stage}"}
-        =Russian::strftime(cabinet_comment.created_at,'%k:%M')
-      - if current_user?(cabinet_comment.user) and can_edit_content?
-        %span.dropdown.edit_comment{id: "redactor_comment_#{cabinet_comment.id}"}
-          %button.btn_reset{id: "edit_comment#{cabinet_comment.id}", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            %i.fa.fa-cog.fa-lg{class: "font_color_stage#{number_current_stage || num_stage}"}
-          %ul.dropdown-menu{"aria-labelledby" => "edit_comment#{cabinet_comment.id}", :role => "menu"}
-            %li
-              %a.edit-comment{data:{ project: @project.id, id: cabinet_comment.id, path: cabinet_comment.post.class.name.underscore.pluralize}, id: "edit_comment_#{cabinet_comment.id}", href: "#", tabindex: "-1"}
-                %i.glyphicon.glyphicon-pencil>
-                Редактировать
-            %li
-              = link_to({controller: cabinet_comment.controller_name_for_action, action: :destroy_comment, id: cabinet_comment.id}, method: :put, remote: true, data: { confirm: t('confirm.delete_comment')}, id: "destroy_comment_#{cabinet_comment.id}", tabindex: "-1") do
-                %i.glyphicon.glyphicon-remove>
-                Удалить
-      - if cabinet_comment.approve_status
-        %span.badge.badge_important{class: "back_color_stage#{number_current_stage || num_stage}"}= t('show.important')
-      %span{id: "cancel_comment_#{cabinet_comment.id}"}
-
-  %p.font_grey.comment_text{id: "comment_text_#{cabinet_comment.id}"}
-    = cabinet_comment.content
-  .post-interfaces-buttons.text-left
-    %button.rate_button{"data-for" => "comment#{cabinet_comment.id}", "data-rate-action" => "like", :type => "button"}
-      %span.bold
-        %span(id="lk_comment_#{cabinet_comment.id}")
-          =cabinet_comment.users_pro.count
-        =link_to({controller: cabinet_comment.controller_name_for_action, :action => :like_comment, :project => @project, :id => cabinet_comment.id, :against => false}, :remote => true, :method => :put, id: "like_comment_#{cabinet_comment.id}") do
-          %i.fa.fa-thumbs-up{class: "font_color_stage#{number_current_stage || num_stage}"}
-    %button.rate_button{"data-for" => "comment#{cabinet_comment.id}", "data-rate-action" => "dislike", :type => "button"}
-      %span.bold
-        %span(id="dlk_comment_#{cabinet_comment.id}")
-          =cabinet_comment.users_against.count
-        =link_to({controller: cabinet_comment.controller_name_for_action, :action => :like_comment, :project => @project,  :id => cabinet_comment.id, :against => true}, :remote => true, :method => :put, id: "dislike_comment_#{cabinet_comment.id}") do
-          %i.fa.fa-thumbs-down{class: "font_color_stage#{number_current_stage || num_stage}"}
-    -#%button.reply_btn.collapsed{"data-target" => "#reply_form_1", "data-toggle" => "collapse", :type => "button"}
-    -#  %span.bold
-    -#    %i.fa.fa-reply.fa-rotate-180{class: "font_color_stage#{number_current_stage}"}
-.divider_1_grey
+.comment{ id: "comment#{cabinet_comment.id}" }
+  .comment-user
+    %span.date
+      = l(cabinet_comment.created_at, format: '%k:%M %d.%m.%Y')
+    - if current_user?(cabinet_comment.user) && can_edit_content?
+      %span.dropdown.edit_comment{ id: "redactor_comment_#{cabinet_comment.id}" }
+        %a{ id: "edit_comment#{cabinet_comment.id}", 'data-toggle' => 'dropdown' }
+          %i.fa.fa-cog.fa-lg
+        %ul.dropdown-menu{ 'aria-labelledby' => "edit_comment#{cabinet_comment.id}" }
+          %li
+            %a.edit-comment{ data: { project: @project.id, id: cabinet_comment.id, path: cabinet_comment.post.class.name.underscore.pluralize },
+              id: "edit_comment_#{cabinet_comment.id}", href: '#', tabindex: '-1' }
+              %i.glyphicon.glyphicon-pencil
+              Редактировать
+          %li
+            = link_to({ controller: cabinet_comment.post_controller_path, action: :destroy_comment, id: cabinet_comment.id }, method: :put, remote: true,
+              data: { confirm: t('confirm.delete_comment') }, id: "destroy_comment_#{cabinet_comment.id}", tabindex: '-1') do
+              %i.glyphicon.glyphicon-remove
+              Удалить
+    - if cabinet_comment.approve_status
+      %span.fa.fa-bookmark.fa-lg
+    %span{ id: "cancel_comment_#{cabinet_comment.id}" }
+  .comment-content
+    %a{ id: "comment_text_#{cabinet_comment.id}",
+    href: "/project/#{@project.id}/#{cabinet_comment.post.class_name_for_url}?jr_post=#{cabinet_comment.post.id}" |
+    + "&jr_comment=#{cabinet_comment.id}#comment#{cabinet_comment.id}" } |
+      = cabinet_comment.content
+  .comment-likes
+    %span{ 'data-for' => "comment#{cabinet_comment.id}" }
+      %small{ id: "lk_comment_#{cabinet_comment.id}" }
+        = cabinet_comment.users_pro.count
+      = link_to({ controller: cabinet_comment.post_controller_path, action: :like_comment, project: @project, id: cabinet_comment.id, against: false },
+        remote: true, method: :put, id: "like_comment_#{cabinet_comment.id}") do
+        %i.fa.fa-thumbs-up
+    %span{ 'data-for' => "comment#{cabinet_comment.id}" }
+      %small{ id: "dlk_comment_#{cabinet_comment.id}" }
+        = cabinet_comment.users_against.count
+      = link_to({ controller: cabinet_comment.post_controller_path, action: :like_comment, project: @project, id: cabinet_comment.id, against: true },
+        remote: true, method: :put, id: "dislike_comment_#{cabinet_comment.id}") do
+        %i.fa.fa-thumbs-down
+%hr

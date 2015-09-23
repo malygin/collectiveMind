@@ -4,12 +4,12 @@ class Util::Unit::GroupTask < ActiveRecord::Base
   has_many :users, through: :group_task_users
 
   STATUSES = {
-      10 => 'Создана',
-      20 => 'Выполняется',
-      30 => 'Требует обсуждения',
-      40 => 'Выполнена'
+    10 => 'Создана',
+    20 => 'Выполняется',
+    30 => 'Требует обсуждения',
+    40 => 'Выполнена'
   }
 
   validates :name, :description, presence: true
-  validates :status, inclusion: {in: STATUSES.keys}
+  validates :status, inclusion: { in: STATUSES.keys }
 end

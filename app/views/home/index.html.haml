@@ -8,26 +8,23 @@
     - @closed_projects.each do |project|
       .widget-block-procedure
         .row
-          .col-md-1.col-sm-3
+          .col-md-1
             .pull-right
-              = image_tag ('md_icon.png')
-          .col-md-5.col-sm-5.no-padding
+              %span.logotips-icon
+          .col-md-5
             %h4
               = project.name
           -#%b
           -#  ="(#{project.main_stage} стадия)"
-          .col-md-3.col-sm-3.text-center
-            .divider3
+          .col-md-3
             %h4
-              %i
-                = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users_in_project.count )
+              %span.i-red-users
+              = t('project_users_count', count: project.users.count)
 
-          .col-md-3.col-sm-3.text-center
+          .col-md-3
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow  btn-danger', id: "go_to_closed_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_closed_project_#{project.id}" do
               = t('link.go_to_project')
-      .divider10
   -#- cache @opened_projects do
   - if @opened_projects.present?
     -#%h4
@@ -36,22 +33,20 @@
     - @opened_projects.each do |project|
       .widget-block-procedure
         .row
-          .col-md-1.col-sm-1
+          .col-md-1
             .pull-right
-              = image_tag ('md_icon.png')
-          .col-md-5.col-sm-5.no-padding
+              %span.logotips-icon
+          .col-md-5
             %h4
               = project.name
           -#%b
           -#  ="(#{project.main_stage} стадия)"
-          .col-md-3.col-sm-3.text-center
-            .divider3
+          .col-md-3
             %h4
-              %i
-                = image_tag ('icon_users.png')
-              =I18n.t("project_users_count",count: project.users_in_project.count )
-          .col-md-3.col-sm-3.text-center
+              %span.i-red-users
+              = t('project_users_count', count: project.users.count)
+          .col-md-3
             .divider5
-            = link_to current_stage_url(project), class:'btn btn-arrow btn-danger', id: "go_to_opened_project_#{project.id}" do
+            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_opened_project_#{project.id}" do
               = t('link.go_to_project')
       .divider10

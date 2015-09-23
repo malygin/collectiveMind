@@ -1,0 +1,38 @@
+.slide-outer#slide-panel{ 'data-position' => 'left' }
+  .slide-opener.tooltip_m_r#opener{ title: 'Выберите из списка интересующие вас несовершенства, чтобы оставить на экране только те идеи, которые с ними связаны.' }
+    %span.text-slider-opener.tooltip_r{ title: 'Перейти к выбору несовершенств' }
+  .slide-inner#tooltip_slide_panel
+    .ps_cont#filter
+      .checkox_item{ data: { group: 'all' } }
+        .cell
+          .check
+            %input#check0{ type: 'checkbox' }
+            %label{ for: 'check0' }
+              %i.fa.fa-check
+        .cell
+          %label{ for: 'check0' } Выбрать все
+      .slide_table_wrap
+        - @last_visit_presenter.content_with_counters.each_with_index do |post_with_counters, index|
+          .checkox_item{ data: { group: "discontent_#{post_with_counters[:post].id}" } }
+            .cell
+              .check
+                %input{ id: "check#{index + 2}", type: 'checkbox' }
+                %label{ for: "check#{index + 2}" }
+                  %i.fa.fa-check
+            .cell
+              %span.color_counter.color_me.tooltip_r{ 'data-me-action' => 'background-color', 'data-me-color' => "#{post_with_counters[:post].id}",
+                'data-me-type' => 'imperf',
+                title: "#{post_with_counters[:post].dispost_concepts.count > 0 ? 'Для устранения этого несовершенства ' |
+                + t('dispost_concepts', count: post_with_counters[:post].dispost_concepts.count) |
+                : 'Для устранения этого несовершенства пока не предложено ни одной идеи'}" } |
+                = post_with_counters[:post].dispost_concepts.count
+            .cell
+              %label{ for: "check#{index + 2}" }
+                = post_with_counters[:post].content
+            - if post_with_counters[:posts] > 0
+              %span.cb_doc
+                = post_with_counters[:posts]
+            - if post_with_counters[:comments] > 0
+              %span.cb_com
+                = post_with_counters[:comments]
+

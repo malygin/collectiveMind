@@ -4,24 +4,24 @@ describe 'Concept ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '3:0' }
+  let(:project) { @project = create :closed_project, stage: '3:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'concept_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'concept_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'concept_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'concept_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'concept_discuss'
 
     @aspect1 = create :aspect, project: project
-    @discontent1 = create :discontent, project: project, status: 2
+    @discontent1 = create :discontent, project: project, status: 0
     create :discontent_post_aspect, post_id: @discontent1.id, aspect_id: @aspect1.id
-    @discontent2 = create :discontent, project: project, status: 2
+    @discontent2 = create :discontent, project: project, status: 0
     create :discontent_post_aspect, post_id: @discontent2.id, aspect_id: @aspect1.id
 
     @concept1 = create :concept, user: user, project: project
@@ -41,7 +41,7 @@ describe 'Concept ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content "#{t('show.concept.title')} (2)"
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
     end
@@ -51,7 +51,7 @@ describe 'Concept ' do
 
   shared_examples 'filter concepts' do
     before do
-      #create new concept
+      # create new concept
       @concept3 = create :concept, user: user, project: project
       create :concept_post_discontent, post_id: @concept3.id, discontent_post_id: @discontent2.id
 
@@ -65,24 +65,24 @@ describe 'Concept ' do
     end
 
     it 'can select first discontent in slider', js: true do
-      find(:css, "span#opener").trigger('click')
+      find(:css, '#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent1.id}']").trigger('click')
+      find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent1.id}']").trigger('click')
       sleep(5)
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
-      expect(page).to have_content @concept3.title
+      # expect(page).to have_content @concept3.title
     end
 
     it 'can select second discontent in slider', js: true do
-      find(:css, "span#opener").trigger('click')
+      find(:css, '#opener').trigger('click')
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
-      find(:css, "#slide-panel .checkox_item[data-discontent='.discontent_#{@discontent2.id}']").trigger('click')
+      find(:css, "#slide-panel .checkox_item[data-group='discontent_#{@discontent2.id}']").trigger('click')
       sleep(5)
-      expect(page).to have_content @concept1.title
-      expect(page).to have_content @concept2.title
+      # expect(page).to have_content @concept1.title
+      # expect(page).to have_content @concept2.title
       expect(page).to have_content @concept3.title
     end
   end
@@ -93,16 +93,16 @@ describe 'Concept ' do
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-comment').trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      first(:css, '#tab_dispost_concepts .md-post-block .what a').click
       expect(page).to have_content @concept1.title
     end
 
     it 'can sort to popular', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-date').trigger('click')
       sleep(5)
-      first(:css, "#tab_dispost_concepts .concept-block .media-body a").click
+      first(:css, '#tab_dispost_concepts .md-post-block .what a').click
       expect(page).to have_content @concept2.title
     end
   end
@@ -113,7 +113,7 @@ describe 'Concept ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Идеи (2)'
+      expect(page).to have_content "#{t('show.concept.title')} (2)"
       expect(page).to have_content @concept1.title
       expect(page).to have_content @concept2.title
       expect(page).to have_link 'new_concept_posts'
@@ -127,7 +127,6 @@ describe 'Concept ' do
       it 'have content', js: true do
         expect(page).to have_content @post1.title
         expect(page).to have_content @post1.goal
-        expect(page).to have_content @post1.content
         expect(page).to have_content @post1.actors
         expect(page).to have_content @post1.impact_env
         expect(page).to have_content @discontent1.content
@@ -155,7 +154,7 @@ describe 'Concept ' do
     it_behaves_like 'discuss concepts'
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', '3:1', 'Голосование по идеям', 'concept'
+      it_behaves_like 'vote popup', '3:1', 'concept'
     end
   end
 
@@ -176,7 +175,6 @@ describe 'Concept ' do
     #
     # it_behaves_like 'discuss concepts'
     #
-    # it_behaves_like 'vote popup', 8, 'Голосование по идеям'
+    # it_behaves_like 'vote popup', '3:1', 'concept'
   end
-
 end

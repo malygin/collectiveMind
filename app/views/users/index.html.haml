@@ -1,23 +1,13 @@
-.row
-  .col-sm-3
-    %span.badge.badge_type2.wide.white.font_dark_grey Участник
-  .col-sm-9
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage1 Стадия 1
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage2 Стадия 2
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage3 Стадия 3
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage4 Стадия 4
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage5 Стадия 5
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage6 Стадия 6
-    .col_custom.col_type1.text-center
-      %span.badge.badge_type2.back_color_stage7 Стадия 7
-    .col_custom.col_type2.text-center
-      %span.badge.badge_type2.wide Итог
-.divider20
+.rating-stage
+  .row
+    .col-sm-3
+      .badge.badge-user= t('show.rating.header')
+    .col-sm-9
+      - (1..7).each do |i|
+        .col-custom
+          .badge{ class: "badge-#{i}" } Стадия #{i}
+      .col-total
+        .badge Итог
 - @users.each_with_index do |user, i|
-  = render partial: 'user', locals: {user: user, number: i+1}
+  = render partial: 'user', locals: { user: user, number: i + 1 }
+

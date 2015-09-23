@@ -1,19 +1,21 @@
-.container
-  .row
-    .col-md-5.col_padding_right_3
-      .border_grey.rounded_3.stages_block
-        .btn-toolbar{role: 'toolbar'}
-          .btn-group{role: 'group'}
-            = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}", role: 'button', class: "btn back_color_stage#{@project.main_stage}" do
-              = "#{@project.main_stage} СТАДИЯ:  #{@project.current_stage_name} "
-    .col-md-7.col_padding_left_3
-      .border_grey.rounded_3.stages_block
-        .media.contact
-          .media-left
-            = link_to user_path(@project, current_user) do
-              = user_image_tag current_user.avatar, class: 'img-circle img40'
-          .media-body
-            %h5.media-heading.bold
-              = link_to current_user, user_path(@project, current_user)
+.subhead_navigate
+  .container
+    .col-md-5
+      .border-block
+        = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}",
+              role: 'button', class: 'btn arrow_left' do
+          #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
 
-        = render partial: 'application/cabinet_sticker'
+    .col-md-7
+      .border-block
+        .contact
+          = link_to user_path(@project, current_user) do
+            = user_image_tag current_user.avatar
+          = link_to current_user, user_path(@project, current_user)
+        .info
+          %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.sticker' }
+          .sticker{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
+            = t("cabinet.#{@project.current_stage_type}_sticker").try(:html_safe)
+            = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker",
+              status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
+              %i.fa.fa-times.fa-lg.sticker_close{ 'data-for' => '.sticker' }

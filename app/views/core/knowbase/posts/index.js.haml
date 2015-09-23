@@ -1,4 +1,5 @@
-$('#render_knowbase_posts').empty();
-$("#render_knowbase_posts").html('#{escape_javascript(render partial: 'modal_knowbase_posts')}');
-magnificPopupOpen('#popup-database');
+$('#render_knowbase_posts').html('#{escape_javascript(render partial: 'modal_knowbase_posts')}');
+modalInit('#modal-database');
 $("[data-toggle=tooltip]").tooltip();
+color_modal_knowbase('#myCarousel');
+$('.carousel-inner .item').perfectScrollbar();

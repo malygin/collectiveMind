@@ -1,59 +1,50 @@
-#popup-database.popup-window.popup_database.popup-w770.mfp-hide
-  .popup.popup_rounded
-    .row
-      .col-md-12
-        #myCarousel.carousel.base_carousel.slide{"data-ride" => "carousel"}
-          %ul.list-unstyled.list-inline.carousel-indicators.text-center
-            %li.myCarousel-target.active{style: "border-top-color:#eac85e;", "data-slide-to" => "0", "data-target" => "#myCarousel"}
-              Введение в процедуру
+.modal.fade#modal-database
+  .modal-dialog.modal-770
+    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
+    .modal-content
+      .carousel.base_carousel.slide#myCarousel{ 'data-ride' => 'carousel' }
+        .header{ style: 'background:#eac85e;' }
+          %ul.carousel-indicators
+            %li.myCarousel-target.active{ style: 'border-top-color:#eac85e;', 'data-slide-to' => '0', 'data-target' => '#myCarousel', 'data-color' => '#eac85e' }
+              = t('stages.aspects_title')
             - @aspects.each_with_index do |asp, index|
-              %li.myCarousel-target{style: "border-top-color:#{asp.color};", "data-slide-to" => "#{index+1}", "data-target" => "#myCarousel"}
+              %li.myCarousel-target{ style: "border-top-color:#{asp.color};", 'data-slide-to' => "#{index + 1}", 'data-target' => '#myCarousel',
+              'data-color' => "#{asp.color}" }
                 = asp.content
-          .carousel-inner{:role => "listbox"}
-            .item.active
-              .row
-                .col-md-12
-                  .container
-                    .row
-                      .col-md-12.col-sm-12
-                        .aspect-main-block{style: "border-top-color:#eac85e;"}
-                          = @project.introduction.html_safe if @project.introduction
-
-            - @aspects.each_with_index do |asp, index|
-              .item
-                .row
-                  .col-md-12
-                    .container
-                      -if asp.knowbase_posts.size > 1
-                        .row
-                          .col-md-12.col-sm-12
-                            %ul.nav.nav-tabs.aspects_tabs{:role => "tablist"}
-                              - asp.knowbase_posts.each_with_index do |post, i|
-                                %li{class: "#{'active' if i == 0}", role: "presentation"}
-                                  %a{style: "background:#{asp.color};" ,"aria-controls" => "Статья #{i+1}", "data-toggle" => "tab", :href => "#article_#{index+1}_#{i+1}", :role => "tab"}
-                                    = trim_content(post.title, 30)
-
-                      .row
-                        .col-md-12.col-sm-12
-                          .aspect-main-block{style: "border-top-color:#{asp.color};"}
-                            -if asp.knowbase_posts.size > 1
-                              .tab-content
-                                - asp.knowbase_posts.each_with_index do |post, i|
-                                  .tab-pane.fade{id: "article_#{index+1}_#{i+1}", class: "#{'active in' if i==0}", role: "tabpanel"}
-                                    %h6.aspect-main-block-heading
-                                      = post.title
-                                    %p.aspect-main-block-text
-                                      = post.content.html_safe unless post.content.nil?
-
-                            -else
-                              - asp.knowbase_posts.each do |post|
-                                %h6.aspect-main-block-heading
-                                  = post.title
-                                %p.aspect-main-block-text
-                                  = post.content.html_safe unless post.content.nil?
+        .carousel-inner{ role: 'listbox' }
+          .item.active
+            .aspect-main-block{ style: 'border-top-color:#eac85e;' }
+              = @project.introduction.try(:html_safe)
+          - @aspects.each_with_index do |asp, index|
+            .item
+              - if asp.knowbase_posts.size > 1
+                %ul.nav.nav-tabs.aspects_tabs
+                  - asp.knowbase_posts.each_with_index do |post, i|
+                    %li{ class: "#{'active' if i == 0}", role: 'presentation' }
+                      %a{ style: "background:#{asp.color};", 'aria-controls' => "Статья #{i + 1}", 'data-toggle' => 'tab',
+                      href: "#article_#{index + 1}_#{i + 1}", role: 'tab' }
+                        = trim_content(post.title, 30)
 
 
-          %a.myCarousel-control.left{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
-            %i.fa.fa-3x.fa-caret-left
-          %a.myCarousel-control.right{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
-            %i.fa.fa-3x.fa-caret-right
+              .aspect-main-block{ style: "border-top-color:#{asp.color};" }
+                - if asp.knowbase_posts.size > 1
+                  .tab-content
+                    - asp.knowbase_posts.each_with_index do |post, i|
+                      .tab-pane.fade{ id: "article_#{index + 1}_#{i + 1}", class: "#{'active in' if i == 0}", role: 'tabpanel' }
+                        %h6
+                          = post.title
+                        %p
+                          = post.content.try(:html_safe)
+
+                - else
+                  - asp.knowbase_posts.each do |post|
+                    %h6
+                      = post.title
+                    %p
+                      = post.content.try(:html_safe)
+
+
+        %a.myCarousel-control.left{ 'data-slide' => 'prev', href: '#myCarousel', role: 'button' }
+          %i.fa.fa-5x.fa-angle-left
+        %a.myCarousel-control.right{ 'data-slide' => 'next', href: '#myCarousel', role: 'button' }
+          %i.fa.fa-5x.fa-angle-right

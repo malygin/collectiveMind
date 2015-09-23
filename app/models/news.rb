@@ -8,6 +8,6 @@ class News < ActiveRecord::Base
 
   # факт прочтения новости эксперта
   def read?(project, user)
-    user.loggers.where(type_event: 'expert_news_read', project_id: project.id, user_id: user.id, first_id: self.id).order(created_at: :desc).first
+    user.loggers.where(type_event: 'expert_news_read', project_id: project.id, user_id: user.id, first_id: id).order(created_at: :desc).first
   end
 end

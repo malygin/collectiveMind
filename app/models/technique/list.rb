@@ -3,10 +3,12 @@ class Technique::List < ActiveRecord::Base
 
   validates :code, :stage, presence: true
 
-  scope :by_stage, -> (stage) { stage = :aspect_posts if stage == :collect_info_posts; where stage: stage }
-
   def name
     "#{stage}_#{code}"
+  end
+
+  def self.by_stage(stage)
+    where stage: stage
   end
 
   # Формируем массив из всех техник, для отображения в форме редактирования проекта

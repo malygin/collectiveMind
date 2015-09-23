@@ -3,29 +3,33 @@
     %br/
     .col-md-6
       %span.stage-heading
-        Проектные предложения
+        = t('show.plan.title')
         %span#count_plans
-          ="(#{@posts.count})"
+          (#{@posts.count})
     .col-md-6
-      .sort-block.pull-right
-        %span.sort-label Сортировать по новым:
-        %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_5.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.plan_published_post.after_last_visit_comments(last_time_visit_page('plan')).size
-            - if new_comments > 0
-              %span.badge-red
-                = new_comments
-          %span#tooltip3_2.sort-2.sort_btn.sprite.sprite-2_5.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения."}
-            - new_posts = @project.plan_published_post.after_last_visit_posts(last_time_visit_page('plan')).size
-            - if new_posts > 0
-              %span.badge-red
-                = new_posts
-
-        - if @project.stage == '5:0'
+      .pull-right
+        - if @project.can_add?(name_controller) || @project.status == 100
           = link_to new_novation_post_path(@project, type_mechanic: 'simple'), id: 'new_plan_posts' do
             %button.btn.add-button
               %span
                 = t 'techniques.plan_posts_simple'
+        - else
+          = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
+            .results.tooltip_b{ class: "#{show_check_field?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+            title: 'Показать итоги стадии' }
+
+      .sort-block.pull-right
+        %span.sort-label Сортировать по новым:
+        %span#sorter
+          %span.sort_btn.sort-comment{ data: { type: 'comment' } }
+            - if @last_visit_presenter.comments > 0
+              %span.badge-red
+                = @last_visit_presenter.comments
+          %span.sort_btn.sort-date.active.tooltip_m{ data: { type: 'date' },
+          title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться проектные предложения.' }
+            - if @last_visit_presenter.posts > 0
+              %span.badge-red
+                = @last_visit_presenter.posts
 
 
 .stage-post-block
@@ -33,9 +37,7 @@
     = render partial: 'post_short', collection: @posts
 
 
-
-
-
-- if shown_intro('plan_intro') == ''
-  = render partial: 'popup_welcome'
-
+- unless show_check_field?(name_controller.to_s + '_intro')
+  = render partial: 'modal_welcome'
+- if @project_result
+  = render partial: 'modal_results'

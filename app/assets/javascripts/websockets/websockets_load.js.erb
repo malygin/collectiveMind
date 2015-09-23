@@ -1,0 +1,7 @@
+<% if ENV['RAILS_ENV'] != 'test' %>
+var pubnub = PUBNUB.init({
+    publish_key: '<%= ENV['PUBNUB_PUBLISH_KEY'].present? ? ENV['PUBNUB_PUBLISH_KEY'] : 'demo' %>',
+    subscribe_key: '<%= ENV['PUBNUB_SUBSCRIBE_KEY'].present? ? ENV['PUBNUB_SUBSCRIBE_KEY'] : 'demo' %>'
+});
+<% end %>
+

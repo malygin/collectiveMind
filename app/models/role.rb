@@ -6,10 +6,10 @@ class Role < ActiveRecord::Base
   before_validation :set_code
 
   private
+
   def set_code
-    if code.nil?
-      c = Role.last.try(:code)
-      self.code = (1 + c) unless c.nil?
-    end
+    return unless code.nil?
+    c = Role.last.try(:code)
+    self.code = (1 + c) unless c.nil?
   end
 end

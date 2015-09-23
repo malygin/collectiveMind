@@ -1,0 +1,113 @@
+.landing {
+  background: white;
+  p {
+    font-size: 12px;
+    color: #9e9e9e;
+  }
+  .navbar-brand {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .navbar-right {
+    font-size: 12px;
+  }
+  .bottom-bar {
+    p {
+      color: #787878;
+    }
+    .navbar-right {
+      padding-top: 30px;
+      margin-right: 0;
+      > li {
+        font-weight: 400;
+      }
+      > li > a, > li > span {
+        color: #EA1B22;
+        font-weight: 400;
+      }
+    }
+    .navbar-brand {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+  header{
+    margin-bottom: 27px;
+  }
+  .container {
+    > p{
+      line-height: 3;
+    }
+    > hr {
+      margin: 0;
+    }
+  }
+}
+
+.widget-block {
+  background: #e1e8f3;
+  border: 1px solid #e2e2e2;
+  height: 170px;
+  margin-bottom: 10px;
+  &.left_gradient {
+    background: linear-gradient(to right, #e1e8f3 0%, #eff2f7 76%, #eff2f7 100%);
+  }
+
+  &.right_gradient {
+    background: linear-gradient(to right, #eff2f7 0%, #dce3ef 86%, #dce3ef 100%);
+  }
+  .image_1 {
+    height: 100%;
+    background: image-url("home-page/1_1.png") center left 70px no-repeat, image-url("home-page/1_2.png") bottom right no-repeat;
+  }
+
+  .image_2 {
+    height: 100%;
+    background: image-url("home-page/2_2.png") left no-repeat, image-url("home-page/2_1.png") center right 90px no-repeat;
+  }
+
+  .image_3 {
+    height: 100%;
+    background: image-url("home-page/3_1.png") center left 130px no-repeat, image-url("home-page/3_2.png") top 20px right 170px no-repeat;
+  }
+}
+
+.widget-block-procedure {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e2e2;
+  .col-md-5 {
+    padding: 0;
+  }
+  .col-md-3 {
+    text-align: center
+  }
+}
+
+.form-auth {
+  padding:0 10px;
+
+  input {
+    width: 100%;
+    border: 1px solid #cfcfcf;
+    background: #f7f7f7;
+    padding: 0 13px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 35px;
+
+    + input {
+      margin-top: 14px;
+    }
+    @include input-placeholder {
+      color: #797979;
+    }
+  }
+  .btn {
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    letter-spacing: 1.1px;
+  }
+}

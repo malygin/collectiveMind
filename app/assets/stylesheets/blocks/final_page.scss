@@ -1,0 +1,71 @@
+.list_win .active .back_color_stage7 {
+  background: #9ee7f4;
+}
+
+.project_win {
+  background: image-url("background/stripe.png") repeat;
+  margin-top: 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  height: 450px;
+
+}
+
+.radial-gradient {
+  height: 100%;
+  border-radius: 6px;
+  background: radial-gradient(circle, rgba(253, 255, 254, 0.70) 30%, rgba(227, 232, 236, 0.7) 60%);
+  padding-bottom: 40px;
+}
+
+.poster_win {
+  padding-top: 40px;
+  img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  h5 {
+    margin-top: 20px;
+  }
+}
+
+.post-win, .post-accost {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.post-accost {
+  padding-left: 10px;
+}
+
+.post-win h4, .post-accost h4 {
+  line-height: 1.4;
+}
+
+.post-win h5, .post-accost h5 {
+  margin-top: 30px;
+}
+
+.post-win p, .post-accost p {
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.list_win {
+  li {
+    color: #a4a4a4;
+    padding-left: 0px;
+    padding-right: 0px;
+   &:hover,.active {
+      cursor: pointer;
+      color: #323232;
+    }
+  }
+}
+
+.letters {
+  height: 100%;
+  background: image-url("background/lettersTL.png") top 30px left 30px no-repeat, image-url("background/letters.png") bottom 10px right no-repeat;
+}

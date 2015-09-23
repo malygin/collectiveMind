@@ -1,11 +1,7 @@
 - if @concept_post.valid?
   $('.notice_messages').hide();
   $('#create_concept_success').fadeIn(3000).fadeOut('slow');
-  $('#concept_post_title').val('');
-  $('#concept_post_goal').val('')
-  $('#concept_post_content').val('')
-  $('#concept_post_actors').val('')
-  $('#concept_post_impact_env').val('')
+  $('#concept_post_title, #concept_post_goal, #concept_post_content, #concept_post_actors, #concept_post_impact_env').val('');
   $.each($('.checked_items .item'), function(key, value) {
   $(value).find('input.check_push_box').click();
   });

@@ -13,7 +13,6 @@ FactoryGirl.define do
     type_user 1
   end
 
-
   factory :ordinary_user, parent: :user do
     type_user 0
   end

@@ -1,0 +1,356 @@
+$sizes_modal: 710, 770, 985, 1030, 1100, 1150;
+
+@each $size in $sizes_modal {
+  .modal-#{$size} {
+    width: #{$size}px;
+  }
+}
+
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .important {
+      color: nth($base_colors, $i);
+    }
+    .modal {
+      .modal-header .likes > a > i, .panel .panel-heading i, .count > i, {
+        color: nth($base_colors, $i);
+      }
+      &.modal-explanation {
+        .modal_badge {
+          background: nth($base_colors, $i);
+        }
+      }
+      .subhead-stripe, .stat-block .badge {
+        background: nth($base_colors, $i);
+      }
+    }
+  }
+}
+
+.modal {
+  &.modal-explanation {
+
+    .modal_badge {
+      position: absolute;
+      top: -5px;
+      left: 30px;
+      padding: 5px 30px;
+      color: white;
+      z-index: 2;
+    }
+    .modal-content {
+      padding: 41px 94px 56px;
+      text-align: center;
+      p {
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      h2 {
+        font-size: 28px;
+        line-height: 46px;
+        margin-bottom: 40px;
+        font-weight: 600;
+      }
+      ol {
+        text-align: left;
+        font-size: 14.7px;
+        margin-bottom: 45px;
+        padding-left: 50px;
+        li {
+          line-height: 18px;
+          margin-bottom: 15px;
+        }
+      }
+      .btn {
+        padding: 4px 28px;
+        font-size: 14.7px;
+      }
+    }
+  }
+  &.modal_auth {
+    border-radius: 0px;
+    .modal-dialog {
+
+      width: 400px;
+    }
+    .modal-content {
+      padding: 0 20px 40px 20px;
+      .logotip {
+        padding: 35px 0;
+        text-align: center;
+      }
+    }
+  }
+  &.modal-results {
+    .legend {
+      line-height: 23px;
+      font-size: 11px;
+      span {
+        margin-right: 19px;
+      }
+    }
+    .result-block {
+      padding: 18px 68px;
+      .result-cell {
+        display: table;
+        > .cell {
+          display: table-cell;
+          font-weight: bold;
+          font-size: 13px;
+          padding: 10px 5px;
+          a {
+            img {
+              @include circle35;
+            }
+          }
+          .legend span {
+            margin-right: 10px;
+            font-size: 11px;
+            color: #bbbbbb;
+          }
+        }
+
+      }
+      .top {
+        text-align: center;
+        a {
+          font-size: 12px;
+          img {
+            display: block;
+            margin: 0 auto;
+            @include circle100;
+          }
+        }
+        .count {
+          margin-top: 10px;
+          font-size: 12px;
+          i {
+            font-size: 13px;
+          }
+        }
+      }
+      .stat-block {
+        display: table;
+        & > .cell {
+          display: table-cell;
+          vertical-align: middle;
+          padding: 0 5px;
+        }
+        .badge {
+          line-height: 30px;
+          width: 36px;
+          height: 36px;
+          font-size: 19px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  .modal-dialog {
+    > button.close {
+      position: absolute;
+      right: -70px;
+      background: $white;
+      padding: 3px 9px;
+      font-size: 31px;
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+
+    }
+  }
+  .modal-relation {
+    > .row > .col-md-6 {
+      padding-right: 0px;
+    }
+    .modal-body {
+      padding: 15px;
+      height: 560px;
+    }
+  }
+  .modal-choose {
+    .modal-body {
+      padding: 15px;
+    }
+  }
+  .admin_panel {
+    margin-top: 10px;
+    padding: 5px;
+    background: $white*0.94;
+    @include border-top-radius(5px);
+  }
+  .modal-content {
+    border: none;
+  }
+  .modal-header {
+    padding-left: 30px;
+    padding-right: 30px;
+    h4 {
+      color: $dark_grey;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0;
+    }
+    .likes {
+      text-align: right;
+      a {
+        margin-right: 5px;
+        i {
+          font-size: 16px;
+        }
+        small {
+          margin-right: 3px;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .modal-navigate {
+    padding: 10px;
+    border-radius: 6px 6px 0 0;
+    .nav li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+  .modal-body {
+    padding: 0;
+    .post-header {
+      background: #f7f7f7;
+      border-bottom: 1px solid #d1d1d1;
+      box-shadow: inset 0 5px 3px -3px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      .post-poster {
+        padding: 20px 0 18px 27px;
+        display: inline-block;
+        img {
+          @include circle50;
+
+        }
+        span {
+          margin-left: 25px;
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+      .tags_block {
+        float: right;
+        padding-top: 35px;
+        padding-bottom: 10px;
+        .tags_badge {
+          position: absolute;
+          top: 5px;
+          right: 0;
+          background: $white;
+          color: $light_grey;
+          padding: 1px 20px;
+          box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.3);
+        }
+        .tag {
+          float: right;
+          padding: 0 27px 0 9px;
+          font-size: 10px;
+          color: $white;
+          margin-bottom: 3px;
+          @include border-left-radius(2px);
+          clear: both;
+
+        }
+
+      }
+    }
+    .post-body {
+      padding: 0 15px;
+      .post-content {
+        padding-top: 26px;
+        .panel-heading {
+          font-weight: 600;
+        }
+        table {
+          background: #f8f8f8;
+          tr {
+            td {
+              padding: 10px 15px;
+              font-size: 12px;
+            }
+            &:first-child td {
+              padding: 18px 15px;
+              border-bottom: 1px solid #f8cece;
+              a {
+                font-weight: bold;
+                font-size: 14px;
+                img {
+                  margin-right: 15px;
+                }
+              }
+            }
+            &:nth-child(2n) td {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+    .post {
+      width: 100%;
+      min-height: 130px;
+      border-bottom: 1px solid #d7d9dd;
+      .post-poster, .post-content {
+        position: relative;
+        height: 100%;
+        float: left;
+      }
+      .post-poster {
+        width: 17%;
+        background: linear-gradient(to top, #fff, #e9eff7);
+        border-right: 1px solid #d7d9dd;
+        text-align: center;
+        padding: 20px 10px;
+      }
+      .post-content {
+        width: 83%;
+        overflow: hidden;
+      }
+    }
+    .subhead-stripe {
+      color: white;
+      padding: 0 35px;
+      h5 {
+        margin-top: 6px;
+        margin-bottom: 7px;
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .btn {
+        margin-top: 3px;
+        width: 80px;
+        padding: 2px 0 3px;
+        font-size: 11px;
+        border: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.modal-backdrop {
+  background: #bababa;
+  height: 100%;
+}
+
+.open-modal {
+  cursor: pointer;
+}
+
+.stage_4 {
+  .modal-navigate {
+    background: $service_color_4;
+  }
+}
+
+.stage_5 {
+  .modal-navigate {
+    background: $service_color_5;
+  }
+}

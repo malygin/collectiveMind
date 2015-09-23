@@ -4,7 +4,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'resque/tasks'
-task "resque:preload" => :environment
+task 'resque:preload' => :environment
 
 CollectiveMind::Application.load_tasks
-

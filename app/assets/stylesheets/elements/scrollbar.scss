@@ -1,0 +1,33 @@
+.ps_cont {
+  position: relative;
+  height: 100%;
+}
+
+.ps-scrollbar-y-rail {
+  margin: 15px 0;
+}
+
+.post_cont_hover .ps-scrollbar-y-rail {
+  margin: 0px 0 5px;
+}
+
+.ps-container .ps-scrollbar-y-rail {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
+.radial-gradient > .ps-container > .ps-scrollbar-y-rail {
+  margin-right: 20px;
+  margin-top: 50px;
+}
+
+.ps-container > .ps-scrollbar-y-rail, .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  width: 6px;
+}
+
+/* to make scrollbars always visible */
+.always-visible.ps-container > .ps-scrollbar-x-rail,
+.always-visible.ps-container > .ps-scrollbar-y-rail {
+  opacity: 1;
+}
+

@@ -80,13 +80,13 @@
   
     
       <dt class="r2">Includes:</dt>
-      <dd class="r2"><span class='object_link'><a href="Util/Filterable.html" title="Util::Filterable (module)">Util::Filterable</a></span></dd>
+      <dd class="r2"><span class='object_link'><a href="ApplicationHelper.html" title="ApplicationHelper (module)">ApplicationHelper</a></span>, <span class='object_link'><a href="MarkupHelper.html" title="MarkupHelper (module)">MarkupHelper</a></span>, <span class='object_link'><a href="Util/Filterable.html" title="Util::Filterable (module)">Util::Filterable</a></span></dd>
       
     
   
   
     <dt class="r1">Included in:</dt>
-    <dd class="r1"><span class='object_link'><a href="Concept/Post.html" title="Concept::Post (class)">Concept::Post</a></span>, <span class='object_link'><a href="Core/Aspect/Post.html" title="Core::Aspect::Post (class)">Core::Aspect::Post</a></span>, <span class='object_link'><a href="Core/Essay/Post.html" title="Core::Essay::Post (class)">Core::Essay::Post</a></span>, <span class='object_link'><a href="Discontent/Post.html" title="Discontent::Post (class)">Discontent::Post</a></span>, <span class='object_link'><a href="Estimate/Post.html" title="Estimate::Post (class)">Estimate::Post</a></span>, <span class='object_link'><a href="Novation/Post.html" title="Novation::Post (class)">Novation::Post</a></span>, <span class='object_link'><a href="Plan/Post.html" title="Plan::Post (class)">Plan::Post</a></span></dd>
+    <dd class="r1"><span class='object_link'><a href="Aspect/Post.html" title="Aspect::Post (class)">Aspect::Post</a></span>, <span class='object_link'><a href="Concept/Post.html" title="Concept::Post (class)">Concept::Post</a></span>, <span class='object_link'><a href="Core/Essay/Post.html" title="Core::Essay::Post (class)">Core::Essay::Post</a></span>, <span class='object_link'><a href="Discontent/Post.html" title="Discontent::Post (class)">Discontent::Post</a></span>, <span class='object_link'><a href="Estimate/Post.html" title="Estimate::Post (class)">Estimate::Post</a></span>, <span class='object_link'><a href="Novation/Post.html" title="Novation::Post (class)">Novation::Post</a></span>, <span class='object_link'><a href="Plan/Post.html" title="Plan::Post (class)">Plan::Post</a></span></dd>
     
   
   
@@ -105,7 +105,7 @@
           <div class="docstring">
   <div class="discussion">
     
-<p>Статусы поста: черновик, опубликовано, одобрено, в архиве</p>
+<p>Statuses of post</p>
 
 
   </div>
@@ -116,10 +116,10 @@
 </div>
         </dt>
         <dd><pre class="code"><span class='lbrace'>{</span>
-    <span class='label'>draft:</span> <span class='int'>0</span><span class='comma'>,</span>
-    <span class='label'>published:</span> <span class='int'>1</span><span class='comma'>,</span>
-    <span class='label'>approved:</span> <span class='int'>2</span><span class='comma'>,</span>
-    <span class='label'>archived:</span> <span class='int'>3</span>
+  <span class='label'>draft:</span> <span class='int'>0</span><span class='comma'>,</span>
+  <span class='label'>published:</span> <span class='int'>1</span><span class='comma'>,</span>
+  <span class='label'>approved:</span> <span class='int'>2</span><span class='comma'>,</span>
+  <span class='label'>archived:</span> <span class='int'>3</span>
 <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
       
         <dt id="SCORE-constant" class="">SCORE =
@@ -144,12 +144,34 @@
   
   
   
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="MarkupHelper.html" title="MarkupHelper (module)">MarkupHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="MarkupHelper.html#color_progress_bar-instance_method" title="MarkupHelper#color_progress_bar (method)">#color_progress_bar</a></span>, <span class='object_link'><a href="MarkupHelper.html#escape_text-instance_method" title="MarkupHelper#escape_text (method)">#escape_text</a></span>, <span class='object_link'><a href="MarkupHelper.html#post_aspect_classes-instance_method" title="MarkupHelper#post_aspect_classes (method)">#post_aspect_classes</a></span>, <span class='object_link'><a href="MarkupHelper.html#post_concept_classes-instance_method" title="MarkupHelper#post_concept_classes (method)">#post_concept_classes</a></span>, <span class='object_link'><a href="MarkupHelper.html#post_discontent_classes-instance_method" title="MarkupHelper#post_discontent_classes (method)">#post_discontent_classes</a></span>, <span class='object_link'><a href="MarkupHelper.html#stage_theme-instance_method" title="MarkupHelper#stage_theme (method)">#stage_theme</a></span>, <span class='object_link'><a href="MarkupHelper.html#trim_content-instance_method" title="MarkupHelper#trim_content (method)">#trim_content</a></span>, <span class='object_link'><a href="MarkupHelper.html#user_image_alt-instance_method" title="MarkupHelper#user_image_alt (method)">#user_image_alt</a></span>, <span class='object_link'><a href="MarkupHelper.html#user_image_path-instance_method" title="MarkupHelper#user_image_path (method)">#user_image_path</a></span>, <span class='object_link'><a href="MarkupHelper.html#user_image_tag-instance_method" title="MarkupHelper#user_image_tag (method)">#user_image_tag</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="ApplicationHelper.html" title="ApplicationHelper (module)">ApplicationHelper</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ApplicationHelper.html#aspect_answers_count-instance_method" title="ApplicationHelper#aspect_answers_count (method)">#aspect_answers_count</a></span>, <span class='object_link'><a href="ApplicationHelper.html#cabinet%3F-instance_method" title="ApplicationHelper#cabinet? (method)">#cabinet?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#can_edit_content%3F-instance_method" title="ApplicationHelper#can_edit_content? (method)">#can_edit_content?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#current_stage_popover_status-instance_method" title="ApplicationHelper#current_stage_popover_status (method)">#current_stage_popover_status</a></span>, <span class='object_link'><a href="ApplicationHelper.html#current_stage_url-instance_method" title="ApplicationHelper#current_stage_url (method)">#current_stage_url</a></span>, <span class='object_link'><a href="ApplicationHelper.html#last_time_visit_page-instance_method" title="ApplicationHelper#last_time_visit_page (method)">#last_time_visit_page</a></span>, <span class='object_link'><a href="ApplicationHelper.html#left_rollover%3F-instance_method" title="ApplicationHelper#left_rollover? (method)">#left_rollover?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#model_for-instance_method" title="ApplicationHelper#model_for (method)">#model_for</a></span>, <span class='object_link'><a href="ApplicationHelper.html#name_controller-instance_method" title="ApplicationHelper#name_controller (method)">#name_controller</a></span>, <span class='object_link'><a href="ApplicationHelper.html#name_model-instance_method" title="ApplicationHelper#name_model (method)">#name_model</a></span>, <span class='object_link'><a href="ApplicationHelper.html#number_current_stage-instance_method" title="ApplicationHelper#number_current_stage (method)">#number_current_stage</a></span>, <span class='object_link'><a href="ApplicationHelper.html#profile%3F-instance_method" title="ApplicationHelper#profile? (method)">#profile?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#rating%3F-instance_method" title="ApplicationHelper#rating? (method)">#rating?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#show_check_field%3F-instance_method" title="ApplicationHelper#show_check_field? (method)">#show_check_field?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#show_stage_subbar%3F-instance_method" title="ApplicationHelper#show_stage_subbar? (method)">#show_stage_subbar?</a></span>, <span class='object_link'><a href="ApplicationHelper.html#substage_status_by-instance_method" title="ApplicationHelper#substage_status_by (method)">#substage_status_by</a></span>, <span class='object_link'><a href="ApplicationHelper.html#unread_expert_news%3F-instance_method" title="ApplicationHelper#unread_expert_news? (method)">#unread_expert_news?</a></span></p>
+
+  
+  
+  
+  
+  
+  
   
 
 </div>
 
     <div id="footer">
-  Generated on Wed May 13 15:35:08 2015 by
+  Generated on Mon Aug  3 16:30:21 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.0).
 </div>

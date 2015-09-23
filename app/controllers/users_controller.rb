@@ -1,25 +1,14 @@
 class UsersController < ProjectsController
   before_action :set_user
   before_filter :correct_user, only: [:update]
-  before_filter :journal_data, only: [:index, :new, :show,  :journal_clear, :edit_notice]
+  before_filter :journal_data, only: [:index, :new, :show, :journal_clear, :edit_notice]
 
   def index
-    @users = @project.users_in_project.where(users: {type_user: 0})
-  end
-
-  def new
-    @user = User.new
-    @title = 'Sign up'
+    @users = @project.users.where(users: { type_user: 0 })
   end
 
   def show
-    redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content) if @user == current_user
-
-    # if @user != current_user
-    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    # else
-    #   @journals = Journal.events_for_user_show @project.id, @user.id, 30
-    # end
+    redirect_to polymorphic_path(@project.current_stage_type, project: @project, action: :user_content, edit_profile: true) if @user == current_user
   end
 
   def update
@@ -30,59 +19,33 @@ class UsersController < ProjectsController
     if params[:user][:avatar].present?
       img = Cloudinary::Uploader.upload(params[:user][:avatar], folder: 'avatars', width: 600, height: 600, crop: :limit)
       to_update.merge!(avatar: img['public_id'])
+    elsif params[:collection_avatar].present?
+      to_update.merge!(avatar: 'collection_avatar_path:' + params[:collection_avatar])
     end
-    if @user.update_attributes(to_update)
-      flash[:success] = 'Профиль обновлен'
-    end
-    # redirect_to user_path(@project, @user)
-    # respond_to do |format|
-    #   if @user.update_attributes(to_update)
-    #     format.html { redirect_to user_path(@project, @user) }
-    #     format.js
-    #   end
-    # end
-    respond_to do |format|
-      format.html { redirect_to user_path(@project, @user) }
-      format.js
-    end
+    flash[:success] = 'Профиль обновлен' if @user.update_attributes(to_update)
+    respond_to :js
   end
 
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'Пользователь удален!!'
-    redirect_to users_path
-  end
-
-  #clean notifications
+  # clean notifications
   def journal_clear
-    if @my_journals.size > 0 and current_user?(@user)
+    if @my_journals.size > 0 && current_user?(@user)
       Journal.events_for_my_feed(@project.id, current_user).update_all(viewed: true)
       journal_data
     end
     respond_to :js
   end
 
+  # :nocov:
   def search
     @code = params[:code]
     @search_users = User.search params[:search_users_text]
   end
 
-  def update_score
-    params[:value] = '0' if params[:value] == ''
-    respond_to do |format|
-      if @user.update_attributes(params[:name] => params[:value])
-        format.json { head :no_content } # 204 No Content
-        format.js { head :no_content }
-      end
-    end
-  end
-
-
-  #mail sender
+  # mail sender
   def edit_notice
     @auto_feed_mailer = current_user.user_checks.where(project_id: @project.id, check_field: 'auto_feed_mailer').first
     @journal_mailer = JournalMailer.new
-    @mailers = prime_admin? ? @project.journal_mailers : @project.journal_mailers.mailers_for_moderator(current_user)
+    @mailers = boss? ? @project.journal_mailers : @project.journal_mailers.mailers_for_moderator(current_user)
   end
 
   def create_notice
@@ -90,14 +53,13 @@ class UsersController < ProjectsController
     @post.user = current_user
     @post.project = @project
     @post.status = 0
-    respond_to do |format|
-      if @post.save!
-        format.js
-      end
-    end
+    @post.save
+    respond_to :js
   end
+  # :nocov:
 
   private
+
   def set_user
     @user = User.find(params[:id]) if params[:id]
   end

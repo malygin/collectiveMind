@@ -1,10 +1,3 @@
--if @comment
-  -if params[:discuss_status]
-    -if @comment.discuss_status
-      $('#discuss_stat_comment_#{@comment.id} span').removeClass('label-default').addClass('label-danger')
-    -else
-      $('#discuss_stat_comment_#{@comment.id} span').removeClass('label-danger').addClass('label-default')
-
-  -if params[:approve_status]
-    $('#approve_stat_comment_#{@comment.id} span').toggleClass('theme_back_color')
+- if @comment && params[:approve_status]
+  $('#approve_status_comment_#{@comment.id} span').toggleClass('theme_font_color')
 

@@ -20,6 +20,7 @@ CollectiveMind::Application.routes.draw do
     resources :posts, controller: controller_name do
       get :user_content, on: :collection
       put :check_field, on: :collection
+      get :show_results, on: :collection
 
       member do
         put :to_archive
@@ -51,7 +52,7 @@ CollectiveMind::Application.routes.draw do
   scope '/project/:project' do
 
     resources :news do
-        get :read, on: :member
+      get :read, on: :member
     end
 
     namespace :knowbase, :module => false do
@@ -59,10 +60,10 @@ CollectiveMind::Application.routes.draw do
     end
 
     resources :users, except: [:edit] do
-      collection do
-        get :list_users
-        get :search
-      end
+      # collection do
+      #   get :list_users
+      #   get :search
+      # end
       member do
         post :update_score
         put :journal_clear
@@ -73,14 +74,10 @@ CollectiveMind::Application.routes.draw do
       end
     end
 
-    namespace :aspect, :module => false do
-      posts_routes('core/aspect/posts')
-    end
-
-    namespace :collect_info do
+    namespace :aspect do
       posts_routes
       resources :posts do
-          put :answer_question, on: :member
+        put :answer_question, on: :member
       end
     end
 
@@ -88,6 +85,8 @@ CollectiveMind::Application.routes.draw do
       posts_routes
     end
 
+    put 'concept/posts/show_discontents', to: 'concept/posts#show_discontents'
+    put 'concept/posts/search_discontents', to: 'concept/posts#search_discontents'
     namespace :concept do
       posts_routes
     end
@@ -107,7 +106,7 @@ CollectiveMind::Application.routes.draw do
       posts_routes
     end
 
-    namespace :completion_proc do
+    namespace :completion do
       resources :posts
     end
 

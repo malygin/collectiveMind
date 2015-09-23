@@ -4,16 +4,16 @@ describe 'Plan ' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '5:0' }
+  let(:project) { @project = create :closed_project, stage: '5:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'plan_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'plan_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'plan_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'plan_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'plan_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'plan_discuss'
@@ -39,7 +39,7 @@ describe 'Plan ' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content "#{t('show.plan.title')} (2)"
       expect(page).to have_content @plan1.content
       expect(page).to have_content @plan2.content
     end
@@ -53,7 +53,7 @@ describe 'Plan ' do
     end
 
     it 'have content' do
-      expect(page).to have_content 'Проектные предложения (2)'
+      expect(page).to have_content "#{t('show.plan.title')} (2)"
       expect(page).to have_content @plan1.content
       expect(page).to have_content @plan2.content
       expect(page).to have_link 'new_plan_posts'
@@ -65,7 +65,7 @@ describe 'Plan ' do
       end
 
       it 'have content' do
-        expect(page).to have_content @post1.name
+        expect(page).to have_content @post1.content
       end
 
       it_behaves_like 'content with comments'
@@ -101,5 +101,4 @@ describe 'Plan ' do
     #
     # it_behaves_like 'discuss plans'
   end
-
 end

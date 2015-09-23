@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Cabinet Discontents' do
   subject { page }
-  let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
+  let(:cabinet_stage_url) { Rails.application.routes.url_helpers.send("new_#{@current_stage_type_for_cabinet_url}_path", @project, type_mechanic: 'simple') }
 
   before do
     create_project_and_user_for '2:0'
@@ -28,7 +28,7 @@ describe 'Cabinet Discontents' do
       end
     end
 
-    context 'correct', js: true  do
+    context 'correct', js: true do
       before do
         find('#select_aspect').click
         # @todo не выбирается аспект
@@ -40,21 +40,20 @@ describe 'Cabinet Discontents' do
         fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
-        fill_in 'discontent_post_whend', with: 'because'
+        # fill_in 'discontent_post_whend', with: 'because'
         execute_script("$('#send_post').click()")
       end
 
-      it {expect(page).to have_content t('form.discontent.new_success') }
-
+      it { expect(page).to have_content t('form.discontent.new_success') }
     end
 
     it 'empty fields - error' do
-      expect {
+      expect do
         click_button 'send_post'
         within :css, 'div.notice_messages' do
           expect(page).to have_css 'div#error_explanation'
         end
-      }.not_to change(Discontent::Post, :count)
+      end.not_to change(Discontent::Post, :count)
     end
   end
 
@@ -70,14 +69,14 @@ describe 'Cabinet Discontents' do
     end
 
     it 'correct' do
-      expect {
+      expect do
         fill_in 'discontent_post_content', with: 'new discontent'
         fill_in 'discontent_post_what', with: 'because'
         fill_in 'discontent_post_whered', with: 'because'
-        fill_in 'discontent_post_whend', with: 'because'
+        # fill_in 'discontent_post_whend', with: 'because'
         click_button 'send_post'
         expect(page).to have_content t('form.discontent.new_success')
-      }.to change(Discontent::Post, :count).by(1)
+      end.to change(Discontent::Post, :count).by(1)
     end
   end
 
@@ -85,11 +84,11 @@ describe 'Cabinet Discontents' do
     new_content = 'new cool content'
     visit user_content_discontent_posts_path(@project)
     click_link "edit_discontent_#{@discontent.id}"
-    expect {
+    expect do
       fill_in 'discontent_post_content', with: new_content
       click_button 'send_post'
       expect(page).to have_content t('form.discontent.edit_success')
-    }.not_to change(Discontent::Post, :count)
+    end.not_to change(Discontent::Post, :count)
     visit user_content_discontent_posts_path(@project)
     expect(page).to have_content new_content
   end
@@ -97,20 +96,20 @@ describe 'Cabinet Discontents' do
   context 'destroy', js: true do
     it 'from user content page' do
       visit user_content_discontent_posts_path(@project)
-      expect {
+      expect do
         click_link "destroy_discontent_#{@discontent.id}"
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_discontent_posts_path(@project)
-      }.to change(Discontent::Post, :count).by(-1)
+      end.to change(Discontent::Post, :count).by(-1)
     end
 
     it 'from edit form' do
       visit edit_discontent_post_path(@project, @discontent)
-      expect {
+      expect do
         click_link "destroy_discontent_#{@discontent.id}"
         page.driver.browser.accept_js_confirms
         expect(current_path) == user_content_discontent_posts_path(@project)
-      }.to change(Discontent::Post, :count).by(-1)
+      end.to change(Discontent::Post, :count).by(-1)
     end
   end
 
@@ -122,17 +121,17 @@ describe 'Cabinet Discontents' do
     end
   end
 
-  it 'publish', js: true do
+  xit 'publish', js: true do
     visit edit_discontent_post_path(@project, @discontent)
-    expect {
+    expect do
       click_link "publish_#{@discontent.id}"
       refresh_page
       expect(page).not_to have_link "publish_#{@discontent.id}"
-    }.to change(Discontent::Post.published, :count).by(1)
+    end.to change(Discontent::Post.published, :count).by(1)
   end
 
   it 'go to correct url' do
-    visit  new_concept_post_path(@project)
+    visit new_concept_post_path(@project)
     expect(current_path).to eq(new_discontent_post_path(@project))
   end
 end

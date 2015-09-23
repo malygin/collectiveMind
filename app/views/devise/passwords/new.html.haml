@@ -4,7 +4,7 @@
     DECISION
   %br
   %h4 Забыли пароль?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
   = devise_error_messages!
   %fieldset
     .form-group
@@ -15,8 +15,8 @@
         = f.email_field :email, placeholder: 'Ваш Email', class: 'form-control input-lg'
 
   .form-actions
-    =f.submit 'Послать инструкции', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
+    = f.submit 'Послать инструкции', class: 'btn btn-block btn-lg btn-danger', id: 'Signin'
     .forgot
-      =link_to 'Вернуться', '/users/sign_in', class:'forgot'
+      = link_to 'Вернуться', '/users/sign_in', class: 'forgot'
 
 

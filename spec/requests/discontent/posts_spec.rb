@@ -4,16 +4,16 @@ describe 'Discontent' do
   subject { page }
 
   let!(:user) { @user = create :user }
-  let (:user_data) { create :user }
+  let(:user_data) { create :user }
   let!(:moderator) { @moderator = create :moderator }
-  let (:project) { @project = create :closed_project, stage: '2:0' }
+  let(:project) { @project = create :closed_project, stage: '2:0' }
 
   before do
     create :core_project_user, user: user, core_project: project
     create :core_project_user, user: moderator, core_project: project
 
-    @user_check = create :user_check, user: user, project: project, check_field: 'discontent_intro'
-    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_intro'
+    @user_check = create :user_check, user: user, project: project, check_field: 'discontent_posts_intro'
+    @moderator_check = create :user_check, user: moderator, project: project, check_field: 'discontent_posts_intro'
 
     @user_check_popover = create :user_check, user: user, project: project, check_field: 'discontent_discuss'
     @moderator_check_popover = create :user_check, user: moderator, project: project, check_field: 'discontent_discuss'
@@ -28,7 +28,7 @@ describe 'Discontent' do
     @post1 = @discontent1
     @post2 = @discontent2
 
-    @comment_1 = create :discontent_comment, post: @post1, user: user
+    @comment_1 = create :discontent_comment, post: @post1, user: user_data
     @comment_2 = create :discontent_comment, post: @post1, comment: @comment_1
   end
 
@@ -38,7 +38,7 @@ describe 'Discontent' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content "#{t('show.discontent.title')} (2)"
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
     end
@@ -48,7 +48,7 @@ describe 'Discontent' do
 
   shared_examples 'filter discontents' do
     before do
-      #create new aspect
+      # create new aspect
       @aspect2 = create :aspect, project: project
       @discontent3 = create :discontent, project: project, user: user
       create :discontent_post_aspect, post_id: @discontent3.id, aspect_id: @aspect2.id
@@ -63,7 +63,7 @@ describe 'Discontent' do
     end
 
     it 'can select first aspect in dropdown', js: true do
-      find(:css, "a.select-aspect").trigger('click')
+      find(:css, 'a.select-aspect').trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect1.id}").trigger('click')
@@ -75,7 +75,7 @@ describe 'Discontent' do
     end
 
     it 'can select second aspect in dropdown', js: true do
-      find(:css, "a.select-aspect").trigger('click')
+      find(:css, 'a.select-aspect').trigger('click')
       expect(page).to have_content @aspect1.content
       expect(page).to have_content @aspect2.content
       find(:css, "ul#filter li#button_aspect_#{@aspect2.id}").trigger('click')
@@ -93,16 +93,16 @@ describe 'Discontent' do
     end
 
     it 'can sort to comment', js: true do
-      find(:css, "span#sorter span.sort-1").trigger('click')
+      find(:css, 'span#sorter span.sort-comment').trigger('click')
       sleep(5)
-      first(:css, "#tab_aspect_posts .discontent-block .what a").click
+      first(:css, '#tab_aspect_posts .md-post-block .what a').click
       expect(page).to have_content @discontent1.content
     end
 
     it 'can sort to date', js: true do
-      find(:css, "span#sorter span.sort-2").trigger('click')
+      find(:css, 'span#sorter span.sort-date').trigger('click')
       sleep(5)
-      first(:css, "#tab_aspect_posts .discontent-block .what a").click
+      first(:css, '#tab_aspect_posts .md-post-block .what a').click
       expect(page).to have_content @discontent2.content
     end
   end
@@ -113,13 +113,13 @@ describe 'Discontent' do
     end
 
     it 'have content', js: true do
-      expect(page).to have_content 'Несовершенства (2)'
+      expect(page).to have_content "#{t('show.discontent.title')} (2)"
       expect(page).to have_content @discontent1.content
       expect(page).to have_content @discontent2.content
       expect(page).to have_link 'new_discontent_posts'
     end
 
-    context 'show popup aspect ', js: true do
+    context 'show popup discontent ', js: true do
       before do
         find(:css, "#show_record_#{@post1.id}").trigger('click')
       end
@@ -127,8 +127,8 @@ describe 'Discontent' do
       it 'have content', js: true do
         expect(page).to have_content @post1.content
         expect(page).to have_content @post1.what
-        expect(page).to have_content @post1.whend
-        expect(page).to have_content @post1.whered
+        # expect(page).to have_content @post1.whend
+        # expect(page).to have_content @post1.whered
         expect(page).to have_content @aspect1.content
       end
 
@@ -151,10 +151,19 @@ describe 'Discontent' do
 
     it_behaves_like 'sort discontents'
 
-    it_behaves_like 'discuss discontents'
+    context 'show discuss discontents', js: true do
+      it_behaves_like 'discuss discontents'
+    end
 
     context 'vote content', js: true do
-      it_behaves_like 'vote popup', '2:1', 'Голосование по несовершенствам', 'discontent'
+      it_behaves_like 'vote popup', '2:1', 'discontent'
+    end
+
+    it 'can see stage result for previous stage ', js: true do
+      visit aspect_posts_path(project)
+      click_link 'aspect_posts_intro'
+      click_link 'show_results'
+      expect(page).to have_content "#{t('show.result_stage')} 1"
     end
   end
 
@@ -175,8 +184,6 @@ describe 'Discontent' do
     #
     # it_behaves_like 'discuss discontents'
     #
-    # it_behaves_like 'vote popup', 6, 'Голосование по несовершенствам'
+    # it_behaves_like 'vote popup', '2:1', 'discontent'
   end
-
-
 end

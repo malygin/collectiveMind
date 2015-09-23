@@ -1,0 +1,70 @@
+.modal.fade#modal-post
+  .modal-dialog.modal-lg
+    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
+    - if boss?
+      .admin_panel
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
+          remote: true, method: :put, class: "btn btn-white btn-xs #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+          %i.fa.fa-trophy.fa-lg
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true },
+          remote: true, method: :put, class: "btn btn-white btn-xs #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+          %i.fa.fa-bookmark.fa-lg
+    .modal-content
+      %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+        .important
+          %i.fa.fa-bookmark.fa-2x
+      .modal-header{ style: "border-top-color:#{@post.color};" }
+        .row
+          .col-md-8
+            %h4
+              = @post.content
+          .col-md-4
+            .likes
+              %a
+                %small{ class: "cc_post_#{@post.id}" }
+                  = @post.comments.count
+                %i.fa.fa-comment-o
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false }, remote: true,
+                    method: :put, id: "like_post_#{@post.id}", class: 'tooltip_b', title: 'Нравится') do
+                %small{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
+                  = @post.users_pro.count
+                %i.fa.fa-thumbs-o-up
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
+                    remote: true, method: :put, id: "dislike_post_#{@post.id}", class: 'tooltip_b', title: 'Не нравится') do
+                %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
+                  = @post.users_against.count
+                %i.fa.fa-thumbs-o-down
+              %small
+                = l(@post.created_at, format: '%d.%m.%Y')
+      .modal-body
+        .post
+          .post-poster
+            = link_to user_path(@project, @post.user) do
+              = user_image_tag @post.user.try(:avatar)
+            = link_to @post.user, user_path(@project, @post.user)
+          .post-content
+            - if @post.status == 1
+              %p
+                %span.badge.badge_type1{ style: "background:#{@post.color};" } Обоснование
+              %p
+                = @post.short_desc
+            - else
+              -# @todo прицепить perfectScrollbar, без сокращения пояснения
+              .post-text.ps_cont
+                = @post.questions.by_type(0).first.try(:content)
+
+        .post-comments
+          .separator
+            %hr
+              .separator_label.text-left
+                %h4 Обсуждение аспекта
+              .separator_label.pull-right
+                %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
+                  'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                  %span.comments_action свернуть
+          .chat-messages.collapse.in#comments
+            = render partial: 'shared/comment', collection: @comments
+          .divider15
+          = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
+            url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
+          .divider25

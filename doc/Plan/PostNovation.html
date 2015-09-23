@@ -133,7 +133,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>rubocop:disable Metrics/MethodLength.</p>
+</div></span>
   
 </li>
 
@@ -157,7 +159,18 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>rubocop:disable Metrics/MethodLength</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -197,33 +210,33 @@
       <pre class="code"><span class="info file"># File 'app/models/plan/post_novation.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_attributes_for_form'>attributes_for_form</span>
-  <span class='lbrace'>{</span><span class='label'>project:</span> <span class='lbrace'>{</span>
-      <span class='label'>project_goal:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>project_change:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>project_members:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>project_results:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>project_time:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>members_execute:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>members_who:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>resource_financial:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>resource_internal:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
-      <span class='label'>resource_external:</span> <span class='kw'>true</span><span class='comma'>,</span>
-      <span class='label'>resource_commands:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+  <span class='lbrace'>{</span> <span class='label'>project:</span> <span class='lbrace'>{</span>
+    <span class='label'>project_goal:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>project_change:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>project_members:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>project_results:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>project_time:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>members_execute:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>members_who:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>resource_financial:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>resource_internal:</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+    <span class='label'>resource_external:</span> <span class='kw'>true</span><span class='comma'>,</span>
+    <span class='label'>resource_commands:</span> <span class='op'>-</span><span class='int'>1</span>
   <span class='rbrace'>}</span><span class='comma'>,</span>
-   <span class='label'>members:</span> <span class='lbrace'>{</span>
-       <span class='label'>members_new:</span> <span class='kw'>true</span><span class='comma'>,</span>
-       <span class='label'>members_motivation:</span> <span class='kw'>true</span><span class='comma'>,</span>
-       <span class='label'>members_education:</span> <span class='kw'>true</span><span class='comma'>,</span>
-       <span class='label'>confidence_commands:</span> <span class='kw'>false</span><span class='comma'>,</span>
-       <span class='label'>resource_support:</span> <span class='kw'>false</span><span class='comma'>,</span>
-   <span class='rbrace'>}</span><span class='comma'>,</span>
-   <span class='label'>resource:</span> <span class='lbrace'>{</span>
-       <span class='label'>resource_competition:</span> <span class='kw'>true</span><span class='comma'>,</span>
-   <span class='rbrace'>}</span><span class='comma'>,</span>
-   <span class='label'>confidence:</span> <span class='lbrace'>{</span>
-       <span class='label'>confidence_remove_discontent:</span> <span class='kw'>false</span><span class='comma'>,</span>
-       <span class='label'>confidence_negative_results:</span> <span class='kw'>true</span>
-   <span class='rbrace'>}</span><span class='rbrace'>}</span>
+    <span class='label'>members:</span> <span class='lbrace'>{</span>
+      <span class='label'>members_new:</span> <span class='kw'>true</span><span class='comma'>,</span>
+      <span class='label'>members_motivation:</span> <span class='kw'>true</span><span class='comma'>,</span>
+      <span class='label'>members_education:</span> <span class='kw'>true</span><span class='comma'>,</span>
+      <span class='label'>confidence_commands:</span> <span class='kw'>false</span><span class='comma'>,</span>
+      <span class='label'>resource_support:</span> <span class='kw'>false</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>resource:</span> <span class='lbrace'>{</span>
+      <span class='label'>resource_competition:</span> <span class='kw'>true</span>
+    <span class='rbrace'>}</span><span class='comma'>,</span>
+    <span class='label'>confidence:</span> <span class='lbrace'>{</span>
+      <span class='label'>confidence_remove_discontent:</span> <span class='kw'>false</span><span class='comma'>,</span>
+      <span class='label'>confidence_negative_results:</span> <span class='kw'>true</span>
+    <span class='rbrace'>}</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -235,7 +248,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed May 13 15:35:12 2015 by
+  Generated on Mon Aug  3 16:30:22 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.2.0).
 </div>

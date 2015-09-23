@@ -1,0 +1,186 @@
+/* HEADER BOTTOM */
+
+@for $i from 1 through length($base_colors) {
+  .stage_#{$i} {
+    .subhead {
+      @include background-image(linear-gradient(top, nth($base_colors, $i)  * 0.8 0%, nth($base_colors, $i) * 1.02));
+    }
+    .subhead_navigate .metro_block ul li.active i, .info > i {
+      color: nth($base_colors, $i);
+
+    }
+  }
+}
+
+.grey_theme .subhead {
+  @include background-image(linear-gradient(top, #969b9f 0%, #afafaf 100%));
+}
+
+.subhead {
+  position: relative;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: inset 0 6px 6px -3px rgba(0, 0, 0, 0.4);
+  h4 {
+    color: white;
+  }
+
+  a.btn-tooltip {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -12px;
+    border: 0;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+
+    }
+    i {
+      font-size: 14px;
+      padding-right: 5px;
+      color: #fff;
+    }
+    &.active {
+      background: #fcf8db;
+      color: #666666;
+      i {
+        font-size: 14px;
+        padding-right: 5px;
+        color: #666666;
+      }
+    }
+  }
+}
+
+.subhead_navigate {
+  [class*="col-"] {
+    padding: 3px;
+  }
+  .border-block {
+    position: relative;
+    padding: 8px 10px 4px;
+    min-height: 54px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    .btn {
+      border-radius: 4px;
+      margin-right: 6px;
+      font-size: 16px;
+      color: #fff;
+      border: none;
+    }
+    .btn-group > a.btn {
+      @include child-b-color;
+    }
+    img {
+      @include circle40;
+    }
+  }
+  .metro_block {
+    margin-top: 4px;
+
+    ul {
+      margin-top: 4px;
+      margin-bottom: 5px;
+      li {
+        color: #b9b9b9;
+        &:after {
+          content: "";
+          background: image-url('arrows.png') 0 -7px;
+          width: 24px;
+          height: 10px;
+          margin: -10px 0 0 5px;
+          @extend .icons;
+        }
+        &:last-of-type {
+          &:after {
+            background-image: none;
+          }
+        }
+        a {
+          color: #b9b9b9;
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 10px;
+          margin-top: -10px;
+          &:hover {
+            color: #5b5b5b;
+          }
+        }
+
+        &.active a {
+          color: #5b5b5b;
+        }
+      }
+    }
+  }
+
+  .progress_block {
+    box-sizing: border-box;
+    margin-left: 56px;
+    padding-right: -56px;
+    padding-top: 8px;
+    height: 54px;
+
+    .knob-block {
+      width: 144px;
+      float: left;
+      .knob_label {
+        width: 100px;
+        text-align: right;
+        line-height: 1;
+        color: #787878;
+        float: left;
+        margin: 3px 7px 0 0;
+      }
+
+      .progress-knob .knob {
+        font-size: 12px !important;
+        font-weight: bold;
+        height: 20px !important;
+        width: 26px !important;
+        margin-top: 7px !important;
+        margin-left: -31px !important;
+      }
+    }
+  }
+  .contact {
+    width: 200px;
+    float: left;
+    a {
+      font-weight: bold;
+      img {
+        margin-right: 14px;
+      }
+    }
+  }
+  .info {
+    float: right;
+    margin-top: 8px;
+  }
+}
+
+@for $i from 1 through 6 {
+  .stage_#{$i} {
+    .help_icon {
+      background: image-url('i-help.png') no-repeat 0 -53px*($i - 1);
+    }
+  }
+}
+
+.help_icon {
+  float: left;
+  width: 50px;
+  height: 54px;
+  cursor: pointer;
+  &.shown {
+    background: image-url('i-help.png') no-repeat -48px 0;
+  }
+}
+
+

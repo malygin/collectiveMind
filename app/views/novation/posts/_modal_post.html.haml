@@ -1,0 +1,182 @@
+.modal.fade#modal-post
+  .modal-dialog.modal-1030
+    %button.close{ 'data-dismiss' => 'modal' } &times;
+    - if boss?
+      .admin_panel
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id },
+          remote: true, method: :put, class: "btn btn-white btn-xs #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+          %i.fa.fa-trophy.fa-lg
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true },
+          remote: true, method: :put, class: "btn btn-white btn-xs #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+          %i.fa.fa-bookmark.fa-lg
+    .modal-content
+      %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+        .important
+          %i.fa.fa-bookmark.fa-2x
+      .modal-header
+        .row
+          .col-md-8
+            %h4
+              = @post.title.present? ? trim_content(@post.title) : 'Пакет без названия'
+          .col-md-4
+            .likes
+              %a
+                %small{ class: "cc_post_#{@post.id}" }
+                  = @post.comments.count
+                %i.fa.fa-comment
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false },
+                    remote: true, method: :put, id: "like_post_#{@post.id}", class: 'tooltip_b', title: 'Нравится') do
+                %small{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
+                  = @post.users_pro.count
+                %i.fa.fa-thumbs-up
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
+                    remote: true, method: :put, id: "dislike_post_#{@post.id}", class: 'tooltip_b', title: 'Не нравится') do
+                %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
+                  = @post.users_against.count
+                %i.fa.fa-thumbs-down
+              %small
+                = l(@post.created_at, format: '%d.%m.%Y')
+      .modal-body
+        .post-header
+          .post-poster
+            = link_to user_path(@project, @post.user) do
+              = user_image_tag @post.user.try(:avatar)
+            %span
+              = link_to @post.user, user_path(@project, @post.user)
+          .tags_block
+            %span.tags_badge идеи
+            - @post.novation_concepts.each_with_index do |post, index|
+              .tag.color_me{ 'data-me-action' => 'background-color', 'data-me-color' => "#{index + 1}", 'data-me-type' => 'imperf' }
+                = trim_content(post.title, 50)
+
+        .post-body
+          .row
+            .col-md-6.exp_col.left
+              %a.exp_button
+                %span.arrows-left
+              .post-content
+                .panel
+                  .panel-heading
+                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-1', 'aria-expanded' => 'false' }
+                      = t('activerecord.attributes.novation/post.project')
+                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                  .collapse#cab4-1
+                    .panel-body
+                      %h5= t('activerecord.attributes.novation/post.project_change')
+                      %p
+                        = @post.project_change
+                      %h5= t('activerecord.attributes.novation/post.project_goal')
+                      %p
+                        = @post.project_goal
+                      %h5=  t('activerecord.attributes.novation/post.project_members')
+                      %p
+                        = @post.project_members
+                      %h5= t('activerecord.attributes.novation/post.project_results')
+                      %p
+                        = @post.project_results
+                      %h5= t('activerecord.attributes.novation/post.project_time')
+                      %p
+                        = @post.project_time
+                .panel
+                  .panel-heading
+                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-2', 'aria-expanded' => 'false' }
+                      = t('activerecord.attributes.novation/post.members')
+                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                  .collapse#cab4-2
+                    .panel-body
+                      %h5= t('activerecord.attributes.novation/post.members_new')
+                      %p
+                        = @post.members_new_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.members_new
+
+                      %h5= t('activerecord.attributes.novation/post.members_who')
+                      %p
+                        = @post.members_who
+                      %h5= t('activerecord.attributes.novation/post.members_education')
+                      %p
+                        = @post.members_education_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.members_education
+                      %h5= t('activerecord.attributes.novation/post.members_motivation')
+                      %p
+                        = @post.members_motivation_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.members_motivation
+                      %h5= t('activerecord.attributes.novation/post.members_execute')
+                      %p
+                        = @post.members_execute
+                .panel
+                  .panel-heading
+                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-3', 'aria-expanded' => 'false' }
+                      = t('activerecord.attributes.novation/post.resource')
+                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                  .collapse#cab4-3
+                    .panel-body
+                      %h5= t('activerecord.attributes.novation/post.resource_commands')
+                      %p
+                        %strong
+                          = t('activerecord.attributes.novation/post.resource_commands')
+                      %p
+                        = @post.resource_commands_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.resource_commands
+                      %h5= t('activerecord.attributes.novation/post.resource_support')
+                      %p
+                        = @post.resource_support_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.resource_support
+                      %h5= t('activerecord.attributes.novation/post.resource_internal')
+                      %p
+                        = @post.resource_internal
+                      %h5= t('activerecord.attributes.novation/post.resource_external')
+                      %p
+                        = @post.resource_external
+                      %h5= t('activerecord.attributes.novation/post.resource_financial')
+                      %p
+                        = @post.resource_financial
+                      %h5=  t('activerecord.attributes.novation/post.resource_competition')
+                      %p
+                        = @post.resource_competition_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.resource_competition
+                .panel
+                  .panel-heading
+                    %a.with_arrow.collapsed{ 'data-toggle' => 'collapse', href: '#cab4-4', 'aria-expanded' => 'false' }
+                      = t('activerecord.attributes.novation/post.confidence')
+                      %i.fa.fa-angle-right.fa-lg.collapse_arrow
+                  .collapse#cab4-4
+                    .panel-body
+                      %h5= t('activerecord.attributes.novation/post.confidence_commands')
+                      %p
+                        = @post.confidence_commands_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.confidence_commands
+                      %h5= t('activerecord.attributes.novation/post.confidence_remove_discontent')
+                      %p
+                        = @post.confidence_remove_discontent_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.confidence_remove_discontent
+                      %h5= t('activerecord.attributes.novation/post.confidence_negative_results')
+                      %p
+                        = @post.confidence_negative_results_bool ? 'Да' : 'Нет'
+                        %br
+                        = @post.confidence_negative_results
+                = render partial: 'shared/content_question', collection: @questions
+            .col-md-6.exp_col.right
+              %a.exp_button
+                %span.arrows-right
+              .post-comments
+                .separator
+                  %hr
+                    .separator_label.text-left
+                      %h4 Обсуждение результатов опроса
+                    .separator_label.pull-right
+                      %a{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
+                        'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                        %span.comments_action свернуть
+                .chat-messages.collapse.in#comments
+                  = render partial: 'shared/comment', collection: @comments
+                = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
+                  url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
+

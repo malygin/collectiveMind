@@ -1,104 +1,89 @@
+- unless show_check_field?(name_controller.to_s + '_intro')
+  = render partial: 'modal_welcome'
+
+- if @user_voter
+  = render partial: 'modal_vote'
+
+- if @project_result
+  = render partial: 'modal_results'
 .stage-info-sort-block
-  #tooltip2_1.btn-group.tooltip1{"data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом."}
+  .dropdown-block.tooltip_m{ title: 'Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом.' }
     %span Фильтр аспектов:
-    %a.dropdown-toggle.select-aspect{"data-toggle" => "dropdown"}
-      %span
-        %span.vert_stripe.back1
-        %span.vert_stripe.back2
-        %span.vert_stripe.back3
+    %a.dropdown-toggle.select-aspect{ 'data-toggle' => 'dropdown' }
+      - (2..4).each do |i|
+        %span.stripe{ class: "stripe-#{i}" }
       %span.text_label Все аспекты
-    %ul.dropdown-menu.index-of-aspects#filter
-      %li{data: {aspect: "*"}}
-        %input#ex2_2_0{:name => "ex2_2", :type => "radio", :value => "0"}/
-        %label.checkox_item{:for => "ex2_2_0"}
+      %span.arrows-icon-dropdown
+    %ul.dropdown-menu#filter
+      %li{ data: { group: 'all' } }
+        %input#ex2_2_0{ name: 'ex2_2', type: 'radio', value: '0' }
+        %label.checkox_item{ for: 'ex2_2_0' }
           %span
-            %span.vert_stripe.back1
-            %span.vert_stripe.back2
-            %span.vert_stripe.back3
+            - (2..4).each do |i|
+              %span.stripe{ class: "stripe-#{i}" }
           %span.text_label Все аспекты
-          - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
-          - if new_posts > 0
+          - if @last_visit_presenter.posts > 0
             %span.cb_doc
-              = new_posts
-          - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
-          - if new_comments > 0
+              = @last_visit_presenter.posts
+          - if @last_visit_presenter.comments > 0
             %span.cb_com
-              = new_comments
-      %li{data: {aspect: "#"}}
-        %input#ex2_2_1{:name => "ex2_2", :type => "radio", :value => "1"}/
-        %label.checkox_item{:for => "ex2_2_1"}
+              = @last_visit_presenter.comments
+
+      %li{ data: { group: '#' } }
+        %input#ex2_2_1{ name: 'ex2_2', type: 'radio', value: '1' }/
+        %label.checkox_item{ for: 'ex2_2_1' }
           %span
-            %span.vert_stripe.back0
-            %span.vert_stripe.back0
-            %span.vert_stripe.back0
+            - (1..3).each do
+              %span.stripe.stripe-1
           %span.text_label Без аспекта
-          - new_posts = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
-          - if new_posts > 0
+          - if @last_visit_presenter.posts > 0
             %span.cb_doc
-              = new_posts
-          - new_comments = @project.discontents_without_aspect.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).count(' DISTINCT "discontent_comments"."id" ')
-          - if new_comments > 0
+              = @last_visit_presenter.posts
+          - if @last_visit_presenter.comments > 0
             %span.cb_com
-              = new_comments
-      - @aspects.each_with_index do |aspect, index|
-        - aspect.subaspects.each do |asp, level|
-          = render partial: 'aspect', object: asp, locals: {level: level}
+              = @last_visit_presenter.comments
 
+      - @aspects.each do |aspect|
+        = render partial: 'aspect', object: aspect, locals: { level: 0 }
 
-        -#%li.checkbox_item{id: "button_aspect_#{aspect.id}", data: {project: @project.id, aspect: ".aspect_#{aspect.id}"}}
-        -#  %input{:id => "ex2_2_#{index+2}",:name => "ex2_2", :type => "radio", :value => "#{index+2}"}/
-        -#  %label.checkox_item{:for => "ex2_2_#{index+2}"}
-        -#    %span
-        -#      %span.color_counter.color_me{style: "background-color: #{aspect.color};"}
-        -#        %span
-        -#          = aspect.aspect_posts.by_status_for_discontent(@project).count
-        -#    %span.text_label
-        -#      = aspect.content
-        -#    - new_posts = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
-        -#    - if new_posts > 0
-        -#      %span.cb_doc
-        -#        = new_posts
-        -#    - new_comments = aspect.aspect_posts.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
-        -#    - if new_comments > 0
-        -#      %span.cb_com
-        -#        = new_comments
+        - aspect.aspects.each do |asp|
+          = render partial: 'aspect', object: asp, locals: { level: 1 }
 
 .stage-info-sort-block
   .row
     %br/
     .col-md-7
       %span.stage-heading
-        Несовершенства
+        = t('show.discontent.title')
         %span#count_discontents
-          ="(#{@posts.count})"
+          (#{@posts.count})
     .col-md-5
+      .pull-right
+        - if @project.can_add?(name_controller) || @project.status == 100
+          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
+            %button.btn.add-button.tooltip_b{ title: 'Добавить несовершенство' }
+              %span.tooltip_m{ title: 'Добавляйте новые несовершенства, связанные с текущей проблемной ситуацией' }
+                = t('techniques.discontent_posts_simple')
+      -#- else
+      -#  = link_to({ action: :show_results, project: @project.id }, remote: true, id: 'show_results') do
+      -#    .results.tooltip_b{ class: "#{show_results?('results_' + name_controller.to_s) ? 'results_blue' : 'results_red'}",
+      -#     title: 'Показать итоги стадии' }
+
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
         %span#sorter
-          %span.sort-1.sort_btn.sprite.sprite-1_2.sort-comment{data: {name: 'sort', desc: 0, type: 'comment'}}
-            - new_comments = @project.discontents.by_status_for_discontent(@project).after_last_visit_comments(last_time_visit_page('discontent')).size
-            - if new_comments > 0
+          %span.sort_btn.sort-comment{ data: { type: 'comment' } }
+            - if @last_visit_presenter.comments > 0
               %span.badge-red
-                = new_comments
-          %span#tooltip2_2.sort-2.sort_btn.sprite.sprite-2_2.tooltip1.sort-date.active{data: {name: 'sort', desc: 0, type: 'date'}, "data-placement" => "bottom", "data-toggle" => "tooltip", "data-trigger" => "manual", :title => "При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства."}
-            - new_posts = @project.discontents.by_status_for_discontent(@project).after_last_visit_posts(last_time_visit_page('discontent')).size
-            - if new_posts > 0
+                = @last_visit_presenter.comments
+          %span.sort_btn.sort-date.active.tooltip_m{ data: { type: 'date' },
+           title: 'При помощи этих фильтров вы можете выбирать, в каком порядке будут отображаться несовершенства.' }
+            - if @last_visit_presenter.posts > 0
               %span.badge-red
-                = new_posts
-
-        - if @project.stage=='2:0'
-          = link_to new_discontent_post_path(@project, type_mechanic: 'simple'), id: 'new_discontent_posts' do
-            %button.btn.add-button
-              %span
-                = t('techniques.discontent_posts_simple')
+                = @last_visit_presenter.posts
 
 .stage-post-block
   .row#tab_aspect_posts
     -#= render partial: 'post_short', collection: @posts
 
 
-
-- if shown_intro('discontent_intro') == ''
-  = render partial: 'popup_welcome'
-- if current_user.can_vote_for(:discontent, @project)
-  = render partial: 'popup_vote'

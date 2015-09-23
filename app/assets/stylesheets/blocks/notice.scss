@@ -1,0 +1,29 @@
+.cab_notice {
+  padding: 20px 15px 20px 30px;
+  position: relative;
+  line-height: 20px;
+  border-radius: 3px;
+  box-shadow: 0 3px 3px 1px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  background: white;
+  span {
+    display: inline-block;
+    margin: 0 auto;
+    width: 38px;
+    height: 38px;
+    background: image-url('smile.png') no-repeat;
+    &.success {
+      background-position: 0 -38px;
+    }
+
+    &.fail {
+      background-position: 0 0;
+    }
+  }
+  .text {
+    display: inline-block;
+    font-size: 13px;
+    color: #666;
+    padding-left:10px;
+  }
+}

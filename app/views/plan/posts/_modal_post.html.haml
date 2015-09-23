@@ -1,0 +1,105 @@
+.modal.fade#modal-post
+  .modal-dialog.modal-1150
+    %button.close{ 'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button' } &times;
+    - if boss?
+      .admin_panel
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :add_score, project: @project.id, id: @post.id }, remote: true, method: :put,
+          class: "btn btn-white btn-xs #{'theme_font_color' if @post.useful}", id: "plus_post_#{@post.id}") do
+          %i.fa.fa-trophy.fa-lg
+        = link_to({ controller: @post.class.name.underscore.pluralize, action: :change_status, project: @project.id, id: @post.id, approve_status: true },
+          remote: true, method: :put, class: "btn btn-white btn-xs #{'theme_font_color' if @post.approve_status}", id: "approve_status_post_#{@post.id}") do
+          %i.fa.fa-bookmark.fa-lg
+    .modal-content
+      %div{ 'data-important' => "#{@post.id}", class: "#{'hide' unless @post.approve_status}" }
+        .important
+          %i.fa.fa-bookmark.fa-2x
+      .modal-header
+        .row
+          .col-md-8
+            %h4
+              = @post.content
+          .col-md-4
+            .likes
+              %a
+                %small{ class: "cc_post_#{@post.id}" }
+                  = @post.comments.count
+                %i.fa.fa-comment
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: false },
+                    remote: true, method: :put, id: "like_post_#{@post.id}", class: 'tooltip_b', title: 'Нравится') do
+                %small{ id: "lk_post_#{@post.id}", class: "lk_post_#{@post.id}" }
+                  = @post.users_pro.count
+                %i.fa.fa-thumbs-up
+              = link_to({ controller: @post.class.name.underscore.pluralize, action: :like, project: @project, id: @post.id, against: true },
+                    remote: true, method: :put, id: "dislike_post_#{@post.id}", class: 'tooltip_b', title: 'Не нравится') do
+                %small{ id: "dlk_post_#{@post.id}", class: "dlk_post_#{@post.id}" }
+                  = @post.users_against.count
+                %i.fa.fa-thumbs-down
+              %small
+                = l(@post.created_at, format: '%d.%m.%Y')
+      .modal-body
+        .post-header
+          .row
+            .col-md-9
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{ 'data-toggle' => 'tab', href: '#tab-1' }
+                    %button.btn
+                      = t('show.plan.desc')
+                %li
+                  %a{ 'data-toggle' => 'tab', href: '#tab-2' }
+                    %button.btn
+                      = t('show.plan.diagram')
+            .col-md-3
+              .pull-right
+                = link_to user_path(@project, @post.user) do
+                  = user_image_tag @post.user.try(:avatar)
+                  = @post.user
+        .tab-content
+          .tab-pane.fade.in.active#tab-1
+            .post-body
+              .row
+                .col-md-6.exp_col.left
+                  %a.exp_button
+                    %span.arrows-left
+                  .post-content
+                    - @post.post_novations.first.try(:attributes_for_form).try(:each) do |link, attributes|
+                      .panel
+                        .panel-heading
+                          %a.with_arrow{ class: "#{'collapsed' if link != :project}", 'aria-expanded' => 'false',
+                            'data-toggle' => 'collapse', href: "#cab4-#{link}" }
+                            = t("activerecord.attributes.plan/post_novation.#{link}")
+                            %i.fa.fa-angle-right.fa-lg.collapse_arrow
+
+                        .collapse{ id: "cab4-#{link}", class: "#{'in' if link == :project}" }
+                          .panel-body
+                            - attributes.each do |attribute, bool|
+                              - if (bool == -1 || bool == true) && @post.post_novations.first.send(attribute).present?
+                                %h5
+                                  = t("activerecord.attributes.plan/post_novation.#{attribute}")
+                                %p
+                                  = @post.post_novations.first.send(attribute)
+
+                .col-md-6.exp_col.right
+                  %a.exp_button
+                    %span.arrows-right
+                  .post-comments
+                    .separator
+                      %hr
+                        .separator_label.text-left
+                          %h4 Обсуждение результатов опроса
+                        .separator_label.pull-right
+                          %a.theme_font_color{ class: "#{'font_grey' if @comments.count == 0}", 'data-original-action' => 'свернуть', 'data-new-action' => 'развернуть',
+                            'aria-expanded' => 'false', 'data-toggle' => 'collapse', href: '#comments' }
+                            %span.comments_action свернуть
+                    .chat-messages.collapse.in#comments
+                      = render partial: 'shared/comment', collection: @comments
+                    = render partial: 'shared/comment_form', locals: { comment: @comment, post: @post,
+                      url_link: url_for(controller: @post.class.name.underscore.pluralize, action: 'add_comment') }
+
+          .tab-pane.fade#tab-2
+            .post-body
+              .row
+                .col-md-12.col-sm-12
+                  #workSpace
+
+                  = render 'shared/gantt_template'
