@@ -230,7 +230,7 @@ task "resque:scheduler_setup" => :environment
 namespace :resque do
   task :setup do
     require 'resque'
-    require 'resque_scheduler'
+    # require 'resque_scheduler'
     require 'resque/scheduler'
     # Resque.redis = 'localhost:6379'
     # ENV['QUEUE'] = '*'
