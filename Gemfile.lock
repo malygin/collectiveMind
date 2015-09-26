@@ -112,7 +112,7 @@ GEM
     capybara-screenshot (1.0.9)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.5.0)
+    capybara-webkit (1.6.0)
       capybara (>= 2.3.0, < 2.5.0)
       json
     celluloid (0.16.0)
@@ -595,7 +595,7 @@ DEPENDENCIES
   bullet
   capybara
   capybara-screenshot
-  capybara-webkit
+  capybara-webkit (>= 1.6.0)
   cloudinary
   coffee-rails
   coffeelint

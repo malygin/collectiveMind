@@ -101,7 +101,7 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'database_rewinder'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', '>=1.6.0'
   gem 'capybara-screenshot'
   gem 'headless'
   gem 'simplecov'
