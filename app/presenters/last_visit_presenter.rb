@@ -42,7 +42,7 @@ class LastVisitPresenter
   def last_time_visit_page(type_event = 'visit_save', post = nil)
     post_id = post ? "/#{post.id}" : ''
     notice = @user.loggers.by_type_event(type_event).by_project(@project.id).by_format('html')
-             .where('body = ?', "/project/#{@project.id}/#{@controller}" + post_id).order(created_at: :desc).first
+             .where('body = ?', "/project/#{@project.id}/#{@controller}" + post_id).first
     notice ? notice.created_at : '2000-01-01 00:00:00'
   end
 end

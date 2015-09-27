@@ -22,7 +22,7 @@ json.array! @posts do |item|
     json.id concept.id
     json.content trim_content(concept.content, 30)
   end
-  json.comments item.comments.preview do |comment|
+  json.comments item.comments.includes(:user).preview do |comment|
     json.id comment.id
     json.date Russian.strftime(comment.created_at, '%k:%M %d.%m.%y')
     json.user comment.user.to_s

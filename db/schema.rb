@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150816121207) do
+ActiveRecord::Schema.define(version: 20150927191300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,14 +78,14 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "position"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "project_id"
     t.text     "short_desc"
-    t.integer  "status",               default: 0
+    t.integer  "status",                           default: 0
     t.integer  "aspect_id"
-    t.string   "color"
-    t.string   "short_name"
+    t.string   "color",                limit: 255
+    t.string   "short_name",           limit: 255
     t.text     "detailed_description"
     t.boolean  "approve_status"
     t.boolean  "useful"
@@ -439,10 +439,9 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.integer  "user_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.boolean  "ready_to_concept",       default: false
-    t.boolean  "ready_to_plan",          default: false
     t.boolean  "owner",                  default: false
     t.integer  "type_user"
+    t.boolean  "ready_to_concept",       default: false
     t.integer  "aspect_posts_score",     default: 0
     t.integer  "discontent_posts_score", default: 0
     t.integer  "concept_posts_score",    default: 0
@@ -450,6 +449,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.integer  "plan_posts_score",       default: 0
     t.integer  "estimate_posts_score",   default: 0
     t.integer  "score",                  default: 0
+    t.boolean  "ready_to_plan",          default: false
   end
 
   add_index "core_project_users", ["project_id", "user_id"], name: "index_core_project_users_on_project_id_and_user_id", using: :btree
@@ -461,8 +461,8 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.text     "desc"
     t.text     "short_desc"
     t.integer  "status",                      default: 1
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "url_logo",        limit: 255
     t.integer  "type_access"
     t.integer  "position",                    default: 0
@@ -472,7 +472,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.date     "date_start"
     t.date     "date_end"
     t.text     "completion_text"
-    t.string   "stage",                       default: "0"
+    t.string   "stage",                       default: "1:0"
     t.integer  "project_type_id"
     t.text     "introduction"
   end
@@ -503,6 +503,22 @@ ActiveRecord::Schema.define(version: 20150816121207) do
   add_index "core_user_awards", ["award_id"], name: "index_core_user_awards_on_award_id", using: :btree
   add_index "core_user_awards", ["project_id"], name: "index_core_user_awards_on_project_id", using: :btree
   add_index "core_user_awards", ["user_id"], name: "index_core_user_awards_on_user_id", using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "discontent_comment_votings", force: :cascade do |t|
     t.integer  "user_id"
@@ -611,7 +627,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.boolean  "discuss_status"
     t.boolean  "useful"
     t.boolean  "approve_status"
-    t.boolean  "anonym"
+    t.boolean  "anonym",             default: false
     t.text     "what"
   end
 
@@ -849,8 +865,8 @@ ActiveRecord::Schema.define(version: 20150816121207) do
   end
 
   add_index "journal_loggers", ["project_id"], name: "index_journal_loggers_on_project_id", using: :btree
+  add_index "journal_loggers", ["user_id", "project_id", "type_event"], name: "index_journal_loggers_on_user_id_and_project_id_and_type_event", using: :btree
   add_index "journal_loggers", ["user_id"], name: "index_journal_loggers_on_user_id", using: :btree
-  add_index "journal_loggers", ["user_informed"], name: "index_journal_loggers_on_user_informed", using: :btree
 
   create_table "journal_mailers", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -873,7 +889,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
   create_table "journals", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type_event",    limit: 255
-    t.text     "body"
+    t.string   "body",          limit: 255
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "project_id"
@@ -905,7 +921,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
   add_index "moderator_messages", ["user_id"], name: "index_moderator_messages_on_user_id", using: :btree
 
   create_table "news", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.text     "body"
     t.integer  "project_id"
     t.integer  "user_id"
@@ -992,6 +1008,7 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.text     "content"
+    t.boolean  "approve_status"
     t.text     "project_change"
     t.text     "project_goal"
     t.text     "project_members"
@@ -1011,7 +1028,6 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.text     "confidence_commands"
     t.text     "confidence_remove_discontent"
     t.text     "confidence_negative_results"
-    t.boolean  "approve_status"
     t.boolean  "project_change_bool"
     t.boolean  "project_goal_bool"
     t.boolean  "project_members_bool"
@@ -1224,14 +1240,14 @@ ActiveRecord::Schema.define(version: 20150816121207) do
   add_index "plan_votings", ["user_id"], name: "index_plan_votings_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.integer  "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seed_migration_data_migrations", force: :cascade do |t|
-    t.string   "version"
+    t.string   "version",     limit: 255
     t.integer  "runtime"
     t.datetime "migrated_on"
   end
@@ -1345,9 +1361,9 @@ ActiveRecord::Schema.define(version: 20150816121207) do
     t.datetime "last_seen_news"
     t.boolean  "chat_open",                          default: false
     t.datetime "last_seen_chat_at"
-    t.string   "skype",                  limit: 255
-    t.string   "phone",                  limit: 255
     t.string   "locale",                 limit: 255
+    t.string   "skype"
+    t.string   "phone"
     t.string   "avatar"
   end
 

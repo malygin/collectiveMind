@@ -64,8 +64,8 @@ module ApplicationHelper
   # последняя дата захода на страницу
   def last_time_visit_page(stage = model_controller, type_event = 'visit_save', post = nil)
     post_id = post ? "/#{post.id}" : ''
-    notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, user_id: current_user.id, request_format: 'html')
-             .where('body = ?', "/project/#{@project.id}/#{stage}/posts" + post_id).order(created_at: :desc).first
+    notice = current_user.loggers.where(type_event: type_event, project_id: @project.id, request_format: 'html')
+             .where('body = ?', "/project/#{@project.id}/#{stage}/posts" + post_id).first
     notice ? notice.created_at : '2000-01-01 00:00:00'
   end
 
@@ -77,7 +77,7 @@ module ApplicationHelper
   # возвращаем true, если есть непрочитанные новости эксперта
   def unread_expert_news?
     count_news_log = current_user.loggers.select(' DISTINCT "journal_loggers"."first_id" ')
-                     .where(type_event: 'expert_news_read', project_id: @project.id, user_id: current_user.id).count
+                     .where(type_event: 'expert_news_read', project_id: @project.id).count
     @project.news.count - count_news_log > 0
   end
 
