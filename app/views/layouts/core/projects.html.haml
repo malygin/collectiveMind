@@ -51,9 +51,9 @@
               .divider5
               = f.email_field :email, placeholder: 'Email'
               = f.password_field :password, placeholder: 'Пароль'
-              -#.form-group
-              -#  = f.label :remember_me, 'Запомнить меня'
-              -#  = f.check_box :remember_me
+              .form-group
+                = f.check_box :remember_me, style: 'width: 30px;margin-left:10px;'
+                = f.label :remember_me, 'Запомнить меня'
               %button.btn.btn-lg.btn-block.btn-danger{ id: 'sign_in', type: 'submit' }
                 = t('menu.sign_in')
               -#.text-center

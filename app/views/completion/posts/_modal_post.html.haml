@@ -34,11 +34,11 @@
                     %li.active
                       %a{ 'data-toggle' => 'tab', href: '#tab-1' }
                         %button.btn.btn_cab_mod.type2.btn_toggle.btn_reset.active
-                          Описание проектного предложения
+                          = t('show.plan.desc')
                     %li
                       %a{ 'data-toggle' => 'tab', href: '#tab-2' }
                         %button.btn.btn_cab_mod.type2.warm_sandy.btn_toggle.btn_reset.active
-                          График реализации проекта
+                          = t('show.plan.diagram')
               .col-md-3
                 .popup-post-block.pull-right
                   = link_to user_path(@project, @post.user) do

@@ -9,7 +9,7 @@
         %li.tooltip_b{ class: "#{'active' unless cabinet? || rating? || profile?}", title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
           = link_to t('menu.open_procedure'), current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
-          = link_to t('menu.open_cabinet'), send("new_#{@project.current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
+          = link_to t('menu.open_cabinet'), send("new_#{current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
           id: 'open_cabinet', class: 'tooltip_b', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
           = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,

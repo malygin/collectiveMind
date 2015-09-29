@@ -171,6 +171,8 @@ $colors_imperf_codes = [
       $('.unchecked_items').append(item.first())
       ch_its--
       unch_its++
+    $('.ch_lenght').text '(' + ch_its + ')'
+    $('.unch_lenght').text '(' + unch_its + ')'
 
 @like_counter = (id, against, type_post) ->
   against_type = if against == 'true' then 'dlk' else 'lk'

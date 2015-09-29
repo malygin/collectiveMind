@@ -2,9 +2,12 @@
   .container
     .col-md-5
       .border-block
-        = link_to send("#{@project.current_stage_type}_path", @project), id: "go_to_#{@project.current_stage_type}",
+        = link_to send("#{current_stage_type}_path", @project), id: "go_to_#{current_stage_type}",
               role: 'button', class: 'btn arrow_left' do
-          #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
+          - if @project.status == 100
+            #{number_current_stage} СТАДИЯ: #{name_current_stage}
+          - else
+            #{@project.main_stage} СТАДИЯ: #{@project.current_stage_name}
 
     .col-md-7
       .border-block
@@ -14,8 +17,9 @@
           = link_to current_user, user_path(@project, current_user)
         .info
           %i.fa.fa-info-circle.fa-lg.open_sticker{ 'data-for' => '.sticker' }
-          .sticker{ style: ('display: none;' if show_check_field?("#{@project.current_stage_type}_cabinet_sticker")) }
-            = t("cabinet.#{@project.current_stage_type}_sticker").try(:html_safe)
-            = link_to send("check_field_#{@project.current_stage_type}_path", @project, check_field: "#{@project.current_stage_type}_cabinet_sticker",
+          .sticker{ style: ('display: none;' if show_check_field?("#{current_stage_type}_cabinet_sticker")) }
+            = t("cabinet.#{current_stage_type}_sticker").try(:html_safe)
+            = link_to send("check_field_#{current_stage_type}_path", @project, check_field: "#{current_stage_type}_cabinet_sticker",
               status: true), method: :put, remote: true, id: 'cabinet_close_sticker' do
               %i.fa.fa-times.fa-lg.sticker_close{ 'data-for' => '.sticker' }
+

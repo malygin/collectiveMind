@@ -28,6 +28,7 @@ DiscontentCollectionView = Backbone.View.extend
     this.collection.forEach(this.addOne, this)
     this.$container = $('#tab_aspect_posts').shuffle
       itemSelector: '.md-post-block'
+    colors_for_content()
     return this
 
   addOne: (discontent)->

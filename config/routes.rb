@@ -107,7 +107,7 @@ CollectiveMind::Application.routes.draw do
     end
 
     namespace :completion do
-      resources :posts
+      posts_routes
     end
 
     # scope '/stage/:stage' do

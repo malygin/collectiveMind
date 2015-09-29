@@ -55,6 +55,8 @@ module PostCabinet
 
   def check_stage_for_cabinet
     #  check if user reload url for old-stage cabinet, and procedure on new stage - redirect to new stage
+    # редирект на просмотр проектов, если открываем кабинет на 6 или 7 стадии
+    return redirect_to user_content_plan_posts_path if [:estimate_posts, :completion_posts].include?(params[:controller].sub('/', '_').to_sym)
     return if @project.current_stage_type == params[:controller].sub('/', '_').to_sym || action_name == 'user_content' || @project.status == 100
     redirect_to url_for(params.merge(controller: '/' + @project.current_stage_type.to_s.sub('_', '/')))
   end

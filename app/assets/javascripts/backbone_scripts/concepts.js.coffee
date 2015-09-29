@@ -28,6 +28,7 @@ ConceptCollectionView = Backbone.View.extend
     this.collection.forEach(this.addOne, this)
     this.$container = $('#tab_dispost_concepts').shuffle
       itemSelector: '.md-post-block'
+    colors_for_content()
     return this
 
   addOne: (concept)->

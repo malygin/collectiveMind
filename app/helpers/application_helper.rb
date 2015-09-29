@@ -11,6 +11,16 @@ module ApplicationHelper
     name_controller.to_s.chomp('_posts')
   end
 
+  def current_stage_type_for_cabinet_url
+    return name_controller.to_s.downcase.singularize if @project.status == 100
+    @project.current_stage_type_for_cabinet_url
+  end
+
+  def current_stage_type
+    return name_controller if @project.status == 100
+    @project.current_stage_type
+  end
+
   ##
   # Хелперовский метод, вернет `true` если мы в кабинете
   # т.е. если мы на странице project_user или создаем контент
@@ -48,6 +58,13 @@ module ApplicationHelper
   def number_current_stage
     Core::Project::STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage]
+    end
+    nil
+  end
+
+  def name_current_stage
+    Core::Project::STAGES.each do |num_stage, stage|
+      return stage[:name] if name_controller == stage[:type_stage]
     end
     nil
   end

@@ -11,12 +11,12 @@
             .col-md-2
               .cab-menu
                 .add-techniq
-                  - @project.techniques.by_stage(@project.current_stage_type).each do |technique|
+                  - @project.techniques.by_stage(current_stage_type).each do |technique|
                     = link_to t("techniques.#{technique.name}"), send("new_#{technique.stage.to_s.downcase.singularize}_path", @project.id,
                     type_mechanic: technique.code), class: 'btn', id: "new_#{technique.name}"
                 %ul.menu
                   %li{ class: "#{'active' if action_name == 'user_content' && params[:edit_profile].nil?}" }
-                    = link_to send("user_content_#{@project.current_stage_type}_path", @project.id), class: 'btn', id: "user_content_#{@project.current_stage_type}" do
+                    = link_to send("user_content_#{current_stage_type}_path", @project.id), class: 'btn', id: "user_content_#{current_stage_type}" do
                       = t('menu.content')
                   %li{ class: "#{'active' if params[:edit_profile]}" }
                     %a.btn#edit_profile{ 'data-toggle' => 'tab', href: '#user_profile' }

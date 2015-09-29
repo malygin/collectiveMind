@@ -1,6 +1,5 @@
 class Core::ProjectUsersController < ProjectsController
   before_action :journal_data, only: [:user_analytics, :moderator_analytics, :show]
-  before_filter :prime_admin_authenticate, only: [:create, :destroy]
   before_filter :news_data
 
   def show
@@ -32,7 +31,6 @@ class Core::ProjectUsersController < ProjectsController
   end
 
   def moderator_analytics
-    prime_admin_authenticate
     @count_people = @project.count_people('for_moderators').to_json
     @average_time = @project.average_time('for_moderators').to_json
     @count_pages = @project.count_pages('for_moderators')

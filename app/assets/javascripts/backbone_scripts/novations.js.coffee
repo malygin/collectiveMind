@@ -27,6 +27,7 @@ NovationCollectionView = Backbone.View.extend
     this.collection.forEach(this.addOne, this)
     this.$container = $('#tab_concept_novations').shuffle
       itemSelector: '.md-post-block'
+    colors_for_content()
     return this
 
   addOne: (novation)->

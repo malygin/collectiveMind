@@ -35,4 +35,9 @@ class Aspect::Post < ActiveRecord::Base
   def to_s
     content
   end
+
+  def color
+    color = read_attribute(:color)
+    color.present? ? color : '#9d9d9d'
+  end
 end
