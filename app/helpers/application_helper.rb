@@ -17,8 +17,15 @@ module ApplicationHelper
   end
 
   def current_stage_type
-    return name_controller if @project.status == 100
+    return name_controller if @project.status == 100 && only_stages?
     @project.current_stage_type
+  end
+
+  def only_stages?
+    Core::Project::STAGES.each do |_num_stage, stage|
+      return true if name_controller == stage[:type_stage]
+    end
+    false
   end
 
   ##
@@ -59,14 +66,14 @@ module ApplicationHelper
     Core::Project::STAGES.each do |num_stage, stage|
       return num_stage if name_controller == stage[:type_stage]
     end
-    nil
+    @project.main_stage
   end
 
   def name_current_stage
-    Core::Project::STAGES.each do |num_stage, stage|
+    Core::Project::STAGES.each do |_num_stage, stage|
       return stage[:name] if name_controller == stage[:type_stage]
     end
-    nil
+    @project.current_stage_name
   end
 
   def can_edit_content?
