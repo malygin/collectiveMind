@@ -9,8 +9,12 @@
         %li.tooltip_b{ class: "#{'active' unless cabinet? || rating? || profile?}", title: "#{'Вернуться в процедуру' if cabinet? || rating? || profile?}" }
           = link_to t('menu.open_procedure'), current_stage_url(@project), id: 'open_procedure'
         %li{ class: "#{'active' if cabinet?}" }
-          = link_to t('menu.open_cabinet'), send("new_#{current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
-          id: 'open_cabinet', class: 'tooltip_b', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
+          - if @project.can_add?(name_controller)
+            = link_to t('menu.open_cabinet'), send("new_#{current_stage_type_for_cabinet_url}_path", @project.id, type_mechanic: 'simple'),
+            id: 'open_cabinet', class: 'tooltip_b', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
+          - else
+            = link_to t('menu.open_cabinet'), send("user_content_#{current_stage_type}_path", @project.id),
+            id: 'open_cabinet', class: 'tooltip_b', title: 'Создавайте новые материалы, просматривайте старые и следите за своим рейтингом'
         %li
           = link_to "/project/#{@project.id}/users/#{current_user.id}/journal_clear", method: :put, remote: true,
           class: 'has_circle drop_opener tooltip_b', id: 'clear_my_journals', 'data-dd' => 'dd_2', title: 'Следите за тем, кому понравились ваши комментарии' do
