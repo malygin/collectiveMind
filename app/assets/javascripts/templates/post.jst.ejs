@@ -1,5 +1,5 @@
-<div id="<%= getStageByUrl() %>_post_<%= id %>" class="col-md-6 md-post-block" data-groups="[<%= post_classes %>]"
-     data-id="id-<%= id %>" data-date="<%= sort_date %>"
+<div id="<%= getStageByUrl() %>_post_<%= id %>" class="<%= typeof type_aspects !== 'undefined' ? 'col-md-12' : 'col-md-6' %> md-post-block"
+     data-groups="[<%= typeof post_classes !== 'undefined' ? post_classes : '' %>]" data-id="id-<%= id %>" data-date="<%= sort_date %>"
      data-comment="<%= sort_comment %>">
     <div class="post_full">
         <% if(admin_panel) { %>
@@ -50,6 +50,10 @@
                 </div>
             </div>
             <div class="post_footer">
+                <% if(typeof type_aspects !== 'undefined' || getStageByUrl() == 'plan') { %>
+                <div class="tags_block"></div>
+                <% } %>
+
                 <% if(typeof aspects !== 'undefined') { %>
                 <div class="tags_block">
                     <div class="title">Аспекты</div>
@@ -88,7 +92,7 @@
                 <% } %>
                 <% if(typeof concepts !== 'undefined')  { %>
                 <div class="tags_block">
-                    <div class="title">Аспекты</div>
+                    <div class="title">Идеи</div>
 
                     <div id="stripe<%= id %>" class="post-theme">
 

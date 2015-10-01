@@ -15,18 +15,16 @@
             title: 'Показать итоги стадии' }
       .sort-block.pull-right
         %span.sort-label Сортировать по новым:
-        = link_to aspect_posts_path(@project, sort_rule: 'sort_by_comments') do
-          .sort_btn.sort-comment.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_comments'}",
-          title: 'Сортировать по новым комментариям' }
+        %span#sorter
+          %span.sort_btn.sort-comment.tooltip_b{ data: { type: 'comment' }, title: 'Сортировать по новым комментариям' }
             - if @last_visit_presenter.comments > 0
               %span.badge-red
                 = @last_visit_presenter.comments
-        = link_to aspect_posts_path(@project, sort_rule: 'sort_by_date') do
-          .sort_btn.sort-date.tooltip_b{ class: "#{'active' if params[:sort_rule] == 'sort_by_date'}",
-          title: 'Сортировать по новым аспектам' }
+          %span.sort_btn.sort-date.active.tooltip_b{ data: { type: 'date' }, title: 'Сортировать по новым аспектам' }
             - if @last_visit_presenter.posts > 0
               %span.badge-red
                 = @last_visit_presenter.posts
+
 %hr
 .stage-post-block
   .row
@@ -39,9 +37,9 @@
         = t('show.aspect.other')
         (#{@project.other_aspects.size})
   .row.tooltip_m_t{ title: 'Знакомьтесь с предложениями других участников, комментируйте и развивайте их' }
-    .col-md-6.combined_border.right
-      - @main_aspects.each do |aspect|
-        = render partial: 'post_short', object: aspect
-    .col-md-6.combined_border.left
-      - @other_aspects.each do |aspect|
-        = render partial: 'post_short', object: aspect
+    .col-md-6.combined_border.right#tab_main_aspects
+      -#- @main_aspects.each do |aspect|
+      -#  = render partial: 'post_short', object: aspect
+    .col-md-6.combined_border.left#tab_other_aspects
+      -#- @other_aspects.each do |aspect|
+      -#  = render partial: 'post_short', object: aspect

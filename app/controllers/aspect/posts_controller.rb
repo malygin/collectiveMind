@@ -3,12 +3,12 @@ class Aspect::PostsController < PostsController
   before_action :user_vote, only: [:index]
 
   def index
-    @main_aspects = @project.get_main_aspects_sorted_by params[:sort_rule]
-    @other_aspects = @project.get_other_aspects_sorted_by params[:sort_rule]
+    @main_aspects = @project.aspects_for_discussion.created_order
+    @other_aspects = @project.other_aspects.created_order
     @questions_progress, @questions_progress_all = aspect_answers_count(@project)
     @last_visit_presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)
-    respond_to :html
+    respond_to :html, :json
   end
 
   def answer_question

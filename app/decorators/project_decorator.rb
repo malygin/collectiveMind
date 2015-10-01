@@ -65,26 +65,6 @@ class ProjectDecorator
     send("#{current_stage_type}_for_vote").size - user.send("voted_#{current_stage_type}").by_project(id).size
   end
 
-  def get_other_aspects_sorted_by(sort_rule)
-    if sort_rule == 'sort_by_comments'
-      other_aspects.sort_comments
-    elsif sort_rule == 'sort_by_date'
-      other_aspects.created_order
-    else
-      other_aspects
-    end
-  end
-
-  def get_main_aspects_sorted_by(sort_rule)
-    if sort_rule == 'sort_by_comments'
-      aspects_for_discussion.sort_comments
-    elsif sort_rule == 'sort_by_date'
-      aspects_for_discussion.created_order
-    else
-      aspects_for_discussion
-    end
-  end
-
   # move to next stage if it '1:2' and we haven't '1:3' then go to '2:0', unless go to '1:3
   def go_to_next_stage
     if stages[main_stage][:substages] && stages[main_stage][:substages][sub_stage + 1]

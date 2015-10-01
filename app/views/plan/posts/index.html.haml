@@ -34,7 +34,7 @@
 
 .stage-post-block
   .row#tab_novation_plans
-    = render partial: 'post_short', collection: @posts
+    -#= render partial: 'post_short', collection: @posts
 
 
 - unless show_check_field?(name_controller.to_s + '_intro')
