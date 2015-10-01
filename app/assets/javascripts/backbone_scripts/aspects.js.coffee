@@ -53,7 +53,7 @@ OtherAspectCollectionView = Backbone.View.extend
     $('#tab_other_aspects').shuffle 'sort', opts
 
 # only for aspect url
-if isProcedurePage("aspect/posts")
+if isProcedurePage("aspect/posts") && $('#tab_other_aspects').length > 0
   dc = new AspectCollection
   dc.fetch
     success: (col,res)->

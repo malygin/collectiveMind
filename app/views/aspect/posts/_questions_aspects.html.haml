@@ -20,12 +20,12 @@
 
     .slider-wrapper
       .slider-nav
-        %a.slider-left
+        %a.slider-btn.slider-left{ data: { type: 'left' } }
           %i.fa.fa-caret-left
-        %a.slider-right
+        %a.slider-btn.slider-right{ data: { type: 'right' } }
           %i.fa.fa-caret-right
       .slider-outer
-        %ul.slider-inner#first-stage-slider{ data: { project: @project.id } }
+        %ul.slider-inner#first-stage-slider{ data: { project: @project.id }, style: 'padding-left:0;' }
           %li.active{ style: 'border-top-color: #eac85e;' }
             %a{ id: 'tab_intro', 'data-toggle' => 'tab', href: '#tab_aspect_0' }
               = t('stages.aspects_title')

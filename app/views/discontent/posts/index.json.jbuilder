@@ -23,10 +23,10 @@ json.array! @posts do |item|
     json.color aspect.color
     json.content aspect.content
   end
-  json.comments item.comments.preview do |comment|
-    json.id comment.id
-    json.date Russian.strftime(comment.created_at, '%k:%M %d.%m.%y')
-    json.user comment.user.to_s
-    json.content comment.content
-  end
+  # json.comments item.comments.preview do |comment|
+  #   json.id comment.id
+  #   json.date Russian.strftime(comment.created_at, '%k:%M %d.%m.%y')
+  #   json.user comment.user.to_s
+  #   json.content comment.content
+  # end
 end

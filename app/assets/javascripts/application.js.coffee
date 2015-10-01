@@ -61,6 +61,7 @@ $ ->
   init_cabinet()
   vote_scripts()
   notifications()
+  slider_scripts()
 
   $("form#auth-form1").bind "ajax:success", (e, data, status, xhr) ->
     $('#error_explanation')
