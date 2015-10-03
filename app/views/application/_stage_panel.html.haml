@@ -19,9 +19,15 @@
                 = num_stage
 
     .col-md-4
-      .border-block.help_icon.help_popover.tooltip_m{ class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
-            data: { project: "#{@project.id}", stage: "#{name_controller.to_s.gsub('_posts', '')}", status: "#{current_stage_popover_status}",
-            text: t(current_stage_popover_status) }, title: 'Читайте инструкции по работе на этом этапе стадии' }
+      %button.border-block.help_icon.help_popover{ type: 'button', class: "#{show_check_field?(current_stage_popover_status) ? 'shown_intro' : ''}",
+            data: { toggle: 'popover', html: 'true', container: 'body', placement: 'bottom',
+            template: '<div class="popover help_popover_content" role="tooltip"><div class="arrow"></div> |
+            <a data-remote="true" rel="nofollow" id="close_help_popover" data-method="put" href="/project/' + |
+            @project.id.to_s + '/' + name_controller.to_s.gsub('_posts', '') + '/posts/check_field?check_field=' + |
+            current_stage_popover_status + '&status=true"> |
+            <i class="fa fa-times cl_btn font_white" onclick="$(\'.help_popover\').popover(\'hide\');"></i></a> |
+            <div class="popover-content font_white"></div></div>', |
+            content: t(current_stage_popover_status) } }
       .border-block.progress_block
         = render partial: 'application/progress_bar'
     - if show_stage_subbar?

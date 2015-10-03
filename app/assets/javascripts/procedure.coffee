@@ -14,6 +14,13 @@
   # аутосайз полей
   $('textarea').not('.without_autosize').autosize()
 
+  $('[data-toggle="popover"]').popover()
+
+  $('.help_popover').on 'show.bs.popover', ->
+    $(this).addClass 'shown'
+  $('.help_popover').on 'hide.bs.popover', ->
+    $(this).removeClass 'shown'
+
   # sort button active
   $('.sort_btn').click ->
     $('.sort_btn').toggleClass 'active'

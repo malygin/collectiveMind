@@ -78,7 +78,7 @@ module ApplicationHelper
 
   def can_edit_content?
     name_controller == @project.current_stage_type && @project.stages[@project.main_stage][:substages] &&
-        @project.stages[@project.main_stage][:substages][@project.sub_stage][:status] == :add
+      @project.stages[@project.main_stage][:substages][@project.sub_stage][:status] == :add
   end
 
   # Показывалось ли уже?
