@@ -92,7 +92,7 @@ describe 'Aspect ' do
       visit aspect_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content t('show.aspect.title')
       expect(page).to have_content "#{t('show.aspect.main')} (2)"
       expect(page).to have_content "#{t('show.aspect.other')} (0)"
@@ -158,7 +158,7 @@ describe 'Aspect ' do
       visit aspect_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content t('show.aspect.title')
       expect(page).to have_content "#{t('show.aspect.main')} (2)"
       expect(page).to have_content "#{t('show.aspect.other')} (0)"

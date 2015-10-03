@@ -52,7 +52,7 @@ describe 'Plan ' do
       visit plan_posts_path(project)
     end
 
-    it 'have content' do
+    it 'have content', js: true do
       expect(page).to have_content "#{t('show.plan.title')} (2)"
       expect(page).to have_content @plan1.content
       expect(page).to have_content @plan2.content
