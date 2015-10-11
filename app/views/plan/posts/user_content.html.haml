@@ -3,20 +3,19 @@
     .post_block
       .post_body
         .post_poster
-          .cab_folder{ class: (post_short.published? ? 'back3' : 'back4') }
-            %span.percentage.font_white.bold.text-center 32%
-          %p.time.text-center
+          .cab_folder{ class: (post_short.published? ? 'case_b' : 'case_r') }
+            32%
+          %p
             = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
-          .what
+          .about
             = post_short.content
             - if current_user?(post_short.user) && can_edit_content?
-              %span.right_icon
+              .edit-icon
                 = link_to edit_plan_post_path(@project, post_short), id: "edit_plan_#{post_short.id}" do
                   %i.glyphicon.glyphicon-pencil
                 = link_to plan_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_plan') }, id: "destroy_plan_#{post_short.id}" do
                   %i.glyphicon.glyphicon-trash
-          .about
             = link_to plan_post_path(@project, post_short), remote: true, id: "show_plan_#{post_short.id}" do
               %span.right_icon
                 %i.fa.fa-angle-right

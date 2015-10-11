@@ -69,12 +69,13 @@
     border-radius: 3px;
     .btn {
       border-radius: 4px;
-      margin-right: 6px;
+      margin-right: 10px;
       font-size: 16px;
       color: #fff;
       border: none;
     }
     .btn-group > a.btn {
+      border-radius: 4px!important;
       @include child-b-color;
     }
     img {

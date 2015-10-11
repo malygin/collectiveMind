@@ -48,11 +48,11 @@ remote: true do |f|
                   = concept.title
       %hr
       .pull-right
-        = f.submit 'Опубликовать', id: "publish_#{@novation.id}", class: 'btn add-button type2', name: 'novation_post[published]'
-        = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button type2'
+        = f.submit 'Опубликовать', id: "publish_#{@novation.id}", class: 'btn add-button', name: 'novation_post[published]'
+        = f.submit t("form.#{action_name}"), id: 'send_post_novation', class: 'btn add-button'
         - if @novation.persisted?
           = link_to 'Удалить', novation_post_path(@project, @novation), method: :delete, data: { confirm: t('confirm.delete_novation') },
-          id: "destroy_novation_#{@novation.id}", class: 'btn add-button type2 del'
+          id: "destroy_novation_#{@novation.id}", class: 'btn add-button del'
 
 .modal.fade#modal-cabinet4-1
   .modal-dialog.modal-relation.modal-1030

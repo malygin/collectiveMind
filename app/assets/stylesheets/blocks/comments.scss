@@ -8,15 +8,17 @@
     .answers_subblock {
       border-left-color: nth($base_colors, $i);
     }
-    .comment_add .btn{
+    .comment_add .btn {
       background: white;
       color: nth($base_colors, $i);
     }
   }
 }
-.chat-messages{
-  margin-bottom:15px;
+
+.chat-messages {
+  margin-bottom: 15px;
 }
+
 .comment {
   padding: 7px 7px 10px 7px;
   margin: 3px 9px;
@@ -26,6 +28,7 @@
     }
     .user {
       font-weight: 700;
+      color: $dark_grey;
       img {
         margin-right: 10px;
         @include circle40;
@@ -68,11 +71,11 @@
   textarea {
     width: 85%;
     height: 28px;
-    float:left;
+    float: left;
     box-sizing: content-box;
     line-height: 28px;
     padding-left: 8px;
-    margin-right:10px;
+    margin-right: 10px;
     border: 1px solid #d9d7d9;
     border-radius: 3px;
     @include input-placeholder {
@@ -88,8 +91,8 @@
 }
 
 .answers_subblock {
-  border-left:2px solid;
-  margin:10px 0 6px 0;
+  border-left: 2px solid;
+  margin: 10px 0 6px 0;
 }
 
 ///Comments in hover panel

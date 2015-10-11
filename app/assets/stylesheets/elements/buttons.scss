@@ -175,53 +175,16 @@
   line-height: 28px;
 }
 
-.btn_cab_mod.type2 {
-  margin: 0px;
-  margin-right: 10px;
-  padding: 0 22px;
-  border-radius: 10px;
-  font-size: 12px;
-  line-height: 28px;
-}
-
-.btn_cab_mod.active {
-  cursor: default;
-}
-
 .add-button.del {
   background: #787880;
 }
 
 .add-button {
   color: #fff;
-  padding: 0 10px 3px;
+  padding: 2px 13px;
   line-height: 26px;
   margin-left: 15px;
   border: 0;
-}
-
-.add-button.type2 {
-  padding: 0 20px 1px;
-  font-size: 13px;
-}
-
-.add-button:hover, .add-button:focus {
-  color: #fff;
-}
-
-p .add-button {
-  margin-left: 0;
-  padding: 0 17px 3px;
-  line-height: 30px;
-}
-
-p .add-button + .add-button {
-  margin-left: 21px;
-}
-
-.add-button span {
-  margin-right: 9px;
-  font-size: 16px;
 }
 
 .post-win button {

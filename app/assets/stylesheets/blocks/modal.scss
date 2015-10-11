@@ -280,6 +280,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
               border-bottom: 1px solid #f8cece;
               a {
                 font-weight: bold;
+                color: $dark_grey;
                 font-size: 14px;
                 img {
                   margin-right: 15px;
@@ -295,7 +296,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
     }
     .post {
       width: 100%;
-      min-height: 130px;
+      min-height: 131px;
       border-bottom: 1px solid #d7d9dd;
       .post-poster, .post-content {
         position: relative;
@@ -308,9 +309,16 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
         border-right: 1px solid #d7d9dd;
         text-align: center;
         padding: 20px 10px;
+        a {
+          margin-bottom: 10px;
+          display: block;
+          font-weight: bold;
+          color: $dark_grey;
+        }
       }
       .post-content {
         width: 83%;
+        padding: 20px 15px;
         overflow: hidden;
       }
     }

@@ -9,18 +9,15 @@
           %p.time
             = l(post_short.created_at, format: '%d.%m.%Y')
         .post_content
-          .what
+          .about
             = post_short.content
             - if current_user?(post_short.user) && can_edit_content?
-              %span.right_icon
+              .edit-icon
                 = link_to edit_aspect_post_path(@project, post_short), id: "edit_aspect_#{post_short.id}" do
                   %i.glyphicon.glyphicon-pencil
                 = link_to aspect_post_path(@project, post_short), method: :delete, data: { confirm: t('confirm.delete_aspect') },
                               id: "destroy_aspect_#{post_short.id}" do
                   %i.glyphicon.glyphicon-trash
-          .about
             = link_to aspect_post_path(@project, post_short), remote: true, id: "show_aspect_#{post_short.id}" do
-              = post_short.short_desc
               %span.right_icon
                 %i.fa.fa-angle-right
-      .post_footer
