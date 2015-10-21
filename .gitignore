@@ -12,6 +12,8 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
+/node-v4.1.0-darwin-x64
+/doc
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
