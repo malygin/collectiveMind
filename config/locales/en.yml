@@ -1,96 +1,306 @@
 ---
 en:
+  procedure_theme: "Theme of Procedure"
+  hint_open: "Open Tooltips"
+  hint_close: "Close Tooltips"
+  progress_my: "Your Progress"
+  progress_others: "Users’ Progress"
+  filter_all_aspects: "All Aspects"
+  filter_aspects: "Aspects’ Filter"
+  sort_by_new: "Show Last Added: "
+  stage:
+    open_false: ' Stage (completed) <br/>'
+    open_true: ' Stage (open) <br/>'
+  substage:
+    status_unavailable: 'Substage Is Unavailable'
+    status_current: 'Substage Is Open'
+    status_complete: 'Substage Is Completed'
+  aspect_save_post: 'added an aspect '
+  aspect_post_approve_status:  'marked the aspect as important  '
+  my_aspect_post_approve_status: 'marked your aspect as important  '
+  my_aspect_post_like: 'liked your aspect '
+  my_aspect_post_dislike: 'disliked your aspect '
+  my_add_score_aspect_post: "you received %{body} points for the aspect "
+
+  aspect_comment_save: "added a commentary: '%{body} ...' to the aspect: "
+  my_aspect_comment:  "added a commentary: '%{body} ...' to your aspect "
+  reply_aspect_comment: "replied to your commentary: '%{body} ... ' "
+  ASPECT_COMMENT_APPROVE_STATUS:  "MARKED YOUR COMMENTARY TO THE ASPECT '%{BODY} ...' AS IMPORTANT: '%{BODY}...' "
+  my_aspect_comment_dislike: "disliked your commentary: '%{body}' to the aspect "
+  my_aspect_comment_like: "liked your commentary: '%{body}' to the aspect "
+
+  discontent_post_save: 'added a problem '
+
+  discontent_postt_comment_save: "added a comment: '%{body} ...' to the problem: "
+  my_discontent_comment:  'added a comment: "%{body} ..." to your problem '
+  reply_discontent_comment: "replied to your commentary: '%{body} ... ' "
+  discontent_comment_approve_status:  "MARKED YOUR COMMENTARY TO THE ASPECT '%{BODY} ...' AS IMPORTANT: '%{BODY}...' "
+  my_discontent_comment_approve_status: "MARKED YOUR COMMENTARY TO THE ASPECT '%{BODY} ...' AS IMPORTANT: '%{BODY}...' "
+  my_discontent_comment_dislike: "disliked your commentary: '%{body}' to the aspect "
+  my_discontent_comment_like: "liked your commentary: '%{body}' to the aspect "
+
+
+  concept_post_save: 'added an idea '
+  novation_post_save: 'added a package '
+  plan_post_save: 'added a project proposal '
+
+  aspect_posts_stage_popover_sub_0: 'Please read the Knowledge Base moving from aspect to aspect and answering YES or NO to simple questions. <br>You can add comments to your answers in COMMENT field. Once you are done, you will move further to discussing and adding the aspects.<br>Please note! Our INTRODUCTION section is not an aspect. It is just introduction!'
+
+  aspect_posts_stage_popover_sub_1: 'Please read the description of a current situation prepared by the methodologist (Introduction tab). Then go to three remaining tabs to answer the questions.<span class="font_red bold"> YOUR ANSWERS WILL SERVE AS A BASIS FOR OUR KNOWLEDGE BASE.</span>After answering or skipping the questions, you can discuss with other users the material that you have just learnt.'
+
+  aspect_posts_stage_popover: 'Here you can discuss the pre-set aspects (left) and the aspects proposed by the users (right).<br>By clicking ADD YOUR ASPECT you get to the window where you can compose and publish your aspect.<br>Before hitting the button, please look at all added aspects and make sure that your proposal does not repeat any of them.'
+
+  discontent_posts_stage_popover: 'Please express anything that disturbs you in the current situation. Keep in mind that each detected problem will be offered solution at later stages, so please keep your problems as specific as possible.'
+  concept_posts_stage_popover: 'Proposed ideas will be later united in packages.'
+  novation_posts_stage_popover: 'The packages made on this stage will later serve as a basis for full-scaled projects featuring detailed operation plan.'
+
+  dispost_concepts:
+    one: "1 idea is added"
+    other: "%{count} ideas are added"
+    few: "%{count} ideas are added"
+    many: "%{count} ideas are added"
+  discontent:
+    one: "1 problem"
+    other: "%{count} problems"
+    few:  "%{count} problems"
+    many: "%{count} problems"
+  project_users_count:
+    one: "1 user"
+    other: "%{count} users"
+    few: "%{count} users"
+    many: "%{count} users"
   analytic:
-    graph_visits: Graph visits
+    graph_visits: "Hits Graph"
   confirm:
-    accept: "Точно?"
-    delete_aspect: "Удалить тему?"
-    delete_comment: "Удалить комментарий?"
-    delete_concept: "Удалить нововведение?"
-    delete_discontent: Delete discontent?
-    delete_group: Delete group?
-    delete_group_task: Delete?
-    delete_news: Delete news?
-    delete_note: "Удалить замечание?"
-    delete_novation: Delete?
-    delete_plan: "Удалить план?"
+    accept: "Are you sure?"
+    delete_aspect: "Delete aspect?"
+    delete_comment: "Delete commentary?"
+    delete_concept: "Delete idea?"
+    delete_discontent: "Delete problem?"
+    delete_group: "Delete group?"
+    delete_group_task: "Delete task?"
+    delete_news: "Delete news item?"
+    delete_note: "Delete remark?"
+    delete_novation: "Delete?"
+    delete_plan: "Delete plan?"
   groups:
-    call_moderator_success: Moderator get notification
-    creating: Creating group
-    editing: Editing group
-    group: Group
-    groups: Groups
+    call_moderator_success: "Moderator has got a message"
+    creating: "Add group"
+    editing: "Edit group"
+    group: "Group"
+    groups: "List of groups"
   journal:
-    add_anonym_discontent: Add anonym discontent
+    add_anonym_discontent: "Problem added anonymously"
   link:
-    add: "Добавить"
-    back: "Назад"
-    back_list: Back to списку
-    back_proc: Back to процедуре
-    contacts: "Контакты:"
-    delete: "Удалить"
-    edit: "Редактировать"
-    go_list: "Перейти к списку"
-    go_show: "Перейти к просмотру"
-    go_to_project: "Перейти к процедуре"
-    issue: "Выдано!"
-    more: "подробнее"
-    phone: "тел."
-    remove: "Убрать"
-    top: "наверх"
+    add: "Add"
+    back: "Back"
+    back_list: "Back to list"
+    back_proc: "Back to procedure"
+    contacts: "Contacts:"
+    delete: "Delete"
+    edit: "Added"
+    go_list: "Go to list"
+    GO_SHOW: "GO TO DISPLAY MODE"
+    go_to_project: "Go to procedure"
+    ISSUE: "AWARDED!"
+    more: "More"
+    phone: "Phone"
+    remove: "Delete"
+    top: "Go to top"
   menu:
-    account: Profile
-    analytics: "Аналитика"
-    base_knowledge: Knowledge Data Base
-    general_news: "Общие новости"
-    general_rating: "Общий рейтинг"
-    help: Help
-    help_stage: Stage Help
+    account: 'Profile'
+    content: 'Content'
+    open_procedure: Procedure
+    open_cabinet: My Study
+    open_my_journals: My messages
+    open_rating: Rating
+    analytics: "Analytics"
+    base_knowledge: "Knowledge Base"
+    general_news: "General news"
+    general_rating: "General rating"
+    account_edit: Edit
+    help: "Help"
+    help_stage: "Stage help"
     journal_count:
-      few: and %{count} similar results
-      one: and one similar result
-      other: " and %{count} similar results"
-    journal_empty: No notifications
-    journal_title: Notifications
-    list_aspects: 'Aspects:'
-    list_groups: List of gorups
-    list_projects: Project List
-    main: Main Page
-    notice_edit: Edit notice
-    profile_edit: Edit profile
-    reflection_stage: Stage Analysis
+      few: "and %{count} similar entries"
+      many: "and %{count} entries"
+      one: "and 1 similar entry"
+      other: "and %{count} entries"
+    journal_empty: "No messages"
+    journal_title: "Messages"
+    list_aspects: "Aspects:"
+    list_groups: "List of groups"
+    list_projects: "List of procedures"
+    main: "Home"
+    notice_edit: "Message settings"
+    profile_edit: "Edit profile"
+    reflection_stage: "Stage feedback"
     settings:
-      settings_admin: Admin Settings
-      settings_title: Settings
-    sign_in: Sign in
-    sign_out: Sign out
-    sign_up: Sign up
-    user_analytic: User analytic
-    vote_result: "Результаты голосования"
+      settings_admin: "Admin settings"
+      settings_title: "Settings"
+    sign_in: "Log in"
+    sign_out: "Log out"
+    sign_up: "Sign up"
+    user_analytic: "User statistics"
+    vote_result: "Vote results"
   my:
-    aspect_posts: "Мои аспекты"
-    concept_posts: "Мои идеи"
-    discontent_posts: "Мои несовершенства"
-    novation_posts: "Мои пакеты"
-    plan_posts: "Мои проектные предложения"
+    aspect_posts: "My aspects"
+    concept_posts: "My ideas"
+    discontent_posts: "My problems"
+    novation_posts: "My packages"
+    plan_posts: "My project proposals"
+  my_add:
+    aspect_posts: Aspect
+    discontent_posts: Problem
+    concept_posts: Idea
+    novation_posts: Package
+    plan_posts: Project proposal
+  my_result:
+    aspect_posts: aspects
+    discontent_posts: problems
+    concept_posts: ideas
+    novation_posts: packages
+    plan_posts: project proposals
+  my_result_add:
+    aspect_posts: ASPECTS
+    discontent_posts: PROBLEMS
+    concept_posts: IDEAS
+    novation_posts: PACKAGES
+    plan_posts: PROJECT PROPOSALS
+  my_list:
+    aspect_posts: aspects
+    discontent_posts: problems
+    concept_posts: ideas
+    novation_posts: packages
+    plan_posts: project proposals
   news:
-    body: Full text
-    title: Announce
+    header: News from our expert
+    body: "Full text"
+    title: "Preview"
+    unread: '(unread)'
+  proc:
+    aspect_discuss_popover: "Here you can discuss the pre-set aspects (left) and the aspects proposed by the users (right).<br>By clicking ADD YOUR ASPECT you get to the window where you can compose and publish your aspect.<br>Before hitting the button, please look at all added aspects and make sure that your proposal does not repeat any of them."
+    aspect_questions_0_popover: "Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br> Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br> Обратите внимание: раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!"
+    aspect_questions_1_popover: "Please read the Knowledge Base moving from aspect to aspect and answering YES or NO to simple questions. <br>You can add comments to your answers in COMMENT field. Once you are done, you will move further to discussing and adding the aspects.<br>Please note! Our INTRODUCTION section is not an aspect. It is just introduction!"
+    concept_posts_popover: "Proposed ideas will be later united in packages."
+    discontent_posts_popover: "Please express anything that disturbs you in the current situation. Keep in mind that each detected problem will be offered solution at later stages, so please keep your problems as specific as possible."
+    novation_posts_popover: "The packages made on this stage will later serve as a basis for full-scaled projects featuring detailed operation plan."
+    plan_posts_popover: "This is a place for a future tooltip that is not here yet!"
   project_settings:
     success_update: Dates successful update
   show:
-    activity: "Активность:"
-    add_score: "Выдать баллы"
-    all_from_post: "Всего за пост:"
-    back_list_proc: Back to списку процедур
-    close_proc: "закрыта"
-    commenting: "Комментировать"
-    completed_proc: "Завершена"
+    activity: "Activity:"
+    add_score: "Give points"
+    ALL_FROM_POST: "TOTAL POINTS FOR POST:"
+    back_list_proc: "back to list of procedures"
+    close_proc: "closed"
+    commenting: "Add comment"
+    completed_proc: "Completed"
+    demo_proc: "demo"
+    desc: "Description:"
+    discuss: "TO BE DISCUSSED"
+    essay:
+      comment: "Comments to feedback post"
+      new_essay: "Please leave your feedback about this stage"
+      title: "Stage feedback:"
+    general_analytics: "ALL ANALYTICS"
+    general_news: "ALL NEWS"
+    general_rating: "ALL USERS"
+    go_proc:
+      few: "%{count} stage in process"
+      one: "1 stage in process"
+      other: "%{count} stage in process"
+    idea: "Idea"
+    important: "Important"
+    improve:
+      concept: "Developed to a full idea"
+      discontent: "Developed to a full problem"
+      name_concept: "Define as an idea"
+      name_discontent: "Define as a problem"
+    improved: "Developed from"
+    improver: "Source"
+    imrove_deal: "proposal "
+    journal_title: "Event"
+    like: "For:"
+    mailer:
+      messages:
+        few: "%{count} messages"
+        one: 1 message
+        other: "%{count} messages"
+      team: "Project team"
+      title: "Comment was added to your entry at mass-decision.ru"
+    note: "note"
+    open_proc: "open for participation"
+    open_view_proc: "open for review"
+    prepare_proc: "Prodedure under preparation"
+    problem: "Problem"
+    project:
+      closed: "Closed procedures"
+      club: "Club procedures"
+      new: "Add project"
+      opened: "Open procedures"
+    rating:
+      header: User
+      sort: "Rating displayed"
+      sort_analysts: "Analysts"
+      sort_default: "for the current stage"
+      sort_generators: "Content generators"
+      sort_voters: "Raters"
+      title: "User ratings"
+    revert_score: "Take away points"
+    support: "Support"
+    to_work:
+      fifth_title: 'Stage 5: Projects Evaluation. Please read before you start!'
+      fourth_title: 'Stage 4: Рrojects Development. Please read before you start!'
+      second_title: 'Stage 2: Situation Analysis. Please read before you start!'
+      third_title: 'Stage 3: Design of the Future. Please read before you start!'
+    unlike: "Against:"
+    user:
+      added: "Added"
+      all_score: "Total score:"
+      analyst: "Analyst"
+      club_rating: "Users' club rating"
+      generator: "Content generator"
+      others: "Users"
+      searsh_users_promt: "Please enter user's name or e-mail and press Enter"
+      select_users: "Please select users for closed procedure"
+      voter: "Rater"
+    view_more: "View more"
+    votes: "Votes:"
+    votes_users: "Voters:"
+    without_name: "Untitled"
+    result_stage: Stage results
+    aspect:
+      title: Discussion on the aspects
+      main: Aspects from the knowledge base
+      other: Users' aspects
+      notice: 'Wrong! Please use our tip'
+    discontent:
+      title: Problems
+      add_group_success: "The problem was added to the group"
+      added_group: "Added to the group"
+      complite: "the problem is solved "
+      complite_1: "to a small extent"
+      complite_2: "to a great extent"
+      complite_3: "fully"
+      do_group: "Сделать группой"
+      do_require: "В обязательные"
+      edit_group: "Редактировать группу"
+      grouped: "Группа"
+      grouped_success: "Несовершенство сделано группой"
+      remove_from_group: "Удалить из объединения"
+      required: "В обычные"
+      required_revert: "Несовершенство возвращено в обычные"
+      required_success: "Несовершенство добавлено в обязательные"
+      select_prompt: "Добавьте несовершенство"
+      ungroup: "Разгруппировать"
+      union: "Объединяет:"
     concept:
+      title: Идеи
       check: "Проверено"
       check_now: "Проверяется"
       comments: "Комментарии к нововведению"
-      complite_1: "в незначительной мере"
+      complite_1: "частично"
       complite_2: "в значительной мере"
       complite_3: "полностью"
       desc_res: "Пояснение"
@@ -98,130 +308,168 @@ en:
       name_res: "Название"
       not_use: "не определено"
       notes: "Замечания"
-      solved: "Решаемость"
-    demo_proc: "демонстрационная"
-    desc: "Описание:"
-    discontent:
-      add_group_success: "Несовершенство успешно добавлено в группу"
-      added_group: "Добавлено в группу"
-      complite: "несовершенство решается "
-      complite_1: "частично"
-      complite_2: "в значительной мере"
-      complite_3: "полностью"
-      do_group: "Сделать группой"
-      do_require: "В обязательные"
-      edit_group: "Редактировать группу"
-      grouped: "Группа"
-      grouped_success: "Несовершенство сделано группой"
-      remove_from_group: "Удалить из объединения"
-      required: "Добавлено"
-      required_revert: "Несовершенство возвращено в обычные"
-      required_success: "Несовершенство добавлено в обязательные"
-      select_prompt: "Добавьте несовершенство"
-      ungroup: "Разгруппировать"
-      union: "Объединяет:"
-    discuss: "ТРЕБУЕТ ОБСУЖДЕНИЯ"
-    essay:
-      comment: "Комментарии к рефлексии"
-      new_essay: "Добавить свой отзыв об этапе"
-      title: "Рефлексия по этапу:"
-    general_analytics: "ВСЯ АНАЛИТИКА"
-    general_news: "ВСЕ НОВОСТИ"
-    general_rating: "ВСЕ УЧАСТНИКИ"
-    go_proc:
-      few: "Идет %{count} этап"
-      one: "Идет 1 этап"
-      other: "Идет %{count} этап"
-    idea: "Идея"
-    important: "ВАЖНОЕ"
-    improve:
-      concept: "Доработано до нововведения"
-      discontent: "Доработано до несовершенства"
-      name_concept: "Сформулировать как нововведение"
-      name_discontent: "Сформулировать как несовершенство"
-    improved: "Доработано из"
-    improver: "Источник"
-    imrove_deal: "предложения "
-    journal_title: "События"
-    like: "За:"
-    mailer:
-      messages:
-        few: "%{count} сообщения"
-        one: 1 сообщение
-        other: "%{count} сообщений"
-      team: "Команда проекта"
-      title: "К вашему материалу на портале mass-decision.ru добавлен комментарий"
-    note: "замечание"
-    open_proc: "открыта с возможностью участвовать"
-    open_view_proc: "открыта для просмотра"
-    prepare_proc: "Идет подготовка к процедуре"
-    problem: "Проблема"
-    project:
-      closed: "Закрытые процедуры"
-      club: "Клубные процедуры"
-      new: "Создать проект"
-      opened: "Открытые процедуры"
-    rating:
-      sort: "Показан рейтинг"
-      sort_analysts: "Аналитиков"
-      sort_default: "по текущему этапу"
-      sort_generators: "Генераторов идей"
-      sort_voters: "Оценщиков"
-      title: "Рейтинг участников"
-    revert_score: "Забрать баллы"
-    support: "Поддержать"
-    to_work:
-      fifth_title: '5 этап: Оценка проектов. Ознакомьтесь перед началом работы!'
-      fourth_title: '4 этап: Создание проектов. Ознакомьтесь перед началом работы!'
-      second_title: '2 этап: Сбор несовершенств. Ознакомьтесь перед началом работы!'
-      third_title: '3 этап: Сбор нововведений. Ознакомьтесь перед началом работы!'
-    unlike: "Против:"
-    user:
-      added: "Добавленные"
-      all_score: "Всего:"
-      analyst: "Аналитик"
-      club_rating: "Клубный рейтинг участников"
-      generator: "Генератор идей"
-      others: "Пользователи"
-      searsh_users_promt: "Введите имя или email пользователя и нажмите Enter"
-      select_users: "Выберите участников для закрытой процедуры"
-      voter: "Оценщик"
-    view_more: "Посмотреть еще"
-    votes: "Голосов:"
-    votes_users: "Голосовавших:"
-    without_name: "Без названия"
-  stages:
-    comments:
-      few: "%{count} ответа"
-      one: 1 ответ
-      other: "%{count} ответов"
-    concept: Gathering Changes
-    discontent: Gathering Shortfalls
-    estimate: Estimation of Projects
-    glossary: "Глоссарий"
-    intro: Intro
-    life_tape: Data Gathering
-    plan: Development of Projects
-    result: "Подведение итогов"
-    stage:
-      few: "%{count} Stage"
-      one: First Stage
-      other: "%{count} Stage"
-  technique_project:
-    success_update: Success update technique
-  techniques:
-    aspect_posts_detailed: "Воспользоваться вспомогательной техникой"
-    aspect_posts_simple: "+ Аспект"
-    concept_posts_simple: "+ Idea"
-    discontent_posts_detailed: "Воспользоваться вспомогательной техникой"
-    discontent_posts_simple: "+ Несовершенство"
-    novation_posts_simple: "+ Пакет"
-    plan_posts_simple: "+ Проектное предложение"
-  voting:
-    go_reflection: "Перейти к рефлексии"
-    have_votes: "Осталось голосов:"
+      solved: "Степень устранения"
+    novation:
+      title: Packages
     plan:
-      go_list: "Перейти к списку проектов"
-      select: "Вы можете выбрать %{num} проект, который на Ваш взгляд является лучшим"
-      title: "Голосование за проеты"
-    thanks: "Спасибо за участие в голосовании!"
+      title: Project proposals
+      desc: Description of a project proposal
+      diagram: Project implementation schedule
+    estimate:
+      name: Project
+      desc: Description of a project proposal
+      diagram: Project implementation schedule
+      rating: Assessments by other users
+      field_left: Is this project important for resolving the issue set by the client?
+      field_right: Is this project doable within suggested time limit, with all suggested resources available and with all risks considered?
+  stages:
+    name: "STAGE:"
+    comments:
+      few: "%{count} replies"
+      many: "%{count} replies"
+      one: 1 reply
+      other: "%{count} replies"
+    concept: "Design of the Future"
+    discontent: "Situation Analysis"
+    estimate: "Projects Evaluation"
+    glossary: "Glossary"
+    intro: "Introduction"
+    intro1: "Studying and Discussing Knowledge Base"
+    intro2: "Extended Knowledge Base"
+    intro3: "Voting for Aspects"
+    discontent1: "Locating Problems"
+    discontent2: "Voting"
+    concept1: "Searching Ideas"
+    concept2: " Voting "
+    novation1: "Making Packages"
+    novation2: " Voting "
+    plan1: "Making Project Proposals"
+
+    intro_desc: 'Знакомство с описанием ситуации и ее различных аспектов'
+    discontent_desc: 'Выявление проблем текущей ситуации'
+    concept_desc: 'Поиск идей по устранению проблем текущей ситуации'
+    novation_desc: 'Объединение идей в пакеты'
+    plan_desc: 'Формирование проектных предложений на основе пакетов идей'
+    estimate_desc: 'Подведение итогов'
+    result_desc: 'Завершение процедуры'
+
+    plan1: "Создание проектных предложений"
+    aspects_title: "Introduction"
+    plan: "Projects development"
+    result: "Summing Up"
+    stage:
+      few: " stage"
+      one: " stage"
+      other: " stage"
+  technique_project:
+    success_update: "Successfully updated"
+  techniques:
+    aspect_posts_detailed: "Use supporting tool"
+    aspect_posts_simple: "+ Aspect"
+    concept_posts_simple: "+ Idea"
+    discontent_posts_detailed: "Use supporting tool"
+    discontent_posts_simple: "+ Problem"
+    novation_posts_simple: "+ Package"
+    plan_posts_simple: "+ Project proposal"
+  voting:
+    go_reflection: "Go to feedback"
+    have_votes: "Votes left:"
+    plan:
+      go_list: "Go to project list"
+      select: "You can choose %{num} project that you like most"
+      title: "Voting for the best project"
+    thanks: "Thank you for voting!"
+  vote:
+    aspect_posts:
+      header: 'Voting for the aspects'
+      title: 'Put the aspects in relevant folders'
+      all:
+        name: 'All aspects'
+        title_folder: 'Go to all aspects'
+        title_button:
+      important:
+        name: '<span class="font_red">Required</span>'
+        title_folder: 'Go to Required'
+        title_button: 'Put in Required Folder'
+      not_important:
+        name: '<span class="font_green">Important</span>'
+        title_folder: 'Go to Important'
+        title_button: 'Put in Important Folder'
+      unnecessary:
+        name: '<span class="font_grey2">Unimportant</span>'
+        title_folder: 'Go to Unimportant'
+        title_button: 'Put in Unimportant Folder'
+    discontent_posts:
+      header: 'Voting for the problems'
+      title: 'Put the problems in relevant folders'
+      all:
+        name: 'All problems'
+        title_folder: 'Go to all problems'
+        title_button:
+      important:
+        name: '<span class="font_red">Important</span><span class="font_grey2">|</span><span class="font_green">Urgent</span>'
+        title_folder: 'Go to Important and Urgent'
+        title_button: 'Put in Important and Urgent folder'
+      not_important:
+        name: '<span class="font_red">Important</span><span class="font_grey2">|</span><span class="font_grey2">Less urgent</span>'
+        title_folder: 'Go to Important and Less Urgent'
+        title_button: 'Put in Important and Less Urgent folder'
+      necessary:
+        name: '<span class="font_green">Urgent</span><span class="font_grey2">|</span><span class="font_grey2">Less Important</span>'
+        title_folder: 'Go to Urgent and Less Important'
+        title_button: 'Put in Urgent and Less Important folder'
+      unnecessary:
+        name: '<span class="font_grey2">Not Important</span><span class="font_grey2">|</span><span class="font_grey2">Not Urgent</span>'
+        title_folder: 'Go to Not Important and Not Urgent'
+        title_button: 'Put in Not Important and Not Urgent folder'
+    concept_posts:
+      header: 'Voting for the ideas'
+      title: 'Put the ideas in relevant folders'
+      all:
+        name: 'All ideas'
+        title_folder: 'Go to all ideas'
+        title_button:
+      vote_yes:
+        name: 'Like'
+        title_folder: 'Go to Liked'
+        title_button: 'Put in Likes folder'
+      vote_no:
+        name: 'Dislike'
+        title_folder: 'Go to Disliked'
+        title_button: 'Put in Dislikes folder'
+    novation_posts:
+      header: 'Voting for the packages'
+      title: 'Put the packages in relevant folders'
+      all:
+        name: 'All packages'
+        title_folder: 'Go to all packages'
+        title_button:
+      vote_yes:
+        name: 'Like'
+        title_folder: 'Go to Liked'
+        title_button: 'Put in Likes folder'
+      vote_no:
+        name: 'Dislike'
+        title_folder: 'Go to Disliked'
+        title_button: 'Put in Dislikes folder'
+  welcome:
+    header: 'Purpose of this stage'
+    begining: 'Start'
+    aspect_posts:
+      heading: <p class="expl-sub-heading">All users study the materials required for further participation in MASSDECISION™ procedure</p><p class="expl-notice rounded-2">The 2nd stade will not be launched until 80% of the users complete this stage!</p>
+      working: <ol><li>Please make yourself familiar with all the aspects of our knowledge base.</li><li>Take part in the discussion.</li><li>If our knowledge base seems incomplete, suggest your own aspects.</li><li>Take a short test on our knowledge base.</li><li>Vote for the most important aspects.</li></ol>
+    discontent_posts:
+      heading: <p class="expl-sub-heading">Locating the problems of the situation as defined in the knowledge base.</p>
+      working: <ol><li>Please read and discuss the problems suggested by the users.</li><li>Add your own problems and discuss them with others.</li><li>Vote for the most important problems at the end of this stage.</li></ol>
+    concept_posts:
+      heading: <p class="expl-sub-heading">Collecting ideas to remove the problems located at the previous stage.</p>
+      working: <ol><li>Please read and discuss people's ideas.</li><li>If you have your own ideas, shape them with our helping tools and put to the discussuion.</li></ol>
+    novation_posts:
+      heading: <p class="expl-sub-heading">Making the packages of ideas<br/>for resolving the issue.</p>
+      working: <ol><li>Please select the ideas you like and put them in a package.</li><li>Put them to the discussion and discuss the packages of other users.</li></ol>
+    plan_posts:
+      heading:
+      working:
+    estimate_posts:
+      heading:
+      working:

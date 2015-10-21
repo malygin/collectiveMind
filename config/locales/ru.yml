@@ -1,5 +1,13 @@
 ---
 ru:
+  procedure_theme: The theme of procedure
+  hint_open: 'Открыть подсказки'
+  hint_close: 'Закрыть подсказки'
+  progress_my: 'Ваш прогресс на стадии'
+  progress_others: 'Прогресс других участников'
+  filter_all_aspects: 'Все аспекты'
+  filter_aspects: 'Фильтр аспектов'
+  sort_by_new: "Сортировать по новым: "
   stage:
     open_false: ' стадия (завершена) <br/>'
     open_true: ' стадия (открыта) <br/>'
@@ -7,84 +15,45 @@ ru:
     status_unavailable: 'подстадия недоступна'
     status_current: 'подстадия открыта'
     status_complete: 'подстадия завершена'
+  aspect_save_post: 'добавил(a) аспект '
+  aspect_post_approve_status:  'выделил(а) как важный аспект  '
+  my_aspect_post_approve_status: 'выделил(а) как важный ваш аспект  '
+  my_aspect_post_like: 'понравился ваш аспект '
+  my_aspect_post_dislike: 'не понравился ваш аспект '
+  my_add_score_aspect_post: "вы получили %{body} баллов за аспект "
 
-  aspect_post_save: 'добавил(a) аспект '
   aspect_comment_save: "добавил(а) комментарий: '%{body} ...' к аспекту: "
   my_aspect_comment:  "добавил(а) комментарий: '%{body} ...' к вашему аспекту "
   reply_aspect_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
-  aspect_post_approve_status:  'выделил(а) как важный аспект '
-  my_aspect_post_approve_status: 'выделил(а) как важный ваш аспект '
-  aspect_comment_approve_status:  "выделил(а) как важный комментарий: '%{body} ...' к аспекту "
+  aspect_comment_approve_status:  "выделил(а) как важный комментарий: '%{body}...' к аспекту "
   my_aspect_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body}' к аспекту "
-  my_aspect_post_like: 'понравился ваш аспект '
-  my_aspect_comment_like: "понравился ваш комментарий: '%{body}' к аспекту "
-  my_aspect_post_dislike: 'не понравился ваш аспект '
   my_aspect_comment_dislike: "не понравился ваш комментарий: '%{body}' к аспекту "
-  my_add_score_aspect_post: "вы получили %{body} баллов за аспект "
+  my_aspect_comment_like: "понравился ваш комментарий: '%{body}' к аспекту "
 
   discontent_post_save: 'добавил(a) несовершенство '
-  discontent_post_comment_save: "добавил(а) комментарий: '%{body} ...' к несовершенству: "
+
+  discontent_postt_comment_save: "добавил(а) комментарий: '%{body} ...' к несовершенству: "
   my_discontent_comment:  'добавил(а) комментарий: "%{body} ..." к вашему несовершенству '
   reply_discontent_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
-  discontent_post_approve_status:  'выделил(а) как важное несовершенство '
-  my_discontent_post_approve_status: 'выделил(а) как важное ваше несовершенство '
-  discontent_comment_approve_status:  "выделил(а) как важный комментарий: '%{body} ...' к несовершенству "
-  my_discontent_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body} ...' к несовершенству "
-  my_discontent_post_like: 'понравилось ваше несовершенство '
-  my_discontent_comment_like: "понравился ваш комментарий: '%{body} ...' к несовершенству "
-  my_discontent_post_dislike: 'не понравилось ваше несовершенство '
-  my_discontent_comment_dislike: "не понравился ваш комментарий: '%{body} ...' к несовершенству "
-  my_add_score_discontent_post: "вы получили %{body} баллов за несовершенство "
+  discontent_comment_approve_status:  "выделил(а) как важный комментарий: '%{body}...' к аспекту "
+  my_discontent_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body}' к аспекту "
+  my_discontent_comment_dislike: "не понравился ваш комментарий: '%{body}' к аспекту "
+  my_discontent_comment_like: "понравился ваш комментарий: '%{body}' к аспекту "
+
 
   concept_post_save: 'добавил(a) идею '
-  concept_post_comment_save: "добавил(а) комментарий: '%{body} ...' к идее: "
-  my_concept_comment:  'добавил(а) комментарий: "%{body} ..." к вашей идее '
-  reply_concept_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
-  concept_post_approve_status:  'выделил(а) как важную идею '
-  my_concept_post_approve_status: 'выделил(а) как важную вашу идею '
-  concept_comment_approve_status:  "выделил(а) как важный комментарий: '%{body} ...' к идее "
-  my_concept_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body} ...' к идее "
-  my_concept_post_like: 'понравилась ваша идея '
-  my_concept_comment_like: "понравился ваш комментарий: '%{body} ...' к идее "
-  my_concept_post_dislike: 'не понравилась ваша идея '
-  my_concept_comment_dislike: "не понравился ваш комментарий: '%{body} ...' к идее "
-  my_add_score_concept_post: "вы получили %{body} баллов за идею "
-
   novation_post_save: 'добавил(a) пакет '
-  novation_post_comment_save: "добавил(а) комментарий: '%{body} ...' к пакету: "
-  my_novation_comment:  'добавил(а) комментарий: "%{body} ..." к вашему пакету '
-  reply_novation_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
-  novation_post_approve_status:  'выделил(а) как важный пакет '
-  my_novation_post_approve_status: 'выделил(а) как важный ваш пакет '
-  novation_comment_approve_status:  "выделил(а) как важный комментарий: '%{body} ...' к пакету "
-  my_novation_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body} ...' к пакету "
-  my_novation_post_like: 'понравился ваш пакет '
-  my_novation_comment_like: "понравился ваш комментарий: '%{body} ...' к пакету "
-  my_novation_post_dislike: 'не понравился ваш пакет '
-  my_novation_comment_dislike: "не понравился ваш комментарий: '%{body} ...' к пакету "
-  my_add_score_novation_post: "вы получили %{body} баллов за пакет "
-
   plan_post_save: 'добавил(a) проектное предложение '
-  plan_post_comment_save: "добавил(а) комментарий: '%{body} ...' к проектному предложению: "
-  my_plan_comment:  'добавил(а) комментарий: "%{body} ..." к вашему проектному предложению '
-  reply_plan_comment: "добавил(а) комментарий: '%{body} ... ' в ответ на ваш "
-  plan_post_approve_status:  'выделил(а) как важное проектное предложение '
-  my_plan_post_approve_status: 'выделил(а) как важное ваше проектное предложение '
-  plan_comment_approve_status:  "выделил(а) как важный комментарий: '%{body} ...' к проектному предложению "
-  my_plan_comment_approve_status:  "выделил(а) как важный ваш комментарий: '%{body} ...' к проектному предложению "
-  my_plan_post_like: 'понравилось ваше проектное предложение '
-  my_plan_comment_like: "понравился ваш комментарий: '%{body} ...' к проектному предложению "
-  my_plan_post_dislike: 'не понравилось ваше проектное предложение '
-  my_plan_comment_dislike: "не понравился ваш комментарий: '%{body} ...' к проектному предложению "
-  my_add_score_plan_post: "вы получили %{body} баллов за проектное предложение "
 
   aspect_posts_stage_popover_sub_0: 'Прочитайте базу знаний, переходя от аспекта к аспекту и отвечая ДА или НЕТ на наши простые вопросы.<br>Вы можете комментировать свои ответы в поле “Пояснение”. Ответив на все вопросы, вы перейдете на этап обсуждения и добавления аспектов.<br>Обратите внимание! Раздел ”Введение в процедуру” — это не аспект, а просто введение в процедуру!'
+
   aspect_posts_stage_popover_sub_1: 'Прочитайте подготовленное методологом описание ситуации на вкладке «Введение в процедуру». После этого ответьте на вопросы на трех остальных вкладках.<span class="font_red bold"> ВАШИ ОТВЕТЫ ПОСЛУЖАТ ОСНОВОЙ ДЛЯ БАЗЫ ЗНАНИЙ.</span>Ответив на вопросы или выбрав возможность «Пропустить вопрос», вы сможете перейти к обсуждению прочитанного с остальными участниками.'
+
   aspect_posts_stage_popover: 'Здесь можно обсуждать аспекты, подготовленные оргкомитетом (слева) и предложенные другими участниками процедуры (справа).<br>Нажав на кнопку “Добавить аспект”, вы попадете на экран, где сможете сформулировать и опубликовать собственный аспект<br>Прежде чем отправиться туда, внимательно прочитайте все предложенные аспекты и убедитесь, что ваше предложение не дублирует ни один из них.'
+
   discontent_posts_stage_popover: 'Высказывайте все, что вас не устраивает в текущей ситуации! Не забывайте, что для каждой выявленной проблемы впоследствии будет подбираться решение, поэтому следите, чтобы ваши несовершенства были конкретными.'
   concept_posts_stage_popover: 'Идеи, предложенные на этой стадии, в дальнейшем будут объединяться в пакеты.'
   novation_posts_stage_popover: 'Пакеты, сформированные на этой стадии, на следующей стадии послужат основой для полноценных проектов, включающих в себя подробный план действий.'
-  plan_posts_stage_popover: ''
 
   dispost_concepts:
     one: "предложена 1 идея"
@@ -363,9 +332,20 @@ ru:
       other: "%{count} ответов"
     concept: "Дизайн будущего"
     discontent: "Анализ ситуации"
+
     estimate: "Оценивание проектов"
     glossary: "Глоссарий"
     intro: "Знакомство"
+    intro1: "Изучение и обсуждение БЗ"
+    intro2: "Расширенная БЗ"
+    intro3: "Голосование за аспекты"
+    discontent1: "Поиск несовершенств"
+    discontent2: "Голосование"
+    concept1: "Поиск идей"
+    concept2: "Голосование"
+    novation1: "Создание пакетов"
+    novation2: "Голосование"
+    plan1: "Создание проектных предложений"
     aspects_title: "Введение в процедуру"
     plan: "Разработка проектов"
     result: "Подведение итогов"
@@ -480,8 +460,8 @@ ru:
       heading: <p class="expl-sub-heading">Формирование пакетов идей<br/>для исправления проблемной ситуации.</p>
       working: <ol><li>Выбрать понравившиеся вам идеи и объединить их в пакет.</li><li>При необходимости подкорректировать выбранные идеи для получения целостного видения.</li><li>Выставить пакеты на общее обсуждение и принять участие в обсуждении пакетов других участников.</li></ol>
     plan_posts:
-      heading: ''
-      working: ''
+      heading:
+      working:
     estimate_posts:
-      heading: ''
-      working: ''
+      heading:
+      working:

@@ -57,12 +57,12 @@
 .subhead
   .container
     %h4
-      Тема процедуры:
+      ="#{t('procedure_theme')}:"
       = @project.name
     %a.btn-tooltip
       %i.fa.fa-lightbulb-o
-      Открыть подсказки
+      =t('hint_open')
     %a.btn-tooltip.active{ style: 'display: none;' }
       %i.fa.fa-lightbulb-o
-      Закрыть подсказки
+      =t('hint_close')
 
