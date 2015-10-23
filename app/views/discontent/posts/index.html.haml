@@ -8,11 +8,11 @@
   = render partial: 'modal_results'
 .stage-info-sort-block
   .dropdown-block.tooltip_m{ title: 'Жмите сюда, чтобы выбрать аспект из выпадающего списка. На экране отобразятся несовершенства, связанные только с этим аспектом.' }
-    %span=t('filter_aspects')
+    %span= t('filter_aspects')
     %a.dropdown-toggle.select-aspect{ 'data-toggle' => 'dropdown' }
       - (2..4).each do |i|
         %span.stripe{ class: "stripe-#{i}" }
-      %span.text_label=t('filter_all_aspects')
+      %span.text_label= t('filter_all_aspects')
       %span.arrows-icon-dropdown
     %ul.dropdown-menu#filter
       %li{ data: { group: 'all' } }
@@ -70,7 +70,7 @@
       -#     title: 'Показать итоги стадии' }
 
       .sort-block.pull-right
-        %span.sort-label=t('sort_by_new')
+        %span.sort-label= t('sort_by_new')
         %span#sorter
           %span.sort_btn.sort-comment{ data: { type: 'comment' } }
             - if @last_visit_presenter.comments > 0
