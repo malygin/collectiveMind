@@ -142,7 +142,7 @@ module BasePost
     end
 
     def self.prepare_to_show(id, project, viewed)
-      post = where(id: id, project_id: project).first
+      post = where(id: id, project_id: project).includes(:comments, :user).first
       if viewed
         Journal.events_for_content(project, current_user, post.id).update_all("viewed = 'true'")
       end

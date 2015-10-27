@@ -18,10 +18,10 @@ class Concept::PostsController < PostsController
 
   def index
     if params[:discontent] && params[:discontent] != '*'
-      @posts = @project.concept_posts_for_vote.includes(:concept_post_discontents)
+      @posts = @project.concept_posts_for_vote.includes(:concept_post_discontents, :concept_disposts, :user)
                .where(concept_post_discontents: { discontent_post_id: params[:discontent] }).created_order
     else
-      @posts = @project.concept_posts_for_vote.created_order
+      @posts = @project.concept_posts_for_vote.includes(:concept_post_discontents, :concept_disposts, :user).created_order
     end
     @last_visit_presenter = LastVisitPresenter.new(project: @project, controller: params[:controller], user: current_user)
     @project_result = ProjectResulter.new @project unless @project.can_add?(name_controller)

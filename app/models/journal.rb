@@ -44,7 +44,7 @@ class Journal < ActiveRecord::Base
 
   def self.events_for_my_feed_viewed(project_id, user_id, lim = 10)
     Journal.where(' project_id = ? AND user_informed = ? AND viewed =? AND personal =?', project_id, user_id, true, true)
-      .limit(lim).order('created_at DESC')
+      .includes(:user).limit(lim).order('created_at DESC')
   end
 
   # @todo for Daniil refac может нужен едины метод для удаления ? а то два очень похожих

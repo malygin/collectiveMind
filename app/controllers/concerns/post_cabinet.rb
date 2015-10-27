@@ -42,8 +42,8 @@ module PostCabinet
   # :nocov:
 
   def user_content
-    @content = current_model.by_project(@project).by_user(current_user)
-    @stage_comments = comment_model.by_user(current_user).stage_comments_for(@project)
+    @content = current_model.by_project(@project).by_user(current_user).includes(:user)
+    @stage_comments = comment_model.by_user(current_user).stage_comments_for(@project).includes(:user, :post)
   end
 
   def publish

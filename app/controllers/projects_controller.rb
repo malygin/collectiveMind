@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def journal_data
-    @my_journals = current_user.my_journals @project
+    @my_journals = current_user.my_journals(@project)
     @my_journals_count = @my_journals.size
     return unless @my_journals_count == 0
     @my_journals = current_user.my_journals_viewed @project
