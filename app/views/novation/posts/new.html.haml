@@ -9,6 +9,7 @@ remote: true do |f|
           = link_to user_content_novation_posts_path(@project), id: 'open_user_content_from_edit' do
             Мои пакеты
             %small &gt;
+      .icon-edit
       = f.text_area :title, rows: 1, class: 'form-control transp_ta without_autosize', placeholder: t('activerecord.attributes.novation/post.title')
     .content-body
       #for_hidden_fields

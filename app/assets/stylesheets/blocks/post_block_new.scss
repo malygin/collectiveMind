@@ -33,7 +33,13 @@ a.collapser {
   .content-head {
     margin: -10px -20px 20px -20px;
     padding: 10px 20px;
-
+    .icon-edit{
+      position: absolute;
+      margin: 11px 0 0 5px;
+    }
+    .form-control{
+      padding-left:20px;
+    }
   }
   .form-group {
     margin-bottom: 25px;
@@ -78,6 +84,6 @@ a.collapser {
     font-size: 13px;
     white-space: normal;
     background: #325d66 !important;
-    color:white;
+    color: white;
   }
 }
