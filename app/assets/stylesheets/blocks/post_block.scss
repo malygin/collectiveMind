@@ -1,11 +1,12 @@
 $border_grey: 1px solid #d9d9d9;
 @for $i from 1 through length($base_colors) {
   .stage_#{$i} {
-    .post_full .what a,.post_full .post_footer .likes i {
-      color: nth($base_colors, $i)  !important;
+    .post_full .what a, .post_full .post_footer .likes i {
+      color: nth($base_colors, $i) !important;
     }
   }
 }
+
 .post_full {
   margin-top: 10px;
   border-radius: 5px;
@@ -38,7 +39,10 @@ $border_grey: 1px solid #d9d9d9;
         img {
           @include circle40;
           margin-bottom: 10px;
+          display: block;
+          margin:0 auto;
         }
+
         a.name {
           color: black;
         }
@@ -73,6 +77,7 @@ $border_grey: 1px solid #d9d9d9;
         .about {
           padding: 5px 15px 5px 8px;
           color: #666666;
+          font-size: 13px;
           .right_icon {
             position: absolute;
             font-size: 36px;
