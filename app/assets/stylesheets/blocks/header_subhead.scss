@@ -5,7 +5,7 @@
     .subhead {
       @include background-image(linear-gradient(top, nth($base_colors, $i)  * 0.8 0%, nth($base_colors, $i) * 1.02));
     }
-    .subhead_navigate .metro_block ul li.active i, .info > i {
+    .subhead_navigate .metro_block ul li.active i, .info > i,.subhead_navigate .contact a{
       color: nth($base_colors, $i);
 
     }
