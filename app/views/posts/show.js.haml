@@ -1,5 +1,7 @@
 $('#render_for_post').html('#{escape_javascript(render partial: 'modal_post')}');
 modalInit('#modal-post');
+$('#modal-post').on('hidden.bs.modal', function () { $('.modal-backdrop').remove();});
+
 comments_feed();
 comments_expandable_column();
 comments_collapse_column();

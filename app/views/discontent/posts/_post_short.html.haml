@@ -29,16 +29,7 @@ date: "#{post_short.created_at.to_datetime.to_f}", comment: "#{post_short.last_c
                 %i.fa.fa-angle-right
           .about
             = trim_string(post_short.what, 50)
-      -#.post_cont_hover.white{ id: "post_ch#{post_short.id}" }
-      -#  .wrapper.ps_cont.half_wheel_speed
-      -#    .post_cont_inner
-      -#      - post_short.comments.preview.each do |comment|
-      -#        .comment_preview.tooltip_b{ title: "#{comment.content}" }
-      -#          %span.bold.com_date
-      -#            = l(comment.created_at, format: '%d.%m.%Y')
-      -#          %span.bold
-      -#            #{comment.user}:
-      -#          = comment.content
+
       .post_footer
         .tags_block
           .title Аспекты

@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include MarkupHelper
+
   def name_controller
     controller.class.to_s.gsub('::', '_').gsub('Controller', '').underscore.to_sym
   end

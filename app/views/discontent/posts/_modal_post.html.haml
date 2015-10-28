@@ -17,7 +17,7 @@
         .row
           .col-md-8
             %h4
-              = @post.content
+              = trim_content(@post.content)
           .col-md-4
             .likes
               %a
@@ -49,6 +49,12 @@
                       = link_to user_path(@project, @post.user) do
                         = user_image_tag @post.user.try(:avatar)
                         = @post.user
+                  %tr
+                    %td
+                      = t('activerecord.attributes.discontent/post.content')
+                  %tr
+                    %td
+                      = @post.content
                   %tr
                     %td
                       = t('activerecord.attributes.discontent/post.what')
