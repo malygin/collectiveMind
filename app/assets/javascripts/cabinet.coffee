@@ -51,7 +51,7 @@
   $('#select_novation').click ->
     modalInit('#modal-cabinet5-1')
 
-  $('#choose_novation').click  ->
+  $('.choose_novation').click  ->
     if $('#list_novations').length > 0
       $('#selected_novation_main_form').text('Выбранный пакет:' + $('.open_novation.active a ').text().trim())
       $('#list_novations .active').find('.novation_attribute').each ->

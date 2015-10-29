@@ -11,9 +11,15 @@
 
 @for $i from 1 through length($base_colors) {
   .stage_#{$i} {
+    .modal-navigate h4{
+      color: nth($base_colors, $i)*0.7;
+    }
     ul > li.active > .panel > .panel-heading {
       background: nth($base_colors, $i);
       opacity: 0.7;
+      > .btn {
+        background: nth($base_colors, $i) *0.7;
+      }
       &:before {
         border-left-color: nth($base_colors, $i);
       }
@@ -111,8 +117,8 @@
   }
 }
 
-.stage_5{
-  .pocket{
+.stage_5 {
+  .pocket {
     padding-left: 60px;
     padding-bottom: 5px;
     background-image: image-url('directory/folder-b-sm.png');
@@ -148,4 +154,27 @@ ul > li.active > .panel > .panel-heading {
   height: 0;
   width: 0;
   position: absolute;
+}
+
+li.active > .open_novation {
+  .panel-heading .choose_novation {
+    display: inline-block;
+  }
+}
+
+.open_novation {
+  position: relative;
+  .panel-heading {
+    paading-right:100px;
+    .choose_novation {
+      display: none;
+      position: absolute;
+      right: 10px;
+      padding: 4px 7px;
+      font-size: 10px;
+      color: white;
+      margin-top: -12px;
+      top: 50%;
+    }
+  }
 }
