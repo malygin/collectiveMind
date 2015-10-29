@@ -3,7 +3,7 @@
   %label.checkox_item.tooltip_b{ for: "ex2_2_#{aspect.id + 1}",
   title: "#{aspect.aspect_posts.count > 0 ? 'В этом аспекте ' + t('discontent', count: aspect.aspect_posts.count) : 'В этом аспекте еще нет несовершенств'}" }
     %span
-      %span.color_counter.color_me{ style: "background-color: #{aspect.color};" }
+      %span.color_counter.color_me(data-me-action="background-color"  data-me-type="aspect" data-me-color="#{aspect.id}")
         %span
           = aspect.aspect_posts.count
     %span.text_label

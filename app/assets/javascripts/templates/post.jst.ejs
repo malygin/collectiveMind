@@ -60,8 +60,10 @@
 
                     <div id="stripe<%= id %>" class="post-theme">
                         <% for(var i = 0; i < aspects.length; i++) { %>
-                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes"
-                              style="background-color: <%= aspects[i].color %>;">
+                        <span class="<%= i == 0 ? 'active' : '' %> tag-stripes color_me"
+                              data-me-action="background-color" data-me-color="<%= aspects[i].id %>"
+                              data-me-type="aspect" title="<%= aspects[i].content %>"
+                              >
                                 <span class="tags">
                                 <%= aspects[i].content %>
                                 </span>
