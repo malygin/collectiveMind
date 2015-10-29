@@ -73,7 +73,6 @@ $colors_imperf_codes = [
     switch me.attr('data-me-type')
       when 'imperf' then  color = $colors_imperf_codes[me.attr('data-me-color') % 49]
       when 'aspect' then  color = $colors_aspect_codes[me.attr('data-me-color') % 12]
-    console.log me.attr('data-me-color')
     action = me.attr('data-me-action')
     if action and color
       me.css action, '#' + color
