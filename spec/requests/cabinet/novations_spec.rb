@@ -6,7 +6,6 @@ describe 'Cabinet Novations' do
 
   before do
     create_project_and_user_for '4:0'
-    @user.user_checks.create(project_id: @project.id, check_field: 'novation_posts_cabinet_sticker', status: true).save!
 
     @novation = create :novation, user: @user, project: @project
     @concept = create :concept_with_discontent, user: @user, project: @project
@@ -18,11 +17,15 @@ describe 'Cabinet Novations' do
 
   context 'create with simple form', js: true do
     before do
+      @user.user_checks.create(project_id: @project.id, check_field: 'novation_posts_cabinet_sticker', status: true).save!
       click_link 'new_novation_posts_simple'
     end
 
     context 'correct' do
-      before do
+
+
+      it  'save novation' do
+
         fill_in 'novation_post_title', with: 'new novation'
         # screenshot_and_open_image
         # find('#cabinet_close_sticker').click
@@ -44,11 +47,9 @@ describe 'Cabinet Novations' do
         choose 'novation_post_confidence_remove_discontent_bool_false'
         fill_in 'novation_post_confidence_remove_discontent', with: 'ss'
         click_button 'send_post_novation'
-      end
-
-      it { expect(page).to have_content t('form.novation.new_success') }
+        expect(page).to have_content t('form.novation.new_success')
     end
-
+   end
     it 'empty fields - error' do
       expect do
         click_button 'send_post_novation'
