@@ -182,6 +182,7 @@ $sizes_modal: 710, 770, 985, 1030, 1100, 1150;
   }
   .modal-content {
     border: none;
+    overflow: visible !important; //dirty hack
   }
   .modal-header {
     padding-left: 30px;
