@@ -22,10 +22,7 @@ describe 'Cabinet Novations' do
     end
 
     context 'correct' do
-
-
-      it  'save novation' do
-
+      it 'save novation' do
         fill_in 'novation_post_title', with: 'new novation'
         # screenshot_and_open_image
         # find('#cabinet_close_sticker').click
@@ -48,8 +45,8 @@ describe 'Cabinet Novations' do
         fill_in 'novation_post_confidence_remove_discontent', with: 'ss'
         click_button 'send_post_novation'
         expect(page).to have_content t('form.novation.new_success')
+      end
     end
-   end
     it 'empty fields - error' do
       expect do
         click_button 'send_post_novation'
