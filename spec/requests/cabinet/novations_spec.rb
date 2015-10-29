@@ -6,6 +6,8 @@ describe 'Cabinet Novations' do
 
   before do
     create_project_and_user_for '4:0'
+    @user.user_checks.create(project_id: @project.id, check_field: 'novation_posts_cabinet_sticker', status: true).save!
+
     @novation = create :novation, user: @user, project: @project
     @concept = create :concept_with_discontent, user: @user, project: @project
     sign_in @user
@@ -22,6 +24,8 @@ describe 'Cabinet Novations' do
     context 'correct' do
       before do
         fill_in 'novation_post_title', with: 'new novation'
+        # screenshot_and_open_image
+        # find('#cabinet_close_sticker').click
         find('#select_concept').click
         within :css, '#modal-cabinet4-1' do
           find("a#open_discontent_#{@concept.concept_disposts.first.id}").click
