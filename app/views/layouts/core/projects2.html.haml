@@ -1,0 +1,54 @@
+!!! 5
+%html{ lang: 'en' }
+  = render 'application/meta'
+  -# До тех времен, пока не сделаем нормальные лейауты (а лучше один)
+  -# Времена настали! Делайте один лейаут
+  - if controller_name == 'sessions'
+    %body
+      = yield
+  - else
+    %body
+      .landing
+        %header
+          %nav.navbar.navbar-default
+            .container
+              .navbar-header
+                .navbar-brand
+                  Контактый email: massDecision@gmail.com
+              %ul.nav.navbar-nav.navbar-right
+                %li.dropdown
+                  %a#lang_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
+                    %i.fa.fa-globe
+                    Русский
+                    %i.fa.fa-angle-down.font_red
+                  %ul.dropdown-menu{ role: 'menu', 'aria-labelledby' => 'lang_dropdown' }
+                    %li.disabled
+                      %a{ href: '#' } English
+                    %li
+                      %a{ href: '#' } Русский
+        = render 'application/header_no_current_project'
+        .container
+          = yield
+
+
+          -#.widget-block.right_gradient
+          -#  .image_2
+          -#.widget-block.left_gradient
+          -#  .image_3
+          %br
+          %br
+          %br
+          %hr
+          %p all rights reserved to MASSDECISION
+
+
+
+
+
+
+      /
+        Javascripts
+        \==================================================
+      / Placed at the end of the document so the pages load faster
+      %script{ src: 'http://cdn.pubnub.com/pubnub-3.7.13.min.js' }
+      = javascript_include_tag 'application'

@@ -1,52 +1,52 @@
-- if signed_in?
-  -#- cache @closed_projects do
-  - if @closed_projects.present?
-
-    -#%h4
-    -#  %strong
-    -#    = t('show.project.closed')
-    - @closed_projects.each do |project|
-      .widget-block-procedure
-        .row
-          .col-md-1
-            .pull-right
-              %span.logotips-icon
-          .col-md-5
-            %h4
-              = project.name
-          -#%b
-          -#  ="(#{project.main_stage} стадия)"
-          .col-md-3
-            %h4
-              %span.i-red-users
-              = t('project_users_count', count: project.users.count)
-
-          .col-md-3
-            .divider5
-            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_closed_project_#{project.id}" do
-              = t('link.go_to_project')
-  -#- cache @opened_projects do
-  - if @opened_projects.present?
-    -#%h4
-    -#  %strong
-    -#    = t('show.project.opened')
-    - @opened_projects.each do |project|
-      .widget-block-procedure
-        .row
-          .col-md-1
-            .pull-right
-              %span.logotips-icon
-          .col-md-5
-            %h4
-              = project.name
-          -#%b
-          -#  ="(#{project.main_stage} стадия)"
-          .col-md-3
-            %h4
-              %span.i-red-users
-              = t('project_users_count', count: project.users.count)
-          .col-md-3
-            .divider5
-            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_opened_project_#{project.id}" do
-              = t('link.go_to_project')
-      .divider10
+-#- if signed_in?
+-#  -#- cache @closed_projects do
+-#  - if @closed_projects.present?
+-#
+-#    -#%h4
+-#    -#  %strong
+-#    -#    = t('show.project.closed')
+-#    - @closed_projects.each do |project|
+-#      .widget-block-procedure
+-#        .row
+-#          .col-md-1
+-#            .pull-right
+-#              %span.logotips-icon
+-#          .col-md-5
+-#            %h4
+-#              = project.name
+-#          -#%b
+-#          -#  ="(#{project.main_stage} стадия)"
+-#          .col-md-3
+-#            %h4
+-#              %span.i-red-users
+-#              = t('project_users_count', count: project.users.count)
+-#
+-#          .col-md-3
+-#            .divider5
+-#            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_closed_project_#{project.id}" do
+-#              = t('link.go_to_project')
+-#  -#- cache @opened_projects do
+-#  - if @opened_projects.present?
+-#    -#%h4
+-#    -#  %strong
+-#    -#    = t('show.project.opened')
+-#    - @opened_projects.each do |project|
+-#      .widget-block-procedure
+-#        .row
+-#          .col-md-1
+-#            .pull-right
+-#              %span.logotips-icon
+-#          .col-md-5
+-#            %h4
+-#              = project.name
+-#          -#%b
+-#          -#  ="(#{project.main_stage} стадия)"
+-#          .col-md-3
+-#            %h4
+-#              %span.i-red-users
+-#              = t('project_users_count', count: project.users.count)
+-#          .col-md-3
+-#            .divider5
+-#            = link_to current_stage_url(project), class: 'btn arrow_right btn-danger', id: "go_to_opened_project_#{project.id}" do
+-#              = t('link.go_to_project')
+-#      .divider10

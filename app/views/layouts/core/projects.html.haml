@@ -14,7 +14,7 @@
             .container
               .navbar-header
                 .navbar-brand
-                  massdecision@gmail.com
+                  Контактый email: massDecision@gmail.com
               %ul.nav.navbar-nav.navbar-right
                 %li.dropdown
                   %a#lang_dropdown{ 'data-target' => '#', 'data-toggle' => 'dropdown', href: '#', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
@@ -29,12 +29,27 @@
         = render 'application/header_no_current_project'
         .container
           = yield
-          .widget-block.left_gradient
-            .image_1
-          .widget-block.right_gradient
-            .image_2
-          .widget-block.left_gradient
-            .image_3
+
+          .row
+            .col-md-2
+              %img(src='assets/savelzon.jpg')
+            .col-md-10
+              %h3(tyle="margin-top: 0px;")
+                MassDecision помогает коллективно вырабатывать и принимать стратегические решения в организациях и обходить главное препятствие к их реализации – сопротивление персонала диктуемым ему нововведениям.
+                =link_to 'Подробнее', '/about'
+              %h3
+                Автор MassDecision
+                %b Олег Савельзон
+                , доктор философии, руководитель исследовательского проекта в Академическом Центре Лев – Высшей Школе Технологии в Иерусалиме (Jerusalem College of Technology).
+                =link_to 'Подробнее', '/articles'
+              %h3
+                Обширный опыт консультирования государственных, политических, общественных и коммерческих организаций в США, Израиле и России по вопросам коллективного принятия стратегических решений (избранные клиенты — американское агентство НАСА, израильская партия Исраэль-ба-Алия, российский Союз профессиональных фармацевтических организаций и многие другие).
+
+              %br
+          -#.widget-block.right_gradient
+          -#  .image_2
+          -#.widget-block.left_gradient
+          -#  .image_3
           %hr
           %p all rights reserved to MASSDECISION
 

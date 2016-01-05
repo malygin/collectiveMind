@@ -134,4 +134,6 @@ CollectiveMind::Application.routes.draw do
   ############
 
   root to: 'home#index'
+  get '/articles', to: 'home#articles'
+  get '/about', to: 'home#about'
 end

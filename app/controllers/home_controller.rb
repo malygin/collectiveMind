@@ -10,4 +10,13 @@ class HomeController < ApplicationController
     end
     @opened_projects = Core::Project.where(type_access: Core::Project::TYPE_ACCESS[:opened][:code])
   end
+
+  def articles
+    render layout: 'core/projects2'
+  end
+
+  def about
+    render layout: 'core/projects2'
+  end
+
 end
