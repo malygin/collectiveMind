@@ -18,5 +18,4 @@ class HomeController < ApplicationController
   def about
     render layout: 'core/projects2'
   end
-
 end
