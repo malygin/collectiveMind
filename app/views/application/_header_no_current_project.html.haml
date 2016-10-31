@@ -5,29 +5,29 @@
         %a{ href: '/', id: 'go_to_logo' }
           %span.logotips-sm
 
-    -#%ul.list-inline.navbar-right
-    -#  - if signed_in?
-    -#    - if @core_project
-    -#      %li
-    -#        = link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
-    -#    - elsif @project
-    -#      %li
-    -#        = link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
-    -#    - else
-    -#      %li
-    -#        %p
-    -#          Добро пожаловать, #{current_user.name} !
-    -#    %li
-    -#      = link_to destroy_user_session_path, method: :delete, id: 'sign_out' do
-    -#        = t('menu.sign_out')
-    -#  - else
-    -#    %li
-    -#      = link_to t('menu.sign_in'), '#', class: 'open-modal', id: 'sign_in', data: { target: 'sign_in' }
-    -#    %li
-    -#      %span.auth-divider
-    -#        |
-    -#    %li.disabled
-    -#      = link_to t('menu.sign_up'), '#', class: 'open-modal', id: 'sign_up', data: { target: 'sign_up' }
+    %ul.list-inline.navbar-right
+      - if signed_in?
+        - if @core_project
+          %li
+            = link_to current_user, "/project/#{@core_project.id}/users/#{current_user.id}", id: 'user_profile'
+        - elsif @project
+          %li
+            = link_to current_user, "/project/#{@project.id}/users/#{current_user.id}", id: 'user_profile'
+        - else
+          %li
+            %p
+              Добро пожаловать, #{current_user.name} !
+        %li
+          = link_to destroy_user_session_path, method: :delete, id: 'sign_out' do
+            = t('menu.sign_out')
+      - else
+        %li
+          = link_to t('menu.sign_in'), '#', class: 'open-modal', id: 'sign_in', data: { target: 'sign_in' }
+        %li
+          %span.auth-divider
+            |
+        %li.disabled
+          = link_to t('menu.sign_up'), '#', class: 'open-modal', id: 'sign_up', data: { target: 'sign_up' }
 
 
 
